@@ -1,0 +1,2 @@
+# BoardClass
+kh정보교육원_세미프로젝트_1조_BoardClass
