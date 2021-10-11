@@ -5,17 +5,18 @@ import java.sql.Date;
 public class Board {
 
 	private int boardNo;
-	private String userId;
+	private String boardWrite;
 	private String boardType;
 	private String boardCategory;
 	private String boardTitle;
 	private String boardContent;
 	private Date boardWriteDate;
 	private Date boardRewriteDate;
-	private int viewCount;
+	private int boardViewCount;
 	private int boardReplyRef;
 	private int boardReplyLev;
 	private int boardReplySeq;
+	private String boardImg;
 
 	public Board() {
 		// TODO Auto-generated constructor stub
@@ -29,12 +30,12 @@ public class Board {
 		this.boardNo = boardNo;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getBoardWrite() {
+		return boardWrite;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setBoardWrite(String boardWrite) {
+		this.boardWrite = boardWrite;
 	}
 
 	public String getBoardType() {
@@ -85,12 +86,12 @@ public class Board {
 		this.boardRewriteDate = boardRewriteDate;
 	}
 
-	public int getViewCount() {
-		return viewCount;
+	public int getBoardViewCount() {
+		return boardViewCount;
 	}
 
-	public void setViewCount(int viewCount) {
-		this.viewCount = viewCount;
+	public void setBoardViewCount(int boardViewCount) {
+		this.boardViewCount = boardViewCount;
 	}
 
 	public int getBoardReplyRef() {
@@ -115,6 +116,14 @@ public class Board {
 
 	public void setBoardReplySeq(int boardReplySeq) {
 		this.boardReplySeq = boardReplySeq;
+	}
+
+	public String getBoardImg() {
+		return boardImg;
+	}
+
+	public void setBoardImg(String boardImg) {
+		this.boardImg = boardImg;
 	}
 
 }
