@@ -50,7 +50,7 @@ public class AdListServlet extends HttpServlet {
 				currentPage=Integer.parseInt(pageNum);
 		}
 		
-		aCount = new AdminService().getNoticeCount();
+		aCount = new AdminService().getAdCount();
 		pageCount = (aCount / PAGE_SIZE) + (aCount % PAGE_SIZE == 0 ? 0:1);
 		startRnum = (currentPage-1) * PAGE_SIZE + 1;  
 		endRnum = startRnum + PAGE_SIZE -1;

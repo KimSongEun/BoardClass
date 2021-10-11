@@ -38,6 +38,7 @@ public class AdGetForUpdateServlet extends HttpServlet {
 		System.out.println(no);
 		int promotionNo = Integer.parseInt(no);
 		Banner vo = new AdminService().getAd(promotionNo);
+		request.setAttribute("promotionno", no);
 		request.setAttribute("bannervo", vo);
 		request.getRequestDispatcher("/WEB-INF/admin/ad/adupdate.jsp").forward(request, response);
 	}
