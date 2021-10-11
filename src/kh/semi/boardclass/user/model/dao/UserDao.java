@@ -1,8 +1,12 @@
 package kh.semi.boardclass.user.model.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.user.model.vo.User;
 
 public class UserDao {
@@ -10,9 +14,39 @@ public class UserDao {
 	public UserDao() {
 	}
 
-	public int login(Connection conn, String userId, String userPassword) {
-		int result = 0;
-		return result;
+	public User login(Connection conn, String userId, String userPassword) {
+		User user = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "SELECT * FROM member where user_Id=? and user_Password=?";
+
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userPassword);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {	
+				user = new User();
+				user.setUserId(rset.getString("user_Id"));	
+				user.setUserNum(rset.getInt("user_Num"));	
+				user.setUserPassword(rset.getString("user_Password"));	
+				user.setUserName(rset.getString("user_Name"));
+				user.setUserNickname(rset.getString("user_Nickname"));
+				user.setUserEmail(rset.getString("user_Email"));	
+				user.setUserPhone(rset.getInt("user_Phone"));	
+				user.setUserAddress(rset.getString("user_Address"));	
+				user.setUserType(rset.getString("user_Type").charAt(0));	
+				user.setUserImage(rset.getString("user_Image"));
+				user.setUserHistory(rset.getInt("user_History"));
+
+			}
+		} catch (SQLException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+	return user;
 	}
 	
 	public int updateHistory(Connection conn, String userId) {
