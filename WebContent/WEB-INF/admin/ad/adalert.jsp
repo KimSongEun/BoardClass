@@ -11,7 +11,6 @@
 <title>adalert</title>
 </head>
 <body>
-AAA
 <script>
 alert("<%=msg%>");
 location.href="<%=loc%>";
