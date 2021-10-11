@@ -46,13 +46,27 @@ public class GameService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
-
-	public int selectFilterGameList() {
+	public int getGameCount(){
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new GameDao().selectFilterGameList(conn);
+		result = new GameDao().getGameCount(conn);
 		JDBCTemplate.close(conn);
 		return result;
+	}
+	
+	public ArrayList<Game> selectFilterGameList() {
+		ArrayList<Game> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new GameDao().selectFilterGameList(conn);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	public ArrayList<Game> selectFilterGameList(int start, int end) {
+		ArrayList<Game> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new GameDao().selectFilterGameList(conn,start, end);
+		JDBCTemplate.close(conn);
+		return volist;
 	}
 
 	public int addViewCount() {

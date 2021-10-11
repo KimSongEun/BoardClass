@@ -4,41 +4,41 @@ import java.sql.Date;
 
 public class Game {
 
-	private int gameNo;
+	private int gameNumber;
 	private String gameKoName;
 	private String gameEnName;
 	private String gameCategory;
 	private int gameView;
 	private String gameAge;
 	private String gamePlayer;
-	private int gameTime;
+	private String gameTime;
 	private int gamePrice;
 	private int gameGrade;
-	private int gameStock;
 	private Date gameDate;
 	private int gameLevel;
 	private String gameDesigner;
 	private String gameWriter;
 	private String gameBrand;
-	private Date gameReleaseDate;
+	private String gameReleaseDate;
 	private int gameRank;
 	private String gameLanguage;
 	private String gameReview;
 	private String gameImage;
+	private String gameRuleImage;
 	private String gameVideo;
 	private String gamePlus;
-	private int usedNo;
+	private int usedNum;
 
 	public Game() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Game(int gameNo, String gameKoName, String gameEnName, String gameCategory, int gameView, String gameAge,
-			String gamePlayer, int gameTime, int gamePrice, int gameGrade, int gameStock, Date gameDate, int gameLevel,
-			String gameDesigner, String gameWriter, String gameBrand, Date gameReleaseDate, int gameRank,
-			String gameLanguage, String gameReview, String gameImage, String gameVideo, String gamePlus, int usedNo) {
+	public Game(int gameNumber, String gameKoName, String gameEnName, String gameCategory, int gameView, String gameAge,
+			String gamePlayer, String gameTime, int gamePrice, int gameGrade, Date gameDate, int gameLevel,
+			String gameDesigner, String gameWriter, String gameBrand, String gameReleaseDate, int gameRank,
+			String gameLanguage, String gameReview, String gameImage, String gameRuleImage, String gameVideo, String gamePlus, int usedNo) {
 		super();
-		this.gameNo = gameNo;
+		this.gameNumber = gameNumber;
 		this.gameKoName = gameKoName;
 		this.gameEnName = gameEnName;
 		this.gameCategory = gameCategory;
@@ -48,7 +48,7 @@ public class Game {
 		this.gameTime = gameTime;
 		this.gamePrice = gamePrice;
 		this.gameGrade = gameGrade;
-		this.gameStock = gameStock;
+		
 		this.gameDate = gameDate;
 		this.gameLevel = gameLevel;
 		this.gameDesigner = gameDesigner;
@@ -59,17 +59,26 @@ public class Game {
 		this.gameLanguage = gameLanguage;
 		this.gameReview = gameReview;
 		this.gameImage = gameImage;
+		this.gameRuleImage = gameRuleImage;
 		this.gameVideo = gameVideo;
 		this.gamePlus = gamePlus;
-		this.usedNo = usedNo;
+		this.usedNum = usedNo;
 	}
 
-	public int getGameNo() {
-		return gameNo;
+	public String getGameRuleImage() {
+		return gameRuleImage;
 	}
 
-	public void setGameNo(int gameNo) {
-		this.gameNo = gameNo;
+	public void setGameRuleImage(String gameRuleImage) {
+		this.gameRuleImage = gameRuleImage;
+	}
+
+	public int getGameNumber() {
+		return gameNumber;
+	}
+
+	public void setGameNumber(int gameNumber) {
+		this.gameNumber = gameNumber;
 	}
 
 	public String getGameKoName() {
@@ -120,11 +129,11 @@ public class Game {
 		this.gamePlayer = gamePlayer;
 	}
 
-	public int getGameTime() {
+	public String getGameTime() {
 		return gameTime;
 	}
 
-	public void setGameTime(int gameTime) {
+	public void setGameTime(String gameTime) {
 		this.gameTime = gameTime;
 	}
 
@@ -142,14 +151,6 @@ public class Game {
 
 	public void setGameGrade(int gameGrade) {
 		this.gameGrade = gameGrade;
-	}
-
-	public int getGameStock() {
-		return gameStock;
-	}
-
-	public void setGameStock(int gameStock) {
-		this.gameStock = gameStock;
 	}
 
 	public Date getGameDate() {
@@ -192,11 +193,11 @@ public class Game {
 		this.gameBrand = gameBrand;
 	}
 
-	public Date getGameReleaseDate() {
+	public String getGameReleaseDate() {
 		return gameReleaseDate;
 	}
 
-	public void setGameReleaseDate(Date gameReleaseDate) {
+	public void setGameReleaseDate(String gameReleaseDate) {
 		this.gameReleaseDate = gameReleaseDate;
 	}
 
@@ -248,12 +249,12 @@ public class Game {
 		this.gamePlus = gamePlus;
 	}
 
-	public int getUsedNo() {
-		return usedNo;
+	public int getUsedNum() {
+		return usedNum;
 	}
 
-	public void setUsedNo(int usedNo) {
-		this.usedNo = usedNo;
+	public void setUsedNum(int usedNum) {
+		this.usedNum = usedNum;
 	}
 
 
