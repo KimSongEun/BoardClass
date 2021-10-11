@@ -9,8 +9,6 @@ public class Notice {
 	private String adminContent;
 	private Date adminWrDate;
 	private Date adminRwrDate;
-	private String fileName;
-	private String filePath;
 	
 	public Notice(){
 		
@@ -19,7 +17,7 @@ public class Notice {
 	
 
 	public Notice(int announceNo, String userId, String adminTitle, String adminContent, Date adminWrDate,
-			Date adminRwrDate, String fileName, String filePath) {
+			Date adminRwrDate) {
 		super();
 		this.announceNo = announceNo;
 		this.userId = userId;
@@ -27,8 +25,6 @@ public class Notice {
 		this.adminContent = adminContent;
 		this.adminWrDate = adminWrDate;
 		this.adminRwrDate = adminRwrDate;
-		this.fileName = fileName;
-		this.filePath = filePath;
 	}
 
 
@@ -80,28 +76,11 @@ public class Notice {
 	public void setAdminRwrDate(Date adminRwrDate) {
 		this.adminRwrDate = adminRwrDate;
 	}
-	
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
-	public String getFilePath() {
-		return filePath;
-	}
-
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
-	}
 
 	@Override
 	public String toString() {
 		return "Notice [announceNo=" + announceNo + ", userId=" + userId + ", adminTitle=" + adminTitle
-				+ ", adminContent=" + adminContent + ", adminWrDate=" + adminWrDate + ", adminRwrDate=" + adminRwrDate
-				+ ", fileName=" + fileName + ", filePath=" + filePath + "]";
+				+ ", adminContent=" + adminContent + ", adminWrDate=" + adminWrDate + ", adminRwrDate=" + adminRwrDate + "]";
 	}
 
 	

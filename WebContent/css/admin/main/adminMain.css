@@ -1,0 +1,74 @@
+@charset "UTF-8";
+.admin-main-section{
+    position :absolute;
+    left : 250px;
+    top : 40px;
+    width : 83.6%;
+    padding: 50px;
+}
+.admin-main-title{
+	font-weight: bold;
+	font-size: 34px;
+	text-align: center;
+    margin: auto;
+}
+.admin-count-div{
+    margin : 50px auto;
+    text-align: center;
+}
+.admin-count-allmember-div {
+    display: inline-block;
+    margin: 40px;
+}
+.admin-count-todayvisit-div {
+    display: inline-block;
+    margin: 40px;
+}
+.admin-count-monthvisit-div {
+    display: inline-block;
+    margin: 40px;
+}
+.admin-count-todayboard-div {
+    display: inline-block;
+    margin: 40px;
+}
+.admin-count-table {
+    border: 1px solid black;
+    border-radius: 20px !important;
+}
+.admin-report-div{
+    height : 400px;
+}
+.admin-report-board-table-div{
+    float : left;
+    /* display: inline-block; */
+    margin: auto 40px;
+} 
+.admin-report-board-table{
+	width: 500px; 
+}
+.admin-report-comment-table-div{
+    float: right;
+    /* display: inline-block; */
+}
+.admin-report-comment-table{
+	width: 500px; 
+}
+.admin-notice-div{
+    margin: auto;
+}
+.admin-notice-table {
+    width : 600px;
+    margin: auto;
+}
+tr, td {
+    padding: 10px;
+}
+.table-hover tr:hover {
+    color: #212529;
+    background-color: rgba(0, 0, 0, 0.075);
+  }
+table {
+    border: 2px solid #1f232c;
+}
+  

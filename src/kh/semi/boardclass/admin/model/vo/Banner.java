@@ -3,34 +3,37 @@ package kh.semi.boardclass.admin.model.vo;
 import java.sql.Date;
 
 public class Banner {
-	private int promotion;
+	private int promotionNo;
 	private String userId;
 	private int promotionPlace;
 	private String promotionTitle;
 	private String promotionContent;
 	private Date promotionDate;
+	private String promotionImg;
 	
 	public Banner(){
 		
 	}
 	
-	public Banner(int promotion, String userId, int promotionPlace,String promotionTitle,String promotionContent,Date promotionDate){
+	public Banner(int promotionNo, String userId, int promotionPlace, String promotionTitle, String promotionContent,
+			Date promotionDate, String promotionImg) {
 		super();
-		this.promotion = promotion;
+		this.promotionNo = promotionNo;
 		this.userId = userId;
 		this.promotionPlace = promotionPlace;
 		this.promotionTitle = promotionTitle;
 		this.promotionContent = promotionContent;
 		this.promotionDate = promotionDate;
+		this.promotionImg = promotionImg;
 	}
-	
-	public int getPromotion() {
-		return promotion;
+
+	public int getPromotionNo() {
+		return promotionNo;
 	}
 
 
-	public void setPromotion(int promotion) {
-		this.promotion = promotion;
+	public void setPromotionNo(int promotionNo) {
+		this.promotionNo = promotionNo;
 	}
 
 
@@ -82,14 +85,25 @@ public class Banner {
 	public void setPromotionDate(Date promotionDate) {
 		this.promotionDate = promotionDate;
 	}
+	
 
+	public String getPromotionImg() {
+		return promotionImg;
+	}
+
+	public void setPromotionImg(String promotionImg) {
+		this.promotionImg = promotionImg;
+	}
 
 	@Override
 	public String toString() {
-		return "Banner [promotion=" + promotion + ", userId=" + userId + ", promotionPlace=" + promotionPlace
+		return "Banner [promotionNo=" + promotionNo + ", userId=" + userId + ", promotionPlace=" + promotionPlace
 				+ ", promotionTitle=" + promotionTitle + ", promotionContent=" + promotionContent + ", promotionDate="
-				+ promotionDate + "]";
+				+ promotionDate + ", promotionImg=" + promotionImg + "]";
 	}
+
+
+
 	
 	
 }

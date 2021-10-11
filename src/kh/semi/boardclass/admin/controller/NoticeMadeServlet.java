@@ -31,8 +31,19 @@ public class NoticeMadeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+
+		String title = request.getParameter("title"); 
+		String content = request.getParameter("content");
+		String writer = (String)request.getSession().getAttribute("memberLoginInfo"); //TODO: 관리자계정 넣는 것에 따라서 바꾸기
+		if(writer == null) {
+			writer = "song"; // TODO: 임시 writer 설정
+		}		
+		
+		int result = new AdminService().insertNotice(title,content, writer);
+		response.sendRedirect("noticelist");
 	}
 
 	/**

@@ -32,13 +32,46 @@ public class NoticeListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setContentType("text/html; charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		
+		int PAGE_SIZE = 10; // TODO: 나중에 선택한 글 수로 바뀌게 하기
+		final int PAGE_BLOCK = 5; 
+		int aCount = 0; 
+		int pageCount = 0; 
+		int startPage = 1;
+		int endPage = 1;
+		int currentPage = 1;
+		int startRnum = 1;
+		int endRnum = 1; 
+		
+		String pageNum = request.getParameter("pagenum");
+		if(pageNum !=null) { 
+				currentPage=Integer.parseInt(pageNum);
+		}
+		
+		aCount = new AdminService().getNoticeCount();
+		pageCount = (aCount / PAGE_SIZE) + (aCount % PAGE_SIZE == 0 ? 0:1);
+		startRnum = (currentPage-1) * PAGE_SIZE + 1;  
+		endRnum = startRnum + PAGE_SIZE -1;
+		if(endRnum > aCount) endRnum = aCount;
+		
+		if (currentPage % PAGE_BLOCK == 0) {
+			startPage = (currentPage / PAGE_BLOCK -1) * PAGE_BLOCK + 1;
+		} else {
+			startPage = (currentPage / PAGE_BLOCK) * PAGE_BLOCK + 1;
+		}
+		endPage = startPage + PAGE_BLOCK -1;
+		if(endPage > pageCount) endPage = pageCount;
+		
+		ArrayList<Notice> volist  = new AdminService().selectNoticeList(startRnum, endRnum);
+		
+		request.setAttribute("noticevolist", volist);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("pageCount", pageCount);
+		request.getRequestDispatcher("/WEB-INF/admin/notice/noticelist.jsp").forward(request, response);
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);

@@ -1,6 +1,7 @@
 package kh.semi.boardclass.admin.model.service;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.ArrayList;
 
 import kh.semi.boardclass.admin.model.dao.AdminDao;
@@ -67,10 +68,10 @@ public class AdminService {
 		return volist;
 	}
 
-	public ArrayList<Notice> getRankNotice() {
+	public ArrayList<Notice> getNewestNotice() {
 		ArrayList<Notice> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().getRankNotice(conn);
+		volist = new AdminDao().getNewestNotice(conn);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
@@ -78,7 +79,7 @@ public class AdminService {
 	public Notice getNotice(int announceNo) {
 		Notice vo = null;
 		Connection conn = JDBCTemplate.getConnection();
-		vo = new AdminDao().getnotice(conn, announceNo);
+		vo = new AdminDao().getNotice(conn, announceNo);
 		JDBCTemplate.close(conn);
 		return vo;
 	}
@@ -107,26 +108,41 @@ public class AdminService {
 		return vo;
 	}
 
-	public int insertNotice(Notice notice) {
+	public int insertNotice(String title, String content, String writer) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().insertNotice(conn, notice);
+		result = new AdminDao().insertNotice(conn, title, content, writer);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}
 
-	public int updateNotice(Notice notice) {
+	public int updateNotice(String title, String content, int announceNo) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().updateNotice(conn, notice);
+		result = new AdminDao().updateNotice(conn, title, content, announceNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}
 
-	public int deleteNotice(Notice notice) {
+	public int deleteNotice(int announceNo) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().deleteNotice(conn, notice);
+		result = new AdminDao().deleteNotice(conn, announceNo);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}
@@ -171,10 +187,26 @@ public class AdminService {
 		return result;
 	}
 
-	public ArrayList<Banner> selectAdList() {
+	public Banner getAd(int promotionNo) {
+		Banner vo = null;
+		Connection conn = JDBCTemplate.getConnection();
+		vo = new AdminDao().getAd(conn, promotionNo);
+		JDBCTemplate.close(conn);
+		return vo;
+	}
+
+	public int getAdCount() {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getAdCount(conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
+	public ArrayList<Banner> selectAdList(int start, int end) {
 		ArrayList<Banner> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().selectAdList(conn);
+		volist = new AdminDao().selectAdList(conn, start, end);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
@@ -187,26 +219,41 @@ public class AdminService {
 		return vo;
 	}
 
-	public int insertAd(Banner banner) {
+	public int insertAd(String title, String content, String writer, String img) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().insertAd(conn, banner);
+		result = new AdminDao().insertAd(conn, title, content, writer, img);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}
 
-	public int updateAd(Banner banner) {
+	public int updateAd(String title, String content, String img, int promotionNo) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().updateAd(conn, banner);
+		result = new AdminDao().updateAd(conn, title, content, img, promotionNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}
 
-	public int deleteAd(Banner banner) {
+	public int deleteAd(int promotionNo) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().deleteAd(conn, banner);
+		result = new AdminDao().deleteAd(conn, promotionNo);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}
