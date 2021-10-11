@@ -2,7 +2,7 @@
     <wb-module deploy-name="BoardClass">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-        <property name="java-output-path" value="/BOARD_GAME/build/classes"/>
+        <property name="java-output-path" value="/BoardClass/build/classes"/>
         <property name="context-root" value="BoardClass"/>
     </wb-module>
 </project-modules>

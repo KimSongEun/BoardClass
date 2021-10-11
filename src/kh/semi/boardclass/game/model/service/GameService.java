@@ -61,10 +61,40 @@ public class GameService {
 		JDBCTemplate.close(conn);
 		return volist;
 	}
-	public ArrayList<Game> selectFilterGameList(int start, int end) {
+	
+	public ArrayList<Game> selectCateGameList(int start, int end, String cate) {
 		ArrayList<Game> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new GameDao().selectFilterGameList(conn,start, end);
+		volist = new GameDao().selectCateGameList(conn, start, end, cate);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public ArrayList<Game> selectLevelGameList(int start, int end) {
+		ArrayList<Game> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new GameDao().selectLevelGameList(conn,start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	public ArrayList<Game> selectGradeGameList(int start, int end) {
+		ArrayList<Game> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new GameDao().selectGradeGameList(conn,start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	public ArrayList<Game> selectGradeDescGameList(int start, int end) {
+		ArrayList<Game> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new GameDao().selectGradeDescGameList (conn,start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	public ArrayList<Game> selectSortGameList(int start, int end) {
+		ArrayList<Game> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new GameDao().selectSortGameList (conn,start, end);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
