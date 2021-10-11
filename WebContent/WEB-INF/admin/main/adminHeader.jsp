@@ -30,7 +30,7 @@
 	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="bglist">보드게임 조회</a></li>
 	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="bgmade">보드게임 등록</a></li>
 	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="adlist">광고 조회</a></li>
-	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="admade">광고 등록</a></li>
+	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="admadeview">광고 등록</a></li>
 	                </ul>
                     <br>
 	            <li class="admin-nav-li" id="menu3">
