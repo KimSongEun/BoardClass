@@ -77,8 +77,8 @@ public class GameKoreanListServlet extends HttpServlet {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
-		// Page 이동하면서 Data도 전달함.
-		request.getRequestDispatcher("/WEB-INF/game/GameKoreanList.jsp").forward(request, response);
+		
+		request.getRequestDispatcher("/WEB-INF/game/gamelist/GameKoreanList.jsp").forward(request, response);
 		
 	}
 

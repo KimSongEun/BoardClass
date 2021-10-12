@@ -37,7 +37,7 @@ public class GameGradeListServlet extends HttpServlet {
         PrintWriter out=response.getWriter();    
     	
         
-		final int PAGE_SIZE = 10;   // 한 페이지 당 글수
+    	final int PAGE_SIZE = 10;   // 한 페이지 당 글수
 		final int PAGE_BLOCK = 3;   // 한 화면에 나타날 페이지 링크 수
 		int bCount = 0;   // 총 글수
 		int pageCount = 0; // 총 페이지수
@@ -76,8 +76,8 @@ public class GameGradeListServlet extends HttpServlet {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
-		// Page 이동하면서 Data도 전달함.
-		request.getRequestDispatcher("/WEB-INF/game/GameGradeList.jsp").forward(request, response);
+		
+		request.getRequestDispatcher("/WEB-INF/game/gamelist/GameGradeList.jsp").forward(request, response);
 		
 	}
 
