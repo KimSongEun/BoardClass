@@ -35,7 +35,13 @@ public class NoticeListServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		
-		int PAGE_SIZE = 10; // TODO: 나중에 선택한 글 수로 바뀌게 하기
+		String viewcount = request.getParameter("viewcount");
+		int PAGE_SIZE;
+		if(viewcount != null) {
+			PAGE_SIZE = Integer.parseInt(viewcount);
+		} else {
+			PAGE_SIZE = 10;
+		}
 		final int PAGE_BLOCK = 5; 
 		int aCount = 0; 
 		int pageCount = 0; 
@@ -66,6 +72,7 @@ public class NoticeListServlet extends HttpServlet {
 		
 		ArrayList<Notice> volist  = new AdminService().selectNoticeList(startRnum, endRnum);
 		
+		request.setAttribute("viewcount", PAGE_SIZE);
 		request.setAttribute("noticevolist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
