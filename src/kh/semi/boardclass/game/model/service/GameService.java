@@ -30,6 +30,7 @@ public class GameService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	
 
 	public ArrayList<Game> selectGame() {
 		ArrayList<Game> volist = null;
@@ -39,6 +40,7 @@ public class GameService {
 		return volist;
 	}
 
+	
 	public int getListCounterFilter() {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();

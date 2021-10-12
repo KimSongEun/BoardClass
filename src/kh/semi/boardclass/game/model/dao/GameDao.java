@@ -81,6 +81,7 @@ public class GameDao {
 			}
 		}
 		return volist;
+
 	}
 	
 	public int getListCounterFilter(Connection conn) {

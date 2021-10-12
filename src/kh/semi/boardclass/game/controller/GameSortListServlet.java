@@ -77,7 +77,7 @@ public class GameSortListServlet extends HttpServlet {
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
 		// Page 이동하면서 Data도 전달함.
-		request.getRequestDispatcher("/GameSortList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/game/GameSortList.jsp").forward(request, response);
 		
 	}
 

@@ -15,7 +15,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>º¸µå ¸®½ºÆ®</title>
+<title>ë³´ë“œ ë¦¬ìŠ¤íŠ¸</title>
 <style>
 @font-face {
 	font-family: 'ImcreSoojin';
@@ -116,7 +116,7 @@
 		<header>
 			<div class="nav">
 				<nav class="navlogin">
-					<a href="#">·Î±×ÀÎ</a> | <a href="#">È¸¿ø°¡ÀÔ</a>
+					<a href="#">ë¡œê·¸ì¸</a> | <a href="#">íšŒì›ê°€ìž…</a>
 				</nav>
 			</div>
 			<div class="logo">
@@ -126,8 +126,8 @@
 			<br>
 			<div class="nav">
 				<nav class="navcategory">
-					<a href="#">Ä«Å×°í¸®</a> | <a href="#">°ÔÀÓ·©Å·</a> | <a href="#">Áß°í°Å·¡</a>
-					| <a href="#">°Ô½ÃÆÇ</a> | <a href="#">º¸µå°ÔÀÓÁ¤º¸</a>
+					<a href="#">ì¹´í…Œê³ ë¦¬</a> | <a href="#">ê²Œìž„ëž­í‚¹</a> | <a href="#">ì¤‘ê³ ê±°ëž˜</a>
+					| <a href="#">ê²Œì‹œíŒ</a> | <a href="#">ë³´ë“œê²Œìž„ì •ë³´</a>
 				</nav>
 			</div>
 			<br>
@@ -135,15 +135,15 @@
 		</header>
 		<nav id="nav2">
 
-			<p>¤·¤·¤·</p>
+			<p>ã…‡ã…‡ã…‡</p>
 			<br>
 			<ul class="ulist">
-				<li><a href="#">ÀüÃ¼</a></li>
-				<li><a href="GameStrategyList">Àü·«</a></li>
-				<li><a href="GameTemaList">Å×¸¶</a></li>
-				<li><a href="GameFamilyList">°¡Á·</a></li>
-				<li><a href="GamePartyList">ÆÄÆ¼</a></li>
-				<li><a href="GameKoreanList">ÇÑ±Û</a></li>
+				<li><a href="#">ì „ì²´</a></li>
+				<li><a href="GameStrategyList">ì „ëžµ</a></li>
+				<li><a href="GameTemaList">í…Œë§ˆ</a></li>
+				<li><a href="GameFamilyList">ê°€ì¡±</a></li>
+				<li><a href="GamePartyList">íŒŒí‹°</a></li>
+				<li><a href="GameKoreanList">í•œê¸€</a></li>
 
 			</ul>
 
@@ -152,24 +152,24 @@
 		<aside></aside>
 
 		<section id="section2">
-			<div id="d1">¤·¤·¤·</div>
+			<div id="d1">ã…‡ã…‡ã…‡</div>
 
 			<div id="search">
-				°ÔÀÓÀÌ¸§ <input type="text" id="text_name">
-				<button type="button" id="search_btn" onclick="#">°Ë»ö</button>
+				ê²Œìž„ì´ë¦„ <input type="text" id="text_name">
+				<button type="button" id="search_btn" onclick="#">ê²€ìƒ‰</button>
 			</div>
 
 			<select id="sort" onchange="window.open(value,'_self');">
-				<option value="GameGradeDescList">ÆòÁ¡ ³·Àº¼ø</option>
-				<option value="GameGradeList">ÆòÁ¡ ¼ø</option>
-				<option value="GameLevelList">³­ÀÌµµ ¼ø</option>
-				<option value="GameSortList">°¡³ª´Ù ¼ø</option>
+				<option value="GameGradeDescList">í‰ì  ë‚®ì€ìˆœ</option>
+				<option value="GameGradeList">í‰ì  ìˆœ</option>
+				<option value="GameLevelList">ë‚œì´ë„ ìˆœ</option>
+				<option value="GameSortList">ê°€ë‚˜ë‹¤ ìˆœ</option>
 			</select> <br>
 			<%
 				if (volist != null) {
 					for (Game vo : volist) {
-						// tr ÀÌ volist °¹¼ö ¸¸Å­ »ý±â°Ô µÊ.
-						// <%= Àº È­¸é¿¡ Ãâ·ÂÀ» À§ÇÑ Ç¥Çö½ÄÀ» ÀÛ¼ºÇÏ´Â ÅÂ±×, ;¾ø¾î¾ß ÇÔ.
+						// tr ì´ volist ê°¯ìˆ˜ ë§Œí¼ ìƒê¸°ê²Œ ë¨.
+						// <%= ì€ í™”ë©´ì— ì¶œë ¥ì„ ìœ„í•œ í‘œí˜„ì‹ì„ ìž‘ì„±í•˜ëŠ” íƒœê·¸, ;ì—†ì–´ì•¼ í•¨.
 			%>
 			<div id="board_info">
 				<button type="button" class="btn1" onclick="#">
@@ -191,7 +191,7 @@
 				<%
 					if (startPage > 1) {
 				%>
-				ÀÌÀü
+				ì´ì „
 				<%
 					}
 					for (int i = startPage; i <= endPage; i++) {
@@ -206,7 +206,7 @@
 					}
 					if (endPage < pageCount) {
 				%>
-				´ÙÀ½
+				ë‹¤ìŒ
 				<%
 					}
 				%>
@@ -222,10 +222,10 @@
 		<footer>
 			<div class="footer">
 				<hr>
-				<br> <span id="f_s">Copyright ¨Ï 2021 <b id="f_b">º¸µå°ÔÀÓ
-						Ä¿¹Â´ÏÆ¼ º¸µåÅ¬·¡½º</b> All rights reserved.
-				</span> | <a href="#"><b>¼­ºñ½º ¾à°ü/Á¤Ã¥</b></a> | <a href="#"><b>°³ÀÎÁ¤º¸Ãë±Þ¹æÄ§</b></a>
-				| <a href="#">°øÁö»çÇ×</a> | <a href="#">°í°´¼¾ÅÍ</a>
+				<br> <span id="f_s">Copyright â“’ 2021 <b id="f_b">ë³´ë“œê²Œìž„
+						ì»¤ë®¤ë‹ˆí‹° ë³´ë“œí´ëž˜ìŠ¤</b> All rights reserved.
+				</span> | <a href="#"><b>ì„œë¹„ìŠ¤ ì•½ê´€/ì •ì±…</b></a> | <a href="#"><b>ê°œì¸ì •ë³´ì·¨ê¸‰ë°©ì¹¨</b></a>
+				| <a href="#">ê³µì§€ì‚¬í•­</a> | <a href="#">ê³ ê°ì„¼í„°</a>
 			</div>
 		</footer>
 		<br>
