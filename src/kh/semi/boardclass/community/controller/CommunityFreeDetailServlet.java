@@ -19,7 +19,6 @@ public class CommunityFreeDetailServlet extends HttpServlet {
      */
     public CommunityFreeDetailServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**

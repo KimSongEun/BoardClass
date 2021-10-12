@@ -18,8 +18,11 @@
 			<li><a href="#">모임게시판</a></li>
 		</ul>
 </nav> <!-- TODO 링크 첨부 -->
-<button>새글쓰기</button>
-<a href="/cfupdate">새글쓰기</a>
+<section>
+
+</section>
+<input type="button" value="새글쓰기" id="btn_write" onclick="location.href ='cfwrite.do'"/>
+<!-- <a href="/cfinsert">새글쓰기</a> -->
 <%@include file="/WEB-INF/community/footer.jsp" %>
 </body>
 </html>

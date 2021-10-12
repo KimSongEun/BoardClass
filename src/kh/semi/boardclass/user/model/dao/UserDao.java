@@ -28,7 +28,7 @@ public class UserDao {
 			if (rset.next()) {	
 				user = new User();
 				user.setUserId(rset.getString("user_Id"));	
-				user.setUserNum(rset.getInt("user_Num"));	
+				user.setUserNo(rset.getInt("user_No"));	
 				user.setUserPassword(rset.getString("user_Password"));	
 				user.setUserName(rset.getString("user_Name"));
 				user.setUserNickname(rset.getString("user_Nickname"));

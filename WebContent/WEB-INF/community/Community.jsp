@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page import="kh.semi.boardclass.community.model.vo.Board"%>
-<%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +9,7 @@
 <link rel="stylesheet" href="./css/community/community.css" />
 </head>
 <body>
-<c:import url="./header.jsp" />
+<%@include file="/WEB-INF/community/header.jsp" %>
 	<nav id="c_category" class="c_category">
 		<ul>
 			<li><a href="#">커뮤니티</a></li>
@@ -21,8 +19,9 @@
 			<li><a href="#">모임게시판</a></li>
 		</ul>
 	</nav>
+	
 <section>
-<div class="best">
+<article class="best">
 	<div class="freeboardbest">
 	<h1>자유게시판 인기글</h1>
 		<ul>
@@ -43,8 +42,9 @@
 			<li>5</li>
 		</ul>
 	</div>
-</div>
-<div class="list">
+</article>
+
+<article class="list">
 	<h1>전체글 보기</h1>
 	<table border="1">
 		<tr>
@@ -68,8 +68,10 @@
 </c:if>
 		
 	</table>
-</div>
+</article>
+
 </section>
-<c:import url="footer.jsp" />
+
+<%@include file="/WEB-INF/community/footer.jsp" %>
 </body>
 </html>

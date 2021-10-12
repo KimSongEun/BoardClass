@@ -1,7 +1,9 @@
 package kh.semi.boardclass.community.model.vo;
 
 public class BoardLike {
-
+//	 BOARD_LIKE_NO NUMBER,
+//	    BOARD_NO NUMBER,
+//	    USER_ID VARCHAR2(20),
 	private int boardLikeNo;
 	private int boardNO;
 	private String userId;

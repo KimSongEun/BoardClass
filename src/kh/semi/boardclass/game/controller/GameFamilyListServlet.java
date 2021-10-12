@@ -37,25 +37,25 @@ public class GameFamilyListServlet extends HttpServlet {
         PrintWriter out=response.getWriter();    
     	
         
-		final int PAGE_SIZE = 10;   // ÇÑ ÆäÀÌÁö ´ç ±Û¼ö
-		final int PAGE_BLOCK = 3;   // ÇÑ È­¸é¿¡ ³ªÅ¸³¯ ÆäÀÌÁö ¸µÅ© ¼ö
-		int bCount = 0;   // ÃÑ ±Û¼ö
-		int pageCount = 0; // ÃÑ ÆäÀÌÁö¼ö
-		int startPage = 1;   // È­¸é¿¡ ³ªÅ¸³¯ ½ÃÀÛÆäÀÌÁö
-		int endPage = 1;   // È­¸é¿¡ ³ªÅ¸³¯ ¸¶Áö¸·ÆäÀÌÁö
+		final int PAGE_SIZE = 10;   // í•œ í˜ì´ì§€ ë‹¹ ê¸€ìˆ˜
+		final int PAGE_BLOCK = 3;   // í•œ í™”ë©´ì— ë‚˜íƒ€ë‚  í˜ì´ì§€ ë§í¬ ìˆ˜
+		int bCount = 0;   // ì´ ê¸€ìˆ˜
+		int pageCount = 0; // ì´ í˜ì´ì§€ìˆ˜
+		int startPage = 1;   // í™”ë©´ì— ë‚˜íƒ€ë‚  ì‹œì‘í˜ì´ì§€
+		int endPage = 1;   // í™”ë©´ì— ë‚˜íƒ€ë‚  ë§ˆì§€ë§‰í˜ì´ì§€
 		int currentPage = 1;
-		int startRnum = 1;   // È­¸é¿¡ ±Û
-		int endRnum = 1;  // È­¸é¿¡ ±Û
+		int startRnum = 1;   // í™”ë©´ì— ê¸€
+		int endRnum = 1;  // í™”ë©´ì— ê¸€
 		
 		String pageNum = request.getParameter("pagenum");
-		if(pageNum != null) {   // ´­·ÁÁø ÆäÀÌÁö°¡ ÀÖÀ½.
-			currentPage = Integer.parseInt(pageNum); // ´­·ÁÁø ÆäÀÌÁö
+		if(pageNum != null) {   // ëˆŒë ¤ì§„ í˜ì´ì§€ê°€ ìˆìŒ.
+			currentPage = Integer.parseInt(pageNum); // ëˆŒë ¤ì§„ í˜ì´ì§€
 		}
-		// ÃÑ ±Û¼ö
+		// ì´ ê¸€ìˆ˜
 		bCount = new GameService().getGameCount();
-		// ÃÑ ÆäÀÌÁö¼ö = (ÃÑ±Û°³¼ö / ÆäÀÌÁö´ç±Û¼ö) + (ÃÑ±Û°³¼ö¿¡¼­ ÆäÀÌÁö´ç±Û¼ö·Î ³ª´« ³ª¸ÓÁö°¡ 0ÀÌ ¾Æ´Ï¶ó¸é ÆäÀÌÁö°³¼ö¸¦ 1 Áõ°¡)
+		// ì´ í˜ì´ì§€ìˆ˜ = (ì´ê¸€ê°œìˆ˜ / í˜ì´ì§€ë‹¹ê¸€ìˆ˜) + (ì´ê¸€ê°œìˆ˜ì—ì„œ í˜ì´ì§€ë‹¹ê¸€ìˆ˜ë¡œ ë‚˜ëˆˆ ë‚˜ë¨¸ì§€ê°€ 0ì´ ì•„ë‹ˆë¼ë©´ í˜ì´ì§€ê°œìˆ˜ë¥¼ 1 ì¦ê°€)
 		pageCount = (bCount / PAGE_SIZE) + (bCount % PAGE_SIZE == 0 ? 0 : 1);
-		//rownum Á¶°Ç °è»ê
+		//rownum ì¡°ê±´ ê³„ì‚°
 		startRnum = (currentPage-1) * PAGE_SIZE   + 1;   // 1//6//11/16//21
 		endRnum = startRnum + PAGE_SIZE -1; 
 		if(endRnum > bCount) endRnum=bCount;
@@ -68,17 +68,17 @@ public class GameFamilyListServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1; 
 		if(endPage > pageCount) endPage=pageCount;
 		
-		String cate = "°¡Á·";
-		// DB¿¡¼­ °ª ÀĞ¾î¿À±â
+		String cate = "ê°€ì¡±";
+		// DBì—ì„œ ê°’ ì½ì–´ì˜¤ê¸°
 		ArrayList<Game> volist = new GameService().selectCateGameList(startRnum,endRnum,cate);
 		
-		// Data Àü´ŞÀ» À§ÇØ¼­ request¿¡ ¼Â
+		// Data ì „ë‹¬ì„ ìœ„í•´ì„œ requestì— ì…‹
 		request.setAttribute("gamevolist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
-		// Page ÀÌµ¿ÇÏ¸é¼­ Dataµµ Àü´ŞÇÔ.
-		request.getRequestDispatcher("/WEB-INF/game/GameFamilyList.jsp").forward(request, response);
+		
+		request.getRequestDispatcher("/WEB-INF/game/gamelist/GameFamilyList.jsp").forward(request, response);
 		
 	}
 

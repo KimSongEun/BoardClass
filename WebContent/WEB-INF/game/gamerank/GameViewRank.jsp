@@ -152,18 +152,12 @@
 		<aside></aside>
 
 		<section id="section2">
-			<div id="d1">ㅇㅇㅇ</div>
-
-			<div id="search">
-				게임이름 <input type="text" id="text_name">
-				<button type="button" id="search_btn" onclick="#">검색</button>
-			</div>
 
 			<select id="sort" onchange="window.open(value,'_self');">
-				<option value="GameGradeList">평점 순</option>
-				<option value="GameGradeDescList">평점 낮은순</option>
-				<option value="GameLevelList">난이도 순</option>
-				<option value="GameSortList">가나다 순</option>
+				<option value="GameViewRank">조회수 순</option>
+				<option value="GameGradeRank">평점 순</option>
+				<option value="GameJjimRank">찜 상품 순</option>
+				
 			</select> <br>
 			<%
 				if (volist != null) {
@@ -176,8 +170,10 @@
 					<img src="<%=request.getContextPath()%>/<%=vo.getGameImage()%>"
 						width="250" height="250" />
 					<div class="img-text">
-						<%=vo.getGameKoName()%>
-						<%=vo.getGameLevel()%>
+						<%=vo.getGameKoName()%><br>
+						게임 인원 : <%=vo.getGameLevel()%>명<br>
+						게임 연령 : <%=vo.getGameAge()%><br>
+						게임 시간 : <%=vo.getGameTime()%>분
 					</div>
 				</button>
 
@@ -196,7 +192,7 @@
 					}
 					for (int i = startPage; i <= endPage; i++) {
 				%>
-				<a href="./GameStrategyList?pagenum=<%=i%>"> <%=i%></a>
+				<a href="./GameGradeRank?pagenum=<%=i%>"> <%=i%></a>
 				<%
 					if (i != endPage) {
 				%>

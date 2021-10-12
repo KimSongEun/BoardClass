@@ -4,7 +4,6 @@
 	pageEncoding="UTF-8"%>
 <%
 	ArrayList<Game> volist = (ArrayList<Game>) request.getAttribute("gamevolist");
-	
 	int startPage = (int) request.getAttribute("startPage");
 	int endPage = (int) request.getAttribute("endPage");
 	int pageCount = (int) request.getAttribute("pageCount");
@@ -82,12 +81,11 @@
 }
 
 #text_name {
-position: relative;
+	position: relative;
 	top: -6px;
 	width: 250px;
 	height: 40px;
 	font-size: 20px;
-	
 }
 
 #search_btn {
@@ -108,7 +106,7 @@ position: relative;
 .footer {
 	width: 78%;
 	top: 1400px;
-	height: 100px; 
+	height: 100px;
 	position: absolute;
 }
 </style>
@@ -154,22 +152,15 @@ position: relative;
 		<aside></aside>
 
 		<section id="section2">
-			<div id="d1">ㅇㅇㅇ</div>
-
-			<div id="search">
-				게임이름 <input type="text" id="text_name">
-				<button type="button" id="search_btn" onclick="#">검색</button>
-			</div>
 
 			<select id="sort" onchange="window.open(value,'_self');">
-				<option value="GameLevelList">난이도 순</option>
-				<option value="GameGradeList">평점 순</option>
-				<option value="GameGradeDescList">평점 낮은순</option>
-				<option value="GameSortList">가나다 순</option>
+				<option value="GameJjimRank">찜 상품 순</option>
+				<option value="GameGradeRank">평점 순</option>
+				<option value="GameViewRank">조회수 순</option>
+				
+				
 			</select> <br>
-			
 			<%
-			
 				if (volist != null) {
 					for (Game vo : volist) {
 						// tr 이 volist 갯수 만큼 생기게 됨.
@@ -177,15 +168,16 @@ position: relative;
 			%>
 			<div id="board_info">
 				<button type="button" class="btn1" onclick="#">
-				<script>
-				console.log("<%=vo.getGameImage()%>");
-				</script>
-				<img src="<%=request.getContextPath() %>/<%=vo.getGameImage()%>" width="250" height="250" />
+					<img src="<%=request.getContextPath()%>/<%=vo.getGameImage()%>"
+						width="250" height="250" />
 					<div class="img-text">
-						<%=vo.getGameKoName()%>
-						<%=vo.getGameLevel()%>
+						<%=vo.getGameKoName()%><br>
+						게임 인원 : <%=vo.getGameLevel()%>명<br>
+						게임 연령 : <%=vo.getGameAge()%><br>
+						게임 시간 : <%=vo.getGameTime()%>분
 					</div>
 				</button>
+
 			</div>
 			<%
 				}
@@ -201,7 +193,7 @@ position: relative;
 					}
 					for (int i = startPage; i <= endPage; i++) {
 				%>
-				<a href="./GameLevelList?pagenum=<%=i%>"> <%=i%></a>
+				<a href="./GameGradeRank?pagenum=<%=i%>"> <%=i%></a>
 				<%
 					if (i != endPage) {
 				%>

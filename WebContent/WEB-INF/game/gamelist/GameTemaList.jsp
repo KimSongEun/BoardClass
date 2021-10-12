@@ -196,7 +196,7 @@
 					}
 					for (int i = startPage; i <= endPage; i++) {
 				%>
-				<a href="./GameStrategyList?pagenum=<%=i%>"> <%=i%></a>
+				<a href="./GameTemaList?pagenum=<%=i%>"> <%=i%></a>
 				<%
 					if (i != endPage) {
 				%>
