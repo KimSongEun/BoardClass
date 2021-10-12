@@ -27,8 +27,8 @@
 	                <ul class="admin-nav-li-ul" id="menu2_ul">
 	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="noticelist">공지사항 조회</a></li>
 	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="noticemadeview">공지사항 등록</a></li>
-	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="bglist">보드게임 조회</a></li>
-	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="bgmade">보드게임 등록</a></li>
+	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="boardgamelist">보드게임 조회</a></li>
+	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="boardgamemadeview">보드게임 등록</a></li>
 	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="adlist">광고 조회</a></li>
 	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="admadeview">광고 등록</a></li>
 	                </ul>

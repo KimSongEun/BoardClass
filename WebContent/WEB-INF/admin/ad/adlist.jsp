@@ -49,7 +49,7 @@
                 </table>
 
                 <div class="admin-ad-table-div">
-                    <table class="table table-striped admin-notice-table" style="text-align: center;">
+                    <table class="table table-striped admin-ad-table" style="text-align: center;">
                         <tr style="text-align:center; font-size: 16px; font-weight: bold;">
                             <td>글번호</td>
                             <td style="width : 300px;">광고제목</td>
@@ -61,9 +61,9 @@
 						 for(Banner b : volist){ %> 
                         <tr>
                             <td><%=b.getPromotionNo() %></td>
-                            <td><a href = #사용자가보는공지사항화면새창열기 target = '_blank'> <%=b.getPromotionTitle() %></a></td>
+                            <td><a href = #사용자가보는광고화면새창열기 target = '_blank'> <%=b.getPromotionTitle() %></a></td>
                             <td><%=b.getPromotionDate() %></td>
-                            <td><button class="update btn btn-primary" value="updatego" no="<%=b.getPromotionNo()%>">광고수정</button> </td>
+                            <td><button class="update btn btn-danger" value="updatego" no="<%=b.getPromotionNo()%>">광고수정</button> </td>
                             <td><button class="delete btn btn-primary" value="deletego" id="<%=b.getPromotionNo() %>">광고삭제</button> </td>
                         </tr>
                          <%} }%> 
@@ -100,7 +100,6 @@
                 </ul>
               </nav>
             </div>
-        </div>
         </div>
         </div>
     </section>

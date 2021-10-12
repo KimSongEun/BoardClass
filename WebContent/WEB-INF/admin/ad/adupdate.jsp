@@ -1,6 +1,7 @@
 <%@page import="kh.semi.boardclass.admin.model.vo.Banner"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%
 	Banner b = (Banner)request.getAttribute("bannervo");
 	%>
@@ -9,7 +10,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>광고등록</title>
+    <title>광고수정</title>
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>

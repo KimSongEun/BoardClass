@@ -1,41 +1,41 @@
 @charset "UTF-8";
 
-.admin-ad-section{
+.admin-boardgame-section{
 	position :absolute;
     left : 250px;
     top : 40px;
     width : 83.6%;
     padding: 50px;
 }
-.admin-ad-div{
+.admin-boardgame-div{
 	margin: 0 auto;
 	width: 900px;
 	/* background-color: pink; */
 }
-.admin-ad-title{
+.admin-boardgame-title{
 	font-weight: bold;
 	font-size: 34px;
 	text-align: left;
 }
-.admin-ad-search{
+.admin-boardgame-search{
 	margin-top: 20px;
 	margin-right : 200px;
 	width : 100%;
 }
-.admin-ad-search-select{
+.admin-boardgame-search-select{
 	width: 100px;
 	height: 30px; 
 	line-height: 40px; 
 	margin: 0px;
 	padding: 0px;
 }
-.admin-ad-search-input{
+.admin-boardgame-search-input{
 	width: 240px;
 	height: 30px; 
 	padding: 5px;
 	line-height: 30px;
 }
-.admin-ad-search-button{
+.admin-boardgame-search-button{
 	width: 60px;
 	height: 30px;
 	background: black;
@@ -43,14 +43,15 @@
 	color: white;
 	border: none;
 }
-.admin-ad-table-div{
+.admin-boardgame-table-div{
 	margin : 0 auto;
 }
-.admin-ad-table{
+.admin-boardgame-table{
+	table-layout : fixed;
 	width: 900px; 
 	margin-top: 20px;
 }
-.admin-ad-page-nav {
+.admin-boardgame-page-nav {
 	margin-left: 330px;
 	margin-right: 330px;
 }
