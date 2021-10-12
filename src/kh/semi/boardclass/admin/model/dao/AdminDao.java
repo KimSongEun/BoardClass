@@ -169,7 +169,7 @@ public class AdminDao {
 	
 	public int insertNotice(Connection conn, String title, String content, String writer){
 		int result = 0;
-		String sql = "INSERT INTO NOTICE VALUES (NOTICE_NUM.nextval, ?, ?, ?, SYSDATE, SYSDATE, null, null)";
+		String sql = "INSERT INTO NOTICE VALUES (ANNOUNCE_NUM.nextval, ?, ?, ?, SYSDATE, SYSDATE)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
