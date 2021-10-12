@@ -16,14 +16,14 @@ import kh.semi.boardclass.game.model.vo.Game;
 /**
  * Servlet implementation class GameListServlet
  */
-@WebServlet("/GameList")
-public class GameListServlet extends HttpServlet {
+@WebServlet("/GameStrategyList")
+public class GameStrategyListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GameListServlet() {
+    public GameStrategyListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +36,8 @@ public class GameListServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
         PrintWriter out=response.getWriter();    
     	
-		final int PAGE_SIZE = 3;   // 한 페이지 당 글수
+        
+		final int PAGE_SIZE = 10;   // 한 페이지 당 글수
 		final int PAGE_BLOCK = 3;   // 한 화면에 나타날 페이지 링크 수
 		int bCount = 0;   // 총 글수
 		int pageCount = 0; // 총 페이지수
@@ -67,8 +68,9 @@ public class GameListServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1; 
 		if(endPage > pageCount) endPage=pageCount;
 		
+		String cate = "전략";
 		// DB에서 값 읽어오기
-		ArrayList<Game> volist = new GameService().selectFilterGameList(startRnum,endRnum);
+		ArrayList<Game> volist = new GameService().selectCateGameList(startRnum,endRnum,cate);
 		
 		// Data 전달을 위해서 request에 셋
 		request.setAttribute("gamevolist", volist);
@@ -76,7 +78,7 @@ public class GameListServlet extends HttpServlet {
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
 		// Page 이동하면서 Data도 전달함.
-		request.getRequestDispatcher("/GameList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/game/GameStrategyList.jsp").forward(request, response);
 		
 	}
 

@@ -12,16 +12,15 @@ public class UserService {
 	public UserService() {
 	}
 	
-	public int login(String userId, String userPassword) {
-		int result = 0;
+	public User login(String userId, String userPassword) {
 		Connection conn = JDBCTemplate.getConnection();
-		
+		User user = new UserDao().login(conn, userId, userPassword);
 		// TODO:
-		result = new UserDao().login(conn, userId, userPassword);
-		result = new UserDao().updateHistory(conn, userId);
+		
+		// result = new UserDao().updateHistory(conn, userId);
 		
 		JDBCTemplate.close(conn);
-		return result;
+		return user;
 	}
 	
 	public int signUp(User user) {

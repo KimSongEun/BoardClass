@@ -3,7 +3,19 @@ package kh.semi.boardclass.community.model.vo;
 import java.sql.Date;
 
 public class Board {
-
+//	BOARD_NO NUMBER, 
+//    USER_ID VARCHAR2(20), 
+//    BOARD_TYPE	VARCHAR2(60) NOT NULL, 
+//    BOARD_CATEGORY	VARCHAR2(30) NOT NULL, 
+//    BOARD_TITLE	VARCHAR2(300) NOT NULL,
+//    BOARD_CONTENT VARCHAR2(3000) NOT NULL, 
+//    BOARD_WRITE_DATE TIMESTAMP NOT NULL, 
+//    BOARD_REWRITE_DATE TIMESTAMP, 
+//    BOARD_VIEW_COUNT NUMBER DEFAULT 0, 
+//    BOARD_REPLY_REF NUMBER, 
+//    BOARD_REPLY_LEV NUMBER, 
+//    BOARD_REPLY_SEQ NUMBER,
+//    BOARD_IMG VARCHAR2(100),
 	private int boardNo;
 	private String userId;
 	private String boardType;
@@ -12,10 +24,11 @@ public class Board {
 	private String boardContent;
 	private Date boardWriteDate;
 	private Date boardRewriteDate;
-	private int viewCount;
+	private int boardViewCount;
 	private int boardReplyRef;
 	private int boardReplyLev;
 	private int boardReplySeq;
+	private String boardImg;
 
 	public Board() {
 		// TODO Auto-generated constructor stub
@@ -85,12 +98,12 @@ public class Board {
 		this.boardRewriteDate = boardRewriteDate;
 	}
 
-	public int getViewCount() {
-		return viewCount;
+	public int getBoardViewCount() {
+		return boardViewCount;
 	}
 
-	public void setViewCount(int viewCount) {
-		this.viewCount = viewCount;
+	public void setBoardViewCount(int boardViewCount) {
+		this.boardViewCount = boardViewCount;
 	}
 
 	public int getBoardReplyRef() {
@@ -115,6 +128,14 @@ public class Board {
 
 	public void setBoardReplySeq(int boardReplySeq) {
 		this.boardReplySeq = boardReplySeq;
+	}
+
+	public String getBoardImg() {
+		return boardImg;
+	}
+
+	public void setBoardImg(String boardImg) {
+		this.boardImg = boardImg;
 	}
 
 }

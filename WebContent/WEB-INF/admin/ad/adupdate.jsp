@@ -21,7 +21,7 @@
 <body>
     <%@include file="/WEB-INF/admin/main/adminHeader.jsp" %>
     <div>
-        <form method="post" action="adupdate">
+        <form method="post" action="adupdate" enctype = "multipart/form-data">
             <table style="text-align: center; font-size: 15px; margin: 0 auto; margin-top: 50px; width : 900px">
                 <tr>
                     <td style="text-align: left; font-size: 34px; font-weight: bold;">광고수정</td>
@@ -35,9 +35,14 @@
                 </tr>
                 
                 <tr style="text-align: left; font-size: 16px;">
-					<td style="font-weight: bold;">작성일 <%=b.getPromotionDate()%> </td>
+					<td><br>광고 썸네일 이미지 : <%=b.getPromotionImg()%> </td>
 				</tr>
-				<input type="hidden" name="no" value="<%=b.getPromotionNo()%>"/>
+				<tr>
+					<td style = "text-align: left; font-size: 16px; color : #F08080">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								👆🏻수정 파일 등록 : <input style = "display : inline-block"type="file" name="uploadFile"/></td>
+				</tr>
+				<input type="hidden" name="no" value = "${promotionno}" />
+				<input type="hidden" name="originimg" value="<%=b.getPromotionImg()%>"/>
 				<%} %>
                 <tr>
                     <td><br><button class='btn btn-warning' value='등록' type="submit">수정</button>
