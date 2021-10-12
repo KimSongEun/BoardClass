@@ -67,7 +67,8 @@ public Board getBoard(Connection conn, int boardNo) {
 		}
 		return result;
 	}
-public ArrayList<Board> selectBoardList(Connection conn, int start, int end) {
+	// 전체 게시글 리스트 조회
+	public ArrayList<Board> selectBoardList(Connection conn, int start, int end) {
 	ArrayList<Board> volist = null;
 
 	String sql = "select * from "
@@ -112,7 +113,54 @@ public ArrayList<Board> selectBoardList(Connection conn, int start, int end) {
 	return volist;
 }
 
-
+	// 게시글의 조회 수 1 상승
+	public void readCount(Connection conn, int boardNo) {
+		PreparedStatement pstmt = null;
+		String sql = "update board set board_view_count + 1 where board_no = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			pstmt.executeQuery();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+	}
+	
+	// 게시글 상세보기
+	public Board selectBoardContent(Connection conn, int boardNo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		Board vo = new Board();
+		String sql = "select * from board where board_no = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			rset = pstmt.executeQuery();
+				if(rset.next()) {
+				vo.setBoardNo(rset.getInt("board_no"));
+				vo.setUserId(rset.getString("user_id"));
+				vo.setBoardType(rset.getString("board_type"));
+				vo.setBoardCategory(rset.getString("board_category"));
+				vo.setBoardTitle(rset.getString("board_title"));
+				vo.setBoardContent(rset.getString("board_content"));
+				vo.setBoardWriteDate(rset.getDate("board_write_date"));
+				vo.setBoardRewriteDate(rset.getDate("board_rewrite_date"));
+				vo.setBoardViewCount(rset.getInt("board_view_count"));
+				vo.setBoardImg(rset.getString("board_img"));
+				}
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return vo;
+		
+	}
+	
 	public ArrayList<Board> selectFreeBoardList() {
 		ArrayList<Board> volist = null;
 		return volist;
@@ -142,19 +190,66 @@ public ArrayList<Board> selectBoardList(Connection conn, int start, int end) {
 		Board vo = null;
 		return vo;
 	}
-
-	public int insertFreeBoard() {
-		int result = -1;
+	// 자유게시판 글쓰기
+	// 글쓰기 전 로그인 확인 , 카테고리, 라벨 추가
+	public int insertFreeBoard(Connection conn, Board vo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+//	    BOARD_REPLY_REF NUMBER, 
+//	    BOARD_REPLY_LEV NUMBER, 
+//	    BOARD_REPLY_SEQ NUMBER,
+		String sql = "insert into board values (board_num.nextval,?,?,?,?,?,SYSDATE, SYSDATE,?,?,?,?,?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getUserId());
+			pstmt.setString(2, vo.getBoardType());
+			pstmt.setString(3, vo.getBoardContent());
+			pstmt.setString(4, vo.getBoardTitle());
+			pstmt.setString(5, vo.getBoardContent());
+			pstmt.setInt(6, vo.getBoardViewCount());
+			pstmt.setInt(7, vo.getBoardReplyRef());
+			pstmt.setInt(8, vo.getBoardReplyLev());
+			pstmt.setInt(9, vo.getBoardReplySeq());
+			pstmt.setString(10, vo.getBoardImg());
+			result = pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+	}
+	// 아이디 일치 확인 후 -> 수정 가능
+	public int updateFreeBoard(Connection conn, Board vo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = "update board set board_title = ?, board_content = ? where board_no = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getBoardTitle());
+			pstmt.setString(2, vo.getBoardContent());
+			pstmt.setInt(3, vo.getBoardNo());
+			result = pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
 
-	public int updateFreeBoard() {
-		int result = -1;
-		return result;
-	}
-
-	public int deleteFreeBoard() {
-		int result = -1;
+	public int deleteFreeBoard(Connection conn, int boardNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "delete from board where board_no = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
 

@@ -29,10 +29,25 @@ public class Board {
 	private int boardReplyLev;
 	private int boardReplySeq;
 	private String boardImg;
-
+	
 	public Board() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	public Board(int boardNo, String title, String content, String writer, String type, String category, int boardReplyRef, int boardReplyLev, int boardReplySeq) {
+		super();
+		this.boardNo =boardNo;
+		this.boardTitle = title;
+		this.boardContent = content;
+		this.userId = writer;
+		this.boardReplyRef = boardReplyRef;
+		this.boardReplyLev = boardReplyLev;
+		this.boardReplySeq = boardReplySeq;
+		this.boardType = type;
+		this.boardCategory = category;
+	}
+
+
 
 	public int getBoardNo() {
 		return boardNo;

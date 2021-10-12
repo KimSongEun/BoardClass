@@ -14,10 +14,10 @@ public class CommunityService {
 		// TODO Auto-generated constructor stub
 	}
 	// 보드 가져오기
-	public Board getBoard(int board_no) {
+	public Board getBoard(int boardNo) {
 		Board vo = null;
 		Connection conn = JDBCTemplate.getConnection();
-		vo = new CommunityDao().getBoard(conn, board_no);
+		vo = new CommunityDao().getBoard(conn, boardNo);
 		JDBCTemplate.close(conn);
 		return vo;
 	}
@@ -26,9 +26,10 @@ public class CommunityService {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
 		result = new CommunityDao().getBoardCount(conn);
+		JDBCTemplate.close(conn);
 		return result;
 	}
-	// 보드 리스트 조회
+	// 전체 글 리스트 조회
 	public ArrayList<Board> selectBoardList(int start, int end){
 		ArrayList<Board> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
@@ -38,7 +39,15 @@ public class CommunityService {
 		JDBCTemplate.close(conn);
 		return volist;
 	}
-
+	// 조회수 1 상승
+	public void readCount (int boardNo) {
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().readCount(conn, boardNo);
+		 JDBCTemplate.close(conn);
+	}
+	
+	
+	
 	public ArrayList<Board> selectUserBoardList() {
 		ArrayList<Board> volist = null;
 		return volist;
@@ -63,19 +72,43 @@ public class CommunityService {
 		Board vo = null;
 		return vo;
 	}
-
-	public int insertFreeBoard() {
-		int result = -1;
+	// 자유게시판 글쓰기
+	public int insertFreeBoard(Board vo) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().insertFreeBoard(conn, vo);
+	 if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
 		return result;
 	}
 
-	public int updateFreeBoard() {
-		int result = -1;
+	public int updateFreeBoard(Board vo) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().updateFreeBoard(conn, vo);
+	 if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
 		return result;
 	}
 
-	public int deleteFreeBoard() {
-		int result = -1;
+	public int deleteFreeBoard(int boardNo) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().deleteFreeBoard(conn, boardNo);
+	 if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
 		return result;
 	}
 

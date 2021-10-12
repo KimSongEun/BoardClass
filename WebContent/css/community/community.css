@@ -1,11 +1,11 @@
 @charset "UTF-8";
-#c_category {
-	
+a {
+	text-decoration: none;
 }
-.best {
-	
+body{}
+nav {}
+nav ul {}
+nav ul li {}
+nav ul li a {
+	color: #656565;
 }
-.freeboardbest {
-	display: block;
-}
-.userboardbest {display: block;}
