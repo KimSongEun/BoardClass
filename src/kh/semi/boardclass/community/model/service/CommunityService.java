@@ -13,6 +13,7 @@ public class CommunityService {
 	public CommunityService() {
 		// TODO Auto-generated constructor stub
 	}
+	// 보드 가져오기
 	public Board getBoard(int board_no) {
 		Board vo = null;
 		Connection conn = JDBCTemplate.getConnection();
@@ -20,13 +21,14 @@ public class CommunityService {
 		JDBCTemplate.close(conn);
 		return vo;
 	}
+	//보드 개수 조회
 	public static int getBoardCount() {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
 		result = new CommunityDao().getBoardCount(conn);
 		return result;
 	}
-
+	// 보드 리스트 조회
 	public ArrayList<Board> selectBoardList(int start, int end){
 		ArrayList<Board> volist = null;
 		Connection conn = JDBCTemplate.getConnection();

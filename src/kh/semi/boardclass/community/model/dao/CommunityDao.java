@@ -26,7 +26,7 @@ public Board getBoard(Connection conn, int boardNo) {
 		if (rset.next()) {
 			vo = new Board();
 			vo.setBoardNo(rset.getInt("board_no"));
-			vo.setBoardWrite(rset.getString("board_write"));
+			vo.setUserId(rset.getString("user_id"));
 			vo.setBoardType(rset.getString("board_type"));
 			vo.setBoardCategory(rset.getString("board_category"));
 			vo.setBoardTitle(rset.getString("board_title"));
@@ -88,7 +88,7 @@ public ArrayList<Board> selectBoardList(Connection conn, int start, int end) {
 			do {
 				Board vo = new Board();
 				vo.setBoardNo(rset.getInt("board_no"));
-				vo.setBoardWrite(rset.getString("board_write"));
+				vo.setUserId(rset.getString("user_id"));
 				vo.setBoardType(rset.getString("board_type"));
 				vo.setBoardCategory(rset.getString("board_category"));
 				vo.setBoardTitle(rset.getString("board_title"));

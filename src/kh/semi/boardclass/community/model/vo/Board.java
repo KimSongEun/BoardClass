@@ -3,9 +3,21 @@ package kh.semi.boardclass.community.model.vo;
 import java.sql.Date;
 
 public class Board {
-
+//	BOARD_NO NUMBER, 
+//    USER_ID VARCHAR2(20), 
+//    BOARD_TYPE	VARCHAR2(60) NOT NULL, 
+//    BOARD_CATEGORY	VARCHAR2(30) NOT NULL, 
+//    BOARD_TITLE	VARCHAR2(300) NOT NULL,
+//    BOARD_CONTENT VARCHAR2(3000) NOT NULL, 
+//    BOARD_WRITE_DATE TIMESTAMP NOT NULL, 
+//    BOARD_REWRITE_DATE TIMESTAMP, 
+//    BOARD_VIEW_COUNT NUMBER DEFAULT 0, 
+//    BOARD_REPLY_REF NUMBER, 
+//    BOARD_REPLY_LEV NUMBER, 
+//    BOARD_REPLY_SEQ NUMBER,
+//    BOARD_IMG VARCHAR2(100),
 	private int boardNo;
-	private String boardWrite;
+	private String userId;
 	private String boardType;
 	private String boardCategory;
 	private String boardTitle;
@@ -30,12 +42,12 @@ public class Board {
 		this.boardNo = boardNo;
 	}
 
-	public String getBoardWrite() {
-		return boardWrite;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setBoardWrite(String boardWrite) {
-		this.boardWrite = boardWrite;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getBoardType() {

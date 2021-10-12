@@ -25,16 +25,23 @@
 <div class="best">
 	<div class="freeboardbest">
 	<h1>자유게시판 인기글</h1>
-	<ul>
-	<li>1</li>
-	<li>2</li>
-	<li>3</li>
-	<li>4</li>
-	<li>5</li>
-	</ul>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
 	</div>
 	<div class="userboardbest">
 	<h1>유저정보게시판 인기글</h1>
+		<ul>
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
 	</div>
 </div>
 <div class="list">
@@ -51,7 +58,7 @@
 		<tr>
 			<td>${vo.boardNo }</td>
 			<td>${vo.boardTitle }</td>
-			<td>${vo.boardContent }</td>
+			<td>${vo.userId }</td>
 			<td>${vo.boardWriteDate }</td>			
 		</tr> 
 	</c:forEach>
