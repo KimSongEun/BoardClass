@@ -15,11 +15,4 @@ $(".insert").click(function () {
     newWindow.location.href = "noticemadeview";
 });
 
-var viewcount = $("#viewcount");
-$("#selectno").change(function() {
-	var ele = $(this).find('option:selected');
-	var sel = ele.attr("viewcount");
-	viewcount.val(sel);
-})
-
 });
