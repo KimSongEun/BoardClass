@@ -11,29 +11,37 @@ public class UsedService {
 
 	public UsedService() {
 	}
-	
-	public int insertUsed(Used used) {
-		int result = 0;
-		Connection conn = JDBCTemplate.getConnection();
-		result = new UsedDao().insertUsed(conn, used);
-		JDBCTemplate.close(conn);
-		return result;
-	}
-	
-	public ArrayList<Used> selectUsed(Used used) {
+
+	public ArrayList<Used> selectUsedList() {
 		ArrayList<Used> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new UsedDao().selectUsed(conn, used);
+		volist = new UsedDao().selectUsedList(conn);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
 	
+	public int getUsedCount() {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new UsedDao().getUsedCount(conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+//	public int insertUsed(Used vo) {
+//		int result = 0;
+//		Connection conn = JDBCTemplate.getConnection();
+//		result = new UsedDao().insertUsed(conn, vo);
+//		JDBCTemplate.close(conn);
+//		return result;
+//	}
+
 	public void updateUsed(Used used) {
 		Connection conn = JDBCTemplate.getConnection();
 		new UsedDao().updateUsed(conn, used);
 		JDBCTemplate.close(conn);
 	}
-	
+
 	public int chatUset(Used used) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();

@@ -21,7 +21,6 @@ public class Used {
 
 	public Used(int usedNo, String userId, String usedTitle, String usedPrice, String usedState, String usedChange,
 			String usedPay, String usedArea, String usedInfo, Date usedDay, String usedImg) {
-		super();
 		this.usedNo = usedNo;
 		this.userId = userId;
 		this.usedTitle = usedTitle;
@@ -33,6 +32,32 @@ public class Used {
 		this.usedInfo = usedInfo;
 		this.usedDay = usedDay;
 		this.usedImg = usedImg;
+	}
+
+	public Used(int usedNo, String userId, String usedTitle, String usedPrice, String usedState, String usedChange,
+			String usedPay, String usedArea, String usedInfo, Date usedDay) {
+		this.usedNo = usedNo;
+		this.userId = userId;
+		this.usedTitle = usedTitle;
+		this.usedPrice = usedPrice;
+		this.usedState = usedState;
+		this.usedChange = usedChange;
+		this.usedPay = usedPay;
+		this.usedArea = usedArea;
+		this.usedInfo = usedInfo;
+		this.usedDay = usedDay;
+	}
+	
+	public Used(String userId, String usedTitle, String usedPrice, String usedState, String usedChange,
+			String usedPay, String usedArea, String usedInfo) {
+		this.userId = userId;
+		this.usedTitle = usedTitle;
+		this.usedPrice = usedPrice;
+		this.usedState = usedState;
+		this.usedChange = usedChange;
+		this.usedPay = usedPay;
+		this.usedArea = usedArea;
+		this.usedInfo = usedInfo;
 	}
 
 	public int getUsedNo() {
