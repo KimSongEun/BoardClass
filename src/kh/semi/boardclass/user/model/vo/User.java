@@ -11,62 +11,38 @@ public class User {
 	private char userType;
 	private String userImage;
 	private int userHistory;
-	private int userNum;
-	
+	private int userNo;
 
-	public User(String userId, int userNum, String userPassword, String userName, String userNickname, String userEmail,
-			int userPhone, String userAddress, char userType, String userImage, int userHistory) {
+
+	public User() {
+	}
+
+	public User(String userName, String userNickname, String userId, String userPassword, String userEmail,
+			int userPhone, String userAddress) {
 		super();
-		this.userId = userId;
-		this.userNum = userNum;
-		this.userPassword = userPassword;
 		this.userName = userName;
 		this.userNickname = userNickname;
+		this.userId = userId;
+		this.userPassword = userPassword;
+		this.userEmail = userEmail;
+		this.userPhone = userPhone;
+		this.userAddress = userAddress;
+	}
+
+	public User(String userName, String userNickname, String userId, String userPassword, String userEmail,
+			int userPhone, String userAddress, char userType, String userImage, int userHistory, int userNo) {
+		super();
+		this.userName = userName;
+		this.userNickname = userNickname;
+		this.userId = userId;
+		this.userPassword = userPassword;
 		this.userEmail = userEmail;
 		this.userPhone = userPhone;
 		this.userAddress = userAddress;
 		this.userType = userType;
 		this.userImage = userImage;
 		this.userHistory = userHistory;
-	}
-
-
-	public User(String userName, String userNickname, String userId, String userPassword, String userEmail, int userPhone,
-		String userAddress) {
-	super();
-	this.userName = userName;
-	this.userNickname = userNickname;
-	this.userId = userId;
-	this.userPassword = userPassword;
-	this.userEmail = userEmail;
-	this.userPhone = userPhone;
-	this.userAddress = userAddress;
-}
-	public User() {
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public int getUserNum() {
-		return userNum;
-	}
-
-	public void setUserNum(int userNum) {
-		this.userNum = userNum;
-	}
-
-	public String getUserPassword() {
-		return userPassword;
-	}
-
-	public void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
+		this.userNo = userNo;
 	}
 
 	public String getUserName() {
@@ -83,6 +59,22 @@ public class User {
 
 	public void setUserNickname(String userNickname) {
 		this.userNickname = userNickname;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getUserPassword() {
+		return userPassword;
+	}
+
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
 
 	public String getUserEmail() {
@@ -132,4 +124,13 @@ public class User {
 	public void setUserHistory(int userHistory) {
 		this.userHistory = userHistory;
 	}
+
+	public int getUserNo() {
+		return userNo;
+	}
+
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
+
 }
