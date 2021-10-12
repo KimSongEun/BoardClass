@@ -3,127 +3,124 @@ package kh.semi.boardclass.used.model.vo;
 import java.sql.Date;
 
 public class Used {
-	
-	private int used_num;
-	private String user_id;
-	private String used_title;
-	private String used_price;
-	private String used_state;
-	private String used_change;
-	private String used_pay;
-	private String used_area;
-	private String used_info;
-	private Date used_day;
-	private String used_img;
+
+	private int usedNo;
+	private String userId;
+	private String usedTitle;
+	private String usedPrice;
+	private String usedState;
+	private String usedChange;
+	private String usedPay;
+	private String usedArea;
+	private String usedInfo;
+	private Date usedDay;
+	private String usedImg;
 
 	public Used() {
 	}
 
-	public Used(int used_num, String user_id, String used_title, String used_price, String used_state,
-			String used_change, String used_pay, String used_area, String used_info, Date used_day, String used_img) {
+	public Used(int usedNo, String userId, String usedTitle, String usedPrice, String usedState, String usedChange,
+			String usedPay, String usedArea, String usedInfo, Date usedDay, String usedImg) {
 		super();
-		this.used_num = used_num;
-		this.user_id = user_id;
-		this.used_title = used_title;
-		this.used_price = used_price;
-		this.used_state = used_state;
-		this.used_change = used_change;
-		this.used_pay = used_pay;
-		this.used_area = used_area;
-		this.used_info = used_info;
-		this.used_day = used_day;
-		this.used_img = used_img;
+		this.usedNo = usedNo;
+		this.userId = userId;
+		this.usedTitle = usedTitle;
+		this.usedPrice = usedPrice;
+		this.usedState = usedState;
+		this.usedChange = usedChange;
+		this.usedPay = usedPay;
+		this.usedArea = usedArea;
+		this.usedInfo = usedInfo;
+		this.usedDay = usedDay;
+		this.usedImg = usedImg;
 	}
 
-	public int getUsed_num() {
-		return used_num;
+	public int getUsedNo() {
+		return usedNo;
 	}
 
-	public void setUsed_num(int used_num) {
-		this.used_num = used_num;
+	public void setUsedNo(int usedNo) {
+		this.usedNo = usedNo;
 	}
 
-	public String getUser_id() {
-		return user_id;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public String getUsed_title() {
-		return used_title;
+	public String getUsedTitle() {
+		return usedTitle;
 	}
 
-	public void setUsed_title(String used_title) {
-		this.used_title = used_title;
+	public void setUsedTitle(String usedTitle) {
+		this.usedTitle = usedTitle;
 	}
 
-	public String getUsed_price() {
-		return used_price;
+	public String getUsedPrice() {
+		return usedPrice;
 	}
 
-	public void setUsed_price(String used_price) {
-		this.used_price = used_price;
+	public void setUsedPrice(String usedPrice) {
+		this.usedPrice = usedPrice;
 	}
 
-	public String getUsed_state() {
-		return used_state;
+	public String getUsedState() {
+		return usedState;
 	}
 
-	public void setUsed_state(String used_state) {
-		this.used_state = used_state;
+	public void setUsedState(String usedState) {
+		this.usedState = usedState;
 	}
 
-	public String getUsed_change() {
-		return used_change;
+	public String getUsedChange() {
+		return usedChange;
 	}
 
-	public void setUsed_change(String used_change) {
-		this.used_change = used_change;
+	public void setUsedChange(String usedChange) {
+		this.usedChange = usedChange;
 	}
 
-	public String getUsed_pay() {
-		return used_pay;
+	public String getUsedPay() {
+		return usedPay;
 	}
 
-	public void setUsed_pay(String used_pay) {
-		this.used_pay = used_pay;
+	public void setUsedPay(String usedPay) {
+		this.usedPay = usedPay;
 	}
 
-	public String getUsed_area() {
-		return used_area;
+	public String getUsedArea() {
+		return usedArea;
 	}
 
-	public void setUsed_area(String used_area) {
-		this.used_area = used_area;
+	public void setUsedArea(String usedArea) {
+		this.usedArea = usedArea;
 	}
 
-	public String getUsed_info() {
-		return used_info;
+	public String getUsedInfo() {
+		return usedInfo;
 	}
 
-	public void setUsed_info(String used_info) {
-		this.used_info = used_info;
+	public void setUsedInfo(String usedInfo) {
+		this.usedInfo = usedInfo;
 	}
 
-	public Date getUsed_day() {
-		return used_day;
+	public Date getUsedDay() {
+		return usedDay;
 	}
 
-	public void setUsed_day(Date used_day) {
-		this.used_day = used_day;
+	public void setUsedDay(Date usedDay) {
+		this.usedDay = usedDay;
 	}
 
-	public String getUsed_img() {
-		return used_img;
+	public String getUsedImg() {
+		return usedImg;
 	}
 
-	public void setUsed_img(String used_img) {
-		this.used_img = used_img;
+	public void setUsedImg(String usedImg) {
+		this.usedImg = usedImg;
 	}
-	
-	
-	
 
 }
