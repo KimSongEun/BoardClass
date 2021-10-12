@@ -12,7 +12,7 @@
 <%@include file="/WEB-INF/community/header.jsp" %>
 	<nav id="c_category" class="c_category">
 		<ul>
-			<li><a href="#">커뮤니티</a></li>
+			<li><a href="./cmain">커뮤니티</a></li>
 			<li><a href="#">공지사항</a></li>
 			<li><a href="./cf">자유게시판</a></li>
 			<li><a href="#">유저정보게시판</a></li>

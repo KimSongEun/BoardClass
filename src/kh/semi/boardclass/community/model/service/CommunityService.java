@@ -21,11 +21,18 @@ public class CommunityService {
 		JDBCTemplate.close(conn);
 		return vo;
 	}
-	//보드 개수 조회
-	public static int getBoardCount() {
+	public int getBoardCount() {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
 		result = new CommunityDao().getBoardCount(conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	//category 별 보드 개수 조회
+	public int getBoardCount(String category) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new CommunityDao().getBoardCount(conn, category);
 		JDBCTemplate.close(conn);
 		return result;
 	}
@@ -39,6 +46,17 @@ public class CommunityService {
 		JDBCTemplate.close(conn);
 		return volist;
 	}
+	// category 별 글 리스트 조회
+	public ArrayList<Board> selectBoardList(int start, int end, String category) {
+		ArrayList<Board> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		
+		volist = new CommunityDao().selectBoardList(conn, start, end);
+		
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+
 	// 조회수 1 상승
 	public void readCount (int boardNo) {
 		Connection conn = JDBCTemplate.getConnection();
