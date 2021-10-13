@@ -13,7 +13,7 @@ public class Board {
 //    BOARD_REWRITE_DATE TIMESTAMP, 
 //    BOARD_VIEW_COUNT NUMBER DEFAULT 0, 
 //    BOARD_REPLY_REF NUMBER, 
-//    BOARD_REPLY_LEV NUMBER, 
+//    BOARD_REPLY_LEV NUMBER, function
 //    BOARD_REPLY_SEQ NUMBER,
 //    BOARD_IMG VARCHAR2(100),
 	private int boardNo;
@@ -48,6 +48,15 @@ public class Board {
 	}
 
 
+
+	@Override
+	public String toString() {
+		return "Board [boardNo=" + boardNo + ", userId=" + userId + ", boardType=" + boardType + ", boardCategory="
+				+ boardCategory + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent + ", boardWriteDate="
+				+ boardWriteDate + ", boardRewriteDate=" + boardRewriteDate + ", boardViewCount=" + boardViewCount
+				+ ", boardReplyRef=" + boardReplyRef + ", boardReplyLev=" + boardReplyLev + ", boardReplySeq="
+				+ boardReplySeq + ", boardImg=" + boardImg + "]";
+	}
 
 	public int getBoardNo() {
 		return boardNo;

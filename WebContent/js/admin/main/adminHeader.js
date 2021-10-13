@@ -1,26 +1,26 @@
         $(function(){
             $("#menu2").click(function(){
                 $("#menu2_ul").slideToggle();
-                if($("#menu2_s").html()=="▲"){
-                    $("#menu2_s").html("▼");
-                }else{
+                if($("#menu2_s").html()=="▼"){
                     $("#menu2_s").html("▲");
+                }else{
+                    $("#menu2_s").html("▼");
                 }
             });
             $("#menu3").click(function(){
                 $("#menu3_ul").slideToggle();
-                if($("#menu3_s").html()=="▲"){
-                    $("#menu3_s").html("▼");
-                }else{
+                if($("#menu3_s").html()=="▼"){
                     $("#menu3_s").html("▲");
+                }else{
+                    $("#menu3_s").html("▼");
                 }
             });
             $("#menu4").click(function(){
                 $("#menu4_ul").slideToggle();
-                if($("#menu4_s").html()=="▲"){
-                    $("#menu4_s").html("▼");
-                }else{
+                if($("#menu4_s").html()=="▼"){
                     $("#menu4_s").html("▲");
+                }else{
+                    $("#menu4_s").html("▼");
                 }
             });
         });

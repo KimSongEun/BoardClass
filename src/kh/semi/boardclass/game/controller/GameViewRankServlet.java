@@ -16,14 +16,14 @@ import kh.semi.boardclass.game.model.vo.Game;
 /**
  * Servlet implementation class GameListServlet
  */
-@WebServlet("/GameLevelList")
-public class GameLevelListServlet extends HttpServlet {
+@WebServlet("/GameViewRank")
+public class GameViewRankServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GameLevelListServlet() {
+    public GameViewRankServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -70,9 +70,9 @@ public class GameLevelListServlet extends HttpServlet {
 		
 
 		
-		
+		//String grade = "GAME_GRADE";
 		// DB에서 값 읽어오기
-		ArrayList<Game> volist1 = new GameService().selectLevelGameList(startRnum,endRnum);
+		ArrayList<Game> volist1 = new GameService().selectViewRankList(startRnum,endRnum);
 		
 		
 		
@@ -83,7 +83,7 @@ public class GameLevelListServlet extends HttpServlet {
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
 		// Page 이동하면서 Data도 전달함.
-		request.getRequestDispatcher("/WEB-INF/game/gamelist/GameLevelList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/game/gamerank/GameViewRank.jsp").forward(request, response);
 		
 	}
 

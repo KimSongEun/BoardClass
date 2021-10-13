@@ -10,7 +10,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 	<script src = "ckeditor/ckeditor.js"></script>
-    <script type="text/javascript" src="./js/admin/notice/adminNoticeMade.js"></script>
     <script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
 
 </head>

@@ -22,31 +22,31 @@
                 <br>
 	            <li class="admin-nav-li" id="menu2">
 		            <img class="admin-nav-img" src="./img/dice.png">
-		            <a class="admin-header-a" href="#">관리자 게시판 관리</a> <span class="li-list" id="menu2_s">▲</span>
+		            <a class="admin-header-a" href="#">관리자 게시판 관리</a> <span class="li-list" id="menu2_s">▼</span>
 	            </li>
-	                <ul class="admin-nav-li-ul" id="menu2_ul">
+	                <ul class="admin-nav-li-ul" id="menu2_ul" style="display: none">
 	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="noticelist">공지사항 조회</a></li>
 	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="noticemadeview">공지사항 등록</a></li>
-	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="bglist">보드게임 조회</a></li>
-	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="bgmade">보드게임 등록</a></li>
+	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="boardgamelist">보드게임 조회</a></li>
+	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="boardgamemadeview">보드게임 등록</a></li>
 	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="adlist">광고 조회</a></li>
 	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="admadeview">광고 등록</a></li>
 	                </ul>
                     <br>
 	            <li class="admin-nav-li" id="menu3">
 		            <img class="admin-nav-img" src="./img/dice.png">
-		            <a class="admin-header-a" href="#">유저 게시판 관리</a> <span class="li-list" id="menu3_s">▲</span>
+		            <a class="admin-header-a" href="#">유저 게시판 관리</a> <span class="li-list" id="menu3_s">▼</span>
 	            </li>
-	                <ul class="admin-nav-li-ul" id="menu3_ul">
+	                <ul class="admin-nav-li-ul" id="menu3_ul" style="display: none">
 	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="allboardlist">전체 글 목록</a></li>
 	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="allcommentlist">전체 댓글 목록</a></li>
 	                </ul>
                     <br>
                 <li class="admin-nav-li" id="menu4">
                     <img class="admin-nav-img" src="./img/dice.png">
-                    <a class="admin-header-a" href="#">회원관리</a> <span class="li-list" id="menu4_s">▲</span>
+                    <a class="admin-header-a" href="#">회원관리</a> <span class="li-list" id="menu4_s">▼</span>
                 </li>
-                    <ul class="admin-nav-li-ul" id="menu4_ul">
+                    <ul class="admin-nav-li-ul" id="menu4_ul" style="display: none">
                         <li class="admin-nav-li-li"><a class="admin-header-a" href="userlist">회원관리</a></li>
                         <li class="admin-nav-li-li"><a class="admin-header-a" href="reportboardlist">신고된 글</a></li>
                         <li class="admin-nav-li-li"><a class="admin-header-a" href="reportcommentlist">신고된 댓글</a></li>

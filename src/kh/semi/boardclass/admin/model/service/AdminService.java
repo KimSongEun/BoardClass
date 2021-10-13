@@ -146,11 +146,27 @@ public class AdminService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	
+	public Game getBoardGame(int gameNo) {
+		Game vo = null;
+		Connection conn = JDBCTemplate.getConnection();
+		vo = new AdminDao().getBoardGame(conn, gameNo);
+		JDBCTemplate.close(conn);
+		return vo;
+	}
 
-	public ArrayList<Game> selectBoardGameList() {
+	public int getBoardGameCount() {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getBoardGameCount(conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
+	public ArrayList<Game> selectBoardGameList(int start, int end) {
 		ArrayList<Game> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().selectBoardGameList(conn);
+		volist = new AdminDao().selectBoardGameList(conn, start, end);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
@@ -163,26 +179,41 @@ public class AdminService {
 		return vo;
 	}
 
-	public int insertBoardGame(Game game) {
+	public int insertBoardGame(String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().insertBoardGame(conn, game);
+		result = new AdminDao().insertBoardGame(conn, kotitle, entitle, category, age, player, time, price, grade, level, designer, brand, releasedate, language, image, ruleimage, video, plus);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}
 
-	public int updateBoardGame(Game game) {
+	public int updateBoardGame(String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus, int gameNo) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().updateBoardGame(conn, game);
+		result = new AdminDao().updateBoardGame(conn, kotitle, entitle, category, age, player, time, price, grade, level, designer, brand, releasedate, language, image, ruleimage, video, plus, gameNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}
 
-	public int deleteBoardGame(Game game) {
+	public int deleteBoardGame(int gameNo) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().deleteBoardGame(conn, game);
+		result = new AdminDao().deleteBoardGame(conn, gameNo);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}

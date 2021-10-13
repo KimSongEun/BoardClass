@@ -215,24 +215,202 @@ public class AdminDao {
 		return result;
 	}
 	
-	public ArrayList<Game> selectBoardGameList(Connection conn){
+	public Game getBoardGame(Connection conn, int gameNo) {
+		Game vo = null;
+		String sql = "select * from boardgame where game_no = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,  gameNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				vo = new Game();
+				vo.setGameNumber(rset.getInt("GAME_NO"));
+				vo.setGameKoName(rset.getString("GAME_KONAME"));
+				vo.setGameEnName(rset.getString("GAME_ENNAME"));
+				vo.setGameCategory(rset.getString("GAME_CATEGORY"));
+				vo.setGameView(rset.getInt("GAME_VIEW"));
+				vo.setGameAge(rset.getString("GAME_AGE"));
+				vo.setGamePlayer(rset.getString("GAME_PLAYER"));
+				vo.setGameTime(rset.getString("GAME_TIME"));
+				vo.setGamePrice(rset.getInt("GAME_PRICE"));
+				vo.setGameGrade(rset.getInt("GAME_GRADE"));
+				vo.setGameDate(rset.getDate("GAME_DATE"));
+				vo.setGameLevel(rset.getInt("GAME_LEVEL"));
+				vo.setGameDesigner(rset.getString("GAME_DESIGNER"));
+				vo.setGameWriter(rset.getString("GAME_WRITER"));
+				vo.setGameBrand(rset.getString("GAME_BRAND"));
+				vo.setGameReleaseDate(rset.getString("GAME_RELEASEDATE"));
+				vo.setGameRank(rset.getInt("GAME_RANK"));
+				vo.setGameLanguage(rset.getString("GAME_LANGUAGE"));
+				vo.setGameReview(rset.getString("GAME_REVIEW"));
+				vo.setGameImage(rset.getString("GAME_IMAGE"));
+				vo.setGameRuleImage(rset.getString("GAME_RULE_IMAGE"));
+				vo.setGameVideo(rset.getString("GAME_VIDEO"));
+				vo.setGamePlus(rset.getString("GAME_PLUS"));
+				vo.setUsedNum(rset.getInt("USED_NO"));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			} 
+		return vo;
+	}
+	
+	public int getBoardGameCount(Connection conn) {
+		int result = 0;
+		String sql = "select count(GAME_NO) from BOARDGAME";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<Game> selectBoardGameList(Connection conn, int start, int end){
 		ArrayList<Game> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT * FROM BOARDGAME ORDER BY GAME_KONAME) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Game>();
+			if (rset.next()) {
+				do {
+					Game vo = new Game();
+					vo.setGameNumber(rset.getInt("GAME_NO"));
+					vo.setGameKoName(rset.getString("GAME_KONAME"));
+					vo.setGameEnName(rset.getString("GAME_ENNAME"));
+					vo.setGameCategory(rset.getString("GAME_CATEGORY"));
+					vo.setGameView(rset.getInt("GAME_VIEW"));
+					vo.setGameAge(rset.getString("GAME_AGE"));
+					vo.setGamePlayer(rset.getString("GAME_PLAYER"));
+					vo.setGameTime(rset.getString("GAME_TIME"));
+					vo.setGamePrice(rset.getInt("GAME_PRICE"));
+					vo.setGameGrade(rset.getInt("GAME_GRADE"));
+					vo.setGameDate(rset.getDate("GAME_DATE"));
+					vo.setGameLevel(rset.getInt("GAME_LEVEL"));
+					vo.setGameDesigner(rset.getString("GAME_DESIGNER"));
+					vo.setGameWriter(rset.getString("GAME_WRITER"));
+					vo.setGameBrand(rset.getString("GAME_BRAND"));
+					vo.setGameReleaseDate(rset.getString("GAME_RELEASEDATE"));
+					vo.setGameRank(rset.getInt("GAME_RANK"));
+					vo.setGameLanguage(rset.getString("GAME_LANGUAGE"));
+					vo.setGameReview(rset.getString("GAME_REVIEW"));
+					vo.setGameImage(rset.getString("GAME_IMAGE"));
+					vo.setGameRuleImage(rset.getString("GAME_RULE_IMAGE"));
+					vo.setGameVideo(rset.getString("GAME_VIDEO"));
+					vo.setGamePlus(rset.getString("GAME_PLUS"));
+					vo.setUsedNum(rset.getInt("USED_NO"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return volist;
 	}
+	
 	public Game searchBoardGame(Connection conn){
 		Game vo = null;
 		return vo;
 	}
-	public int insertBoardGame(Connection conn, Game game){
+	public int insertBoardGame(Connection conn, String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus){
 		int result = 0;
+		String sql = "insert into BOARDGAME values(GAME_NUM.nextval,null,?,?,?,0,?,?,?,?,?,SYSDATE,?,?,?,?,?,null,?,null,'/game_img/1.jpg',?,?,?)";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, kotitle);
+			pstmt.setString(2, entitle);
+			pstmt.setString(3, category);
+			pstmt.setString(4, age);
+			pstmt.setString(5, player);
+			pstmt.setString(6, time);
+			pstmt.setInt(7, price);
+			pstmt.setInt(8, grade);
+			pstmt.setInt(9, level);
+			pstmt.setString(10, designer);
+			pstmt.setString(11, brand);
+			pstmt.setString(12, releasedate);
+			pstmt.setString(13, language);
+			pstmt.setString(14, image);
+			pstmt.setString(15, ruleimage);
+			pstmt.setString(16, video);
+			pstmt.setString(17, plus);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
-	public int updateBoardGame(Connection conn, Game game){
+	
+	public int updateBoardGame(Connection conn, String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus, int gameNo){
 		int result = 0;
+		String sql = "UPDATE BOARDGAME SET GAME_KONAME = ?, GAME_ENNAME = ?, GAME_CATEGORY = ?, GAME_AGE = ?, GAME_PLAYER = ?, GAME_TIME = ?, GAME_PRICE = ?, GAME_GRADE = ?, GAME_DATE = ?, GAME_LEVEL = ?, GAME_DESIGNER = ?, GAME_BRAND = ?, GAME_RELEASEDATE = ?, GAME_LANGUAGE = ?, GAME_IMAGE = ?, GAME_RULE_IMAGE = ?, GAME_VIDEO = ?, GAME_PLUS = ?  WHERE GAME_NO=?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null; 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, kotitle);
+			pstmt.setString(2, entitle);
+			pstmt.setString(3, category);
+			pstmt.setString(4, age);
+			pstmt.setString(5, player);
+			pstmt.setString(6, time);
+			pstmt.setInt(7, price);
+			pstmt.setInt(8, grade);
+			pstmt.setInt(9, level);
+			pstmt.setString(10, designer);
+			pstmt.setString(11, brand);
+			pstmt.setString(12, releasedate);
+			pstmt.setString(13, language);
+			pstmt.setString(14, image);
+			pstmt.setString(15, ruleimage);
+			pstmt.setString(16, video);
+			pstmt.setString(17, plus);
+			pstmt.setInt(18, gameNo);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
-	public int deleteBoardGame(Connection conn, Game game){
+	
+	public int deleteBoardGame(Connection conn, int gameNo){
 		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM BOARDGAME WHERE GAME_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, gameNo);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
 		return result;
 	}
 	

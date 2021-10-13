@@ -47,14 +47,15 @@ public Board getBoard(Connection conn, int boardNo) {
 	}
 	return vo;
 	}
-	// 글 개수 조회
-	public int getBoardCount(Connection conn) { 
+	// category 별 글 개수 조회
+	public int getBoardCount(Connection conn, String category) { 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result = 0;
-		String sql = "SELECT COUNT(board_no) FROM BOARD";
+		String sql = "SELECT COUNT(board_no) FROM BOARD where board_category = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, category);
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				result = rset.getInt(1);
@@ -67,6 +68,26 @@ public Board getBoard(Connection conn, int boardNo) {
 		}
 		return result;
 	}
+	// 글 개수 조회
+	public int getBoardCount(Connection conn) { 
+			PreparedStatement pstmt = null;
+			ResultSet rset = null;
+			int result = 0;
+			String sql = "SELECT COUNT(board_no) FROM BOARD";
+			try {
+				pstmt = conn.prepareStatement(sql);
+				rset = pstmt.executeQuery();
+				if(rset.next()) {
+					result = rset.getInt(1);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			}
+			return result;
+		}
 	// 전체 게시글 리스트 조회
 	public ArrayList<Board> selectBoardList(Connection conn, int start, int end) {
 	ArrayList<Board> volist = null;
@@ -112,6 +133,52 @@ public Board getBoard(Connection conn, int boardNo) {
 	}
 	return volist;
 }
+	// category별  게시글 리스트 조회
+	public ArrayList<Board> selectBoardList(Connection conn, int start, int end, String category) {
+		ArrayList<Board> volist = null;
+
+		String sql = "select * from "
+				+ " (select Rownum r, t1.* from "
+				+ " (select * from board where board_category=? order by BOARD_REPLY_REF desc, BOARD_REPLY_SEQ asc) t1 ) t2 "
+				+ " where r between ? and ?";
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, category);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Board>();
+			if (rset.next()) {
+				do {
+					Board vo = new Board();
+					vo.setBoardNo(rset.getInt("board_no"));
+					vo.setUserId(rset.getString("user_id"));
+					vo.setBoardType(rset.getString("board_type"));
+					vo.setBoardCategory(rset.getString("board_category"));
+					vo.setBoardTitle(rset.getString("board_title"));
+					vo.setBoardContent(rset.getString("board_content"));
+					vo.setBoardWriteDate(rset.getDate("board_write_date"));
+					vo.setBoardRewriteDate(rset.getDate("board_rewrite_date"));
+					vo.setBoardViewCount(rset.getInt("board_view_count"));
+					vo.setBoardImg(rset.getString("board_img"));
+					vo.setBoardReplyRef(rset.getInt("BOARD_REPLY_REF"));
+					vo.setBoardReplyLev(rset.getInt("BOARD_REPLY_LEV"));
+					vo.setBoardReplySeq(rset.getInt("BOARD_REPLY_SEQ"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
 
 	// 게시글의 조회 수 1 상승
 	public void readCount(Connection conn, int boardNo) {
@@ -160,21 +227,21 @@ public Board getBoard(Connection conn, int boardNo) {
 		return vo;
 		
 	}
-	
-	public ArrayList<Board> selectFreeBoardList() {
-		ArrayList<Board> volist = null;
-		return volist;
-	}
-
-	public ArrayList<Board> selectUserBoardList() {
-		ArrayList<Board> volist = null;
-		return volist;
-	}
-
-	public ArrayList<Board> selectGatheringBoardList() {
-		ArrayList<Board> volist = null;
-		return volist;
-	}
+//	
+//	public ArrayList<Board> selectFreeBoardList(Connection conn, int start, int end, String category) {
+//		ArrayList<Board> volist = null;
+//		return volist;
+//	}
+//
+//	public ArrayList<Board> selectUserBoardList() {
+//		ArrayList<Board> volist = null;
+//		return volist;
+//	}
+//
+//	public ArrayList<Board> selectGatheringBoardList() {
+//		ArrayList<Board> volist = null;
+//		return volist;
+//	}
 
 	public Board getFreeboard() {
 		Board vo = null;
@@ -202,10 +269,10 @@ public Board getBoard(Connection conn, int boardNo) {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getUserId());
-			pstmt.setString(2, vo.getBoardType());
-			pstmt.setString(3, vo.getBoardContent());
+			pstmt.setString(2, vo.getBoardType()); // 사담/건의/질문
+			pstmt.setString(3, vo.getBoardCategory()); // 자유게시판
 			pstmt.setString(4, vo.getBoardTitle());
-			pstmt.setString(5, vo.getBoardContent());
+			pstmt.setString(5, vo.getBoardContent()); 
 			pstmt.setInt(6, vo.getBoardViewCount());
 			pstmt.setInt(7, vo.getBoardReplyRef());
 			pstmt.setInt(8, vo.getBoardReplyLev());

@@ -1,11 +1,23 @@
 @charset "UTF-8";
-a {
-	text-decoration: none;
-}
+* { margin: 0; padding: 0;}
+body {font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;}
+li { list-style-type: none;}
+a { text-decoration: none;}
+img { border: 0;}
+table { border: 1px solid black; border-collapse: collapse;}
+
 body{}
 nav {}
 nav ul {}
 nav ul li {}
 nav ul li a {
-	color: #656565;
+	/* color: #656565; */
 }
+section {
+	margin: 0 0 20px; 
+	padding: 30px 30px 60px; 
+	background: s#fff;
+	}
+section .best {	display: flex;}
+section .best .freeboardbest {}
+section .best .userboardbest {}
