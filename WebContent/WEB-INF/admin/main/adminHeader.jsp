@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-	<link rel="stylesheet" href="./css/admin/main/adminHeader.css"/> 
+	<link rel="stylesheet" href="./css/admin/main/adminHeader.css?after"/> 
 	<script type="text/javascript" src="./js/admin/main/adminHeader.js"></script>  
     <header>
 		<div class="admin-header">
@@ -14,6 +14,11 @@
 	
 	<nav>			
 		<div class="admin-nav"> 
+			<div class="admin-profile">
+				<img class="admin-profile-img" src = "./img/adminprofile.png"></img>
+				<p class="admin-nav-id">관리자</p>
+			</div>
+			
 			<ul class="admin-nav-ul">
 	            <li class="admin-nav-li" id="menu1">
 		            <img class="admin-nav-img" src="./img/dice.png">

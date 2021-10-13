@@ -24,7 +24,7 @@ public class OpenView extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String viewPage = "/WEB-INF/game/ad/adlist.jsp";
+		String viewPage = "/WEB-INF/admin/main/adminHeader.jsp";
 		request.getRequestDispatcher(viewPage).forward(request, response);
 	}
 

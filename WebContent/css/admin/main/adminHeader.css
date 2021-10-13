@@ -29,7 +29,7 @@ html,body{
 /* nav */
 .admin-header-a{
 	text-decoration: none;
-	color: white;
+	color: whi;
 }
 .admin-header-a:link{
 	text-decoration: none;
@@ -51,6 +51,21 @@ html,body{
 	background: #232730;
 	float:left;
 	height: 1500px;
+}
+.admin-profile{
+	width: 200px;
+	height: 250px;
+	margin: 0 auto;
+	padding-top: 20px;
+}
+.admin-profile-img{
+	width: 180px;
+	height: 180px;
+}
+.admin-nav-id{
+	margin-top: 15px;
+	color: white;
+	text-align: center;
 }
 
 .admin-nav-ul{
