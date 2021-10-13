@@ -7,11 +7,10 @@ public class Used {
 	private int usedNo;
 	private String userId;
 	private String usedTitle;
-	private String usedPrice;
+	private int usedPrice;
 	private String usedState;
 	private String usedChange;
-	private String usedPay;
-	private String usedArea;
+	private String usedExtype;
 	private String usedInfo;
 	private Date usedDay;
 	private String usedImg;
@@ -19,35 +18,43 @@ public class Used {
 	public Used() {
 	}
 
-	public Used(int usedNo, String userId, String usedTitle, String usedPrice, String usedState, String usedChange,
-			String usedPay, String usedArea, String usedInfo, Date usedDay, String usedImg) {
+	public Used(int usedNo, String userId, String usedTitle, int usedPrice, String usedState, String usedChange,
+			String usedExtype, String usedInfo, Date usedDay, String usedImg) {
+		super();
 		this.usedNo = usedNo;
 		this.userId = userId;
 		this.usedTitle = usedTitle;
 		this.usedPrice = usedPrice;
 		this.usedState = usedState;
 		this.usedChange = usedChange;
-		this.usedPay = usedPay;
-		this.usedArea = usedArea;
+		this.usedExtype = usedExtype;
 		this.usedInfo = usedInfo;
 		this.usedDay = usedDay;
 		this.usedImg = usedImg;
 	}
 
-	public Used(String userId, String usedTitle, String usedPrice, String usedState, String usedChange, String usedPay,
-			String usedArea, String usedInfo, String usedImg) {
+	public Used(String userId, String usedTitle, int usedPrice, String usedState, String usedChange, String usedExtype,
+			String usedInfo, String usedImg) {
 		super();
 		this.userId = userId;
 		this.usedTitle = usedTitle;
 		this.usedPrice = usedPrice;
 		this.usedState = usedState;
 		this.usedChange = usedChange;
-		this.usedPay = usedPay;
-		this.usedArea = usedArea;
+		this.usedExtype = usedExtype;
 		this.usedInfo = usedInfo;
 		this.usedImg = usedImg;
 	}
 
+
+	@Override
+	public String toString() {
+		return "Used [usedNo=" + usedNo + ", userId=" + userId + ", usedTitle=" + usedTitle + ", usedPrice=" + usedPrice
+				+ ", usedState=" + usedState + ", usedChange=" + usedChange + ", usedExtype=" + usedExtype
+				+ ", usedInfo=" + usedInfo + ", usedDay=" + usedDay + ", usedImg=" + usedImg + "]";
+	}
+
+	
 	public int getUsedNo() {
 		return usedNo;
 	}
@@ -72,11 +79,11 @@ public class Used {
 		this.usedTitle = usedTitle;
 	}
 
-	public String getUsedPrice() {
+	public int getUsedPrice() {
 		return usedPrice;
 	}
 
-	public void setUsedPrice(String usedPrice) {
+	public void setUsedPrice(int usedPrice) {
 		this.usedPrice = usedPrice;
 	}
 
@@ -96,20 +103,12 @@ public class Used {
 		this.usedChange = usedChange;
 	}
 
-	public String getUsedPay() {
-		return usedPay;
+	public String getUsedExtype() {
+		return usedExtype;
 	}
 
-	public void setUsedPay(String usedPay) {
-		this.usedPay = usedPay;
-	}
-
-	public String getUsedArea() {
-		return usedArea;
-	}
-
-	public void setUsedArea(String usedArea) {
-		this.usedArea = usedArea;
+	public void setUsedExtype(String usedExtype) {
+		this.usedExtype = usedExtype;
 	}
 
 	public String getUsedInfo() {

@@ -69,13 +69,13 @@ int pageCount = (int) request.getAttribute("pageCount");
 			<td>글제목</td>
 			<td>유저ID</td>
 		</tr>
-		<c:if test="${usedlist} != null">
-			<c:forEach var="r" items="${usedlist}" begin="0" end="3" step="1">
+		<c:if test="${usedlist != null}">
+			<c:forEach var="r" items="${usedlist}">
 				<tr>
 					<td>${r.usedNo}</td>
 					<td><a href="#">${r.usedImg}</a></td>
 					<td><a href="#">${r.usedTitle}</a></td>
-					<td>${r.usedId}</td>
+					<td>${r.userId}</td>
 				</tr>
 			</c:forEach>
 		</c:if>

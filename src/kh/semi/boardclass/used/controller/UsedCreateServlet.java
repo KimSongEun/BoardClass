@@ -18,6 +18,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kh.semi.boardclass.used.model.service.UsedService;
 import kh.semi.boardclass.used.model.vo.Used;
+import kh.semi.boardclass.user.model.vo.User;
 
 /**
  * Servlet implementation class UsedCreateServlet
@@ -38,38 +39,49 @@ public class UsedCreateServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 
-		String userId = (String) request.getSession().getAttribute(getServletInfo());
-		if (userId == null) {
-			userId = "테스트회원01";
-		}
-		String usedTitle = request.getParameter("usedTitle");
-		String usedPrice = request.getParameter("usedPrice");
-		String usedState = request.getParameter("usedState");
-		String usedChange = request.getParameter("usedChange");
-		String usedPay = request.getParameter("usedPay");
-		String usedArea = request.getParameter("usedArea");
-		String usedInfo = request.getParameter("usedInfo");
-		String fileSavePath = "used_img";
 		int uploadSizeLimit = 10 * 1024 * 1024;
 		String encType = "UTF-8";
 		if (!ServletFileUpload.isMultipartContent(request)) {
 			response.sendRedirect("/WEB-INF/used/imguploaderror.jsp");
 		}
 		ServletContext context = getServletContext();
+		String fileSavePath = "used_img";
 		String uploadPath = context.getRealPath(fileSavePath);
-		System.out.println(uploadPath);
 		MultipartRequest multi = new MultipartRequest(request, uploadPath, uploadSizeLimit, encType,
 				new DefaultFileRenamePolicy());
+
+		// TODO 임시계정
+		String userId = "c";
+		//String userId = "";
+		User userSS = (User) request.getSession().getAttribute("user");
+		if (userSS != null) {
+			userId = userSS.getUserId();
+		}
+		String usedTitle = multi.getParameter("usedTitle");
+		int usedPrice;
+		try {
+			usedPrice = Integer.parseInt(multi.getParameter("usedPrice"));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			usedPrice = 0;
+		}
+		String usedState = multi.getParameter("usedState");
+		String usedChange = multi.getParameter("usedChange");
+		String usedExtype = multi.getParameter("usedExtype");
+		String usedInfo = multi.getParameter("usedInfo");
 		String usedImg = multi.getFilesystemName("usedImg");
 
-		Used vo = new Used(userId, usedTitle, usedPrice, usedState, usedChange, usedPay, usedArea, usedInfo, usedImg);
+		Used vo = new Used(userId, usedTitle, usedPrice, usedState, usedChange, usedExtype, usedInfo, usedImg);
 		int result = new UsedService().insertUsed(vo);
-		if (result == 0) {
-			out.println("글 입력 안됨");
+		if (result < 1) {
+			System.out.println("글 입력 안됨");
 		} else {
+			System.out.println("글 입력 성공 - 그리고 main 이동");
 			response.sendRedirect("usedmain");
+			
 		}
 	}
 
