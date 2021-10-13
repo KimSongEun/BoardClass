@@ -52,7 +52,7 @@ public class BoardgameUpdateServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 
-		String fileSavePath = "upload/boardgame";
+		String fileSavePath = "game_img";
 		int uploadSizeLimit = 10 * 1024 * 1024;
 		String encType = "UTF-8";
 
@@ -136,8 +136,8 @@ public class BoardgameUpdateServlet extends HttpServlet {
 		if (plus == null) {
 			plus = "plus 재설정 필요";
 		}
-		String image = "./upload/boardgame/" + fileImage;
-		String ruleimage = "./upload/boardgame/" + fileRuleImage;
+		String image = "./game_img/" + fileImage;
+		String ruleimage = "./game_img/" + fileRuleImage;
 		if (fileImage == null) {
 			// 업로드 실패 시
 			image = multi.getParameter("originimage");
@@ -160,13 +160,12 @@ public class BoardgameUpdateServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/admin/boardgame/boardgamealert.jsp");
 
 		if (result > 0) {
-			request.setAttribute("msg", gameNo + "번 광고 수정완료");
+			request.setAttribute("msg", gameNo + "번 보드게임 수정완료");
 			request.setAttribute("loc", "boardgamelist");
 		} else {
 			request.setAttribute("msg", "수정실패 ");
 			request.setAttribute("loc", "boardgamelist");
 		}
-
 		rd.forward(request, response);
 	}
 

@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-	<link rel="stylesheet" href="./css/admin/main/adminHeader.css?after"/> 
+	<link rel="stylesheet" href="./css/admin/main/adminHeader.css"/> 
 	<script type="text/javascript" src="./js/admin/main/adminHeader.js"></script>  
     <header>
 		<div class="admin-header">
