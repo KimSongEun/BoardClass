@@ -34,9 +34,9 @@ public class Used {
 		this.usedImg = usedImg;
 	}
 
-	public Used(int usedNo, String userId, String usedTitle, String usedPrice, String usedState, String usedChange,
-			String usedPay, String usedArea, String usedInfo, Date usedDay) {
-		this.usedNo = usedNo;
+	public Used(String userId, String usedTitle, String usedPrice, String usedState, String usedChange, String usedPay,
+			String usedArea, String usedInfo, String usedImg) {
+		super();
 		this.userId = userId;
 		this.usedTitle = usedTitle;
 		this.usedPrice = usedPrice;
@@ -45,19 +45,7 @@ public class Used {
 		this.usedPay = usedPay;
 		this.usedArea = usedArea;
 		this.usedInfo = usedInfo;
-		this.usedDay = usedDay;
-	}
-	
-	public Used(String userId, String usedTitle, String usedPrice, String usedState, String usedChange,
-			String usedPay, String usedArea, String usedInfo) {
-		this.userId = userId;
-		this.usedTitle = usedTitle;
-		this.usedPrice = usedPrice;
-		this.usedState = usedState;
-		this.usedChange = usedChange;
-		this.usedPay = usedPay;
-		this.usedArea = usedArea;
-		this.usedInfo = usedInfo;
+		this.usedImg = usedImg;
 	}
 
 	public int getUsedNo() {

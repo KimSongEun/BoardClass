@@ -44,7 +44,7 @@ public class UsedDao {
 		}
 		return volist;
 	}
-	
+
 	public int getUsedCount(Connection conn) {
 		int result = -1;
 		String sql = "select count(USED_NO) from USED";
@@ -65,28 +65,27 @@ public class UsedDao {
 		return result;
 	}
 
-//	public int insertUsed(Connection conn, Used vo) {
-//		int result = 0;
-//		String sql = "INSERT INTO USED VALUES (USED_NUM.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//		PreparedStatement pstmt = null;
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1,userId);
-//			pstmt.setString(2,);
-//			pstmt.setString(3,);
-//			pstmt.setString(4,);
-//			pstmt.setString(5,);
-//			pstmt.setString(6,);
-//			pstmt.setString(7,);
-//			pstmt.setString(8,);
-//			pstmt.setString(9,);
-//			pstmt.setString(10,);
-//			result = pstmt.executeUpdate();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return result;
-//	}
+	public int insertUsed(Connection conn, Used vo) {
+		int result = 0;
+		String sql = "INSERT INTO USED VALUES (USED_NUM.nextval, ?, ?, ?, ?, ?, ?, ?, ?, SYSDATE, ?)";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getUserId());
+			pstmt.setString(2, vo.getUsedTitle());
+			pstmt.setString(3, vo.getUsedPrice());
+			pstmt.setString(4, vo.getUsedState());
+			pstmt.setString(5, vo.getUsedChange());
+			pstmt.setString(6, vo.getUsedPay());
+			pstmt.setString(7, vo.getUsedArea());
+			pstmt.setString(8, vo.getUsedInfo());
+			pstmt.setString(9, vo.getUsedImg());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	public void updateUsed(Connection conn, Used used) {
 
