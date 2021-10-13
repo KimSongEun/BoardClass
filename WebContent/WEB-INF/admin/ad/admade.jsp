@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>광고등록</title>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 	<script src = "ckeditor/ckeditor.js"></script>
@@ -29,11 +29,18 @@
                     <td colspan = "2"><textarea id="ckeditor" name="content" class="content" required></textarea></td>
                 </tr>
 				<tr>
-                	<td style = "width : 180px; text-align : left"><br>광고 썸네일 이미지 등록</td>
-                	<td><br><input type="file" name="uploadFile" /></td>
+                	<td style = "width : 200px; text-align : left; font-size : 18px">광고 썸네일 이미지 등록</td>
+                	<!-- <td><br><input type="file" name="uploadFile" /></td> -->
+                	<td>
+                	<br>
+                	<div class="input-group mb-3">
+  					<input type="file" class="form-control" id="inputGroupFile02" name = "uploadFile">
+  					<label class="input-group-text" for="inputGroupFile02">Upload</label>
+					</div>
+                	</td>
                 </tr>
                 <tr>
-                    <td colspan = "2"><br><button class='btn btn-warning' value='등록' type="submit">등록</button>
+                    <td colspan = "2"><button class='btn btn-warning' value='등록' type="submit">등록</button>
                         &nbsp;
                         <button type="reset" class = 'btn btn-warning'>취소</button>
                     </td>

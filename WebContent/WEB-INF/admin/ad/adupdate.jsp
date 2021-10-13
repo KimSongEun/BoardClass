@@ -36,10 +36,10 @@
                 </tr>
                 
                 <tr style="text-align: left; font-size: 16px;">
-					<td><br>광고 썸네일 이미지 : <%=b.getPromotionImg()%> </td>
+					<td><br>현재 광고 썸네일 이미지 : <%=b.getPromotionImg()%> </td>
 				</tr>
 				<tr>
-					<td style = "text-align: left; font-size: 16px; color : #F08080">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<td style = "text-align: left; font-size: 16px; color : #F08080">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								👆🏻수정 파일 등록 : <input style = "display : inline-block"type="file" name="uploadFile"/></td>
 				</tr>
 				<input type="hidden" name="no" value = "${promotionno}" />
