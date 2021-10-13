@@ -40,7 +40,7 @@ public class GameDao {
 				volist = new ArrayList<Game>();
 				do {
 					Game vo = new Game();
-					vo.setGameNumber(rset.getInt("GAME_NUMBER"));
+					vo.setGameNumber(rset.getInt("GAME_NO"));
 					vo.setGameKoName(rset.getString("GAME_KONAME"));
 					vo.setGameEnName(rset.getString("GAME_ENNAME"));
 					vo.setGameCategory(rset.getString("GAME_CATEGORY"));
