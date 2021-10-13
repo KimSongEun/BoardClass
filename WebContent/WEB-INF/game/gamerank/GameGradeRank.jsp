@@ -7,6 +7,7 @@
 	int startPage = (int) request.getAttribute("startPage");
 	int endPage = (int) request.getAttribute("endPage");
 	int pageCount = (int) request.getAttribute("pageCount");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -57,27 +58,33 @@
 
 #board_info {
 	position: relative;
-	top: -280px;
+	top: -280px; 
 	float: left;
 	margin: 30px;
 }
 
 #d1 {
 	position: relative;
-	top: -280px;
 	text-align: center;
-	line-height: 200px;
-	background-color: burlywood;
-	width: 1570px;
-	height: 180px;
+	left:-220px;
+	width: 1000px;
+	height: 100px;
 	font-size: 50px;
 }
 
 #search {
 	position: relative;
-	left: 500px;
-	top: -240px;
+	top: -280px;
+	left: -120px;
 	font-size: 40px;
+	display: flex;
+    justify-content: space-around;
+}
+#hrline{
+position: relative;
+top: -310px;
+width: 90%;
+border: 1px solid grey;
 }
 
 #text_name {
@@ -109,6 +116,7 @@
 	height: 100px;
 	position: absolute;
 }
+
 </style>
 </head>
 <body>
@@ -126,8 +134,8 @@
 			<br>
 			<div class="nav">
 				<nav class="navcategory">
-					<a href="#">카테고리</a> | <a href="#">게임랭킹</a> | <a href="#">중고거래</a>
-					| <a href="#">게시판</a> | <a href="#">보드게임정보</a>
+					<a href="#">카테고리</a> | <a href="GameGradeRank">게임랭킹</a> | <a href="#">중고거래</a>
+					| <a href="#">게시판</a> | <a href="GameLevelList">보드게임정보</a>
 				</nav>
 			</div>
 			<br>
@@ -138,7 +146,7 @@
 			<p>ㅇㅇㅇ</p>
 			<br>
 			<ul class="ulist">
-				<li><a href="#">전체</a></li>
+				<li><a href="#">전체</a></li> 
 				<li><a href="GameStrategyList">전략</a></li>
 				<li><a href="GameTemaList">테마</a></li>
 				<li><a href="GameFamilyList">가족</a></li>
@@ -153,12 +161,23 @@
 
 		<section id="section2">
 
-			<select id="sort" onchange="window.open(value,'_self');">
-				<option value="GameGradeRank">평점 순</option>
-				<option value="GameViewRank">조회수 순</option>
+		<div id="search">
+				게임 순위
+				<div id="d1">평점 순</div>
+				
+				
+			</div>
+			
+		<hr id="hrline">	
+		<select id="sort" onchange="window.open(value,'_self');" >
+				<option value="GameGradeRank" >평점 순</option>
+				<option value="GameViewRank" >조회수 순</option>
 				<option value="GameJjimRank">찜 상품 순</option>
 				
 			</select> <br>
+	
+			
+			
 			<%
 				if (volist != null) {
 					for (Game vo : volist) {
@@ -166,6 +185,8 @@
 						// <%= 은 화면에 출력을 위한 표현식을 작성하는 태그, ;없어야 함.
 			%>
 			<div id="board_info">
+			
+						
 				<button type="button" class="btn1" onclick="#">
 					<img src="<%=request.getContextPath()%>/<%=vo.getGameImage()%>"
 						width="250" height="250" />
@@ -174,9 +195,11 @@
 						게임 인원 : <%=vo.getGameLevel()%>명<br>
 						게임 연령 : <%=vo.getGameAge()%><br>
 						게임 시간 : <%=vo.getGameTime()%>분
+						
 					</div>
 				</button>
-
+				
+			
 			</div>
 			<%
 				}
