@@ -29,10 +29,15 @@ public class UserService {
 		
 		// TODO:
 		result = new UserDao().signUp(conn, user);
-		result = new UserDao().agree(conn, user);
-		result = new UserDao().checkId(conn, user);
-		result = new UserDao().checkNick(conn, user);
+		//result = new UserDao().agree(conn, user);
+		//result = new UserDao().checkId(conn, user);
+		//result = new UserDao().checkNick(conn, user);
 		
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}
