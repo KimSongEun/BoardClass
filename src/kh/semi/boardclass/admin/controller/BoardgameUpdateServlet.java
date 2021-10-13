@@ -112,6 +112,10 @@ public class BoardgameUpdateServlet extends HttpServlet {
 		if (designer == null) {
 			designer = "designer 재설정 필요";
 		}
+		String writer = multi.getParameter("writer");
+		if (writer == null) {
+			writer = "writer 재설정 필요";
+		}
 		String brand = multi.getParameter("brand");
 		if (brand == null) {
 			brand = "brand 재설정 필요";
@@ -151,7 +155,7 @@ public class BoardgameUpdateServlet extends HttpServlet {
 			System.out.println("규칙서 이미지 업로드 성공!!!");
 		}
 		int gameNo = Integer.parseInt(multi.getParameter("no"));
-		int result = new AdminService().updateBoardGame(kotitle, entitle, category, age, player, time, price, grade, level, designer, brand, releasedate, language, image, ruleimage, video, plus, gameNo);
+		int result = new AdminService().updateBoardGame(kotitle, entitle, category, age, player, time, price, grade, level, designer, writer, brand, releasedate, language, image, ruleimage, video, plus, gameNo);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/admin/boardgame/boardgamealert.jsp");
 

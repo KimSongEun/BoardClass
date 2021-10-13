@@ -111,6 +111,10 @@ public class BoardgameMadeServlet extends HttpServlet {
 		if (designer == null) {
 			designer = "designer 재설정 필요";
 		}
+		String writer = multi.getParameter("writer");
+		if (writer == null) {
+			writer = "writer 재설정 필요";
+		}
 		String brand = multi.getParameter("brand");
 		if (brand == null) {
 			brand = "brand 재설정 필요";
@@ -149,10 +153,10 @@ public class BoardgameMadeServlet extends HttpServlet {
 			System.out.println("첨부파일명 : " + fileRuleImage);
 			System.out.println("규칙서 이미지 업로드 성공!!!");
 		}
-		int result = new AdminService().insertBoardGame(kotitle, entitle, category, age, player, time, price, grade, level, designer, brand, releasedate, language, image, ruleimage, video, plus);
+		int result = new AdminService().insertBoardGame(kotitle, entitle, category, age, player, time, price, grade, level, designer, writer, brand, releasedate, language, image, ruleimage, video, plus);
 
 
-		response.sendRedirect("adlist");
+		response.sendRedirect("boardgamelist");
 	}
 
 }
