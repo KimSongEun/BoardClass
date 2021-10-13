@@ -47,7 +47,7 @@ public class BoardgameMadeServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 
-		String fileSavePath = "upload/boardgame";
+		String fileSavePath = "game_img";
 		int uploadSizeLimit = 10 * 1024 * 1024;
 		String encType = "UTF-8";
 
@@ -135,8 +135,8 @@ public class BoardgameMadeServlet extends HttpServlet {
 		if (plus == null) {
 			plus = "plus 재설정 필요";
 		}
-		String image = "./upload/boardgame/" + fileImage;
-		String ruleimage = "./upload/boardgame/" + fileRuleImage;
+		String image = "./game_img/" + fileImage;
+		String ruleimage = "./game_img/" + fileRuleImage;
 		if (fileImage == null) {
 			// 업로드 실패 시
 			image = "썸네일 미등록";
