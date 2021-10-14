@@ -202,9 +202,7 @@
                                     <div class="boardgame-item_menu">
                                         <label class="boardgame-item_menu_label">게임 규칙 영상 및 게임 설명 :</label>
                                         <div class="boardgame-item_menu_comment">
-                                            <br><br><textarea id = "ckeditor" class="boardgame-form_comment" rows="10"
-                                                placeholder="게임 규칙 영상 및 게임 설명을 등록해주세요" name="video"></textarea>
-
+                                            <br><br><textarea id = "ckeditor" name="video"></textarea>
                                         </div>
                                     </div>
                                     <div class="boardgame-item_upload">
