@@ -16,6 +16,7 @@ import kh.semi.boardclass.user.model.vo.User;
 
 import java.util.ArrayList;
 
+import kh.semi.boardclass.admin.model.vo.AllBoardUser;
 import kh.semi.boardclass.admin.model.vo.Banner;
 import kh.semi.boardclass.admin.model.vo.Notice;
 
@@ -552,8 +553,39 @@ public class AdminDao {
 		return result;
 	} 
 	
-	public ArrayList<Board> selectAllBoardList(Connection conn){
-		ArrayList<Board> volist = null;
+	public ArrayList<AllBoardUser> selectAllBoardList(Connection conn, int start, int end){
+		ArrayList<AllBoardUser> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT B.USER_ID, B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.BOARD_CONTENT, B.BOARD_WRITE_DATE, B.BOARD_REWRITE_DATE, M.USER_NO FROM BOARD B JOIN MEMBER M ON B.USER_ID = M.USER_ID ORDER BY BOARD_REWRITE_DATE DESC) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<AllBoardUser>();
+			if (rset.next()) {
+				do {
+					AllBoardUser vo = new AllBoardUser();
+					vo.setBoardNo(rset.getInt("BOARD_NO"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setBoardType(rset.getString("BOARD_TYPE"));
+					vo.setBoardCategory(rset.getString("BOARD_CATEGORY"));
+					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+					vo.setBoardContent(rset.getString("BOARD_CONTENT"));
+					vo.setBoardWriteDate(rset.getDate("BOARD_WRITE_DATE"));
+					vo.setBoardRewriteDate(rset.getDate("BOARD_REWRITE_DATE"));
+					vo.setUserNo(rset.getInt("USER_NO"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return volist;
 	}
 	public Board searchAllBoard(Connection conn){

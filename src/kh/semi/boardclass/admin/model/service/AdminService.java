@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 import kh.semi.boardclass.admin.model.dao.AdminDao;
+import kh.semi.boardclass.admin.model.vo.AllBoardUser;
 import kh.semi.boardclass.admin.model.vo.Banner;
 import kh.semi.boardclass.admin.model.vo.Notice;
 import kh.semi.boardclass.common.JDBCTemplate;
@@ -289,10 +290,10 @@ public class AdminService {
 		return result;
 	}
 
-	public ArrayList<Board> selectAllBoardList() {
-		ArrayList<Board> volist = null;
+	public ArrayList<AllBoardUser> selectAllBoardList(int start, int end) {
+		ArrayList<AllBoardUser> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().selectAllBoardList(conn);
+		volist = new AdminDao().selectAllBoardList(conn, start, end);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
