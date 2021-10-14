@@ -41,4 +41,6 @@ CKEDITOR.editorConfig = function( config ) {
     config.filebrowserUploadUrl = "ckfinder/core/connector/java/connctor.java?command=QuickUpload&type=Files";
     config.filebrowserImageUploadUrl = "ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Images";
     config.filebrowserFlashUploadUrl = "ckfinder/core/connector/java/connector.java?command=QuickUpload&type=Flash";
+
+	config.extraPlugins = 'youtube';
 };

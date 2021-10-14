@@ -19,7 +19,7 @@ public class UsedService {
 		JDBCTemplate.close(conn);
 		return volist;
 	}
-	
+
 	public int getUsedCount() {
 		int result = -1;
 		Connection conn = JDBCTemplate.getConnection();
@@ -28,13 +28,13 @@ public class UsedService {
 		return result;
 	}
 
-//	public int insertUsed(Used vo) {
-//		int result = 0;
-//		Connection conn = JDBCTemplate.getConnection();
-//		result = new UsedDao().insertUsed(conn, vo);
-//		JDBCTemplate.close(conn);
-//		return result;
-//	}
+	public int insertUsed(Used vo) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new UsedDao().insertUsed(conn, vo);
+		JDBCTemplate.close(conn);
+		return result;
+	}
 
 	public void updateUsed(Used used) {
 		Connection conn = JDBCTemplate.getConnection();

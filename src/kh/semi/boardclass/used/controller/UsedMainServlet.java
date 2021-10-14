@@ -1,6 +1,7 @@
 package kh.semi.boardclass.used.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -27,6 +28,7 @@ public class UsedMainServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
 		final int PAGE_SIZE = 10;   // 한 페이지 당 글수
 		final int PAGE_BLOCK = 5;   // 한 화면에 나타날 페이지 링크 수
@@ -56,7 +58,7 @@ public class UsedMainServlet extends HttpServlet {
 		if(endPage > pageCount) endPage=pageCount;
 		
 		ArrayList<Used> volist = new UsedService().selectUsedList();
-		
+		System.out.println("usedmain:volist: " + volist);
 		request.setAttribute("usedlist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);

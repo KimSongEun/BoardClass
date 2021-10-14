@@ -17,7 +17,7 @@
 	Configure the location of uploaded files. See the following article for more details:
 	http://docs.cksource.com/CKFinder_2.x/Developers_Guide/Java/Configuration/baseURL_and_baseDir
 	-->
-	<baseDir>?:\z_workspace\Semi_Project_1BoardClass\boardclass\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\BoardClass\ckstorage</baseDir>
+	<baseDir>C:\z_workspace\Semi_Project_1BoardClass\boardclass\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\BoardClass\ckstorage</baseDir>
 	<baseURL>/BoardClass/ckstorage</baseURL>
 	<licenseKey></licenseKey>
 	<licenseName></licenseName>

@@ -4,7 +4,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	ArrayList<Game> volist = (ArrayList<Game>) request.getAttribute("gamevolist");
-	
+
 	int startPage = (int) request.getAttribute("startPage");
 	int endPage = (int) request.getAttribute("endPage");
 	int pageCount = (int) request.getAttribute("pageCount");
@@ -127,8 +127,8 @@
 			<br>
 			<div class="nav">
 				<nav class="navcategory">
-					<a href="#">카테고리</a> | <a href="#">게임랭킹</a> | <a href="#">중고거래</a>
-					| <a href="#">게시판</a> | <a href="#">보드게임정보</a>
+					<a href="#">카테고리</a> | <a href="GameGradeRank">게임랭킹</a> | <a
+						href="#">중고거래</a> | <a href="#">게시판</a> | <a href="GameLevelList">보드게임정보</a>
 				</nav>
 			</div>
 			<br>
@@ -136,10 +136,10 @@
 		</header>
 		<nav id="nav2">
 
-			<p>ㅇㅇㅇ</p>
+			<p>전체</p>
 			<br>
 			<ul class="ulist">
-				<li><a href="#">전체</a></li>
+				<li><a href="GameLevelList">전체</a></li>
 				<li><a href="GameStrategyList">전략</a></li>
 				<li><a href="GameTemaList">테마</a></li>
 				<li><a href="GameFamilyList">가족</a></li>
@@ -153,14 +153,14 @@
 		<aside></aside>
 
 		<section id="section2">
-			<div id="d1">ㅇㅇㅇ</div>
+			<div id="d1">전체</div>
 
 			<div id="search">
 				게임이름 <input type="text" id="text_name">
 				<button type="button" id="search_btn">검색</button>
 			</div>
 
-	<%-- 		<script>
+			<%-- 		<script>
 			$("#search_btn").click(searchF1);
 		      function searchF1(){
 		         if($("#text_name").val() == ""){
@@ -219,26 +219,32 @@
 			</select> <br>
 
 			<%
-			
 				if (volist != null) {
 					for (Game vo : volist) {
 						// tr 이 volist 갯수 만큼 생기게 됨.
 						// <%= 은 화면에 출력을 위한 표현식을 작성하는 태그, ;없어야 함.
 			%>
-			<div id="board_info">
-				<button type="button" class="btn1" onclick="#">
-					<img src="<%=request.getContextPath() %>/<%=vo.getGameImage()%>"
-						width="250" height="250" />
-					<div class="img-text">
-						<%=vo.getGameKoName()%>
-						<%=vo.getGameLevel()%>
-					</div>
-				</button>
-			</div>
-			<%
-				}
-				}
-			%>
+			<form id="box1" method="post" action="GameInfo">
+
+				<div id="board_info">
+				
+					<button type="submit"   formmethod ="post" class="btn1" value="<%=vo.getGameKoName()%>"
+						onclick="location='GameInfo'">
+						
+						<img src="<%=request.getContextPath()%>/<%=vo.getGameImage()%>"
+							width="250" height="250" />
+						<div class="img-text">
+							<%=vo.getGameKoName()%>
+							<%=vo.getGameLevel()%>
+						</div>
+					</button>
+				</div>
+				<%
+					}
+					}
+				%>
+			</form>
+
 
 			<div id="page">
 				<%

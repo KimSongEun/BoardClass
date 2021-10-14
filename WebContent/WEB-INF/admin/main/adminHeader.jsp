@@ -14,6 +14,11 @@
 	
 	<nav>			
 		<div class="admin-nav"> 
+			<div class="admin-profile">
+				<img class="admin-profile-img" src = "./img/adminprofile.png"></img>
+				<p class="admin-nav-id">관리자</p>
+			</div>
+			
 			<ul class="admin-nav-ul">
 	            <li class="admin-nav-li" id="menu1">
 		            <img class="admin-nav-img" src="./img/dice.png">

@@ -25,17 +25,16 @@ public class UsedDao {
 			rset = pstmt.executeQuery();
 
 			volist = new ArrayList<Used>();
-			if (rset.next())
+			if (rset.next())			{
 				do {
 					Used vo = new Used();
 					vo.setUsedNo(rset.getInt("USED_NO"));
 					vo.setUserId(rset.getString("USER_ID"));
 					vo.setUsedTitle(rset.getString("USED_TITLE"));
 					vo.setUsedImg(rset.getString("USED_IMG"));
+					volist.add(vo);
 				} while (rset.next());
-			{
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -44,7 +43,7 @@ public class UsedDao {
 		}
 		return volist;
 	}
-	
+
 	public int getUsedCount(Connection conn) {
 		int result = -1;
 		String sql = "select count(USED_NO) from USED";
@@ -65,28 +64,26 @@ public class UsedDao {
 		return result;
 	}
 
-//	public int insertUsed(Connection conn, Used vo) {
-//		int result = 0;
-//		String sql = "INSERT INTO USED VALUES (USED_NUM.nextval, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-//		PreparedStatement pstmt = null;
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			pstmt.setString(1,userId);
-//			pstmt.setString(2,);
-//			pstmt.setString(3,);
-//			pstmt.setString(4,);
-//			pstmt.setString(5,);
-//			pstmt.setString(6,);
-//			pstmt.setString(7,);
-//			pstmt.setString(8,);
-//			pstmt.setString(9,);
-//			pstmt.setString(10,);
-//			result = pstmt.executeUpdate();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//		return result;
-//	}
+	public int insertUsed(Connection conn, Used vo) {
+		int result = 0;
+		String sql = "INSERT INTO USED VALUES (USED_NUM.nextval, ?, ?, ?, ?, ?, ?, ?, SYSDATE, ?)";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getUserId());
+			pstmt.setString(2, vo.getUsedTitle());
+			pstmt.setInt(3, vo.getUsedPrice());
+			pstmt.setString(4, vo.getUsedState());
+			pstmt.setString(5, vo.getUsedChange());
+			pstmt.setString(6, vo.getUsedExtype());
+			pstmt.setString(7, vo.getUsedInfo());
+			pstmt.setString(8, vo.getUsedImg());
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	public void updateUsed(Connection conn, Used used) {
 

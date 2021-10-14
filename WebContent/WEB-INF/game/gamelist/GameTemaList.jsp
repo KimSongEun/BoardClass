@@ -126,8 +126,8 @@
 			<br>
 			<div class="nav">
 				<nav class="navcategory">
-					<a href="#">카테고리</a> | <a href="#">게임랭킹</a> | <a href="#">중고거래</a>
-					| <a href="#">게시판</a> | <a href="#">보드게임정보</a>
+					<a href="#">카테고리</a> | <a href="GameGradeRank">게임랭킹</a> | <a href="#">중고거래</a>
+					| <a href="#">게시판</a> | <a href="GameLevelList">보드게임정보</a>
 				</nav>
 			</div>
 			<br>
@@ -135,10 +135,10 @@
 		</header>
 		<nav id="nav2">
 
-			<p>ㅇㅇㅇ</p>
+			<p>테마</p>
 			<br>
 			<ul class="ulist">
-				<li><a href="#">전체</a></li>
+				<li><a href="GameLevelList">전체</a></li>
 				<li><a href="GameStrategyList">전략</a></li>
 				<li><a href="GameTemaList">테마</a></li>
 				<li><a href="GameFamilyList">가족</a></li>
@@ -152,7 +152,7 @@
 		<aside></aside>
 
 		<section id="section2">
-			<div id="d1">ㅇㅇㅇ</div>
+			<div id="d1">테마</div>
 
 			<div id="search">
 				게임이름 <input type="text" id="text_name">

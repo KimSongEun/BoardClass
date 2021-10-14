@@ -22,9 +22,62 @@ public class GameDao {
 		return result;
 	}
 	
-	public int selectCategory(Connection conn) {
-		int result = 0;
-		return result;
+	public ArrayList<Game> InfoGame(Connection conn, String name) {
+		ArrayList<Game> volist = null;
+		String sql ="select * from BOARDGAME where GAME_KONAME = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "'"+name+"'");
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				volist = new ArrayList<Game>();
+				do {
+					Game vo = new Game();
+					vo.setGameNumber(rset.getInt("GAME_NO"));
+					vo.setGameKoName(rset.getString("GAME_KONAME"));
+					vo.setGameEnName(rset.getString("GAME_ENNAME"));
+					vo.setGameCategory(rset.getString("GAME_CATEGORY"));
+					vo.setGameView(rset.getInt("GAME_VIEW"));
+					vo.setGameAge(rset.getString("GAME_AGE"));
+					vo.setGamePlayer(rset.getString("GAME_PLAYER"));
+					vo.setGameTime(rset.getString("GAME_TIME"));
+					vo.setGamePrice(rset.getInt("GAME_PRICE"));
+					vo.setGameGrade(rset.getInt("GAME_GRADE"));
+					vo.setGameDate(rset.getDate("GAME_DATE"));
+					vo.setGameLevel(rset.getInt("GAME_LEVEL"));
+					vo.setGameDesigner(rset.getString("GAME_DESIGNER"));
+					vo.setGameWriter(rset.getString("GAME_WRITER"));
+					vo.setGameBrand(rset.getString("GAME_BRAND"));
+					vo.setGameReleaseDate(rset.getString("GAME_RELEASEDATE"));
+					vo.setGameRank(rset.getInt("GAME_RANK"));
+					vo.setGameLanguage(rset.getString("GAME_LANGUAGE"));
+					vo.setGameReview(rset.getString("GAME_REVIEW"));
+					vo.setGameImage(rset.getString("GAME_IMAGE"));
+					vo.setGameRuleImage(rset.getString("GAME_RULE_IMAGE"));
+					vo.setGameVideo(rset.getString("GAME_VIDEO"));
+					vo.setGamePlus(rset.getString("GAME_PLUS"));
+					vo.setUsedNum(rset.getInt("USED_NO"));
+					
+					
+					volist.add(vo);
+					
+				}while(rset.next());
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				rset.close();
+				pstmt.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		return volist;
+
 	}
 	
 	public ArrayList<Game> selectGame(Connection conn, String name) {

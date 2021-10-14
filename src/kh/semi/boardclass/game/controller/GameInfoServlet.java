@@ -32,7 +32,19 @@ public class GameInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		  
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=utf-8");
+        PrintWriter out=response.getWriter();    
+        
+        String name = request.getParameter("GAME_KONAME");
+        
+        System.out.println(name);
+        ArrayList<Game> volist1 = new GameService().InfoGame(name);
+		
+        request.setAttribute("gamevolist", volist1);
+        
+		request.getRequestDispatcher("/WEB-INF/game/gameinfo/GameInfo.jsp").forward(request, response);
+		
     }
 		
 	    

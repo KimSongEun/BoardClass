@@ -82,6 +82,7 @@ public class GameGradeRankServlet extends HttpServlet {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
+		request.setAttribute("endRnum", endRnum);
 		// Page 이동하면서 Data도 전달함.
 		request.getRequestDispatcher("/WEB-INF/game/gamerank/GameGradeRank.jsp").forward(request, response);
 		

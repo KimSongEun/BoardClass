@@ -33,10 +33,8 @@ public class LogoutServlet extends HttpServlet {
 		// 새로 만드는 것을 원치 않기 때문에 false 값을 인자로 한다.
 		HttpSession session = request.getSession(false);
 		// 만약 세션이 null이 아니라면 해당 세션을 만료 시켜 세션 정보를 없앤다.
-		if (session != null)
-			session.invalidate();
-		//response.sendRedirect("login.jsp");
-		request.getRequestDispatcher("/WEB-INF/user/login.jsp").forward(request, response);
+		if (session != null) session.invalidate();
+		response.sendRedirect("login");
 	}
 
 	
