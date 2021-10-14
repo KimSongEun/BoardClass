@@ -2,20 +2,14 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-        <%
-        ArrayList<AllBoardUser> volist=(ArrayList<AllBoardUser>)request.getAttribute("allboarduservolist");
-	int startPage = (int)request.getAttribute("startPage");
-	int endPage = (int)request.getAttribute("endPage");
-	int pageCount = (int)request.getAttribute("pageCount");
-	%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/admin/main/adminHeader.css"/> 
-    <link rel="stylesheet" href="./css/admin/allboard/adminAllBoard.css?"/>
+    <link rel="stylesheet" href="./css/admin/allboard/adminAllBoard.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="./js/admin/boardgame/adminBoardGame.js"></script>
@@ -65,46 +59,52 @@
                             <td>삭제 </td>
                             
                         </tr>
-                         <%if(volist !=null){
-						 for(AllBoardUser g : volist){ %> 
-<%--                         <c:if test = "${allboarduservolist != null}">
-                        <c:forEach items = "${allboarduservolist}" var="b" > --%>
-                        <tr>
-                            <td style = "vertical-align : middle"><%=g.getBoardCategory() %></td>
-                            <td style = "vertical-align : middle"><%=g.getBoardType() %></td>
-                            <td style = "vertical-align : middle"><%=g.getBoardTitle() %></td>
-                            <td style = "vertical-align : middle"><%=g.getUserId() %></td>
-                            <td style = "vertical-align : middle"><%=g.getUserNo() %></td>
-                            <td style = "vertical-align : middle"><%=g.getBoardRewriteDate() %></td>
+                       <c:if test = "${allboarduservolist != null}">
+                        <c:forEach items = "${allboarduservolist}" var="b" >
+                        
+                        
+                         <tr>
+                            <td style = "vertical-align : middle">${b.boardCategory}</td>
+                            <td style = "vertical-align : middle">${b.boardType}</td>
+                            <td style = "vertical-align : middle">${b.boardTitle}</td>
+                            <td style = "vertical-align : middle">${b.userId}</td>
+                            <td style = "vertical-align : middle">${b.userNo}</td>
+                            <td style = "vertical-align : middle">${b.boardRewriteDate}</td>
                             <td style = "vertical-align : middle"><button class="update btn btn-danger" value="updatego">수정</button> </td>
-                            <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" id="<%=g.getBoardNo() %>">삭제</button> </td>
-                        </tr>
-<%--                         </c:forEach>
-                         </c:if> --%>
-                          <%} }%> 
+                            <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" id="${b.boardNo}">삭제</button> </td>
+                        </tr> 
+                         </c:forEach>
+                         </c:if> 
                     </table>
                 </div>
 
             <div class="admin-allboard-page-nav">
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
-                <% if(startPage == 1) {%>
+                <c:choose>
+                <c:when test = "${startPage == 1}">
                 	<li class="page-item-previous disabled">
-                	<%} else { %>
+                	</c:when>
+                	<c:otherwise>
                   <li class="page-item-previous">
-                  <% }%>
-                    <a class="page-link" href="boardgamelist?pagenum=${startPage-1}&viewcount=${viewcount}" aria-label="Previous">
+                  </c:otherwise>
+                  </c:choose>
+                    <a class="page-link" href="allboardlist?pagenum=${startPage-1}&viewcount=${viewcount}" aria-label="Previous">
                       <span aria-hidden="true">&laquo;</span>
                     </a>
                   </li>
-  	<%for (int i = startPage; i <= endPage; i++) {%>
-		<li class="page-item"><a class="page-link" href="boardgamelist?pagenum=<%=i%>&viewcount=${viewcount}"><%=i%></a></li>
-		<%} if(endPage == pageCount){%>
-		<li class="page-item-next disabled">
-		<%}else{ %>
-                  <li class="page-item-next">
-                  <% }%>
-                    <a class="page-link" href="boardgamelist?pagenum=${endPage+1}&viewcount=${viewcount}" aria-label="Next">
+                  <c:forEach var = "i" begin = "${startPage}" end = "${endPage}" step = "1">
+						<li class="page-item"><a class="page-link" href="allboardlist?pagenum=${i}&viewcount=${viewcount}">${i}</a></li>
+				  </c:forEach>
+				  <c:choose>
+					<c:when test = "${endPage}==${pageCount}">
+						<li class="page-item-next disabled">
+		             </c:when>
+                	<c:otherwise>
+                  		<li class="page-item-next">
+                  </c:otherwise>
+                  </c:choose>
+                    <a class="page-link" href="allboardlist?pagenum=${endPage+1}&viewcount=${viewcount}" aria-label="Next">
                       <span aria-hidden="true">&raquo;</span>
                     </a>
                   </li>
@@ -115,5 +115,4 @@
         </div>
     </section>
 </body>
-
 </html>
