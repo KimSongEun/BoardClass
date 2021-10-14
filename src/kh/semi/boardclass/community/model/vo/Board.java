@@ -22,8 +22,8 @@ public class Board {
 	private String boardCategory;
 	private String boardTitle;
 	private String boardContent;
-	private Date boardWriteDate;
-	private Date boardRewriteDate;
+	private String boardWriteDate;
+	private String boardRewriteDate;
 	private int boardViewCount;
 	private int boardReplyRef;
 	private int boardReplyLev;
@@ -106,19 +106,19 @@ public class Board {
 		this.boardContent = boardContent;
 	}
 
-	public Date getBoardWriteDate() {
+	public String getBoardWriteDate() {
 		return boardWriteDate;
 	}
 
-	public void setBoardWriteDate(Date boardWriteDate) {
+	public void setBoardWriteDate(String boardWriteDate) {
 		this.boardWriteDate = boardWriteDate;
 	}
 
-	public Date getBoardRewriteDate() {
+	public String getBoardRewriteDate() {
 		return boardRewriteDate;
 	}
 
-	public void setBoardRewriteDate(Date boardRewriteDate) {
+	public void setBoardRewriteDate(String boardRewriteDate) {
 		this.boardRewriteDate = boardRewriteDate;
 	}
 
@@ -161,5 +161,7 @@ public class Board {
 	public void setBoardImg(String boardImg) {
 		this.boardImg = boardImg;
 	}
+
+	
 
 }

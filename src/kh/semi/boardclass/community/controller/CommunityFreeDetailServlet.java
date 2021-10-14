@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.boardclass.community.model.dao.CommunityDao;
+import kh.semi.boardclass.community.model.service.CommunityService;
+import kh.semi.boardclass.community.model.vo.Board;
+
 /**
  * Servlet implementation class CommunityFreeDetailServlet
  */
@@ -25,15 +29,29 @@ public class CommunityFreeDetailServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		//TODO 로그인
+		
+		// 게시글 보기 위한 작업
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		String pageNum = request.getParameter("pageNum");
+		new CommunityService().readCount(boardNo);
+		Board board = new CommunityService().getBoard(boardNo);
+		
+		String content = board.getBoardContent();
+		content = content.replace("/r/n", "<br>");
+		
+		request.setAttribute("boardNo", boardNo);
+		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("board", board);
+		request.setAttribute("content", content);
+		request.getRequestDispatcher("/WEB-INF/community/BoardContent.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

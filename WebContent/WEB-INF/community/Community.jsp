@@ -6,10 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>커뮤니티</title>
-<link rel="stylesheet" href="./css/community/community.css" />
+<link rel="stylesheet" href="css/community/community.css" />
+<link rel="stylesheet" href="css/community/main.css" />
+
 </head>
 <body>
-<%@include file="/WEB-INF/community/header.jsp" %>
+<c:import url="header.jsp" />
 	<nav id="c_category" class="c_category">
 		<ul>
 			<li><a href="./cmain">커뮤니티</a></li>
@@ -72,6 +74,6 @@
 
 </section>
 
-<%@include file="/WEB-INF/community/footer.jsp" %>
+<c:import url="footer.jsp" />
 </body>
 </html>

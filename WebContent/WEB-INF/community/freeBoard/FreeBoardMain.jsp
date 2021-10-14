@@ -1,17 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="kh.semi.boardclass.community.model.vo.Board"%>
+<%@page import="java.util.ArrayList"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>자유 게시판</title>
-<link rel="stylesheet" href="./css/community/freeBoard/freeBoardMain.css" />
+<link rel="stylesheet" href="css/community/freeBoardMain.css" />
+<link rel="stylesheet" href="css/community/main.css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
 </head>
-<%@include file="/WEB-INF/community/header.jsp" %>
+<c:import url="../header.jsp" />
 <body>
-<nav id="c_category" class="c_category">
+
+<div id="guide" class="row">
+<nav id="aside" class="column">
 		<ul>
 			<li><a href="./cmain">커뮤니티</a></li>
 			<li><a href="#">공지사항</a></li>
@@ -20,34 +26,89 @@
 			<li><a href="#">모임게시판</a></li>
 		</ul>
 </nav> <!-- TODO 링크 첨부 -->
-<section>
-<select id="b_category">
-  <option value="freeboard">자유게시판</option>
-  <option value="userboard">유저정보게시판</option>
-  <option value="gathering">모임게시판</option>
-</select>
-<div id ="a1">
+<section id="boardlsit">
+	<div class="h3group ">
+		<h3 class="tit">자유게시판</h3>
+		<div class="location">
+			<span class="depth">홈</span>
+			<span class="depth">커뮤니티</span><strong class="this">자유게시판</strong>
+		</div>
+	</div>
+<div class="conwrap">
+	<div class="h4group">
+		<h4 class="tit">전체글 보기</h4>
+	</div>
+	<!--  선택옵션-->
+	<select id="b_category">
+	  <option value="freeboard">자유게시판</option>
+	  <option value="userboard">유저정보게시판</option>
+	  <option value="gathering">모임게시판</option>
+	</select>
+	<div id ="a1">
+	
+	</div>
+
+<table class="c_table">
+	<tr>
+	<th>번호</th>
+	<th>제목</th>
+	<th>작성자</th>
+	<th>작성일</th>
+	<th>조회수</th>
+	</tr>
+	
+	<c:if test="${totCnt > 0 }">
+	<c:forEach var="board" items="${list }">
+		<tr>
+			<td style="width: 10%; font-weight: bold; font-size: 18px; text-align: center;">
+				${board.boardNo }
+			</td>
+			<td style="width: 40%; font-weight: bold; font-size: 18px">
+				<a href="cfdetail?boardNo=${board.boardNo }&pageNum=${currentPage}">${board.boardTitle }</a>
+			</td>
+			<td style="width: 10%; text-align: center;">${board.userId }</td>
+			<td style="width: 10%;">${board.boardWriteDate }</td>
+			<td style="width: 10%; text-align: center;">${board.boardViewCount }</td>
+		</tr>
+	</c:forEach>
+	</c:if>
+	<c:if test="${totCnt == 0 }">
+		<tr>
+			<td colspan="7">데이터가 없습니다</td>
+		</tr>
+	</c:if>
+	</table>
+	</section>
+	
+	<div style="text-align: centerl; margin-top:20px; ">
+		<c:if test="${startPage > blockSize }">
+			<a href="cf?pageNum=${startPage-blockSize}">[이전]</a>
+		</c:if>
+		<c:forEach var="i" begin="${startPage }" end="${endPage }">
+			<c:if test="${pageNum == i }">
+				<a href="cf?pageNum=${i }" style="color: blue;">[${i }]</a>
+			</c:if>
+		<c:if test="${pageNum != i }">
+			<a href="cf?pageNum=${i }">[${i }]</a>
+		</c:if>
+		</c:forEach>
+		<c:if test="${endPage < pageCnt }">
+			<a href="cf?pageNum=${startPage + blockSize }">[다음]</a>
+		</c:if>
+ 	</div>
+	
+	<input type="button" value="새글쓰기" id="btn_write" onclick="location.href ='cfwrite'" style="width: 240px;"/>
+	<div class="btn_wrap">
+		<div class="fl_c">
+			<a href="./cfwrite" class="btn50 c3 reg" style="width: 240px;" tmp="contents/bod" mn="60" cn="0"><span class="write">글작성</span></a>
+		</div>
+	</div>
 
 </div>
 
-</section>
-<input type="button" value="새글쓰기" id="btn_write" onclick="location.href ='cfwrite'"/>
-<!-- <a href="/cfinsert">새글쓰기</a> -->
 
 <script>
 //change 될때마다 getListAjax
-/* $('#b_category').change(getListAjax=function(){
-	$.ajax({
-		url: '',
-		data:'b_category='+$(this).val(),
-		dataType: 'json',
-		success : function(data){
-			if(!data.data || data.dada=="" || data.data.length<1) return false;
-			$('#a1').html(data.data[0].CONTENT);
-		},
-	});
-}); */
-//2
 $(function(){
 	$('#b_category').on('change', getList);
 });
@@ -75,6 +136,6 @@ $(function(){
 
 
 
-<%@include file="/WEB-INF/community/footer.jsp" %>
+<c:import url="../footer.jsp" />
 </body>
 </html>

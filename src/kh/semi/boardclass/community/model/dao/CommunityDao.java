@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.community.model.vo.Board;
 import kh.semi.boardclass.community.model.vo.Comment;
+import oracle.jdbc.proxy.annotation.Pre;
 
 public class CommunityDao {
 
@@ -16,7 +17,11 @@ public class CommunityDao {
 	}
 public Board getBoard(Connection conn, int boardNo) {
 	Board vo = null;
-	String sql = "select * from board where board_no = ?";
+//	String sql = "select * from board where board_no =?";
+	String sql = "SELECT BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT," 
+			+ " TO_CHAR(BOARD_WRITE_DATE, 'YYYY/MM/DD'), TO_CHAR(BOARD_REWRITE_DATE, 'YYYY/MM/DD'), " 
+			+ " BOARD_VIEW_COUNT, BOARD_REPLY_REF, BOARD_REPLY_LEV, BOARD_REPLY_SEQ, BOARD_IMG  FROM BOARD"
+			+ " WHERE BOARD_NO = ?";
 	PreparedStatement pstmt = null;
 	ResultSet rset = null;
 	try {
@@ -31,11 +36,11 @@ public Board getBoard(Connection conn, int boardNo) {
 			vo.setBoardCategory(rset.getString("board_category"));
 			vo.setBoardTitle(rset.getString("board_title"));
 			vo.setBoardContent(rset.getString("board_content"));
-			vo.setBoardWriteDate(rset.getDate("board_write_date"));
-			vo.setBoardRewriteDate(rset.getDate("board_rewrite_date"));
+			vo.setBoardWriteDate(rset.getString("board_write_date"));
+			vo.setBoardRewriteDate(rset.getString("board_rewrite_date"));
 			vo.setBoardViewCount(rset.getInt("board_view_count"));
-			vo.setBoardReplyLev(rset.getInt("board_reply_lev"));
 			vo.setBoardReplyRef(rset.getInt("board_reply_ref"));
+			vo.setBoardReplyLev(rset.getInt("board_reply_lev"));
 			vo.setBoardReplySeq(rset.getInt("board_reply_seq"));
 			vo.setBoardImg(rset.getString("board_img"));
 		}
@@ -91,7 +96,11 @@ public Board getBoard(Connection conn, int boardNo) {
 	// 전체 게시글 리스트 조회
 	public ArrayList<Board> selectBoardList(Connection conn, int start, int end) {
 	ArrayList<Board> volist = null;
-
+//	String sql = "SELECT BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE, BOARD_CONTENT, "
+//			+ " TO_CHAR(BOARD_WRITE_DATE, 'YYYY/MM/DD'), TO_CHAR(BOARD_REWRITE_DATE, 'YYYY/MM/DD'),"
+//			+" BOARD_VIEW_COUNT, BOARD_REPLY_REF, BOARD_REPLY_LEV, BOARD_REPLY_SEQ, BOARD_IMG  "
+//			+" FROM (SELECT Rownum r, t1.* FROM (SELECT * FROM BOARD ORDER BY BOARD_REPLY_REF DESC, BOARD_REPLY_SEQ ASC) T1) T2"
+//			+" WHERE R BETWEEN ? AND ?";
 	String sql = "select * from "
 			+ " (select Rownum r, t1.* from "
 			+ " (select * from board order by BOARD_REPLY_REF desc, BOARD_REPLY_SEQ asc) t1 ) t2 "
@@ -115,8 +124,8 @@ public Board getBoard(Connection conn, int boardNo) {
 				vo.setBoardCategory(rset.getString("board_category"));
 				vo.setBoardTitle(rset.getString("board_title"));
 				vo.setBoardContent(rset.getString("board_content"));
-				vo.setBoardWriteDate(rset.getDate("board_write_date"));
-				vo.setBoardRewriteDate(rset.getDate("board_rewrite_date"));
+				vo.setBoardWriteDate(rset.getString("board_write_date"));
+				vo.setBoardRewriteDate(rset.getString("board_rewrite_date"));
 				vo.setBoardViewCount(rset.getInt("board_view_count"));
 				vo.setBoardImg(rset.getString("board_img"));
 				vo.setBoardReplyRef(rset.getInt("BOARD_REPLY_REF"));
@@ -136,11 +145,15 @@ public Board getBoard(Connection conn, int boardNo) {
 	// category별  게시글 리스트 조회
 	public ArrayList<Board> selectBoardList(Connection conn, int start, int end, String category) {
 		ArrayList<Board> volist = null;
-
-		String sql = "select * from "
-				+ " (select Rownum r, t1.* from "
-				+ " (select * from board where board_category=? order by BOARD_REPLY_REF desc, BOARD_REPLY_SEQ asc) t1 ) t2 "
-				+ " where r between ? and ?";
+		String sql = "SELECT BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT," + 
+				" TO_CHAR(BOARD_WRITE_DATE, 'YYYY/MM/DD'), TO_CHAR(BOARD_REWRITE_DATE, 'YYYY/MM/DD'), " + 
+				" BOARD_VIEW_COUNT, BOARD_REPLY_REF, BOARD_REPLY_LEV, BOARD_REPLY_SEQ, BOARD_IMG  "
+				+ " FROM (SELECT ROWNUM R, T1.* FROM (SELECT * FROM BOARD ORDER BY BOARD_REPLY_REF DESC, BOARD_REPLY_SEQ ASC) T1) T2"
+				+ " WHERE R BETWEEN ? AND ?";
+//		String sql = "select * from "
+//				+ " (select Rownum r, t1.* from "
+//				+ " (select * from board where board_category=? order by BOARD_REPLY_REF desc, BOARD_REPLY_SEQ asc) t1 ) t2 "
+//				+ " where r between ? and ?";
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -161,8 +174,8 @@ public Board getBoard(Connection conn, int boardNo) {
 					vo.setBoardCategory(rset.getString("board_category"));
 					vo.setBoardTitle(rset.getString("board_title"));
 					vo.setBoardContent(rset.getString("board_content"));
-					vo.setBoardWriteDate(rset.getDate("board_write_date"));
-					vo.setBoardRewriteDate(rset.getDate("board_rewrite_date"));
+					vo.setBoardWriteDate(rset.getString("board_write_date"));
+					vo.setBoardRewriteDate(rset.getString("board_rewrite_date"));
 					vo.setBoardViewCount(rset.getInt("board_view_count"));
 					vo.setBoardImg(rset.getString("board_img"));
 					vo.setBoardReplyRef(rset.getInt("BOARD_REPLY_REF"));
@@ -183,10 +196,25 @@ public Board getBoard(Connection conn, int boardNo) {
 	// 게시글의 조회 수 1 상승
 	public void readCount(Connection conn, int boardNo) {
 		PreparedStatement pstmt = null;
-		String sql = "update board set board_view_count + 1 where board_no = ?";
+		//TODO
+		String sql = "update board set board_view_count = board_view_count + 1 where board_no = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardNo);
+			pstmt.executeQuery();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
+		
+	}
+	public void updateCount (Connection conn, Board vo) {
+		PreparedStatement pstmt = null;
+		String sql = "update board set board_view_count = board_view_count + 1 where board_no = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, vo.getBoardNo());
 			pstmt.executeQuery();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -213,8 +241,8 @@ public Board getBoard(Connection conn, int boardNo) {
 				vo.setBoardCategory(rset.getString("board_category"));
 				vo.setBoardTitle(rset.getString("board_title"));
 				vo.setBoardContent(rset.getString("board_content"));
-				vo.setBoardWriteDate(rset.getDate("board_write_date"));
-				vo.setBoardRewriteDate(rset.getDate("board_rewrite_date"));
+				vo.setBoardWriteDate(rset.getString("board_write_date"));
+				vo.setBoardRewriteDate(rset.getString("board_rewrite_date"));
 				vo.setBoardViewCount(rset.getInt("board_view_count"));
 				vo.setBoardImg(rset.getString("board_img"));
 				}
@@ -260,24 +288,24 @@ public Board getBoard(Connection conn, int boardNo) {
 	// 자유게시판 글쓰기
 	// 글쓰기 전 로그인 확인 , 카테고리, 라벨 추가
 	public int insertFreeBoard(Connection conn, Board vo) {
-		int result = 0;
+		int result = -1;
 		PreparedStatement pstmt = null;
 //	    BOARD_REPLY_REF NUMBER, 
 //	    BOARD_REPLY_LEV NUMBER, 
 //	    BOARD_REPLY_SEQ NUMBER,
-		String sql = "insert into board values (board_num.nextval,?,?,?,?,?,SYSDATE, SYSDATE,?,?,?,?,?)";
+//		String sql = "insert into board values (board_num.nextval,?,?,?,?,?,SYSDATE, SYSDATE,?,?,?,?,?)";
+		String sql =  "INSERT INTO BOARD (BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE, BOARD_CONTENT, "
+				+ "BOARD_WRITE_DATE, BOARD_VIEW_COUNT, BOARD_IMG)"
+				+ "VALUES (BOARD_NUM.NEXTVAL, ?, ?, ?, ?, ?, TO_DATE(SYSDATE, 'YYYY/MM/DD SS'), ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getUserId());
 			pstmt.setString(2, vo.getBoardType()); // 사담/건의/질문
-			pstmt.setString(3, vo.getBoardCategory()); // 자유게시판
+			pstmt.setString(3, "자유게시판"); // 자유게시판
 			pstmt.setString(4, vo.getBoardTitle());
 			pstmt.setString(5, vo.getBoardContent()); 
 			pstmt.setInt(6, vo.getBoardViewCount());
-			pstmt.setInt(7, vo.getBoardReplyRef());
-			pstmt.setInt(8, vo.getBoardReplyLev());
-			pstmt.setInt(9, vo.getBoardReplySeq());
-			pstmt.setString(10, vo.getBoardImg());
+			pstmt.setString(7, vo.getBoardImg());
 			result = pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -305,7 +333,7 @@ public Board getBoard(Connection conn, int boardNo) {
 		}
 		return result;
 	}
-
+	//아이디 일치후 삭제 가능
 	public int deleteFreeBoard(Connection conn, int boardNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -408,5 +436,6 @@ public Board getBoard(Connection conn, int boardNo) {
 		int result = -1;
 		return result;
 	}
+	
 
 }

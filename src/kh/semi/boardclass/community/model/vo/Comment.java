@@ -14,8 +14,8 @@ public class Comment {
 	private int boardNo;
 	private String userId;
 	private String commentContent;
-	private Date commentWriteDate;
-	private Date commentRewriteDate;
+	private String commentWriteDate;
+	private String commentRewriteDate;
 	
 
 	public Comment() {
@@ -54,19 +54,19 @@ public class Comment {
 		this.commentContent = commentContent;
 	}
 
-	public Date getCommentWriteDate() {
+	public String getCommentWriteDate() {
 		return commentWriteDate;
 	}
 
-	public void setCommentWriteDate(Date commentWriteDate) {
+	public void setCommentWriteDate(String commentWriteDate) {
 		this.commentWriteDate = commentWriteDate;
 	}
 
-	public Date getCommentRewriteDate() {
+	public String getCommentRewriteDate() {
 		return commentRewriteDate;
 	}
 
-	public void setCommentRewriteDate(Date commentRewriteDate) {
+	public void setCommentRewriteDate(String commentRewriteDate) {
 		this.commentRewriteDate = commentRewriteDate;
 	}
 

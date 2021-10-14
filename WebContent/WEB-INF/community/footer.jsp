@@ -1,22 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<style>
-.footer{ text-align: center;}
-.footer #f_s{color: rgb(196, 196, 196);}
-.footer #f_b{color: rgb(119, 116, 141);}
-
-.footer a{
-    text-decoration: none;
-    color: black;
-}
-</style>
-</head>
-<body>
       <hr>
       <br>
       <footer>
@@ -33,5 +16,3 @@
           </div>
       </footer>
       <br>
-</body>
-</html>

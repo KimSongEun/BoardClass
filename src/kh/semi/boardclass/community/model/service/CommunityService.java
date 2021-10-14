@@ -21,6 +21,7 @@ public class CommunityService {
 		JDBCTemplate.close(conn);
 		return vo;
 	}
+	// 전체 보드 개수 조회
 	public int getBoardCount() {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
@@ -63,8 +64,11 @@ public class CommunityService {
 		 new CommunityDao().readCount(conn, boardNo);
 		 JDBCTemplate.close(conn);
 	}
-	
-	
+	public void updateCount (Board vo) {
+		Connection conn = JDBCTemplate.getConnection();
+		new CommunityDao().updateCount(conn, vo);
+		JDBCTemplate.close(conn);
+	}
 	
 	public ArrayList<Board> selectUserBoardList() {
 		ArrayList<Board> volist = null;
@@ -103,7 +107,7 @@ public class CommunityService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
-
+	// 자유게시판 수정
 	public int updateFreeBoard(Board vo) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
@@ -116,7 +120,7 @@ public class CommunityService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
-
+	// 자유게시판 삭제
 	public int deleteFreeBoard(int boardNo) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();

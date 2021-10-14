@@ -1,0 +1,128 @@
+@charset "UTF-8";
+
+#guide{
+	display:table;
+	table-layout: fixed;
+	width: 1100px;
+	margin: 0 auto;
+	padding: 50px 0 100px;	
+}
+#aside {
+	display: table-cell;
+	width: 215px;
+}
+#boardlist {
+    margin: 0 0 20px;
+    padding: 30px 30px 60px;
+    background-color: #ffffff;
+}
+.h3group{
+	overflow: hidden;
+    margin: -30px -30px 0;
+    padding: 30px;
+    border-bottom: 1px solid #e6e6e8;
+ 	 background-color: #ffffff;
+}
+.h3group .tit {
+	 background-color: #ffffff;
+	 font-size: 23px;
+}
+.h3group .location {
+	float: right;
+	background-color: #ffffff;
+}
+.h3group .location .depth {
+    display: block;
+    float: left;
+    position: relative;
+    margin: 0 25px 0 0;
+    font-size: 14px;
+    line-height: 44px;
+    color: #777777;
+    background-color: #ffffff;
+}
+.h3group .location .this {
+    display: block;
+    float: left;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 44px;
+    color: #2d2d2d;
+    background-color: #ffffff;
+}
+.h3group .location .depth:after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -15px;
+    width: 6px;
+    height: 9px;
+    margin: -4px 0 0;
+    background: url(ima/chevron.png) 0 0 no-repeat;
+}
+.h4group {
+	 overflow: hidden;
+    margin: -30px -30px 0;
+    padding: 21px 30px 18px;
+    border-bottom: 1px solid #e6e6e8;
+    background-color: #ffffff;
+}
+.h4group .tit {
+    float: left;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 40px;
+    color: #2d2d2d;
+    background-color: #ffffff;
+}
+
+.conwrap {
+    padding: 30px 30px 60px;
+    background: #ffffff;
+    width: 825px;
+    height: 1324px;
+}
+.c_table {
+	background: #ffffff;
+}
+.c_table tr {
+	background-color: #ffffff;
+}
+.c_table tr th {
+	background-color: #ffffff;
+}
+.c_table tr td {
+	background-color: #ffffff;
+}
+/* 글쓰기 */
+.btn_wrap a:first-child {
+	margin: 0;
+}
+.btn50.c3 {
+    border: 1px solid #fd5064;
+    background: #fd5064;
+    color: #ffffff;
+}
+.btn_wrap a {
+    float: left;
+}
+a:link {
+	text-decoration: none;
+}
+.btn50 {
+    display: inline-block;
+    box-sizing: border-box;
+    height: 50px;
+    border: none;
+    border-radius: 0;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 48px;
+    text-align: center;
+    vertical-align: top;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}
