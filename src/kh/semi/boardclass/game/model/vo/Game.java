@@ -65,6 +65,18 @@ public class Game {
 		this.usedNum = usedNo;
 	}
 
+	@Override
+	public String toString() {
+		return "Game [gameNumber=" + gameNumber + ", gameKoName=" + gameKoName + ", gameEnName=" + gameEnName
+				+ ", gameCategory=" + gameCategory + ", gameView=" + gameView + ", gameAge=" + gameAge + ", gamePlayer="
+				+ gamePlayer + ", gameTime=" + gameTime + ", gamePrice=" + gamePrice + ", gameGrade=" + gameGrade
+				+ ", gameDate=" + gameDate + ", gameLevel=" + gameLevel + ", gameDesigner=" + gameDesigner
+				+ ", gameWriter=" + gameWriter + ", gameBrand=" + gameBrand + ", gameReleaseDate=" + gameReleaseDate
+				+ ", gameRank=" + gameRank + ", gameLanguage=" + gameLanguage + ", gameReview=" + gameReview
+				+ ", gameImage=" + gameImage + ", gameRuleImage=" + gameRuleImage + ", gameVideo=" + gameVideo
+				+ ", gamePlus=" + gamePlus + ", usedNum=" + usedNum + "]";
+	}
+
 	public String getGameRuleImage() {
 		return gameRuleImage;
 	}

@@ -224,13 +224,10 @@
 						// tr 이 volist 갯수 만큼 생기게 됨.
 						// <%= 은 화면에 출력을 위한 표현식을 작성하는 태그, ;없어야 함.
 			%>
-			<form id="box1" method="post" action="GameInfo">
-
-				<div id="board_info">
-				
-					<button type="submit"   formmethod ="post" class="btn1" value="<%=vo.getGameKoName()%>"
-						onclick="location='GameInfo'">
-						
+				<form name = "fom" method="get" action="GameInfo">
+ 				<div id="board_info">
+					<input type = "hidden" value = "<%=vo.getGameKoName()%>"  name="GAME_KONAME">
+					<button type="submit"    class="btn1" >
 						<img src="<%=request.getContextPath()%>/<%=vo.getGameImage()%>"
 							width="250" height="250" />
 						<div class="img-text">
@@ -239,12 +236,14 @@
 						</div>
 					</button>
 				</div>
+			</form>
 				<%
 					}
-					}
+				}
 				%>
-			</form>
+			
 
+			
 
 			<div id="page">
 				<%
@@ -270,6 +269,7 @@
 					}
 				%>
 			</div>
+
 
 
 		</section>

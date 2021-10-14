@@ -34,28 +34,29 @@ public class GameGradeDescListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
+		request.setCharacterEncoding("UTF-8");
         PrintWriter out=response.getWriter();    
     	
         
-		final int PAGE_SIZE = 10;   // ÇÑ ÆäÀÌÁö ´ç ±Û¼ö
-		final int PAGE_BLOCK = 3;   // ÇÑ È­¸é¿¡ ³ªÅ¸³¯ ÆäÀÌÁö ¸µÅ© ¼ö
-		int bCount = 0;   // ÃÑ ±Û¼ö
-		int pageCount = 0; // ÃÑ ÆäÀÌÁö¼ö
-		int startPage = 1;   // È­¸é¿¡ ³ªÅ¸³¯ ½ÃÀÛÆäÀÌÁö
-		int endPage = 1;   // È­¸é¿¡ ³ªÅ¸³¯ ¸¶Áö¸·ÆäÀÌÁö
+		final int PAGE_SIZE = 10;   // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Û¼ï¿½
+		final int PAGE_BLOCK = 3;   // ï¿½ï¿½ È­ï¿½é¿¡ ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å© ï¿½ï¿½
+		int bCount = 0;   // ï¿½ï¿½ ï¿½Û¼ï¿½
+		int pageCount = 0; // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		int startPage = 1;   // È­ï¿½é¿¡ ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		int endPage = 1;   // È­ï¿½é¿¡ ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		int currentPage = 1;
-		int startRnum = 1;   // È­¸é¿¡ ±Û
-		int endRnum = 1;  // È­¸é¿¡ ±Û
+		int startRnum = 1;   // È­ï¿½é¿¡ ï¿½ï¿½
+		int endRnum = 1;  // È­ï¿½é¿¡ ï¿½ï¿½
 		
 		String pageNum = request.getParameter("pagenum");
-		if(pageNum != null) {   // ´­·ÁÁø ÆäÀÌÁö°¡ ÀÖÀ½.
-			currentPage = Integer.parseInt(pageNum); // ´­·ÁÁø ÆäÀÌÁö
+		if(pageNum != null) {   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½.
+			currentPage = Integer.parseInt(pageNum); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		}
-		// ÃÑ ±Û¼ö
+		// ï¿½ï¿½ ï¿½Û¼ï¿½
 		bCount = new GameService().getGameCount();
-		// ÃÑ ÆäÀÌÁö¼ö = (ÃÑ±Û°³¼ö / ÆäÀÌÁö´ç±Û¼ö) + (ÃÑ±Û°³¼ö¿¡¼­ ÆäÀÌÁö´ç±Û¼ö·Î ³ª´« ³ª¸ÓÁö°¡ 0ÀÌ ¾Æ´Ï¶ó¸é ÆäÀÌÁö°³¼ö¸¦ 1 Áõ°¡)
+		// ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ = (ï¿½Ñ±Û°ï¿½ï¿½ï¿½ / ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û¼ï¿½) + (ï¿½Ñ±Û°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Û¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 0ï¿½ï¿½ ï¿½Æ´Ï¶ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 1 ï¿½ï¿½ï¿½ï¿½)
 		pageCount = (bCount / PAGE_SIZE) + (bCount % PAGE_SIZE == 0 ? 0 : 1);
-		//rownum Á¶°Ç °è»ê
+		//rownum ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
 		startRnum = (currentPage-1) * PAGE_SIZE   + 1;   // 1//6//11/16//21
 		endRnum = startRnum + PAGE_SIZE -1; 
 		if(endRnum > bCount) endRnum=bCount;
@@ -68,10 +69,10 @@ public class GameGradeDescListServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1; 
 		if(endPage > pageCount) endPage=pageCount;
 		
-		// DB¿¡¼­ °ª ÀÐ¾î¿À±â
+		// DBï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ð¾ï¿½ï¿½ï¿½ï¿½
 		ArrayList<Game> volist = new GameService().selectGradeDescGameList(startRnum,endRnum);
 		
-		// Data Àü´ÞÀ» À§ÇØ¼­ request¿¡ ¼Â
+		// Data ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ requestï¿½ï¿½ ï¿½ï¿½
 		request.setAttribute("gamevolist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);

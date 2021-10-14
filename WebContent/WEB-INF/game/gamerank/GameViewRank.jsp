@@ -178,19 +178,24 @@ border: 1px solid grey;
 						// tr 이 volist 갯수 만큼 생기게 됨.
 						// <%= 은 화면에 출력을 위한 표현식을 작성하는 태그, ;없어야 함.
 			%>
+		<form name = "fom" method="get" action="GameInfo">
 			<div id="board_info">
-				<button type="button" class="btn1" onclick="#">
-					<img src="<%=request.getContextPath()%>/<%=vo.getGameImage()%>"
+			
+				<input type = "hidden" value = "<%=vo.getGameKoName()%>"  name="GAME_KONAME">
+							
+				<button type="submit"    class="btn1" >
+						<img src="<%=request.getContextPath()%>/<%=vo.getGameImage()%>"
 						width="250" height="250" />
 					<div class="img-text">
 						<%=vo.getGameKoName()%><br>
 						게임 인원 : <%=vo.getGameLevel()%>명<br>
 						게임 연령 : <%=vo.getGameAge()%><br>
 						게임 시간 : <%=vo.getGameTime()%>분
+						
 					</div>
 				</button>
-
 			</div>
+			</form>
 			<%
 				}
 				}

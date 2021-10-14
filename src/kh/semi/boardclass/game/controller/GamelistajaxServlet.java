@@ -35,6 +35,9 @@ public class GamelistajaxServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=utf-8");
+		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 	      
 	      String gameImage = request.getParameter("GMAE_IMAGE");
