@@ -1,0 +1,113 @@
+table {
+	border-collapse: collapse;
+	height: 500px;
+	width: 970px;
+	border-top: 3px solid black;
+	border-bottom: 3px solid black;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 50px;
+	letter-spacing: 2px;
+}
+
+tr {
+	border-bottom: 1px dotted black;
+}
+
+caption h1 {
+	padding: 15px 0 25px;
+}
+
+caption h2, caption h4 {
+	line-height: 30px;
+	display: inline;
+	float: left;
+	padding: 0 10px;
+	margin: 10px 0;
+}
+
+.col1 {
+	background-color: #f4e2f7;
+	padding: 10px;
+	width: 130px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+.col2 {
+	margin: auto;
+	width: 490px;
+	text-align: left;
+	padding: 15px 25px;
+}
+
+.col2 span, .col2 div {
+	font-size: 13px;
+	margin-top: 10px;
+	padding-left: 10px;
+}
+
+.col3 {
+	width: 330px;
+	text-align: left;
+	padding: 15px 20px;
+}
+
+.CheckBtn {
+	font-family: ImcreSoojin;
+	height: 40px;
+	width: auto;
+	margin: 0 15px;
+	padding: 10px 15px;
+	color: black;
+	background-color: #f0d2ed;
+	border: none;
+	border-radius: 0.25rem;
+	letter-spacing: 1px;
+	font-weight: bold;
+	font-size: 13px;
+}
+
+input[type=file] {
+	font-family: ImcreSoojin;
+	font-size: 13px;
+	letter-spacing: 1px;
+}
+
+input[type=text], [type=number], [type=password] {
+	font-family: ImcreSoojin;
+	padding: 20px;
+	background-color: white;
+	width: 300px;
+	height: 45px;
+	font-size: 14px;
+	border-radius: 6px;
+	letter-spacing: 1px;
+	border: 2px #dfafd9 solid;
+}
+
+input:focus {
+	outline: 2px solid #d50000;
+}
+
+div.create {
+	width: 800px;
+	text-align: center;
+	padding: 30px 0 50px;
+	margin: auto;
+}
+
+.signupBtn, .cancelBtn {
+	font-family: ImcreSoojin;
+	height: 50px;
+	width: auto;
+	margin: 0 5px;
+	padding: 0 20px;
+	color: black;
+	border: 4px solid #b125ca;
+	border-radius: 0.25rem;
+	letter-spacing: 1px;
+	font-weight: bold;
+	font-size: 15px;
+}
