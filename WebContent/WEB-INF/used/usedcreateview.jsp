@@ -19,18 +19,19 @@
 <body>
 	^^; 연결되었나요?
 
-	<form action="usedcreate" method="post" enctype="multipart/form-data">  
+	<form action="usedcreate" method="post" enctype="multipart/form-data">
 		<div>
 			<table>
 				<tr>
-					<td rowspan=4>썸네일</td>
+					<td rowspan=5>썸네일</td>
 					<td><label for="title">제목 : </label></td>
 					<td><input id="title" name="usedTitle"
 						placeholder="제목을 입력해주세요"></td>
 				</tr>
 				<tr>
 					<td><label for="price">가격 : </label></td>
-					<td><input id="price" name="usedPrice" pattern="[0-9]+" placeholder="숫자만 입력하세요"></td>
+					<td><input id="price" name="usedPrice" pattern="[0-9]+"
+						placeholder="숫자만 입력하세요"></td>
 				</tr>
 				<tr>
 					<td><label for="state">상태 : </label></td>
@@ -49,12 +50,28 @@
 					</select></td>
 				</tr>
 				<tr>
-					<td><input type="file" name="usedImg"></td>
 					<td><label for="changetype">거래방식 : </label></td>
 					<td><select id="changetype" name="usedExtype">
 							<option value="0">직거래&amp;택배</option>
 							<option value="1">직거래</option>
 							<option value="2">택배</option>
+					</select></td>
+				</tr>
+				<tr>
+					<td><input type="file" name="usedImg">
+					<td><label for="gamecate">카테고리 : </label></td>
+					<td><select id="gamecate" name="usedCategory">
+							<option value="없음" selected>없음</option>
+							<option value="퍼즐">퍼즐</option>
+							<option value="전략">전략</option>
+							<option value="추상">추상</option>
+							<option value="테마">테마</option>
+							<option value="방탈출, 추리">방탈출, 추리</option>
+							<option value="2인 추천">2인 추천</option>
+							<option value="파티">파티</option>
+							<option value="가족">가족</option>
+							<option value="어린이">어린이</option>
+							<option value="한글">한글</option>
 					</select></td>
 				</tr>
 			</table>

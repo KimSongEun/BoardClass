@@ -73,8 +73,9 @@ public class UsedCreateServlet extends HttpServlet {
 		String usedExtype = multi.getParameter("usedExtype");
 		String usedInfo = multi.getParameter("usedInfo");
 		String usedImg = multi.getFilesystemName("usedImg");
+		String usedCategory = multi.getParameter("usedCategory");
 
-		Used vo = new Used(userId, usedTitle, usedPrice, usedState, usedChange, usedExtype, usedInfo, usedImg);
+		Used vo = new Used(userId, usedTitle, usedPrice, usedState, usedChange, usedExtype, usedInfo, usedImg, usedCategory);
 		int result = new UsedService().insertUsed(vo);
 		if (result < 1) {
 			System.out.println("글 입력 안됨");

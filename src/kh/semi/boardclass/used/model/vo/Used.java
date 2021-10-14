@@ -1,7 +1,5 @@
 package kh.semi.boardclass.used.model.vo;
 
-import java.sql.Date;
-
 public class Used {
 
 	private int usedNo;
@@ -12,14 +10,15 @@ public class Used {
 	private String usedChange;
 	private String usedExtype;
 	private String usedInfo;
-	private Date usedDay;
+	private String usedDay;
 	private String usedImg;
+	private String usedCategory;
 
 	public Used() {
 	}
 
 	public Used(int usedNo, String userId, String usedTitle, int usedPrice, String usedState, String usedChange,
-			String usedExtype, String usedInfo, Date usedDay, String usedImg) {
+			String usedExtype, String usedInfo, String usedDay, String usedImg, String usedCategory) {
 		super();
 		this.usedNo = usedNo;
 		this.userId = userId;
@@ -31,10 +30,11 @@ public class Used {
 		this.usedInfo = usedInfo;
 		this.usedDay = usedDay;
 		this.usedImg = usedImg;
+		this.usedCategory = usedCategory;
 	}
 
 	public Used(String userId, String usedTitle, int usedPrice, String usedState, String usedChange, String usedExtype,
-			String usedInfo, String usedImg) {
+			String usedInfo, String usedImg, String usedCategory) {
 		super();
 		this.userId = userId;
 		this.usedTitle = usedTitle;
@@ -44,17 +44,17 @@ public class Used {
 		this.usedExtype = usedExtype;
 		this.usedInfo = usedInfo;
 		this.usedImg = usedImg;
+		this.usedCategory = usedCategory;
 	}
-
 
 	@Override
 	public String toString() {
 		return "Used [usedNo=" + usedNo + ", userId=" + userId + ", usedTitle=" + usedTitle + ", usedPrice=" + usedPrice
 				+ ", usedState=" + usedState + ", usedChange=" + usedChange + ", usedExtype=" + usedExtype
-				+ ", usedInfo=" + usedInfo + ", usedDay=" + usedDay + ", usedImg=" + usedImg + "]";
+				+ ", usedInfo=" + usedInfo + ", usedDay=" + usedDay + ", usedImg=" + usedImg + ", usedCategory="
+				+ usedCategory + "]";
 	}
 
-	
 	public int getUsedNo() {
 		return usedNo;
 	}
@@ -119,11 +119,11 @@ public class Used {
 		this.usedInfo = usedInfo;
 	}
 
-	public Date getUsedDay() {
+	public String getUsedDay() {
 		return usedDay;
 	}
 
-	public void setUsedDay(Date usedDay) {
+	public void setUsedDay(String usedDay) {
 		this.usedDay = usedDay;
 	}
 
@@ -133,6 +133,14 @@ public class Used {
 
 	public void setUsedImg(String usedImg) {
 		this.usedImg = usedImg;
+	}
+
+	public String getUsedCategory() {
+		return usedCategory;
+	}
+
+	public void setUsedCategory(String usedCategory) {
+		this.usedCategory = usedCategory;
 	}
 
 }

@@ -12,10 +12,18 @@ public class UsedService {
 	public UsedService() {
 	}
 
-	public ArrayList<Used> selectUsedList() {
+	public ArrayList<Used> selectUsedList(int start, int end) {
 		ArrayList<Used> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new UsedDao().selectUsedList(conn);
+		volist = new UsedDao().selectUsedList(conn, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public ArrayList<Used> selectCateUsedList(int start, int end, String cate) {
+		ArrayList<Used> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new UsedDao().selectCateUsedList(conn, start, end, cate);
 		JDBCTemplate.close(conn);
 		return volist;
 	}

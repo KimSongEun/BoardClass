@@ -13,25 +13,74 @@ public class UsedDao {
 	public UsedDao() {
 	}
 
-	public ArrayList<Used> selectUsedList(Connection conn) {
+	public ArrayList<Used> selectUsedList(Connection conn, int start, int end) {
 		ArrayList<Used> volist = null;
 
-		String sql = "select USED_NO, USER_ID, USED_TITLE, USED_IMG from USED";
+		String sql = "select * from (select Rownum r, u.* from (select USED_NO, USER_ID, USED_TITLE, USED_PRICE, USED_STATE, USED_CHANGE, USED_EXTYPE, USED_INFO, TO_CHAR(USED_DAY, 'mm/dd hh24:mi') USED_DAY, USED_IMG, USED_CATEGORY from used order by used_day desc) u) where r between ? and ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
 			rset = pstmt.executeQuery();
 
 			volist = new ArrayList<Used>();
-			if (rset.next())			{
+			if (rset.next()) {
 				do {
 					Used vo = new Used();
 					vo.setUsedNo(rset.getInt("USED_NO"));
 					vo.setUserId(rset.getString("USER_ID"));
 					vo.setUsedTitle(rset.getString("USED_TITLE"));
+					vo.setUsedPrice(rset.getInt("USED_PRICE"));
+					vo.setUsedState(rset.getString("USED_STATE"));
+					vo.setUsedChange(rset.getString("USED_CHANGE"));
+					vo.setUsedExtype(rset.getString("USED_EXTYPE"));
+					vo.setUsedInfo(rset.getString("USED_INFO"));
+					vo.setUsedDay(rset.getString("USED_DAY"));
 					vo.setUsedImg(rset.getString("USED_IMG"));
+					vo.setUsedCategory(rset.getString("USED_CATEGORY"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+
+	public ArrayList<Used> selectCateUsedList(Connection conn, int start, int end, String cate) {
+		ArrayList<Used> volist = null;
+
+		String sql = "select * from (select Rownum r, u.* from (select USED_NO, USER_ID, USED_TITLE, USED_PRICE, USED_STATE, USED_CHANGE, USED_EXTYPE, USED_INFO, TO_CHAR(USED_DAY, 'mm/dd hh24:mi') USED_DAY, USED_IMG, USED_CATEGORY from used where used_category like ? order by used_day desc) u) where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cate);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Used>();
+			if (rset.next()) {
+				do {
+					Used vo = new Used();
+					vo.setUsedNo(rset.getInt("USED_NO"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setUsedTitle(rset.getString("USED_TITLE"));
+					vo.setUsedPrice(rset.getInt("USED_PRICE"));
+					vo.setUsedState(rset.getString("USED_STATE"));
+					vo.setUsedChange(rset.getString("USED_CHANGE"));
+					vo.setUsedExtype(rset.getString("USED_EXTYPE"));
+					vo.setUsedInfo(rset.getString("USED_INFO"));
+					vo.setUsedDay(rset.getString("USED_DAY"));
+					vo.setUsedImg(rset.getString("USED_IMG"));
+					vo.setUsedCategory(rset.getString("USED_CATEGORY"));
 					volist.add(vo);
 				} while (rset.next());
 			}
@@ -66,7 +115,7 @@ public class UsedDao {
 
 	public int insertUsed(Connection conn, Used vo) {
 		int result = 0;
-		String sql = "INSERT INTO USED VALUES (USED_NUM.nextval, ?, ?, ?, ?, ?, ?, ?, SYSDATE, ?)";
+		String sql = "INSERT INTO USED VALUES (USED_NUM.nextval, ?, ?, ?, ?, ?, ?, ?, sysdate, ?, ?)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -78,6 +127,7 @@ public class UsedDao {
 			pstmt.setString(6, vo.getUsedExtype());
 			pstmt.setString(7, vo.getUsedInfo());
 			pstmt.setString(8, vo.getUsedImg());
+			pstmt.setString(9, vo.getUsedCategory());
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

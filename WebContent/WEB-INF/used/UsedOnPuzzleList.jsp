@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>중고거래 메인</title>
+<title>Insert title here</title>
 </head>
-<body>화면이 보이나요?
 <body>
-	<h1>화면 나오나?</h1>
 
 	<div>
 		<select id="gameCategory" onchange="window.open(value,'_self');">
@@ -30,25 +29,20 @@
 		<input type="search" placeholder="검색어를 입력해주세요">
 		<button type="submit">검색</button>
 	</div>
-	<table>
-		<tr>
-			<td>글번호</td>
-			<td>이미지</td>
-			<td>글제목</td>
-			<td>유저ID</td>
-		</tr>
+	<div>
 		<c:if test="${usedlist != null}">
 			<c:forEach var="r" items="${usedlist}">
-				<tr>
-					<td>${r.usedNo}</td>
-					<td><a href="#">${r.usedImg}</a></td>
-					<td><a href="#">${r.usedTitle}</a></td>
-					<td>${r.userId}</td>
-				</tr>
+				<div id="board_info">
+					<button type="button" class="btn1" onclick="#">
+						<img src="${r.usedImg}" width="250" height="250" />
+						<div class="img-text">
+							${r.usedTitle}
+							${r.usedState}
+						</div>
+					</button>
+				</div>
 			</c:forEach>
 		</c:if>
-	</table>
-	<button type="button" onclick="location.href='./usedcreateview'">글쓰기</button>
-
+	</div>
 </body>
 </html>

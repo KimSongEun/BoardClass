@@ -1,7 +1,6 @@
 package kh.semi.boardclass.used.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -14,14 +13,11 @@ import kh.semi.boardclass.game.model.service.GameService;
 import kh.semi.boardclass.used.model.service.UsedService;
 import kh.semi.boardclass.used.model.vo.Used;
 
-/**
- * Servlet implementation class UsedMainServlet
- */
-@WebServlet("/usedmain")
-public class UsedMainServlet extends HttpServlet {
+@WebServlet("/UsedOnStrategyList")
+public class UsedOnStrategyListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public UsedMainServlet() {
+	public UsedOnStrategyListServlet() {
 		super();
 	}
 
@@ -64,10 +60,15 @@ public class UsedMainServlet extends HttpServlet {
 		if (endPage > pageCount)
 			endPage = pageCount;
 
-		ArrayList<Used> volist = new UsedService().selectUsedList(startRnum, endRnum);
-		System.out.println("usedmain:volist: " + volist);
-		request.setAttribute("usedlist", volist);
-		request.getRequestDispatcher("/WEB-INF/used/usedmain.jsp").forward(request, response);
+		String cate = "전략";
+
+		ArrayList<Used> volist = new UsedService().selectCateUsedList(startRnum, endRnum, cate);
+
+		request.setAttribute("usedvolist", volist);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("pageCount", pageCount);
+		request.getRequestDispatcher("/WEB-INF/used/UsedOnStrategyList.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
