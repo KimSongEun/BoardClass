@@ -1,0 +1,25 @@
+@charset "UTF-8";
+body{}
+nav {
+
+}
+section {
+	display:inline-block;
+	width: 825px;
+	margin: 0 0 20px;
+	padding: 30px 30px 60px;
+	background: #fff;
+}
+.write_header {
+}
+nav {
+	top: 0;
+	
+}
+nav ul {}
+nav ul li {
+	
+}
+nav ul li a {
+	font-size: 20px;
+}
