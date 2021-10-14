@@ -1,6 +1,7 @@
 package kh.semi.boardclass.user.model.vo;
 
 public class User {
+	private String userImage;
 	private String userName;
 	private String userNickname;
 	private String userId;
@@ -9,7 +10,6 @@ public class User {
 	private int userPhone;
 	private String userAddress;
 	private char userType;
-	private String userImage;
 	private int userHistory;
 	private int userNo;
 
@@ -47,34 +47,7 @@ public class User {
 		this.userHistory = userHistory;
 		this.userNo = userNo;
 	}
-//	public User(String userId, int userNo, String userPassword, String userName, String userNickname, String userEmail,
-//			int userPhone, String userAddress, char userType, String userImage, int userHistory) {
-//		super();
-//		this.userId = userId;
-//		this.userNo = userNo;
-//		this.userPassword = userPassword;
-//		this.userName = userName;
-//		this.userNickname = userNickname;
-//		this.userEmail = userEmail;
-//		this.userPhone = userPhone;
-//		this.userAddress = userAddress;
-//		this.userType = userType;
-//		this.userImage = userImage;
-//		this.userHistory = userHistory;
-//	}
-//
-//
-//	public User(String userName, String userNickname, String userId, String userPassword, String userEmail, int userPhone,
-//		String userAddress) {
-//	super();
-//	this.userName = userName;
-//	this.userNickname = userNickname;
-//	this.userId = userId;
-//	this.userPassword = userPassword;
-//	this.userEmail = userEmail;
-//	this.userPhone = userPhone;
-//	this.userAddress = userAddress;
-//}
+
 	
 	public String getUserName() {
 		return userName;

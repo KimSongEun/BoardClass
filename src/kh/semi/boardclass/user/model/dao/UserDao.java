@@ -58,17 +58,18 @@ public class UserDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 
-		String sql = "insert into MEMBER(USER_NAME,USER_NICKNAME,USER_ID, USER_PASSWORD,USER_EMAIL,USER_PHONE,USER_ADDRESS,USER_NO) VALUES(?,?, ?, ?,?, ?, ?, USER_NUM.nextval)";
+		String sql = "insert into MEMBER(USER_IMAGE,USER_NAME,USER_NICKNAME,USER_ID, USER_PASSWORD,USER_EMAIL,USER_PHONE,USER_ADDRESS,USER_NO) VALUES(?,?,?, ?, ?,?, ?, ?, USER_NUM.nextval)";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, user.getUserName());
-			pstmt.setString(2, user.getUserNickname());
-			pstmt.setString(3, user.getUserId());
-			pstmt.setString(4, user.getUserPassword());
-			pstmt.setString(5, user.getUserEmail());
-			pstmt.setInt(6, user.getUserPhone());
-			pstmt.setString(7, user.getUserAddress());
+			pstmt.setString(1, user.getUserImage());
+			pstmt.setString(2, user.getUserName());
+			pstmt.setString(3, user.getUserNickname());
+			pstmt.setString(4, user.getUserId());
+			pstmt.setString(5, user.getUserPassword());
+			pstmt.setString(6, user.getUserEmail());
+			pstmt.setInt(7, user.getUserPhone());
+			pstmt.setString(8, user.getUserAddress());
 			// executeupdate() 는 실행 결과를 반영된 행의 개수로 리턴하므로
 			// 1 이상은 실행 성공, 0 이하(구문 에러 포함)는 실패이다.
 			result = pstmt.executeUpdate();

@@ -18,8 +18,12 @@
                         <h3>정보입력</h3>
                         <h4>*은 필수작성 항목입니다.</h4>
                     </caption>
+					<tr>
+						<td class="col1">프로필사진</td>
+						<td class="col2"><input type="file" name="uploadFile" id="userImage" /></td>
+					</tr>
 
-                    <tr>
+					<tr>
                         <td class="col1">* 이름</td>
                         <td class="col2"><input type="text" name="userName" id="userName" maxlength="5"
                                 placeholder="이름을 입력해주세요.">
