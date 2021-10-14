@@ -11,11 +11,12 @@
 <head>
     <meta charset="UTF-8">
     <title>공지수정</title>
+    <link rel="stylesheet" href="./css/admin/main/adminHeader.css"/> 
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 	<script src = "ckeditor/ckeditor.js"></script>
-    <script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="./ckfinder/ckfinder.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 
 </head>
 

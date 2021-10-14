@@ -7,14 +7,14 @@
 <head>
     <meta charset="UTF-8">
     <title>보드게임 수정</title>
+	<link rel="stylesheet" href="./css/admin/main/adminHeader.css"/> 
+       <link rel="stylesheet" href="./css/admin/boardgame/adminBoardGameUpdate.css" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+    <script type="text/javascript" src="./js/admin/boardgame/adminBoardGameUpdate.js"></script>
 	<script src = "ckeditor/ckeditor.js"></script>
     <script type="text/javascript" src="./ckfinder/ckfinder.js"></script>
-       <link rel="stylesheet" href="./css/admin/boardgame/adminBoardGameUpdate.css" type="text/css">
-    <script type="text/javascript" src="./js/admin/boardgame/adminBoardGameUpdate.js"></script>
-
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 
 </head>
 
