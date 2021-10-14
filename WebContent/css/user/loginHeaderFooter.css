@@ -1,0 +1,268 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'ImcreSoojin';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+*{
+    margin: 0; padding: 0;
+    background-color: #f8f3fd;
+    box-sizing: border-box;
+}
+body {
+    font-family: ImcreSoojin;
+    width: 1920px;
+    height: 1080px;
+    margin: 0 auto;
+    /* background-color: darksalmon; */
+}
+
+header{
+    position: relative;
+}
+.nav{
+    width: 1920; height: 25px; 
+    
+    /* background-color: aqua; */
+}
+.nav a{text-decoration: none;color: black;}
+
+.navlogin{
+    top:5px;
+   /* left: 90%;*/
+   right:10px;
+    position: absolute;
+    font-size: medium;
+}
+
+.navcategory{
+    text-align: center;
+    /* left: 50%;
+    transform: translateX(-50%);
+    position: absolute; */
+    font-size: 25px;
+}
+.logo{
+    /* background-color: antiquewhite; */
+    width: 1920px; height: 200px;
+    position: relative;
+}
+.logo img{
+    width: 300px;
+    position: absolute;
+    left: 960px; 
+    top: 100px;
+    transform: translateX(-50%)translateY(-50%);          
+}
+#hrdash{
+    border: 1px dashed grey;
+}
+#hrsolid{
+    border: 1px solid grey;
+}
+
+
+.footer{ text-align: center;}
+.footer #f_s{color: rgb(196, 196, 196);}
+.footer #f_b{color: rgb(119, 116, 141);}
+
+.footer a{
+    text-decoration: none;
+    color: black;
+}
+
+.modal_content .login {
+	width: 410px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.modal_content .login h2 {
+	padding: 0 0 30px;
+	border-bottom: 2px solid #111;
+	text-align: center;
+	line-height: 1;
+	font-size: 32px;
+	color: #111;
+	background-color: white;
+}
+
+.modal_content .login ul {
+	padding: 30px 0 10px;
+	list-style: none;
+	background-color: white;
+}
+
+.modal_content .login ul li {
+	padding: 0 0 18px;
+	background-color: white;
+}
+
+/*.login ul li #userid  {
+	width: 100%;
+	height: 50px;
+	box-sizing: border-box;
+	text-indent: 20px;
+	border: 1px solid yellow;
+	border-radius: 0.25rem;
+	background-color: white;
+	
+	padding:0 0;
+}
+.login  #userpwd  {
+	width: 100%;
+	height: 50px;
+	box-sizing: border-box;
+	text-indent: 20px;
+	border: 1px solid yellow;
+	border-radius: 0.25rem;
+	background-color: white;
+	
+	padding:0 0;
+
+}*/
+
+
+#userid, #userpwd{
+	width: 100%;
+	height: 50px;
+	box-sizing: border-box;
+	text-indent: 20px;
+	border: 1px solid #777777;
+	border-radius: 0.25rem;
+	background-color: white;
+	font-weight:normal;
+	padding:0 0;
+}
+#userid:focus, #userpwd:focus{
+outline: 1px solid black;
+}
+
+.login ul li #userid::-webkit-input-placeholder {
+	font-family:ImcreSoojin;
+	font-size: 18px;
+	color: #9f9f9f;
+
+}
+
+.login ul li #userpwd::-webkit-input-placeholder{
+	font-family:ImcreSoojin;
+	font-size: 18px;
+	color: #9f9f9f;
+
+}
+.modal_content .login #btnLogin {
+	width: 100%;
+	height: 58px;
+	font-size: 22px;
+	font-weight: bold;
+	border-radius: 0.25rem;
+	background-color: #ed1c24;
+	color: #fff;
+	margin: 20px 0 0;
+	padding: 0 0;
+	border: none;
+}
+
+.modal_content .login #btnLogin:hover {
+	background-color: #9a0007;
+}
+
+.modal_content .login div {
+	padding: 0 0 10px;
+	background-color: white;
+}
+
+.modal_content .login div ul {
+	display: flex;
+	justify-content: center;
+	padding: 0;
+}
+
+.modal_content .login div ul li {
+	position: relative;
+	padding: 0 18px;
+	background-color: white;
+}
+
+.modal_content .login div ul li ~li::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 4px;
+	height: 14px;
+	width: 1px;
+	background-color: #111;
+	transform: rotate(25deg);
+}
+
+.modal_content .login div ul li a {
+	color: #111;
+	text-decoration: none;
+	font-size: 17px;
+	background-color: white;
+}
+
+/* The Modal */
+#modal {
+	left: 0;
+	top: 0;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	display: none;
+	z-index: 1;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Modal Content/Box */
+#modal .modal_content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: white;
+	padding: 1rem 1.5rem;
+	width: 500px;
+	height: 520px;
+	border-radius: 0.5rem;
+}
+
+#modal_close_btn {
+	float: right;
+	font-size: 30px;
+	cursor: pointer;
+	border-radius: 0.25rem;
+	background-color: white;
+	border: none;
+	padding: 0;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+}
+
+#modal_close_btn:hover {
+	background-color: rgb(221, 221, 221);
+}
+
+#modal_opne_btn:hover { 
+	cursor: pointer;
+}
+
+#modal .modal_layer {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.2);
+	z-index: -1;
+}

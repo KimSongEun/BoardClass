@@ -129,9 +129,12 @@ public class BoardgameUpdateServlet extends HttpServlet {
 			language = "language 재설정 필요";
 		}
 		String video = multi.getParameter("video");
-		if (video == null) {
-			video = "video 재설정 필요";
+		String videocheck = multi.getParameter("hiddentextarea");
+		if (videocheck == "999") {
+			System.out.println("비었어 원래껄로해!");
+			video = multi.getParameter("originvideo");
 		}
+		System.out.println(videocheck);
 		String plus = multi.getParameter("plus");
 		if (plus == null) {
 			plus = "plus 재설정 필요";
@@ -154,6 +157,15 @@ public class BoardgameUpdateServlet extends HttpServlet {
 			System.out.println("첨부파일명 : " + fileRuleImage);
 			System.out.println("규칙서 이미지 업로드 성공!!!");
 		}
+		
+		if (image == null) {
+			image = multi.getParameter("originimage");
+		}
+		if(ruleimage == null) {
+			ruleimage = multi.getParameter("originruleimage");
+		}
+		
+		
 		int gameNo = Integer.parseInt(multi.getParameter("no"));
 		int result = new AdminService().updateBoardGame(kotitle, entitle, category, age, player, time, price, grade, level, designer, writer, brand, releasedate, language, image, ruleimage, video, plus, gameNo);
 
@@ -167,6 +179,11 @@ public class BoardgameUpdateServlet extends HttpServlet {
 			request.setAttribute("loc", "boardgamelist");
 		}
 		rd.forward(request, response);
+		
+
+		System.out.println("수정된 비디오 값 : " + multi.getParameter("video"));
+		System.out.println("원래 비디오 값 : " + multi.getParameter("originvideo"));
+		System.out.println("조건체크 : " + multi.getParameter("hiddentextarea"));
 	}
 
 }

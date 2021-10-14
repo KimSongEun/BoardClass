@@ -11,10 +11,10 @@
 	%>
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="UTF-8">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" href="./css/admin/main/adminHeader.css"/> 
     <link rel="stylesheet" href="./css/admin/ad/adminAd.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script type="text/javascript" src="./js/admin/ad/adminAd.js"></script>

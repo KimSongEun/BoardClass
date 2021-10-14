@@ -14,9 +14,10 @@
 
 <head>
     <meta charset="UTF-8">
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" href="./css/admin/main/adminHeader.css"/> 
     <link rel="stylesheet" href="./css/admin/boardgame/adminBoardGame.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="./js/admin/boardgame/adminBoardGame.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>  
     <title>보드게임 조회</title>

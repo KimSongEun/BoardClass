@@ -7,14 +7,14 @@
 <head>
     <meta charset="UTF-8">
     <title>보드게임 수정</title>
+	<link rel="stylesheet" href="./css/admin/main/adminHeader.css"/> 
+       <link rel="stylesheet" href="./css/admin/boardgame/adminBoardGameUpdate.css" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+    <script type="text/javascript" src="./js/admin/boardgame/adminBoardGameUpdate.js"></script>
 	<script src = "ckeditor/ckeditor.js"></script>
     <script type="text/javascript" src="./ckfinder/ckfinder.js"></script>
-       <link rel="stylesheet" href="./css/admin/boardgame/adminBoardGameUpdate.css" type="text/css">
-    <script type="text/javascript" src="./js/admin/boardgame/adminBoardGameMade.js?"></script>
-
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 
 </head>
 
@@ -205,14 +205,27 @@
                                     <br>
                                     <div class="boardgame-item_menu">
                                         <label class="boardgame-item_menu_label">게임 규칙 영상 및 게임 설명 :</label>
-                                        <div class="boardgame-item_menu_comment">
-                                        
-                                            <br><br><textarea id = "ckeditor" class="boardgame-form_comment" rows="10"
-                                                placeholder="게임 규칙 영상 및 게임 설명을 등록해주세요" name="video">${gamevo.gameVideo}</textarea>
-										
+                                        <br>
+                                        <div class = "boardgame-item_description">
+                                        <div>
+                                      		 ${gamevo.gameVideo}
+                                        </div>
                                         </div>
                                     </div>
+                                    
+                                    <div class="boardgame-item_menu">
+                                        <label class="boardgame-item_menu_label">👆🏻게임 규칙 영상 및 게임 설명 수정을 원할 경우 아래에 등록해주세요.</label>
+                                        <div class="boardgame-item_menu_comment">
+                                            <br><br>
+                                            <textarea id = "ckeditor" class="boardgame-form_comment" name="video"></textarea>
+                                        </div>
+                                    </div>
+                                    
                                     <input type="hidden" name="no" value = "${gameno}" />
+                                    <input type="hidden" name="originimage" value = "${gamevo.gameImage}" />
+                                    <input type="hidden" name="originruleimage" value = "${gamevo.gameRuleImage}" />
+                                    <input type="hidden" id = "hiddentextarea" name="hiddentextarea" />                                    
+                                    <textarea name = "originvideo" style = "display : none">${gamevo.gameVideo}</textarea>
                                     <div class="boardgame-item_upload">
                                         <div class="boardgame-upload_text">
                                             <button type="submit" class="boardgame-upload_btn">게임 수정</button>
@@ -228,6 +241,7 @@
     </section>
 <script>
 CKEDITOR.replace("ckeditor", {height : 300});
+CKEDITOR.config.extraPlugins = 'youtube';
 </script>
 
 </body>
