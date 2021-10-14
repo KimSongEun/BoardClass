@@ -1,0 +1,290 @@
+@charset "UTF-8";
+
+* {
+    box-sizing: border-box;
+}
+html{
+	padding: 0px;
+	margin: 0px;
+}
+section{
+    position :absolute;
+    left : 250px;
+    top : 40px;
+    width : 83.6%;
+    padding: 50px;
+}
+div {
+    display: block;
+}
+.boardgame-div_bg {
+    padding-bottom: 15px;
+    width: 900px;
+}
+
+h2 {
+    font-weight: 100;
+    font-size : 34px;
+    margin-bottom: 10px;
+    line-height: 1.1;
+}
+
+.boardgame-main_body {
+    margin-right: 0;
+    width: 100%;
+    max-width: 900px;
+    display: inline-block;
+    top: 0;
+    vertical-align: top;
+    margin-left: -15px;
+}
+
+.boardgame-main_body_img {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 150px;
+}
+
+.boardgame-main_body_imgcontent {
+    background-color: #ffffff;
+    color: inherit;
+    padding: 15px 20px 20px 20px;
+    border-color: #e7eaec;
+    border-image: none;
+    border-width: 1px 0px;
+    height: 750px;
+}
+
+.boardgame-enroll_img_btn {
+    margin-bottom: 5px;
+    background-color: #1ab394;
+    border-color: #1ab394;
+    color: #FFFFFF;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    direction: ltr;
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+}
+
+.boardgame-enroll_box {
+    float: left;
+    width: 190px;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: Arial;
+    font-size: 118px;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+    opacity: 0;
+    PADDING-BOTTOM: 0px;
+    height: 33px;
+    line-height: 33px;
+}
+
+.boardgame-img_del_btn {
+    position: absolute;
+    top: 18px;
+    right: 19px;
+    opacity: 0.5;
+    margin-bottom: 5px;
+    background-color: #ed5565;
+    border-color: #ed5565;
+    color: #FFFFFF;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+}
+
+.boardgame-main_img {
+    position: relative;
+    text-align: center;
+    width: 900px;
+    height: 600px;
+    margin-top:20px;
+    border: 1px solid white;
+    background: papayawhip;
+    padding: 15px 3px 0 3px;
+    line-height: 600px;
+}
+
+.boardgame-item_main_back {
+    width: 900px;
+    min-height: 700px;
+    border-top: none;
+    background: #fff;
+    border: 1px solid white;
+    border-radius: 3px;
+    padding: 20px;
+    position: relative;
+}
+
+.boardgame-item_main {
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+.boardgame-item_menu {
+    margin-right: -15px;
+    margin-left: -15px;
+    margin-bottom: 15px;
+}
+
+.boardgame-item_menu_label {
+    color: gray;
+    position: relative;
+    min-height: 1px;
+    padding-top: 7px;
+    padding-right: 15px;
+    padding-left: 15px;
+    font-weight: 700;
+    float: left;
+    margin-bottom: 0;
+}
+
+.boardgame-item_menu_maincate {
+    width: 25%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.boardgame-mainCategory_select {
+    margin-bottom: 15px;
+    background-color: #FFFFFF;
+    background-image: none;
+    border: 1px solid #e5e6e7;
+    border-radius: 1px;
+    color: inherit;
+    display: block;
+    padding: 6px 12px;
+    width: 100%;
+    font-size: 14px;
+}
+
+option {
+    font-weight: normal;
+    display: block;
+    white-space: pre;
+    min-height: 1.2em;
+    padding: 0px 2px 1px;
+}
+
+option:not(:checked) {
+    background-color: white;
+    color: #000000;
+}
+
+.boardgame-item_menu_title {
+    width: 80%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.boardgame-form_control_title {
+    background-color: #FFFFFF;
+    background-image: none;
+    border: 1px solid #e5e6e7;
+    border-radius: 1px;
+    color: inherit;
+    display: block;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 760px;
+    font-size: 14px;
+    box-shadow: none;
+}
+
+.boardgame-item_menu_number {
+    width: 770px;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.boardgame-form_control_number {
+    background-color: #FFFFFF;
+    background-image: none;
+    border: 1px solid #e5e6e7;
+    border-radius: 1px;
+    color: inherit;
+    display: block;
+    padding: 6px 12px;
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+    width: 100%;
+    font-size: 14px;
+    box-shadow: none;
+}
+
+.boardgame-item_menu_comment {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.boardgame-item_description {
+	position: relative;
+    text-align: center;
+    width: 865px;
+    padding-top : 25px;
+    margin-top:20px;
+    margin-left : 10px;
+    border: 1px solid white;
+    background: papayawhip;
+}
+
+.boardgame-item_upload {
+    text-align: right;
+    padding-top: 24px;
+    margin-bottom: 15px;
+    float: right;
+}
+
+.boardgame-upload_btn {
+    width: 150px;
+    background-color: #1ab394;
+    border-color: #1ab394;
+    color: #FFFFFF;
+    border-radius: 3px;
+    padding: 10px 16px;
+    font-size: 18px;
+    margin-bottom: 0;
+    text-align: center;
+    cursor: pointer;
+}

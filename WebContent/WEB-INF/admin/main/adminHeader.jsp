@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-	<link rel="stylesheet" href="./css/admin/main/adminHeader.css?after"/> 
 	<script type="text/javascript" src="./js/admin/main/adminHeader.js"></script>  
     <header>
 		<div class="admin-header">
@@ -10,8 +9,6 @@
 				<span style="float: right; line-height: 14px;"><a href="#" style="text-decoration:none;color:white;padding-right: 10px;line-height:20px;">LOGOUT</a></span>
 			</div>
 		</div>	
-	</header>
-	
 	<nav>			
 		<div class="admin-nav"> 
 			<div class="admin-profile">
@@ -59,3 +56,4 @@
 	        </ul>
 		</div>
 	</nav>
+</header>

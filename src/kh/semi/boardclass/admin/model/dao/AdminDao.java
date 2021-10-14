@@ -337,9 +337,9 @@ public class AdminDao {
 		Game vo = null;
 		return vo;
 	}
-	public int insertBoardGame(Connection conn, String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus){
+	public int insertBoardGame(Connection conn, String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus){
 		int result = 0;
-		String sql = "insert into BOARDGAME values(GAME_NUM.nextval,null,?,?,?,0,?,?,?,?,?,SYSDATE,?,?,?,?,?,null,?,null,'/game_img/1.jpg',?,?,?)";
+		String sql = "insert into BOARDGAME values(GAME_NUM.nextval,null,?,?,?,0,?,?,?,?,?,SYSDATE,?,?,?,?,?,null,?,null,?,?,?,?)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -353,13 +353,14 @@ public class AdminDao {
 			pstmt.setInt(8, grade);
 			pstmt.setInt(9, level);
 			pstmt.setString(10, designer);
-			pstmt.setString(11, brand);
-			pstmt.setString(12, releasedate);
-			pstmt.setString(13, language);
-			pstmt.setString(14, image);
-			pstmt.setString(15, ruleimage);
-			pstmt.setString(16, video);
-			pstmt.setString(17, plus);
+			pstmt.setString(11, writer);
+			pstmt.setString(12, brand);
+			pstmt.setString(13, releasedate);
+			pstmt.setString(14, language);
+			pstmt.setString(15, image);
+			pstmt.setString(16, ruleimage);
+			pstmt.setString(17, video);
+			pstmt.setString(18, plus);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -367,9 +368,9 @@ public class AdminDao {
 		return result;
 	}
 	
-	public int updateBoardGame(Connection conn, String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus, int gameNo){
+	public int updateBoardGame(Connection conn, String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus, int gameNo){
 		int result = 0;
-		String sql = "UPDATE BOARDGAME SET GAME_KONAME = ?, GAME_ENNAME = ?, GAME_CATEGORY = ?, GAME_AGE = ?, GAME_PLAYER = ?, GAME_TIME = ?, GAME_PRICE = ?, GAME_GRADE = ?, GAME_DATE = ?, GAME_LEVEL = ?, GAME_DESIGNER = ?, GAME_BRAND = ?, GAME_RELEASEDATE = ?, GAME_LANGUAGE = ?, GAME_IMAGE = ?, GAME_RULE_IMAGE = ?, GAME_VIDEO = ?, GAME_PLUS = ?  WHERE GAME_NO=?";
+		String sql = "UPDATE BOARDGAME SET GAME_KONAME = ?, GAME_ENNAME = ?, GAME_CATEGORY = ?, GAME_AGE = ?, GAME_PLAYER = ?, GAME_TIME = ?, GAME_PRICE = ?, GAME_GRADE = ?, GAME_LEVEL = ?, GAME_DESIGNER = ?, GAME_WRITER = ?, GAME_BRAND = ?, GAME_RELEASEDATE = ?, GAME_LANGUAGE = ?, GAME_IMAGE = ?, GAME_RULE_IMAGE = ?, GAME_VIDEO = ?, GAME_PLUS = ?  WHERE GAME_NO=?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null; 
 		try {
@@ -384,14 +385,15 @@ public class AdminDao {
 			pstmt.setInt(8, grade);
 			pstmt.setInt(9, level);
 			pstmt.setString(10, designer);
-			pstmt.setString(11, brand);
-			pstmt.setString(12, releasedate);
-			pstmt.setString(13, language);
-			pstmt.setString(14, image);
-			pstmt.setString(15, ruleimage);
-			pstmt.setString(16, video);
-			pstmt.setString(17, plus);
-			pstmt.setInt(18, gameNo);
+			pstmt.setString(11, writer);
+			pstmt.setString(12, brand);
+			pstmt.setString(13, releasedate);
+			pstmt.setString(14, language);
+			pstmt.setString(15, image);
+			pstmt.setString(16, ruleimage);
+			pstmt.setString(17, video);
+			pstmt.setString(18, plus);
+			pstmt.setInt(19, gameNo);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

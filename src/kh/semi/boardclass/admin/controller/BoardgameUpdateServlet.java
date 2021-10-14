@@ -52,7 +52,7 @@ public class BoardgameUpdateServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 
-		String fileSavePath = "upload/boardgame";
+		String fileSavePath = "game_img";
 		int uploadSizeLimit = 10 * 1024 * 1024;
 		String encType = "UTF-8";
 
@@ -112,6 +112,10 @@ public class BoardgameUpdateServlet extends HttpServlet {
 		if (designer == null) {
 			designer = "designer 재설정 필요";
 		}
+		String writer = multi.getParameter("writer");
+		if (writer == null) {
+			writer = "writer 재설정 필요";
+		}
 		String brand = multi.getParameter("brand");
 		if (brand == null) {
 			brand = "brand 재설정 필요";
@@ -125,15 +129,18 @@ public class BoardgameUpdateServlet extends HttpServlet {
 			language = "language 재설정 필요";
 		}
 		String video = multi.getParameter("video");
-		if (video == null) {
-			video = "video 재설정 필요";
+		String videocheck = multi.getParameter("hiddentextarea");
+		if (videocheck == "999") {
+			System.out.println("비었어 원래껄로해!");
+			video = multi.getParameter("originvideo");
 		}
+		System.out.println(videocheck);
 		String plus = multi.getParameter("plus");
 		if (plus == null) {
 			plus = "plus 재설정 필요";
 		}
-		String image = "./upload/boardgame/" + fileImage;
-		String ruleimage = "./upload/boardgame/" + fileRuleImage;
+		String image = "./game_img/" + fileImage;
+		String ruleimage = "./game_img/" + fileRuleImage;
 		if (fileImage == null) {
 			// 업로드 실패 시
 			image = multi.getParameter("originimage");
@@ -150,20 +157,33 @@ public class BoardgameUpdateServlet extends HttpServlet {
 			System.out.println("첨부파일명 : " + fileRuleImage);
 			System.out.println("규칙서 이미지 업로드 성공!!!");
 		}
+		
+		if (image == null) {
+			image = multi.getParameter("originimage");
+		}
+		if(ruleimage == null) {
+			ruleimage = multi.getParameter("originruleimage");
+		}
+		
+		
 		int gameNo = Integer.parseInt(multi.getParameter("no"));
-		int result = new AdminService().updateBoardGame(kotitle, entitle, category, age, player, time, price, grade, level, designer, brand, releasedate, language, image, ruleimage, video, plus, gameNo);
+		int result = new AdminService().updateBoardGame(kotitle, entitle, category, age, player, time, price, grade, level, designer, writer, brand, releasedate, language, image, ruleimage, video, plus, gameNo);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/admin/boardgame/boardgamealert.jsp");
 
 		if (result > 0) {
-			request.setAttribute("msg", gameNo + "번 광고 수정완료");
+			request.setAttribute("msg", gameNo + "번 보드게임 수정완료");
 			request.setAttribute("loc", "boardgamelist");
 		} else {
 			request.setAttribute("msg", "수정실패 ");
 			request.setAttribute("loc", "boardgamelist");
 		}
-
 		rd.forward(request, response);
+		
+
+		System.out.println("수정된 비디오 값 : " + multi.getParameter("video"));
+		System.out.println("원래 비디오 값 : " + multi.getParameter("originvideo"));
+		System.out.println("조건체크 : " + multi.getParameter("hiddentextarea"));
 	}
 
 }

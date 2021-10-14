@@ -23,12 +23,12 @@ public class GameService {
 		return result;
 	}
 
-	public int selectCategory() {
-		int result = 0;
+	public ArrayList<Game> InfoGame(String name) {
+		ArrayList<Game> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new GameDao().selectCategory(conn);
+		volist = new GameDao().InfoGame(conn,name);
 		JDBCTemplate.close(conn);
-		return result;
+		return volist;
 	}
 	
 

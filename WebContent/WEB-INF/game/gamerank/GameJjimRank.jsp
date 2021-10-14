@@ -64,22 +64,27 @@
 
 #d1 {
 	position: relative;
-	top: -280px;
 	text-align: center;
-	line-height: 200px;
-	background-color: burlywood;
-	width: 1570px;
-	height: 180px;
+	left:-220px;
+	width: 1000px;
+	height: 100px;
 	font-size: 50px;
 }
 
 #search {
 	position: relative;
-	left: 500px;
-	top: -240px;
+	top: -280px;
+	left: -120px;
 	font-size: 40px;
+	display: flex;
+    justify-content: space-around;
 }
-
+#hrline{
+position: relative;
+top: -310px;
+width: 90%;
+border: 1px solid grey;
+}
 #text_name {
 	position: relative;
 	top: -6px;
@@ -126,8 +131,8 @@
 			<br>
 			<div class="nav">
 				<nav class="navcategory">
-					<a href="#">카테고리</a> | <a href="#">게임랭킹</a> | <a href="#">중고거래</a>
-					| <a href="#">게시판</a> | <a href="#">보드게임정보</a>
+					<a href="#">카테고리</a> | <a href="GameGradeRank">게임랭킹</a> | <a href="#">중고거래</a>
+					| <a href="#">게시판</a> | <a href="GameLevelList">보드게임정보</a>
 				</nav>
 			</div>
 			<br>
@@ -152,7 +157,14 @@
 		<aside></aside>
 
 		<section id="section2">
-
+	<div id="search">
+				게임 순위
+				<div id="d1">찜 상품 순</div>
+				
+				
+			</div>
+			
+		<hr id="hrline">	
 			<select id="sort" onchange="window.open(value,'_self');">
 				<option value="GameJjimRank">찜 상품 순</option>
 				<option value="GameGradeRank">평점 순</option>
