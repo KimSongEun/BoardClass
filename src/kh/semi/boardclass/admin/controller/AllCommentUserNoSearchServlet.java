@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class AllCommentSearchServlet
+ * Servlet implementation class AllCommentUserNoSearchServlet
  */
-@WebServlet("/AllCommentSearchServlet")
-public class AllCommentSearchServlet extends HttpServlet {
+@WebServlet("/AllCommentUserNoSearchServlet")
+public class AllCommentUserNoSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AllCommentSearchServlet() {
+    public AllCommentUserNoSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
