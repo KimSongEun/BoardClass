@@ -5,6 +5,7 @@ import java.sql.Date;
 public class Game {
 
 	private int gameNumber;
+	private int usedNum;
 	private String gameKoName;
 	private String gameEnName;
 	private String gameCategory;
@@ -27,18 +28,19 @@ public class Game {
 	private String gameRuleImage;
 	private String gameVideo;
 	private String gamePlus;
-	private int usedNum;
+	private String gamePlusImage;
 
 	public Game() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Game(int gameNumber, String gameKoName, String gameEnName, String gameCategory, int gameView, String gameAge,
+	public Game(int gameNumber, int usedNo, String gameKoName, String gameEnName, String gameCategory, int gameView, String gameAge,
 			String gamePlayer, String gameTime, int gamePrice, int gameGrade, Date gameDate, int gameLevel,
 			String gameDesigner, String gameWriter, String gameBrand, String gameReleaseDate, int gameRank,
-			String gameLanguage, String gameReview, String gameImage, String gameRuleImage, String gameVideo, String gamePlus, int usedNo) {
+			String gameLanguage, String gameReview, String gameImage, String gameRuleImage, String gameVideo, String gamePlus, String gamePlusImage ) {
 		super();
 		this.gameNumber = gameNumber;
+		this.usedNum = usedNo;
 		this.gameKoName = gameKoName;
 		this.gameEnName = gameEnName;
 		this.gameCategory = gameCategory;
@@ -62,19 +64,28 @@ public class Game {
 		this.gameRuleImage = gameRuleImage;
 		this.gameVideo = gameVideo;
 		this.gamePlus = gamePlus;
-		this.usedNum = usedNo;
+		this.gamePlusImage = gamePlusImage;
 	}
+
 
 	@Override
 	public String toString() {
-		return "Game [gameNumber=" + gameNumber + ", gameKoName=" + gameKoName + ", gameEnName=" + gameEnName
-				+ ", gameCategory=" + gameCategory + ", gameView=" + gameView + ", gameAge=" + gameAge + ", gamePlayer="
-				+ gamePlayer + ", gameTime=" + gameTime + ", gamePrice=" + gamePrice + ", gameGrade=" + gameGrade
-				+ ", gameDate=" + gameDate + ", gameLevel=" + gameLevel + ", gameDesigner=" + gameDesigner
-				+ ", gameWriter=" + gameWriter + ", gameBrand=" + gameBrand + ", gameReleaseDate=" + gameReleaseDate
-				+ ", gameRank=" + gameRank + ", gameLanguage=" + gameLanguage + ", gameReview=" + gameReview
-				+ ", gameImage=" + gameImage + ", gameRuleImage=" + gameRuleImage + ", gameVideo=" + gameVideo
-				+ ", gamePlus=" + gamePlus + ", usedNum=" + usedNum + "]";
+		return "Game [gameNumber=" + gameNumber + ", usedNum=" + usedNum + ", gameKoName=" + gameKoName
+				+ ", gameEnName=" + gameEnName + ", gameCategory=" + gameCategory + ", gameView=" + gameView
+				+ ", gameAge=" + gameAge + ", gamePlayer=" + gamePlayer + ", gameTime=" + gameTime + ", gamePrice="
+				+ gamePrice + ", gameGrade=" + gameGrade + ", gameDate=" + gameDate + ", gameLevel=" + gameLevel
+				+ ", gameDesigner=" + gameDesigner + ", gameWriter=" + gameWriter + ", gameBrand=" + gameBrand
+				+ ", gameReleaseDate=" + gameReleaseDate + ", gameRank=" + gameRank + ", gameLanguage=" + gameLanguage
+				+ ", gameReview=" + gameReview + ", gameImage=" + gameImage + ", gameRuleImage=" + gameRuleImage
+				+ ", gameVideo=" + gameVideo + ", gamePlus=" + gamePlus + ", gamePlusImage=" + gamePlusImage + "]";
+	}
+
+	public String getGamePlusImage() {
+		return gamePlusImage;
+	}
+
+	public void setGamePlusImage(String gamePlusImage) {
+		this.gamePlusImage = gamePlusImage;
 	}
 
 	public String getGameRuleImage() {

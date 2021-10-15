@@ -35,6 +35,7 @@ public class GameDao {
 				vo = new Game();
 
 				vo.setGameNumber(rset.getInt("GAME_NO"));
+				vo.setUsedNum(rset.getInt("USED_NO"));
 				vo.setGameKoName(rset.getString("GAME_KONAME"));
 				vo.setGameEnName(rset.getString("GAME_ENNAME"));
 				vo.setGameCategory(rset.getString("GAME_CATEGORY"));
@@ -57,10 +58,10 @@ public class GameDao {
 				vo.setGameRuleImage(rset.getString("GAME_RULE_IMAGE"));
 				vo.setGameVideo(rset.getString("GAME_VIDEO"));
 				vo.setGamePlus(rset.getString("GAME_PLUS"));
-				vo.setUsedNum(rset.getInt("USED_NO"));
+				vo.setGamePlusImage(rset.getString("Game_PLUSIMAGE"));
 
 			}
-			
+			System.out.println(vo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}  finally {
@@ -86,6 +87,7 @@ public class GameDao {
 				do {
 					Game vo = new Game();
 					vo.setGameNumber(rset.getInt("GAME_NO"));
+					vo.setUsedNum(rset.getInt("USED_NO"));
 					vo.setGameKoName(rset.getString("GAME_KONAME"));
 					vo.setGameEnName(rset.getString("GAME_ENNAME"));
 					vo.setGameCategory(rset.getString("GAME_CATEGORY"));
@@ -108,7 +110,7 @@ public class GameDao {
 					vo.setGameRuleImage(rset.getString("GAME_RULE_IMAGE"));
 					vo.setGameVideo(rset.getString("GAME_VIDEO"));
 					vo.setGamePlus(rset.getString("GAME_PLUS"));
-					vo.setUsedNum(rset.getInt("USED_NO"));
+					vo.setGamePlusImage(rset.getString("Game_PLUSIMAGE"));
 
 					volist.add(vo);
 
@@ -169,6 +171,7 @@ public class GameDao {
 				do {
 					Game vo = new Game();
 					vo.setGameNumber(rset.getInt("GAME_NO"));
+					vo.setUsedNum(rset.getInt("USED_NO"));
 					vo.setGameKoName(rset.getString("GAME_KONAME"));
 					vo.setGameEnName(rset.getString("GAME_ENNAME"));
 					vo.setGameCategory(rset.getString("GAME_CATEGORY"));
@@ -191,7 +194,7 @@ public class GameDao {
 					vo.setGameRuleImage(rset.getString("GAME_RULE_IMAGE"));
 					vo.setGameVideo(rset.getString("GAME_VIDEO"));
 					vo.setGamePlus(rset.getString("GAME_PLUS"));
-					vo.setUsedNum(rset.getInt("USED_NO"));
+					vo.setGamePlusImage(rset.getString("Game_PLUSIMAGE"));
 
 					volist.add(vo);
 
@@ -226,6 +229,7 @@ public class GameDao {
 				do {
 					Game vo = new Game();
 					vo.setGameNumber(rset.getInt("GAME_NO"));
+					vo.setUsedNum(rset.getInt("USED_NO"));
 					vo.setGameKoName(rset.getString("GAME_KONAME"));
 					vo.setGameEnName(rset.getString("GAME_ENNAME"));
 					vo.setGameCategory(rset.getString("GAME_CATEGORY"));
@@ -248,7 +252,7 @@ public class GameDao {
 					vo.setGameRuleImage(rset.getString("GAME_RULE_IMAGE"));
 					vo.setGameVideo(rset.getString("GAME_VIDEO"));
 					vo.setGamePlus(rset.getString("GAME_PLUS"));
-					vo.setUsedNum(rset.getInt("USED_NO"));
+					vo.setGamePlusImage(rset.getString("Game_PLUSIMAGE"));
 
 					volist.add(vo);
 
@@ -282,6 +286,7 @@ public class GameDao {
 				do {
 					Game vo = new Game();
 					vo.setGameNumber(rset.getInt("GAME_NO"));
+					vo.setUsedNum(rset.getInt("USED_NO"));
 					vo.setGameKoName(rset.getString("GAME_KONAME"));
 					vo.setGameEnName(rset.getString("GAME_ENNAME"));
 					vo.setGameCategory(rset.getString("GAME_CATEGORY"));
@@ -304,7 +309,7 @@ public class GameDao {
 					vo.setGameRuleImage(rset.getString("GAME_RULE_IMAGE"));
 					vo.setGameVideo(rset.getString("GAME_VIDEO"));
 					vo.setGamePlus(rset.getString("GAME_PLUS"));
-					vo.setUsedNum(rset.getInt("USED_NO"));
+					vo.setGamePlusImage(rset.getString("Game_PLUSIMAGE"));
 
 					volist.add(vo);
 
@@ -338,6 +343,7 @@ public class GameDao {
 				do {
 					Game vo = new Game();
 					vo.setGameNumber(rset.getInt("GAME_NO"));
+					vo.setUsedNum(rset.getInt("USED_NO"));
 					vo.setGameKoName(rset.getString("GAME_KONAME"));
 					vo.setGameEnName(rset.getString("GAME_ENNAME"));
 					vo.setGameCategory(rset.getString("GAME_CATEGORY"));
@@ -360,7 +366,7 @@ public class GameDao {
 					vo.setGameRuleImage(rset.getString("GAME_RULE_IMAGE"));
 					vo.setGameVideo(rset.getString("GAME_VIDEO"));
 					vo.setGamePlus(rset.getString("GAME_PLUS"));
-					vo.setUsedNum(rset.getInt("USED_NO"));
+					vo.setGamePlusImage(rset.getString("Game_PLUSIMAGE"));
 
 					volist.add(vo);
 
@@ -394,6 +400,7 @@ public class GameDao {
 				do {
 					Game vo = new Game();
 					vo.setGameNumber(rset.getInt("GAME_NO"));
+					vo.setUsedNum(rset.getInt("USED_NO"));
 					vo.setGameKoName(rset.getString("GAME_KONAME"));
 					vo.setGameEnName(rset.getString("GAME_ENNAME"));
 					vo.setGameCategory(rset.getString("GAME_CATEGORY"));
@@ -416,7 +423,7 @@ public class GameDao {
 					vo.setGameRuleImage(rset.getString("GAME_RULE_IMAGE"));
 					vo.setGameVideo(rset.getString("GAME_VIDEO"));
 					vo.setGamePlus(rset.getString("GAME_PLUS"));
-					vo.setUsedNum(rset.getInt("USED_NO"));
+					vo.setGamePlusImage(rset.getString("Game_PLUSIMAGE"));
 
 					volist.add(vo);
 
@@ -452,6 +459,7 @@ public class GameDao {
 				do {
 					Game vo = new Game();
 					vo.setGameNumber(rset.getInt("GAME_NO"));
+					vo.setUsedNum(rset.getInt("USED_NO"));
 					vo.setGameKoName(rset.getString("GAME_KONAME"));
 					vo.setGameEnName(rset.getString("GAME_ENNAME"));
 					vo.setGameCategory(rset.getString("GAME_CATEGORY"));
@@ -474,7 +482,7 @@ public class GameDao {
 					vo.setGameRuleImage(rset.getString("GAME_RULE_IMAGE"));
 					vo.setGameVideo(rset.getString("GAME_VIDEO"));
 					vo.setGamePlus(rset.getString("GAME_PLUS"));
-					vo.setUsedNum(rset.getInt("USED_NO"));
+					vo.setGamePlusImage(rset.getString("Game_PLUSIMAGE"));
 
 					volist.add(vo);
 
@@ -510,6 +518,7 @@ public class GameDao {
 				do {
 					Game vo = new Game();
 					vo.setGameNumber(rset.getInt("GAME_NO"));
+					vo.setUsedNum(rset.getInt("USED_NO"));
 					vo.setGameKoName(rset.getString("GAME_KONAME"));
 					vo.setGameEnName(rset.getString("GAME_ENNAME"));
 					vo.setGameCategory(rset.getString("GAME_CATEGORY"));
@@ -532,7 +541,7 @@ public class GameDao {
 					vo.setGameRuleImage(rset.getString("GAME_RULE_IMAGE"));
 					vo.setGameVideo(rset.getString("GAME_VIDEO"));
 					vo.setGamePlus(rset.getString("GAME_PLUS"));
-					vo.setUsedNum(rset.getInt("USED_NO"));
+					vo.setGamePlusImage(rset.getString("Game_PLUSIMAGE"));
 
 					volist.add(vo);
 
@@ -568,6 +577,7 @@ public class GameDao {
 				do {
 					Game vo = new Game();
 					vo.setGameNumber(rset.getInt("GAME_NO"));
+					vo.setUsedNum(rset.getInt("USED_NO"));
 					vo.setGameKoName(rset.getString("GAME_KONAME"));
 					vo.setGameEnName(rset.getString("GAME_ENNAME"));
 					vo.setGameCategory(rset.getString("GAME_CATEGORY"));
@@ -590,7 +600,7 @@ public class GameDao {
 					vo.setGameRuleImage(rset.getString("GAME_RULE_IMAGE"));
 					vo.setGameVideo(rset.getString("GAME_VIDEO"));
 					vo.setGamePlus(rset.getString("GAME_PLUS"));
-					vo.setUsedNum(rset.getInt("USED_NO"));
+					vo.setGamePlusImage(rset.getString("Game_PLUSIMAGE"));
 
 					volist.add(vo);
 
