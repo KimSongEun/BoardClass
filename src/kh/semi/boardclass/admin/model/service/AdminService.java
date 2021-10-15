@@ -306,18 +306,28 @@ public class AdminService {
 		return vo;
 	}
 
-	public int updateBoardCategory(Board comu) {
+	public int updateAllBoard(int boardNo, String boardCategory, String boardType) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().updateBoardCategory(conn, comu);
+		result = new AdminDao().updateAllBoard(conn, boardNo, boardCategory, boardType);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}
 
-	public int updateBoardType(Board comu) {
+	public int deleteAllBoard(int boardNo) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().updateBoardType(conn, comu);
+		result = new AdminDao().deleteAllBoard(conn, boardNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}

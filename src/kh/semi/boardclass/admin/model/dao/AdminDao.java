@@ -592,14 +592,38 @@ public class AdminDao {
 		Board vo = null;
 		return vo;
 	}
-	public int updateBoardCategory(Connection conn, Board comu){
+	public int updateAllBoard(Connection conn, int boardNo, String boardCategory, String boardType){
 		int result = 0;
+		String sql = "UPDATE BOARD SET BOARD_CATEGORY = ? , BOARD_TYPE =? WHERE BOARD_NO=?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null; 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, boardCategory);
+			pstmt.setString(2, boardType);
+			pstmt.setInt(3, boardNo);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return result;
 	}
-	public int updateBoardType(Connection conn, Board comu){
+	
+	public int deleteAllBoard(Connection conn, int boardNo){
 		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM BOARD WHERE BOARD_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
 		return result;
 	} 
+	
 	public ArrayList<Comment> selectAllCommentList(Connection conn){
 		ArrayList<Comment> volist = null;
 		return volist;

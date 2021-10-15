@@ -116,7 +116,7 @@
                             <td style = "vertical-align : middle">${b.userNo}</td>
                             <td style = "vertical-align : middle">${b.boardRewriteDate}</td>
                             <td style = "vertical-align : middle"><button class="update btn btn-danger" value="updatego">수정</button> </td>
-                            <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" id="${b.boardNo}">삭제</button> </td>
+                            <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" onclick="location.href='allboarddelete?boardNo=${b.boardNo}'">삭제</button> </td>
                         </tr> 
                          </c:forEach>
                          </c:if> 
