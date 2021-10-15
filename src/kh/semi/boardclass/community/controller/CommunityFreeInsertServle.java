@@ -55,8 +55,6 @@ public class CommunityFreeInsertServle extends HttpServlet {
 			oVo = new CommunityService().getBoard(boardNo); 
 		}
 				
-		// 화면입력 전달되어 옴. request - parameter (==변수명) : t, c
-		// http://localhost:8090/myBoard/boardwrite.kh?c=내용부분입력된값이지요&t=뭐라해야할지모를제목
 		String title = request.getParameter("title");  //내용부분입력된값이지요
 		String content = request.getParameter("content");  //뭐라해야할지모를제목
 		String type = request.getParameter("type"); // 사담/ 건의 / 질문

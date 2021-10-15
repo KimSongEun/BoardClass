@@ -10,13 +10,21 @@
 <title>게시글 보기</title>
 </head>
 <body>
+<div class="h3group">
+	<h3 class="tit">자유게시판</h3>
+	<div class="location">
+		<span class="depth">홈</span>
+		<span class="depth">커뮤니티</span><strong class="this">비상교재 게시판</strong>
+	</div>
+</div>
+
 	<h2>${board.boardTitle }</h2>
 	<div>
 		<span style="font-size: 18px; font-weight: bold; float: left; margin-left:20px;">${board.userId }</span>
 		<span style="float: right; margiin-rignt: 10px;">${board.boardWriteDate }</span>
 		<span style="float: right; margiin-rignt: 10px;">조회수 : ${board.boardViewCount }</span>
 	</div>
-	
+
 	<div style="margin-top: 50px; margin-bottom: 100px;">
 		<div style="position: absolute; right: 11%;">
 			<c:if test="${board.userId == userId }">

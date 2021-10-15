@@ -10,7 +10,7 @@
 <meta charset="UTF-8">
 <title>자유 게시판</title>
 <link rel="stylesheet" href="css/community/freeBoardMain.css" />
-<link rel="stylesheet" href="css/community/main.css" />
+<link rel="stylesheet" href="css/community/cmain.css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
 </head>
 <c:import url="../header.jsp" />
@@ -26,6 +26,8 @@
 			<li><a href="#">모임게시판</a></li>
 		</ul>
 </nav> <!-- TODO 링크 첨부 -->
+<div id= "contents">
+<div class="conwrap pb30">
 <section id="boardlsit">
 	<div class="h3group ">
 		<h3 class="tit">자유게시판</h3>
@@ -80,7 +82,7 @@
 	</table>
 	</section>
 	
-	<div style="text-align: centerl; margin-top:20px; ">
+	<div style="text-align: centerl; margin-top:20px;" class="pagination">
 		<c:if test="${startPage > blockSize }">
 			<a href="cf?pageNum=${startPage-blockSize}">[이전]</a>
 		</c:if>
@@ -97,7 +99,6 @@
 		</c:if>
  	</div>
 	
-	<input type="button" value="새글쓰기" id="btn_write" onclick="location.href ='cfwrite'" style="width: 240px;"/>
 	<div class="btn_wrap">
 		<div class="fl_c">
 			<a href="./cfwrite" class="btn50 c3 reg" style="width: 240px;" tmp="contents/bod" mn="60" cn="0"><span class="write">글작성</span></a>
@@ -105,8 +106,8 @@
 	</div>
 
 </div>
-
-
+</div>
+</div>
 <script>
 //change 될때마다 getListAjax
 $(function(){
