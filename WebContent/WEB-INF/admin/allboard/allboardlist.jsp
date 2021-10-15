@@ -71,6 +71,7 @@
                 <div class="admin-allboard-table-div">
                     <table class="table table-striped admin-allboard-table" style="text-align: center;">
                         <tr style="text-align:center; font-size: 16px; font-weight: bold;">
+                        	<td>글번호</td>
                             <td>게시판 카테고리</td>
                             <td>게시판 타입</td>
                             <td>글제목</td>
@@ -84,6 +85,7 @@
                        <c:if test = "${allboarduservolist != null}">
                         <c:forEach items = "${allboarduservolist}" var="b" >
                          <tr>
+                         	<td style = "vertical-align : middle">${b.boardNo}</td>
                             <td style = "vertical-align : middle">
                              <select class = "admin-select" name = "selectcategory" id = "allboard-select-main" onchange = "selectCategory()">
                           		<option value="자유 게시판"<c:if test = "${b.boardCategory=='자유 게시판'}">selected</c:if>>자유 게시판</option>
