@@ -12,9 +12,31 @@
     <link rel="stylesheet" href="./css/admin/allboard/adminAllBoard.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="./js/admin/boardgame/adminBoardGame.js"></script>
+    <script type="text/javascript" src="./js/admin/allboard/allboardlist.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>  
     <title>전체글 목록</title>
+     <script>
+  	function selectCategory() {
+ 		console.log("변경");
+		var free = ["사담", "건의", "질문"];
+		var userInfo = [ "기사", "후기", "공식", "팁"];
+		var party = [ "모임후기", "모집", "일정안내"];
+		var selectItem = $("#allboard-select-main").val();
+		var changeItem;
+		if (selectItem == "자유 게시판") {
+			changeItem = free;
+		} else if (selectItem == "유저정보 게시판") {
+			changeItem = userInfo;
+		} else if (selectItem == "모임 게시판") {
+			changeItem = party;
+		} 
+		$('#allboard-select-sub').empty();
+		for (var count = 0; count < changeItem.length; count++) {
+			var option = $("<option>" + changeItem[count] + "</option>");
+			$('#allboard-select-sub').append(option);
+		}
+	};     
+    </script> 
 </head>
 
 <body>
@@ -61,11 +83,34 @@
                         </tr>
                        <c:if test = "${allboarduservolist != null}">
                         <c:forEach items = "${allboarduservolist}" var="b" >
-                        
-                        
                          <tr>
-                            <td style = "vertical-align : middle">${b.boardCategory}</td>
-                            <td style = "vertical-align : middle">${b.boardType}</td>
+                            <td style = "vertical-align : middle">
+                             <select class = "admin-select" name = "selectcategory" id = "allboard-select-main" onchange = "selectCategory()">
+                          		<option value="자유 게시판"<c:if test = "${b.boardCategory=='자유 게시판'}">selected</c:if>>자유 게시판</option>
+								<option value="유저정보 게시판"<c:if test = "${b.boardCategory=='유저정보 게시판'}">selected</c:if>>유저정보 게시판</option>
+								<option value="모임 게시판"<c:if test = "${b.boardCategory=='모임 게시판'}">selected</c:if>>모임 게시판</option>
+                            </select>
+                            </td>
+                            <td style = "vertical-align : middle">
+                            <select class="admin-sub-select" name="selectSubCategory" id = "allboard-select-sub">
+                            		<c:if test="${b.boardCategory=='자유 게시판'}"> 
+										<option value="사담"<c:if test = "${b.boardType=='사담'}">selected</c:if>>사담</option>
+										<option value="건의"<c:if test = "${b.boardType=='건의'}">selected</c:if>>건의</option>
+										<option value="질문"<c:if test = "${b.boardType=='질문'}">selected</c:if>>질문</option>
+									</c:if>
+									<c:if test="${b.boardCategory=='유저정보 게시판'}"> 
+										<option value="기사">기사</option>
+										<option value="후기">후기</option>
+										<option value="공식">공식</option>
+										<option value="팁">팁</option>
+									</c:if>
+									<c:if test="${b.boardCategory=='모임 게시판'}"> 
+										<option value="모임후기">모임후기</option>
+										<option value="모집">모집</option>
+										<option value="일정안내">일정안내</option>
+									</c:if>
+                            </select>
+                            </td>
                             <td style = "vertical-align : middle">${b.boardTitle}</td>
                             <td style = "vertical-align : middle">${b.userId}</td>
                             <td style = "vertical-align : middle">${b.userNo}</td>
