@@ -12,31 +12,9 @@
     <link rel="stylesheet" href="./css/admin/allboard/adminAllBoard.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="./js/admin/allboard/allboardlist.js"></script>
+    <script type="text/javascript" src="./js/admin/allboard/allboardlist.js?after"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>  
     <title>전체글 목록</title>
-     <script>
-  	function selectCategory() {
- 		console.log("변경");
-		var free = ["사담", "건의", "질문"];
-		var userInfo = [ "기사", "후기", "공식", "팁"];
-		var party = [ "모임후기", "모집", "일정안내"];
-		var selectItem = $("#allboard-select-main").val();
-		var changeItem;
-		if (selectItem == "자유 게시판") {
-			changeItem = free;
-		} else if (selectItem == "유저정보 게시판") {
-			changeItem = userInfo;
-		} else if (selectItem == "모임 게시판") {
-			changeItem = party;
-		} 
-		$('#allboard-select-sub').empty();
-		for (var count = 0; count < changeItem.length; count++) {
-			var option = $("<option>" + changeItem[count] + "</option>");
-			$('#allboard-select-sub').append(option);
-		}
-	};     
-    </script> 
 </head>
 
 <body>
@@ -85,9 +63,9 @@
                        <c:if test = "${allboarduservolist != null}">
                         <c:forEach items = "${allboarduservolist}" var="b" >
                          <tr>
-                         	<td style = "vertical-align : middle">${b.boardNo}</td>
-                            <td style = "vertical-align : middle">
-                             <select class = "admin-select" name = "selectcategory" id = "allboard-select-main" onchange = "selectCategory()">
+                         	<td style = "vertical-align : middle" class = "boardNo">${b.boardNo}</td>
+                            <td style = "vertical-align : middle" id = "select-main-td">
+                             <select class = "admin-select" name = "selectCategory" id = "allboard-select-main">
                           		<option value="자유 게시판"<c:if test = "${b.boardCategory=='자유 게시판'}">selected</c:if>>자유 게시판</option>
 								<option value="유저정보 게시판"<c:if test = "${b.boardCategory=='유저정보 게시판'}">selected</c:if>>유저정보 게시판</option>
 								<option value="모임 게시판"<c:if test = "${b.boardCategory=='모임 게시판'}">selected</c:if>>모임 게시판</option>
@@ -101,15 +79,15 @@
 										<option value="질문"<c:if test = "${b.boardType=='질문'}">selected</c:if>>질문</option>
 									</c:if>
 									<c:if test="${b.boardCategory=='유저정보 게시판'}"> 
-										<option value="기사">기사</option>
-										<option value="후기">후기</option>
-										<option value="공식">공식</option>
-										<option value="팁">팁</option>
+										<option value="기사"<c:if test = "${b.boardType=='기사'}">selected</c:if>>기사</option>
+										<option value="후기"<c:if test = "${b.boardType=='후기'}">selected</c:if>>후기</option>
+										<option value="공식"<c:if test = "${b.boardType=='공식'}">selected</c:if>>공식</option>
+										<option value="팁"<c:if test = "${b.boardType=='팁'}">selected</c:if>>팁</option>
 									</c:if>
 									<c:if test="${b.boardCategory=='모임 게시판'}"> 
-										<option value="모임후기">모임후기</option>
-										<option value="모집">모집</option>
-										<option value="일정안내">일정안내</option>
+										<option value="모임후기"<c:if test = "${b.boardType=='모임후기'}">selected</c:if>>모임후기</option>
+										<option value="모집"<c:if test = "${b.boardType=='모집'}">selected</c:if>>모집</option>
+										<option value="일정안내"<c:if test = "${b.boardType=='일정안내'}">selected</c:if>>일정안내</option>
 									</c:if>
                             </select>
                             </td>
