@@ -17,12 +17,11 @@ public class User {
 	public User() {
 	}
 
-
 	
-
-	public User(String userName, String userNickname, String userId, String userPassword, String userEmail,
-			int userPhone, String userAddress) {
+	public User(String userImage, String userName, String userNickname, String userId, String userPassword,
+			String userEmail, int userPhone, String userAddress) {
 		super();
+		this.userImage = userImage;
 		this.userName = userName;
 		this.userNickname = userNickname;
 		this.userId = userId;
@@ -32,9 +31,10 @@ public class User {
 		this.userAddress = userAddress;
 	}
 
-	public User(String userName, String userNickname, String userId, String userPassword, String userEmail,
-			int userPhone, String userAddress, char userType, String userImage, int userHistory, int userNo) {
+	public User(String userImage, String userName, String userNickname, String userId, String userPassword,
+			String userEmail, int userPhone, String userAddress, char userType, int userHistory, int userNo) {
 		super();
+		this.userImage = userImage;
 		this.userName = userName;
 		this.userNickname = userNickname;
 		this.userId = userId;
@@ -43,12 +43,13 @@ public class User {
 		this.userPhone = userPhone;
 		this.userAddress = userAddress;
 		this.userType = userType;
-		this.userImage = userImage;
 		this.userHistory = userHistory;
 		this.userNo = userNo;
 	}
 
-	
+
+
+
 	public String getUserName() {
 		return userName;
 	}

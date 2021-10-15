@@ -7,6 +7,8 @@
 <title>Insert title here</title>
   <link rel="stylesheet" href="./css/user/signUp.css">
   <link rel="stylesheet" href="./css/user/loginHeaderFooter.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="./js/user/signUp.js"></script>
 </head>
 <body>
  <%@include file="/WEB-INF/user/userHeader.jsp" %>
@@ -15,8 +17,8 @@
             <div class="insert">
                 <table>
                     <caption>
-                        <h2>회원가입</h2>
-                        <h3>정보입력</h3>
+                        <h1>회원가입</h1>
+                        <h2>정보입력</h2>
                         <h4>*은 필수작성 항목입니다.</h4>
                     </caption>
 					<tr>
@@ -36,6 +38,10 @@
                             <input type="text" name="userNickname" id="userNickname" maxlength="8" placeholder="닉네임을 입력해주세요.">
                             <input class='CheckBtn' id="dupnicknamechkBtn" type="button" value="중복확인" onclick="">
                         </td>
+                        <td class="col3">
+                                <div id="nicknamecheck"></div>
+                                <input type="button" name="nickDuplication" value="nicknameUncheck">
+                        </td>
                     </tr>
                     <tr>
                         <td class="col1">* 아이디</td>
@@ -43,6 +49,10 @@
                             <input type="text" name="userId" id="userId" maxlength="20" placeholder="아이디를 입력해주세요." onkeydown="inputIdChk()">
                             <input class='CheckBtn' id="dupidchkBtn" type="button" value="중복확인" >     
                         </td>
+                         <td class="col3">
+                                <div id="idcheck"></div>
+                                <input type="button" name="idDuplication" value="idUncheck">
+                         </td>
                     </tr>
                     <tr>
                         <td class="col1">* 비밀번호</td>

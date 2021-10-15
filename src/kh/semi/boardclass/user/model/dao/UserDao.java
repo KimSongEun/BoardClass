@@ -86,13 +86,48 @@ public class UserDao {
 		return result;
 	}
 
-	public int checkId(Connection conn, User user) {
+	public int checkId(Connection conn, String userId) {
 		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "SELECT COUNT(*) FROM MEMBER WHERE USER_ID = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1); // rset의 첫 컬럼의 숫자값을 가져온다
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
 
-	public int checkNick(Connection conn, User user) {
+	public int checkNick(Connection conn, String userNickname) {
 		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "SELECT COUNT(*) FROM MEMBER WHERE USER_NICKNAME = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userNickname);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1); // rset의 첫 컬럼의 숫자값을 가져온다
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
 

@@ -37,7 +37,8 @@ public class SignUpDoServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-
+		
+		String userImage = request.getParameter("userImage");
 		String userName = request.getParameter("userName");
 		String userNickname = request.getParameter("userNickname");
 		String userId = request.getParameter("userId");
@@ -47,7 +48,7 @@ public class SignUpDoServlet extends HttpServlet {
 		String userAddress = request.getParameter("userAddress");
 
 		// 화면 데이터를 vo에 싣기
-		User user = new User(userName, userNickname, userId, userPassword, userEmail, userPhone, userAddress);
+		User user = new User(userImage, userName, userNickname, userId, userPassword, userEmail, userPhone, userAddress);
 
 		// vo를 가지고 회원가입하러 Dao로 출발
 		UserService uservice = new UserService();
@@ -55,6 +56,7 @@ public class SignUpDoServlet extends HttpServlet {
 
 		System.out.println(user);
 		System.out.println(userName);
+		System.out.println("image"+userImage);
 		System.out.println(result);
 
 		if (result == 1) {
@@ -63,7 +65,7 @@ public class SignUpDoServlet extends HttpServlet {
 			request.getSession().setAttribute("messageContent", "회원가입에 성공했습니다.");
 			// out.println(userId + "님 가입되었습니다. 환영합니다.");
 			// response.sendRedirect("signUp.jsp");
-			response.sendRedirect("login");
+			response.sendRedirect("usermain");
 		} else {
 			System.out.println("회원가입 실패");
 			request.getSession().setAttribute("messageType", "오류 메시지");

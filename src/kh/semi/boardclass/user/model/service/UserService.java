@@ -30,8 +30,6 @@ public class UserService {
 		// TODO:
 		result = new UserDao().signUp(conn, user);
 		//result = new UserDao().agree(conn, user);
-		//result = new UserDao().checkId(conn, user);
-		//result = new UserDao().checkNick(conn, user);
 		
 		if (result > 0) {
 			JDBCTemplate.commit(conn);
@@ -39,6 +37,20 @@ public class UserService {
 			JDBCTemplate.rollback(conn);
 		}
 		JDBCTemplate.close(conn);
+		return result;
+	}
+	
+	// ID 중복 체크를 위한 메소드
+	public int checkId(String id) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new UserDao().checkId(conn, id);
+		return result;
+	}
+
+	// 닉네임 중복 체크를 위한 메소드
+	public int checkNick(String userNickname) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new UserDao().checkId(conn, userNickname);
 		return result;
 	}
 	
