@@ -64,7 +64,7 @@ public class UsedOnStrategyListServlet extends HttpServlet {
 
 		ArrayList<Used> volist = new UsedService().selectCateUsedList(startRnum, endRnum, cate);
 
-		request.setAttribute("usedvolist", volist);
+		request.setAttribute("usedlist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);

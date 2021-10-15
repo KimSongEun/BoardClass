@@ -12,8 +12,8 @@
 
 	<div>
 		<select id="gameCategory" onchange="window.open(value,'_self');">
-			<option value="usedmain" selected>전체</option>
-			<option value="UsedOnPuzzleList">퍼즐</option>
+			<option value="usedmain">전체</option>
+			<option value="UsedOnPuzzleList" selected>퍼즐</option>
 			<option value="UsedOnStrategyList">전략</option>
 			<option value="UsedOnAbstractList">추상</option>
 			<option value="UsedOnThemeList">테마</option>

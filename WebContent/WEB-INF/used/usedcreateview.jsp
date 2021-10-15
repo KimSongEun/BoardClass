@@ -1,25 +1,55 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<title>중고거래글 작성</title>
 <script>
-	$("#btnInsert").click(checkValue);
+	function checkValAll() {
+		console.log("checkValAll함수진입");
 
-	function checkValue() {
-		alert("기다려봐");
+		var title = document.getElementById("title")
+		var price = document.getElementById("price")
+		var info = document.getElementById("info")
+		var imgFile = document.getElementById("imgFile");
+
+		var titleval = title.value;
+		var priceval = price.value;
+		var infoval = info.value;
+		
+		if (!titleval) {
+			alert("제목을 입력하세요")
+			title.focus();
+			return false;
+		}
+
+		if (!priceval) {
+			alert("가격을 입력하세요");
+			return false;
+		}
+
+		var regExpPrice = /^[0-9]{1,7}$/;
+		if (!regExpPrice.test(priceval)) {
+			alert("숫자만 입력해주세요. 입력가능한 최대금액은 9,999,999입니다.");
+			return false;
+		}
+
+		if (!infoval) {
+			alert("상품 상세 설명을 작성하세요");
+			return false;
+		}
+
+		return false;
 	}
 </script>
-<style>
-</style>
 </head>
 <body>
 	^^; 연결되었나요?
 
-	<form action="usedcreate" method="post" enctype="multipart/form-data">
+	<form action="#" method="post" enctype="multipart/form-data">
 		<div>
 			<table>
 				<tr>
@@ -30,7 +60,7 @@
 				</tr>
 				<tr>
 					<td><label for="price">가격 : </label></td>
-					<td><input id="price" name="usedPrice" pattern="[0-9]+"
+					<td><input id="price" name="usedPrice"
 						placeholder="숫자만 입력하세요"></td>
 				</tr>
 				<tr>
@@ -61,7 +91,7 @@
 					<td><input type="file" name="usedImg">
 					<td><label for="gamecate">카테고리 : </label></td>
 					<td><select id="gamecate" name="usedCategory">
-							<option value="없음" selected>없음</option>
+							<option value="" selected>없음</option>
 							<option value="퍼즐">퍼즐</option>
 							<option value="전략">전략</option>
 							<option value="추상">추상</option>
@@ -78,17 +108,13 @@
 		</div>
 		<div>
 			상품정보<br>
-			<textarea name="usedInfo" placeholder="상품정보를 입력하세요"></textarea>
+			<textarea id="info" name="usedInfo" placeholder="상품정보를 입력하세요"></textarea>
 		</div>
 		<div>
 			검색창 <input type="search">
 		</div>
-		<button type="submit" id="btnInsert">등록</button>
+		<button type="button" onclick="checkValAll()">등록</button>
 	</form>
-
-
-
-
 
 
 </body>

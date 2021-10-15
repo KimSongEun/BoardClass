@@ -35,6 +35,14 @@ public class UsedService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	
+	public Used getUsedDetail(int usedNO) {
+		Used vo = null;
+		Connection conn = JDBCTemplate.getConnection();
+		vo = new UsedDao().getUsedDetail(conn, usedNO);
+		JDBCTemplate.close(conn);
+		return vo;
+	}
 
 	public int insertUsed(Used vo) {
 		int result = 0;

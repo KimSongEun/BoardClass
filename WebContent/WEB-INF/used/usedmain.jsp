@@ -8,7 +8,6 @@
 <title>중고거래 메인</title>
 </head>
 <body>화면이 보이나요?
-<body>
 	<h1>화면 나오나?</h1>
 
 	<div>
@@ -41,8 +40,8 @@
 			<c:forEach var="r" items="${usedlist}">
 				<tr>
 					<td>${r.usedNo}</td>
-					<td><a href="#">${r.usedImg}</a></td>
-					<td><a href="#">${r.usedTitle}</a></td>
+					<td><a href="usedinformation?no=${r.usedNo}">${r.usedImg}</a></td>
+					<td><a href="usedinformation?no=${r.usedNo}">${r.usedTitle}</a></td>
 					<td>${r.userId}</td>
 				</tr>
 			</c:forEach>

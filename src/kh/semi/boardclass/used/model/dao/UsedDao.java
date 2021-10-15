@@ -113,6 +113,40 @@ public class UsedDao {
 		return result;
 	}
 
+	public Used getUsedDetail(Connection conn, int usedNo) {
+		Used vo = null;
+		String sql = "select USED_NO, USER_ID, USED_TITLE, USED_PRICE, USED_STATE, USED_CHANGE, USED_EXTYPE, USED_INFO, TO_CHAR(USED_DAY, 'mm/dd hh24:mi') USED_DAY, USED_IMG, USED_CATEGORY from used where USED_NO = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, usedNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				vo = new Used();
+				vo.setUsedNo(rset.getInt(1));
+				vo.setUserId(rset.getString(2));
+				vo.setUsedTitle(rset.getString(3));
+				vo.setUsedPrice(rset.getInt(4));
+				vo.setUsedState(rset.getString(5));
+				vo.setUsedChange(rset.getString(6));
+				vo.setUsedExtype(rset.getString(7));
+				vo.setUsedDay(rset.getString(8));
+				vo.setUsedImg(rset.getString(9));
+				vo.setUsedCategory(rset.getString(10));				
+			}
+			
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return vo;
+	}
+
 	public int insertUsed(Connection conn, Used vo) {
 		int result = 0;
 		String sql = "INSERT INTO USED VALUES (USED_NUM.nextval, ?, ?, ?, ?, ?, ?, ?, sysdate, ?, ?)";
@@ -131,6 +165,8 @@ public class UsedDao {
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
 		}
 		return result;
 	}
