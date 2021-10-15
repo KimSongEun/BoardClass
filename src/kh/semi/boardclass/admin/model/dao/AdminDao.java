@@ -17,6 +17,7 @@ import kh.semi.boardclass.user.model.vo.User;
 import java.util.ArrayList;
 
 import kh.semi.boardclass.admin.model.vo.AllBoardUser;
+import kh.semi.boardclass.admin.model.vo.AllCommentUser;
 import kh.semi.boardclass.admin.model.vo.Banner;
 import kh.semi.boardclass.admin.model.vo.Notice;
 
@@ -816,14 +817,241 @@ public class AdminDao {
 		return result;
 	} 
 	
-	public ArrayList<Comment> selectAllCommentList(Connection conn){
-		ArrayList<Comment> volist = null;
+	public int getAllCommentCount(Connection conn) {
+		int result = 0;
+		String sql = "SELECT count(*) FROM COMT C JOIN BOARD B ON C.BOARD_NO=B.BOARD_NO JOIN MEMBER M ON C.USER_ID = M.USER_ID";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<AllCommentUser> selectAllCommentList(Connection conn, int start, int end){
+		ArrayList<AllCommentUser> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT C.COMMENT_NO, B.BOARD_TITLE, C.COMMENT_CONTENT, M.USER_ID, M.USER_NO, C.COMMENT_REWRITE_DATE FROM COMT C JOIN BOARD B ON C.BOARD_NO=B.BOARD_NO JOIN MEMBER M ON C.USER_ID = M.USER_ID ORDER BY COMMENT_REWRITE_DATE DESC) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<AllCommentUser>();
+			if (rset.next()) {
+				do {
+					AllCommentUser vo = new AllCommentUser();
+					vo.setCommentNo(rset.getInt("COMMENT_NO"));
+					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+					vo.setCommentContent(rset.getString("COMMENT_CONTENT"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setUserNo(rset.getInt("USER_NO"));
+					vo.setCommentRewriteDate(rset.getDate("COMMENT_REWRITE_DATE"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return volist;
 	}
-	public Comment searchAllcomment(Connection conn){
-		Comment vo = null;
-		return vo;
+	
+	public int getAllCommentUserIdCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "select count(*) as total FROM COMT C JOIN BOARD B ON C.BOARD_NO=B.BOARD_NO JOIN MEMBER M ON C.USER_ID = M.USER_ID where M.USER_ID like (?)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
+	
+	public ArrayList<AllCommentUser> searchAllCommentUserId(Connection conn, String keyword, int start, int end){
+		ArrayList<AllCommentUser> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT C.COMMENT_NO, B.BOARD_TITLE, C.COMMENT_CONTENT, M.USER_ID, M.USER_NO, C.COMMENT_REWRITE_DATE FROM COMT C JOIN BOARD B ON C.BOARD_NO=B.BOARD_NO  JOIN MEMBER M ON C.USER_ID = M.USER_ID WHERE M.USER_ID like (?) ORDER BY COMMENT_REWRITE_DATE DESC) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<AllCommentUser>();
+			if (rset.next()) {
+				do {
+					AllCommentUser vo = new AllCommentUser();
+					vo.setCommentNo(rset.getInt("COMMENT_NO"));
+					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+					vo.setCommentContent(rset.getString("COMMENT_CONTENT"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setUserNo(rset.getInt("USER_NO"));
+					vo.setCommentRewriteDate(rset.getDate("COMMENT_REWRITE_DATE"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	public int getAllCommentUserNoCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "select count(*) as total FROM COMT C JOIN BOARD B ON C.BOARD_NO=B.BOARD_NO JOIN MEMBER M ON C.USER_ID = M.USER_ID where USER_NO like (?)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<AllCommentUser> searchAllCommentUserNo(Connection conn, String keyword, int start, int end){
+		ArrayList<AllCommentUser> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT C.COMMENT_NO, B.BOARD_TITLE, C.COMMENT_CONTENT, M.USER_ID, M.USER_NO, C.COMMENT_REWRITE_DATE FROM COMT C JOIN BOARD B ON C.BOARD_NO=B.BOARD_NO  JOIN MEMBER M ON C.USER_ID = M.USER_ID WHERE USER_NO like (?) ORDER BY COMMENT_REWRITE_DATE DESC) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<AllCommentUser>();
+			if (rset.next()) {
+				do {
+					AllCommentUser vo = new AllCommentUser();
+					vo.setCommentNo(rset.getInt("COMMENT_NO"));
+					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+					vo.setCommentContent(rset.getString("COMMENT_CONTENT"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setUserNo(rset.getInt("USER_NO"));
+					vo.setCommentRewriteDate(rset.getDate("COMMENT_REWRITE_DATE"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	public int getAllCommentTitleCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "select count(*) as total FROM COMT C JOIN BOARD B ON C.BOARD_NO=B.BOARD_NO JOIN MEMBER M ON C.USER_ID = M.USER_ID where BOARD_TITLE like (?)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<AllCommentUser> searchAllCommentTitle(Connection conn, String keyword, int start, int end){
+		ArrayList<AllCommentUser> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT C.COMMENT_NO, B.BOARD_TITLE, C.COMMENT_CONTENT, M.USER_ID, M.USER_NO, C.COMMENT_REWRITE_DATE FROM COMT C JOIN BOARD B ON C.BOARD_NO=B.BOARD_NO  JOIN MEMBER M ON C.USER_ID = M.USER_ID WHERE BOARD_TITLE like (?) ORDER BY COMMENT_REWRITE_DATE DESC) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<AllCommentUser>();
+			if (rset.next()) {
+				do {
+					AllCommentUser vo = new AllCommentUser();
+					vo.setCommentNo(rset.getInt("COMMENT_NO"));
+					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+					vo.setCommentContent(rset.getString("COMMENT_CONTENT"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setUserNo(rset.getInt("USER_NO"));
+					vo.setCommentRewriteDate(rset.getDate("COMMENT_REWRITE_DATE"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	
+	public int deleteAllComment(Connection conn, int boardNo){
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM COMT WHERE COMMENT_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return result;
+	} 
+	
 	public ArrayList<User> selectUserList(Connection conn){
 		ArrayList<User> volist = null;
 		return volist;
