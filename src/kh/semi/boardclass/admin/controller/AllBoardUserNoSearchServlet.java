@@ -10,20 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.boardclass.admin.model.service.AdminService;
-import kh.semi.boardclass.admin.model.vo.Banner;
-import kh.semi.boardclass.game.model.vo.Game;
+import kh.semi.boardclass.admin.model.vo.AllBoardUser;
 
 /**
- * Servlet implementation class BoardgameListServlet
+ * Servlet implementation class AllBoardUserNoSearchServlet
  */
-@WebServlet("/boardgamelist")
-public class BoardgameListServlet extends HttpServlet {
+@WebServlet("/allboardusernosearch")
+public class AllBoardUserNoSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BoardgameListServlet() {
+    public AllBoardUserNoSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,8 +31,9 @@ public class BoardgameListServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html; charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		
 		String viewcount = request.getParameter("viewcount");
 		int PAGE_SIZE;
@@ -55,8 +55,9 @@ public class BoardgameListServlet extends HttpServlet {
 		if(pageNum !=null) { 
 				currentPage=Integer.parseInt(pageNum);
 		}
-		
-		aCount = new AdminService().getBoardGameCount();
+		String type = request.getParameter("type");
+		String keyword = request.getParameter("keyword");
+		aCount = new AdminService().getAllBoardUserNoCount(keyword);
 		pageCount = (aCount / PAGE_SIZE) + (aCount % PAGE_SIZE == 0 ? 0:1);
 		startRnum = (currentPage-1) * PAGE_SIZE + 1;  
 		endRnum = startRnum + PAGE_SIZE -1;
@@ -70,14 +71,16 @@ public class BoardgameListServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1;
 		if(endPage > pageCount) endPage = pageCount;
 		
-		ArrayList<Game> volist  = new AdminService().selectBoardGameList(startRnum, endRnum);
+		ArrayList<AllBoardUser> volist  = new AdminService().searchAllBoardUserNoList(keyword, startRnum, endRnum);
 		
 		request.setAttribute("viewcount", PAGE_SIZE);
-		request.setAttribute("gamevolist", volist);
+		request.setAttribute("allboarduservolist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
-		request.getRequestDispatcher("/WEB-INF/admin/boardgame/boardgamelist.jsp").forward(request, response);
+		request.setAttribute("keyword", keyword);
+		request.setAttribute("type", type);
+		request.getRequestDispatcher("/WEB-INF/admin/allboard/allboardlist.jsp").forward(request, response);
 	}
 
 	/**

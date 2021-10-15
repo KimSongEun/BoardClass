@@ -289,6 +289,14 @@ public class AdminService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	
+	public int getAllBoardCount() {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getAllBoardCount(conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}
 
 	public ArrayList<AllBoardUser> selectAllBoardList(int start, int end) {
 		ArrayList<AllBoardUser> volist = null;
@@ -298,14 +306,54 @@ public class AdminService {
 		return volist;
 	}
 
-	public Board searchAllBoard() {
-		Board vo = null;
+	public int getAllBoardUserIdCount(String keyword) {
+		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		vo = new AdminDao().searchAllBoard(conn);
+		result = new AdminDao().getAllBoardUserIdCount(conn, keyword);
 		JDBCTemplate.close(conn);
-		return vo;
+		return result;
 	}
 
+	public ArrayList<AllBoardUser> searchAllBoardUserIdList(String keyword, int start, int end) {
+		ArrayList<AllBoardUser> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchAllBoardUserId(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int getAllBoardUserNoCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getAllBoardUserNoCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<AllBoardUser> searchAllBoardUserNoList(String keyword, int start, int end) {
+		ArrayList<AllBoardUser> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchAllBoardUserNo(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+
+	public int getAllBoardTitleCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getAllBoardTitleCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<AllBoardUser> searchAllBoardTitleList(String keyword, int start, int end) {
+		ArrayList<AllBoardUser> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchAllBoardTitle(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
 	public int updateAllBoard(int boardNo, String boardCategory, String boardType) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();

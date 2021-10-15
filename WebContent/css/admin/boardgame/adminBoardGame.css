@@ -48,10 +48,8 @@
 }
 .admin-boardgame-table{
 	table-layout : fixed;
-	width: 900px; 
 	margin-top: 20px;
 }
 .admin-boardgame-page-nav {
-	margin-left: 330px;
-	margin-right: 330px;
+	text-align : center;
 }

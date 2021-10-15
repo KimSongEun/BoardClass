@@ -3,7 +3,21 @@ $(function(){
 /*	$(window).click(function(e){
 		console.log(e.target);
 	});*/
-	
+	$(".admin-allboard-search-select").change(f1);
+	f1();
+	function f1() {
+		console.log("변경");
+		if($(".admin-allboard-search-select").val() == "작성자아이디"){
+			$(".searchselect").attr("action", "allboarduseridsearch");
+			/*console.log($(".searchselect").attr("action"));*/
+		} else if ($(".admin-allboard-search-select").val() == "작성자 회원번호") {
+			$(".searchselect").attr("action", "allboardusernosearch");
+			/*console.log($(".searchselect").attr("action"));*/
+		}else if ($(".admin-allboard-search-select").val() == "글제목") {
+			$(".searchselect").attr("action", "allboardtitlesearch");
+			/*console.log($(".searchselect").attr("action"));*/
+		}
+	};
 	$(".admin-select").change(selectCategory);
 	function selectCategory() {
 		var index = $(".admin-select").index(this);

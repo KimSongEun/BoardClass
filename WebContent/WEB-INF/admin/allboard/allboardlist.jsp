@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./css/admin/allboard/adminAllBoard.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="./js/admin/allboard/allboardlist.js?after"></script>
+    <script type="text/javascript" src="./js/admin/allboard/allboardlist.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>  
     <title>전체글 목록</title>
 </head>
@@ -27,13 +27,15 @@
                 <table class="admin-allboard-search">
                 <tr>
                 	<td>
-                    <select class="admin-allboard-search-select">
-                        <option>작성자아이디 </option>
-                        <option>작성자 회원번호</option>
-                        <option>글제목</option>
+                	<form action = "allboarduseridsearch" method = "post" class = "searchselect">
+                    <select class="admin-allboard-search-select" name = "type">
+                        <option value ="작성자아이디" <c:if test = "${type == '작성자아이디'}"> selected </c:if>>작성자아이디 </option>
+                        <option value ="작성자 회원번호" <c:if test = "${type == '작성자 회원번호'}"> selected </c:if>>작성자 회원번호</option>
+                        <option value ="글제목" <c:if test = "${type == '글제목'}"> selected </c:if>>글제목</option>
                     </select>
-                    <input type="text" class="admin-allboard-search-input">
-                    <input type="button" value="검색" class="admin-allboard-search-button">
+                    <input type="text" class="admin-allboard-search-input" name = "keyword" id = "keyword" value="${keyword }">
+                    <button type="submit" class="admin-allboard-search-button">검색</button>
+                    </form>
                     </td>
                     
                     <td style = "text-align : right; font-size : 15px">
@@ -91,8 +93,8 @@
 									</c:if>
                             </select>
                             </td>
-                            <td style = "vertical-align : middle">${b.boardTitle}</td>
-                            <td style = "vertical-align : middle">${b.userId}</td>
+                            <td style = "vertical-align : middle"><a href="#글내용조회">${b.boardTitle}</a></td>
+                            <td style = "vertical-align : middle"><a href="#회원정보조회">${b.userId}</a></td>
                             <td style = "vertical-align : middle">${b.userNo}</td>
                             <td style = "vertical-align : middle">${b.boardRewriteDate}</td>
                             <td style = "vertical-align : middle"><button class="update btn btn-danger" value="updatego">수정</button> </td>
