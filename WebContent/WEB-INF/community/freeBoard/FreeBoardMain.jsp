@@ -51,19 +51,16 @@
 	</div>
 
 <table class="c_table">
-	<tr>
-	<th>번호</th>
-	<th>제목</th>
-	<th>작성자</th>
-	<th>작성일</th>
-	<th>조회수</th>
-	</tr>
+
 	
 	<c:if test="${totCnt > 0 }">
 	<c:forEach var="board" items="${list }">
 		<tr>
-			<td style="width: 10%; font-weight: bold; font-size: 18px; text-align: center;">
+			<td style="width: 10%; font-size: 18px; text-align: center;">
 				${board.boardNo }
+			</td>
+			<td style="width: 10%; font-size: 18px; text-align: center;">
+				${board.boardType }
 			</td>
 			<td style="width: 40%; font-weight: bold; font-size: 18px">
 				<a href="cfdetail?boardNo=${board.boardNo }&pageNum=${currentPage}">${board.boardTitle }</a>
@@ -133,6 +130,8 @@ $(function(){
 			}
 		});//ajax
 	}
+	
+
 </script>
 
 

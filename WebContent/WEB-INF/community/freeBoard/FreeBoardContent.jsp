@@ -45,8 +45,8 @@
 			</div>
 		</div>
 		<div class= "content">
-		내용 : ${content }
-		<!-- 파일첨부 -->
+		내용 : ${board.boardContent }
+		<!-- 댓글 -->
 		</div>
 	<div class="bottom">
 		<div class="utils">
@@ -57,12 +57,27 @@
 			</div>
 		</div>
 	</div>
-	<div class="updte">
-			<input type="button" value="수정" onclick="location.href='cfupdate?=boardNo=${board.boardNo }&pageNum=${pageNum }'">
-			<input type="button" value="삭제" >
+	<div class="btn_wrap">
+	<!-- 아이디 확인한 후 버튼 생성 가능-->
+	
+			<a href="cfupdate?boardNo=${board.boardNo }" class="btn btn1">
+				<button>수정</button>
+			</a>
+			<input type="button" class="btn btn2" value="삭제" onclick="del()">
+			<a href="cf" class="btn btn3">
+				<button >목록</button>
+			</a>
 	</div>
 	
 </div>
 </div>
+<script>
+function del(){
+	const del = confirm("해당 게시물을 삭제하시겠습니까?");
+	if(del) {
+		location.href='cfdelete?boardNo=${board.boardNo }';
+	}
+}
+</script>
 </body>
 </html>

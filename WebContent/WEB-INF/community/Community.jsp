@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>커뮤니티</title>
 <link rel="stylesheet" href="css/community/community.css" />
-<link rel="stylesheet" href="css/community/main.css" />
+<link rel="stylesheet" href="css/community/cmain.css" />
 
 </head>
 <body>

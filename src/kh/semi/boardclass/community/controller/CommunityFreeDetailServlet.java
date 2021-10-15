@@ -40,13 +40,13 @@ public class CommunityFreeDetailServlet extends HttpServlet {
 		Board board = new CommunityService().getBoard(boardNo);
 		String date = board.getBoardWriteDate();
 		
-		String content = board.getBoardContent();
-		content = content.replace("/r/n", "<br>");
+//		String content = board.getBoardContent();
+//		content = content.replace("/r/n", "<br>");
 		
 		request.setAttribute("boardNo", boardNo);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("board", board);
-		request.setAttribute("content", content);
+//		request.setAttribute("content", content);
 		request.setAttribute("date", date);
 		//TODO 댓
 		
