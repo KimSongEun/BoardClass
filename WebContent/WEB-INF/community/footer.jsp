@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
       <hr>
       <br>
-      <footer>
+      <footer style="background-color: #f8f3fd;">
           <div class="footer">
               <span id="f_s">Copyright ⓒ 2021 <b id="f_b">보드게임 커뮤니티 보드클래스</b> All rights reserved.</span>
                | 

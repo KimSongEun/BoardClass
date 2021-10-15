@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 #guide{
 	display:table;
 	table-layout: fixed;
@@ -87,49 +86,34 @@
     margin: -30px -30px 0;
  	 background-color: #ffffff;
 }
-.pb30 {
-	padding-bottom: 30px !important
+.viewbody {
+	padding: 53px 0 0;
 }
-.c_table {
-	background: #ffffff;
-}
-.c_table tr {
-	background-color: #ffffff;
-}
-.c_table tr th {
-	background-color: #ffffff;
-}
-.c_table tr td {
-	background-color: #ffffff;
-}
-/* 글쓰기 */
-.btn_wrap a:first-child {
-	margin: 0;
-}
-.btn50.c3 {
-    border: 1px solid #fd5064;
-    background: #fd5064;
-    color: #ffffff;
-}
-.btn_wrap a {
-    float: left;
-}
-a:link {
-	text-decoration: none;
-}
-.btn50 {
-    display: inline-block;
-    box-sizing: border-box;
-    height: 50px;
-    border: none;
-    border-radius: 0;
+.viewbody .hgroup .tit {
+    margin: 0 0 18px;
     font-weight: 700;
+    font-size: 42px;
+    line-height: 56px;
+    color: #2d2723;
+    word-break: break-all;
+	text-align: center;
+}
+.viewbody .hgroup .util {
+    display: inline-block;
+}
+.viewbody .hgroup .util div {
+    float: left;
+    position: relative;
+    margin: 0 0 0 28px;
     font-size: 16px;
-    line-height: 48px;
-    text-align: center;
-    vertical-align: top;
-    cursor: pointer;
-    outline: none;
-    -webkit-appearance: none;
-    appearance: none;
+    color: #777777;
+}
+.viewbody .hgroup .util div:first-child {
+    margin: 0;
+}
+.viewbodt .content {
+	font-size: 16px;
+	line-height: 26px;
+	color: #666;
+	text-align: center;
 }

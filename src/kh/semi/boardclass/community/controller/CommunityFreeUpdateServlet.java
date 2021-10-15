@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.boardclass.community.model.service.CommunityService;
+import kh.semi.boardclass.community.model.vo.Board;
+
 /**
  * Servlet implementation class CommunityFreeUpdateServlet
  */
@@ -19,15 +22,26 @@ public class CommunityFreeUpdateServlet extends HttpServlet {
      */
     public CommunityFreeUpdateServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		Board board = new Board();
+		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+		board.setUserId(request.getParameter("user_id"));
+		board.setBoardTitle(request.getParameter("board_title"));
+		board.setBoardContent(request.getParameter("board_content"));
+		board.setBoardNo(Integer.parseInt(request.getParameter("board_no")));
+		
+		int result = new CommunityService().updateFreeBoard(board);
+		
+		request.setAttribute("result", result);
+		request.setAttribute("board_no", board.getBoardNo());
+		request.setAttribute("pageNum", pageNum);
+		
+		request.getRequestDispatcher("/WEB-INF/community/freeBoard/FreeBoardUpdate.jsp").forward(request, response);
 	}
 
 	/**
