@@ -1,24 +1,213 @@
 @charset "UTF-8";
 
-/* 커뮤니티 메인*/
+/* common*/
 * { margin: 0; padding: 0;}
 body {font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;}
 li { list-style-type: none;}
 a { text-decoration: none;}
 img { border: 0;}
-table { border: 1px solid black; border-collapse: collapse;}
 
-body{}
-nav {}
-nav ul {}
-nav ul li {}
-nav ul li a {
-	/* color: #656565; */
+@font-face {
+    font-family: 'ImcreSoojin';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
-section {
-	margin: 0 0 20px; 
-	padding: 30px 30px 60px; 
-	}
-section .best {	display: flex;}
-section .best .freeboardbest {}
-section .best .userboardbest {}
+
+#guide{
+	display:table;
+	table-layout: fixed;
+	width: 1100px;
+	margin: 0 auto;
+	padding: 50px 0 100px;	
+}
+#aside {
+	display: table-cell;
+	width: 215px;
+	vertical-align: top;
+}
+#aside .as_inner {
+    width: 185px;
+    background: #ffffff;
+}
+
+#aside .as_inner .as_hgroup { /* 커뮤니티 큰 글씨*/
+    width: 185px;
+    height: 105px;
+    background-color: blue; /* 색깔변경하기*/
+    line-height: 105px;
+    text-align:center;
+}
+#aside .as_inner .as_hgroup > a {
+    font-weight: 700;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+#aside .as_inner .lnb > ul > li > a {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px 15px 15px 20px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 26px;
+    color: #444444;
+}
+#contnets {
+    display: table-cell;
+    width: auto;
+}
+#boardlist {
+    margin: 0 0 20px;
+    padding: 30px 30px 60px;
+    background-color: #ffffff;
+}
+.h3group{ /* 커뮤니티 큰 글씨 */
+	overflow: hidden;
+    margin: -30px -30px 0;
+    padding: 30px;
+    border-bottom: 1px solid #e6e6e8;
+ 	 background-color: #ffffff;
+}
+.h3group .tit {
+    float: left;
+    font-family: 'NanumSquare';
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 44px;
+    color: #2d2d2d;
+}
+.mb30 {
+    margin-bottom: 30px !important;
+}
+
+.h4group { /* 인기글 중간 글씨 */
+	 overflow: hidden;
+    margin: -30px -30px 0;
+    padding: 21px 30px 18px;
+    border-bottom: 1px solid #e6e6e8;
+    background-color: #ffffff;
+}
+.h4group .tit {
+    float: left;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 40px;
+    color: #2d2d2d;
+}
+.bdb_n {
+    border-bottom: none !important;
+}
+.pb30 {
+	 border-bottom: none !important;
+}
+.conwrap {
+    padding: 30px 30px 60px;
+   	overflow: hidden;
+    margin: 0 0 20px;
+ 	background-color: #ffffff;
+}
+/* 인기글 랭킹 부분 */
+.board_rank_wrap {
+    display: inline-block;
+    width: 100%;
+}
+.board_rank_wrap .rbox {/* 인기글 박스 왼쪽 부분*/
+    width: 402px;
+    float: left;
+    position: relative;
+    border-top: 3px solid #ff4057;
+    border-bottom: 3px solid #f1f1f2;
+}
+.board_rank_wrap .cbox { /* 인기글 박스 오른쪽 부분*/
+    width: 402px;
+    float: right;
+    position: relative;
+    border-top: 3px solid #ff4057;
+    border-bottom: 3px solid #f1f1f2;
+}
+.board_rank_wrap dl dt {
+    padding: 0 20px;
+    border-bottom: 1px solid #e6e6e8;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 44px;
+    color: #ff4057;
+}
+.board_rank_wrap dl {
+    border: solid #e6e6e8;
+    border-width: 0 1px 1px;
+}
+.board_rank_wrap dl dd ol {
+    padding: 7px 20px 8px;
+}
+
+.board_rank_wrap dl dd ol li .rank {/* 인기글 순위 숫자 부분 */
+    position: absolute;
+    top: 7px;
+    left: 0;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 25px;
+    color: #333333;
+}
+.board_rank_wrap dl dd ol li:first-child {
+    border-top: none;
+}
+.board_rank_wrap dl dd ol li { /* 인기글 순위 제목 부분 */
+    position: relative;
+    padding: 0 48px 0 37px;
+
+}
+.board_rank_wrap dl dd ol li .tit { /* 인기글 제목 */
+    display: inline-block;
+    overflow: hidden;
+    max-width: 100%;
+    font-size: 13px;
+    line-height: 39px;
+    color: #666666;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+}
+.board_rank_wrap dl dd ol li .commt { /* 댓글 수 */
+    position: absolute;
+    top: 10px;
+    right: 0;
+    padding: 0 0 0 17px;
+    background: url(../../images/common/ico_reply.png) 0 center no-repeat;
+    font-size: 12px;
+    line-height: 19px;
+    color: #ff4057;
+}
+.btn_wrap a:first-child {
+	margin: 0;
+}
+.btn50.c3 {
+    border: 1px solid #fd5064;
+    background: #fd5064;
+    color: #ffffff;
+}
+.btn_wrap a {
+    float: left;
+}
+a:link {
+	text-decoration: none;
+}
+.btn50 {
+    display: inline-block;
+    box-sizing: border-box;
+    height: 50px;
+    border: none;
+    border-radius: 0;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 48px;
+    text-align: center;
+    vertical-align: top;
+    cursor: pointer;
+    outline: none;
+    -webkit-appearance: none;
+    appearance: none;
+}

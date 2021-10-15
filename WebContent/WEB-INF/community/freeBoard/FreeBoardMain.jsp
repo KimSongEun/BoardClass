@@ -105,6 +105,7 @@
 </div>
 </div>
 </div>
+
 <script>
 //change 될때마다 getListAjax
 $(function(){
