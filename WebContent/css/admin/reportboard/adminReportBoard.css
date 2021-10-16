@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+.admin-reportboard-section{
+	position :absolute;
+    left : 250px;
+    top : 40px;
+    width : 83.6%;
+    padding: 50px;
+}
+.admin-reportboard-div{
+	margin: 0 auto;
+	/* background-color: pink; */
+}
+.admin-reportboard-title{
+	font-weight: bold;
+	font-size: 34px;
+	text-align: left;
+}
+.admin-reportboard-search{
+	margin-top: 20px;
+	margin-right : 200px;
+	width : 100%;
+}
+.admin-reportboard-search-select{
+	width: 120px;
+	height: 30px; 
+	line-height: 40px; 
+	margin: 0px;
+	padding: 0px;
+}
+.admin-reportboard-search-input{
+	width: 240px;
+	height: 30px; 
+	padding: 5px;
+	line-height: 30px;
+}
+.admin-reportboard-search-button{
+	width: 60px;
+	height: 30px;
+	background: black;
+	font-size: 14px;
+	color: white;
+	border: none;
+}
+.admin-reportboard-table-div{
+	margin : 0 auto;
+}
+.admin-reportboard-table{
+	table-layout : fixed;
+	/* width: 900px;  */
+	margin-top: 20px;
+}
+.admin-reportboard-page-nav {
+	text-align : center;
+}

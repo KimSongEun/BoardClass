@@ -20,6 +20,7 @@ import kh.semi.boardclass.admin.model.vo.AllBoardUser;
 import kh.semi.boardclass.admin.model.vo.AllCommentUser;
 import kh.semi.boardclass.admin.model.vo.Banner;
 import kh.semi.boardclass.admin.model.vo.Notice;
+import kh.semi.boardclass.admin.model.vo.ReportBoard;
 
 public class AdminDao {
 
@@ -1094,14 +1095,265 @@ public class AdminDao {
 		return result;
 	} 
 
-	public ArrayList<Board> selectReportBoardList(Connection conn){
-		ArrayList<Board> volist = null;
+	public int getReportBoardCount(Connection conn) {
+		int result = 0;
+		String sql = "SELECT count(*) \r\n" + 
+				"FROM(SELECT  count(*)\r\n" + 
+				"FROM BOARD_REPORT R JOIN BOARD B\r\n" + 
+				"ON R.BOARD_NO = B.BOARD_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON B.USER_ID = M.USER_ID\r\n" + 
+				"GROUP BY B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.USER_ID, M.USER_NO, B.BOARD_WRITE_DATE, B. BOARD_REWRITE_DATE\r\n" + 
+				")";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<ReportBoard> selectReportBoardList(Connection conn, int start, int end){
+		ArrayList<ReportBoard> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT  count(*) 신고횟수,  B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.USER_ID ,M.USER_NO, B.BOARD_WRITE_DATE, B. BOARD_REWRITE_DATE \r\n" + 
+				"FROM BOARD_REPORT R JOIN BOARD B\r\n" + 
+				"ON R.BOARD_NO = B.BOARD_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON B.USER_ID = M.USER_ID\r\n" + 
+				"GROUP BY B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.USER_ID, M.USER_NO, B.BOARD_WRITE_DATE, B. BOARD_REWRITE_DATE\r\n" + 
+				"ORDER BY 신고횟수 DESC) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<ReportBoard>();
+			if (rset.next()) {
+				do {
+					ReportBoard vo = new ReportBoard();
+					vo.setReportCount(rset.getInt(2));
+					vo.setBoardNo(rset.getInt("BOARD_NO"));
+					vo.setBoardType(rset.getString("BOARD_TYPE"));
+					vo.setBoardCategory(rset.getString("BOARD_CATEGORY"));
+					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setUserNo(rset.getInt("USER_NO"));
+					vo.setBoardWriteDate(rset.getDate("BOARD_WRITE_DATE"));
+					vo.setBoardRewriteDate(rset.getDate("BOARD_REWRITE_DATE"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return volist;
 	}
-	public BoardReport searchReportBoard(Connection conn){
-		BoardReport vo = null;
-		return vo;
+	
+	public ArrayList<ReportBoard> selectReportBoardAscList(Connection conn, int start, int end){
+		ArrayList<ReportBoard> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT  count(*) 신고횟수,  B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.USER_ID ,M.USER_NO, B.BOARD_WRITE_DATE, B. BOARD_REWRITE_DATE \r\n" + 
+				"FROM BOARD_REPORT R JOIN BOARD B\r\n" + 
+				"ON R.BOARD_NO = B.BOARD_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON B.USER_ID = M.USER_ID\r\n" + 
+				"GROUP BY B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.USER_ID, M.USER_NO, B.BOARD_WRITE_DATE, B.BOARD_REWRITE_DATE\r\n" + 
+				"ORDER BY 신고횟수) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<ReportBoard>();
+			if (rset.next()) {
+				do {
+					ReportBoard vo = new ReportBoard();
+					vo.setReportCount(rset.getInt(2));
+					vo.setBoardNo(rset.getInt("BOARD_NO"));
+					vo.setBoardType(rset.getString("BOARD_TYPE"));
+					vo.setBoardCategory(rset.getString("BOARD_CATEGORY"));
+					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setUserNo(rset.getInt("USER_NO"));
+					vo.setBoardWriteDate(rset.getDate("BOARD_WRITE_DATE"));
+					vo.setBoardRewriteDate(rset.getDate("BOARD_REWRITE_DATE"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
 	}
+	
+	public int getReportBoardUserIdCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "SELECT count(*) \r\n" + 
+				"FROM(\r\n" + 
+				"select count(*) as total \r\n" + 
+				"FROM  BOARD_REPORT R JOIN BOARD B\r\n" + 
+				"ON R.BOARD_NO = B.BOARD_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON B.USER_ID = M.USER_ID\r\n" + 
+				"where M.USER_ID like (?)\r\n" + 
+				"GROUP BY B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.USER_ID, M.USER_NO, B.BOARD_WRITE_DATE, B.BOARD_REWRITE_DATE)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<ReportBoard> searchReportBoardUserId(Connection conn, String keyword, int start, int end){
+		ArrayList<ReportBoard> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT  count(*) 신고횟수,  B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.USER_ID ,M.USER_NO, B.BOARD_WRITE_DATE, B.BOARD_REWRITE_DATE \r\n" + 
+				"FROM BOARD_REPORT R JOIN BOARD B\r\n" + 
+				"ON R.BOARD_NO = B.BOARD_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON B.USER_ID = M.USER_ID\r\n" + 
+				"WHERE B.USER_ID like(?)\r\n" + 
+				"GROUP BY B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.USER_ID, M.USER_NO, B.BOARD_WRITE_DATE, B. BOARD_REWRITE_DATE\r\n" + 
+				"ORDER BY 신고횟수 DESC) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<ReportBoard>();
+			if (rset.next()) {
+				do {
+					ReportBoard vo = new ReportBoard();
+					vo.setReportCount(rset.getInt(2));
+					vo.setBoardNo(rset.getInt("BOARD_NO"));
+					vo.setBoardType(rset.getString("BOARD_TYPE"));
+					vo.setBoardCategory(rset.getString("BOARD_CATEGORY"));
+					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setUserNo(rset.getInt("USER_NO"));
+					vo.setBoardWriteDate(rset.getDate("BOARD_WRITE_DATE"));
+					vo.setBoardRewriteDate(rset.getDate("BOARD_REWRITE_DATE"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	public int getReportBoardUserNoCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "SELECT count(*) \r\n" + 
+				"FROM(\r\n" + 
+				"select count(*) as total \r\n" + 
+				"FROM  BOARD_REPORT R JOIN BOARD B\r\n" + 
+				"ON R.BOARD_NO = B.BOARD_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON B.USER_ID = M.USER_ID\r\n" + 
+				"where M.USER_NO like (?)\r\n" + 
+				"GROUP BY B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.USER_ID, M.USER_NO, B.BOARD_WRITE_DATE, B.BOARD_REWRITE_DATE)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<ReportBoard> searchReportBoardUserNo(Connection conn, String keyword, int start, int end){
+		ArrayList<ReportBoard> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT  count(*) 신고횟수,  B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.USER_ID ,M.USER_NO, B.BOARD_WRITE_DATE, B. BOARD_REWRITE_DATE \r\n" + 
+				"FROM BOARD_REPORT R JOIN BOARD B\r\n" + 
+				"ON R.BOARD_NO = B.BOARD_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON B.USER_ID = M.USER_ID\r\n" + 
+				"WHERE M.USER_NO like(?)\r\n" + 
+				"GROUP BY B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.USER_ID, M.USER_NO, B.BOARD_WRITE_DATE, B.BOARD_REWRITE_DATE\r\n" + 
+				"ORDER BY 신고횟수 DESC) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<ReportBoard>();
+			if (rset.next()) {
+				do {
+					ReportBoard vo = new ReportBoard();
+					vo.setReportCount(rset.getInt(2));
+					vo.setBoardNo(rset.getInt("BOARD_NO"));
+					vo.setBoardType(rset.getString("BOARD_TYPE"));
+					vo.setBoardCategory(rset.getString("BOARD_CATEGORY"));
+					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setUserNo(rset.getInt("USER_NO"));
+					vo.setBoardWriteDate(rset.getDate("BOARD_WRITE_DATE"));
+					vo.setBoardRewriteDate(rset.getDate("BOARD_REWRITE_DATE"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	
 	public ArrayList<Board> selectReportCommentList(Connection conn){
 		ArrayList<Board> volist = null;
 		return volist;

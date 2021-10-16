@@ -3,7 +3,7 @@ $(function(){
 	$(window).click(function(e){
 		console.log(e.target);
 	});
-	$(".admin-allboard-search-select").change(f1);
+	$(".admin-allcomment-search-select").change(f1);
 	f1();
 	function f1() {
 		console.log("변경");

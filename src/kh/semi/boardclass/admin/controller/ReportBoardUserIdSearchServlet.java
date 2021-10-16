@@ -13,16 +13,16 @@ import kh.semi.boardclass.admin.model.service.AdminService;
 import kh.semi.boardclass.admin.model.vo.ReportBoard;
 
 /**
- * Servlet implementation class ReportBoardListServlet
+ * Servlet implementation class ReportBoardUserIdSearchServlet
  */
-@WebServlet("/reportboardlist")
-public class ReportBoardListServlet extends HttpServlet {
+@WebServlet("/reportboarduseridsearch")
+public class ReportBoardUserIdSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportBoardListServlet() {
+    public ReportBoardUserIdSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +36,6 @@ public class ReportBoardListServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String viewcount = request.getParameter("viewcount");
-		String selectno = "reportboardlist";
 		int PAGE_SIZE;
 		if(viewcount != null) {
 			PAGE_SIZE = Integer.parseInt(viewcount);
@@ -56,8 +55,9 @@ public class ReportBoardListServlet extends HttpServlet {
 		if(pageNum !=null) { 
 				currentPage=Integer.parseInt(pageNum);
 		}
-		
-		aCount = new AdminService().getReportBoardCount();
+		String type = request.getParameter("type");
+		String keyword = request.getParameter("keyword");
+		aCount = new AdminService().getReportBoardUserIdCount(keyword);
 		pageCount = (aCount / PAGE_SIZE) + (aCount % PAGE_SIZE == 0 ? 0:1);
 		startRnum = (currentPage-1) * PAGE_SIZE + 1;  
 		endRnum = startRnum + PAGE_SIZE -1;
@@ -71,16 +71,17 @@ public class ReportBoardListServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1;
 		if(endPage > pageCount) endPage = pageCount;
 		
-		ArrayList<ReportBoard> volist  = new AdminService().selectReportBoardList(startRnum, endRnum);
+		ArrayList<ReportBoard> volist  = new AdminService().searchReportBoardUserId(keyword, startRnum, endRnum);
 		
 		request.setAttribute("viewcount", PAGE_SIZE);
-		request.setAttribute("selectno", selectno);
 		request.setAttribute("reportboardvolist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
+		request.setAttribute("keyword", keyword);
+		request.setAttribute("type", type);
 		request.getRequestDispatcher("/WEB-INF/admin/reportboard/reportboardlist.jsp").forward(request, response);
-		System.out.println(selectno);
+		System.out.println(type);
 	}
 
 	/**

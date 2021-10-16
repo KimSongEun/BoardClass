@@ -9,6 +9,7 @@ import kh.semi.boardclass.admin.model.vo.AllBoardUser;
 import kh.semi.boardclass.admin.model.vo.AllCommentUser;
 import kh.semi.boardclass.admin.model.vo.Banner;
 import kh.semi.boardclass.admin.model.vo.Notice;
+import kh.semi.boardclass.admin.model.vo.ReportBoard;
 import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.community.model.vo.Board;
 import kh.semi.boardclass.community.model.vo.BoardReport;
@@ -499,20 +500,60 @@ public class AdminService {
 		return result;
 	}
 
-	public ArrayList<Board> selectReportBoardList() {
-		ArrayList<Board> volist = null;
+	public int getReportBoardCount() {
+		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().selectReportBoardList(conn);
+		result = new AdminDao().getReportBoardCount(conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportBoard> selectReportBoardList(int start, int end) {
+		ArrayList<ReportBoard> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().selectReportBoardList(conn, start, end);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
 
-	public BoardReport searchReportBoard() {
-		BoardReport vo = null;
+	public ArrayList<ReportBoard> selectReportBoardAscList(int start, int end) {
+		ArrayList<ReportBoard> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		vo = new AdminDao().searchReportBoard(conn);
+		volist = new AdminDao().selectReportBoardAscList(conn, start, end);
 		JDBCTemplate.close(conn);
-		return vo;
+		return volist;
+	}
+	
+	public int getReportBoardUserIdCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getReportBoardUserIdCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportBoard> searchReportBoardUserId(String keyword, int start, int end) {
+		ArrayList<ReportBoard> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchReportBoardUserId(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int getReportBoardUserNoCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getReportBoardUserNoCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportBoard> searchReportBoardUserNo(String keyword, int start, int end) {
+		ArrayList<ReportBoard> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchReportBoardUserNo(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
 	}
 
 	public ArrayList<Board> selectReportCommentList() {
