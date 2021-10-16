@@ -459,6 +459,14 @@ public class AdminService {
 		return result;
 	}
 	
+	public AllCommentUser getAllCommentDetail(String commentNo) {
+		AllCommentUser vo = null;
+		Connection conn = JDBCTemplate.getConnection();
+		vo = new AdminDao().getAllCommentDetail(conn, commentNo);
+		JDBCTemplate.close(conn);
+		return vo;
+	}
+	
 	public ArrayList<User> selectUserList() {
 		ArrayList<User> volist = null;
 		Connection conn = JDBCTemplate.getConnection();

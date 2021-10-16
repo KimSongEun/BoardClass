@@ -1052,6 +1052,30 @@ public class AdminDao {
 		return result;
 	} 
 	
+	public AllCommentUser getAllCommentDetail(Connection conn, String commentNo) {
+		AllCommentUser vo = null;
+		String sql = "SELECT COMMENT_CONTENT FROM COMT WHERE COMMENT_NO=?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,  commentNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				vo = new AllCommentUser();
+				vo.setCommentContent(rset.getString("COMMENT_CONTENT"));
+
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			} 
+		return vo;
+	}
+	
 	public ArrayList<User> selectUserList(Connection conn){
 		ArrayList<User> volist = null;
 		return volist;

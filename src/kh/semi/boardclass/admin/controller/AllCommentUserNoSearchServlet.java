@@ -74,13 +74,13 @@ public class AllCommentUserNoSearchServlet extends HttpServlet {
 		ArrayList<AllCommentUser> volist  = new AdminService().searchAllCommentUserNo(keyword, startRnum, endRnum);
 		
 		request.setAttribute("viewcount", PAGE_SIZE);
-		request.setAttribute("allboarduservolist", volist);
+		request.setAttribute("allcommentuservolist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("type", type);
-		request.getRequestDispatcher("/WEB-INF/admin/allboard/allboardlist.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/admin/allcomment/allcommentlist.jsp").forward(request, response);
 	}
 
 	/**

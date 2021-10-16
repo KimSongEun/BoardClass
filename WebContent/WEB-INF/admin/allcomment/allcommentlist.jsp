@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/admin/main/adminHeader.css"/> 
-    <link rel="stylesheet" href="./css/admin/allcomment/adminAllComment.css"/>
+    <link rel="stylesheet" href="./css/admin/allcomment/adminAllComment.css?"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="./js/admin/allcomment/allcommentlist.js"></script>
@@ -64,18 +64,31 @@
                          <tr>
                          	<td style = "vertical-align : middle" class = "commentNo">${c.commentNo}</td>
                             <td style = "vertical-align : middle"><a href="#원본글내용조회" style = "color : #754100">${c.boardTitle}</a></td>
-                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" ><a href="#댓글내용팝업" style = "color : #754100">${c.commentContent}</a></td>
+                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" ><a href="#" class = "comment-modal" id = "${c.commentNo}" style = "color : #754100">${c.commentContent}</a></td>
                             <td style = "vertical-align : middle"><a href="#회원정보조회" style = "color : #754100">${c.userId}</a></td>
                             <td style = "vertical-align : middle">${c.userNo}</td>
                             <td style = "vertical-align : middle">${c.commentRewriteDate}</td>
                             <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" onclick="location.href='allcommentdelete?commentNo=${c.commentNo}'">삭제</button> </td>
-                        </tr> 
-                         </c:forEach>
+                        </tr>
+								<!-- The Modal -->
+								<div id="myModal" class="modal">
+
+									<!-- Modal content -->
+									<div class="modal-content">
+										<span class="close">&times;</span>
+										<h3 style = "color : gray">댓글 내용 상세보기</h3>
+										<br>
+										<p id = "modal-content-detail"></p>
+									</div>
+
+								</div>
+							</c:forEach>
                          </c:if> 
                     </table>
                 </div>
 
-            <div class="admin-allcomment-page-nav">
+
+				<div class="admin-allcomment-page-nav">
             <nav aria-label="Page navigation example">
                 <ul class="pagination justify-content-center">
                 <c:choose>
