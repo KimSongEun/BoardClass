@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.boardclass.admin.model.service.AdminService;
 import kh.semi.boardclass.admin.model.vo.AllBoardUser;
-import kh.semi.boardclass.community.model.vo.Board;
 
 /**
  * Servlet implementation class AllBoardListServlet

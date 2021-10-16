@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+.admin-allcomment-section{
+	position :absolute;
+    left : 250px;
+    top : 40px;
+    width : 83.6%;
+    padding: 50px;
+}
+.admin-allcomment-div{
+	margin: 0 auto;
+	/* background-color: pink; */
+}
+.admin-allcomment-title{
+	font-weight: bold;
+	font-size: 34px;
+	text-align: left;
+}
+.admin-allcomment-search{
+	margin-top: 20px;
+	margin-right : 200px;
+	width : 100%;
+}
+.admin-allcomment-search-select{
+	width: 120px;
+	height: 30px; 
+	line-height: 40px; 
+	margin: 0px;
+	padding: 0px;
+}
+.admin-allcomment-search-input{
+	width: 240px;
+	height: 30px; 
+	padding: 5px;
+	line-height: 30px;
+}
+.admin-allcomment-search-button{
+	width: 60px;
+	height: 30px;
+	background: black;
+	font-size: 14px;
+	color: white;
+	border: none;
+}
+.admin-allcomment-table-div{
+	margin : 0 auto;
+}
+.admin-allcomment-table{
+	table-layout : fixed;
+	/* width: 900px;  */
+	margin-top: 20px;
+}
+.admin-allcomment-page-nav {
+	text-align : center;
+}

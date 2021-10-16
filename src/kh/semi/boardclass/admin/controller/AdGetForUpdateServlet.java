@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.boardclass.admin.model.service.AdminService;
 import kh.semi.boardclass.admin.model.vo.Banner;
-import kh.semi.boardclass.admin.model.vo.Notice;
 
 /**
  * Servlet implementation class AdGetForUpdateServlet

@@ -1037,13 +1037,13 @@ public class AdminDao {
 		return volist;
 	}
 	
-	public int deleteAllComment(Connection conn, int boardNo){
+	public int deleteAllComment(Connection conn, int commentNo){
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = "DELETE FROM COMT WHERE COMMENT_NO = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, boardNo);
+			pstmt.setInt(1, commentNo);
 
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {

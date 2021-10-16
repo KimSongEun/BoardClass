@@ -71,7 +71,7 @@ public class AllBoardUserNoSearchServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1;
 		if(endPage > pageCount) endPage = pageCount;
 		
-		ArrayList<AllBoardUser> volist  = new AdminService().searchAllBoardUserNoList(keyword, startRnum, endRnum);
+		ArrayList<AllBoardUser> volist  = new AdminService().searchAllBoardUserNo(keyword, startRnum, endRnum);
 		
 		request.setAttribute("viewcount", PAGE_SIZE);
 		request.setAttribute("allboarduservolist", volist);

@@ -1,4 +1,3 @@
-<%@page import="kh.semi.boardclass.admin.model.vo.AllBoardUser"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -93,8 +92,8 @@
 									</c:if>
                             </select>
                             </td>
-                            <td style = "vertical-align : middle"><a href="#글내용조회">${b.boardTitle}</a></td>
-                            <td style = "vertical-align : middle"><a href="#회원정보조회">${b.userId}</a></td>
+                            <td style = "vertical-align : middle"><a href="#글내용조회" style = "color : #754100">${b.boardTitle}</a></td>
+                            <td style = "vertical-align : middle"><a href="#회원정보조회" style = "color : #754100">${b.userId}</a></td>
                             <td style = "vertical-align : middle">${b.userNo}</td>
                             <td style = "vertical-align : middle">${b.boardRewriteDate}</td>
                             <td style = "vertical-align : middle"><button class="update btn btn-danger" value="updatego">수정</button> </td>

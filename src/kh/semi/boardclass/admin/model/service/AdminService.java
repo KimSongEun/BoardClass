@@ -316,7 +316,7 @@ public class AdminService {
 		return result;
 	}
 
-	public ArrayList<AllBoardUser> searchAllBoardUserIdList(String keyword, int start, int end) {
+	public ArrayList<AllBoardUser> searchAllBoardUserId(String keyword, int start, int end) {
 		ArrayList<AllBoardUser> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
 		volist = new AdminDao().searchAllBoardUserId(conn, keyword, start, end);
@@ -332,7 +332,7 @@ public class AdminService {
 		return result;
 	}
 
-	public ArrayList<AllBoardUser> searchAllBoardUserNoList(String keyword, int start, int end) {
+	public ArrayList<AllBoardUser> searchAllBoardUserNo(String keyword, int start, int end) {
 		ArrayList<AllBoardUser> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
 		volist = new AdminDao().searchAllBoardUserNo(conn, keyword, start, end);
@@ -348,7 +348,7 @@ public class AdminService {
 		return result;
 	}
 
-	public ArrayList<AllBoardUser> searchAllBoardTitleList(String keyword, int start, int end) {
+	public ArrayList<AllBoardUser> searchAllBoardTitle(String keyword, int start, int end) {
 		ArrayList<AllBoardUser> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
 		volist = new AdminDao().searchAllBoardTitle(conn, keyword, start, end);
@@ -438,7 +438,7 @@ public class AdminService {
 		return result;
 	}
 
-	public ArrayList<AllCommentUser> searchAllCommentTitleList(String keyword, int start, int end) {
+	public ArrayList<AllCommentUser> searchAllCommentTitle(String keyword, int start, int end) {
 		ArrayList<AllCommentUser> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
 		volist = new AdminDao().searchAllCommentTitle(conn, keyword, start, end);
@@ -446,10 +446,10 @@ public class AdminService {
 		return volist;
 	}
 	
-	public int deleteAllComment(int boardNo) {
+	public int deleteAllComment(int commentNo) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().deleteAllComment(conn, boardNo);
+		result = new AdminDao().deleteAllComment(conn, commentNo);
 		if(result > 0) {
 			JDBCTemplate.commit(conn);
 		} else {

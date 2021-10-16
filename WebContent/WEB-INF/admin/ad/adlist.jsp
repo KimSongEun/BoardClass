@@ -61,7 +61,7 @@
 						 for(Banner b : volist){ %> 
                         <tr>
                             <td><%=b.getPromotionNo() %></td>
-                            <td><a href = #사용자가보는광고화면새창열기 target = '_blank'> <%=b.getPromotionTitle() %></a></td>
+                            <td><a href = #사용자가보는광고화면새창열기 target = '_blank' style = "color : #754100"> <%=b.getPromotionTitle() %></a></td>
                             <td><%=b.getPromotionDate() %></td>
                             <td><button class="update btn btn-danger" value="updatego" no="<%=b.getPromotionNo()%>">광고수정</button> </td>
                             <td><button class="delete btn btn-primary" value="deletego" id="<%=b.getPromotionNo() %>">광고삭제</button> </td>

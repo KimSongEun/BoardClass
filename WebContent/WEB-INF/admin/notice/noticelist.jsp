@@ -64,7 +64,7 @@
 						 for(Notice n : volist){ %> 
                         <tr>
                             <td><%=n.getAnnounceNo() %></td>
-                            <td><a href = #사용자가보는공지사항화면새창열기 target = '_blank'> <%=n.getAdminTitle() %></a></td>
+                            <td><a href = #사용자가보는공지사항화면새창열기 target = '_blank' style = "color : #754100"> <%=n.getAdminTitle() %></a></td>
                             <td><%=n.getAdminWrDate() %></td>
                             <td><%=n.getAdminRwrDate() %></td>
                             <td><button class="update btn btn-danger" value="updatego" no="<%=n.getAnnounceNo()%>">글수정</button> </td>
