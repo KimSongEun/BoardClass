@@ -13,16 +13,16 @@ import kh.semi.boardclass.admin.model.service.AdminService;
 import kh.semi.boardclass.admin.model.vo.ReportComment;
 
 /**
- * Servlet implementation class ReportCommentListServlet
+ * Servlet implementation class ReportCommentAscListServlet
  */
-@WebServlet("/reportcommentlist")
-public class ReportCommentListServlet extends HttpServlet {
+@WebServlet("/reportcommentasclist")
+public class ReportCommentAscListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportCommentListServlet() {
+    public ReportCommentAscListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +36,7 @@ public class ReportCommentListServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String viewcount = request.getParameter("viewcount");
-		String selectno = "reportcommentlist";
+		String selectno = "reportcommentasclist";
 		int PAGE_SIZE;
 		if(viewcount != null) {
 			PAGE_SIZE = Integer.parseInt(viewcount);
@@ -71,7 +71,7 @@ public class ReportCommentListServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1;
 		if(endPage > pageCount) endPage = pageCount;
 		
-		ArrayList<ReportComment> volist  = new AdminService().selectReportCommentList(startRnum, endRnum);
+		ArrayList<ReportComment> volist  = new AdminService().selectReportCommentAscList(startRnum, endRnum);
 		
 		request.setAttribute("viewcount", PAGE_SIZE);
 		request.setAttribute("selectno", selectno);

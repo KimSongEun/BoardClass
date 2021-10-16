@@ -12,16 +12,16 @@ import javax.servlet.http.HttpServletResponse;
 import kh.semi.boardclass.admin.model.service.AdminService;
 
 /**
- * Servlet implementation class ReportBoardDelete
+ * Servlet implementation class ReportCommentDeleteServlet
  */
-@WebServlet("/reportboarddelete")
-public class ReportBoardDelete extends HttpServlet {
+@WebServlet("/reportcommentdelete")
+public class ReportCommentDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportBoardDelete() {
+    public ReportCommentDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,22 +34,21 @@ public class ReportBoardDelete extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 
-		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		int result = new AdminService().deleteAllBoard(boardNo);
+		int commentNo = Integer.parseInt(request.getParameter("commentNo"));
+		int result = new AdminService().deleteAllComment(commentNo);
 
 
 		if (result > 0) {
-			request.setAttribute("msg", boardNo + "번 게시글 삭제완료");
-			request.setAttribute("loc", "reportboardlist");
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/admin/reportboard/reportboardalert.jsp");
+			request.setAttribute("msg", commentNo + "번 댓글 삭제완료");
+			request.setAttribute("loc", "reportcommentlist");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/admin/reportcomment/reportcommentalert.jsp");
 			rd.forward(request, response);
 		} else {
 			request.setAttribute("msg", "삭제실패 ");
-			request.setAttribute("loc", "reportboardlist");
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/admin/reportboard/reportboardalert.jsp");
+			request.setAttribute("loc", "reportcommentlist");
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/admin/reportcomment/reportcommentalert.jsp");
 			rd.forward(request, response);
 		}
-
 	}
 
 	/**

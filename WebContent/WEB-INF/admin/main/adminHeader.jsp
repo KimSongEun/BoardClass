@@ -52,8 +52,8 @@
                         <li class="admin-nav-li-li"><a class="admin-header-a" href="userlist">회원관리</a></li>
                         <li class="admin-nav-li-li"><a class="admin-header-a" href="reportboardlist">신고된 글</a></li>
                         <li class="admin-nav-li-li"><a class="admin-header-a" href="reportcommentlist">신고된 댓글</a></li>
-                        <li class="admin-nav-li-li"><a class="admin-header-a" href="reportcommentlist">신고된 리뷰</a></li>
-                        <li class="admin-nav-li-li"><a class="admin-header-a" href="reportcommentlist">신고된 중고글</a></li>
+                        <li class="admin-nav-li-li"><a class="admin-header-a" href="reportreviewlist">신고된 리뷰</a></li>
+                        <li class="admin-nav-li-li"><a class="admin-header-a" href="reportreviewlist">신고된 중고글</a></li>
                     </ul>    
 	        </ul>
 		</div>

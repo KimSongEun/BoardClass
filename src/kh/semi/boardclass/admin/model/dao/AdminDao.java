@@ -1559,8 +1559,8 @@ public class AdminDao {
 				"JOIN BOARD B\r\n" + 
 				"ON C.BOARD_NO = B.BOARD_NO\r\n" + 
 				"JOIN MEMBER M\r\n" + 
-				"ON M.USER_NO = M.USER_ID\r\n" + 
-				"where C.USER_ID like (?)\r\n" + 
+				"ON C.USER_ID = M.USER_ID\r\n" + 
+				"where M.USER_NO like (?)\r\n" + 
 				"GROUP BY C.COMMENT_NO, B.BOARD_TITLE, C.COMMENT_CONTENT, C.USER_ID, M.USER_NO, C.COMMENT_WRITE_DATE, C.COMMENT_REWRITE_DATE)";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -1583,7 +1583,7 @@ public class AdminDao {
 	
 	public ArrayList<ReportComment> searchReportCommentUserNo(Connection conn, String keyword, int start, int end){
 		ArrayList<ReportComment> volist = null;
-		String sql = "select * from (   select Rownum r, t1.* from (SELECT  count(*) 신고횟수, C.COMMENT_NO, B.BOARD_TITLE, C.COMMENT_CONTENT, C.USER_ID, M.USER_NO, C.COMMENT_WRITE_DATE, C.COMMENT_REWRITE_DATE\r\n" + 
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT  count(*) 신고횟수, C.COMMENT_NO, B.BOARD_TITLE, C.COMMENT_CONTENT, C.USER_ID, M.USER_NO, C.COMMENT_WRITE_DATE, C.COMMENT_REWRITE_DATE \r\n" + 
 				"FROM COMMENT_REPORT R JOIN COMT C\r\n" + 
 				"ON R.COMMENT_NO = C.COMMENT_NO\r\n" + 
 				"JOIN BOARD B\r\n" + 

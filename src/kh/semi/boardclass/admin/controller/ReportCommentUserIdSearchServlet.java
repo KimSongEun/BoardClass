@@ -13,16 +13,16 @@ import kh.semi.boardclass.admin.model.service.AdminService;
 import kh.semi.boardclass.admin.model.vo.ReportComment;
 
 /**
- * Servlet implementation class ReportCommentListServlet
+ * Servlet implementation class ReportCommentUserIdSearchServlet
  */
-@WebServlet("/reportcommentlist")
-public class ReportCommentListServlet extends HttpServlet {
+@WebServlet("/reportcommentuseridsearch")
+public class ReportCommentUserIdSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReportCommentListServlet() {
+    public ReportCommentUserIdSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,7 +36,6 @@ public class ReportCommentListServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String viewcount = request.getParameter("viewcount");
-		String selectno = "reportcommentlist";
 		int PAGE_SIZE;
 		if(viewcount != null) {
 			PAGE_SIZE = Integer.parseInt(viewcount);
@@ -56,8 +55,9 @@ public class ReportCommentListServlet extends HttpServlet {
 		if(pageNum !=null) { 
 				currentPage=Integer.parseInt(pageNum);
 		}
-		
-		aCount = new AdminService().getReportCommentCount();
+		String type = request.getParameter("type");
+		String keyword = request.getParameter("keyword");
+		aCount = new AdminService().getReportCommentUserIdCount(keyword);
 		pageCount = (aCount / PAGE_SIZE) + (aCount % PAGE_SIZE == 0 ? 0:1);
 		startRnum = (currentPage-1) * PAGE_SIZE + 1;  
 		endRnum = startRnum + PAGE_SIZE -1;
@@ -71,16 +71,17 @@ public class ReportCommentListServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1;
 		if(endPage > pageCount) endPage = pageCount;
 		
-		ArrayList<ReportComment> volist  = new AdminService().selectReportCommentList(startRnum, endRnum);
+		ArrayList<ReportComment> volist  = new AdminService().searchReportCommentUserId(keyword, startRnum, endRnum);
 		
 		request.setAttribute("viewcount", PAGE_SIZE);
-		request.setAttribute("selectno", selectno);
 		request.setAttribute("reportcommentvolist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
+		request.setAttribute("keyword", keyword);
+		request.setAttribute("type", type);
 		request.getRequestDispatcher("/WEB-INF/admin/reportcomment/reportcommentlist.jsp").forward(request, response);
-		System.out.println(selectno);
+		System.out.println(type);
 	}
 
 	/**
