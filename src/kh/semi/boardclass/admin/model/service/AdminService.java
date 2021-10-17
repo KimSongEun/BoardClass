@@ -12,6 +12,7 @@ import kh.semi.boardclass.admin.model.vo.Notice;
 import kh.semi.boardclass.admin.model.vo.ReportBoard;
 import kh.semi.boardclass.admin.model.vo.ReportComment;
 import kh.semi.boardclass.admin.model.vo.ReportReview;
+import kh.semi.boardclass.admin.model.vo.ReportUsed;
 import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.community.model.vo.Board;
 import kh.semi.boardclass.community.model.vo.BoardReport;
@@ -689,5 +690,74 @@ public class AdminService {
 		vo = new AdminDao().getReviewDetail(conn, reviewNo);
 		JDBCTemplate.close(conn);
 		return vo;
+	}
+	
+	public int getReportUsedCount() {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getReportUsedCount(conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportUsed> selectReportUsedList(int start, int end) {
+		ArrayList<ReportUsed> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().selectReportUsedList(conn, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+
+	public ArrayList<ReportUsed> selectReportUsedAscList(int start, int end) {
+		ArrayList<ReportUsed> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().selectReportUsedAscList(conn, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int getReportUsedUserIdCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getReportUsedUserIdCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportUsed> searchReportUsedUserId(String keyword, int start, int end) {
+		ArrayList<ReportUsed> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchReportUsedUserId(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int getReportUsedUserNoCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getReportUsedUserNoCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportUsed> searchReportUsedUserNo(String keyword, int start, int end) {
+		ArrayList<ReportUsed> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchReportUsedUserNo(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int deleteUsed(int usedNo) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().deleteUsed(conn, usedNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
 }

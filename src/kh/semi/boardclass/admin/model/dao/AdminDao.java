@@ -23,6 +23,7 @@ import kh.semi.boardclass.admin.model.vo.Notice;
 import kh.semi.boardclass.admin.model.vo.ReportBoard;
 import kh.semi.boardclass.admin.model.vo.ReportComment;
 import kh.semi.boardclass.admin.model.vo.ReportReview;
+import kh.semi.boardclass.admin.model.vo.ReportUsed;
 
 public class AdminDao {
 
@@ -1218,7 +1219,7 @@ public class AdminDao {
 				"ON R.BOARD_NO = B.BOARD_NO\r\n" + 
 				"JOIN MEMBER M\r\n" + 
 				"ON B.USER_ID = M.USER_ID\r\n" + 
-				"where M.USER_ID like (?)\r\n" + 
+				"where B.USER_ID like (?)\r\n" + 
 				"GROUP BY B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.USER_ID, M.USER_NO, B.BOARD_WRITE_DATE, B.BOARD_REWRITE_DATE)";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -1931,4 +1932,267 @@ public class AdminDao {
 			} 
 		return vo;
 	}
+	
+	public int getReportUsedCount(Connection conn) {
+		int result = 0;
+		String sql = "SELECT count(*) \r\n" + 
+				"FROM(SELECT  count(*)\r\n" + 
+				"FROM USED_REPORT R JOIN USED U\r\n" + 
+				"ON R.USED_NO = U.USED_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON U.USER_ID = M.USER_ID\r\n" + 
+				"GROUP BY U.USED_NO, U.USED_TITLE, U.USER_ID, M.USER_NO, U.USED_DAY\r\n" + 
+				")";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<ReportUsed> selectReportUsedList(Connection conn, int start, int end){
+		ArrayList<ReportUsed> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT  count(*) 신고횟수, U.USED_NO, U.USED_TITLE, U.USER_ID, M.USER_NO, U.USED_DAY\r\n" + 
+				"FROM USED_REPORT R JOIN USED U\r\n" + 
+				"ON R.USED_NO = U.USED_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON U.USER_ID = M.USER_ID\r\n" + 
+				"GROUP BY U.USED_NO, U.USED_TITLE, U.USER_ID, M.USER_NO, U.USED_DAY\r\n" + 
+				"ORDER BY 신고횟수 DESC) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<ReportUsed>();
+			if (rset.next()) {
+				do {
+					ReportUsed vo = new ReportUsed();
+					vo.setReportCount(rset.getInt(2));
+					vo.setUsedNo(rset.getInt(3));
+					vo.setUsedTitle(rset.getString(4));
+					vo.setUserId(rset.getString(5));
+					vo.setUserNo(rset.getInt(6));
+					vo.setUsedDate(rset.getDate(7));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	
+	public ArrayList<ReportUsed> selectReportUsedAscList(Connection conn, int start, int end){
+		ArrayList<ReportUsed> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT  count(*) 신고횟수, U.USED_NO, U.USED_TITLE, U.USER_ID, M.USER_NO, U.USED_DAY\r\n" + 
+				"FROM USED_REPORT R JOIN USED U\r\n" + 
+				"ON R.USED_NO = U.USED_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON U.USER_ID = M.USER_ID\r\n" + 
+				"GROUP BY U.USED_NO, U.USED_TITLE, U.USER_ID, M.USER_NO, U.USED_DAY\r\n" + 
+				"ORDER BY 신고횟수 ) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<ReportUsed>();
+			if (rset.next()) {
+				do {
+					ReportUsed vo = new ReportUsed();
+					vo.setReportCount(rset.getInt(2));
+					vo.setUsedNo(rset.getInt(3));
+					vo.setUsedTitle(rset.getString(4));
+					vo.setUserId(rset.getString(5));
+					vo.setUserNo(rset.getInt(6));
+					vo.setUsedDate(rset.getDate(7));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	
+	public int getReportUsedUserIdCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "SELECT count(*) \r\n" + 
+				"FROM(\r\n" + 
+				"select count(*) as total \r\n" + 
+				"FROM USED_REPORT R JOIN USED U\r\n" + 
+				"ON R.USED_NO = U.USED_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON U.USER_ID = M.USER_ID\r\n" + 
+				"where U.USER_ID like (?)\r\n" + 
+				"GROUP BY U.USED_NO, U.USED_TITLE, U.USER_ID, M.USER_NO, U.USED_DAY)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<ReportUsed> searchReportUsedUserId(Connection conn, String keyword, int start, int end){
+		ArrayList<ReportUsed> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT  count(*) 신고횟수, U.USED_NO, U.USED_TITLE, U.USER_ID, M.USER_NO, U.USED_DAY\r\n" + 
+				"FROM USED_REPORT R JOIN USED U\r\n" + 
+				"ON R.USED_NO = U.USED_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON U.USER_ID = M.USER_ID\r\n" + 
+				"where U.USER_ID like (?)\r\n" + 
+				"GROUP BY U.USED_NO, U.USED_TITLE, U.USER_ID, M.USER_NO, U.USED_DAY\r\n" + 
+				"ORDER BY 신고횟수 DESC) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<ReportUsed>();
+			if (rset.next()) {
+				do {
+					ReportUsed vo = new ReportUsed();
+					vo.setReportCount(rset.getInt(2));
+					vo.setUsedNo(rset.getInt(3));
+					vo.setUsedTitle(rset.getString(4));
+					vo.setUserId(rset.getString(5));
+					vo.setUserNo(rset.getInt(6));
+					vo.setUsedDate(rset.getDate(7));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	public int getReportUsedUserNoCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "SELECT count(*) \r\n" + 
+				"FROM(\r\n" + 
+				"select count(*) as total \r\n" + 
+				"FROM USED_REPORT R JOIN USED U\r\n" + 
+				"ON R.USED_NO = U.USED_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON U.USER_ID = M.USER_ID\r\n" + 
+				"where M.USER_NO like (?)\r\n" + 
+				"GROUP BY U.USED_NO, U.USED_TITLE, U.USER_ID, M.USER_NO, U.USED_DAY)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<ReportUsed> searchReportUsedUserNo(Connection conn, String keyword, int start, int end){
+		ArrayList<ReportUsed> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT  count(*) 신고횟수, U.USED_NO, U.USED_TITLE, U.USER_ID, M.USER_NO, U.USED_DAY\r\n" + 
+				"FROM USED_REPORT R JOIN USED U\r\n" + 
+				"ON R.USED_NO = U.USED_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON U.USER_ID = M.USER_ID\r\n" + 
+				"where M.USER_NO like (?)\r\n" + 
+				"GROUP BY U.USED_NO, U.USED_TITLE, U.USER_ID, M.USER_NO, U.USED_DAY\r\n" + 
+				"ORDER BY 신고횟수 DESC) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<ReportUsed>();
+			if (rset.next()) {
+				do {
+					ReportUsed vo = new ReportUsed();
+					vo.setReportCount(rset.getInt(2));
+					vo.setUsedNo(rset.getInt(3));
+					vo.setUsedTitle(rset.getString(4));
+					vo.setUserId(rset.getString(5));
+					vo.setUserNo(rset.getInt(6));
+					vo.setUsedDate(rset.getDate(7));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	
+	public int deleteUsed(Connection conn, int usedNo){
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM USED WHERE USED_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, usedNo);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return result;
+	}
+	
 }
