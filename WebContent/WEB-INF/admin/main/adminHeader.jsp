@@ -27,7 +27,7 @@
 		            <a class="admin-header-a" href="#">관리자 게시판 관리</a> <span class="li-list" id="menu2_s">▼</span>
 	            </li>
 	                <ul class="admin-nav-li-ul" id="menu2_ul" style="display: none">
-	                    <li class="admin-nav-li-li"><a href="noticelist">공지사항 조회</a></li>
+	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="noticelist">공지사항 조회</a></li>
 	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="noticemadeview">공지사항 등록</a></li>
 	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="boardgamelist">보드게임 조회</a></li>
 	                    <li class="admin-nav-li-li"><a class="admin-header-a" href="boardgamemadeview">보드게임 등록</a></li>
