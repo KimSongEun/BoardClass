@@ -68,7 +68,7 @@
                             <td style = "vertical-align : middle"><a href="#회원정보조회" style = "color : #754100">${c.userId}</a></td>
                             <td style = "vertical-align : middle">${c.userNo}</td>
                             <td style = "vertical-align : middle">${c.commentRewriteDate}</td>
-                            <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" onclick="location.href='allcommentdelete?commentNo=${c.commentNo}'">삭제</button> </td>
+                            <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" id="${c.commentNo}">삭제</button> </td>
                         </tr>
 								<!-- The Modal -->
 								<div id="myModal" class="modal">

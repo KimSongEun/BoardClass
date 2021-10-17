@@ -86,7 +86,7 @@
                          	<td style = "vertical-align : middle"><a href="#회원정보조회" style = "color : #754100">${r.userId}</a></td>
                          	<td style = "vertical-align : middle">${r.userNo}</td>
                          	<td style = "vertical-align : middle">${r.reviewDate}</td>
-                            <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" onclick="location.href='reportreviewdelete?reviewNo=${r.reviewNo}'">삭제</button> </td>
+                            <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" id = "${r.reviewNo}">삭제</button> </td>
                         </tr>
                         		<!-- The Modal -->
 								<div id="myModal" class="modal">

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./css/admin/allboard/adminAllBoard.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="./js/admin/allboard/allboardlist.js"></script>
+    <script type="text/javascript" src="./js/admin/allboard/allboardlist.js?after"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>  
     <title>전체글 목록</title>
 </head>
@@ -97,7 +97,7 @@
                             <td style = "vertical-align : middle">${b.userNo}</td>
                             <td style = "vertical-align : middle">${b.boardRewriteDate}</td>
                             <td style = "vertical-align : middle"><button class="update btn btn-danger" value="updatego">수정</button> </td>
-                            <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" onclick="location.href='allboarddelete?boardNo=${b.boardNo}'">삭제</button> </td>
+                            <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" id = "${b.boardNo}">삭제</button> </td>
                         </tr> 
                          </c:forEach>
                          </c:if> 

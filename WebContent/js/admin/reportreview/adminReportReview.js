@@ -50,4 +50,11 @@ $(function(){
 	  }
 	}
 
+	$(".delete").click(function () {
+	    var deleteid = $(this).attr("id");
+		if(confirm(deleteid+"번 리뷰 삭제하시겠습니까?")){
+	    	location.href = "reportreviewdelete?reviewNo=" + deleteid;
+		} else {
+		}
+	});
 });

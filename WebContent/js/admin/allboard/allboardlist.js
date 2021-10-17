@@ -62,4 +62,11 @@ $(function(){
 	});
 });
 
+	$(".delete").click(function () {
+    var deleteid = $(this).attr("id");
+	if(confirm(deleteid+"번 게시글 삭제하시겠습니까?")){
+    	location.href = "allboarddelete?boardNo=" + deleteid;
+	} else {
+	}
+	});
 });

@@ -49,5 +49,13 @@ $(function(){
 	    modal.style.display = "none";
 	  }
 	}
+	
+	$(".delete").click(function () {
+	    var deleteid = $(this).attr("id");
+		if(confirm(deleteid+"번 댓글 삭제하시겠습니까?")){
+	    	location.href = "reportcommentdelete?commentNo=" + deleteid;
+		} else {
+		}
+	});
 
 });
