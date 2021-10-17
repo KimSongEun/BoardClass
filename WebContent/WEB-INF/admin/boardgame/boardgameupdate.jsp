@@ -180,15 +180,6 @@
                                     </div>
 
                                     <div class="boardgame-item_menu">
-                                        <br> <br> <label class="boardgame-item_menu_label"> 게임 확장판
-                                            : </label>
-                                        <div class="boardgame-item_menu_title">
-                                            <input type="text" class="boardgame-form_control_title"
-                                                placeholder="게임확장판을 입력해주세요" name="plus" value = "${gamevo.gamePlus}">
-                                        </div>
-                                    </div>
-
-                                    <div class="boardgame-item_menu">
                                         <br> <br> <label class="boardgame-item_menu_label"> 규칙 이미지
                                             : </label>
                                             &nbsp; &nbsp;
@@ -216,15 +207,37 @@
                                     <div class="boardgame-item_menu">
                                         <label class="boardgame-item_menu_label">👆🏻게임 규칙 영상 및 게임 설명 수정을 원할 경우 아래에 등록해주세요.</label>
                                         <div class="boardgame-item_menu_comment">
-                                            <br><br>
+                                        <br><br>
                                             <textarea id = "ckeditor" class="boardgame-form_comment" name="video"></textarea>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="boardgame-item_menu">
+                                        <br> <label class="boardgame-item_menu_label"> 게임 확장판
+                                            : </label>
+                                        <div class="boardgame-item_menu_title">
+                                            <input type="text" class="boardgame-form_control_title"
+                                                placeholder="게임확장판을 입력해주세요" name="plus" value = "${gamevo.gamePlus}">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="boardgame-item_menu">
+                                        <br> <br> <label class="boardgame-item_menu_label"> 확장판 이미지
+                                            : </label>
+                                            &nbsp; &nbsp;
+                                            <img id="boardgame-img_view3" height="420" src = "${gamevo.gamePlusImage}" style="max-width: 850px; max-height: 500px;">
+                                            <br><br>
+                                        <div class="input-group mb-3" style="width : 875px;">
+                                            &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                                            <input type="file" class="form-control" id="inputGroupFile03"
+                                                name="uploadFilePlusImage" onchange="loadPlusImg(this)">
+                                            <label class="input-group-text" for="inputGroupFile03">변경</label>
                                         </div>
                                     </div>
                                     
                                     <input type="hidden" name="no" value = "${gameno}" />
                                     <input type="hidden" name="originimage" value = "${gamevo.gameImage}" />
                                     <input type="hidden" name="originruleimage" value = "${gamevo.gameRuleImage}" />
-                                    <input type="hidden" id = "hiddentextarea" name="hiddentextarea" />                                    
                                     <textarea name = "originvideo" style = "display : none">${gamevo.gameVideo}</textarea>
                                     <div class="boardgame-item_upload">
                                         <div class="boardgame-upload_text">

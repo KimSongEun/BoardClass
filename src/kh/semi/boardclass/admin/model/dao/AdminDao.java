@@ -256,6 +256,7 @@ public class AdminDao {
 				vo.setGameRuleImage(rset.getString("GAME_RULE_IMAGE"));
 				vo.setGameVideo(rset.getString("GAME_VIDEO"));
 				vo.setGamePlus(rset.getString("GAME_PLUS"));
+				vo.setGamePlusImage(rset.getString("GAME_PLUSIMAGE"));
 				vo.setUsedNum(rset.getInt("USED_NO"));
 			}
 		} catch(Exception e) {
@@ -326,6 +327,7 @@ public class AdminDao {
 					vo.setGameRuleImage(rset.getString("GAME_RULE_IMAGE"));
 					vo.setGameVideo(rset.getString("GAME_VIDEO"));
 					vo.setGamePlus(rset.getString("GAME_PLUS"));
+					vo.setGamePlusImage(rset.getString("GAME_PLUSIMAGE"));
 					vo.setUsedNum(rset.getInt("USED_NO"));
 					volist.add(vo);
 				} while (rset.next());
@@ -343,9 +345,9 @@ public class AdminDao {
 		Game vo = null;
 		return vo;
 	}
-	public int insertBoardGame(Connection conn, String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus){
+	public int insertBoardGame(Connection conn, String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus, String plusImage){
 		int result = 0;
-		String sql = "insert into BOARDGAME values(GAME_NUM.nextval,null,?,?,?,0,?,?,?,?,?,SYSDATE,?,?,?,?,?,null,?,null,?,?,?,?)";
+		String sql = "insert into BOARDGAME values(GAME_NUM.nextval,null,?,?,?,0,?,?,?,?,?,SYSDATE,?,?,?,?,?,null,?,null,?,?,?,?,?)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -367,6 +369,7 @@ public class AdminDao {
 			pstmt.setString(16, ruleimage);
 			pstmt.setString(17, video);
 			pstmt.setString(18, plus);
+			pstmt.setString(19, plusImage);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -374,9 +377,9 @@ public class AdminDao {
 		return result;
 	}
 	
-	public int updateBoardGame(Connection conn, String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus, int gameNo){
+	public int updateBoardGame(Connection conn, String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus, String plusImage, int gameNo){
 		int result = 0;
-		String sql = "UPDATE BOARDGAME SET GAME_KONAME = ?, GAME_ENNAME = ?, GAME_CATEGORY = ?, GAME_AGE = ?, GAME_PLAYER = ?, GAME_TIME = ?, GAME_PRICE = ?, GAME_GRADE = ?, GAME_LEVEL = ?, GAME_DESIGNER = ?, GAME_WRITER = ?, GAME_BRAND = ?, GAME_RELEASEDATE = ?, GAME_LANGUAGE = ?, GAME_IMAGE = ?, GAME_RULE_IMAGE = ?, GAME_VIDEO = ?, GAME_PLUS = ?  WHERE GAME_NO=?";
+		String sql = "UPDATE BOARDGAME SET GAME_KONAME = ?, GAME_ENNAME = ?, GAME_CATEGORY = ?, GAME_AGE = ?, GAME_PLAYER = ?, GAME_TIME = ?, GAME_PRICE = ?, GAME_GRADE = ?, GAME_LEVEL = ?, GAME_DESIGNER = ?, GAME_WRITER = ?, GAME_BRAND = ?, GAME_RELEASEDATE = ?, GAME_LANGUAGE = ?, GAME_IMAGE = ?, GAME_RULE_IMAGE = ?, GAME_VIDEO = ?, GAME_PLUS = ?, GAME_PLUSIMAGE = ? WHERE GAME_NO=?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null; 
 		try {
@@ -399,7 +402,8 @@ public class AdminDao {
 			pstmt.setString(16, ruleimage);
 			pstmt.setString(17, video);
 			pstmt.setString(18, plus);
-			pstmt.setInt(19, gameNo);
+			pstmt.setString(19, plusImage);
+			pstmt.setInt(20, gameNo);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

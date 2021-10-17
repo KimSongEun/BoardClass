@@ -30,18 +30,4 @@ $(function() {
         // 미리보기 제거
         $("#boardgame-img_view").attr('src', '');
     });
-
-
-	function updateHtmls(){
-	var contents = CKEDITOR.instances.ckeditor.getData();
-    if(contents=='') {
-     	 console.log("비었다");
-		$("#hiddentextarea").attr("value", 999);
-    } else {
-     	 console.log("안비었다");
-    }
-   
-	}
-	$(".boardgame-upload_btn").click(updateHtmls);	
-
 });

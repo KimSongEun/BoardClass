@@ -185,10 +185,10 @@ public class AdminService {
 		return vo;
 	}
 
-	public int insertBoardGame(String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer,String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus) {
+	public int insertBoardGame(String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer,String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus, String plusImage) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().insertBoardGame(conn, kotitle, entitle, category, age, player, time, price, grade, level, designer, writer, brand, releasedate, language, image, ruleimage, video, plus);
+		result = new AdminDao().insertBoardGame(conn, kotitle, entitle, category, age, player, time, price, grade, level, designer, writer, brand, releasedate, language, image, ruleimage, video, plus, plusImage);
 		if(result > 0) {
 			JDBCTemplate.commit(conn);
 		} else {
@@ -198,10 +198,10 @@ public class AdminService {
 		return result;
 	}
 
-	public int updateBoardGame(String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus, int gameNo) {
+	public int updateBoardGame(String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus, String plusImage, int gameNo) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().updateBoardGame(conn, kotitle, entitle, category, age, player, time, price, grade, level, designer, writer, brand, releasedate, language, image, ruleimage, video, plus, gameNo);
+		result = new AdminDao().updateBoardGame(conn, kotitle, entitle, category, age, player, time, price, grade, level, designer, writer, brand, releasedate, language, image, ruleimage, video, plus, plusImage, gameNo);
 		if(result > 0) {
 			JDBCTemplate.commit(conn);
 		} else {
