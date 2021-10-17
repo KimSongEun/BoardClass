@@ -28,7 +28,7 @@ $(function(){
 		var comment_id = $(this).attr("id");
 		console.log(comment_id);
 		$.ajax({
-		url : "allboardgetdetail.ajax",
+		url : "allcommentgetdetail.ajax",
 		type : "post",
 		data : {commentNo : comment_id},
 		success : function(data){

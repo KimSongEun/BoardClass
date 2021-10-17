@@ -1828,7 +1828,7 @@ public class AdminDao {
 				"ON B.GAME_NO = V.GAME_NO\r\n" + 
 				"JOIN MEMBER M\r\n" + 
 				"ON V.USER_ID = M.USER_ID\r\n" + 
-				"where M.USER_NO like ('%1%')\r\n" + 
+				"where M.USER_NO like (?)\r\n" + 
 				"GROUP BY V.REVIEW_NO, B.GAME_KONAME, V.REVIEW_CONTENT, V.USER_ID, M.USER_NO, V.REVIEW_DATE)";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -1891,5 +1891,44 @@ public class AdminDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return volist;
+	}
+	
+	public int deleteReview(Connection conn, int reviewNo){
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM REVIEW WHERE REVIEW_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return result;
+	}
+	
+	public ReportReview getReviewDetail(Connection conn, String reviewNo) {
+		ReportReview vo = null;
+		String sql = "SELECT REVIEW_CONTENT FROM REVIEW WHERE REVIEW_NO=?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,  reviewNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				vo = new ReportReview();
+				vo.setReviewContent(rset.getString("REVIEW_CONTENT"));
+
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			} 
+		return vo;
 	}
 }

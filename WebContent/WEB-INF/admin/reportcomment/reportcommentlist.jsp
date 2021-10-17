@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./css/admin/reportcomment/adminReportComment.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="./js/admin/reportcomment/adminReportComment.js"></script>
+    <script type="text/javascript" src="./js/admin/reportcomment/adminReportComment.js?after"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>  
     <title>신고 댓글 목록</title>
 </head>

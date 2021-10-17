@@ -11,6 +11,7 @@ import kh.semi.boardclass.admin.model.vo.Banner;
 import kh.semi.boardclass.admin.model.vo.Notice;
 import kh.semi.boardclass.admin.model.vo.ReportBoard;
 import kh.semi.boardclass.admin.model.vo.ReportComment;
+import kh.semi.boardclass.admin.model.vo.ReportReview;
 import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.community.model.vo.Board;
 import kh.semi.boardclass.community.model.vo.BoardReport;
@@ -611,5 +612,82 @@ public class AdminService {
 		volist = new AdminDao().searchReportCommentUserNo(conn, keyword, start, end);
 		JDBCTemplate.close(conn);
 		return volist;
+	}
+	
+	public int getReportReviewCount() {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getReportReviewCount(conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportReview> selectReportReviewList(int start, int end) {
+		ArrayList<ReportReview> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().selectReportReviewList(conn, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+
+	public ArrayList<ReportReview> selectReportReviewAscList(int start, int end) {
+		ArrayList<ReportReview> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().selectReportReviewAscList(conn, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int getReportReviewUserIdCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getReportReviewUserIdCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportReview> searchReportReviewUserId(String keyword, int start, int end) {
+		ArrayList<ReportReview> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchReportReviewUserId(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int getReportReviewUserNoCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getReportReviewUserNoCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportReview> searchReportReviewUserNo(String keyword, int start, int end) {
+		ArrayList<ReportReview> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchReportReviewUserNo(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int deleteReview(int reviewNo) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().deleteReview(conn, reviewNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
+	public ReportReview getReviewDetail(String reviewNo) {
+		ReportReview vo = null;
+		Connection conn = JDBCTemplate.getConnection();
+		vo = new AdminDao().getReviewDetail(conn, reviewNo);
+		JDBCTemplate.close(conn);
+		return vo;
 	}
 }

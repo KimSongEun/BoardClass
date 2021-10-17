@@ -12,19 +12,19 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import kh.semi.boardclass.admin.model.service.AdminService;
-import kh.semi.boardclass.admin.model.vo.AllCommentUser;
+import kh.semi.boardclass.admin.model.vo.ReportReview;
 
 /**
- * Servlet implementation class AllCommentGetDetailServlet
+ * Servlet implementation class ReviewGetDetailServlet
  */
-@WebServlet("/allcommentgetdetail.ajax")
-public class AllCommentGetDetailServlet extends HttpServlet {
+@WebServlet("/reviewgetdetail.ajax")
+public class ReviewGetDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AllCommentGetDetailServlet() {
+    public ReviewGetDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,16 +45,16 @@ public class AllCommentGetDetailServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		System.out.println("/allcommentgetdetail.ajax 진입");
-		String commentNo = request.getParameter("commentNo");
-		System.out.println(commentNo);
-		AllCommentUser vo = new AdminService().getAllCommentDetail(commentNo);
-		System.out.println(vo.getCommentContent());
-		String commentDetail = vo.getCommentContent();
+		System.out.println("/reviewgetdetail.ajax 진입");
+		String reviewNo = request.getParameter("reviewNo");
+		System.out.println(reviewNo);
+		ReportReview vo = new AdminService().getReviewDetail(reviewNo);
+		System.out.println(vo.getReviewContent());
+		String reviewDetail = vo.getReviewContent();
 		//ajax 데이터 처리
 		PrintWriter out = response.getWriter();
 		response.setContentType("application/json; charset=utf-8"); 
-		new Gson().toJson(commentDetail, response.getWriter());
+		new Gson().toJson(reviewDetail, response.getWriter());
 		out.flush();
 		out.close();
 	}
