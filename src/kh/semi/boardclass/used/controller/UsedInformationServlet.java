@@ -16,14 +16,10 @@ public class UsedInformationServlet extends HttpServlet {
 
 	public UsedInformationServlet() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
 		
 		int usedNO = Integer.parseInt(request.getParameter("no"));
 		Used vo = new UsedService().getUsedDetail(usedNO);

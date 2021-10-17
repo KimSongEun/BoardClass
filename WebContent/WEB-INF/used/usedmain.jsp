@@ -21,13 +21,15 @@
 			<option value="UsedOnTwoPlayerList">2인 추천</option>
 			<option value="UsedOnPartyList">파티</option>
 			<option value="UsedOnFamilyList">가족</option>
-			<option value="UsedOnChildLsit">어린이</option>
+			<option value="UsedOnChildList">어린이</option>
 			<option value="UsedOnKoreanList">한글</option>
 		</select>
 	</div>
 	<div>
-		<input type="search" placeholder="검색어를 입력해주세요">
-		<button type="submit">검색</button>
+		<form id="searchTandC" action="usedmain">
+			<input type="search" name="search" placeholder="검색어를 입력해주세요">
+			<button type="submit">검색</button>
+		</form>
 	</div>
 	<table>
 		<tr>

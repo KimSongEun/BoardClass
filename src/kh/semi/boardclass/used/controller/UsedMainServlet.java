@@ -27,9 +27,6 @@ public class UsedMainServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
 
 		final int PAGE_SIZE = 10; // 한 페이지 당 글수
 		final int PAGE_BLOCK = 5; // 한 화면에 나타날 페이지 링크 수
@@ -63,8 +60,11 @@ public class UsedMainServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK - 1;
 		if (endPage > pageCount)
 			endPage = pageCount;
+		
+		String search = request.getParameter("search");
+		System.out.println("검색어는 : " + search);
 
-		ArrayList<Used> volist = new UsedService().selectUsedList(startRnum, endRnum);
+		ArrayList<Used> volist = new UsedService().selectUsedList(startRnum, endRnum, search);
 		System.out.println("usedmain:volist: " + volist);
 		request.setAttribute("usedlist", volist);
 		request.getRequestDispatcher("/WEB-INF/used/usedmain.jsp").forward(request, response);
