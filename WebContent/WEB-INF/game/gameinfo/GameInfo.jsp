@@ -4,7 +4,8 @@
 	pageEncoding="UTF-8"%>
 <%
 	Game vo = (Game) request.getAttribute("gamevolist");
-	
+	String[] str2 = (String[]) request.getAttribute("str2");
+	String[] str4 = (String[]) request.getAttribute("str4");
 
 %>
 <!DOCTYPE html>
@@ -27,12 +28,14 @@
 
 @MEDIA {
 }
-.hrr{
-position: relative;
+
+.hrr {
+	position: relative;
 	top: 50px;
-	width:80%;
-	align:right;
+	width: 80%;
+	align: right;
 }
+
 #info {
 	position: relative;
 	width: 1500px;
@@ -81,20 +84,23 @@ position: relative;
 	left: 50px;
 	top: 150px;
 }
-.info2-5{
+
+.info2-5 {
 	position: relative;
 	width: 1200px;
 	height: 400px;
 	left: 50px;
 	top: 150px;
 }
-#plus{
- display: flex;
-         justify-content: space-around;
+
+#plus {
+	display: flex;
+	justify-content: space-around;
 }
-#btnReview{
+
+#btnReview {
 	position: relative;
-	top:-10px;
+	top: -10px;
 	left: 1100px;
 }
 
@@ -115,10 +121,11 @@ position: relative;
 	left: 50px;
 	font-size: 30px;
 	width: 400px;
-	top:30px;
+	top: 30px;
 }
-.infoPP2{
-position: relative;
+
+.infoPP2 {
+	position: relative;
 	left: 50px;
 	font-size: 30px;
 	width: 400px;
@@ -251,8 +258,7 @@ position: relative;
 		<div id="info2">
 			<div id="info2-1">
 				<p class="infoP">게임 정보</p>
-				<br>
-				<br>
+				<br> <br>
 				<table id="infoTable">
 					<tr>
 						<td width="100px"></td>
@@ -273,72 +279,67 @@ position: relative;
 						<td width="600px" height="80" style="font-size: 30px">작가 : <%=vo.getGameWriter()%></td>
 					</tr>
 				</table>
-				<br>
-				<br>
+				<br> <br>
 			</div>
-			
+
 			<div id="info2-2">
 				<p class="infoP">코멘트</p>
 				<p class="infoPP">Hot Review</p>
-				<button id = "btnReview" style = "width: 200px; height: 50px; font-size: 25px;">전체 보기 >></button>
-	
+				<button id="btnReview"
+					style="width: 200px; height: 50px; font-size: 25px;">전체 보기
+					>></button>
+
 				<p class="infoPP2">Recent Review</p>
 			</div>
-			<br>
-			<br>
+			<br> <br>
 			<div class="info2-3">
 				<p class="infoP">게임 규칙</p>
-				<br>
-				<br> <img class="rule"
+				<br> <br> <img class="rule"
 					src="<%=request.getContextPath()%>/<%=vo.getGameRuleImage()%>"
 					width="1200" height="600" />
 			</div>
-			<br>
-			<br>
-			<br>
-			<br>
+			<br> <br> <br> <br>
 
 			<div class="info2-3">
 				<p class="infoP">HOW TO PLAY</p>
-				<br>
-				<br>
-				<iframe class ="rule" width="1200" height="600"
+				<br> <br>
+
+				<iframe class="rule" width="1200" height="600"
 					src="<%=vo.getGameVideo()%>" title="YouTube video player"
 					frameborder="0"
 					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 					allowfullscreen></iframe>
+
 			</div>
-			<br>
-			<br>
-			<br>
-			<br>
+			<br> <br> <br> <br>
 
 			<div class="info2-4">
 				<p class="infoP">중고 거래 정보</p>
 
 
 			</div>
-			<br>
-			<br>
-			<br>
-			<br>
+			<br> <br> <br> <br>
 
 			<div class="info2-5">
 				<p class="infoP">확장판</p>
-				<br>
-				<br>
-				<button class = "rule">
-				<img src="<%=request.getContextPath()%>/<%=vo.getGamePlusImage()%>"
-							width="250" height="250" />
-				<div id = "plus">
-				<%=vo.getGamePlus()%>
-				</div>
+				<br> <br>
+				<% int n = 0;
+					String a = Integer.toString(n);
+					%>
+				<% if(!str2[0].equals(a)){ 
+				 for(int i = 0; i<str2.length; i++){ %>
+				<button class="rule">
+					<img src="<%=request.getContextPath()%>/<%=str2[i]%>"
+						width="250" height="250" />
+					<div id="plus">
+						<%=str4[i]%>
+					</div>
 				</button>
+				<%}} else{%>
+					<p>확장판이 없습니다<p>
+				<%} %>
 			</div>
-			<br>
-			<br>
-			<br>
-			<br>
+			<br> <br> <br> <br>
 
 		</div>
 

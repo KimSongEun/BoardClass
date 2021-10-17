@@ -42,8 +42,14 @@ public class GameInfoServlet extends HttpServlet {
         
         Game vo = new GameService().InfoGame(name);
         
-       
+        String str = vo.getGamePlusImage();
+        String[] str2 = str.split(","); 
+        String str3 = vo.getGamePlus();
+        String[] str4 = str3.split(","); 
         request.setAttribute("gamevolist", vo);
+        request.setAttribute("str2", str2);
+        request.setAttribute("str4", str4);
+      
         
 		request.getRequestDispatcher("/WEB-INF/game/gameinfo/GameInfo.jsp").forward(request, response);
 		
