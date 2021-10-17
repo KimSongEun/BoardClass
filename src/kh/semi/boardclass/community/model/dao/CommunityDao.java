@@ -391,13 +391,76 @@ public Board getBoard(Connection conn, int boardNo) {
 
 	}
 
-	public ArrayList<Comment> selectComment() {
-		ArrayList<Comment> volist = null;
+	public ArrayList<Comment> selectComment(Connection conn, int boardNo) {
+		ArrayList<Comment> volist = new ArrayList<Comment>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = "select comment_no, board_no, user_id,comment_content," 
+				+ "  TO_CHAR(COMMENT_WRITE_DATE, 'YY/MM/DD') AS COMMENT_WRITE_DATE," 
+				+ "  TO_CHAR(COMMENT_REWRITE_DATE, 'YY/MM/DD') AS COMMENT_REWRITE_DATE ," 
+				+ "  comment_img, COMMENT_REF, COMMENT_RE_STEP,COMMENT_RE_LEVEL" 
+				+ " from COMT where board_no = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				do {
+					Comment comment = new Comment();
+					comment.setCommentNo(rset.getInt("comment_no"));
+					comment.setBoardNo(rset.getInt("board_no"));
+					comment.setUserId(rset.getString("user_id"));
+					comment.setCommentContent(rset.getString("Comment_content"));
+					comment.setCommentWriteDate(rset.getString("comment_write_date"));
+					comment.setCommentRewriteDate(rset.getString("comment_rewrite_Date"));
+					comment.setCommentRef(rset.getInt("COMMENT_REF"));
+					comment.setCommentReStep(rset.getInt("comment_re_step"));
+					comment.setCommentReLevel(rset.getInt("comment_re_level"));
+					comment.setCommentImg(rset.getString("comment_img"));
+					volist.add(comment);
+				}while (rset.next());
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return volist;
 	}
 
-	public int insertComment() {
-		int result = -1;
+	public int insertComment(Connection conn, Comment comment) {
+		int commentNo = comment.getCommentNo();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String sql = "Insert into COMT values(COMMENT_NUM.nextval, ?, ?, ?,SYSDATE,SYSDATE, ?, ?, ?, ?)";
+		String sql2 = "update comt set comment_re_step = comment_re_step + 1 where comment_ref = ? and comment_re_step > ?";
+		try {
+			if(commentNo != 0) {
+				pstmt = conn.prepareStatement(sql2);
+				pstmt.setInt(1, comment.getCommentRef());
+				pstmt.setInt(2, comment.getCommentReStep());
+				pstmt.executeUpdate();
+				pstmt.close();
+				comment.setCommentReStep(comment.getCommentReStep() + 1);
+				comment.setCommentReLevel(comment.getCommentReLevel() + 1);
+			}
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, comment.getBoardNo());
+			pstmt.setString(2, comment.getUserId());
+			pstmt.setString(3, comment.getCommentContent());
+			pstmt.setString(4, comment.getCommentImg());
+			pstmt.setInt(5, comment.getCommentRef());
+			pstmt.setInt(6, comment.getCommentReStep());
+			pstmt.setInt(7, comment.getCommentReLevel());
+			result = pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		return result;
 	}
 

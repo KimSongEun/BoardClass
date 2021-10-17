@@ -1,6 +1,8 @@
 package kh.semi.boardclass.community.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import kh.semi.boardclass.community.model.dao.CommunityDao;
 import kh.semi.boardclass.community.model.service.CommunityService;
 import kh.semi.boardclass.community.model.vo.Board;
+import kh.semi.boardclass.community.model.vo.Comment;
 
 /**
  * Servlet implementation class CommunityFreeDetailServlet
@@ -48,8 +51,19 @@ public class CommunityFreeDetailServlet extends HttpServlet {
 		request.setAttribute("board", board);
 //		request.setAttribute("content", content);
 		request.setAttribute("date", date);
-		//TODO 댓
 		
+		//댓글 부분
+		int commentNo = 0, commentRef = 0, commentReLevel = 0, commentReStep = 0;
+		CommunityService comt = new CommunityService();
+
+		request.setAttribute("commentNo", commentNo);
+		request.setAttribute("commentRef", commentRef);
+		request.setAttribute("commentReLevel", commentReLevel);
+		request.setAttribute("commentReStep", commentReStep);
+		
+		ArrayList<Comment> list = comt.selectComment(boardNo);
+		
+		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("/WEB-INF/community/freeBoard/FreeBoardContent.jsp").forward(request, response);
 	}
