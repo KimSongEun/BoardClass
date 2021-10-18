@@ -38,15 +38,15 @@ public class GameGradeListServlet extends HttpServlet {
         PrintWriter out=response.getWriter();    
     	
         
-    	final int PAGE_SIZE = 10;   // �� ������ �� �ۼ�
-		final int PAGE_BLOCK = 3;   // �� ȭ�鿡 ��Ÿ�� ������ ��ũ ��
-		int bCount = 0;   // �� �ۼ�
-		int pageCount = 0; // �� ��������
-		int startPage = 1;   // ȭ�鿡 ��Ÿ�� ����������
-		int endPage = 1;   // ȭ�鿡 ��Ÿ�� ������������
+    	final int PAGE_SIZE = 10;   
+		final int PAGE_BLOCK = 3;   
+		int bCount = 0;  
+		int pageCount = 0; 
+		int startPage = 1;  
+		int endPage = 1;   
 		int currentPage = 1;
-		int startRnum = 1;   // ȭ�鿡 ��
-		int endRnum = 1;  // ȭ�鿡 ��
+		int startRnum = 1;  
+		int endRnum = 1; 
 		
 		String pageNum = request.getParameter("pagenum");
 		if(pageNum != null) {   // ������ �������� ����.

@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="./css/index.css">
+<link rel="stylesheet" href="./css/index/maincss.css"/>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,12 +32,6 @@
 @MEDIA {
 }
 
-.hrr {
-	position: relative;
-	top: 50px;
-	width: 80%;
-	align: right;
-}
 
 #info {
 	position: relative;
@@ -50,7 +44,7 @@
 #info2 {
 	position: relative;
 	width: 1500px;
-	height: 4150px;
+	height: 4450px;
 	left: 200px;
 	top: 240px;
 	border: 1px solid black;
@@ -161,12 +155,7 @@
 	font-size: 25px;
 }
 
-.footer {
-	width: 78%;
-	top: 1400px;
-	height: 100px;
-	position: absolute;
-}
+
 
 .modal {
 	display: none;
@@ -246,6 +235,11 @@ vertical-align: middle;
 .star-rating label:hover, .star-rating label:hover ~ label {
 	-webkit-text-fill-color: #fff58c;
 }
+#total{
+	position: relative;
+	width: 2000px;
+	height: 5200px;
+}
 </style>
 </head>
 <body>
@@ -275,28 +269,9 @@ vertical-align: middle;
 		</div>
 	</div>
 	
-	<div class="total">
-		<header>
-			<div class="nav">
-				<nav class="navlogin">
-					<a href="#">로그인</a> | <a href="#">회원가입</a>
-				</nav>
-			</div>
-			<div class="logo">
-				<a href="#"><img src="./img/logo.png" alt=""></a>
-			</div>
-			<hr id="hrdash">
-			<br>
-			<div class="nav">
-				<nav class="navcategory">
-					<a href="#">카테고리</a> | <a href="GameGradeRank">게임랭킹</a> | <a
-						href="#">중고거래</a> | <a href="#">게시판</a> | <a href="GameLevelList">보드게임정보</a>
-				</nav>
-			</div>
-			<br>
-			<hr id="hrsolid">
-		</header>
-
+	<%@include file="/WEB-INF/index/header.jsp" %>
+		
+<div id ="total">
 		<div id="info">
 			<table>
 				<tr>
@@ -556,9 +531,9 @@ vertical-align: middle;
 			<br> <br> <br> <br>
 
 		</div>
-
-
-
-		<br>
+</div>
+		
+		
+<%@include file="/WEB-INF/index/footer.jsp" %>
 </body>
 </html>
