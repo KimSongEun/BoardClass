@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.boardclass.community.model.service.CommunityService;
+
 /**
  * Servlet implementation class CommunityCommentDeleteServlet
  */
@@ -19,22 +21,29 @@ public class CommunityCommentDeleteServlet extends HttpServlet {
      */
     public CommunityCommentDeleteServlet() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String pageNum = request.getParameter("pageNum");
+		String commentNo  = request.getParameter("commentNo");
+		String boardNo  = request.getParameter("boardNo");
+		int result = new CommunityService().deleteComment(Integer.parseInt(commentNo));
+		
+		
+		request.setAttribute("boardNo", boardNo);
+		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("result", result);
+//		request.getRequestDispatcher("WEB-INF/community/CommentDelete.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/cfdetail?boardNo=" + boardNo);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

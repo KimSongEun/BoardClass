@@ -28,6 +28,14 @@ public class Comment {
 		// TODO Auto-generated constructor stub
 	}
 
+	@Override
+	public String toString() {
+		return "Comment [commentNo=" + commentNo + ", boardNo=" + boardNo + ", userId=" + userId + ", commentContent="
+				+ commentContent + ", commentWriteDate=" + commentWriteDate + ", commentRewriteDate="
+				+ commentRewriteDate + ", commentImg=" + commentImg + ", commentRef=" + commentRef + ", commentReStep="
+				+ commentReStep + ", commentReLevel=" + commentReLevel + "]";
+	}
+
 	public int getCommentNo() {
 		return commentNo;
 	}

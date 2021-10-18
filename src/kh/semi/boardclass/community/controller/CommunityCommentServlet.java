@@ -30,7 +30,7 @@ public class CommunityCommentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		System.out.println("post로만 진입. insert 후 list 보여줌");
 	}
 
 	/**
@@ -43,21 +43,51 @@ public class CommunityCommentServlet extends HttpServlet {
 		
 		String userId = request.getParameter("userId");
 		String pageNum = request.getParameter("pageNum");
-		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		String boardNoStr = request.getParameter("boardNo");
+		String commentNoStr = request.getParameter("commentNo");
+		String commentRefStr = request.getParameter("commentRef");
+		String commentReLevelStr = request.getParameter("commentReLevel");
+		String commentReStepStr = request.getParameter("commentReStep");
+		
+		int boardNo = 0;
+		int commentNo = 0;
+		int commentRef = 0;
+		int commentReLevel = 0;
+		int commentReStep = 0;
+		
+		try {
+			boardNo = Integer.parseInt(boardNoStr);
+		}catch( Exception e ) {
+			e.printStackTrace();
+			System.out.println("boardNoStr 숫자변환못함");
+			response.sendRedirect("cf");
+			return;
+		}
+		try {
+			commentNo = Integer.parseInt(commentNoStr);
+			commentRef = Integer.parseInt(commentRefStr);
+			commentReLevel = Integer.parseInt(commentReLevelStr);
+			commentReStep = Integer.parseInt(commentReStepStr);			
+		}catch( Exception e ) {
+			e.printStackTrace();
+			System.out.println("commentNo 숫자변환못함 - 댓글, 답글아님");
+		}
 		
 		Comment comment = new Comment();
 		comment.setBoardNo(boardNo);
 		comment.setUserId(userId);
 		comment.setCommentContent(request.getParameter("commentContent"));
-		comment.setCommentNo(Integer.parseInt(request.getParameter("commentNo")));
-		comment.setCommentRef(Integer.parseInt(request.getParameter("commentRef")));
-		comment.setCommentReStep(Integer.parseInt(request.getParameter("commentReStep")));
-		comment.setCommentReLevel(Integer.parseInt(request.getParameter("commentReLevel")));
+		comment.setCommentNo(commentNo);
+		comment.setCommentRef(commentRef);
+		comment.setCommentReLevel(commentReLevel);
+		comment.setCommentReStep(commentReStep);
 		
 		CommunityService cs = new CommunityService();
 		int result = cs.insertComment(comment);
 		
-		Board board = cs.getBoard(boardNo);
+		CommunityService bd = new CommunityService();
+		Board board = bd.getBoard(boardNo);
+		
 		String content = board.getBoardContent();
 		content = content.replace("\r\n", "<br>");
 		
@@ -65,15 +95,16 @@ public class CommunityCommentServlet extends HttpServlet {
 		request.setAttribute("boardNo", boardNo);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("board", board);
-		request.setAttribute("userId", comment.getUserId());
+		request.setAttribute("content", content);
+		request.setAttribute("userId", userId);
 		request.setAttribute("commentRef", comment.getCommentRef());
 		request.setAttribute("commentReLevel", comment.getCommentReLevel());
 		request.setAttribute("commentReStep", comment.getCommentReStep());
-		request.setAttribute("content", content);
 		request.setAttribute("result", result);
 		
-		request.getRequestDispatcher("/WEB-INF/community/freeBoard/Comment.jsp").forward(request, response);
 		
+		//request.getRequestDispatcher("/WEB-INF/community/freeBoard/Comment.jsp").forward(request, response);
+		response.sendRedirect(request.getContextPath() + "/cfdetail?boardNo=" + boardNo);
 	}
 
 }

@@ -139,3 +139,10 @@
 .btn1 {border-radius: 2px;}
 .btn2 {border-radius: 4px;}
 .btn3 {border-radius: 8px;}
+
+/* 댓글 부분*/
+.cmt_area {
+	padding: 18px 20px 15px;
+	position: relative;
+	border: 1px solid #e6e6e8;
+}
