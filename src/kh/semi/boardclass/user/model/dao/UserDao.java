@@ -131,9 +131,40 @@ public class UserDao {
 		return result;
 	}
 
-	public int searchId(Connection conn, User user) {
-		int result = 0;
-		return result;
+	public User searchId(Connection conn,String userName, String userEmail, int userPhone) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String query = "SELECT * FROM member where USER_NAME=? and USER_EMAIL=? and USER_PHONE=?";
+		User user =null;
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userName);
+			pstmt.setString(2, userEmail);
+			pstmt.setInt(3, userPhone);
+			rset = pstmt.executeQuery();
+			while(rset.next()) {	
+				user = new User();
+				user.setUserId(rset.getString("user_Id"));	
+				user.setUserNo(rset.getInt("user_No"));	
+				user.setUserPassword(rset.getString("user_Password"));	
+				user.setUserName(rset.getString("user_Name"));
+				user.setUserNickname(rset.getString("user_Nickname"));
+				user.setUserEmail(rset.getString("user_Email"));	
+				user.setUserPhone(rset.getInt("user_Phone"));	
+				user.setUserAddress(rset.getString("user_Address"));	
+				user.setUserType(rset.getString("user_Type").charAt(0));	
+				user.setUserImage(rset.getString("user_Image"));
+				user.setUserHistory(rset.getInt("user_History"));
+			}
+		
+		} catch (SQLException e) { // TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return user;
 	}
 
 	public int searchPwd(Connection conn, User user) {
