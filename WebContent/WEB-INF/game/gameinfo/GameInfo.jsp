@@ -37,56 +37,56 @@
 	position: relative;
 	width: 1500px;
 	height: 400px;
-	left: 200px;
+	left: 300px;
 	top: 100px;
 }
 
 #info2 {
 	position: relative;
-	width: 1500px;
+	width: 1550px;
 	height: 4450px;
 	left: 200px;
-	top: 240px;
+	top: 290px;
 	border: 1px solid black;
 }
 
 #info2-1 {
 	position: relative;
-	width: 1400px;
+	width: 1450px;
 	height: 350px;
-	left: 50px;
+	left: 70px;
 	top: 50px;
 }
 
 #info2-2 {
 	position: relative;
-	width: 1400px;
+	width: 1450px;
 	height: 1000px;
-	left: 50px;
+	left: 70px;
 	top: 150px;
 }
 
 .info2-3 {
 	position: relative;
-	width: 1200px;
+	width: 1250px;
 	height: 700px;
-	left: 50px;
+	left: 70px;
 	top: 150px;
 }
 
 .info2-4 {
 	position: relative;
-	width: 1200px;
+	width: 1250px;
 	height: 500px;
-	left: 50px;
+	left: 70px;
 	top: 150px;
 }
 
 .info2-5 {
 	position: relative;
-	width: 1200px;
+	width: 1250px;
 	height: 400px;
-	left: 50px;
+	left: 70px;
 	top: 150px;
 }
 
@@ -98,24 +98,24 @@
 #btnReview {
 	position: relative;
 	top: -10px;
-	left: 1100px;
+	left: 1150px;
 }
 
 .rule {
 	position: relative;
-	left: 100px;
+	left: 70px;
 }
 
 .infoP {
 	position: relative;
-	left: 50px;
+	left: 70px;
 	font-size: 45px;
 	width: 400px;
 }
 
 .infoPP {
 	position: relative;
-	left: 50px;
+	left: 100px;
 	font-size: 30px;
 	width: 400px;
 	top: 30px;
@@ -123,7 +123,7 @@
 
 .infoPP2 {
 	position: relative;
-	left: 50px;
+	left: 100px;
 	font-size: 30px;
 	width: 400px;
 	top: 400px;
@@ -135,10 +135,10 @@
 
 #ReviewWrite {
 	position: relative;
-	width: 1500px;
+	width: 1550px;
 	height: 100px;
 	left: 200px;
-	top: 180px;
+	top: 260px;
 	background-color: #D9E5FF;
 	display: flex;
 	justify-content: center;
@@ -167,9 +167,9 @@
 }
 
 .modal-content {
-	width: 700px;
-	height: 680px;
-	top: 50px;
+	width: 680px;
+	height: 720px;
+	top: 200px;
 	margin: auto;
 	position: relative;
 	background-color: #e9ecef;
@@ -178,17 +178,17 @@
 
 .btn1 {
 	position: relative;
-	top: 5px;
+	top: 15px;
 	width: 336px;
 	height: 100px;
 }
 #close{
 	position: relative;
-	top: 5px;
+	
 	width: 336px;
 	height: 100px;
 	left:340px;
-	top:-95px;
+	top:-86px;
 }
 .star-rating {
 	display: flex;
@@ -205,7 +205,7 @@
 .star-rating1 {
 	display: flex;
 	flex-direction: row-reverse;
-	font-size: 3rem;
+	font-size: 4.5rem;
 	line-height: 2.5rem;
 	justify-content: space-around;
 	padding: 0 0.2em;
@@ -246,10 +246,10 @@ vertical-align: middle;
 
 	<div id="modal_01" class="modal">
 		<div class="modal-content">
-			
-			<p style="font-size: 50px; background-color: #e9ecef"><%=vo.getGameKoName()%></p>
-			<form action="#" method="get" style="background-color: #e9ecef">
+			<p style="font-size: 33px; background-color: #e9ecef"><%=vo.getGameKoName()%></p>
+			<form action="GameInfo" method="post" style="background-color: #e9ecef">
 				<div class="star-rating space-x-4 mx-auto">
+				<input type = "hidden" value = "<%=vo.getGameNumber()%>" name = "no">
 					<br> <br> <input type="radio" id="5-stars" name="rating"
 						value="5" v-model="ratings" /> <label for="5-stars"
 						class="star pr-4">★</label> <input type="radio" id="4-stars"
@@ -262,8 +262,9 @@ vertical-align: middle;
 						name="rating" value="1" v-model="ratings" /> <label for="1-star"
 						class="star">★</label>
 				</div>
-				<textarea rows="25" cols="98"></textarea>
-				<input type="submit" value="등 록" class="btn1">
+				<textarea rows="25" cols="98" name = "REVIEW_CONTENT" ></textarea>
+				<input type="submit" value="등 록" class="btn1" onclick = "location = 'GameInfo?GAME_KONAME=텔레스트레이션'">
+
 			</form>
 				<button value="취 소" id = "close" >취 소</button>
 		</div>
@@ -277,12 +278,12 @@ vertical-align: middle;
 				<tr>
 					<th rowspan="8"><img
 						src="<%=request.getContextPath()%>/<%=vo.getGameImage()%>"
-						width="400" height="400" /></th>
-					<td>&emsp;&emsp; &emsp;&emsp; &emsp;&emsp;</td>
+						width="500" height="500" /></th>
+					<td></td>
 					<td colspan="3" height="50px" width="600px" style="font-size: 40px">전체순위</td>
 				</tr>
 				<tr>
-					<td></td>
+					<td width = 250px></td>
 					<td colspan="3" height="50px" style="font-size: 50px"><%=vo.getGameKoName()%></td>
 				</tr>
 				<tr>
@@ -317,12 +318,11 @@ vertical-align: middle;
 				<tr>
 					<td></td>
 					<td style = "width: 200px; height: 70px"><button
-							style="height: 70px; width: 170px; font-size: 25px">>
-							찜하기</button></td>
+							style="height: 70px; width: 180px; font-size: 25px">> 찜하기</button></td>
 					
-					<td colspan="2">
+					<td colspan="2" style = "text-align: center;">
 						
-					<br> <br>  
+					 
 					<% int star = vo.getGameGrade();
 					System.out.println(star);
 					if(star<2 && star >=0){%>
@@ -422,20 +422,20 @@ vertical-align: middle;
 				<br> <br>
 				<table id="infoTable">
 					<tr>
-						<td width="100px"></td>
-						<td width="500px" height="80" style="font-size: 30px">게임 난이도
+						<td width="80px"></td>
+						<td width="600px" height="80" style="font-size: 30px">게임 난이도
 							: <%=vo.getGameLevel()%></td>
 						<td width="600px" height="80" style="font-size: 30px"><%=vo.getGameLanguage()%></td>
 					</tr>
 					<tr>
 						<td></td>
-						<td width="500px" height="80" style="font-size: 30px">출시 년도 :
+						<td width="600px" height="80" style="font-size: 30px">출시 년도 :
 							<%=vo.getGameReleaseDate()%></td>
 						<td width="600px" height="80" style="font-size: 30px">제조사 : <%=vo.getGameBrand()%></td>
 					</tr>
 					<tr>
 						<td></td>
-						<td width="500px" height="80" style="font-size: 30px">디자이너 :
+						<td width="600px" height="80" style="font-size: 30px">디자이너 :
 							<%=vo.getGameDesigner()%></td>
 						<td width="600px" height="80" style="font-size: 30px">작가 : <%=vo.getGameWriter()%></td>
 					</tr>
@@ -444,7 +444,7 @@ vertical-align: middle;
 			</div>
 
 			<div id="info2-2">
-				<p class="infoP">코멘트</p>
+				<p class="infoP">리뷰</p>
 				<p class="infoPP">Hot Review</p>
 				<button id="btnReview"
 					style="width: 200px; height: 50px; font-size: 25px;">전체 보기
