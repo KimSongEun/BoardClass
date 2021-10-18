@@ -44,9 +44,9 @@
                     <td style = "text-align : right; font-size : 15px; width : 160px">
                     	|| 표시글 개수 : <select style = "height : 30px" name = "selectno" id = "selectno" onchange = "window.open(value, '_self');">
                     	<c:if test = "${empty selectno}">
-                    	<option value = "reportcommentlist?viewcount=10" <c:if test = "${viewcount == 10}"> selected </c:if>>10</option>
-                    	<option value = "reportcommentlist?viewcount=20" <c:if test = "${viewcount == 20}"> selected </c:if>>20</option>
-                    	<option value = "reportcommentlist?viewcount=50" <c:if test = "${viewcount == 50}"> selected </c:if>>50</option>
+                    	<option value = "reportboardlist?viewcount=10" <c:if test = "${viewcount == 10}"> selected </c:if>>10</option>
+                    	<option value = "reportboardlist?viewcount=20" <c:if test = "${viewcount == 20}"> selected </c:if>>20</option>
+                    	<option value = "reportboardlist?viewcount=50" <c:if test = "${viewcount == 50}"> selected </c:if>>50</option>
                     	</c:if>
                     	<c:if test = "${selectno == 'reportboardlist'}">
                     	<option value = "reportboardlist?viewcount=10" <c:if test = "${viewcount == 10}"> selected </c:if>>10</option>

@@ -202,8 +202,11 @@ public class CommunityService {
 		return result;
 	}
 
-	public int deleteComment() {
-		int result = -1;
+	public int deleteComment(int commentNo) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().deleteComment(conn, commentNo);
+		JDBCTemplate.close(conn);
 		return result;
 	}
 

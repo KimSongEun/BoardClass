@@ -37,7 +37,19 @@ public class CommunityFreeDetailServlet extends HttpServlet {
 		//TODO 로그인
 		
 		// 게시글 보기 위한 작업
-		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		String boardNoStr = request.getParameter("boardNo");
+		int boardNo = 0;
+		try {
+			boardNo = Integer.parseInt(boardNoStr);
+		}catch( Exception e ) {
+			e.printStackTrace();
+			System.out.println("boardNoStr 숫자변환못함");
+			response.sendRedirect("cf");
+			return;
+		}
+		Board bo = new Board();
+		bo.setBoardNo(boardNo);
+		
 		String pageNum = request.getParameter("pageNum");
 		 new CommunityService().readCount(boardNo);
 		Board board = new CommunityService().getBoard(boardNo);

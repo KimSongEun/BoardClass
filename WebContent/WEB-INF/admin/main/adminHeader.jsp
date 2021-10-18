@@ -49,7 +49,7 @@
                     <a class="admin-header-a" href="#">회원관리</a> <span class="li-list" id="menu4_s">▼</span>
                 </li>
                     <ul class="admin-nav-li-ul" id="menu4_ul" style="display: none">
-                        <li class="admin-nav-li-li"><a class="admin-header-a" href="userlist">회원관리</a></li>
+                        <li class="admin-nav-li-li"><a class="admin-header-a" href="adminuserlist">회원관리</a></li>
                         <li class="admin-nav-li-li"><a class="admin-header-a" href="reportboardlist">신고된 글</a></li>
                         <li class="admin-nav-li-li"><a class="admin-header-a" href="reportcommentlist">신고된 댓글</a></li>
                         <li class="admin-nav-li-li"><a class="admin-header-a" href="reportreviewlist">신고된 리뷰</a></li>

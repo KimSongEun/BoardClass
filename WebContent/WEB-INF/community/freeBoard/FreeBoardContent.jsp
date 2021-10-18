@@ -13,6 +13,7 @@
 <link rel="stylesheet" href="css/community/cmain.css" />
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <style>
 .hiddenText { display: none;}
 </style>
@@ -58,7 +59,7 @@
 			<div class="tit">${board.boardTitle }</div>
 			<div class="util">
 				<div class="name">${board.userId }</div>
-				<div class="date">시간:${board.boardWriteDate }</div>
+				<div class="date">시간: ${board.boardWriteDate }</div>
 				<div class="hit">조회수: ${board.boardViewCount }</div>
 			</div>
 		</div>
@@ -88,42 +89,49 @@
 	</div>
 	<!--  댓글  TODO 로그인과정 -->
 	<div class="comment">
+	
 		<c:forEach var="comment" items="${list }">
 			<div class=getComment>
 				<div class="getWriter">
 					<c:if test="${comment.commentReLevel > 0 }">
 						<img src="./img/comtimg.png" width="${comment.commentReLevel*10 }">
 					</c:if>
+					
+					<span class="material-icons">account_circle</span>
 					${comment.userId }
 				</div>
+						[[[ ${comment.commentNo } ]]]
 				<br>
-				<div style="margin-left: ${comment.commentReLevel*15}px; ">
+				<div class="cmt_area" style="margin-left: ${comment.commentReLevel*15}px; " >
 					<div class="getTxt">${comment.commentContent }</div>
 					<div class="createDate">${comment.commentWriteDate }</div>
 				</div>
-					<input type="button" value="답글" onclick="re(${comment.commentNo})">
+					<input type="button" value="답글" onclick="re('${comment.commentNo}')">
 					<!-- c:if 아이디 확인 부분 추가 -->
-					<input type="button" value="삭제">
-					
+					<input type="button" value="삭제" onclick="location.href='ccdelete?commentNo=${comment.commentNo}'">
+					<!-- 답글 영역 -->
 					<div class="hiddenText" id="a${comment.commentNo }">
 						<form action="cclist?pageNum=${pageNum }" method="post" name="frm1" id="frm1">
-							<input type="hidden" name="userId" value="${userId }">
+							<input type="hidden" name="userId" value="${comment.userId }">
 							<input type="hidden" name="boardNo" value=${board.boardNo }>
 							<input type="hidden" name="commentNo" value=${comment.commentNo }>
 							<input type="hidden" name="commentRef" value="${comment.commentRef }">
 							<input type="hidden" name="commentReLevel" value="${comment.commentReLevel }">
 							<input type="hidden" name="commentReStep" value="${comment.commentReStep }">
-							<img src="./img/comt.png">
-							<div><span class="left"><label for="name">${userId }</label></span></div>
-							<div><textarea name="commentContent" id="commentContent" maxlength="800" required="required" placeholder="댓글을 입력해주세요"></textarea></div>
+						
+							<div><span class="left"><label for="name">${comment.userId }</label></span></div>
+							<div><textarea name="commentContent" id="commentContent" maxlength="800" required="required" placeholder="답글을 입력해주세요"></textarea></div>
 							
 							<div><input type="submit" value="등록" id="submitBtn"></div>
 						</form>
 					</div>
 					</c:forEach>
+					<!-- 댓글 insert 영역 -->
+					[[[ ${comment.commentNo } ]]]
 					<div class="inputtxt">
-						<form action="cclist?pageNum=${pageNum }" method="post" name="frm2">
-							<input type="hidden" name="userId" value="${userId }">
+						<form action="cclist" method="post" name="frm2">
+							<input type="hidden" name="pageNum" value="${pageNum }">
+							<input type="hidden" name="userId" value="${comment.userId }">
 							<input type="hidden" name="boardNo" value=${board.boardNo }>
 							<input type="hidden" name="commentNo" value=${comment.commentNo }>
 							<input type="hidden" name="commentRef" value="${comment.commentRef }">
@@ -131,7 +139,7 @@
 							<input type="hidden" name="commentReStep" value="${comment.commentReStep }">
 							
 							<div>
-								<span class="left"><label for="name">${userId }</label></span>
+								<span class="left"><label for="name">${comment.userId }</label></span>
 							</div>
 							<div class="inputComment">
 								<div><textarea name="commentContent" id="commentContent" maxlength="800" required="required" placeholder="댓글을 입력해주세요"></textarea></div>
@@ -146,9 +154,6 @@
 </div>
 </div>
 <script>
-	
-
-
 function del(){
 	const del = confirm("해당 게시물을 삭제하시겠습니까?");
 	if(del) {

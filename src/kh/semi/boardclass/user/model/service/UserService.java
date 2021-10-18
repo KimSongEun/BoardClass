@@ -54,17 +54,15 @@ public class UserService {
 		return result;
 	}
 	
-	public int searchId(User user) {
-		int result = 0;
+	public User searchId(String userName,String userEmail,int userPhone) {
 		Connection conn = JDBCTemplate.getConnection();
-		
-		// TODO:
-		result = new UserDao().searchId(conn, user);
-		result = new UserDao().byEmail(conn, user);
-		result = new UserDao().byPhone(conn, user);
-		
+		UserDao dao = new UserDao();
+		User user = dao.searchId(conn, userName,userEmail,userPhone);
+//		result = new UserDao().byEmail(conn, user);
+//		result = new UserDao().byPhone(conn, user);
+
 		JDBCTemplate.close(conn);
-		return result;
+		return user;
 	}
 	
 	public int searchPwd(User user) {

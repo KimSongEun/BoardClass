@@ -16,6 +16,7 @@ import kh.semi.boardclass.user.model.vo.User;
 
 import java.util.ArrayList;
 
+import kh.semi.boardclass.admin.model.vo.AdminUser;
 import kh.semi.boardclass.admin.model.vo.AllBoardUser;
 import kh.semi.boardclass.admin.model.vo.AllCommentUser;
 import kh.semi.boardclass.admin.model.vo.Banner;
@@ -1083,20 +1084,230 @@ public class AdminDao {
 			} 
 		return vo;
 	}
+
+	public int getAdminUserCount(Connection conn) {
+		int result = 0;
+		String sql = "SELECT count(*) FROM(\r\n" + 
+				"SELECT * \r\n" + 
+				"FROM (\r\n" + 
+				"SELECT  M.USER_ID, M.USER_NO,\r\n" + 
+				"(SELECT COUNT(*) FROM BOARD WHERE USER_ID = M.USER_ID) AS BOARDCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM COMT WHERE USER_ID = M.USER_ID) AS COMTCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM REVIEW WHERE USER_ID = M.USER_ID) AS REVIEWCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM USED WHERE USER_ID = M.USER_ID) AS USEDCOUNT,\r\n" + 
+				"M.USER_HISTORY\r\n" + 
+				"FROM MEMBER M))";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 	
-	public ArrayList<User> selectUserList(Connection conn){
-		ArrayList<User> volist = null;
+	public ArrayList<AdminUser> selectAdminUserList(Connection conn, int start, int end){
+		ArrayList<AdminUser> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT * \r\n" + 
+				"FROM (\r\n" + 
+				"SELECT  M.USER_ID, M.USER_NO,\r\n" + 
+				"(SELECT COUNT(*) FROM BOARD WHERE USER_ID = M.USER_ID) AS BOARDCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM COMT WHERE USER_ID = M.USER_ID) AS COMTCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM REVIEW WHERE USER_ID = M.USER_ID) AS REVIEWCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM USED WHERE USER_ID = M.USER_ID) AS USEDCOUNT,\r\n" + 
+				"M.USER_HISTORY\r\n" + 
+				"FROM MEMBER M)) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<AdminUser>();
+			if (rset.next()) {
+				do {
+					AdminUser vo = new AdminUser();
+					vo.setUserId(rset.getString(2));
+					vo.setUserNo(rset.getInt(3));
+					vo.setBoardCount(rset.getInt(4));
+					vo.setComtCount(rset.getInt(5));
+					vo.setReviewCount(rset.getInt(6));
+					vo.setUsedCount(rset.getInt(7));
+					vo.setUserHistory(rset.getInt(8));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return volist;
-	} 
-	public User searchUser(Connection conn){
-		User vo = null;
-		return vo;
-	}
-	public User getUser(Connection conn, int userNum){
-		User vo = null;
-		return vo;
 	}
 	
+	public int getAdminUserUserIdCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "SELECT count(*) FROM(\r\n" + 
+				"SELECT * \r\n" + 
+				"FROM (\r\n" + 
+				"SELECT  M.USER_ID, M.USER_NO,\r\n" + 
+				"(SELECT COUNT(*) FROM BOARD WHERE USER_ID = M.USER_ID) AS BOARDCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM COMT WHERE USER_ID = M.USER_ID) AS COMTCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM REVIEW WHERE USER_ID = M.USER_ID) AS REVIEWCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM USED WHERE USER_ID = M.USER_ID) AS USEDCOUNT,\r\n" + 
+				"M.USER_HISTORY\r\n" + 
+				"FROM MEMBER M)\r\n" + 
+				"WHERE USER_ID like(?))";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<AdminUser> searchAdminUserUserId(Connection conn, String keyword, int start, int end){
+		ArrayList<AdminUser> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT * \r\n" + 
+				"FROM (\r\n" + 
+				"SELECT  M.USER_ID, M.USER_NO,\r\n" + 
+				"(SELECT COUNT(*) FROM BOARD WHERE USER_ID = M.USER_ID) AS BOARDCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM COMT WHERE USER_ID = M.USER_ID) AS COMTCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM REVIEW WHERE USER_ID = M.USER_ID) AS REVIEWCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM USED WHERE USER_ID = M.USER_ID) AS USEDCOUNT,\r\n" + 
+				"M.USER_HISTORY\r\n" + 
+				"FROM MEMBER M)\r\n" + 
+				"WHERE USER_ID like(?)) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<AdminUser>();
+			if (rset.next()) {
+				do {
+					AdminUser vo = new AdminUser();
+					vo.setUserId(rset.getString(2));
+					vo.setUserNo(rset.getInt(3));
+					vo.setBoardCount(rset.getInt(4));
+					vo.setComtCount(rset.getInt(5));
+					vo.setReviewCount(rset.getInt(6));
+					vo.setUsedCount(rset.getInt(7));
+					vo.setUserHistory(rset.getInt(8));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	public int getAdminUserUserNoCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "SELECT count(*) FROM(\r\n" + 
+				"SELECT * \r\n" + 
+				"FROM (\r\n" + 
+				"SELECT  M.USER_ID, M.USER_NO,\r\n" + 
+				"(SELECT COUNT(*) FROM BOARD WHERE USER_ID = M.USER_ID) AS BOARDCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM COMT WHERE USER_ID = M.USER_ID) AS COMTCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM REVIEW WHERE USER_ID = M.USER_ID) AS REVIEWCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM USED WHERE USER_ID = M.USER_ID) AS USEDCOUNT,\r\n" + 
+				"M.USER_HISTORY\r\n" + 
+				"FROM MEMBER M)\r\n" + 
+				"WHERE USER_NO like(?))";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<AdminUser> searchAdminUserUserNo(Connection conn, String keyword, int start, int end){
+		ArrayList<AdminUser> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT * \r\n" + 
+				"FROM (\r\n" + 
+				"SELECT  M.USER_ID, M.USER_NO,\r\n" + 
+				"(SELECT COUNT(*) FROM BOARD WHERE USER_ID = M.USER_ID) AS BOARDCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM COMT WHERE USER_ID = M.USER_ID) AS COMTCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM REVIEW WHERE USER_ID = M.USER_ID) AS REVIEWCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM USED WHERE USER_ID = M.USER_ID) AS USEDCOUNT,\r\n" + 
+				"M.USER_HISTORY\r\n" + 
+				"FROM MEMBER M)\r\n" + 
+				"WHERE USER_NO like(?)) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<AdminUser>();
+			if (rset.next()) {
+				do {
+					AdminUser vo = new AdminUser();
+					vo.setUserId(rset.getString(2));
+					vo.setUserNo(rset.getInt(3));
+					vo.setBoardCount(rset.getInt(4));
+					vo.setComtCount(rset.getInt(5));
+					vo.setReviewCount(rset.getInt(6));
+					vo.setUsedCount(rset.getInt(7));
+					vo.setUserHistory(rset.getInt(8));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+		
 	public int deleteUserByForce(Connection conn, User user){
 		int result = 0;
 		return result;

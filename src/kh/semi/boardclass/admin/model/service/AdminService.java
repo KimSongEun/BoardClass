@@ -5,6 +5,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 
 import kh.semi.boardclass.admin.model.dao.AdminDao;
+import kh.semi.boardclass.admin.model.vo.AdminUser;
 import kh.semi.boardclass.admin.model.vo.AllBoardUser;
 import kh.semi.boardclass.admin.model.vo.AllCommentUser;
 import kh.semi.boardclass.admin.model.vo.Banner;
@@ -470,29 +471,54 @@ public class AdminService {
 		JDBCTemplate.close(conn);
 		return vo;
 	}
+	// 여기 하기
 	
-	public ArrayList<User> selectUserList() {
-		ArrayList<User> volist = null;
+	public int getAdminUserCount() {
+		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().selectUserList(conn);
+		result = new AdminDao().getAdminUserCount(conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<AdminUser> selectAdminUserList(int start, int end) {
+		ArrayList<AdminUser> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().selectAdminUserList(conn, start, end);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
 
-	public User searchUser() {
-		User vo = null;
+	public int getAdminUserUserIdCount(String keyword) {
+		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		vo = new AdminDao().searchUser(conn);
+		result = new AdminDao().getAdminUserUserIdCount(conn, keyword);
 		JDBCTemplate.close(conn);
-		return vo;
+		return result;
 	}
 
-	public User getUser(int userNum) {
-		User vo = null;
+	public ArrayList<AdminUser> searchAdminUserUserId(String keyword, int start, int end) {
+		ArrayList<AdminUser> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		vo = new AdminDao().getUser(conn, userNum);
+		volist = new AdminDao().searchAdminUserUserId(conn, keyword, start, end);
 		JDBCTemplate.close(conn);
-		return vo;
+		return volist;
+	}
+	
+	public int getAdminUserUserNoCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getAdminUserUserNoCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<AdminUser> searchAdminUserUserNo(String keyword, int start, int end) {
+		ArrayList<AdminUser> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchAdminUserUserNo(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
 	}
 
 	public int deleteUserByForce(User user) {
