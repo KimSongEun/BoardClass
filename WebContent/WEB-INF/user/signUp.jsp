@@ -31,6 +31,9 @@
                         <td class="col2"><input type="text" name="userName" id="userName" maxlength="5"
                                 placeholder="이름을 입력해주세요.">
                         </td>
+                         <td class="col3">
+                                <div class="userName regex"></div>
+                          </td>
                     </tr>
                     <tr>
                         <td class="col1">* 닉네임</td>
@@ -43,34 +46,42 @@
                                 <input type="button" name="nickDuplication" value="nicknameUncheck">
                         </td>
                     </tr>
-                    <tr>
-                        <td class="col1">* 아이디</td>
-                        <td class="col2">
-                            <input type="text" name="userId" id="userId" maxlength="20" placeholder="아이디를 입력해주세요." onkeydown="inputIdChk()">
-                            <input class='CheckBtn' id="dupidchkBtn" type="button" value="중복확인" >     
-                        </td>
-                         <td class="col3">
-                                <div id="idcheck"></div>
-                                <input type="button" name="idDuplication" value="idUncheck">
-                         </td>
-                    </tr>
-                    <tr>
-                        <td class="col1">* 비밀번호</td>
-                        <td class="col2">
-                            <input type="password" name="userPassword" id="userPassword" maxlength="20" placeholder="비밀번호를 입력해주세요.">
-                            <div>5자리 이상, 대/소문자 구분</div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="col1">* 비밀번호 확인</td>
-                        <td class="col2"><input type="password" name="pwdCheck" id="pwdCheck" maxlength="20"
-                                placeholder="비밀번호를 확인해주세요."></td>     
-                    </tr>
-                    <tr>
+					<tr>
+						<td class="col1">* 아이디</td>
+						<td class="col2"><input type="text" name="userId" id="userId"
+							maxlength="20" placeholder="아이디를 입력해주세요."
+							onkeydown="inputIdChk()"> <input class='CheckBtn'
+							id="dupidchkBtn" type="button" value="중복확인"></td>
+						<td class="col3">
+							<div id="idcheck"></div> <input type="button"
+							name="idDuplication" value="idUncheck">
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">* 비밀번호</td>
+						<td class="col2"><input type="password" name="userPassword"
+							id="userPassword" maxlength="20" placeholder="비밀번호를 입력해주세요.">
+							<div>5자리 이상, 대/소문자 구분</div></td>
+						<td class="col3">
+							<div class="userPassword regex"></div>
+						</td>
+					</tr>
+					<tr>
+						<td class="col1">* 비밀번호 확인</td>
+						<td class="col2"><input type="password" name="pwdCheck"
+							id="pwdCheck" maxlength="20" placeholder="비밀번호를 확인해주세요."></td>
+						<td class="col3">
+							<div class="pwdCheck regex"></div>
+						</td>
+					</tr>
+					<tr>
                         <td class="col1">* 이메일</td>
                         <td class="col2">
                             <input type="text"  name="userEmail" id="userEmail" placeholder="이메일을 입력해주세요.">
                         </td>
+                         <td class="col3">
+                                <div class="userEmail regex"></div>
+                            </td>
                     </tr>
                     <tr>
                         <td class="col1">* 핸드폰 번호</td>
@@ -88,7 +99,10 @@
                     </tr>
                     <tr>
                         <td class="col1">주소 (선택)</td>
-                        <td class="col2"><input type="text" name="address" id="address" maxlength="25" placeholder="주소를 입력해주세요.">
+                        <td class="col2"><input type="text" name="address" id="address" maxlength="25" placeholder="주소를 입력해주세요."></td>
+                    <td class="col3">
+                                <div class="address regex"></div>
+                            </td>
                     </tr>
 
                 </table>
