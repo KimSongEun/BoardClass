@@ -7,7 +7,8 @@
 <meta charset="UTF-8">
 <title>BoardClass</title>
 <link rel="stylesheet" href="css/community/community.css" />
-<link rel="stylesheet" href="css/community/cmain.css" />
+<link rel="stylesheet" href="css/community/common.css" />
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
 <c:import url="header.jsp" />

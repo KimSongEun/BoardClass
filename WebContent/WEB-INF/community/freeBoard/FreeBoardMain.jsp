@@ -10,8 +10,10 @@
 <meta charset="UTF-8">
 <title>자유 게시판</title>
 <link rel="stylesheet" href="css/community/freeBoardMain.css" />
-<link rel="stylesheet" href="css/community/cmain.css" />
+<link rel="stylesheet" href="css/community/common.css" />
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
+
 </head>
 <c:import url="../header.jsp" />
 <body>

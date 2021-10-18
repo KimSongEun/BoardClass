@@ -30,6 +30,13 @@ public class CommunityCommentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
@@ -59,22 +66,14 @@ public class CommunityCommentServlet extends HttpServlet {
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("board", board);
 		request.setAttribute("userId", comment.getUserId());
-		request.setAttribute("ref", comment.getCommentRef());
-		request.setAttribute("re_level", comment.getCommentReLevel());
-		request.setAttribute("re_step", comment.getCommentReStep());
+		request.setAttribute("commentRef", comment.getCommentRef());
+		request.setAttribute("commentReLevel", comment.getCommentReLevel());
+		request.setAttribute("commentReStep", comment.getCommentReStep());
 		request.setAttribute("content", content);
 		request.setAttribute("result", result);
 		
-		request.getRequestDispatcher("/WEB-INF/community/freeBoard/FreeBoardContent.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/community/freeBoard/Comment.jsp").forward(request, response);
 		
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
 	}
 
 }

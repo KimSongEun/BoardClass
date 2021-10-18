@@ -52,18 +52,19 @@ public class CommunityFreeDetailServlet extends HttpServlet {
 //		request.setAttribute("content", content);
 		request.setAttribute("date", date);
 		
-		//댓글 부분
-		int commentNo = 0, commentRef = 0, commentReLevel = 0, commentReStep = 0;
-		CommunityService comt = new CommunityService();
-
+		//댓글
+		int commentNo = 0, commentRef = 0, commentReStep = 0, commentReLevel = 0;
+		CommunityService cd = new CommunityService();
+		
 		request.setAttribute("commentNo", commentNo);
 		request.setAttribute("commentRef", commentRef);
 		request.setAttribute("commentReLevel", commentReLevel);
 		request.setAttribute("commentReStep", commentReStep);
 		
-		ArrayList<Comment> list = comt.selectComment(boardNo);
+		ArrayList<Comment> list = cd.selectComment(boardNo);
 		
 		request.setAttribute("list", list);
+		
 		
 		request.getRequestDispatcher("/WEB-INF/community/freeBoard/FreeBoardContent.jsp").forward(request, response);
 	}
