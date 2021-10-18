@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="./css/admin/notice/adminNotice.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="./js/admin/notice/adminNotice.js"></script>
+    <script type="text/javascript" src="./js/admin/notice/adminNotice.js?"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>  
     <title>공지사항 조회</title>
 </head>

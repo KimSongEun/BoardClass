@@ -6,8 +6,10 @@ $(".update").click(function () {
 });
 $(".delete").click(function () {
     var deleteid = $(this).attr("id");
-
+	if(confirm(deleteid+"번 공지 삭제하시겠습니까?")){
     location.href = "noticedelete?id=" + deleteid;
+	} else {
+	}
 });
 
 $(".insert").click(function () {

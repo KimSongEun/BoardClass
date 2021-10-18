@@ -28,7 +28,7 @@ $(function(){
 		var comment_id = $(this).attr("id");
 		console.log(comment_id);
 		$.ajax({
-		url : "allboardgetdetail.ajax",
+		url : "allcommentgetdetail.ajax",
 		type : "post",
 		data : {commentNo : comment_id},
 		success : function(data){
@@ -50,5 +50,13 @@ $(function(){
 	    modal.style.display = "none";
 	  }
 	}
+	
+		$(".delete").click(function () {
+	    var deleteid = $(this).attr("id");
+		if(confirm(deleteid+"번 댓글 삭제하시겠습니까?")){
+	    	location.href = "allcommentdelete?commentNo=" + deleteid;
+		} else {
+		}
+	});
 
 });

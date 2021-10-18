@@ -68,79 +68,58 @@ public class BoardgameUpdateServlet extends HttpServlet {
 
 		String fileImage = multi.getFilesystemName("uploadFileImage");
 		String fileRuleImage = multi.getFilesystemName("uploadFileRuleImage");
+		String filePlusImage = multi.getFilesystemName("uploadFilePlusImage");
 
 		String kotitle = multi.getParameter("kotitle");
-		if (kotitle == null) {
-			kotitle = "kotitle 재설정 필요";
-		}
 		String entitle = multi.getParameter("entitle");
-		if (entitle == null) {
-			entitle = "entitle 재설정 필요";
+		if (entitle.isEmpty()) {
+			entitle = "영어상품명 등록 x";
 		}
 		String category = multi.getParameter("category");
-		if (category == null) {
-			category = "category 재설정 필요";
-		}
 		String age = multi.getParameter("age");
-		if (age == null) {
-			age = "age 재설정 필요";
-		}
 		String player = multi.getParameter("player");
-		if (player == null) {
-			player = "player 재설정 필요";
-		}
 		String time = multi.getParameter("time");
-		if (time == null) {
-			time = "time 재설정 필요";
-		}
 		String priceString = multi.getParameter("price");
+		if(priceString.isEmpty()) {
+			priceString = "0";
+		}
 		int price = Integer.parseInt(priceString); // 숫자
-		if (priceString == null) {
-			price = 999;
+		if (priceString.isEmpty()) {
+			price = 0;
 		}
 		String gradeString = multi.getParameter("grade");
-		int grade = Integer.parseInt(priceString); // 숫자
-		if (gradeString == null) {
-			grade = 999;
+		if(gradeString.isEmpty()) {
+			gradeString = "0";
+		}
+		int grade = Integer.parseInt(gradeString); // 숫자
+		if (gradeString.isEmpty()) {
+			grade = 0;
 		}
 		String levelString = multi.getParameter("level");
+		if(levelString.isEmpty()) {
+			levelString = "0";
+		}
 		int level = Integer.parseInt(levelString); // 숫자
-		if (levelString == null) {
-			level = 999;
+		if (levelString.isEmpty()) {
+			level = 0;
 		}
 		String designer = multi.getParameter("designer");
-		if (designer == null) {
-			designer = "designer 재설정 필요";
-		}
 		String writer = multi.getParameter("writer");
-		if (writer == null) {
-			writer = "writer 재설정 필요";
-		}
 		String brand = multi.getParameter("brand");
-		if (brand == null) {
-			brand = "brand 재설정 필요";
-		}
 		String releasedate = multi.getParameter("releasedate");
-		if (releasedate == null) {
-			releasedate = "releasedate 재설정 필요";
-		}
 		String language = multi.getParameter("language");
-		if (language == null) {
-			language = "language 재설정 필요";
-		}
 		String video = multi.getParameter("video");
-		String videocheck = multi.getParameter("hiddentextarea");
-		if (videocheck == "999") {
+		if (video.isEmpty()) {
 			System.out.println("비었어 원래껄로해!");
 			video = multi.getParameter("originvideo");
 		}
-		System.out.println(videocheck);
 		String plus = multi.getParameter("plus");
 		if (plus == null) {
 			plus = "plus 재설정 필요";
 		}
 		String image = "./game_img/" + fileImage;
 		String ruleimage = "./game_img/" + fileRuleImage;
+		String plusImage = "./game_img/" + filePlusImage;
 		if (fileImage == null) {
 			// 업로드 실패 시
 			image = multi.getParameter("originimage");
@@ -157,17 +136,26 @@ public class BoardgameUpdateServlet extends HttpServlet {
 			System.out.println("첨부파일명 : " + fileRuleImage);
 			System.out.println("규칙서 이미지 업로드 성공!!!");
 		}
-		
+		if (filePlusImage == null) {
+			// 업로드 실패 시
+			plusImage = multi.getParameter("originplusimage");
+			System.out.println("확장판 이미지 업로드 실패");
+		} else {
+			System.out.println("첨부파일명 : " + filePlusImage);
+			System.out.println("확장판 이미지 업로드 성공!!!");
+		}
 		if (image == null) {
 			image = multi.getParameter("originimage");
 		}
 		if(ruleimage == null) {
 			ruleimage = multi.getParameter("originruleimage");
 		}
-		
+		if(plusImage == null) {
+			plusImage = multi.getParameter("originplusimage");
+		}
 		
 		int gameNo = Integer.parseInt(multi.getParameter("no"));
-		int result = new AdminService().updateBoardGame(kotitle, entitle, category, age, player, time, price, grade, level, designer, writer, brand, releasedate, language, image, ruleimage, video, plus, gameNo);
+		int result = new AdminService().updateBoardGame(kotitle, entitle, category, age, player, time, price, grade, level, designer, writer, brand, releasedate, language, image, ruleimage, video, plus, plusImage, gameNo);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/admin/boardgame/boardgamealert.jsp");
 
@@ -183,7 +171,6 @@ public class BoardgameUpdateServlet extends HttpServlet {
 
 		System.out.println("수정된 비디오 값 : " + multi.getParameter("video"));
 		System.out.println("원래 비디오 값 : " + multi.getParameter("originvideo"));
-		System.out.println("조건체크 : " + multi.getParameter("hiddentextarea"));
 	}
 
 }

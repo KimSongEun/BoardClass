@@ -13,12 +13,14 @@ public class Used {
 	private String usedDay;
 	private String usedImg;
 	private String usedCategory;
+	private String usedKeyword;
 
 	public Used() {
 	}
 
 	public Used(int usedNo, String userId, String usedTitle, int usedPrice, String usedState, String usedChange,
-			String usedExtype, String usedInfo, String usedDay, String usedImg, String usedCategory) {
+			String usedExtype, String usedInfo, String usedDay, String usedImg, String usedCategory,
+			String usedKeyword) {
 		super();
 		this.usedNo = usedNo;
 		this.userId = userId;
@@ -31,10 +33,11 @@ public class Used {
 		this.usedDay = usedDay;
 		this.usedImg = usedImg;
 		this.usedCategory = usedCategory;
+		this.usedKeyword = usedKeyword;
 	}
 
 	public Used(String userId, String usedTitle, int usedPrice, String usedState, String usedChange, String usedExtype,
-			String usedInfo, String usedImg, String usedCategory) {
+			String usedInfo, String usedImg, String usedCategory, String usedKeyword) {
 		super();
 		this.userId = userId;
 		this.usedTitle = usedTitle;
@@ -45,6 +48,7 @@ public class Used {
 		this.usedInfo = usedInfo;
 		this.usedImg = usedImg;
 		this.usedCategory = usedCategory;
+		this.usedKeyword = usedKeyword;
 	}
 
 	@Override
@@ -52,7 +56,7 @@ public class Used {
 		return "Used [usedNo=" + usedNo + ", userId=" + userId + ", usedTitle=" + usedTitle + ", usedPrice=" + usedPrice
 				+ ", usedState=" + usedState + ", usedChange=" + usedChange + ", usedExtype=" + usedExtype
 				+ ", usedInfo=" + usedInfo + ", usedDay=" + usedDay + ", usedImg=" + usedImg + ", usedCategory="
-				+ usedCategory + "]";
+				+ usedCategory + ", usedKeyword=" + usedKeyword + "]";
 	}
 
 	public int getUsedNo() {
@@ -141,6 +145,14 @@ public class Used {
 
 	public void setUsedCategory(String usedCategory) {
 		this.usedCategory = usedCategory;
+	}
+
+	public String getUsedKeyword() {
+		return usedKeyword;
+	}
+
+	public void setUsedKeyword(String usedKeyword) {
+		this.usedKeyword = usedKeyword;
 	}
 
 }

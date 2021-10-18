@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./css/admin/allcomment/adminAllComment.css?"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="./js/admin/allcomment/allcommentlist.js"></script>
+    <script type="text/javascript" src="./js/admin/allcomment/allcommentlist.js?"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>  
     <title>전체 댓글 목록</title>
 </head>
@@ -68,7 +68,7 @@
                             <td style = "vertical-align : middle"><a href="#회원정보조회" style = "color : #754100">${c.userId}</a></td>
                             <td style = "vertical-align : middle">${c.userNo}</td>
                             <td style = "vertical-align : middle">${c.commentRewriteDate}</td>
-                            <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" onclick="location.href='allcommentdelete?commentNo=${c.commentNo}'">삭제</button> </td>
+                            <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" id="${c.commentNo}">삭제</button> </td>
                         </tr>
 								<!-- The Modal -->
 								<div id="myModal" class="modal">

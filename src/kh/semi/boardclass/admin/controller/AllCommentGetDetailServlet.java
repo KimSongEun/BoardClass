@@ -13,12 +13,11 @@ import com.google.gson.Gson;
 
 import kh.semi.boardclass.admin.model.service.AdminService;
 import kh.semi.boardclass.admin.model.vo.AllCommentUser;
-import kh.semi.boardclass.admin.model.vo.Banner;
 
 /**
  * Servlet implementation class AllCommentGetDetailServlet
  */
-@WebServlet("/allboardgetdetail.ajax")
+@WebServlet("/allcommentgetdetail.ajax")
 public class AllCommentGetDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -46,7 +45,7 @@ public class AllCommentGetDetailServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		System.out.println("/allboardgetdetail.ajax 진입");
+		System.out.println("/allcommentgetdetail.ajax 진입");
 		String commentNo = request.getParameter("commentNo");
 		System.out.println(commentNo);
 		AllCommentUser vo = new AdminService().getAllCommentDetail(commentNo);

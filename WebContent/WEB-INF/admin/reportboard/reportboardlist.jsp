@@ -90,7 +90,7 @@
                          	<td style = "vertical-align : middle">${r.userNo}</td>
                          	<td style = "vertical-align : middle">${r.boardWriteDate}</td>
                          	<td style = "vertical-align : middle">${r.boardRewriteDate}</td>
-                            <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" onclick="location.href='reportboarddelete?boardNo=${r.boardNo}'">삭제</button> </td>
+                            <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" id = "${r.boardNo}">삭제</button> </td>
                         </tr>
 							</c:forEach>
                          </c:if> 

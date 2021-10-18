@@ -59,16 +59,19 @@ public class UsedOnStrategyListServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK - 1;
 		if (endPage > pageCount)
 			endPage = pageCount;
+		
+		String search = request.getParameter("search");
+		System.out.println("검색어는 : " + search);
 
 		String cate = "전략";
 
-		ArrayList<Used> volist = new UsedService().selectCateUsedList(startRnum, endRnum, cate);
+		ArrayList<Used> volist = new UsedService().selectCateUsedList(startRnum, endRnum, cate, search);
 
 		request.setAttribute("usedlist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
-		request.getRequestDispatcher("/WEB-INF/used/UsedOnStrategyList.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/used/usedonstrategylist.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
