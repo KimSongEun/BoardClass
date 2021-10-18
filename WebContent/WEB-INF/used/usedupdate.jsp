@@ -8,7 +8,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <link rel="stylesheet" href="./css/index/maincss.css" />
-<link rel="stylesheet" href="./css/used/usedcreate.css" />
+<link rel="stylesheet" href="./css/used/usedupdate.css" />
 <title>중고거래글 작성</title>
 </head>
 <body>
@@ -16,26 +16,27 @@
 
 	<section>
 		<div class="article_create">
-			<form class="form_create" action="usedcreate" method="post"
+			<form class="form_create" action="usedupdate" method="post"
 				enctype="multipart/form-data">
 				<div class="div_table">
 					<table>
 						<tr class="tr_img">
-							<td rowspan=5><div id="thumbnail"></div></td>
+							<td rowspan=5><div id="thumbnail"><img src="${pageContext.request.contextPath}/${used.usedImg}"></div></td>
 							<td><label for="title">제목 : </label></td>
 							<td><input id="title" name="usedTitle"
-								placeholder="제목을 입력해주세요"></td>
+								placeholder="제목을 입력해주세요">${used.usedTitle}</td>
 						</tr>
 						<tr class="tr_price">
 							<td><label for="price">가격 : </label></td>
 							<td><input id="price" name="usedPrice"
-								placeholder="숫자만 입력하세요"></td>
+								placeholder="숫자만 입력하세요">${used.usedPrice}</td>
 						</tr>
 						<tr class="tr_state">
 							<td><label for="state">상태 : </label></td>
 							<td><select id="state" name="usedState">
+									<option selected disabled>${used.usedState}</option>
 									<option value="0">미개봉</option>
-									<option value="1" selected>상태좋음</option>
+									<option value="1">상태좋음</option>
 									<option value="2">사용흔적있음</option>
 									<option value="3">구성품누락</option>
 							</select></td>
@@ -43,6 +44,7 @@
 						<tr class="tr_changeable">
 							<td><label for="changeable">교환여부 : </label></td>
 							<td><select id="changeable" name="usedChange">
+									<option selected disabled>${used.usedChange}</option>
 									<option value="0">교환가능</option>
 									<option value="1">교환불가</option>
 							</select></td>
@@ -50,6 +52,7 @@
 						<tr class="tr_changetype">
 							<td><label for="changetype">거래방식 : </label></td>
 							<td><select id="changetype" name="usedExtype">
+									<option selected disabled>${used.usedExtype}</option>
 									<option value="0">직거래&amp;택배</option>
 									<option value="1">직거래</option>
 									<option value="2">택배</option>
@@ -59,7 +62,8 @@
 							<td><input type="file" name="usedImg" onchange="setImg(event);">
 							<td><label for="gamecate">카테고리 : </label></td>
 							<td><select id="gamecate" name="usedCategory">
-									<option value="" selected>없음</option>
+									<option selected disabled>${used.usedCategory}</option>
+									<option value="">없음</option>
 									<option value="퍼즐">퍼즐</option>
 									<option value="전략">전략</option>
 									<option value="추상">추상</option>
@@ -77,7 +81,7 @@
 				<div class="div_info">
 					<label for="info" class="label_down">상품정보</label>
 					<textarea id="info" name="usedInfo" placeholder="상품정보를 입력하세요"
-						autofocus></textarea>
+						autofocus>${used.usedKeyword}</textarea>
 					<div id="info_count">(0 / 1,000)</div>
 				</div>
 				<div class="div_keyword">

@@ -8,29 +8,32 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.boardclass.used.model.service.UsedService;
-import kh.semi.boardclass.used.model.vo.Used;
 
-@WebServlet("/usedinformation")
-public class UsedInformationServlet extends HttpServlet {
+@WebServlet("/useddelete")
+public class UsedDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public UsedInformationServlet() {
+	public UsedDeleteServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		int usedNo = Integer.parseInt(request.getParameter("no"));
-		Used vo = new UsedService().getUsedDetail(usedNo);
-		
-		request.setAttribute("used", vo);
-		request.getRequestDispatcher("/WEB-INF/used/useddetail.jsp").forward(request, response);
+		System.out.println("delete진입");
+		int usedNo = Integer.parseInt(request.getParameter("usedNo"));
+		int result = new UsedService().deleteUsed(usedNo);
+		if (result < 1) {
+			System.out.println("글 삭제 안됨");
+		} else {
+			System.out.println("글 삭제 성공 - 그리고 main 이동");
+			response.sendRedirect("usedmain");
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		doGet(request, response);
+
 	}
 
 }
