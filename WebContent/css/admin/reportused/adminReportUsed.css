@@ -1,0 +1,55 @@
+@charset "UTF-8";
+
+.admin-reportused-section{
+	position :absolute;
+    left : 250px;
+    top : 40px;
+    width : 83.6%;
+    padding: 50px;
+}
+.admin-reportused-div{
+	margin: 0 auto;
+	/* background-color: pink; */
+}
+.admin-reportused-title{
+	font-weight: bold;
+	font-size: 34px;
+	text-align: left;
+}
+.admin-reportused-search{
+	margin-top: 20px;
+	margin-right : 200px;
+	width : 100%;
+}
+.admin-reportused-search-select{
+	width: 120px;
+	height: 30px; 
+	line-height: 40px; 
+	margin: 0px;
+	padding: 0px;
+}
+.admin-reportused-search-input{
+	width: 240px;
+	height: 30px; 
+	padding: 5px;
+	line-height: 30px;
+}
+.admin-reportused-search-button{
+	width: 60px;
+	height: 30px;
+	background: black;
+	font-size: 14px;
+	color: white;
+	border: none;
+}
+.admin-reportused-table-div{
+	margin : 0 auto;
+}
+.admin-reportused-table{
+	table-layout : fixed;
+	/* width: 900px;  */
+	margin-top: 20px;
+}
+.admin-reportused-page-nav {
+	text-align : center;
+}

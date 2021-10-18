@@ -1,4 +1,3 @@
-<%@page import="kh.semi.boardclass.admin.model.vo.AllBoardUser"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -12,7 +11,7 @@
     <link rel="stylesheet" href="./css/admin/allboard/adminAllBoard.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="./js/admin/boardgame/adminBoardGame.js"></script>
+    <script type="text/javascript" src="./js/admin/allboard/allboardlist.js?after"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>  
     <title>전체글 목록</title>
 </head>
@@ -27,13 +26,15 @@
                 <table class="admin-allboard-search">
                 <tr>
                 	<td>
-                    <select class="admin-allboard-search-select">
-                        <option>작성자아이디 </option>
-                        <option>작성자 회원번호</option>
-                        <option>글제목</option>
+                	<form action = "allboarduseridsearch" method = "post" class = "searchselect">
+                    <select class="admin-allboard-search-select" name = "type">
+                        <option value ="작성자아이디" <c:if test = "${type == '작성자아이디'}"> selected </c:if>>작성자아이디 </option>
+                        <option value ="작성자 회원번호" <c:if test = "${type == '작성자 회원번호'}"> selected </c:if>>작성자 회원번호</option>
+                        <option value ="글제목" <c:if test = "${type == '글제목'}"> selected </c:if>>글제목</option>
                     </select>
-                    <input type="text" class="admin-allboard-search-input">
-                    <input type="button" value="검색" class="admin-allboard-search-button">
+                    <input type="text" class="admin-allboard-search-input" name = "keyword" id = "keyword" value="${keyword }">
+                    <button type="submit" class="admin-allboard-search-button">검색</button>
+                    </form>
                     </td>
                     
                     <td style = "text-align : right; font-size : 15px">
@@ -49,6 +50,7 @@
                 <div class="admin-allboard-table-div">
                     <table class="table table-striped admin-allboard-table" style="text-align: center;">
                         <tr style="text-align:center; font-size: 16px; font-weight: bold;">
+                        	<td>글번호</td>
                             <td>게시판 카테고리</td>
                             <td>게시판 타입</td>
                             <td>글제목</td>
@@ -61,17 +63,41 @@
                         </tr>
                        <c:if test = "${allboarduservolist != null}">
                         <c:forEach items = "${allboarduservolist}" var="b" >
-                        
-                        
                          <tr>
-                            <td style = "vertical-align : middle">${b.boardCategory}</td>
-                            <td style = "vertical-align : middle">${b.boardType}</td>
-                            <td style = "vertical-align : middle">${b.boardTitle}</td>
-                            <td style = "vertical-align : middle">${b.userId}</td>
+                         	<td style = "vertical-align : middle" class = "boardNo">${b.boardNo}</td>
+                            <td style = "vertical-align : middle" id = "select-main-td">
+                             <select class = "admin-select" name = "selectCategory" id = "allboard-select-main">
+                          		<option value="자유 게시판"<c:if test = "${b.boardCategory=='자유 게시판'}">selected</c:if>>자유 게시판</option>
+								<option value="유저정보 게시판"<c:if test = "${b.boardCategory=='유저정보 게시판'}">selected</c:if>>유저정보 게시판</option>
+								<option value="모임 게시판"<c:if test = "${b.boardCategory=='모임 게시판'}">selected</c:if>>모임 게시판</option>
+                            </select>
+                            </td>
+                            <td style = "vertical-align : middle">
+                            <select class="admin-sub-select" name="selectSubCategory" id = "allboard-select-sub">
+                            		<c:if test="${b.boardCategory=='자유 게시판'}"> 
+										<option value="사담"<c:if test = "${b.boardType=='사담'}">selected</c:if>>사담</option>
+										<option value="건의"<c:if test = "${b.boardType=='건의'}">selected</c:if>>건의</option>
+										<option value="질문"<c:if test = "${b.boardType=='질문'}">selected</c:if>>질문</option>
+									</c:if>
+									<c:if test="${b.boardCategory=='유저정보 게시판'}"> 
+										<option value="기사"<c:if test = "${b.boardType=='기사'}">selected</c:if>>기사</option>
+										<option value="후기"<c:if test = "${b.boardType=='후기'}">selected</c:if>>후기</option>
+										<option value="공식"<c:if test = "${b.boardType=='공식'}">selected</c:if>>공식</option>
+										<option value="팁"<c:if test = "${b.boardType=='팁'}">selected</c:if>>팁</option>
+									</c:if>
+									<c:if test="${b.boardCategory=='모임 게시판'}"> 
+										<option value="모임후기"<c:if test = "${b.boardType=='모임후기'}">selected</c:if>>모임후기</option>
+										<option value="모집"<c:if test = "${b.boardType=='모집'}">selected</c:if>>모집</option>
+										<option value="일정안내"<c:if test = "${b.boardType=='일정안내'}">selected</c:if>>일정안내</option>
+									</c:if>
+                            </select>
+                            </td>
+                            <td style = "vertical-align : middle"><a href="#글내용조회" style = "color : #754100">${b.boardTitle}</a></td>
+                            <td style = "vertical-align : middle"><a href="#회원정보조회" style = "color : #754100">${b.userId}</a></td>
                             <td style = "vertical-align : middle">${b.userNo}</td>
                             <td style = "vertical-align : middle">${b.boardRewriteDate}</td>
                             <td style = "vertical-align : middle"><button class="update btn btn-danger" value="updatego">수정</button> </td>
-                            <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" id="${b.boardNo}">삭제</button> </td>
+                            <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" id = "${b.boardNo}">삭제</button> </td>
                         </tr> 
                          </c:forEach>
                          </c:if> 

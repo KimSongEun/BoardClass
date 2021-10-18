@@ -1,0 +1,105 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+body {
+        margin: 0px;
+        background-color: rgba(237, 237, 238, 0.89);
+        display: flex;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.header_logo {
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+}
+
+.div_logo {
+    display: flex;
+    align-items: center;
+    width: 300px;
+    height: 200px;
+}
+
+.div_logo img {
+    width: 100%;
+    left: 100%;
+}
+
+.header_menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+}
+
+.div_menu {
+    display: flex;
+}
+
+.div_menu a {
+    padding-top: 13px;
+    padding-bottom: 13px;
+    padding-left: 13px;
+    padding-right: 13px;
+    font-family: 'Gugi', cursive;
+    font-size: 20px;
+}
+
+.div_menu a:hover {
+    background-color: #ddd;
+}
+
+.div_toggle{
+    display: none;
+    position: absolute;
+    right: 15px;
+    top: 5px;
+}
+
+.member_toggleBtn {
+    color: blue;
+}
+
+.menu_toggleBtn{
+    color: rgb(255, 255, 0);
+    padding-right: 7px;
+}
+
+hr{ margin: 0px; }
+
+@media (max-width:767px) {
+    .div_menu {
+        flex-direction: column;
+    }
+
+    .div_toggle {
+        display: block;
+    }
+}
+  .footer {
+    display: flex;
+    justify-content: center;
+}
+
+.ul_footer {
+    display: flex;
+    list-style: none;
+    padding: 0px;
+    font-size: 10px;
+}
+
+.ul_footer li {
+    padding: 5px 10px;
+}
+
+@media (max-width:767px) {
+    .ul_footer {
+        display: none;
+    }
+}

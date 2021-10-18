@@ -6,8 +6,13 @@ import java.util.ArrayList;
 
 import kh.semi.boardclass.admin.model.dao.AdminDao;
 import kh.semi.boardclass.admin.model.vo.AllBoardUser;
+import kh.semi.boardclass.admin.model.vo.AllCommentUser;
 import kh.semi.boardclass.admin.model.vo.Banner;
 import kh.semi.boardclass.admin.model.vo.Notice;
+import kh.semi.boardclass.admin.model.vo.ReportBoard;
+import kh.semi.boardclass.admin.model.vo.ReportComment;
+import kh.semi.boardclass.admin.model.vo.ReportReview;
+import kh.semi.boardclass.admin.model.vo.ReportUsed;
 import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.community.model.vo.Board;
 import kh.semi.boardclass.community.model.vo.BoardReport;
@@ -180,10 +185,10 @@ public class AdminService {
 		return vo;
 	}
 
-	public int insertBoardGame(String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer,String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus) {
+	public int insertBoardGame(String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer,String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus, String plusImage) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().insertBoardGame(conn, kotitle, entitle, category, age, player, time, price, grade, level, designer, writer, brand, releasedate, language, image, ruleimage, video, plus);
+		result = new AdminDao().insertBoardGame(conn, kotitle, entitle, category, age, player, time, price, grade, level, designer, writer, brand, releasedate, language, image, ruleimage, video, plus, plusImage);
 		if(result > 0) {
 			JDBCTemplate.commit(conn);
 		} else {
@@ -193,10 +198,10 @@ public class AdminService {
 		return result;
 	}
 
-	public int updateBoardGame(String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus, int gameNo) {
+	public int updateBoardGame(String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus, String plusImage, int gameNo) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().updateBoardGame(conn, kotitle, entitle, category, age, player, time, price, grade, level, designer, writer, brand, releasedate, language, image, ruleimage, video, plus, gameNo);
+		result = new AdminDao().updateBoardGame(conn, kotitle, entitle, category, age, player, time, price, grade, level, designer, writer, brand, releasedate, language, image, ruleimage, video, plus, plusImage, gameNo);
 		if(result > 0) {
 			JDBCTemplate.commit(conn);
 		} else {
@@ -289,6 +294,15 @@ public class AdminService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	
+	
+	public int getAllBoardCount() {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getAllBoardCount(conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}
 
 	public ArrayList<AllBoardUser> selectAllBoardList(int start, int end) {
 		ArrayList<AllBoardUser> volist = null;
@@ -298,46 +312,165 @@ public class AdminService {
 		return volist;
 	}
 
-	public Board searchAllBoard() {
-		Board vo = null;
-		Connection conn = JDBCTemplate.getConnection();
-		vo = new AdminDao().searchAllBoard(conn);
-		JDBCTemplate.close(conn);
-		return vo;
-	}
-
-	public int updateBoardCategory(Board comu) {
+	public int getAllBoardUserIdCount(String keyword) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().updateBoardCategory(conn, comu);
+		result = new AdminDao().getAllBoardUserIdCount(conn, keyword);
 		JDBCTemplate.close(conn);
 		return result;
 	}
 
-	public int updateBoardType(Board comu) {
+	public ArrayList<AllBoardUser> searchAllBoardUserId(String keyword, int start, int end) {
+		ArrayList<AllBoardUser> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchAllBoardUserId(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int getAllBoardUserNoCount(String keyword) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().updateBoardType(conn, comu);
+		result = new AdminDao().getAllBoardUserNoCount(conn, keyword);
 		JDBCTemplate.close(conn);
 		return result;
 	}
 
-	public ArrayList<Comment> selectAllCommentList() {
-		ArrayList<Comment> volist = null;
+	public ArrayList<AllBoardUser> searchAllBoardUserNo(String keyword, int start, int end) {
+		ArrayList<AllBoardUser> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().selectAllCommentList(conn);
+		volist = new AdminDao().searchAllBoardUserNo(conn, keyword, start, end);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
 
-	public Comment searchAllcomment() {
-		Comment vo = null;
+	public int getAllBoardTitleCount(String keyword) {
+		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		vo = new AdminDao().searchAllcomment(conn);
+		result = new AdminDao().getAllBoardTitleCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<AllBoardUser> searchAllBoardTitle(String keyword, int start, int end) {
+		ArrayList<AllBoardUser> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchAllBoardTitle(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int updateAllBoard(int boardNo, String boardCategory, String boardType) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().updateAllBoard(conn, boardNo, boardCategory, boardType);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int deleteAllBoard(int boardNo) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().deleteAllBoard(conn, boardNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
+	public int getAllCommentCount() {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getAllCommentCount(conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<AllCommentUser> selectAllCommentList(int start, int end) {
+		ArrayList<AllCommentUser> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().selectAllCommentList(conn, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+
+	public int getAllCommentUserIdCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getAllBoardUserIdCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<AllCommentUser> searchAllCommentUserId(String keyword, int start, int end) {
+		ArrayList<AllCommentUser> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchAllCommentUserId(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int getAllCommentUserNoCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getAllCommentUserNoCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<AllCommentUser> searchAllCommentUserNo(String keyword, int start, int end) {
+		ArrayList<AllCommentUser> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchAllCommentUserNo(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+
+	public int getAllCommentTitleCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getAllCommentTitleCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<AllCommentUser> searchAllCommentTitle(String keyword, int start, int end) {
+		ArrayList<AllCommentUser> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchAllCommentTitle(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int deleteAllComment(int commentNo) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().deleteAllComment(conn, commentNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
+	public AllCommentUser getAllCommentDetail(String commentNo) {
+		AllCommentUser vo = null;
+		Connection conn = JDBCTemplate.getConnection();
+		vo = new AdminDao().getAllCommentDetail(conn, commentNo);
 		JDBCTemplate.close(conn);
 		return vo;
 	}
-
+	
 	public ArrayList<User> selectUserList() {
 		ArrayList<User> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
@@ -370,35 +503,261 @@ public class AdminService {
 		return result;
 	}
 
-	public ArrayList<Board> selectReportBoardList() {
-		ArrayList<Board> volist = null;
+	public int getReportBoardCount() {
+		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().selectReportBoardList(conn);
+		result = new AdminDao().getReportBoardCount(conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportBoard> selectReportBoardList(int start, int end) {
+		ArrayList<ReportBoard> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().selectReportBoardList(conn, start, end);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
 
-	public BoardReport searchReportBoard() {
-		BoardReport vo = null;
+	public ArrayList<ReportBoard> selectReportBoardAscList(int start, int end) {
+		ArrayList<ReportBoard> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		vo = new AdminDao().searchReportBoard(conn);
+		volist = new AdminDao().selectReportBoardAscList(conn, start, end);
 		JDBCTemplate.close(conn);
-		return vo;
+		return volist;
+	}
+	
+	public int getReportBoardUserIdCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getReportBoardUserIdCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
-	public ArrayList<Board> selectReportCommentList() {
-		ArrayList<Board> volist = null;
+	public ArrayList<ReportBoard> searchReportBoardUserId(String keyword, int start, int end) {
+		ArrayList<ReportBoard> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().selectReportCommentList(conn);
+		volist = new AdminDao().searchReportBoardUserId(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int getReportBoardUserNoCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getReportBoardUserNoCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportBoard> searchReportBoardUserNo(String keyword, int start, int end) {
+		ArrayList<ReportBoard> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchReportBoardUserNo(conn, keyword, start, end);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
 
-	public CommentReport searchReportComment() {
-		CommentReport vo = null;
+	public int getReportCommentCount() {
+		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		vo = new AdminDao().searchReportComment(conn);
+		result = new AdminDao().getReportCommentCount(conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportComment> selectReportCommentList(int start, int end) {
+		ArrayList<ReportComment> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().selectReportCommentList(conn, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+
+	public ArrayList<ReportComment> selectReportCommentAscList(int start, int end) {
+		ArrayList<ReportComment> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().selectReportCommentAscList(conn, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int getReportCommentUserIdCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getReportCommentUserIdCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportComment> searchReportCommentUserId(String keyword, int start, int end) {
+		ArrayList<ReportComment> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchReportCommentUserId(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int getReportCommentUserNoCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getReportCommentUserNoCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportComment> searchReportCommentUserNo(String keyword, int start, int end) {
+		ArrayList<ReportComment> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchReportCommentUserNo(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int getReportReviewCount() {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getReportReviewCount(conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportReview> selectReportReviewList(int start, int end) {
+		ArrayList<ReportReview> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().selectReportReviewList(conn, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+
+	public ArrayList<ReportReview> selectReportReviewAscList(int start, int end) {
+		ArrayList<ReportReview> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().selectReportReviewAscList(conn, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int getReportReviewUserIdCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getReportReviewUserIdCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportReview> searchReportReviewUserId(String keyword, int start, int end) {
+		ArrayList<ReportReview> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchReportReviewUserId(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int getReportReviewUserNoCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getReportReviewUserNoCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportReview> searchReportReviewUserNo(String keyword, int start, int end) {
+		ArrayList<ReportReview> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchReportReviewUserNo(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int deleteReview(int reviewNo) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().deleteReview(conn, reviewNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
+	public ReportReview getReviewDetail(String reviewNo) {
+		ReportReview vo = null;
+		Connection conn = JDBCTemplate.getConnection();
+		vo = new AdminDao().getReviewDetail(conn, reviewNo);
 		JDBCTemplate.close(conn);
 		return vo;
+	}
+	
+	public int getReportUsedCount() {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getReportUsedCount(conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportUsed> selectReportUsedList(int start, int end) {
+		ArrayList<ReportUsed> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().selectReportUsedList(conn, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+
+	public ArrayList<ReportUsed> selectReportUsedAscList(int start, int end) {
+		ArrayList<ReportUsed> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().selectReportUsedAscList(conn, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int getReportUsedUserIdCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getReportUsedUserIdCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportUsed> searchReportUsedUserId(String keyword, int start, int end) {
+		ArrayList<ReportUsed> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchReportUsedUserId(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int getReportUsedUserNoCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getReportUsedUserNoCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<ReportUsed> searchReportUsedUserNo(String keyword, int start, int end) {
+		ArrayList<ReportUsed> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchReportUsedUserNo(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public int deleteUsed(int usedNo) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().deleteUsed(conn, usedNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
 	}
 }

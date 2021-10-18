@@ -47,6 +47,11 @@
      <p> 제목</p>
      <input type="text" name="title" required="required"><br>
    </div>
+	<select name="type" id="type">
+				<option>사담</option>
+				<option>건의</option>
+				<option>질문</option>
+	</select>
    <p>내용</p>
 	<textarea class ="form-control" name="content" id="p_content" required="required">
 	<div class="container">

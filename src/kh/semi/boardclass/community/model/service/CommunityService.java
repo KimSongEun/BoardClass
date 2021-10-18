@@ -175,14 +175,25 @@ public class CommunityService {
 	public void searchGatheringBoard() {
 
 	}
-
-	public ArrayList<Comment> selectComment() {
+	// 댓글
+	public ArrayList<Comment> selectComment(int boardNo) {
 		ArrayList<Comment> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new CommunityDao().selectComment(conn, boardNo);
+		JDBCTemplate.close(conn);
 		return volist;
 	}
 
-	public int insertComment() {
-		int result = -1;
+	public int insertComment(Comment comment) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().insertComment(conn, comment);
+	 if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
 		return result;
 	}
 

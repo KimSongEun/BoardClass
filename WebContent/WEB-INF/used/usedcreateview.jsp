@@ -1,23 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-	$("#btnInsert").click(checkValue);
-
-	function checkValue() {
-		alert("기다려봐");
-	}
-</script>
-<style>
-</style>
+<title>중고거래글 작성</title>
 </head>
 <body>
-	^^; 연결되었나요?
 
 	<form action="usedcreate" method="post" enctype="multipart/form-data">
 		<div>
@@ -30,8 +21,7 @@
 				</tr>
 				<tr>
 					<td><label for="price">가격 : </label></td>
-					<td><input id="price" name="usedPrice" pattern="[0-9]+"
-						placeholder="숫자만 입력하세요"></td>
+					<td><input id="price" name="usedPrice" placeholder="숫자만 입력하세요"></td>
 				</tr>
 				<tr>
 					<td><label for="state">상태 : </label></td>
@@ -61,7 +51,7 @@
 					<td><input type="file" name="usedImg">
 					<td><label for="gamecate">카테고리 : </label></td>
 					<td><select id="gamecate" name="usedCategory">
-							<option value="없음" selected>없음</option>
+							<option value="" selected>없음</option>
 							<option value="퍼즐">퍼즐</option>
 							<option value="전략">전략</option>
 							<option value="추상">추상</option>
@@ -78,18 +68,103 @@
 		</div>
 		<div>
 			상품정보<br>
-			<textarea name="usedInfo" placeholder="상품정보를 입력하세요"></textarea>
+			<textarea id="info" name="usedInfo" placeholder="상품정보를 입력하세요"></textarea>
 		</div>
 		<div>
-			검색창 <input type="search">
+		<input type="text" id="searchresult" value="" readonly>
 		</div>
-		<button type="submit" id="btnInsert">등록</button>
+		<div>
+				검색
+				<input type="search" id="search" list="keywordResult">
+				<button type="button" id="searchadd">추가</button>
+				<datalist id="keywordResult">
+				</datalist>
+				<div id="searchnull"></div>
+		</div>
+		<button type="submit" onclick="return checkValAll();">등록</button>
 	</form>
+	
+	
+<script>
+	function checkValAll() {
+		console.log("checkValAll함수진입");
 
+		var title = document.getElementById("title")
+		var price = document.getElementById("price")
+		var info = document.getElementById("info")
+		var imgFile = document.getElementById("imgFile");
 
+		var titleval = title.value;
+		var priceval = price.value;
+		var infoval = info.value;
 
+		if (!titleval) {
+			alert("제목을 입력하세요")
+			title.focus();
+			return false;
+		}
 
+		if (!priceval) {
+			alert("가격을 입력하세요");
+			price.focus();
+			return false;
+		}
 
+		var regExpPrice = /^[0-9]{1,7}$/;
+		if (!regExpPrice.test(priceval)) {
+			alert("숫자만 입력해주세요. 입력가능한 최대금액은 9,999,999입니다.");
+			price.focus();
+			return false;
+		}
+
+		if (!infoval) {
+			alert("상품 상세 설명을 작성하세요");
+			info.focus();
+			return false;
+		}
+
+		return true;
+	}
+	
+	
+	$("#search").keyup(searchCB);
+	function searchCB() {
+		var search = $("#search").val().trim();
+		if (search == "") {
+			return;
+		}
+		$.ajax({
+			type : "post",
+			url : "gamesearch.do",
+			data : { searchKeyword : search },
+
+			dataType : "json",
+			success : function(receive) {
+				console.log(receive);
+				$("#keywordResult").html("");
+				if(receive == null){
+					$("#searchnull").html("");
+					$("#searchnull").append('<p>검색된 게임이 없습니다</p>')
+				}
+				for(var i=0; i<receive.length; i++){
+				var searchresult = "<option value='" + receive[i].gameKoName + "'>";
+					$("#keywordResult").append(searchresult);						
+				}
+			},
+			error : function(request, status, error) {
+				alert("code:" + request.status + "\n" + "message:"
+						+ request.responseText + "\n" + "error:" + error);
+			}
+		});
+		
+		$("#searchadd").click(function(){
+			if($("#search").val() != ""){
+			$("#searchresult").val( $("#search").val() )}
+		}); 
+			
+	}
+	
+</script>
 
 </body>
 </html>

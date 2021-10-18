@@ -28,28 +28,47 @@ public class CommunityFreeUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Board board = new Board();
-		int pageNum = Integer.parseInt(request.getParameter("pageNum"));
-		board.setUserId(request.getParameter("user_id"));
-		board.setBoardTitle(request.getParameter("board_title"));
-		board.setBoardContent(request.getParameter("board_content"));
-		board.setBoardNo(Integer.parseInt(request.getParameter("board_no")));
+		//TODO 아이디 정보
 		
-		int result = new CommunityService().updateFreeBoard(board);
+		if(request.getParameter("boardNo") == null) {
+			response.sendRedirect(request.getContextPath() + "board/boardlist");
+		} else {
+			int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+			Board board = new CommunityService().getBoard(boardNo);
+            request.setAttribute("board", board);
+            request.getRequestDispatcher("/WEB-INF/community/freeBoard/FreeBoardUpdate.jsp").forward(request, response);
+		}
 		
-		request.setAttribute("result", result);
-		request.setAttribute("board_no", board.getBoardNo());
-		request.setAttribute("pageNum", pageNum);
 		
-		request.getRequestDispatcher("/WEB-INF/community/freeBoard/FreeBoardUpdate.jsp").forward(request, response);
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		
+			int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+			String title = request.getParameter("title");
+			String content = request.getParameter("content");
+			String type = request.getParameter("type");
+			
+			Board vo = new Board();
+			vo.setBoardNo(boardNo);
+			vo.setBoardTitle(title);
+			vo.setBoardContent(content);
+			vo.setBoardType(type);
+			
+			CommunityService co = new CommunityService();
+			int rowCount = co.updateFreeBoard(vo);
+			if(rowCount > 0) {
+				response.sendRedirect(request.getContextPath() + "/cfdetail?boardNo=" + boardNo);
+			} else {
+				response.sendRedirect(request.getContextPath() + "/cfdetail?boardNo=" + boardNo);
+			}
+		}
 	}
 
-}

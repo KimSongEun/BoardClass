@@ -11,9 +11,27 @@
 <title>보드클래스</title>
 <link rel="stylesheet" href="css/community/BoardContent.css" />
 <link rel="stylesheet" href="css/community/cmain.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<style>
+.hiddenText { display: none;}
+</style>
+<script type="text/javascript">
+	var b = "a";
+	function re(id) {
+		var content2 = document.getElementById(b);
+		content2.style.display= "none";
+		var a = "a" +id;
+		var content = document.getElementById(a);
+		content.style.display="block";
+		b=a;
+	}
+</script>
 </head>
 <body>
 <c:import url="../header.jsp" />
+<div id="a"></div>
+<div id="b"></div>
 
 <div id="guide" class="row">
 <nav id="aside" class="column">
@@ -45,8 +63,8 @@
 			</div>
 		</div>
 		<div class= "content">
-		내용 : ${content }
-		<!-- 파일첨부 -->
+		내용 : ${board.boardContent }
+		<!-- 댓글 -->
 		</div>
 	<div class="bottom">
 		<div class="utils">
@@ -57,12 +75,86 @@
 			</div>
 		</div>
 	</div>
-	<div class="updte">
-			<input type="button" value="수정" onclick="location.href='cfupdate?=boardNo=${board.boardNo }&pageNum=${pageNum }'">
-			<input type="button" value="삭제" >
-	</div>
+	<div class="btn_wrap">
+	<!-- 아이디 확인한 후 버튼 생성 가능-->
 	
+			<a href="cfupdate?boardNo=${board.boardNo }" class="btn btn1">
+				<button>수정</button>
+			</a>
+			<input type="button" class="btn btn2" value="삭제" onclick="del()">
+			<a href="cf" class="btn btn3">
+				<button >목록</button>
+			</a>
+	</div>
+	<!--  댓글  TODO 로그인과정 -->
+	<div class="comment">
+		<c:forEach var="comment" items="${list }">
+			<div class=getComment>
+				<div class="getWriter">
+					<c:if test="${comment.commentReLevel > 0 }">
+						<img src="./img/comtimg.png" width="${comment.commentReLevel*10 }">
+					</c:if>
+					${comment.userId }
+				</div>
+				<br>
+				<div style="margin-left: ${comment.commentReLevel*15}px; ">
+					<div class="getTxt">${comment.commentContent }</div>
+					<div class="createDate">${comment.commentWriteDate }</div>
+				</div>
+					<input type="button" value="답글" onclick="re(${comment.commentNo})">
+					<!-- c:if 아이디 확인 부분 추가 -->
+					<input type="button" value="삭제">
+					
+					<div class="hiddenText" id="a${comment.commentNo }">
+						<form action="cclist?pageNum=${pageNum }" method="post" name="frm1" id="frm1">
+							<input type="hidden" name="userId" value="${userId }">
+							<input type="hidden" name="boardNo" value=${board.boardNo }>
+							<input type="hidden" name="commentNo" value=${comment.commentNo }>
+							<input type="hidden" name="commentRef" value="${comment.commentRef }">
+							<input type="hidden" name="commentReLevel" value="${comment.commentReLevel }">
+							<input type="hidden" name="commentReStep" value="${comment.commentReStep }">
+							<img src="./img/comt.png">
+							<div><span class="left"><label for="name">${userId }</label></span></div>
+							<div><textarea name="commentContent" id="commentContent" maxlength="800" required="required" placeholder="댓글을 입력해주세요"></textarea></div>
+							
+							<div><input type="submit" value="등록" id="submitBtn"></div>
+						</form>
+					</div>
+					</c:forEach>
+					<div class="inputtxt">
+						<form action="cclist?pageNum=${pageNum }" method="post" name="frm2">
+							<input type="hidden" name="userId" value="${userId }">
+							<input type="hidden" name="boardNo" value=${board.boardNo }>
+							<input type="hidden" name="commentNo" value=${comment.commentNo }>
+							<input type="hidden" name="commentRef" value="${comment.commentRef }">
+							<input type="hidden" name="commentReLevel" value="${comment.commentReLevel }">
+							<input type="hidden" name="commentReStep" value="${comment.commentReStep }">
+							
+							<div>
+								<span class="left"><label for="name">${userId }</label></span>
+							</div>
+							<div class="inputComment">
+								<div><textarea name="commentContent" id="commentContent" maxlength="800" required="required" placeholder="댓글을 입력해주세요"></textarea></div>
+							</div>
+							<div class="btnFix"><input type="submit" value="등록" id="submitBtn"></div>
+						</form>
+					</div>
+			</div>
+		
+	</div>
+
 </div>
 </div>
+<script>
+	
+
+
+function del(){
+	const del = confirm("해당 게시물을 삭제하시겠습니까?");
+	if(del) {
+		location.href='cfdelete?boardNo=${board.boardNo }';
+	}
+}
+</script>
 </body>
 </html>

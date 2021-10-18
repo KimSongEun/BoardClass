@@ -1,4 +1,4 @@
-package kh.semi.boardclass.admin.controller;
+package kh.semi.boardclass.used.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.ha.backend.Sender;
+
 /**
- * Servlet implementation class AllBoardCategoryChangeServlet
+ * Servlet implementation class testServlet
  */
-@WebServlet("/AllBoardCategoryChangeServlet")
-public class AllBoardCategoryChangeServlet extends HttpServlet {
+@WebServlet("/test")
+public class testServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AllBoardCategoryChangeServlet() {
+    public testServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,16 +28,16 @@ public class AllBoardCategoryChangeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("/WEB-INF/index/test.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		request.setCharacterEncoding("UTF-8");
+		request.getRequestDispatcher("/WEB-INF/index/test.jsp").forward(request, response);
+		
 	}
 
 }

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.boardclass.admin.model.service.AdminService;
 import kh.semi.boardclass.admin.model.vo.AllBoardUser;
-import kh.semi.boardclass.community.model.vo.Board;
 
 /**
  * Servlet implementation class AllBoardListServlet
@@ -57,7 +56,7 @@ public class AllBoardListServlet extends HttpServlet {
 				currentPage=Integer.parseInt(pageNum);
 		}
 		
-		aCount = new AdminService().getAdCount();
+		aCount = new AdminService().getAllBoardCount();
 		pageCount = (aCount / PAGE_SIZE) + (aCount % PAGE_SIZE == 0 ? 0:1);
 		startRnum = (currentPage-1) * PAGE_SIZE + 1;  
 		endRnum = startRnum + PAGE_SIZE -1;

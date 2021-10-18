@@ -37,10 +37,6 @@ public class UsedCreateServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		request.setCharacterEncoding("UTF-8");
-		PrintWriter out = response.getWriter();
 
 		int uploadSizeLimit = 10 * 1024 * 1024;
 		String encType = "UTF-8";
@@ -74,8 +70,9 @@ public class UsedCreateServlet extends HttpServlet {
 		String usedInfo = multi.getParameter("usedInfo");
 		String usedImg = multi.getFilesystemName("usedImg");
 		String usedCategory = multi.getParameter("usedCategory");
+		String usedKeyword = multi.getParameter("keyword");
 
-		Used vo = new Used(userId, usedTitle, usedPrice, usedState, usedChange, usedExtype, usedInfo, usedImg, usedCategory);
+		Used vo = new Used(userId, usedTitle, usedPrice, usedState, usedChange, usedExtype, usedInfo, usedImg, usedCategory, usedKeyword);
 		int result = new UsedService().insertUsed(vo);
 		if (result < 1) {
 			System.out.println("글 입력 안됨");

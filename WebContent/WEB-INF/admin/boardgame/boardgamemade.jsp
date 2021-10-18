@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./css/admin/boardgame/adminBoardGameMade.css" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script type="text/javascript" src="./js/admin/boardgame/adminBoardGameMade.js"></script>
+    <script type="text/javascript" src="./js/admin/boardgame/adminBoardGameMade.js?"></script>
 	<script src = "ckeditor/ckeditor.js"></script>
     <script type="text/javascript" src="./ckfinder/ckfinder.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
@@ -179,15 +179,6 @@
                                     </div>
 
                                     <div class="boardgame-item_menu">
-                                        <br> <br> <label class="boardgame-item_menu_label"> 게임 확장판
-                                            : </label>
-                                        <div class="boardgame-item_menu_title">
-                                            <input type="text" class="boardgame-form_control_title"
-                                                placeholder="게임확장판을 입력해주세요" name="plus">
-                                        </div>
-                                    </div>
-
-                                    <div class="boardgame-item_menu">
                                         <br> <br> <label class="boardgame-item_menu_label"> 규칙 이미지
                                             : </label>
                                         <div class="input-group mb-3" style="width : 771px;">
@@ -200,11 +191,32 @@
 
                                     <br>
                                     <div class="boardgame-item_menu">
-                                        <label class="boardgame-item_menu_label">게임 규칙 영상 및 게임 설명 :</label>
+                                        <label class="boardgame-item_menu_label">게임 규칙 영상 :</label>
                                         <div class="boardgame-item_menu_comment">
                                             <br><br><textarea id = "ckeditor" name="video"></textarea>
                                         </div>
                                     </div>
+                                    
+                                    <div class="boardgame-item_menu">
+                                        <br> <br> <label class="boardgame-item_menu_label"> 게임 확장판
+                                            : </label>
+                                        <div class="boardgame-item_menu_title">
+                                            <input type="text" class="boardgame-form_control_title"
+                                                placeholder="게임확장판을 입력해주세요" name="plus">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="boardgame-item_menu">
+                                        <br> <br> <label class="boardgame-item_menu_label"> 게임 확장판 이미지
+                                            : </label>
+                                        <div class="input-group mb-3" style="width : 722px;">
+                                            &nbsp; &nbsp;
+                                            <input type="file" class="form-control" id="inputGroupFile03"
+                                                name="uploadFilePlusImage" multiple>
+                                            <label class="input-group-text" for="inputGroupFile03">Upload</label>
+                                        </div>
+                                    </div>
+                                    
                                     <div class="boardgame-item_upload">
                                         <div class="boardgame-upload_text">
                                             <button type="submit" class="boardgame-upload_btn">게임 등록</button>

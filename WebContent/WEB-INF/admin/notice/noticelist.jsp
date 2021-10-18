@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="./css/admin/notice/adminNotice.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="./js/admin/notice/adminNotice.js"></script>
+    <script type="text/javascript" src="./js/admin/notice/adminNotice.js?"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>  
     <title>공지사항 조회</title>
 </head>
@@ -64,7 +64,7 @@
 						 for(Notice n : volist){ %> 
                         <tr>
                             <td><%=n.getAnnounceNo() %></td>
-                            <td><a href = #사용자가보는공지사항화면새창열기 target = '_blank'> <%=n.getAdminTitle() %></a></td>
+                            <td><a href = #사용자가보는공지사항화면새창열기 target = '_blank' style = "color : #754100"> <%=n.getAdminTitle() %></a></td>
                             <td><%=n.getAdminWrDate() %></td>
                             <td><%=n.getAdminRwrDate() %></td>
                             <td><button class="update btn btn-danger" value="updatego" no="<%=n.getAnnounceNo()%>">글수정</button> </td>

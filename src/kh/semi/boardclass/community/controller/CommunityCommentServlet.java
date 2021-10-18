@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.boardclass.community.model.service.CommunityService;
+import kh.semi.boardclass.community.model.vo.Board;
+import kh.semi.boardclass.community.model.vo.Comment;
+
 /**
  * Servlet implementation class CommunityCommentServlet
  */
@@ -26,16 +30,50 @@ public class CommunityCommentServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		
+		String userId = request.getParameter("userId");
+		String pageNum = request.getParameter("pageNum");
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		
+		Comment comment = new Comment();
+		comment.setBoardNo(boardNo);
+		comment.setUserId(userId);
+		comment.setCommentContent(request.getParameter("commentContent"));
+		comment.setCommentNo(Integer.parseInt(request.getParameter("commentNo")));
+		comment.setCommentRef(Integer.parseInt(request.getParameter("commentRef")));
+		comment.setCommentReStep(Integer.parseInt(request.getParameter("commentReStep")));
+		comment.setCommentReLevel(Integer.parseInt(request.getParameter("commentReLevel")));
+		
+		CommunityService cs = new CommunityService();
+		int result = cs.insertComment(comment);
+		
+		Board board = cs.getBoard(boardNo);
+		String content = board.getBoardContent();
+		content = content.replace("\r\n", "<br>");
+		
+		request.setAttribute("commentNo", comment.getCommentNo());
+		request.setAttribute("boardNo", boardNo);
+		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("board", board);
+		request.setAttribute("userId", comment.getUserId());
+		request.setAttribute("commentRef", comment.getCommentRef());
+		request.setAttribute("commentReLevel", comment.getCommentReLevel());
+		request.setAttribute("commentReStep", comment.getCommentReStep());
+		request.setAttribute("content", content);
+		request.setAttribute("result", result);
+		
+		request.getRequestDispatcher("/WEB-INF/community/freeBoard/Comment.jsp").forward(request, response);
+		
 	}
 
 }

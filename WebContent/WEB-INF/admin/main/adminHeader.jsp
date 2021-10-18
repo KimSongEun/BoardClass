@@ -5,7 +5,7 @@
     <header>
 		<div class="admin-header">
 			<div class="admin-con1"> 
-				<span style="font-weight: bold;" class="admin-con1-span">BoardClass</span> <span style="font-weight: nomal;">ADMINPAGE</span>
+				<span style="font-weight: bold;" class="admin-con1-span"><a class="admin-header-a" href = "adminmain">BoardClass</span> <span style="font-weight: nomal;">ADMINPAGE</a></span>
 				<span style="float: right; line-height: 14px;"><a href="#" style="text-decoration:none;color:white;padding-right: 10px;line-height:20px;">LOGOUT</a></span>
 			</div>
 		</div>	
@@ -52,6 +52,8 @@
                         <li class="admin-nav-li-li"><a class="admin-header-a" href="userlist">회원관리</a></li>
                         <li class="admin-nav-li-li"><a class="admin-header-a" href="reportboardlist">신고된 글</a></li>
                         <li class="admin-nav-li-li"><a class="admin-header-a" href="reportcommentlist">신고된 댓글</a></li>
+                        <li class="admin-nav-li-li"><a class="admin-header-a" href="reportreviewlist">신고된 리뷰</a></li>
+                        <li class="admin-nav-li-li"><a class="admin-header-a" href="reportusedlist">신고된 중고글</a></li>
                     </ul>    
 	        </ul>
 		</div>

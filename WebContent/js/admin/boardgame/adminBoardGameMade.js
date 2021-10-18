@@ -19,4 +19,5 @@ $(function() {
         // 미리보기 제거
         $("#boardgame-img_view").attr('src', '');
     });
+
 });

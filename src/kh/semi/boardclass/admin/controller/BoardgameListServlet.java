@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.boardclass.admin.model.service.AdminService;
-import kh.semi.boardclass.admin.model.vo.Banner;
 import kh.semi.boardclass.game.model.vo.Game;
 
 /**
@@ -56,7 +55,7 @@ public class BoardgameListServlet extends HttpServlet {
 				currentPage=Integer.parseInt(pageNum);
 		}
 		
-		aCount = new AdminService().getAdCount();
+		aCount = new AdminService().getBoardGameCount();
 		pageCount = (aCount / PAGE_SIZE) + (aCount % PAGE_SIZE == 0 ? 0:1);
 		startRnum = (currentPage-1) * PAGE_SIZE + 1;  
 		endRnum = startRnum + PAGE_SIZE -1;

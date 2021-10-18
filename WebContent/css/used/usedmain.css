@@ -1,0 +1,92 @@
+@charset "UTF-8";
+
+.secfirst{
+	display: flex;
+	justify-content: flex-end;
+	padding-top: 10px;
+	padding-right: 10px;
+}
+
+.secsecond{
+	display: flex;
+	width: 1550px;
+	flex-flow: row wrap;
+	margin: 0 auto;
+}
+
+.form_usedinfo{
+	width: 250px;
+	height: 350px;
+	margin: 30px;
+}
+
+.div_usedinfo{
+	width: 250px;
+	height: 350px;
+}
+
+.div_usedinfo img{
+	 width: 250px;
+	 height: 250px;
+}
+
+.img_text{
+	width: 250px;
+	height: 45px;
+}
+
+.img_text a{
+	height: 45px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	word-break: break-all; 
+	display: block;
+}
+
+.secthird{
+	display: flex;
+	justify-content: flex-end;
+	padding-top: 10px;
+	padding-right: 10px;
+}
+
+
+.div_paging {
+	display: flex;
+	justify-content: center;
+}
+
+.previous {
+	background-color: black;
+	color: white;
+	text-decoration: none;
+	padding: 5px 13px;
+}
+
+.current {
+	color: black;
+	text-decoration: none;
+	padding: 5px 13px;
+}
+
+.current:hover {
+	background-color: #ddd;
+}
+
+<!--.current.active {
+	background-color: black;
+	color: white;
+}-->
+
+.next {
+	background-color: black;
+	color: white;
+	text-decoration: none;
+	padding: 5px 13px;
+}
+
+@media (max-width:767px) {
+    .secfirst {
+        justify-content: center;
+    }
+}

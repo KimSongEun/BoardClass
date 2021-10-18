@@ -10,8 +10,10 @@
 <meta charset="UTF-8">
 <title>자유 게시판</title>
 <link rel="stylesheet" href="css/community/freeBoardMain.css" />
-<link rel="stylesheet" href="css/community/cmain.css" />
+<link rel="stylesheet" href="css/community/common.css" />
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
+
 </head>
 <c:import url="../header.jsp" />
 <body>
@@ -51,19 +53,16 @@
 	</div>
 
 <table class="c_table">
-	<tr>
-	<th>번호</th>
-	<th>제목</th>
-	<th>작성자</th>
-	<th>작성일</th>
-	<th>조회수</th>
-	</tr>
+
 	
 	<c:if test="${totCnt > 0 }">
 	<c:forEach var="board" items="${list }">
 		<tr>
-			<td style="width: 10%; font-weight: bold; font-size: 18px; text-align: center;">
+			<td style="width: 10%; font-size: 18px; text-align: center;">
 				${board.boardNo }
+			</td>
+			<td style="width: 10%; font-size: 18px; text-align: center;">
+				${board.boardType }
 			</td>
 			<td style="width: 40%; font-weight: bold; font-size: 18px">
 				<a href="cfdetail?boardNo=${board.boardNo }&pageNum=${currentPage}">${board.boardTitle }</a>
@@ -108,6 +107,7 @@
 </div>
 </div>
 </div>
+
 <script>
 //change 될때마다 getListAjax
 $(function(){
@@ -133,6 +133,8 @@ $(function(){
 			}
 		});//ajax
 	}
+	
+
 </script>
 
 

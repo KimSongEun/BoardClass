@@ -117,3 +117,25 @@
 	color: #666;
 	text-align: center;
 }
+/* 수정 ,삭제,목록 버튼*/
+.btn_wrap {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+.btn {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 240px
+}
+.btn1 {border-radius: 2px;}
+.btn2 {border-radius: 4px;}
+.btn3 {border-radius: 8px;}

@@ -40,47 +40,72 @@ public class CommunityMainServlet extends HttpServlet {
 		//new CommunityService().selectFreeBoardList() 처럼 인기글, .. 조회해서 옴 각각의 변수 volist1
 		//new CommunityService().selectFreeBoardList() 처럼 인기글, .. 조회해서 옴 각각의 변수 volist2
 		//new CommunityService().selectFreeBoardList() 처럼 인기글, .. 조회해서 옴 각각의 변수 volist3
-		PrintWriter out = response.getWriter();
+//		PrintWriter out = response.getWriter();
+//		
+//		final int PAGE_SIZE = 20;   // 한 페이지 당 글수
+//		final int PAGE_BLOCK = 3;   // 한 화면에 나타날 페이지 링크 수
+//		int bCount = 0;   // 총 글수
+//		int pageCount = 0; // 총 페이지수
+//		int startPage = 1;   // 화면에 나타날 시작페이지
+//		int endPage = 1;   // 화면에 나타날 마지막페이지
+//		int currentPage = 1;
+//		int startRnum = 1;   // 화면에 글
+//		int endRnum = 1;  // 화면에 글
+//		
+//		String pageNum = request.getParameter("pagenum");
+//		if(pageNum != null) {   // 눌려진 페이지가 있음.
+//			currentPage = Integer.parseInt(pageNum); // 눌려진 페이지
+//		}
+//		// 총 글수
+//		bCount = new CommunityService().getBoardCount();
+//		// 총 페이지수 = (총글개수 / 페이지당글수) + (총글개수에서 페이지당글수로 나눈 나머지가 0이 아니라면 페이지개수를 1 증가)
+//		pageCount = (bCount / PAGE_SIZE) + (bCount % PAGE_SIZE == 0 ? 0 : 1);
+//		//rownum 조건 계산
+//		startRnum = (currentPage-1) * PAGE_SIZE + 1;   // 1//6//11/16//21
+//		endRnum = startRnum + PAGE_SIZE -1; 
+//		if(endRnum > bCount) endRnum=bCount;
+//		
+//		if(currentPage % PAGE_BLOCK == 0) {
+//			startPage = (currentPage / PAGE_BLOCK -1)  * PAGE_BLOCK + 1;
+//		} else {
+//			startPage = (currentPage / PAGE_BLOCK)  * PAGE_BLOCK + 1;
+//		}
+//		endPage = startPage + PAGE_BLOCK -1; 
+//		if(endPage > pageCount) endPage=pageCount;
+//		
+//		ArrayList<Board> volist3 = new CommunityService().selectBoardList(1, 10);
+//		
+////				ArrayList<Board> volist3 = new CommunityService().selectFreeBoardList();
+////				request.setAttribute("boardRankList", volist1);
+////				request.setAttribute("userRankList", volist2);
+//		request.setAttribute("boardList", volist3);
+//		System.out.print("volsit3 :");
+//		System.out.print(volist3);
 		
-		final int PAGE_SIZE = 20;   // 한 페이지 당 글수
-		final int PAGE_BLOCK = 3;   // 한 화면에 나타날 페이지 링크 수
-		int bCount = 0;   // 총 글수
-		int pageCount = 0; // 총 페이지수
-		int startPage = 1;   // 화면에 나타날 시작페이지
-		int endPage = 1;   // 화면에 나타날 마지막페이지
-		int currentPage = 1;
-		int startRnum = 1;   // 화면에 글
-		int endRnum = 1;  // 화면에 글
+		int totCnt = new CommunityService().getBoardCount();
+		String pageNum = request.getParameter("pageNum");
+		if(pageNum == null || pageNum.equals("")) {pageNum = "1";}
+		int currentPage = Integer.parseInt(pageNum);
+		int pageSize = 10, blockSize = 10;
+		int startRow = (currentPage - 1) * pageSize + 1;
+		int endRow = startRow + pageSize -1;
+		int startNum = totCnt - startRow +1;
+		ArrayList<Board> list = new CommunityService().selectBoardList(startRow, endRow);
+		int pageCnt = (int)Math.ceil((double)totCnt/pageSize);
+		int startPage = (int)(currentPage -1) / blockSize * blockSize + 1;
+		int endPage = startPage + blockSize - 1;
+		if( endPage > pageCnt ) endPage = pageCnt;
 		
-		String pageNum = request.getParameter("pagenum");
-		if(pageNum != null) {   // 눌려진 페이지가 있음.
-			currentPage = Integer.parseInt(pageNum); // 눌려진 페이지
-		}
-		// 총 글수
-		bCount = new CommunityService().getBoardCount();
-		// 총 페이지수 = (총글개수 / 페이지당글수) + (총글개수에서 페이지당글수로 나눈 나머지가 0이 아니라면 페이지개수를 1 증가)
-		pageCount = (bCount / PAGE_SIZE) + (bCount % PAGE_SIZE == 0 ? 0 : 1);
-		//rownum 조건 계산
-		startRnum = (currentPage-1) * PAGE_SIZE + 1;   // 1//6//11/16//21
-		endRnum = startRnum + PAGE_SIZE -1; 
-		if(endRnum > bCount) endRnum=bCount;
+		request.setAttribute("totCnt", totCnt);
+		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("currentPage", currentPage);
+		request.setAttribute("startNum", startNum);
+		request.setAttribute("list", list);
+		request.setAttribute("blockSize", blockSize);
+		request.setAttribute("pageCnt", pageCnt);
+		request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
 		
-		if(currentPage % PAGE_BLOCK == 0) {
-			startPage = (currentPage / PAGE_BLOCK -1)  * PAGE_BLOCK + 1;
-		} else {
-			startPage = (currentPage / PAGE_BLOCK)  * PAGE_BLOCK + 1;
-		}
-		endPage = startPage + PAGE_BLOCK -1; 
-		if(endPage > pageCount) endPage=pageCount;
-		
-		ArrayList<Board> volist3 = new CommunityService().selectBoardList(1, 10);
-		
-//				ArrayList<Board> volist3 = new CommunityService().selectFreeBoardList();
-//				request.setAttribute("boardRankList", volist1);
-//				request.setAttribute("userRankList", volist2);
-		request.setAttribute("boardList", volist3);
-		System.out.print("volsit3 :");
-		System.out.print(volist3);
 		request.getRequestDispatcher("/WEB-INF/community/Community.jsp").forward(request, response);
 	}
 
