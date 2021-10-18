@@ -2,12 +2,14 @@ package kh.semi.boardclass.game.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.List;
 
 import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.game.model.dao.GameDao;
 import kh.semi.boardclass.game.model.vo.Game;
 import kh.semi.boardclass.game.model.vo.GameLike;
+import kh.semi.boardclass.game.model.vo.GameReview;
+import kh.semi.boardclass.used.model.dao.UsedDao;
+import kh.semi.boardclass.used.model.vo.Used;
 
 
 public class GameService {
@@ -57,7 +59,20 @@ public class GameService {
 		return result;
 	}
 	
-	
+	public ArrayList<Used> usedlist(String name) {
+		ArrayList<Used> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new GameDao().usedlist(conn,name);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	public int insertRiview(GameReview vo) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new GameDao().insertRiview(conn, vo);
+		JDBCTemplate.close(conn);
+		return result;
+	}
 	
 	public ArrayList<Game> selectCateGameList(int start, int end, String cate) {
 		ArrayList<Game> volist = null;
@@ -151,12 +166,5 @@ public class GameService {
 		return volist;
 	}
 	
-	public List<Game> searchList(String searchKeyword){
-		List<Game> volist = null;
-		Connection conn = JDBCTemplate.getConnection();
-		volist = new GameDao().searchList(conn, searchKeyword);
-		JDBCTemplate.close(conn);
-		return volist;
-	}
 
 }

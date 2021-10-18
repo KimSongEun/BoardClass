@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.boardclass.game.model.service.GameService;
 import kh.semi.boardclass.game.model.vo.Game;
+import kh.semi.boardclass.used.model.vo.Used;
 
 /**
  * Servlet implementation class GameInfoServlet
@@ -41,12 +42,17 @@ public class GameInfoServlet extends HttpServlet {
         String name = request.getParameter("GAME_KONAME");
         
         Game vo = new GameService().InfoGame(name);
+        ArrayList<Used> vo2 = new GameService().usedlist(name);
+        
         
         String str = vo.getGamePlusImage();
         String[] str2 = str.split(","); 
         String str3 = vo.getGamePlus();
         String[] str4 = str3.split(","); 
+        
         request.setAttribute("gamevolist", vo);
+        request.setAttribute("usedvolist", vo2);
+       
         request.setAttribute("str2", str2);
         request.setAttribute("str4", str4);
       
