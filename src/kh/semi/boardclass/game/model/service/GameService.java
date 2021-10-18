@@ -8,6 +8,7 @@ import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.game.model.dao.GameDao;
 import kh.semi.boardclass.game.model.vo.Game;
 import kh.semi.boardclass.game.model.vo.GameLike;
+import kh.semi.boardclass.user.model.dao.UserDao;
 
 
 public class GameService {
@@ -157,6 +158,14 @@ public class GameService {
 		volist = new GameDao().searchList(conn, searchKeyword);
 		JDBCTemplate.close(conn);
 		return volist;
+	}
+	
+	public int matchList(String matchKeyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new GameDao().matchList(conn, matchKeyword);
+		JDBCTemplate.close(conn);
+		return result;
 	}
 
 }

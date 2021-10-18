@@ -3,6 +3,7 @@ package kh.semi.boardclass.game.model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -690,6 +691,30 @@ public class GameDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return volist;
+	}
+
+	public int matchList(Connection conn, String matchKeyword) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = "SELECT COUNT(*) FROM BOARDGAME WHERE GAME_KONAME like ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, matchKeyword);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			} else {
+				result = rset.getInt(0);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
 }

@@ -1,16 +1,68 @@
 @charset "UTF-8";
 
+
 .article_create{
+	margin: auto;
 	display: flex;
 	justify-content: center;
-	padding: 100px 0px 100px 0px;
 }
 
+.form_create{
+	padding: 50px 20px 50px 20px;
+	background-color: white;
+}
 
+.div_table{
+	padding-top: 50px;
+}
 
+#info{
+	width:550px; 
+	height:200px; 
+    resize:none;
+}
 
-@media (max-width:767px) {
-    .article_create {
-       flex-direction: column;
-    }
+.div_info{
+	padding-top: 60px;
+}
+
+#info_count{
+	font-size: 10px;
+	color: gray;
+	text-align: right;
+}
+
+.label_down{
+	display: block;
+	margin-bottom: 6px;
+}
+
+.div_keyword{
+	padding-top: 60px;
+}
+
+.input_keyword{
+	text-align: center;
+	border:none;
+	width: 500px;
+	height: 50px;
+	font-size: 25px;
+	font-family: 'Gugi';
+  	background-image: linear-gradient(90deg, red, orange, yellow, green, blue, navy, purple);
+  	background-clip: text;
+	-webkit-background-clip: text;
+  	color: transparent;
+}
+
+.div_search{
+	padding-top: 60px;
+}
+
+.div_button{
+	padding-top: 80px;
+}
+
+.btn_button{
+	position: relative;
+	left: 91.5%;
 }

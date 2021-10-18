@@ -17,7 +17,6 @@
 
 <section>
 <div class="secfirst">
-한글깨지나?여긴 main
 	<div class="div_select">
 		<select id="gameCategory" onchange="window.open(value,'_self');">
 			<option value="usedmain" selected>전체</option>
@@ -49,7 +48,7 @@
 							<img src="${pageContext.request.contextPath}
 							/${r.usedImg}" alt="이미지없음">
 						</a>
-						<div class="img_text">
+						<div class="div_img_text">
 							<a href="usedinformation?no=${r.usedNo}">${r.usedTitle}</a>
 						</div>
 					</div>
