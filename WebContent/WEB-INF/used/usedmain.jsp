@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<link rel="stylesheet" href="./css/index.css"/>
+<link rel="stylesheet" href="./css/index/maincss.css"/>
 <link rel="stylesheet" href="./css/used/usedmain.css"/>
 <title>중고거래 메인</title>
 </head>
@@ -15,8 +15,9 @@
 
 <%@include file="/WEB-INF/index/header.jsp" %>
 
-<section class="section">
+<section>
 <div class="secfirst">
+한글깨지나?여긴 main
 	<div class="div_select">
 		<select id="gameCategory" onchange="window.open(value,'_self');">
 			<option value="usedmain" selected>전체</option>
@@ -62,13 +63,19 @@
 <div class="secfourth">
 	<div class="div_paging">
 		<c:if test="${startPage > 1}">
-			<a href="#" class="previous">&laquo;</a>
+			<a href="usedmain?pagenum=${startPage-1}" class="previous">&laquo;</a>
+		</c:if>
+		<c:if test="${startPage <= 1}">
+			<a href="usedmain?pagenum=1" class="previous">&laquo;</a>
 		</c:if>
 		<c:forEach var="p" begin="1" step="1" end="${endPage}">
-			<a href="./usedmain?pagenum=${p}" class="current">${p}</a>
+			<a href="usedmain?pagenum=${p}" class="current">${p}</a>
 		</c:forEach>
 		<c:if test="${endPage < pageCount}">
-			<a href="#" class="next">&raquo;</a>
+			<a href="usedmain?pagenum=${endPage+1}" class="next">&raquo;</a>
+		</c:if>
+		<c:if test="${endPage >= pageCount}">
+			<a href="usedmain?pagenum=${pageCount}" class="next">&raquo;</a>
 		</c:if>
 	</div>
 </div>

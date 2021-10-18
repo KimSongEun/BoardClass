@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <header>
     <div class="header_logo">
         <div class="div_logo">
@@ -20,10 +22,10 @@
     <hr>
     <nav class="header_menu">
         <div class="div_menu">
-            <a href="">게임랭킹</a>
-            <a href="">보드게임</a>
-            <a href="">커뮤니티</a>
-            <a href="">중고거래</a>
+            <a href="GameGradeRank">게임랭킹</a>
+            <a href="GameLevelList">보드게임</a>
+            <a href="cmain">커뮤니티</a>
+            <a href="usedmain">중고거래</a>
         </div>
     </nav>
     <hr>

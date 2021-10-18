@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<link rel="stylesheet" href="./css/index.css"/>
+<link rel="stylesheet" href="./css/index/maincss.css"/>
 <title>디자인 테스트페이지</title>
 </head>
 <body>

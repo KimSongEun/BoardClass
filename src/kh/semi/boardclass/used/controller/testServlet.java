@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.ha.backend.Sender;
-
 /**
  * Servlet implementation class testServlet
  */
@@ -35,9 +33,8 @@ public class testServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		request.getRequestDispatcher("/WEB-INF/index/test.jsp").forward(request, response);
-		
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }

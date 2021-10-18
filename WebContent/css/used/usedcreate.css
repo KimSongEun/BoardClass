@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+.article_create{
+	display: flex;
+	justify-content: center;
+	padding: 100px 0px 100px 0px;
+}
+
+
+
+
+@media (max-width:767px) {
+    .article_create {
+       flex-direction: column;
+    }
+}

@@ -3,8 +3,9 @@
 .secfirst{
 	display: flex;
 	justify-content: flex-end;
-	padding-top: 10px;
-	padding-right: 10px;
+	padding-top: 30px;
+	padding-right: 50px;
+	padding-bottom: 30px;
 }
 
 .secsecond{
@@ -47,13 +48,17 @@
 	display: flex;
 	justify-content: flex-end;
 	padding-top: 10px;
-	padding-right: 10px;
+	padding-right: 50px;
 }
 
+.secfourth{
+	display: flex;
+	justify-content: center;
+}
 
 .div_paging {
 	display: flex;
-	justify-content: center;
+	padding-bottom: 20px;
 }
 
 .previous {
@@ -72,11 +77,6 @@
 .current:hover {
 	background-color: #ddd;
 }
-
-<!--.current.active {
-	background-color: black;
-	color: white;
-}-->
 
 .next {
 	background-color: black;
