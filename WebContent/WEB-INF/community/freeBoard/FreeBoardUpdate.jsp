@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@page import="kh.semi.boardclass.community.model.vo.Board"%>
+<%@page import="java.util.ArrayList"%>
+    <%
+	Board board = (Board)request.getAttribute("BoardNo");
+	%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,7 +47,7 @@
 				<option>질문</option>
 	</select>
    <p>내용</p>
-	<textarea class ="form-control" name="content" id="p_content" required="required">
+	
 	<div class="container">
 	    <div class="content" style="width: 70%">
 	      <div class="row justify-content-md-center">

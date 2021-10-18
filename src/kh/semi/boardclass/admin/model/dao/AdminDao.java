@@ -1084,16 +1084,17 @@ public class AdminDao {
 			} 
 		return vo;
 	}
-	// 여기 하기
+
 	public int getAdminUserCount(Connection conn) {
 		int result = 0;
-		String sql = "SELECT COUNT(*)\r\n" + 
-				"FROM(\r\n" + 
+		String sql = "SELECT count(*) FROM(\r\n" + 
 				"SELECT * \r\n" + 
 				"FROM (\r\n" + 
 				"SELECT  M.USER_ID, M.USER_NO,\r\n" + 
 				"(SELECT COUNT(*) FROM BOARD WHERE USER_ID = M.USER_ID) AS BOARDCOUNT,\r\n" + 
 				"(SELECT COUNT(*) FROM COMT WHERE USER_ID = M.USER_ID) AS COMTCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM REVIEW WHERE USER_ID = M.USER_ID) AS REVIEWCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM USED WHERE USER_ID = M.USER_ID) AS USEDCOUNT,\r\n" + 
 				"M.USER_HISTORY\r\n" + 
 				"FROM MEMBER M))";
 		PreparedStatement pstmt = null;
@@ -1121,6 +1122,8 @@ public class AdminDao {
 				"SELECT  M.USER_ID, M.USER_NO,\r\n" + 
 				"(SELECT COUNT(*) FROM BOARD WHERE USER_ID = M.USER_ID) AS BOARDCOUNT,\r\n" + 
 				"(SELECT COUNT(*) FROM COMT WHERE USER_ID = M.USER_ID) AS COMTCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM REVIEW WHERE USER_ID = M.USER_ID) AS REVIEWCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM USED WHERE USER_ID = M.USER_ID) AS USEDCOUNT,\r\n" + 
 				"M.USER_HISTORY\r\n" + 
 				"FROM MEMBER M)) t1) t2 where r between ? and ?";
 		PreparedStatement pstmt = null;
@@ -1139,7 +1142,9 @@ public class AdminDao {
 					vo.setUserNo(rset.getInt(3));
 					vo.setBoardCount(rset.getInt(4));
 					vo.setComtCount(rset.getInt(5));
-					vo.setUserHistory(rset.getInt(6));
+					vo.setReviewCount(rset.getInt(6));
+					vo.setUsedCount(rset.getInt(7));
+					vo.setUserHistory(rset.getInt(8));
 					volist.add(vo);
 				} while (rset.next());
 			}
@@ -1160,6 +1165,8 @@ public class AdminDao {
 				"SELECT  M.USER_ID, M.USER_NO,\r\n" + 
 				"(SELECT COUNT(*) FROM BOARD WHERE USER_ID = M.USER_ID) AS BOARDCOUNT,\r\n" + 
 				"(SELECT COUNT(*) FROM COMT WHERE USER_ID = M.USER_ID) AS COMTCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM REVIEW WHERE USER_ID = M.USER_ID) AS REVIEWCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM USED WHERE USER_ID = M.USER_ID) AS USEDCOUNT,\r\n" + 
 				"M.USER_HISTORY\r\n" + 
 				"FROM MEMBER M)\r\n" + 
 				"WHERE USER_ID like(?))";
@@ -1189,6 +1196,8 @@ public class AdminDao {
 				"SELECT  M.USER_ID, M.USER_NO,\r\n" + 
 				"(SELECT COUNT(*) FROM BOARD WHERE USER_ID = M.USER_ID) AS BOARDCOUNT,\r\n" + 
 				"(SELECT COUNT(*) FROM COMT WHERE USER_ID = M.USER_ID) AS COMTCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM REVIEW WHERE USER_ID = M.USER_ID) AS REVIEWCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM USED WHERE USER_ID = M.USER_ID) AS USEDCOUNT,\r\n" + 
 				"M.USER_HISTORY\r\n" + 
 				"FROM MEMBER M)\r\n" + 
 				"WHERE USER_ID like(?)) t1) t2 where r between ? and ?";
@@ -1209,7 +1218,9 @@ public class AdminDao {
 					vo.setUserNo(rset.getInt(3));
 					vo.setBoardCount(rset.getInt(4));
 					vo.setComtCount(rset.getInt(5));
-					vo.setUserHistory(rset.getInt(6));
+					vo.setReviewCount(rset.getInt(6));
+					vo.setUsedCount(rset.getInt(7));
+					vo.setUserHistory(rset.getInt(8));
 					volist.add(vo);
 				} while (rset.next());
 			}
@@ -1229,6 +1240,8 @@ public class AdminDao {
 				"SELECT  M.USER_ID, M.USER_NO,\r\n" + 
 				"(SELECT COUNT(*) FROM BOARD WHERE USER_ID = M.USER_ID) AS BOARDCOUNT,\r\n" + 
 				"(SELECT COUNT(*) FROM COMT WHERE USER_ID = M.USER_ID) AS COMTCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM REVIEW WHERE USER_ID = M.USER_ID) AS REVIEWCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM USED WHERE USER_ID = M.USER_ID) AS USEDCOUNT,\r\n" + 
 				"M.USER_HISTORY\r\n" + 
 				"FROM MEMBER M)\r\n" + 
 				"WHERE USER_NO like(?))";
@@ -1258,6 +1271,8 @@ public class AdminDao {
 				"SELECT  M.USER_ID, M.USER_NO,\r\n" + 
 				"(SELECT COUNT(*) FROM BOARD WHERE USER_ID = M.USER_ID) AS BOARDCOUNT,\r\n" + 
 				"(SELECT COUNT(*) FROM COMT WHERE USER_ID = M.USER_ID) AS COMTCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM REVIEW WHERE USER_ID = M.USER_ID) AS REVIEWCOUNT,\r\n" + 
+				"(SELECT COUNT(*) FROM USED WHERE USER_ID = M.USER_ID) AS USEDCOUNT,\r\n" + 
 				"M.USER_HISTORY\r\n" + 
 				"FROM MEMBER M)\r\n" + 
 				"WHERE USER_NO like(?)) t1) t2 where r between ? and ?";
@@ -1278,7 +1293,9 @@ public class AdminDao {
 					vo.setUserNo(rset.getInt(3));
 					vo.setBoardCount(rset.getInt(4));
 					vo.setComtCount(rset.getInt(5));
-					vo.setUserHistory(rset.getInt(6));
+					vo.setReviewCount(rset.getInt(6));
+					vo.setUsedCount(rset.getInt(7));
+					vo.setUserHistory(rset.getInt(8));
 					volist.add(vo);
 				} while (rset.next());
 			}

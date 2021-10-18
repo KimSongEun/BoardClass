@@ -28,16 +28,24 @@ public class CommunityFreeDeleteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String boardNo = request.getParameter("boardNo");
-		new CommunityService().deleteFreeBoard(Integer.parseInt(boardNo));
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		String pageNum = request.getParameter("pageNum");
+		CommunityService cs = new CommunityService();
+		int result = cs.deleteFreeBoard(boardNo);
+		
+		request.setAttribute("boardNo", boardNo);
+		request.setAttribute("pageNum", pageNum);
+		request.setAttribute("result", result);
+		
 		response.sendRedirect("cf");
+//		response.sendRedirect(request.getContextPath() + "/cfdetail?boardNo=" + boardNo);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+	
 		doGet(request, response);
 	}
 

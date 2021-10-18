@@ -390,7 +390,27 @@ public Board getBoard(Connection conn, int boardNo) {
 	public void searchGatheringBoard() {
 
 	}
-
+	//댓글 개수 조회
+	public int getCommentCount(Connection conn) { 
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		String sql = "SELECT COUNT(comment_no) FROM comt where board_no = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
 	public ArrayList<Comment> selectComment(Connection conn, int boardNo) {
 		ArrayList<Comment> volist = new ArrayList<Comment>();
 		PreparedStatement pstmt = null;
@@ -399,7 +419,8 @@ public Board getBoard(Connection conn, int boardNo) {
 				+ "  TO_CHAR(COMMENT_WRITE_DATE, 'YY/MM/DD') AS COMMENT_WRITE_DATE," 
 				+ "  TO_CHAR(COMMENT_REWRITE_DATE, 'YY/MM/DD') AS COMMENT_REWRITE_DATE ," 
 				+ "  comment_img, COMMENT_REF, COMMENT_RE_STEP,COMMENT_RE_LEVEL" 
-				+ " from COMT where board_no = ?";
+				+ " from COMT where board_no = ?"
+				+ " order by COMMENT_REF desc, COMMENT_RE_STEP asc";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardNo);
@@ -431,34 +452,57 @@ public Board getBoard(Connection conn, int boardNo) {
 	}
 
 	public int insertComment(Connection conn, Comment comment) {
-		int commentNo = comment.getCommentNo();
+		int commentRef = comment.getCommentRef();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		int result = 0;
 		
-		String sql = "Insert into COMT values(COMMENT_NUM.nextval, ?, ?, ?,SYSDATE,SYSDATE, ?, ?, ?, ?)";
+		String sqlNextVal = "select COMMENT_NUM.nextval  from dual"; // commentNo 조회
+		String sql = "Insert into COMT values(?, ?, ?, ?,SYSDATE,SYSDATE, ?, ?, ?, ?)";
 		String sql2 = "update comt set comment_re_step = comment_re_step + 1 where comment_ref = ? and comment_re_step > ?";
+		System.out.println("insert Dao:" +comment);
+		System.out.println("sql: "+ sql);
+		System.out.println("sql2: "+ sql2);
 		try {
-			if(commentNo != 0) {
+			int nextVal = 0;
+			pstmt = conn.prepareStatement(sqlNextVal);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				nextVal = rset.getInt(1);
+			}
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+			
+			if(commentRef != 0) {
 				pstmt = conn.prepareStatement(sql2);
 				pstmt.setInt(1, comment.getCommentRef());
 				pstmt.setInt(2, comment.getCommentReStep());
 				pstmt.executeUpdate();
-				pstmt.close();
+				JDBCTemplate.close(pstmt);
+				
 				comment.setCommentReStep(comment.getCommentReStep() + 1);
 				comment.setCommentReLevel(comment.getCommentReLevel() + 1);
 			}
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, comment.getBoardNo());
-			pstmt.setString(2, comment.getUserId());
-			pstmt.setString(3, comment.getCommentContent());
-			pstmt.setString(4, comment.getCommentImg());
-			pstmt.setInt(5, comment.getCommentRef());
-			pstmt.setInt(6, comment.getCommentReStep());
-			pstmt.setInt(7, comment.getCommentReLevel());
+			pstmt.setInt(1, nextVal);
+			pstmt.setInt(2, comment.getBoardNo());
+			pstmt.setString(3, comment.getUserId());
+			pstmt.setString(4, comment.getCommentContent());
+			pstmt.setString(5, comment.getCommentImg());
+			if(commentRef != 0) {
+				pstmt.setInt(6, commentRef);
+			} else {
+				pstmt.setInt(6, nextVal);
+			}
+			pstmt.setInt(7, comment.getCommentReStep());
+			pstmt.setInt(8, comment.getCommentReLevel());
+			System.out.println("최종 comment: " + comment);
 			result = pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
 		}
 		
 		return result;
@@ -469,8 +513,19 @@ public Board getBoard(Connection conn, int boardNo) {
 		return result;
 	}
 
-	public int deleteComment() {
-		int result = -1;
+	public int deleteComment(Connection conn, int commentNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = "delete from comt where comment_No = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, commentNo);
+			result = pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+				JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
 

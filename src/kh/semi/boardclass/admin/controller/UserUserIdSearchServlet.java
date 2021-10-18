@@ -15,7 +15,7 @@ import kh.semi.boardclass.admin.model.vo.AdminUser;
 /**
  * Servlet implementation class UserUserIdSearchServlet
  */
-@WebServlet("/adminuseridsearch")
+@WebServlet("/adminuseruseridsearch")
 public class UserUserIdSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
