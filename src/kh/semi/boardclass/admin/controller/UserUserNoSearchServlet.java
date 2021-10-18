@@ -13,16 +13,16 @@ import kh.semi.boardclass.admin.model.service.AdminService;
 import kh.semi.boardclass.admin.model.vo.AdminUser;
 
 /**
- * Servlet implementation class UserListServlet
+ * Servlet implementation class UserUserNoSearchServlet
  */
-@WebServlet("/adminuserlist")
-public class UserListServlet extends HttpServlet {
+@WebServlet("/adminusernosearch")
+public class UserUserNoSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserListServlet() {
+    public UserUserNoSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -55,8 +55,9 @@ public class UserListServlet extends HttpServlet {
 		if(pageNum !=null) { 
 				currentPage=Integer.parseInt(pageNum);
 		}
-		
-		aCount = new AdminService().getAdminUserCount();
+		String type = request.getParameter("type");
+		String keyword = request.getParameter("keyword");
+		aCount = new AdminService().getAdminUserUserNoCount(keyword);
 		pageCount = (aCount / PAGE_SIZE) + (aCount % PAGE_SIZE == 0 ? 0:1);
 		startRnum = (currentPage-1) * PAGE_SIZE + 1;  
 		endRnum = startRnum + PAGE_SIZE -1;
@@ -70,15 +71,17 @@ public class UserListServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1;
 		if(endPage > pageCount) endPage = pageCount;
 		
-		ArrayList<AdminUser> volist  = new AdminService().selectAdminUserList(startRnum, endRnum);
+		ArrayList<AdminUser> volist  = new AdminService().searchAdminUserUserNo(keyword, startRnum, endRnum);
 		
 		request.setAttribute("viewcount", PAGE_SIZE);
 		request.setAttribute("adminuservolist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
+		request.setAttribute("keyword", keyword);
+		request.setAttribute("type", type);
 		request.getRequestDispatcher("/WEB-INF/admin/adminuser/adminuserlist.jsp").forward(request, response);
-		
+		System.out.println(type);
 	}
 
 	/**
