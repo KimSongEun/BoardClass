@@ -2,6 +2,7 @@ package kh.semi.boardclass.game.model.service;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.game.model.dao.GameDao;
@@ -167,6 +168,13 @@ public class GameService {
 		return volist;
 	}
 	
+	public List<Game> searchList(String searchKeyword){
+		List<Game> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new GameDao().searchList(conn, searchKeyword);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
 	
 	public int matchList(String matchKeyword) {
 		int result = 0;
