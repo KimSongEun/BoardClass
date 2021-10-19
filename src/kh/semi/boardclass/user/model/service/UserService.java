@@ -65,17 +65,14 @@ public class UserService {
 		return user;
 	}
 	
-	public int searchPwd(User user) {
-		int result = 0;
+	public User searchPwd(String userName,String userId, String userEmail) {
 		Connection conn = JDBCTemplate.getConnection();
-		
-		// TODO:
-		result = new UserDao().searchPwd(conn, user);
-		result = new UserDao().byEmail(conn, user);
-		result = new UserDao().byPhone(conn, user);
-		
+		UserDao dao = new UserDao();
+		User user = dao.searchPwd(conn, userName,userId,userEmail);
+		//result = new UserDao().byEmail(conn, user);
+		//result = new UserDao().byPhone(conn, user);
 		JDBCTemplate.close(conn);
-		return result;
+		return user;
 	}
 	
 	public ArrayList<User> signUpComplete(User user) {
