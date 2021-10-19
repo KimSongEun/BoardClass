@@ -41,9 +41,9 @@ public class UserService {
 	}
 	
 	// ID 중복 체크를 위한 메소드
-	public int checkId(String id) {
+	public int checkId(String userId) {
 		Connection conn = JDBCTemplate.getConnection();
-		int result = new UserDao().checkId(conn, id);
+		int result = new UserDao().checkId(conn, userId);
 		return result;
 	}
 

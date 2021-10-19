@@ -63,8 +63,8 @@
                 <div>
                     <ul>
                    		<li><a href="<%=request.getContextPath() %>/signup">회원가입</a></li>
-                        <li><a href="#">아이디 찾기</a></li>
-                        <li> <a href="#">비밀번호 찾기</a></li>
+                        <li><a href="<%=request.getContextPath() %>/searchid">아이디 찾기</a></li>
+                        <li><a href="<%=request.getContextPath() %>/searchpwd">비밀번호 찾기</a></li>
                     </ul>
                 </div>
             </div>
