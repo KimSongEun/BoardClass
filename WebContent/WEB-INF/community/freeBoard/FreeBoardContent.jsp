@@ -72,7 +72,39 @@
 			<div class="function">
 				<button type="button" class="report reportBtn ">
 					<span class="ico">신고</span>
+				
 				</button>
+				<!-- 신고하기 -->
+				<div class="madal fade" id="reportModal" tabindex="-1">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="modal">신고하기</h5>
+								<button type="button" class="close" data-dismiss="modal">
+									<span aria-hidden="true">$times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								<form action="./BoardReport.jsp" method="post">
+									<div class="form-group">
+										<label>신고 제목</label>
+										<input type="text" name="reportTitle" class="form-control">
+									</div>
+									<div class="form-group">
+										<label>신고 내용</label>
+										<textarea name="reportContent" class="form-control" maxlength="2000" placeholder="신고 내용을 입력해주세요" required="required"></textarea>
+									</div>
+									<div class="modal-footer">
+										<button type="reset" class="btn btn-secondary">취소</button>
+										<button type="submit" class="btn btn-donger">신고하기</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				
 			</div>
 		</div>
 	</div>

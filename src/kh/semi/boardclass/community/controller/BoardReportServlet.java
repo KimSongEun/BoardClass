@@ -26,8 +26,9 @@ public class BoardReportServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		// TODO 로그인 시에만 가능
+		String reportTitle = null;
+		String reportContent = null;
 	}
 
 	/**

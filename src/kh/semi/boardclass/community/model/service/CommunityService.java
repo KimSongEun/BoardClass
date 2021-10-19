@@ -163,11 +163,58 @@ public class CommunityService {
 		int result = -1;
 		return result;
 	}
-
-	public void searchFreeBoard() {
-
+	
+//	public ArrayList<Board> searchFreeBoard(String query, String field, int start, int end) {
+//		ArrayList<Board> list = null;
+//		Connection conn = JDBCTemplate.getConnection();
+//		list = new CommunityDao().searchFreeBoard(conn, query, field,start,end); 
+//		return list;
+//	}
+	
+	//검색
+	
+	public ArrayList<Board> searchAllBoardUserId( String keyword, int start, int end) {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().searchAllBoardUserId(conn, keyword,start,end); 
+		return list;
 	}
-
+	
+	public int getAllBoardUserIdCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new CommunityDao().getAllBoardUserIdCount(conn, keyword);
+		return result;
+	}
+	
+	public ArrayList<Board> searchAllBoardTitle(String keyword, int start, int end){
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().searchAllBoardTitle(conn, keyword, start, end);
+		return list;
+		
+	}
+	public int getAllBoardTitleCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new CommunityDao().getAllBoardTitleCount(conn, keyword);
+		return result;
+	}
+	
+	public ArrayList<Board> searchAllBoardContent(String keyword, int start, int end){
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().searchAllBoardContent(conn, keyword, start, end);
+		return list;
+	}
+	public int getAllBoardContentCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new CommunityDao().getAllBoardContentCount(conn, keyword);
+		return result;
+	}
+	
+	
 	public void searchUserBoard() {
 
 	}
@@ -176,6 +223,13 @@ public class CommunityService {
 
 	}
 	// 댓글
+	public int getCommentCount(int boardNo) { 
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new CommunityDao().getCommentCount(conn,boardNo);
+		return result;
+	}
+	
 	public ArrayList<Comment> selectComment(int boardNo) {
 		ArrayList<Comment> volist = null;
 		Connection conn = JDBCTemplate.getConnection();

@@ -2,6 +2,7 @@ package kh.semi.boardclass.community.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import java.util.ArrayList;
 
 import javax.servlet.ServletException;
@@ -10,8 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.boardclass.common.JDBCTemplate;
+import kh.semi.boardclass.community.model.dao.CommunityDao;
 import kh.semi.boardclass.community.model.service.CommunityService;
 import kh.semi.boardclass.community.model.vo.Board;
+
 
 /**
  * Servlet implementation class CommunityFreeServlet
@@ -33,8 +37,7 @@ public class CommunityFreeServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-		
-		PrintWriter out = response.getWriter();
+		request.setCharacterEncoding("UTF-8");
 		
 		int totCnt = new CommunityService().getBoardCount();
 		String pageNum = request.getParameter("pageNum");
@@ -49,6 +52,7 @@ public class CommunityFreeServlet extends HttpServlet {
 		int startPage = (int)(currentPage -1) / blockSize * blockSize + 1;
 		int endPage = startPage + blockSize - 1;
 		if( endPage > pageCnt ) endPage = pageCnt;
+	
 		
 		request.setAttribute("totCnt", totCnt);
 		request.setAttribute("pageNum", pageNum);

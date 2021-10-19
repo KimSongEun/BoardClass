@@ -62,17 +62,17 @@
 	
 	<div class="tbl-list">
 		<table class="c_table">
-			<c:if test="${totCnt > 0 }">
+			<c:if test="${list != null }">
 			<c:forEach var="board" items="${list }">
 				<tr>
+					
 					<td class="idx">
 						${board.boardNo }
 					</td>
 					<td class="obj">
 						<div class="tit">${board.boardType } </div>
-						<div class="title"><a href="cfdetail?boardNo=${board.boardNo }&pageNum=${currentPage}">${board.boardTitle }</a></div>
-						<div class="view"><span class="val">${board.boardViewCount }</span></div>
-						<div class="like">댓글수:<span class="val">2</span> </div>
+						<div class="title"><a href="cfdetail?boardNo=${board.boardNo }">${board.boardTitle }</a></div>
+						
 					</td>
 					<td>
 					<div>${board.userId }</div>
@@ -81,11 +81,11 @@
 					<td style="width: 10%;"></td>
 	
 					<td class="util_hit" style="width: 10%; text-align: center;">조회수 : ${board.boardViewCount }</span></td>
-					<td class="util_commt">댓글수</td>
+					<td class="util_commt"><div class="comt">댓글수: <span class="val">${comtCnt }</span> </div></td>
 				</tr>
 			</c:forEach>
 			</c:if>
-			<c:if test="${totCnt == 0 }">
+			<c:if test="${list == null }">
 				<tr>
 					<td colspan="7">데이터가 없습니다</td>
 				</tr>
@@ -116,11 +116,21 @@
 			<a href="./cfwrite" class="btn50 c3 reg" style="width: 240px;" tmp="contents/bod" mn="60" cn="0"><span class="write">글작성</span></a>
 		</div>
 	</div>
+	
+	<!-- 검색 영역 -->
 
-</div>
-</div>
-</div>
+	<form action = "searchallboarduserid" method = "post" class = "searchselect">
+          <select class="search_select" name = "type">
+              <option value ="작성자" <c:if test = "${type == '작성자'}"> selected </c:if>>작성자 </option>
+              <option value ="내용" <c:if test = "${type == '내용'}"> selected </c:if>>내용</option>
+              <option value ="제목" <c:if test = "${type == '제목'}"> selected </c:if>>제목</option>
+          </select>
+   <input type="text" class="admin-allboard-search-input" name = "keyword" id = "keyword" value="${keyword }">
+   <button type="submit" class="admin-allboard-search-button">검색</button>
+   </form>
 
+	
+	
 <script>
 //change 될때마다 getListAjax
 $(function(){
@@ -146,7 +156,21 @@ $(function(){
 			}
 		});//ajax
 	}
-	
+	$(".search_select").change(f1);
+	f1();
+	function f1() {
+		console.log("변경");
+		if($(".search_select").val() == "작성자"){
+			$(".searchselect").attr("action", "searchallboarduserid");
+			/*console.log($(".searchselect").attr("action"));*/
+		} else if ($(".search_select").val() == "내용") {
+			$(".searchselect").attr("action", "searchallboardcontent");
+			/*console.log($(".searchselect").attr("action"));*/
+		}else if ($(".search_select").val() == "제목") {
+			$(".searchselect").attr("action", "searchallboardtitle");
+			/*console.log($(".searchselect").attr("action"));*/
+		}
+	};	
 
 </script>
 
