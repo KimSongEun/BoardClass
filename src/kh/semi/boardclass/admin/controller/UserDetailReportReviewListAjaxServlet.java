@@ -16,19 +16,19 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import kh.semi.boardclass.admin.model.service.AdminService;
-import kh.semi.boardclass.admin.model.vo.AllBoardUser;
+import kh.semi.boardclass.admin.model.vo.ReportReview;
 
 /**
- * Servlet implementation class UserDetailServlet
+ * Servlet implementation class UserDetailReportReviewListAjaxServlet
  */
-@WebServlet("/userdetailboard.ajax")
-public class UserDetailBoardListAjaxServlet extends HttpServlet {
+@WebServlet("/userdetailreview.ajax")
+public class UserDetailReportReviewListAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserDetailBoardListAjaxServlet() {
+    public UserDetailReportReviewListAjaxServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -49,7 +49,7 @@ public class UserDetailBoardListAjaxServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		System.out.println("/userdetailboard.ajax 진입");
+		System.out.println("/userdetailreview.ajax 진입");
 		int PAGE_SIZE = 5;
 		final int PAGE_BLOCK = 5; 
 		int aCount = 0; 
@@ -66,7 +66,7 @@ public class UserDetailBoardListAjaxServlet extends HttpServlet {
 		}
 		
 		String userId = request.getParameter("userId");
-		aCount = new AdminService().getUserDetailBoardCount(userId);
+		aCount = new AdminService().getUserDetailReviewCount(userId);
 		pageCount = (aCount / PAGE_SIZE) + (aCount % PAGE_SIZE == 0 ? 0:1);
 		startRnum = (currentPage-1) * PAGE_SIZE + 1;  
 		endRnum = startRnum + PAGE_SIZE -1;
@@ -83,9 +83,9 @@ public class UserDetailBoardListAjaxServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		Map<String, Object> map1 = new HashMap<String, Object>();  
 		
-		ArrayList<AllBoardUser> volist  = new AdminService().selectUserDetailBoardList(userId, startRnum, endRnum);
+		ArrayList<ReportReview> volist  = new AdminService().selectUserDetailReviewList(userId, startRnum, endRnum);
 		
-		map1.put("allboarduservolist", volist);
+		map1.put("usedvolist", volist);
 		
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String gsonStr = gson.toJson(map1);

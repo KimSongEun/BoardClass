@@ -71,6 +71,65 @@ $(function(){
 	});
 		 
 	};
+	
+	$(".used").click(useddetail);
+	function useddetail() {
+		var user_id = $(this).attr("id");
+		console.log(user_id);
+		$.ajax({
+		url : "userdetailused.ajax",
+		type : "post",
+		data : {userId : user_id},
+		dataType : "json",
+		success : function(data){
+			console.log("ajax 성공");
+			var html = "";
+			for(var i=0; i<data.usedvolist.length; i++){
+				var usedState = data.usedvolist[i].usedState;
+				if(usedState == '0'){
+					usedState = '미개봉'
+				} else if (usedState == '1') {
+					usedState = '상태좋음'
+				} else if (usedState == '2') {
+					usedState = '사용흔적있음'
+				} else if (usedState == '3') {
+					usedState = '구성품누락'
+				}
+				var usedChange = data.usedvolist[i].usedChange;
+				if(usedChange == '0') {
+					usedChange = '교환가능'
+				} else if(usedChange == '1') {
+					usedChange = '교환불가능'
+				}
+				var usedExtype = data.usedvolist[i].usedExtype;
+				if(usedExtype == '0') {
+					usedExtype = '직거래&택배'
+				} else if (usedExtype == '1') {
+					usedExtype = '직거래'
+				} else if (usedExtype == '2') {
+					usedExtype = '택배'
+				}
+				console.log(usedState);
+				html += "<tr>"
+				html += "<td>"+data.usedvolist[i].usedNo+"</td>";
+				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden'>"+data.usedvolist[i].usedTitle+"</td>";
+				html += "<td>"+usedState+"</td>";
+				html += "<td>"+usedChange+"</td>";
+				html += "<td>"+usedExtype+"</td>";
+				html += "<td>"+data.usedvolist[i].usedPrice+"</td>";
+				html += "<td>"+data.usedvolist[i].usedCategory+"</td>";
+				html += "</tr>";
+			}
+
+				console.log(usedState);
+		$("#input_data").html(html);
+		},
+		error : function(){
+			console.log("ajax 실패");
+		}
+	});
+		 
+	};
     // $("#board").click(function(){
     //     console.log("클릭");
     //     $("#test").show();

@@ -42,15 +42,15 @@
                         <button class="subnavbtn">작성글 <i class="fa fa-caret-down"></i></button>
                         <div class="subnav-content">
                             <a href="#" class="board" id = "${uservo.userId}">커뮤니티글</a>
-                            <a href="#" class = "used">중고거래글</a>
+                            <a href="#" class = "used" id = "${uservo.userId}">중고거래글</a>
                         </div>
                     </div>
                     <div class="subnav">
                         <button class="subnavbtn">작성댓글 <i class="fa fa-caret-down"></i></button>
                         <div class="subnav-content">
                             <a href="#"></a>
-                            <a href="#" class="comt">커뮤니티댓글</a>
-                            <a href="#" class="review">리뷰글</a>
+                            <a href="#" class="comt" id = "${uservo.userId}">커뮤니티댓글</a>
+                            <a href="#" class="review" id = "${uservo.userId}">리뷰글</a>
                         </div>
                     </div>
                     <div class="subnav">
@@ -58,8 +58,8 @@
                         <div class="subnav-content">
                         	<a href="#"></a>
                         	<a href="#"></a>
-                            <a href="#" class="reportboard">커뮤니티글</a>
-                            <a href="#" class="reportused">중고거래글</a>
+                            <a href="#" class="reportboard" id = "${uservo.userId}">커뮤니티글</a>
+                            <a href="#" class="reportused" id = "${uservo.userId}">중고거래글</a>
                         </div>
                     </div>
                     <div class="subnav">
@@ -68,8 +68,8 @@
                         	<a href="#"></a>
                         	<a href="#"></a>       
                         	<a href="#"></a>       
-                            <a href="#" class="reportcomt">커뮤니티댓글</a>
-                            <a href="#" class="reportreview">리뷰글</a>
+                            <a href="#" class="reportcomt" id = "${uservo.userId}">커뮤니티댓글</a>
+                            <a href="#" class="reportreview" id = "${uservo.userId}">리뷰글</a>
                         </div>
                     </div>
                 </div>
@@ -78,7 +78,7 @@
                 </div>
                 <div style="padding:50px 16px" id="boarddiv">
                     <h1>커뮤니티 글</h1>
-                    <div class="admin-allboard-table-div" style = "text-align : center">
+                    <div class="admin-table-div" style = "text-align : center">
 						<table style="text-align: center; border : 1px solid black">
 						<thead>
                         <tr style="text-align:center; font-size: 16px;">
@@ -98,7 +98,24 @@
                 </div>
                 <div style="padding:50px 16px" id="useddiv">
                     <h3>중고 글</h3>
-                    <div>Hover over the "about", "services" or "partners" link to see the sub navigation menu.</div>
+                     <div class="admin-table-div" style = "text-align : center">
+						<table style="text-align: center; border : 1px solid black">
+						<thead>
+                        <tr style="text-align:center; font-size: 16px;">
+                        	<td>중고글번호</td>
+                            <td>중고글제목</td>
+                            <td>상품상태</td>
+                            <td>교환여부</td>
+                            <td>거래방법</td>
+                            <td>상품가격 </td>
+                            <td>카테고리 </td>
+                        </tr>
+                        </thead>
+                         <tbody id="input_data"></tbody>
+                         <tr>
+                        </tr> 
+                    </table>
+					</div>
                 </div>
                 <div style="padding:50px 16px" id="comtdiv">
                     <h3>커뮤니티 댓글</h3>
