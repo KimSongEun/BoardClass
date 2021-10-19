@@ -126,7 +126,7 @@
 	left: 100px;
 	font-size: 30px;
 	width: 400px;
-	top: 400px;
+	
 }
 
 #infoTable {
@@ -240,6 +240,13 @@ vertical-align: middle;
 	width: 2000px;
 	height: 5200px;
 }
+#rd{
+background-color:green;
+	width: 250px;
+	height: 300px;
+	position: relative;
+	left: 100px;
+}
 </style>
 </head>
 <body>
@@ -250,17 +257,18 @@ vertical-align: middle;
 			<form action="GameInfo" method="post" style="background-color: #e9ecef">
 				<div class="star-rating space-x-4 mx-auto">
 				<input type = "hidden" value = "<%=vo.getGameNumber()%>" name = "no">
-					<br> <br> <input type="radio" id="5-stars" name="rating"
-						value="5" v-model="ratings" /> <label for="5-stars"
-						class="star pr-4">★</label> <input type="radio" id="4-stars"
-						name="rating" value="4" v-model="ratings" /> <label for="4-stars"
-						class="star">★</label> <input type="radio" id="3-stars"
-						name="rating" value="3" v-model="ratings" /> <label for="3-stars"
-						class="star">★</label> <input type="radio" id="2-stars"
-						name="rating" value="2" v-model="ratings" /> <label for="2-stars"
-						class="star">★</label> <input type="radio" id="1-star"
-						name="rating" value="1" v-model="ratings" /> <label for="1-star"
-						class="star">★</label>
+				<input type = "hidden" value = "<%=vo.getGameKoName()%>" name = "GAME_KONAME">
+					<br> <br> 
+					<input type="radio" id="5-stars" name="rating" value="5" v-model="ratings" /> 
+						<label for="5-stars" class="star pr-4">★</label> 
+						<input type="radio" id="4-stars" name="rating" value="4" v-model="ratings" />
+						 <label for="4-stars" class="star">★</label> 
+						<input type="radio" id="3-stars" name="rating" value="3" v-model="ratings" />
+						 <label for="3-stars" class="star">★</label> 
+						<input type="radio" id="2-stars" name="rating" value="2" v-model="ratings" />
+						 <label for="2-stars" class="star">★</label> 
+						<input type="radio" id="1-star" name="rating" value="1" v-model="ratings" /> 
+						<label for="1-star" class="star">★</label>
 				</div>
 				<textarea rows="25" cols="98" name = "REVIEW_CONTENT" ></textarea>
 				<input type="submit" value="등 록" class="btn1" onclick = "location = 'GameInfo?GAME_KONAME=텔레스트레이션'">
@@ -325,7 +333,7 @@ vertical-align: middle;
 					 
 					<% int star = vo.getGameGrade();
 					System.out.println(star);
-					if(star<2 && star >=0){%>
+					if(star<2 && star >0){%>
 					<div class="star-rating1 space-x-4 mx-auto">
 					<label for="5-stars" class="star pr-4">★</label>  
 						<label for="4-stars" class="star">★</label>  
@@ -446,11 +454,14 @@ vertical-align: middle;
 			<div id="info2-2">
 				<p class="infoP">리뷰</p>
 				<p class="infoPP">Hot Review</p>
-				<button id="btnReview"
-					style="width: 200px; height: 50px; font-size: 25px;">전체 보기
-					>></button>
+				<button id="btnReview" style="width: 200px; height: 50px; font-size: 25px;">전체 보기>></button>
+					<div id = "rd">
+						<button>
+						
+						</button>
+					</div>
 
-				<p class="infoPP2">Recent Review</p>
+				<p class="infoPP2">Recent Review</p>	
 			</div>
 			<br> <br>
 			<div class="info2-3">

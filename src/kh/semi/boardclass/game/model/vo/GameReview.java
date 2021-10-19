@@ -5,6 +5,7 @@ import java.sql.Date;
 public class GameReview {
 
 	
+
 	private int reviewNo;
 	private String userId;
 	private int gameNo;
@@ -12,21 +13,29 @@ public class GameReview {
 	private int reviewScore;
 	private Date reviewDate;
 	
-	public GameReview() {
-		// TODO Auto-generated constructor stub
+	public GameReview(){
+		
 	}
-
-	public GameReview(int reviewNo, String user_Id, int gameNo, String reviewContent, int reviewScore,
-			Date reviewDate) {
+	public GameReview(String userId, int gameNo, String reviewContent, int reviewScore) {
+		super();
+		
+		this.userId = userId;
+		this.gameNo = gameNo;
+		this.reviewContent = reviewContent;
+		this.reviewScore = reviewScore;
+		
+	}
+	public GameReview(int reviewNo, String userId, int gameNo, String reviewContent, int reviewScore, Date reviewDate) {
 		super();
 		this.reviewNo = reviewNo;
-		this.userId = user_Id;
+		this.userId = userId;
 		this.gameNo = gameNo;
 		this.reviewContent = reviewContent;
 		this.reviewScore = reviewScore;
 		this.reviewDate = reviewDate;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "GameReview [reviewNo=" + reviewNo + ", user_Id=" + userId + ", gameNo=" + gameNo + ", reviewContent="

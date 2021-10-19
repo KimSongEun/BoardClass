@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import kh.semi.boardclass.game.model.service.GameService;
 import kh.semi.boardclass.game.model.vo.Game;
 import kh.semi.boardclass.game.model.vo.GameReview;
-import kh.semi.boardclass.used.model.service.UsedService;
 import kh.semi.boardclass.used.model.vo.Used;
 
 /**
@@ -43,7 +42,7 @@ public class GameInfoServlet extends HttpServlet {
         
         String name = request.getParameter("GAME_KONAME");
         
-        Game vo = new GameService().InfoGame(name);
+        
         
         String id =  "a";
         
@@ -61,32 +60,34 @@ public class GameInfoServlet extends HttpServlet {
         }
         int score = Integer.parseInt(sco);
         
-        System.out.println(score);
         
         GameReview gvo= new GameReview(id, gameno, content, score);
-        
+        //GameReview gvo2= new GameService().selectReview(gameno);
         
         int result = new GameService().insertReview(gvo);
         if (result < 1) {
 			System.out.println("글 입력 안됨");
 		} else {
 			System.out.println("글 입력 성공");
-			//response.sendRedirect("GameInfo?GAME_KONAME=텔레스트레이션");
-
 		}
-        	
-      
         
+        int update = new GameService().updateGrade(gameno);
+    	
+        if (update == 0) {
+			System.out.println("평점 입력 안됨");
+		} else {
+			System.out.println("평점 입력 성공");
+		}
         
-        ArrayList<Used> vo2 = new GameService().usedlist(name);
-        
+        Game vo = new GameService().InfoGame(name);
         
         String str = vo.getGamePlusImage();
+        
         String[] str2 = str.split(","); 
         String str3 = vo.getGamePlus();
         String[] str4 = str3.split(","); 
            
-      
+        ArrayList<Used> vo2 = new GameService().usedlist(name);
       
         request.setAttribute("gamevolist", vo);
         request.setAttribute("usedvolist", vo2);

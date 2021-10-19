@@ -3,9 +3,7 @@ package kh.semi.boardclass.game.model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.game.model.vo.Game;
@@ -29,7 +27,7 @@ public class GameDao {
 		String sql = "select * from BOARDGAME where GAME_KONAME = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, name );
@@ -65,7 +63,7 @@ public class GameDao {
 				vo.setGamePlusImage(rset.getString("Game_PLUSIMAGE"));
 
 			}
-			System.out.println(vo);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}  finally {
@@ -74,7 +72,37 @@ public class GameDao {
 		}
 		return vo;
 	}
+	public GameReview selectReview(Connection conn, int no) {
+		GameReview vo = null;
+		String sql = "select * from REVIEW where GAME_NO = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rset = pstmt.executeQuery();
+			
+			if (rset.next()) {
+				vo = new GameReview();
 
+				vo.setReviewNo(rset.getInt("REVIEW_NO"));
+				vo.setUser_Id(rset.getString("USER_ID"));
+				vo.setGameNo(rset.getInt("GAME_NO"));
+				vo.setReviewContent(rset.getString("REVIEW_CONTENT"));
+				vo.setReviewScore(rset.getInt("REVIEW_SCORE"));
+				vo.setReviewDate(rset.getDate("GAME_VIEW"));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}  finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return vo;
+	}
+	
 	public ArrayList<Game> selectGame(Connection conn, String name) {
 		ArrayList<Game> volist = null;
 		String sql = "select * from BOARDGAME where GAME_KONAME like ?";
@@ -648,7 +676,7 @@ public class GameDao {
 		return volist;
 
 	}
-	public int insertRiview(Connection conn, GameReview vo) {
+	public int insertReview(Connection conn, GameReview vo) {
 		int result = 0;
 		String sql = "INSERT INTO REVIEW VALUES (REVIEW_NUM.nextval, ?, ?, ?, ?, sysdate)";
 		PreparedStatement pstmt = null;
@@ -657,7 +685,7 @@ public class GameDao {
 			
 			pstmt.setString(1, vo.getUser_Id());
 			pstmt.setInt(2, vo.getGameNo());
-			pstmt.setString(3, vo.getReviewContent());
+			pstmt.setString(3,vo.getReviewContent());
 			pstmt.setInt(4, vo.getReviewScore());
 		
 			
@@ -670,6 +698,22 @@ public class GameDao {
 		return result;
 	}
 
+	public int updateGrade(Connection conn, int gameno){
+		int result = 0;
+		String sql = "update BOARDGAME set GAME_GRADE = (select round(avg(REVIEW_SCORE)) from REVIEW where GAME_NO = ?) where GAME_NO = ?";
+		PreparedStatement pstmt = null;
+		System.out.println("yoo1 "+gameno);
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, gameno);
+			pstmt.setInt(2, gameno);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public void updateUsed(Connection conn, Used used) {
 
 	}
@@ -698,85 +742,6 @@ public class GameDao {
 			int gameTime, int gamePrice) {
 		ArrayList<Game> volist = null;
 		return volist;
-	}
-	
-	public List<Game> searchList(Connection conn, String searchKeyword) {
-		List<Game> volist = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = "select * from BOARDGAME where GAME_KONAME like ? or GAME_ENNAME like ?";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			searchKeyword = "%" + searchKeyword + "%";
-			pstmt.setString(1, searchKeyword);
-			pstmt.setString(2, searchKeyword);
-			rset = pstmt.executeQuery();
-			if (rset.next()) {
-				volist = new ArrayList<Game>();
-				do {
-					Game vo = new Game();
-
-					vo.setGameNumber(rset.getInt("GAME_NO"));
-					vo.setUsedNum(rset.getInt("USED_NO"));
-					vo.setGameKoName(rset.getString("GAME_KONAME"));
-					vo.setGameEnName(rset.getString("GAME_ENNAME"));
-					vo.setGameCategory(rset.getString("GAME_CATEGORY"));
-					vo.setGameView(rset.getInt("GAME_VIEW"));
-					vo.setGameAge(rset.getString("GAME_AGE"));
-					vo.setGamePlayer(rset.getString("GAME_PLAYER"));
-					vo.setGameTime(rset.getString("GAME_TIME"));
-					vo.setGamePrice(rset.getInt("GAME_PRICE"));
-					vo.setGameGrade(rset.getInt("GAME_GRADE"));
-					vo.setGameDate(rset.getDate("GAME_DATE"));
-					vo.setGameLevel(rset.getInt("GAME_LEVEL"));
-					vo.setGameDesigner(rset.getString("GAME_DESIGNER"));
-					vo.setGameWriter(rset.getString("GAME_WRITER"));
-					vo.setGameBrand(rset.getString("GAME_BRAND"));
-					vo.setGameReleaseDate(rset.getString("GAME_RELEASEDATE"));
-					vo.setGameRank(rset.getInt("GAME_RANK"));
-					vo.setGameLanguage(rset.getString("GAME_LANGUAGE"));
-					vo.setGameReview(rset.getString("GAME_REVIEW"));
-					vo.setGameImage(rset.getString("GAME_IMAGE"));
-					vo.setGameRuleImage(rset.getString("GAME_RULE_IMAGE"));
-					vo.setGameVideo(rset.getString("GAME_VIDEO"));
-					vo.setGamePlus(rset.getString("GAME_PLUS"));
-					vo.setGamePlusImage(rset.getString("Game_PLUSIMAGE"));
-
-					volist.add(vo);
-
-				} while (rset.next());
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
-		}
-		return volist;
-	}
-
-	public int matchList(Connection conn, String matchKeyword) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-
-		String sql = "SELECT COUNT(*) FROM BOARDGAME WHERE GAME_KONAME like ?";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, matchKeyword);
-			rset = pstmt.executeQuery();
-			if (rset.next()) {
-				result = rset.getInt(1);
-			} else {
-				result = rset.getInt(0);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			JDBCTemplate.close(rset);
-			JDBCTemplate.close(pstmt);
-		}
-		return result;
 	}
 
 }
