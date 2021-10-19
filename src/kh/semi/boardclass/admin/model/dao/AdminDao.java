@@ -1308,13 +1308,13 @@ public class AdminDao {
 		return volist;
 	}
 	
-	public int deleteUserByForce(Connection conn, int userNo){
+	public int deleteUserByForce(Connection conn, String userId){
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = "DELETE FROM MEMBER WHERE USER_NO = ?";
+		String sql = "DELETE FROM MEMBER WHERE USER_ID = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, userNo);
+			pstmt.setString(1, userId);
 
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
