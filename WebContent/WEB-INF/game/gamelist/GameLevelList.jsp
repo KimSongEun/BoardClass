@@ -212,6 +212,7 @@ top:-100px;
 				<form name = "fom" method="get" action="GameInfo">
  				<div id="board_info">
 					<input type = "hidden" value = "<%=vo.getGameKoName()%>"  name="GAME_KONAME">
+					<input type = "hidden" value = "<%=vo.getGameNumber()%>"  name="GAME_NO">
 					<button type="submit"    class="btn1" >
 						<img src="<%=request.getContextPath()%>/<%=vo.getGameImage()%>"
 							width="300" height="300" />

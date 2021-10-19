@@ -50,12 +50,12 @@ public class GameReview {
 		this.reviewNo = reviewNo;
 	}
 
-	public String getUser_Id() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUser_Id(String user_Id) {
-		this.userId = user_Id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public int getGameNo() {
@@ -89,5 +89,6 @@ public class GameReview {
 	public void setReviewDate(Date reviewDate) {
 		this.reviewDate = reviewDate;
 	}
+	
 	
 }

@@ -31,58 +31,56 @@
 
 #page {
 	position: absolute;
-	top: 830px;
+	top: 800px;
 	left: 900px;
 	font-size: 40px;
 }
-
 #nav2 {
 	position: relative;
-	
 	left: 30px;
 	font-size: 45px;
 }
-
 .ulist {
-position:relative;
-top:-100px;
+	position:relative;
+	top:-100px;
 	list-style: none;
 	font-size: 30px;
 }
-
 #section2 {
 	position: relative;
 	width: 2100px;
 	height: 400px;
 	left: 300px;
-	top : -150px;
+	top: -50px;
 }
-
 #board_info {
 	position: relative;
-	top: -280px;
+	top: -280px; 
 	float: left;
 	margin: 30px;
 }
-
 #d1 {
 	position: relative;
 	text-align: center;
-	line-height: 200px;
-	background-color: burlywood;
-	width: 1880px;
-	height: 180px;
+	left:-250px;
+	width: 900px;
+	height: 100px;
 	font-size: 50px;
-	top : -320px;
 }
-
 #search {
 	position: relative;
-	left: 630px;
+	top: -400px;
+	left: -220px;
 	font-size: 40px;
-	top : -270px;
+	display: flex;
+    justify-content: space-around;
 }
-
+#hrline{
+position: relative;
+top: -410px;
+width: 90%;
+border: 1px solid grey;
+}
 #text_name {
 	position: relative;
 	top: -6px;
@@ -91,24 +89,17 @@ top:-100px;
 	font-size: 20px;
 }
 
-#search_btn {
-	position: relative;
-	top: -7px;
-	width: 100px;
-	height: 50px;
-}
-
 #sort {
 	position: relative;
 	left: 1600px;
+	top: -330px;
 	width: 250px;
 	height: 50px;
-	top: -320px;
 }
 #total{
 	position: relative;
 	width: 2000px;
-	height: 1300px;
+	height: 1400px;
 }
 
 
@@ -125,7 +116,7 @@ top:-100px;
 			<p>ㅇㅇㅇ</p>
 			<br>
 			<ul class="ulist">
-				<li><a href="#">전체</a></li>
+				<li><a href="GameLevelList">전체</a></li>
 				<li><a href="GameStrategyList">전략</a></li>
 				<li><a href="GameTemaList">테마</a></li>
 				<li><a href="GameFamilyList">가족</a></li>
