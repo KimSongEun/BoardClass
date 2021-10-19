@@ -19,15 +19,23 @@
 <body>
 
 <div id="guide" class="row">
-<nav id="aside" class="column">
-		<ul>
-			<li><a href="./cmain">커뮤니티</a></li>
-			<li><a href="#">공지사항</a></li>
-			<li><a href="./cf">자유게시판</a></li>
-			<li><a href="#">유저정보게시판</a></li>
-			<li><a href="#">모임게시판</a></li>
-		</ul>
-</nav> <!-- TODO 링크 첨부 -->
+	
+	<aside id="aside" class="c_category">
+		<div class="as_inner">
+		<h2 class="as_hgroup"><a href="./cmain">커뮤니티</a></h2>
+		<nav id="lnb" class="lnb">
+			<ul>
+				<li><a href="#">공지사항</a></li>
+				<li><a href="./cf">자유게시판</a></li>
+				<li><a href="#">유저정보게시판</a></li>
+				<li><a href="#">모임게시판</a></li>
+			</ul>
+		</nav>
+		</div>
+	</aside>
+		
+		 <!-- TODO 링크 첨부 -->
+		 
 <div id= "contents">
 <div class="conwrap pb30">
 <section id="boardlsit">
@@ -51,34 +59,39 @@
 	<div id ="a1">
 	
 	</div>
-
-<table class="c_table">
-
 	
-	<c:if test="${totCnt > 0 }">
-	<c:forEach var="board" items="${list }">
-		<tr>
-			<td style="width: 10%; font-size: 18px; text-align: center;">
-				${board.boardNo }
-			</td>
-			<td style="width: 10%; font-size: 18px; text-align: center;">
-				${board.boardType }
-			</td>
-			<td style="width: 40%; font-weight: bold; font-size: 18px">
-				<a href="cfdetail?boardNo=${board.boardNo }&pageNum=${currentPage}">${board.boardTitle }</a>
-			</td>
-			<td style="width: 10%; text-align: center;">${board.userId }</td>
-			<td style="width: 10%;">${board.boardWriteDate }</td>
-			<td style="width: 10%; text-align: center;">${board.boardViewCount }</td>
-		</tr>
-	</c:forEach>
-	</c:if>
-	<c:if test="${totCnt == 0 }">
-		<tr>
-			<td colspan="7">데이터가 없습니다</td>
-		</tr>
-	</c:if>
-	</table>
+	<div class="tbl-list">
+		<table class="c_table">
+			<c:if test="${totCnt > 0 }">
+			<c:forEach var="board" items="${list }">
+				<tr>
+					<td class="idx">
+						${board.boardNo }
+					</td>
+					<td class="obj">
+						<div class="tit">${board.boardType } </div>
+						<div class="title"><a href="cfdetail?boardNo=${board.boardNo }&pageNum=${currentPage}">${board.boardTitle }</a></div>
+						<div class="view"><span class="val">${board.boardViewCount }</span></div>
+						<div class="like">댓글수:<span class="val">2</span> </div>
+					</td>
+					<td>
+					<div>${board.userId }</div>
+					${board.boardWriteDate }
+					</td>
+					<td style="width: 10%;"></td>
+	
+					<td class="util_hit" style="width: 10%; text-align: center;">조회수 : ${board.boardViewCount }</span></td>
+					<td class="util_commt">댓글수</td>
+				</tr>
+			</c:forEach>
+			</c:if>
+			<c:if test="${totCnt == 0 }">
+				<tr>
+					<td colspan="7">데이터가 없습니다</td>
+				</tr>
+			</c:if>
+		</table>
+		</div>
 	</section>
 	
 	<div style="text-align: centerl; margin-top:20px;" class="pagination">
