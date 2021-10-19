@@ -90,13 +90,6 @@
 					<p class="p_info_title">상품 상세설명</p>
 					<p class="p_info">${used.usedInfo}</p>
 				</div>
-				<div class="div_cmt_apply">
-					<p class="p_cmt">상품 문의</p>
-					<textarea id="text_cmt" class="text_cmt" name="cmt_apply"></textarea>
-					<input type="button" class="text_btn" value="등록">
-				</div>
-				<div class="cmt_count">(0 / 100)</div>
-				<div class="div_cmt">댓글내용</div>
 		</div>
 		</div>
 	</section>
@@ -124,14 +117,6 @@ function callDelete(){
 	}
 }
 
-$("#text_cmt").on("keyup", function() {
-	$("#cmt_count").html("(" + $(this).val().length + " / 100)");
-
-	if ($(this).val().length > 100) {
-		$(this).val($(this).val().substring(0, 100));
-		$("#cmt_count").html("(100 / 100)");
-	}
-});
 </script>
 </body>
 </html>
