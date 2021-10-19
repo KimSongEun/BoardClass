@@ -17,6 +17,6 @@ $(function(){
 	};
 	$(".detail").click(function () {
     var detailid = $(this).attr("id");
-    	location.href = "adminuserdetail?userNo=" + detailid;
+    	location.href = "adminuserdetail?userId=" + detailid;
 });
 });

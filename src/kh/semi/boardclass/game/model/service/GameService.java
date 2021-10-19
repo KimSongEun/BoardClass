@@ -34,12 +34,12 @@ public class GameService {
 		JDBCTemplate.close(conn);
 		return vo;
 	}
-	public GameReview selectReview(int no) {
-		GameReview vo= null;
+	public ArrayList<GameReview> selectReview(int start, int end,int no) {
+		ArrayList<GameReview> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		vo = new GameDao().selectReview(conn,no);
+		volist = new GameDao().selectReview(conn,start,end,no);
 		JDBCTemplate.close(conn);
-		return vo;
+		return volist;
 	}
 	
 

@@ -1,4 +1,5 @@
 <%@page import="kh.semi.boardclass.game.model.vo.Game"%>
+<%@page import="kh.semi.boardclass.game.model.vo.GameReview"%>
 <%@page import="kh.semi.boardclass.used.model.vo.Used"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -6,6 +7,8 @@
 <%
 	Game vo = (Game) request.getAttribute("gamevolist");
 	ArrayList<Used> vo2 = (ArrayList<Used>) request.getAttribute("usedvolist");
+	ArrayList<GameReview> go2 = (ArrayList<GameReview>) request.getAttribute("riviewvolist");
+	
 	String[] str2 = (String[]) request.getAttribute("str2");
 	String[] str4 = (String[]) request.getAttribute("str4");
 %>
@@ -61,7 +64,7 @@
 #info2-2 {
 	position: relative;
 	width: 1450px;
-	height: 1000px;
+	height: 550px;
 	left: 70px;
 	top: 150px;
 }
@@ -98,7 +101,7 @@
 #btnReview {
 	position: relative;
 	top: -10px;
-	left: 1150px;
+	left: 100px;
 }
 
 .rule {
@@ -241,11 +244,17 @@ vertical-align: middle;
 	height: 5200px;
 }
 #rd{
-background-color:green;
 	width: 250px;
 	height: 300px;
 	position: relative;
 	left: 100px;
+	float: left;
+	top: 30px;
+}
+#rdbtn{
+width: 250px; 
+height: 300px; 
+background-color:#CCFFFF;
 }
 </style>
 </head>
@@ -332,7 +341,7 @@ background-color:green;
 						
 					 
 					<% int star = vo.getGameGrade();
-					System.out.println(star);
+					
 					if(star<2 && star >0){%>
 					<div class="star-rating1 space-x-4 mx-auto">
 					<label for="5-stars" class="star pr-4">★</label>  
@@ -454,14 +463,31 @@ background-color:green;
 			<div id="info2-2">
 				<p class="infoP">리뷰</p>
 				<p class="infoPP">Hot Review</p>
-				<button id="btnReview" style="width: 200px; height: 50px; font-size: 25px;">전체 보기>></button>
+				<button id="btnReview" style="width: 200px; height: 50px; font-size: 25px;">최신글 보기>></button>
+				<%
+					if (go2 != null) {
+					for (GameReview go : go2) {
+				%>
 					<div id = "rd">
-						<button>
-						
+						<button id = "rdbtn" >
+						<table border = "1">
+							<tr>
+								<td width="120px">@@</td>
+								<td width="120px">★   <%=go.getReviewScore()%> </td>								
+							</tr>
+							<tr>
+								<td colspan="2" height="200px"><%=go.getReviewContent()%></td>
+							</tr>
+							<tr>
+								<td>dd</td>
+								<td><%=go.getReviewDate()%></td>
+							</tr>
+							
+						</table>
 						</button>
 					</div>
+					<%}} %>
 
-				<p class="infoPP2">Recent Review</p>	
 			</div>
 			<br> <br>
 			<div class="info2-3">

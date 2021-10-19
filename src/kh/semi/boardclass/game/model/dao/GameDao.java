@@ -73,35 +73,42 @@ public class GameDao {
 		}
 		return vo;
 	}
-	public GameReview selectReview(Connection conn, int no) {
-		GameReview vo = null;
-		String sql = "select * from REVIEW where GAME_NO = ?";
+	public ArrayList<GameReview> selectReview(Connection conn, int start, int end, int no) {
+		ArrayList<GameReview> volist = null;
+		String sql = "select * from REVIEW where Rownum between ? and ? and GAME_NO = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, no);
+			pstmt.setInt(1, start);
+			pstmt.setInt(2, end);
+			pstmt.setInt(3, no);
 			rset = pstmt.executeQuery();
 			
 			if (rset.next()) {
-				vo = new GameReview();
+				volist = new ArrayList<GameReview>();
+				do {
+					GameReview vo = new GameReview();
 
-				vo.setReviewNo(rset.getInt("REVIEW_NO"));
-				vo.setUser_Id(rset.getString("USER_ID"));
-				vo.setGameNo(rset.getInt("GAME_NO"));
-				vo.setReviewContent(rset.getString("REVIEW_CONTENT"));
-				vo.setReviewScore(rset.getInt("REVIEW_SCORE"));
-				vo.setReviewDate(rset.getDate("GAME_VIEW"));
+					vo.setReviewNo(rset.getInt("REVIEW_NO"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setGameNo(rset.getInt("GAME_NO"));
+					vo.setReviewContent(rset.getString("REVIEW_CONTENT"));
+					vo.setReviewScore(rset.getInt("REVIEW_SCORE"));
+					vo.setReviewDate(rset.getDate("REVIEW_DATE"));
+					
+					volist.add(vo);
+				} while (rset.next());
 			}
-			
+		
 		} catch (Exception e) {
 			e.printStackTrace();
 		}  finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
-		return vo;
+		return volist;
 	}
 	
 	public ArrayList<Game> selectGame(Connection conn, String name) {
@@ -684,7 +691,7 @@ public class GameDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, vo.getUser_Id());
+			pstmt.setString(1, vo.getUserId());
 			pstmt.setInt(2, vo.getGameNo());
 			pstmt.setString(3,vo.getReviewContent());
 			pstmt.setInt(4, vo.getReviewScore());
