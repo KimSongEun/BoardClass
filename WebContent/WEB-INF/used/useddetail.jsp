@@ -81,9 +81,10 @@
 					</table>
 				</div>
 				<div class="div_contact">
-					<c:if test="${used.userId eq user.userId}">
+					<c:if test="${used.userId != user.userId}">
 						<button type="button" onclick="#">찜</button>
 						<button type="button" onclick="#">연락하기</button>
+						<button type="button" onclick="#">신고하기</button>
 					</c:if>
 				</div>
 				<div class="div_info">
