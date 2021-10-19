@@ -72,9 +72,9 @@ public class AdMadeServlet extends HttpServlet {
 
 		String title = multi.getParameter("title");
 		String content = multi.getParameter("content");
-		String writer = (String) request.getSession().getAttribute("memberLoginInfo"); // TODO: 관리자계정 넣는 것에 따라서 바꾸기
+		String writer = (String) request.getSession().getAttribute("userSession"); // TODO: 관리자계정 넣는 것에 따라서 바꾸기
 		if (writer == null) {
-			writer = "song"; // TODO: 임시 writer 설정
+			writer = "admin"; // TODO: 임시 writer 설정
 		}
 		String img = "./upload/ad/" + file;
 		if (file == null) {

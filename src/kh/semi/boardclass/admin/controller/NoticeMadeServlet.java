@@ -35,9 +35,9 @@ public class NoticeMadeServlet extends HttpServlet {
 
 		String title = request.getParameter("title"); 
 		String content = request.getParameter("content");
-		String writer = (String)request.getSession().getAttribute("memberLoginInfo"); //TODO: 관리자계정 넣는 것에 따라서 바꾸기
+		String writer = (String)request.getSession().getAttribute("userSession"); //TODO: 관리자계정 넣는 것에 따라서 바꾸기
 		if(writer == null) {
-			writer = "song"; // TODO: 임시 writer 설정
+			writer = "admin";
 		}		
 		
 		int result = new AdminService().insertNotice(title,content, writer);
