@@ -82,9 +82,9 @@
 				</div>
 				<div class="div_contact">
 					<c:if test="${used.userId != user.userId}">
-						<button type="button" onclick="#">찜</button>
-						<button type="button" onclick="#">연락하기</button>
-						<button type="button" onclick="#">신고하기</button>
+						<button type="button" id="btn_like">찜</button>
+						<button type="button" id="btn_contact">연락하기</button>
+						<button type="button" id="btn_report">신고하기</button>
 					</c:if>
 				</div>
 				<div class="div_info">
@@ -117,6 +117,13 @@ function callDelete(){
 		return;
 	}
 }
+
+
+$("#btn_like").click(cbLike);
+$("#btn_contact").click();
+$("#btn_report").click(cbReport);
+
+
 
 </script>
 </body>

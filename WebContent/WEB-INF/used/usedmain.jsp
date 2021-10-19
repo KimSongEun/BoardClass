@@ -63,7 +63,7 @@
 		</c:if>
 </div>
 <div class="secthird">
-		<button type="button" onclick="location.href='./usedcreateview'">글쓰기</button>
+		<button type="button" id="btn_write">글쓰기</button>
 </div>
 <div class="secfourth">
 	<div class="div_paging">
@@ -85,7 +85,22 @@
 	</div>
 </div>
 </section>
-
 <%@include file="/WEB-INF/index/footer.jsp" %>
+
+
+<script>
+
+$("#btn_write").click(loadWrite);
+
+function loadWrite(){
+	if("${user.user}" != null){
+		alert("로그인해주세요");
+		return;
+	}
+	return;
+}
+
+</script>
+
 </body>
 </html>
