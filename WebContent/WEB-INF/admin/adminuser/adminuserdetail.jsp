@@ -119,7 +119,21 @@
                 </div>
                 <div style="padding:50px 16px" id="comtdiv">
                     <h3>커뮤니티 댓글</h3>
-                    <div>Hover over the "about", "services" or "partners" link to see the sub navigation menu.</div>
+                    <div class="admin-table-div" style = "text-align : center">
+						<table style="text-align: center; border : 1px solid black">
+						<thead>
+                        <tr style="text-align:center; font-size: 16px;">
+                        	<td>댓글 번호</td>
+                            <td>원본 글 제목</td>
+                            <td>댓글</td>
+                            <td>작성일</td>
+                        </tr>
+                        </thead>
+                         <tbody id="input_data"></tbody>
+                         <tr>
+                        </tr> 
+                    </table>
+					</div>
                 </div>
                 <div style="padding:50px 16px" id="reviewdiv">
                     <h3>리뷰 글</h3>
