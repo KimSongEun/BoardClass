@@ -41,7 +41,7 @@
                     <div class="subnav">
                         <button class="subnavbtn">작성글 <i class="fa fa-caret-down"></i></button>
                         <div class="subnav-content">
-                            <a href="#" class="board">커뮤니티글</a>
+                            <a href="#" class="board" id = "${uservo.userId}">커뮤니티글</a>
                             <a href="#" class = "used">중고거래글</a>
                         </div>
                     </div>
@@ -77,8 +77,24 @@
                     
                 </div>
                 <div style="padding:50px 16px" id="boarddiv">
-                    <h3>커뮤니티 글</h3>
-                    <div>Hover over the "about", "services" or "partners" link to see the sub navigation menu.</div>
+                    <h1>커뮤니티 글</h1>
+                    <div class="admin-allboard-table-div" style = "text-align : center">
+						<table style="text-align: center; border : 1px solid black">
+						<thead>
+                        <tr style="text-align:center; font-size: 16px;">
+                        	<td>글번호</td>
+                            <td>게시판 카테고리</td>
+                            <td>게시판 타입</td>
+                            <td>글제목</td>
+                            <td>글내용</td>
+                            <td>글작성일 </td>
+                        </tr>
+                        </thead>
+                         <tbody id="input_data"></tbody>
+                         <tr>
+                        </tr> 
+                    </table>
+					</div>
                 </div>
                 <div style="padding:50px 16px" id="useddiv">
                     <h3>중고 글</h3>

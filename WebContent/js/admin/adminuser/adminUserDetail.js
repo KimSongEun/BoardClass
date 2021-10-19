@@ -39,6 +39,38 @@ $(function(){
         $("#contentdiv").append($("#reportreviewdiv"));
         $("#reportreviewdiv").fadeIn(500);
     })
+
+	$(".board").click(boarddetail);
+	function boarddetail() {
+		var user_id = $(this).attr("id");
+		console.log(user_id);
+		$.ajax({
+		url : "userdetailboard.ajax",
+		type : "post",
+		data : {userId : user_id},
+		dataType : "json",
+		success : function(data){
+			console.log("ajax 성공");
+			var html = "";
+			for(var i=0; i<data.allboarduservolist.length; i++){
+				/*$('#boarddiv').append(data.allboarduservolist[i].boardNo);*/
+				html += "<tr>"
+				html += "<td>"+data.allboarduservolist[i].boardNo+"</td>";
+				html += "<td>"+data.allboarduservolist[i].boardCategory+"</td>";
+				html += "<td>"+data.allboarduservolist[i].boardType+"</td>";
+				html += "<td>"+data.allboarduservolist[i].boardTitle+"</td>";
+				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden'>"+data.allboarduservolist[i].boardContent+"</td>";
+				html += "<td>"+data.allboarduservolist[i].boardRewriteDate+"</td>";
+				html += "</tr>";
+		}
+		$("#input_data").html(html);
+		},
+		error : function(){
+			console.log("ajax 실패");
+		}
+	});
+		 
+	};
     // $("#board").click(function(){
     //     console.log("클릭");
     //     $("#test").show();
