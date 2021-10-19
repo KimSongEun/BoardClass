@@ -521,14 +521,19 @@ public class AdminService {
 		return volist;
 	}
 
-	public int deleteUserByForce(User user) {
+	public int deleteUserByForce(int userNo) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().deleteUserByForce(conn, user);
+		result = new AdminDao().deleteUserByForce(conn, userNo);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}
-
+	
 	public int getReportBoardCount() {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();

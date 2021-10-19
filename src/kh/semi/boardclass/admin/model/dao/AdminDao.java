@@ -1307,11 +1307,21 @@ public class AdminDao {
 		}
 		return volist;
 	}
-		
-	public int deleteUserByForce(Connection conn, User user){
+	
+	public int deleteUserByForce(Connection conn, int userNo){
 		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "DELETE FROM MEMBER WHERE USER_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, userNo);
+
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
 		return result;
-	} 
+	}
 	
 	public int getReportBoardCount(Connection conn) {
 		int result = 0;

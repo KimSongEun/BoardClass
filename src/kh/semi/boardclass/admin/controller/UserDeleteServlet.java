@@ -1,23 +1,27 @@
 package kh.semi.boardclass.admin.controller;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.boardclass.admin.model.service.AdminService;
+
 /**
  * Servlet implementation class UserExtinctionServlet
  */
-@WebServlet("/UserExtinctionServlet")
-public class UserExtinctionServlet extends HttpServlet {
+@WebServlet("/userdelete")
+public class UserDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UserExtinctionServlet() {
+    public UserDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +30,24 @@ public class UserExtinctionServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		int result = new AdminService().deleteNotice(userNo);
+
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/admin/adminuser/adminuseralert.jsp");
+
+		if (result > 0) {
+			request.setAttribute("msg", userNo + "번 회원 탈퇴완료");
+			request.setAttribute("loc", "adminuserlist");
+		} else {
+			request.setAttribute("msg", "삭제실패 ");
+			request.setAttribute("loc", "adminuserlist");
+		}
+
+		rd.forward(request, response);
 	}
 
 	/**
