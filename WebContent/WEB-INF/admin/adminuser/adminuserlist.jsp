@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./css/admin/adminuser/adminUser.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="./js/admin/adminuser/adminUser.js?after"></script>
+    <script type="text/javascript" src="./js/admin/adminuser/adminUser.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>  
     <title>회원관리</title>
 </head>
@@ -68,7 +68,7 @@
                          	<td style = "vertical-align : middle">${r.reviewCount}</td>
                          	<td style = "vertical-align : middle">${r.usedCount}</td>
                          	<td style = "vertical-align : middle">${r.userHistory}</td>
-                            <td style = "vertical-align : middle"><button class="detail btn btn-warning" value="detailgo" id = "${r.userNo}">상세보기</button> </td>
+                            <td style = "vertical-align : middle"><button class="detail btn btn-warning" value="detailgo" id = "${r.userId}">상세보기</button> </td>
                         </tr>
 							</c:forEach>
                          </c:if> 

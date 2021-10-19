@@ -521,6 +521,14 @@ public class AdminService {
 		JDBCTemplate.close(conn);
 		return volist;
 	}
+	
+	public User getUser(String userId) {
+		User vo = null;
+		Connection conn = JDBCTemplate.getConnection();
+		vo = new AdminDao().getUser(conn, userId);
+		JDBCTemplate.close(conn);
+		return vo;
+	}
 
 	public int deleteUserByForce(String userId) {
 		int result = 0;

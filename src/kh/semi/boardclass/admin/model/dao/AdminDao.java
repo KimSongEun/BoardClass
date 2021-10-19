@@ -1310,6 +1310,38 @@ public class AdminDao {
 		return volist;
 	}
 	
+	public User getUser(Connection conn, String userId) {
+		User vo = null;
+		String sql = "select * from MEMBER where USER_ID = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,  userId);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				vo = new User();
+				vo.setUserId(rset.getString(1));
+				vo.setUserNo(rset.getInt(2));
+				vo.setUserPassword(rset.getString(3));
+				vo.setUserName(rset.getString(4));
+				vo.setUserNickname(rset.getString(5));
+				vo.setUserEmail(rset.getString(6));
+				vo.setUserPhone(rset.getInt(7));
+				vo.setUserAddress(rset.getString(8));
+				vo.setUserImage(rset.getString(10));
+				vo.setUserHistory(rset.getInt(11));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+				JDBCTemplate.close(rset);
+				JDBCTemplate.close(pstmt);
+			} 
+		return vo;
+	}
+	
 	public int deleteUserByForce(Connection conn, String userId){
 		int result = 0;
 		PreparedStatement pstmt = null;
