@@ -10,22 +10,23 @@ import javax.servlet.http.HttpServletResponse;
 import kh.semi.boardclass.used.model.service.UsedService;
 import kh.semi.boardclass.used.model.vo.Used;
 
-@WebServlet("/usedinformation")
-public class UsedInformationServlet extends HttpServlet {
+@WebServlet("/UsedGetUpdate")
+public class UsedGetUpdateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	public UsedInformationServlet() {
+	public UsedGetUpdateServlet() {
 		super();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		int usedNo = Integer.parseInt(request.getParameter("no"));
+		int usedNo = Integer.parseInt(request.getParameter("usedNo"));
 		Used vo = new UsedService().getUsedDetail(usedNo);
 		
 		request.setAttribute("used", vo);
-		request.getRequestDispatcher("/WEB-INF/used/useddetail.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/used/usedupdate.jsp").forward(request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

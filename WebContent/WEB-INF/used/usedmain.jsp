@@ -17,7 +17,6 @@
 
 <section>
 <div class="secfirst">
-한글깨지나?여긴 main
 	<div class="div_select">
 		<select id="gameCategory" onchange="window.open(value,'_self');">
 			<option value="usedmain" selected>전체</option>
@@ -46,10 +45,16 @@
 				<form class="form_usedinfo">
 					<div class="div_usedinfo">
 						<a href="usedinformation?no=${r.usedNo}">
-							<img src="${pageContext.request.contextPath}
-							/${r.usedImg}" alt="이미지없음">
+							<c:choose>
+								<c:when test="${r.usedImg != null}">
+									<img src="${pageContext.request.contextPath}/${r.usedImg}">
+								</c:when>
+								<c:when test="${!r.usedImg}">
+									<img src="./img/logo.png">
+								</c:when>
+							</c:choose>
 						</a>
-						<div class="img_text">
+						<div class="div_img_text">
 							<a href="usedinformation?no=${r.usedNo}">${r.usedTitle}</a>
 						</div>
 					</div>

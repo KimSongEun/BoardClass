@@ -3,12 +3,15 @@ package kh.semi.boardclass.game.model.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.game.model.vo.Game;
 import kh.semi.boardclass.game.model.vo.GameLike;
+import kh.semi.boardclass.game.model.vo.GameReview;
+import kh.semi.boardclass.used.model.vo.Used;
 
 public class GameDao {
 
@@ -29,9 +32,9 @@ public class GameDao {
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, name);
+			pstmt.setString(1, name );
 			rset = pstmt.executeQuery();
-
+			
 			if (rset.next()) {
 				vo = new Game();
 
@@ -65,12 +68,11 @@ public class GameDao {
 			System.out.println(vo);
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
+		}  finally {
 			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
 		return vo;
-
 	}
 
 	public ArrayList<Game> selectGame(Connection conn, String name) {
@@ -615,6 +617,67 @@ public class GameDao {
 		}
 		return volist;
 	}
+	
+	public ArrayList<Used> usedlist(Connection conn, String name) {
+		ArrayList<Used> volist = null;
+		String sql = "select USED_TITLE, USED_IMG from USED where USED_KEYWORD = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, name );
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				volist = new ArrayList<Used>();
+				do {
+					Used vo = new Used();
+					vo.setUsedTitle(rset.getString("USED_TITLE"));
+					vo.setUsedImg(rset.getString("USED_IMG"));
+					
+					volist.add(vo);
+
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+
+	}
+	public int insertRiview(Connection conn, GameReview vo) {
+		int result = 0;
+		String sql = "INSERT INTO REVIEW VALUES (REVIEW_NUM.nextval, ?, ?, ?, ?, sysdate)";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, vo.getUser_Id());
+			pstmt.setInt(2, vo.getGameNo());
+			pstmt.setString(3, vo.getReviewContent());
+			pstmt.setInt(4, vo.getReviewScore());
+		
+			
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public void updateUsed(Connection conn, Used used) {
+
+	}
+
+	public int chatUset(Connection conn, Used used) {
+		int result = 0;
+		return result;
+	}
 
 	public int addViewCount(Connection conn) {
 		int result = 0;
@@ -636,7 +699,7 @@ public class GameDao {
 		ArrayList<Game> volist = null;
 		return volist;
 	}
-
+	
 	public List<Game> searchList(Connection conn, String searchKeyword) {
 		List<Game> volist = null;
 		PreparedStatement pstmt = null;
@@ -690,6 +753,30 @@ public class GameDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return volist;
+	}
+
+	public int matchList(Connection conn, String matchKeyword) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String sql = "SELECT COUNT(*) FROM BOARDGAME WHERE GAME_KONAME like ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, matchKeyword);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			} else {
+				result = rset.getInt(0);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
 }

@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import kh.semi.boardclass.common.JDBCTemplate;
+import kh.semi.boardclass.community.model.dao.CommunityDao;
 import kh.semi.boardclass.used.model.vo.Used;
 
 public class UsedDao {
@@ -20,19 +21,18 @@ public class UsedDao {
 		String sql1 = "select * from (select Rownum r, u.* from "
 				+ "(select USED_NO, USER_ID, USED_TITLE, USED_PRICE, USED_STATE, "
 				+ " USED_CHANGE, USED_EXTYPE, USED_INFO, TO_CHAR(USED_DAY, 'mm/dd hh24:mi') USED_DAY, USED_IMG, USED_CATEGORY, USED_KEYWORD "
-				+ " from used order by used_day desc) u) "
-				+ " where r between ? and ?";
+				+ " from used order by used_day desc) u) " + " where r between ? and ?";
 
 		String sql2 = "select * from (select Rownum r, u.* from "
 				+ "(select USED_NO, USER_ID, USED_TITLE, USED_PRICE, USED_STATE, "
 				+ " USED_CHANGE, USED_EXTYPE, USED_INFO, TO_CHAR(USED_DAY, 'mm/dd hh24:mi') USED_DAY, USED_IMG, USED_CATEGORY, USED_KEYWORD "
-				+ " from used where ( USED_TITLE like ? or USED_INFO like ? )"
-				+ " order by used_day desc) u) " + " where r between ? and ?";
+				+ " from used where ( USED_TITLE like ? or USED_INFO like ? )" + " order by used_day desc) u) "
+				+ " where r between ? and ?";
 
 		String sql = "";
-		if(search != null && !search.equals("")) {
+		if (search != null && !search.equals("")) {
 			sql = sql2;
-		} else{
+		} else {
 			sql = sql1;
 		}
 
@@ -75,16 +75,12 @@ public class UsedDao {
 		}
 		return volist;
 	}
-	
-	
-	
-	
 
 	public ArrayList<Used> selectCateUsedList(Connection conn, int start, int end, String cate, String search) {
 		ArrayList<Used> volist = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
+
 		String sql1 = "select * from (select Rownum r, u.* from "
 				+ "(select USED_NO, USER_ID, USED_TITLE, USED_PRICE, USED_STATE, "
 				+ " USED_CHANGE, USED_EXTYPE, USED_INFO, TO_CHAR(USED_DAY, 'mm/dd hh24:mi') USED_DAY, USED_IMG, USED_CATEGORY, USED_KEYWORD "
@@ -174,7 +170,7 @@ public class UsedDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, usedNo);
 			rset = pstmt.executeQuery();
-			if(rset.next()) {
+			if (rset.next()) {
 				vo = new Used();
 				vo.setUsedNo(rset.getInt(1));
 				vo.setUserId(rset.getString(2));
@@ -186,7 +182,7 @@ public class UsedDao {
 				vo.setUsedInfo(rset.getString(8));
 				vo.setUsedDay(rset.getString(9));
 				vo.setUsedImg(rset.getString(10));
-				vo.setUsedCategory(rset.getString(11));		
+				vo.setUsedCategory(rset.getString(11));
 				vo.setUsedKeyword(rset.getString(12));
 			}
 		} catch (Exception e) {
@@ -200,8 +196,8 @@ public class UsedDao {
 
 	public int insertUsed(Connection conn, Used vo) {
 		int result = 0;
-		String sql = "INSERT INTO USED VALUES (USED_NUM.nextval, ?, ?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?)";
 		PreparedStatement pstmt = null;
+		String sql = "INSERT INTO USED VALUES (USED_NUM.nextval, ?, ?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getUserId());
@@ -223,12 +219,45 @@ public class UsedDao {
 		return result;
 	}
 
-	public void updateUsed(Connection conn, Used used) {
+	public int updateUsed(Connection conn, Used vo, int usedNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "UPDATE USED SET USED_TITLE=?, USED_PRICE=?, USED_STATE=?, USED_CHANGE=?, USED_EXTYPE=?, USED_INFO=?, USED_IMG=?, USED_CATEGORY=?, USED_KEYWORD=? WHERE USED_NO=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
 
+			pstmt.setString(1, vo.getUsedTitle());
+			pstmt.setInt(2, vo.getUsedPrice());
+			pstmt.setString(3, vo.getUsedState());
+			pstmt.setString(4, vo.getUsedChange());
+			pstmt.setString(5, vo.getUsedExtype());
+			pstmt.setString(6, vo.getUsedInfo());
+			pstmt.setString(7, vo.getUsedImg());
+			pstmt.setString(8, vo.getUsedCategory());
+			pstmt.setString(9, vo.getUsedKeyword());
+			pstmt.setInt(10, usedNo);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
-	public int chatUset(Connection conn, Used used) {
+	public int deleteUsed(Connection conn, int usedNo) {
 		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "delete from USED where USED_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, usedNo);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
 }

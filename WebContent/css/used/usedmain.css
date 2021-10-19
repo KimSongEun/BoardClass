@@ -10,50 +10,56 @@
 
 .secsecond{
 	display: flex;
-	width: 1550px;
+	justify-content: center;
 	flex-flow: row wrap;
 	margin: 0 auto;
 }
 
 .form_usedinfo{
-	width: 250px;
-	height: 350px;
+	width: 205px;
+	height: 224px;
 	margin: 30px;
 }
 
 .div_usedinfo{
-	width: 250px;
-	height: 350px;
+	width: 205px;
+	height: 154px;
 }
 
 .div_usedinfo img{
-	 width: 250px;
-	 height: 250px;
+	 width: 205px;
+	 height: 154px;
+	 margin-bottom: 15px;
 }
 
-.img_text{
-	width: 250px;
+.div_img_text{
+	width: 205px;
 	height: 45px;
-}
-
-.img_text a{
-	height: 45px;
+	text-align:justify;
 	overflow: hidden;
-	text-overflow: ellipsis;
 	word-break: break-all; 
+}
+
+.div_img_text a{
+	width: 205px;
+	height: 45px;
 	display: block;
+	text-overflow: ellipsis;
 }
 
 .secthird{
 	display: flex;
 	justify-content: flex-end;
-	padding-top: 10px;
+	padding-top: 30px;
+	padding-bottom: 30px;
 	padding-right: 50px;
 }
 
 .secfourth{
 	display: flex;
 	justify-content: center;
+	padding-top: 30px;
+	padding-bottom: 30px;
 }
 
 .div_paging {
@@ -89,4 +95,15 @@
     .secfirst {
         justify-content: center;
     }
+    
+    .secsecond{
+    justify-content: center;
+		width: 100%;    
+    }
+    
+    .secthird{
+    	justify-content: center;
+    	padding-right: 0px;
+    }
 }
+

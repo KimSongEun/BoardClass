@@ -1,8 +1,8 @@
 @charset "UTF-8";
 
 @font-face {
-	font-family: 'Gugi', cursive;
-	src:url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+	font-family: 'Gugi';
+	src:url('./Gugi-Regular.ttf') format('truetype');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -14,6 +14,7 @@ body {
     min-height: 100vh;
     flex-direction: column;
     min-height: 100vh;
+    box-sizing:border-box;
 }
 
 a {
@@ -55,7 +56,7 @@ a {
     padding-bottom: 18px;
     padding-left: 13px;
     padding-right: 13px;
-    font-family: 'Gugi', cursive;
+	font-family: 'Gugi';
     font-size: 20px;
 }
 

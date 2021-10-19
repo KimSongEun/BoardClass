@@ -41,11 +41,12 @@ public class UsedCreateServlet extends HttpServlet {
 		int uploadSizeLimit = 10 * 1024 * 1024;
 		String encType = "UTF-8";
 		if (!ServletFileUpload.isMultipartContent(request)) {
-			response.sendRedirect("/WEB-INF/used/imguploaderror.jsp");
+			response.sendRedirect("view/error/Error.jsp");
 		}
 		ServletContext context = getServletContext();
 		String fileSavePath = "used_img";
 		String uploadPath = context.getRealPath(fileSavePath);
+		System.out.println(uploadPath);
 		MultipartRequest multi = new MultipartRequest(request, uploadPath, uploadSizeLimit, encType,
 				new DefaultFileRenamePolicy());
 
@@ -57,18 +58,12 @@ public class UsedCreateServlet extends HttpServlet {
 			userId = userSS.getUserId();
 		}
 		String usedTitle = multi.getParameter("usedTitle");
-		int usedPrice;
-		try {
-			usedPrice = Integer.parseInt(multi.getParameter("usedPrice"));
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-			usedPrice = 0;
-		}
+		int	usedPrice = Integer.parseInt(multi.getParameter("usedPrice"));
 		String usedState = multi.getParameter("usedState");
 		String usedChange = multi.getParameter("usedChange");
 		String usedExtype = multi.getParameter("usedExtype");
 		String usedInfo = multi.getParameter("usedInfo");
-		String usedImg = multi.getFilesystemName("usedImg");
+		String usedImg = "./used_img/" + multi.getFilesystemName("usedImg");
 		String usedCategory = multi.getParameter("usedCategory");
 		String usedKeyword = multi.getParameter("keyword");
 
