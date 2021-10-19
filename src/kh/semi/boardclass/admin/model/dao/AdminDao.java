@@ -1461,6 +1461,436 @@ public class AdminDao {
 		}
 		return volist;
 	}
+
+	public int getUserDetailCommentCount(Connection conn, String userId) {
+		int result = 0;
+		String sql = "SELECT count(*) \r\n" + 
+				"FROM COMT C JOIN BOARD B \r\n" + 
+				"ON C.BOARD_NO=B.BOARD_NO \r\n" + 
+				"JOIN MEMBER M \r\n" + 
+				"ON C.USER_ID = M.USER_ID\r\n" + 
+				"WHERE C.USER_ID = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<AllCommentUser> selectUserDetailCommentList(Connection conn, String userId, int start, int end){
+		ArrayList<AllCommentUser> volist = null;
+		String sql = "select * from (   \r\n" + 
+				"select Rownum r, t1.* \r\n" + 
+				"from (\r\n" + 
+				"SELECT C.COMMENT_NO, B.BOARD_TITLE, C.COMMENT_CONTENT, M.USER_ID, M.USER_NO, C.COMMENT_REWRITE_DATE\r\n" + 
+				"FROM COMT C JOIN BOARD B \r\n" + 
+				"ON C.BOARD_NO=B.BOARD_NO\r\n" + 
+				"JOIN MEMBER M ON C.USER_ID = M.USER_ID \r\n" + 
+				"WHERE C.USER_ID = ? \r\n" + 
+				"ORDER BY COMMENT_REWRITE_DATE DESC) t1) t2\r\n" + 
+				"where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<AllCommentUser>();
+			if (rset.next()) {
+				do {
+					AllCommentUser vo = new AllCommentUser();
+					vo.setCommentNo(rset.getInt("COMMENT_NO"));
+					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+					vo.setCommentContent(rset.getString("COMMENT_CONTENT"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setUserNo(rset.getInt("USER_NO"));
+					vo.setCommentRewriteDate(rset.getDate("COMMENT_REWRITE_DATE"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	
+	public int getUserDetailReviewCount(Connection conn, String userId) {
+		int result = 0;
+		String sql = "select count(REVIEW_NO) \r\n" + 
+				"FROM REVIEW JOIN BOARDGAME\r\n" + 
+				"ON REVIEW.GAME_NO = BOARDGAME.GAME_NO\r\n" + 
+				"WHERE USER_ID = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<ReportReview> selectUserDetailReviewList(Connection conn, String userId, int start, int end){
+		ArrayList<ReportReview> volist = null;
+		String sql = "select * from (   \r\n" + 
+				"select Rownum r, t1.* from \r\n" + 
+				"(SELECT REVIEW_NO, USER_ID, BOARDGAME.GAME_KONAME,  REVIEW_CONTENT, REVIEW_DATE\r\n" + 
+				"FROM REVIEW JOIN BOARDGAME\r\n" + 
+				"ON REVIEW.GAME_NO = BOARDGAME.GAME_NO\r\n" + 
+				"WHERE USER_ID = ? \r\n" + 
+				"ORDER BY REVIEW_DATE DESC) t1) t2 \r\n" + 
+				"where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<ReportReview>();
+			if (rset.next()) {
+				do {
+					ReportReview vo = new ReportReview();
+					vo.setReviewNo(rset.getInt(2));
+					vo.setUserId(rset.getString(3));
+					vo.setGameKoName(rset.getString(4));
+					vo.setReviewContent(rset.getString(5));
+					vo.setReviewDate(rset.getDate(6));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	
+	public int getUserDetailReportBoardCount(Connection conn, String userId) {
+		int result = 0;
+		String sql = "SELECT count(*) FROM(\r\n" + 
+				"SELECT  count(*) 신고횟수,  B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.USER_ID ,M.USER_NO, B.BOARD_WRITE_DATE, B. BOARD_REWRITE_DATE \r\n" + 
+				"FROM BOARD_REPORT R JOIN BOARD B\r\n" + 
+				"ON R.BOARD_NO = B.BOARD_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON B.USER_ID = M.USER_ID\r\n" + 
+				"WHERE B.USER_ID = ? \r\n" + 
+				"GROUP BY B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.USER_ID, M.USER_NO, B.BOARD_WRITE_DATE, B. BOARD_REWRITE_DATE\r\n" + 
+				"ORDER BY 신고횟수 DESC)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<ReportBoard> selectUserDetailReportBoardList(Connection conn, String userId, int start, int end){
+		ArrayList<ReportBoard> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT  count(*) 신고횟수,  B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.USER_ID ,M.USER_NO, B.BOARD_WRITE_DATE, B. BOARD_REWRITE_DATE \r\n" + 
+				"FROM BOARD_REPORT R JOIN BOARD B\r\n" + 
+				"ON R.BOARD_NO = B.BOARD_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON B.USER_ID = M.USER_ID\r\n" + 
+				"WHERE B.USER_ID = ? \r\n" + 
+				"GROUP BY B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.USER_ID, M.USER_NO, B.BOARD_WRITE_DATE, B. BOARD_REWRITE_DATE\r\n" + 
+				"ORDER BY 신고횟수 DESC) t1) t2 where r between 1 and 5";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<ReportBoard>();
+			if (rset.next()) {
+				do {
+					ReportBoard vo = new ReportBoard();
+					vo.setReportCount(rset.getInt(2));
+					vo.setBoardNo(rset.getInt("BOARD_NO"));
+					vo.setBoardType(rset.getString("BOARD_TYPE"));
+					vo.setBoardCategory(rset.getString("BOARD_CATEGORY"));
+					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setUserNo(rset.getInt("USER_NO"));
+					vo.setBoardWriteDate(rset.getDate("BOARD_WRITE_DATE"));
+					vo.setBoardRewriteDate(rset.getDate("BOARD_REWRITE_DATE"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	
+	public int getUserDetailReportCommentCount(Connection conn, String userId) {
+		int result = 0;
+		String sql = "SELECT count(*) \r\n" + 
+				"FROM(SELECT  count(*)\r\n" + 
+				"FROM COMMENT_REPORT R JOIN COMT C\r\n" + 
+				"ON R.COMMENT_NO = C.COMMENT_NO\r\n" + 
+				"JOIN BOARD B\r\n" + 
+				"ON C.BOARD_NO = B.BOARD_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON C.USER_ID = M.USER_ID\r\n" + 
+				"WHERE C.USER_ID = ? \r\n" + 
+				"GROUP BY C.COMMENT_NO, B.BOARD_TITLE, C.COMMENT_CONTENT, C.USER_ID, M.USER_NO, C.COMMENT_WRITE_DATE, C.COMMENT_REWRITE_DATE";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<ReportComment> selectUserDetailReportCommentList(Connection conn, String userId, int start, int end){
+		ArrayList<ReportComment> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT  count(*) 신고횟수, C.COMMENT_NO, B.BOARD_TITLE, C.COMMENT_CONTENT, C.USER_ID, M.USER_NO, C.COMMENT_WRITE_DATE, C.COMMENT_REWRITE_DATE\r\n" + 
+				"FROM COMMENT_REPORT R JOIN COMT C\r\n" + 
+				"ON R.COMMENT_NO = C.COMMENT_NO\r\n" + 
+				"JOIN BOARD B\r\n" + 
+				"ON C.BOARD_NO = B.BOARD_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON C.USER_ID = M.USER_ID\r\n" + 
+				"WHERE C.USER_ID = ? \r\n" + 
+				"GROUP BY C.COMMENT_NO, B.BOARD_TITLE, C.COMMENT_CONTENT, C.USER_ID, M.USER_NO, C.COMMENT_WRITE_DATE, C.COMMENT_REWRITE_DATE\r\n" + 
+				"ORDER BY 신고횟수 DESC) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<ReportComment>();
+			if (rset.next()) {
+				do {
+					ReportComment vo = new ReportComment();
+					vo.setReportCount(rset.getInt(2));
+					vo.setCommentNo(rset.getInt(3));
+					vo.setBoardTitle(rset.getString(4));
+					vo.setCommentContent(rset.getString(5));
+					vo.setUserId(rset.getString(6));
+					vo.setUserNo(rset.getInt(7));
+					vo.setCommentWriteDate(rset.getDate(8));
+					vo.setCommentRewriteDate(rset.getDate(9));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	
+	public int gettUserDetailReportReviewCount(Connection conn, String userId) { 
+		int result = 0;
+		String sql = "SELECT count(*) \r\n" + 
+				"FROM(SELECT  count(*)\r\n" + 
+				"FROM REVIEW_REPORT R JOIN REVIEW V\r\n" + 
+				"ON R.REVIEW_NO = V.REVIEW_NO\r\n" + 
+				"JOIN BOARDGAME B\r\n" + 
+				"ON B.GAME_NO = V.GAME_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON V.USER_ID = M.USER_ID\r\n" + 
+				"WHERE V.USER_ID = ? \r\n" + 
+				"GROUP BY V.REVIEW_NO, B.GAME_KONAME, V.REVIEW_CONTENT, V.USER_ID, M.USER_NO, V.REVIEW_DATE";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<ReportReview> selectUserDetailReportReviewList(Connection conn, String userId, int start, int end){
+		ArrayList<ReportReview> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT  count(*) 신고횟수, V.REVIEW_NO, B.GAME_KONAME, V.REVIEW_CONTENT, V.USER_ID, M.USER_NO, V.REVIEW_DATE\r\n" + 
+				"FROM REVIEW_REPORT R JOIN REVIEW V\r\n" + 
+				"ON R.REVIEW_NO = V.REVIEW_NO\r\n" + 
+				"JOIN BOARDGAME B\r\n" + 
+				"ON B.GAME_NO = V.GAME_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON V.USER_ID = M.USER_ID\r\n" + 
+				"where V.USER_ID = ? \r\n" + 
+				"GROUP BY V.REVIEW_NO, B.GAME_KONAME, V.REVIEW_CONTENT, V.USER_ID, M.USER_NO, V.REVIEW_DATE\r\n" + 
+				"ORDER BY 신고횟수 DESC) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<ReportReview>();
+			if (rset.next()) {
+				do {
+					ReportReview vo = new ReportReview();
+					vo.setReportCount(rset.getInt(2));
+					vo.setReviewNo(rset.getInt(3));
+					vo.setGameKoName(rset.getString(4));
+					vo.setReviewContent(rset.getString(5));
+					vo.setUserId(rset.getString(6));
+					vo.setUserNo(rset.getInt(7));
+					vo.setReviewDate(rset.getDate(8));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	
+	public int gettUserDetailReportUsedCount(Connection conn, String userId) { 
+		int result = 0;
+		String sql = "SELECT count(*) \r\n" + 
+				"FROM(SELECT  count(*)\r\n" + 
+				"FROM USED_REPORT R JOIN USED U\r\n" + 
+				"ON R.USED_NO = U.USED_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON U.USER_ID = M.USER_ID\r\n" + 
+				"GROUP BY U.USED_NO, U.USED_TITLE, U.USER_ID, M.USER_NO, U.USED_DAY\r\n" + 
+				")";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	public ArrayList<ReportUsed> selectUserDetailReportUsedList(Connection conn, String userId, int start, int end){
+		ArrayList<ReportUsed> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT  count(*) 신고횟수, U.USED_NO, U.USED_TITLE, U.USER_ID, M.USER_NO, U.USED_DAY\r\n" + 
+				"FROM USED_REPORT R JOIN USED U\r\n" + 
+				"ON R.USED_NO = U.USED_NO\r\n" + 
+				"JOIN MEMBER M\r\n" + 
+				"ON U.USER_ID = M.USER_ID\r\n" + 
+				"where U.USER_ID = ? \r\n" + 
+				"GROUP BY U.USED_NO, U.USED_TITLE, U.USER_ID, M.USER_NO, U.USED_DAY\r\n" + 
+				"ORDER BY 신고횟수 DESC) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<ReportUsed>();
+			if (rset.next()) {
+				do {
+					ReportUsed vo = new ReportUsed();
+					vo.setReportCount(rset.getInt(2));
+					vo.setUsedNo(rset.getInt(3));
+					vo.setUsedTitle(rset.getString(4));
+					vo.setUserId(rset.getString(5));
+					vo.setUserNo(rset.getInt(6));
+					vo.setUsedDate(rset.getDate(7));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
 	
 	public int getReportBoardCount(Connection conn) {
 		int result = 0;
@@ -1915,6 +2345,7 @@ public class AdminDao {
 		}
 		return volist;
 	}
+	
 	public int getReportCommentUserNoCount(Connection conn, String keyword) {
 		int result = 0;
 		String sql = "SELECT count(*) \r\n" + 
@@ -2182,6 +2613,7 @@ public class AdminDao {
 		}
 		return volist;
 	}
+	
 	public int getReportReviewUserNoCount(Connection conn, String keyword) {
 		int result = 0;
 		String sql = "SELECT count(*) \r\n" + 
@@ -2473,6 +2905,7 @@ public class AdminDao {
 		}
 		return volist;
 	}
+	
 	public int getReportUsedUserNoCount(Connection conn, String keyword) {
 		int result = 0;
 		String sql = "SELECT count(*) \r\n" + 
