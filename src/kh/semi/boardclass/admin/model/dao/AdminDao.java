@@ -12,6 +12,7 @@ import kh.semi.boardclass.community.model.vo.BoardReport;
 import kh.semi.boardclass.community.model.vo.Comment;
 import kh.semi.boardclass.community.model.vo.CommentReport;
 import kh.semi.boardclass.game.model.vo.Game;
+import kh.semi.boardclass.used.model.vo.Used;
 import kh.semi.boardclass.user.model.vo.User;
 
 import java.util.ArrayList;
@@ -56,6 +57,7 @@ public class AdminDao {
 		ArrayList<CommentReport> volist = null;
 		return volist;
 	}
+	
 	public ArrayList<Notice> getNewestNotice(Connection conn){
 		ArrayList<Notice> volist = null;
 		String sql = "select * from (   select Rownum r, t1.* from (SELECT * FROM NOTICE ORDER BY ADMIN_RWR_DATE DESC) t1) t2 where r between 1 and 5";
@@ -1321,6 +1323,143 @@ public class AdminDao {
 			e.printStackTrace();
 		} 
 		return result;
+	}
+	
+	// 사용자 상세 정보 추가
+	public int getUserDetailBoardCount(Connection conn, String userId) {
+		int result = 0;
+		String sql = "select count(Board_NO) \r\n" + 
+				"FROM BOARD B JOIN MEMBER M \r\n" + 
+				"ON B.USER_ID = M.USER_ID\r\n" + 
+				"WHERE B.USER_ID = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<AllBoardUser> selectUserDetailBoardList(Connection conn, String userId, int start, int end){
+		ArrayList<AllBoardUser> volist = null;
+		String sql = "select * from (   \r\n" + 
+				"select Rownum r, t1.* from \r\n" + 
+				"(SELECT B.USER_ID, B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.BOARD_CONTENT, B.BOARD_WRITE_DATE, B.BOARD_REWRITE_DATE, M.USER_NO\r\n" + 
+				"FROM BOARD B JOIN MEMBER M \r\n" + 
+				"ON B.USER_ID = M.USER_ID \r\n" + 
+				"WHERE B.USER_ID = ? \r\n" + 
+				"ORDER BY BOARD_REWRITE_DATE DESC) t1) t2 \r\n" + 
+				"where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<AllBoardUser>();
+			if (rset.next()) {
+				do {
+					AllBoardUser vo = new AllBoardUser();
+					vo.setBoardNo(rset.getInt("BOARD_NO"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setBoardType(rset.getString("BOARD_TYPE"));
+					vo.setBoardCategory(rset.getString("BOARD_CATEGORY"));
+					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+					vo.setBoardContent(rset.getString("BOARD_CONTENT"));
+					vo.setBoardWriteDate(rset.getDate("BOARD_WRITE_DATE"));
+					vo.setBoardRewriteDate(rset.getDate("BOARD_REWRITE_DATE"));
+					vo.setUserNo(rset.getInt("USER_NO"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	
+	public int getUserDetailUsedCount(Connection conn, String userId) {
+		int result = 0;
+		String sql = "select count(USED_NO) \r\n" + 
+				"FROM USED\r\n" + 
+				"WHERE USER_ID = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<Used> selectUserDetailUsedList(Connection conn, String userId, int start, int end){
+		ArrayList<Used> volist = null;
+		String sql = "select * from (   \r\n" + 
+				"select Rownum r, t1.* from \r\n" + 
+				"(SELECT USER_ID, USED_NO,  USED_TITLE, USED_STATE, USED_CHANGE, USED_EXTYPE, USED_PRICE, USED_CATEGORY, USED_KEYWORD\r\n" + 
+				"FROM USED\r\n" + 
+				"WHERE USER_ID = ? \r\n" + 
+				"ORDER BY USED_DAY DESC) t1) t2 \r\n" + 
+				"where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Used>();
+			if (rset.next()) {
+				do {
+					Used vo = new Used();
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setUsedNo(rset.getInt("USED_NO"));
+					vo.setUsedTitle(rset.getString("USED_TITLE"));
+					vo.setUsedState(rset.getString("USED_STATE"));
+					vo.setUsedChange(rset.getString("USED_CHANGE"));
+					vo.setUsedExtype(rset.getString("USED_EXTYPE"));
+					vo.setUsedPrice(rset.getInt("USED_PRICE"));
+					vo.setUsedCategory(rset.getString("USED_CATEGORY"));
+					vo.setUsedKeyword(rset.getString("USED_KEYWORD"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
 	}
 	
 	public int getReportBoardCount(Connection conn) {
