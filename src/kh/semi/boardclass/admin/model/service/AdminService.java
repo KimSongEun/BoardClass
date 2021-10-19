@@ -521,10 +521,10 @@ public class AdminService {
 		return volist;
 	}
 
-	public int deleteUserByForce(int userNo) {
+	public int deleteUserByForce(String userId) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().deleteUserByForce(conn, userNo);
+		result = new AdminDao().deleteUserByForce(conn, userId);
 		if (result > 0) {
 			JDBCTemplate.commit(conn);
 		} else {

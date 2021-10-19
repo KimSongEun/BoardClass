@@ -34,13 +34,13 @@ public class UserDeleteServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		int userNo = Integer.parseInt(request.getParameter("userNo"));
-		int result = new AdminService().deleteNotice(userNo);
+		String userId = request.getParameter("userId");
+		int result = new AdminService().deleteUserByForce(userId);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/admin/adminuser/adminuseralert.jsp");
 
 		if (result > 0) {
-			request.setAttribute("msg", userNo + "번 회원 탈퇴완료");
+			request.setAttribute("msg", userId + "번 회원 탈퇴완료");
 			request.setAttribute("loc", "adminuserlist");
 		} else {
 			request.setAttribute("msg", "삭제실패 ");
