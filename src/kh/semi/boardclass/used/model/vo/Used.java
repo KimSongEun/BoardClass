@@ -50,6 +50,22 @@ public class Used {
 		this.usedCategory = usedCategory;
 		this.usedKeyword = usedKeyword;
 	}
+	
+	
+
+	public Used(String usedTitle, int usedPrice, String usedState, String usedChange, String usedExtype,
+			String usedInfo, String usedImg, String usedCategory, String usedKeyword) {
+		super();
+		this.usedTitle = usedTitle;
+		this.usedPrice = usedPrice;
+		this.usedState = usedState;
+		this.usedChange = usedChange;
+		this.usedExtype = usedExtype;
+		this.usedInfo = usedInfo;
+		this.usedImg = usedImg;
+		this.usedCategory = usedCategory;
+		this.usedKeyword = usedKeyword;
+	}
 
 	@Override
 	public String toString() {

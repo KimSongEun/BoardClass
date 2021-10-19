@@ -45,8 +45,14 @@
 				<form class="form_usedinfo">
 					<div class="div_usedinfo">
 						<a href="usedinformation?no=${r.usedNo}">
-							<img src="${pageContext.request.contextPath}
-							/${r.usedImg}" alt="이미지없음">
+							<c:choose>
+								<c:when test="${r.usedImg != null}">
+									<img src="${pageContext.request.contextPath}/${r.usedImg}">
+								</c:when>
+								<c:when test="${!r.usedImg}">
+									<img src="./img/logo.png">
+								</c:when>
+							</c:choose>
 						</a>
 						<div class="div_img_text">
 							<a href="usedinformation?no=${r.usedNo}">${r.usedTitle}</a>

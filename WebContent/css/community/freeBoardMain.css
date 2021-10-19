@@ -16,9 +16,37 @@ table {  border-collapse: collapse;}
 	margin: 0 auto;
 	padding: 50px 0 100px;	
 }
-#aside {
+#aside { /* 커뮤니티 게시판 카테고리 부분*/
 	display: table-cell;
 	width: 215px;
+}
+#aside .as_inner {
+    width: 185px;
+    background: #ffffff;
+}
+
+#aside .as_inner .as_hgroup { /* 커뮤니티 큰 글씨*/
+    width: 185px;
+    height: 105px;
+    background-color: blue; /* 색깔변경하기*/
+    line-height: 105px;
+    text-align:center;
+}
+#aside .as_inner .as_hgroup > a {
+    font-weight: 700;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+#aside .as_inner .lnb > ul > li > a {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px 15px 15px 20px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 26px;
+    color: #444444;
 }
 #contnets {
     display: table-cell;
@@ -34,11 +62,14 @@ table {  border-collapse: collapse;}
     margin: -30px -30px 0;
     padding: 30px;
     border-bottom: 1px solid #e6e6e8;
- 	 background-color: #ffffff;
 }
 .h3group .tit {
-	 background-color: #ffffff;
-	 font-size: 23px;
+	  float: left;
+    font-family: 'NanumSquare';
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 44px;
+    color: #2d2d2d;;
 }
 .h3group .location {
 	float: right;
@@ -99,18 +130,39 @@ table {  border-collapse: collapse;}
 .pb30 {
 	padding-bottom: 30px !important
 }
-.c_table {
-	background: #ffffff;
+
+/* 글 리스트 번호*/
+.tbl_list table tbody tr td {
+    padding: 27px 0 26px;
+    border-bottom: 1px solid #e6e6e8;
+    vertical-align: top;
 }
-.c_table tr {
-	background-color: #ffffff;
+.tbl_list table tr td.idx {
+    font-size: 12px;
+    line-height: 24px;
+    color: #777777;
 }
-.c_table tr th {
-	background-color: #ffffff;
+.tbl_list table tbody tr td.obj .tbox .tit a {
+    display: block;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 24px;
+    color: #2d2d2d;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
 }
-.c_table tr td {
-	background-color: #ffffff;
+/* 댓글수 조회수 */
+.tbl_list table tr util_hit {
+    float: left;
+    position: relative;
+    margin: 0 0 0 21px;
+    font-size: 12px;
+    line-height: 20px;
+    color: #777777;
 }
+
 /* 글쓰기 */
 .btn_wrap a:first-child {
 	margin: 0;

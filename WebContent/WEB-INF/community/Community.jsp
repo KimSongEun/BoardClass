@@ -23,6 +23,7 @@
 			<li><a href="#">유저정보게시판</a></li>
 			<li><a href="#">모임게시판</a></li>
 		</ul>
+		</nav>
 		</div>
 	</aside>
 	
@@ -107,6 +108,7 @@
         </dd>
       </dl>
     </div>
+   	</div>
 </article>
 
 
@@ -114,9 +116,9 @@
 		<h4 class="tit">전체글 보기</h4>
 	</div>
 	
-	<!-- 검색 -->
-	<div class="data_srch_wrap bdt_n ">
-<table class="c_table">
+	
+	
+	<table class="c_table">
 	<tr>
 	<td style="width: 10%; text-align: center;">번호</td>
 	<td style="width: 40%; text-align: center;">제목</td>
@@ -144,11 +146,12 @@
 			<td colspan="7">데이터가 없습니다</td>
 		</tr>
 	</c:if>
-</table>
+	</table>
+	</div>
+	
 </div>
 
 </section>
-</div>
 <c:import url="footer.jsp" />
 </body>
 </html>

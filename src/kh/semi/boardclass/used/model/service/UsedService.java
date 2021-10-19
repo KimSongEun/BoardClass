@@ -36,10 +36,10 @@ public class UsedService {
 		return result;
 	}
 	
-	public Used getUsedDetail(int usedNO) {
+	public Used getUsedDetail(int usedNo) {
 		Used vo = null;
 		Connection conn = JDBCTemplate.getConnection();
-		vo = new UsedDao().getUsedDetail(conn, usedNO);
+		vo = new UsedDao().getUsedDetail(conn, usedNo);
 		JDBCTemplate.close(conn);
 		return vo;
 	}
@@ -48,20 +48,37 @@ public class UsedService {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
 		result = new UsedDao().insertUsed(conn, vo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}
 
-	public void updateUsed(Used used) {
-		Connection conn = JDBCTemplate.getConnection();
-		new UsedDao().updateUsed(conn, used);
-		JDBCTemplate.close(conn);
-	}
-
-	public int chatUset(Used used) {
+	public int updateUsed(Used vo, int usedNo) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new UsedDao().chatUset(conn, used);
+		new UsedDao().updateUsed(conn, vo, usedNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public int deleteUsed(int usedNo) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new UsedDao().deleteUsed(conn, usedNo);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}
