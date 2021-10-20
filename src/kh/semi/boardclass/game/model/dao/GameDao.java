@@ -18,10 +18,6 @@ public class GameDao {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getListCount(Connection conn) {
-		int result = 0;
-		return result;
-	}
 
 	public Game InfoGame(Connection conn, String name) {
 		Game vo = null;
@@ -831,27 +827,6 @@ public class GameDao {
 		return result;
 	}
 
-	public int addViewCount(Connection conn) {
-		int result = 0;
-		return result;
-	}
-
-	public int insertGameLike(Connection conn, GameLike gameLike) {
-		int result = 0;
-		return result;
-	}
-
-	public ArrayList<Game> selectGameRank(Connection conn) {
-		ArrayList<Game> volist = null;
-		return volist;
-	}
-
-	public ArrayList<Game> searchFilterGameRank(Connection conn, String gameCategory, String gameAge, String gamePlayer,
-			int gameTime, int gamePrice) {
-		ArrayList<Game> volist = null;
-		return volist;
-	}
-	
 	public List<Game> searchList(Connection conn, String searchKeyword) {
 		List<Game> volist = null;
 		PreparedStatement pstmt = null;

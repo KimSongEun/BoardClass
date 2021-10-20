@@ -19,13 +19,7 @@ public class GameService {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getListCount() {
-		int result = 0;
-		Connection conn = JDBCTemplate.getConnection();
-		result = new GameDao().getListCount(conn);
-		JDBCTemplate.close(conn);
-		return result;
-	}
+
 
 	public Game InfoGame(String name) {
 		Game vo= null;
@@ -151,38 +145,6 @@ public class GameService {
 		ArrayList<Game> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
 		volist = new GameDao().selectJjimRankList(conn, start, end);
-		JDBCTemplate.close(conn);
-		return volist;
-	}
-
-	public int addViewCount() {
-		int result = 0;
-		Connection conn = JDBCTemplate.getConnection();
-		result = new GameDao().addViewCount(conn);
-		JDBCTemplate.close(conn);
-		return result;
-	}
-
-	public int insertGameLike(GameLike gameLike) {
-		int result = 0;
-		Connection conn = JDBCTemplate.getConnection();
-		result = new GameDao().insertGameLike(conn, gameLike);
-		JDBCTemplate.close(conn);
-		return result;
-	}
-
-	public ArrayList<Game> selectGameRank() {
-		ArrayList<Game> volist = null;
-		Connection conn = JDBCTemplate.getConnection();
-		volist = new GameDao().selectGameRank(conn);
-		JDBCTemplate.close(conn);
-		return volist;
-	}
-
-	public ArrayList<Game> searchFilterGameRank(String gameCategory, String gameAge, String gamePlayer, int gameTime,int gamePrice) {
-		ArrayList<Game> volist = null;
-		Connection conn = JDBCTemplate.getConnection();
-		volist = new GameDao().searchFilterGameRank(conn, gameCategory, gameAge, gamePlayer, gameTime, gamePrice);
 		JDBCTemplate.close(conn);
 		return volist;
 	}

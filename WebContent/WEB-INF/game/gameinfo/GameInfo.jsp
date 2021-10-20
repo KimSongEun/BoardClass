@@ -169,14 +169,6 @@
 	z-index: 1;
 	background-color: rgba(12, 12, 12, .3);
 }
-.modal2 {
-	display: none;
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	z-index: 1;
-	background-color: rgba(12, 12, 12, .3);
-}
 
 .modal-content {
 	width: 680px;
@@ -196,20 +188,33 @@
 	background-color: #e9ecef;
 	padding: 10px;
 }
+/* Modal Box content에 내용 크게 키우기 */
+.modal-content2 .normal-table td {
+	width:500px;
+	align-content: center;
+	font-size: 2em;
+}
+#rd .normal-table td {
+	width:120px;
+}
+
 
 .btn1 {
-	position: relative;
+ 	position: relative;
 	top: 15px;
 	width: 336px;
 	height: 100px;
+	float:left;
 }
 .close{
-	position: relative;
-	
+ 	position: relative;
+	top: 15px;
+	left: 4px;
 	width: 336px;
 	height: 100px;
-	left:340px;
-	top:-86px;
+	float:left;
+/* 	left:340px;
+	top:-86px; */
 }
 .star-rating {
 	display: flex;
@@ -306,7 +311,12 @@ background-color:#CCFFFF;
 	</div>
 	
 
-	
+<!-- Modal Box -->
+<div id="modal_02" class="modal">
+<div class="modal-content2">
+				
+</div>
+</div>
 	
 	
 	<%@include file="/WEB-INF/index/header.jsp" %>
@@ -477,12 +487,12 @@ background-color:#CCFFFF;
 					if (go2 != null) {
 					for (GameReview go : go2) {
 				%>
-					<div id = "rd">
+					<div id="rd">
 						<input type = "hidden" value = "<%=go.getReviewNo()%>" name = "REVIEW_NO">
 						<input type = "hidden" value = "<%=vo.getGameKoName()%>" name = "GAME_KONAME">
 				
-						<button type = "button" name = "re" class = "rdbtn" id = "c_<%=go.getReviewNo()%>">
-						<table border = "1">
+						<button type="button" name="re" class="rdbtn" id="c_<%=go.getReviewNo()%>">
+						<table border = "1" class="normal-table">
 							<tr>
 								<td width="120px">@@</td>
 								<td width="120px">★   <%=go.getReviewScore()%> </td>								
@@ -498,52 +508,37 @@ background-color:#CCFFFF;
 						</table>
 						</button>
 				</div>
-<!-- Modal Box -->
-<div id="modal_02" class="c_<%=go.getReviewNo()%> modal2">
-<div class="modal-content2">
-	<table border = "1">
-		<tr>
-			<td width="120px">@@</td>
-			<td width="120px">★   <%=go.getReviewScore()%> </td>								
-		</tr>
-		<tr>
-			<td colspan="2" height="200px"><%=go.getReviewContent()%></td>
-		</tr>
-		<tr>
-			<td>dd</td>
-			<td><%=go.getReviewDate()%></td>
-		</tr>
-		
-	</table>
-	<button value="취 소" class = "close" >취 소</button>			
-</div>
-</div>
 				<%}} %>
 
 			</div>
 			
-			
 		<script>
 			$(".rdbtn").click(function() {
-				var id= $(this).prop('id');
-				console.log(id);
-				var classid="."+id;
-				console.log($(".c_2"));
-				$(".c_2").hide();
-				$(".c_2").css("display","block");
+				var html= $(this).html();
+				console.log(html);
+				$(".modal-content2").html("");
+				$(".modal-content2").append(html);
+				html='<br><button value="취 소" class="close">취 소</button>';
+				$(".modal-content2").append(html);
+				$("#modal_02").show();
+				//$(".c_2").css("display","block");
 			});
 			$("#btnModalShow").click(function() {
-				$(".modal").show();
+				$("#modal_01").show();
 			});
 			$(".close").click(function() {
 				$(".modal").hide();
 			});
 
 			$(window).on("click", function(e) {
-				var modal = document.getElementById("modal_01");
-				if (e.target == modal) {
-					$(".modal").hide();
-				}
+				//var modal = document.getElementById("modal_01");
+				//if (e.target == modal) {
+				$(".modal").each(function () {
+					if(e.target == this){
+						$(this).hide();
+					}	
+				});
+				
 			});
 
 		</script>
