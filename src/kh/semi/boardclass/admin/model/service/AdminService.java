@@ -83,6 +83,39 @@ public class AdminService {
 		JDBCTemplate.close(conn);
 		return volist;
 	}
+	
+	public ArrayList<ReportBoard> selectNewestReportBoardList() {
+		ArrayList<ReportBoard> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().selectNewestReportBoardList(conn);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public ArrayList<ReportComment> selectNewestReportCommentList() {
+		ArrayList<ReportComment> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().selectNewestReportCommentList(conn);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public ArrayList<ReportReview> selectNewestReportReviewList() {
+		ArrayList<ReportReview> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().selectNewestReportReviewList(conn);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
+	public ArrayList<ReportUsed> selectNewestReportUsedList() {
+		ArrayList<ReportUsed> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().selectNewestReportUsedList(conn);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	// 여기
 
 	public Notice getNotice(int announceNo) {
 		Notice vo = null;

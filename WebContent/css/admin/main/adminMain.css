@@ -1,10 +1,17 @@
 @charset "UTF-8";
 .admin-main-section{
-    position :absolute;
+/*     position :absolute;
     left : 250px;
     top : 40px;
     width : 83.6%;
     padding: 50px;
+    background-color : ivory; */
+    padding: 50px;
+    background-color: rgba(237, 237, 238, 0.89);
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    box-sizing:border-box;
 }
 .admin-main-title{
 	font-weight: bold;
@@ -38,10 +45,10 @@
 }
 .admin-report-div{
     height : 400px;
+    display : flex;
 }
 .admin-report-board-table-div{
     float : left;
-    /* display: inline-block; */
     margin: auto 40px;
 } 
 .admin-report-board-table{
@@ -49,26 +56,54 @@
 }
 .admin-report-comment-table-div{
     float: right;
-    /* display: inline-block; */
 }
 .admin-report-comment-table{
 	width: 500px; 
 }
 .admin-notice-div{
-    margin: auto;
+    margin : auto;
 }
 .admin-notice-table {
     width : 600px;
     margin: auto;
+    margin-bottom : 300px;
 }
-tr, td {
-    padding: 10px;
+
+.table {
+	border-collapse: collapse;
+	margin: 25px 0;
+	min-width: 400px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	width: 1100px;
+	justify-content: center;
+	margin-left: auto;
+	margin-right: auto;
+	table-layout: fixed;
 }
-.table-hover tr:hover {
-    color: #212529;
-    background-color: rgba(0, 0, 0, 0.075);
-  }
-table {
-    border: 2px solid #1f232c;
+
+.table thead tr {
+	background-color: #fdcfad;
+	color: black;
+	text-align: left;
+	border-bottom: 1px solid grey;
 }
-  
+
+.table th, table td {
+	padding: 12px 15px;
+}
+
+.table tbody tr {
+	border-bottom: 1px solid #d3d1c4;
+}
+
+.table tbody tr:nth-of-type(even) {
+	background-color: #f3f3f3;
+}
+
+.table tbody tr:last-of-type {
+	border-bottom: 2px solid #999879;
+}
+
+#num {
+	width : 10px;
+}
