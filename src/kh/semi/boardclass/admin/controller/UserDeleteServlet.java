@@ -40,7 +40,7 @@ public class UserDeleteServlet extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/admin/adminuser/adminuseralert.jsp");
 
 		if (result > 0) {
-			request.setAttribute("msg", userId + "번 회원 탈퇴완료");
+			request.setAttribute("msg", userId + "님 탈퇴완료😭");
 			request.setAttribute("loc", "adminuserlist");
 		} else {
 			request.setAttribute("msg", "삭제실패 ");

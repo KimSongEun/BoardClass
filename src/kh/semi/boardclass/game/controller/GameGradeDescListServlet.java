@@ -69,8 +69,12 @@ public class GameGradeDescListServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1; 
 		if(endPage > pageCount) endPage=pageCount;
 		
+		String search = request.getParameter("search");
+		System.out.println("검색어는 : " + search);
+
 		
-		ArrayList<Game> volist = new GameService().selectGradeDescGameList(startRnum,endRnum);
+		// DB에서 값 읽어오기
+		ArrayList<Game> volist = new GameService().selectGradeDescGameList(startRnum,endRnum, search);
 		
 		
 		request.setAttribute("gamevolist", volist);

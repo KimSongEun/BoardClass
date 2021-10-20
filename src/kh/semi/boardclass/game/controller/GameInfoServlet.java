@@ -43,8 +43,11 @@ public class GameInfoServlet extends HttpServlet {
         String name = request.getParameter("GAME_KONAME");
         String gamenum = request.getParameter("GAME_NO");
         
-        
-        
+        String reviewno1 = request.getParameter("REVIEW_NO");
+        if(reviewno1 == null){
+        	reviewno1 = "0";
+        }
+       
         String id =  "a";
         
         String gamen =   request.getParameter("no");
@@ -89,8 +92,11 @@ public class GameInfoServlet extends HttpServlet {
          
         ArrayList<Used> vo2 = new GameService().usedlist(name);
         
-        final int PAGE_SIZE = 5;   // 한 페이지 당 글수
-		final int PAGE_BLOCK = 3;   // 한 화면에 나타날 페이지 링크 수
+        
+       
+        
+        final int PAGE_SIZE = 4;   // 한 페이지 당 글수
+		final int PAGE_BLOCK = 1;   // 한 화면에 나타날 페이지 링크 수
 		int bCount = 0;   // 총 글수
 		int pageCount = 0; // 총 페이지수
 		int startPage = 1;   // 화면에 나타날 시작페이지
@@ -125,11 +131,20 @@ public class GameInfoServlet extends HttpServlet {
         ArrayList<GameReview> gvo2 = new GameService().selectReview(startRnum,endRnum,gameno2);
         request.setAttribute("riviewvolist", gvo2);
         }catch(Exception e){}
-        
+ 
+        try {
+        int reviewno2 = Integer.parseInt(reviewno1);   
+        GameReview vo3 = new GameService().InfoReview(reviewno2);
+        System.out.println("a"+reviewno1);
+        System.out.println("aa"+reviewno2);
+        System.out.println("aaa"+vo3);
+        request.setAttribute("reviewvolist", vo3);
+        }catch(Exception e){}
+       
         
         request.setAttribute("gamevolist", vo);
         request.setAttribute("usedvolist", vo2);
-       
+     
         request.setAttribute("str2", str2);
         request.setAttribute("str4", str4);
       

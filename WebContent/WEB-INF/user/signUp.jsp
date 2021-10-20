@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원가입</title>
   <link rel="stylesheet" href="./css/user/signUp.css">
   <link rel="stylesheet" href="./css/user/loginHeaderFooter.css">
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -12,7 +12,7 @@
 </head>
 <body>
  <%@include file="/WEB-INF/user/userHeader.jsp" %>
-<form name="form" method="post" id="signform" action="signup.do" >
+<form name="form" method="post" id="signform" action="signup.do" enctype="multipart/form-data">
         <div class="container">
             <div class="insert">
                 <table>
@@ -99,13 +99,13 @@
                     </tr>
                     <tr>
                         <td class="col1">주소 (선택)</td>
-                        <td class="col2"><input type="text" name="address" id="address" maxlength="25" placeholder="주소를 입력해주세요."></td>
+                        <td class="col2"><input type="text" name="userAddress" id="userAddress" maxlength="25" placeholder="주소를 입력해주세요."></td>
                     <td class="col3">
-                                <div class="address regex"></div>
+                                <div class="userAddress regex"></div>
                             </td>
                     </tr>
-
-                </table>
+					
+				</table>
             </div>
             <div class="create">
                  <input class="signupBtn" id="signupBtn" type="button" value="회원가입" > 

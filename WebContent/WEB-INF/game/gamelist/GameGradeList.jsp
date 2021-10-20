@@ -123,10 +123,10 @@ top:-100px;
 		
 		<nav id="nav2">
 
-			<p>ㅇㅇㅇ</p>
+			<p>전체</p>
 			<br>
 			<ul class="ulist">
-					<li><a href="GameLevelList">전체</a></li>
+					<li><a href="GameAllList">전체</a></li>
 				<li><a href="GameStrategyList">전략</a></li>
 				<li><a href="GameTemaList">테마</a></li>
 				<li><a href="GameFamilyList">가족</a></li>
@@ -140,17 +140,20 @@ top:-100px;
 		<aside></aside>
 
 		<section id="section2">
-			<div id="d1">ㅇㅇ</div>
+			<div id="d1">평점 순</div>
 
 			<div id="search">
-				게임이름 <input type="text" id="text_name">
-				<button type="button" id="search_btn" onclick="#">검색</button>
+				<form action="GameGradeList">
+				게임이름 <input type="search" id="text_name" name="search">
+				<button type="submit" id="search_btn" >검색</button>
+				</form>
 			</div>
 
 			<select id="sort" onchange="window.open(value,'_self');">
 				<option value="GameGradeList">평점 순</option>
-				<option value="GameGradeDescList">평점 낮은순</option>
 				<option value="GameLevelList">난이도 순</option>
+				
+				<option value="GameGradeDescList">평점 낮은순</option>
 				<option value="GameSortList">가나다 순</option>
 			</select> <br>
 			<%

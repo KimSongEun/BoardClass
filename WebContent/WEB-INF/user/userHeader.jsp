@@ -2,14 +2,14 @@
 	pageEncoding="UTF-8" import="kh.semi.boardclass.user.model.vo.*"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	User m = (User) session.getAttribute("user");
+	User userSession = (User) session.getAttribute("userSession");
 %>
 
 
 	<header>
 <div class="nav">
 	<%
-	if (m == null) {
+	if (userSession == null) {
 %>	
 			<nav class="navlogin">
 				 <a id="modal_opne_btn">로그인</a>
@@ -21,7 +21,7 @@
 
 	<nav class="navlogin">
 		<a href="<%=request.getContextPath() %>/logout">로그아웃</a> | 
-		<a href="#">회원정보 관리</a> | 
+		<a href="<%=request.getContextPath() %>/checkuser">회원정보 관리</a> | 
 		<a href="#">마이페이지</a>
 	</nav>
 
@@ -92,7 +92,7 @@ $(function() {
 					if(d.result == "ok"){ 
 						 $("#modal").hide(); 
 							var text = 
-								"<a href='logout'>로그아웃</a> | <a href='#'>회원정보 관리</a> | <a href='#'>마이페이지</a>";
+								"<a href='logout'>로그아웃</a> | <a href='checkuser'>회원정보 관리</a> | <a href='#'>마이페이지</a>";
 						
 								$(".navlogin").html(text);
 						//예시 1

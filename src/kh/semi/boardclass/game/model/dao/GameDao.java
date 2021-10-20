@@ -18,10 +18,6 @@ public class GameDao {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getListCount(Connection conn) {
-		int result = 0;
-		return result;
-	}
 
 	public Game InfoGame(Connection conn, String name) {
 		Game vo = null;
@@ -62,6 +58,38 @@ public class GameDao {
 				vo.setGameVideo(rset.getString("GAME_VIDEO"));
 				vo.setGamePlus(rset.getString("GAME_PLUS"));
 				vo.setGamePlusImage(rset.getString("Game_PLUSIMAGE"));
+
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}  finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return vo;
+	}
+	
+	public GameReview InfoReview(Connection conn, int no) {
+		GameReview vo = null;
+		String sql = "select * from REVIEW where REVIEW_NO = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			rset = pstmt.executeQuery();
+			
+			if (rset.next()) {
+				vo = new GameReview();
+
+				vo.setReviewNo(rset.getInt("REVIEW_NO"));
+				vo.setUserId(rset.getString("USER_ID"));
+				vo.setGameNo(rset.getInt("GAME_NO"));
+				vo.setReviewContent(rset.getString("REVIEW_CONTENT"));
+				vo.setReviewScore(rset.getInt("REVIEW_SCORE"));
+				vo.setReviewDate(rset.getDate("REVIEW_DATE"));
 
 			}
 			
@@ -190,7 +218,7 @@ public class GameDao {
 		return result;
 	}
 
-	public ArrayList<Game> selectCateGameList(Connection conn, int start, int end, String cate) {
+	public ArrayList<Game> selectCateGameList(Connection conn, int start, int end, String cate, String search) {
 
 		ArrayList<Game> volist = null;
 
@@ -322,19 +350,37 @@ public class GameDao {
 		return volist;
 	}
 
-	public ArrayList<Game> selectGradeGameList(Connection conn, int start, int end) {
+	public ArrayList<Game> selectGradeGameList(Connection conn, int start, int end, String search) {
 
 		ArrayList<Game> volist = null;
-		String sql = "select * from " + " (select Rownum r, t1.* from "
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql1 = "select * from " + " (select Rownum r, t1.* from "
 				+ " (select * from BOARDGAME order by GAME_GRADE asc) t1 ) t2 " + " where r between ? and ?";
 
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
+		String sql2 = "select * from (select Rownum r, u.* from "
+				+ "(select * from BOARDGAME where GAME_KONAME like ? order by GAME_LEVEL asc) u) "
+				+ " where r between ? and ?";
+		String sql = "";
+		if (search != null && !search.equals("")) {
+			sql = sql2;
+		} else {
+			sql = sql1;
+		}
+		
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
+			int idx = 0;
+			if (search != null && !search.equals("")) {
+				search = "%" + search + "%";
+				pstmt.setString(++idx, search);
+				
+			}
+			pstmt.setInt(++idx, start);
+			pstmt.setInt(++idx, end);
+			
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
 				volist = new ArrayList<Game>();
@@ -379,19 +425,36 @@ public class GameDao {
 		return volist;
 	}
 
-	public ArrayList<Game> selectGradeDescGameList(Connection conn, int start, int end) {
+	public ArrayList<Game> selectGradeDescGameList(Connection conn, int start, int end, String search) {
 
 		ArrayList<Game> volist = null;
-		String sql = "select * from " + " (select Rownum r, t1.* from "
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql1 = "select * from " + " (select Rownum r, t1.* from "
 				+ " (select * from BOARDGAME order by GAME_GRADE desc) t1 ) t2 " + " where r between ? and ?";
-
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
+		String sql2 = "select * from (select Rownum r, u.* from "
+				+ "(select * from BOARDGAME where GAME_KONAME like ? order by GAME_GRADE desc) u) "
+				+ " where r between ? and ?";
+		String sql = "";
+		if (search != null && !search.equals("")) {
+			sql = sql2;
+		} else {
+			sql = sql1;
+		}
+		
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
+			int idx = 0;
+			if (search != null && !search.equals("")) {
+				search = "%" + search + "%";
+				pstmt.setString(++idx, search);
+				
+			}
+			pstmt.setInt(++idx, start);
+			pstmt.setInt(++idx, end);
+			
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
 				volist = new ArrayList<Game>();
@@ -436,19 +499,36 @@ public class GameDao {
 		return volist;
 	}
 
-	public ArrayList<Game> selectSortGameList(Connection conn, int start, int end) {
+	public ArrayList<Game> selectSortGameList(Connection conn, int start, int end, String search) {
 
 		ArrayList<Game> volist = null;
-		String sql = "select * from " + " (select Rownum r, t1.* from "
-				+ " (select * from BOARDGAME order by GAME_KONAME asc) t1 ) t2 " + " where r between ? and ?";
-
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		
+		String sql1 = "select * from " + " (select Rownum r, t1.* from "
+				+ " (select * from BOARDGAME order by GAME_KONAME asc) t1 ) t2 " + " where r between ? and ?";
+		String sql2 = "select * from (select Rownum r, u.* from "
+				+ "(select * from BOARDGAME where GAME_KONAME like ? order by GAME_KONAME asc) u) "
+				+ " where r between ? and ?";
+		String sql = "";
+		if (search != null && !search.equals("")) {
+			sql = sql2;
+		} else {
+			sql = sql1;
+		}
+		
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
+			int idx = 0;
+			if (search != null && !search.equals("")) {
+				search = "%" + search + "%";
+				pstmt.setString(++idx, search);
+				
+			}
+			pstmt.setInt(++idx, start);
+			pstmt.setInt(++idx, end);
+			
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
 				volist = new ArrayList<Game>();
@@ -497,11 +577,11 @@ public class GameDao {
 
 		ArrayList<Game> volist = null;
 
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		String sql = "select * from " + " (select Rownum r, t1.* from "
 				+ " (select * from BOARDGAME order by GAME_GRADE asc) t1 ) t2 " + " where r between ? and ?";
 
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -747,27 +827,6 @@ public class GameDao {
 		return result;
 	}
 
-	public int addViewCount(Connection conn) {
-		int result = 0;
-		return result;
-	}
-
-	public int insertGameLike(Connection conn, GameLike gameLike) {
-		int result = 0;
-		return result;
-	}
-
-	public ArrayList<Game> selectGameRank(Connection conn) {
-		ArrayList<Game> volist = null;
-		return volist;
-	}
-
-	public ArrayList<Game> searchFilterGameRank(Connection conn, String gameCategory, String gameAge, String gamePlayer,
-			int gameTime, int gamePrice) {
-		ArrayList<Game> volist = null;
-		return volist;
-	}
-	
 	public List<Game> searchList(Connection conn, String searchKeyword) {
 		List<Game> volist = null;
 		PreparedStatement pstmt = null;

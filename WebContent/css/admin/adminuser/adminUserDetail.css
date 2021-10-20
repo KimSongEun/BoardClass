@@ -77,15 +77,6 @@ section {
 	background-color: #E4D8DC;
 }
 
-.navbar a {
-	float: left;
-	font-size: 16px;
-	color: white;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-}
-
 .subnav {
 	float: left;
 	overflow: hidden;
@@ -104,14 +95,13 @@ section {
 }
 
 .navbar a:hover, .subnav:hover .subnavbtn {
-	background-color: #d5d7df;
+	background-color:  #efe3f3;
 }
 
 .subnav-content {
 	display: none;
 	position: absolute;
 	left: 0px;
-	background-color: #FFE3E3;
 	width: 92%;
 	height: 45px;
 	margin-left: 50px;
@@ -123,11 +113,6 @@ section {
 	color: black;
 	text-decoration: none;
 	width: 200px;
-}
-
-.subnav-content a:hover {
-	background-color: #F4D8DC;
-	color: black;
 }
 
 .subnav:hover .subnav-content {
@@ -185,55 +170,55 @@ table tbody tr:last-of-type {
 	border: 2px solid black;
 	color: black;
 	text-decoration: none;
-	font-weight: 700;
+	font-weight: 400;
 	text-transform: uppercase;
-	margin: 15px 5px 0;
+	/* margin: 15px 5px 0; */
 	transition: all .2s;
 	min-width: 100px;
 	text-align: center;
 	font-size: 14px;
-	background-color : ivory;
+	background-color: white;
+	cursor: pointer;
+}
+
+.btn.warning {
+	border-color: #f17170;
+	color: #f17170;
+}
+
+.btn.warning:hover, .btn.warning.hover {
+	background: #f17170;
+	color: #fff;
 }
 
 .btn.danger {
 	border-color: #e74c3c;
-	color: #e74c3c
+	color: #e74c3c;
 }
 
 .btn.danger:hover, .btn.danger.hover {
 	background: #e74c3c;
-	color: #fff
+	color: #fff;
 }
 
 /* 네비 콘텐츠 */
-#boarddiv {
-	display: none;
-}
-
-#useddiv {
-	display: none;
-}
-
-#comtdiv {
-	display: none;
-}
-
-#reviewdiv {
-	display: none;
-}
-
-#reportboarddiv {
-	display: none;
-}
-
-#reportuseddiv {
-	display: none;
-}
-
-#reportcomtdiv {
-	display: none;
-}
-
-#reportreviewdiv {
-	display: none;
-}
+.tablink {
+    background-color: #f3c8c8;
+    color: black;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    line-height: 45px;    
+    font-size: 15px;
+    width: 200px;
+  }
+  .tablink:hover {
+    background-color: #e7e0e9;
+  }
+  .tabcontent {
+    color: black;
+    display: none;
+    padding: 100px 20px;
+    height: 100%;
+  }
