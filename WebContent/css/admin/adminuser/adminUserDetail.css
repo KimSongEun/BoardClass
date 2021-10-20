@@ -170,7 +170,7 @@ table tbody tr:last-of-type {
 	border: 2px solid black;
 	color: black;
 	text-decoration: none;
-	font-weight: 700;
+	font-weight: 400;
 	text-transform: uppercase;
 	/* margin: 15px 5px 0; */
 	transition: all .2s;
