@@ -135,7 +135,7 @@
                         <div class="admin-report-div">
 
                 <div class="admin-report-board-table-div" style="margin:0 auto;">
-                    <table class="table table-hover admin-report-board-table" style="text-align: center; width : 500px">
+                    <table class="table table-hover admin-report-board-table" style="text-align: center; width : 550px">
                         <thead>
                             <tr>
                                 <td colspan="5" class="table-active"
@@ -157,7 +157,7 @@
                             <td>${rr.reviewNo}</td>
                             <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" ><a href="#" class = "comment-modal" id = "${rr.reviewNo}" style = "color : #754100">${rr.reviewContent}</a></td>
                             <td><a href="#회원정보조회" style = "color : #754100">${rr.userId}</a></td>
-                            <td><button class="deletecomment btn btn-primary" value="deletego" id = "${rr.reviewNo}">삭제</button></td>
+                            <td><button class="deletereview btn btn-primary" value="deletego" id = "${rr.reviewNo}">삭제</button></td>
                         </tr>
                         </c:forEach>
                         </c:if>
@@ -165,7 +165,7 @@
                 </div>
 
                 <div class="admin-report-comment-table-div" style="margin:0 auto;">
-                    <table class="table table-hover admin-report-comment-table" style="text-align: center; width : 500px">
+                    <table class="table table-hover admin-report-comment-table" style="text-align: center; width : 550px">
                         <thead>
                             <tr>
                                 <td colspan="5" style="text-align:center; font-size: 18px; font-weight: bold;  background-color: #dedfe0;">신고 된 중고글
@@ -187,7 +187,7 @@
                             <td>${ru.usedNo}</td>
                             <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" ><a href="#중고글조회" id = "${ru.usedNo}" style = "color : #754100" title = "${ru.usedTitle}">${ru.usedTitle}</a></td>
                             <td><a href="#회원정보조회" style = "color : #754100">${ru.userId}</a></td>
-                            <td><button class="deletecomment btn btn-primary" value="deletego" id = "${ru.usedNo}">삭제</button></td>
+                            <td><button class="deleteused btn btn-primary" value="deletego" id = "${ru.usedNo}">삭제</button></td>
                         </tr>
                         </c:forEach>
                         </c:if>
