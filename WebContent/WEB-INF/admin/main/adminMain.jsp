@@ -24,7 +24,7 @@
 	<header></header>
     <section>
         <div class="admin-main-section">
-            <div class="admin-main-title">admin님 방문을 환영합니다.</div>
+            <div class="admin-main-title">😊 admin님 방문을 환영합니다. 😊</div>
 
             <div class="admin-count-div">
                 <div class="admin-count-allmember-div">
