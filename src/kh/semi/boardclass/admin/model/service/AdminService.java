@@ -60,22 +60,6 @@ public class AdminService {
 		return result;
 	}
 
-	public ArrayList<BoardReport> getRankReportBoard() {
-		ArrayList<BoardReport> volist = null;
-		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().getRankReportBoard(conn);
-		JDBCTemplate.close(conn);
-		return volist;
-	}
-
-	public ArrayList<CommentReport> getRankReportComment() {
-		ArrayList<CommentReport> volist = null;
-		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().getRankReportComment(conn);
-		JDBCTemplate.close(conn);
-		return volist;
-	}
-
 	public ArrayList<Notice> getNewestNotice() {
 		ArrayList<Notice> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
