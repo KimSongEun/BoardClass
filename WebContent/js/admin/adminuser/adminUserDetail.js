@@ -1,5 +1,14 @@
+function openPage(pageName,elmnt) {
+    console.log("시작");
+    var i, tabcontent;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
+    document.getElementById(pageName).style.display = "block"; 
+  }
 $(function(){
-    $(".board").click(function(){
+ /*   $(".board").click(function(){
         $("#contentdiv").text("");
         $("#contentdiv").append($("#boarddiv"));
         $("#boarddiv").fadeIn(300);
@@ -38,7 +47,7 @@ $(function(){
         $("#contentdiv").text("");
         $("#contentdiv").append($("#reportreviewdiv"));
         $("#reportreviewdiv").fadeIn(500);
-    })
+    })*/
 
 	$(".board").click(boarddetail);
 	function boarddetail() {
@@ -207,7 +216,7 @@ $(function(){
 				html += "<td>"+data.reportboardvolist[i].boardType+"</td>";
 				html += "<td id = 'tda'><a href = #게시글조회가기 target='blank'>"+data.reportboardvolist[i].boardTitle+"</a></td>";
 				html += "<td>"+data.reportboardvolist[i].boardRewriteDate+"</td>";
-				html += "<td style = 'vertical-align : middle'><button class='delete btn btn-primary' value='deletego' id = '"+data.reportboardvolist[i].boardNo+"'>삭제</button></td>";
+				html += "<td style = 'vertical-align : middle'><button class='delete btn warning' value='deletego' id = '"+data.reportboardvolist[i].boardNo+"'>삭제</button></td>";
 				html += "</tr>";
 		}
 		$("#input_data").html(html);
@@ -276,7 +285,7 @@ $(function(){
 				html += "<td>"+usedExtype+"</td>";
 				html += "<td>"+data.reportusedvolist[i].usedPrice+"</td>";
 				html += "<td>"+data.reportusedvolist[i].usedCategory+"</td>";
-				html += "<td style = 'vertical-align : middle'><button class='delete btn btn-primary' value='deletego' id = '"+data.reportusedvolist[i].usedNo+"'>삭제</button></td>";
+				html += "<td style = 'vertical-align : middle'><button class='delete btn warning' value='deletego' id = '"+data.reportusedvolist[i].usedNo+"'>삭제</button></td>";
 				html += "</tr>";
 			}
 
@@ -316,7 +325,7 @@ $(function(){
 				html += "<td>"+data.reportcommentvolist[i].boardTitle+"</td>";
 				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden' id = 'tda'><a href = #댓글조회가기 target='blank'>"+data.reportcommentvolist[i].commentContent+"</a></td>";
 				html += "<td>"+data.reportcommentvolist[i].commentRewriteDate+"</td>";
-				html += "<td style = 'vertical-align : middle'><button class='delete btn btn-primary' value='deletego' id = '"+data.reportcommentvolist[i].commentNo+"'>삭제</button></td>";
+				html += "<td style = 'vertical-align : middle'><button class='delete btn warning' value='deletego' id = '"+data.reportcommentvolist[i].commentNo+"'>삭제</button></td>";
 				html += "</tr>";
 		}
 		$("#input_data").html(html);
@@ -355,7 +364,7 @@ $(function(){
 				html += "<td>"+data.reportreviewvolist[i].gameKoName+"</td>";
 				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden' id = 'tda'><a href = #리뷰 조회가기 target='blank'>"+data.reportreviewvolist[i].reviewContent+"</a></td>";
 				html += "<td>"+data.reportreviewvolist[i].reviewDate+"</td>";
-				html += "<td style = 'vertical-align : middle'><button class='delete btn btn-primary' value='deletego' id = '"+data.reportreviewvolist[i].reviewNo+"'>삭제</button></td>";
+				html += "<td style = 'vertical-align : middle'><button class='delete btn warning' value='deletego' id = '"+data.reportreviewvolist[i].reviewNo+"'>삭제</button></td>";
 				html += "</tr>";
 		}
 		$("#input_data").html(html);

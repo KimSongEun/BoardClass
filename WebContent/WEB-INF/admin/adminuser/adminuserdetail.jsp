@@ -41,42 +41,42 @@
                     <div class="subnav">
                         <button class="subnavbtn">작성글 <i class="fa fa-caret-down"></i></button>
                         <div class="subnav-content">
-                            <a href="#" class="board" id = "${uservo.userId}">커뮤니티글</a>
-                            <a href="#" class = "used" id = "${uservo.userId}">중고거래글</a>
+                            <button class="tablink board" onclick="openPage('boarddiv', this)" id = "${uservo.userId}">커뮤니티글</button>
+                            <button class="tablink used" onclick="openPage('useddiv', this)" id = "${uservo.userId}">중고거래글</button>
                         </div>
                     </div>
                     <div class="subnav">
                         <button class="subnavbtn">작성댓글 <i class="fa fa-caret-down"></i></button>
-                        <div class="subnav-content">
+                        <div class="subnav-content" style = "padding-left : 200px">
                             <a href="#"></a>
-                            <a href="#" class="comt" id = "${uservo.userId}">커뮤니티댓글</a>
-                            <a href="#" class="review" id = "${uservo.userId}">리뷰글</a>
+                            <button class="tablink comt" onclick="openPage('comtdiv', this)" id = "${uservo.userId}">커뮤니티댓글</button>
+                            <button class="tablink review" onclick="openPage('reviewdiv', this)" id = "${uservo.userId}">리뷰글</button>
                         </div>
                     </div>
                     <div class="subnav">
                         <button class="subnavbtn">신고된 글 <i class="fa fa-caret-down"></i></button>
-                        <div class="subnav-content">
+                        <div class="subnav-content" style = "padding-left : 400px">
                         	<a href="#"></a>
                         	<a href="#"></a>
-                            <a href="#" class="reportboard" id = "${uservo.userId}">커뮤니티글</a>
-                            <a href="#" class="reportused" id = "${uservo.userId}">중고거래글</a>
+                            <button class="tablink reportboard" onclick="openPage('reportcomtdiv', this)" id = "${uservo.userId}">커뮤니티글</button>
+                            <button class="tablink reportused" onclick="openPage('reportreviewdiv', this)" id = "${uservo.userId}">중고거래글</button>
                         </div>
                     </div>
                     <div class="subnav">
                         <button class="subnavbtn">신고된 댓글 <i class="fa fa-caret-down"></i></button>
-                        <div class="subnav-content">
+                        <div class="subnav-content" style = "padding-left : 600px">
                         	<a href="#"></a>
                         	<a href="#"></a>       
                         	<a href="#"></a>       
-                            <a href="#" class="reportcomt" id = "${uservo.userId}">커뮤니티댓글</a>
-                            <a href="#" class="reportreview" id = "${uservo.userId}">리뷰글</a>
+                            <button class="tablink reportcomt" onclick="openPage('reportcomtdiv', this)" id = "${uservo.userId}">커뮤니티댓글</button>
+                            <button class="tablink reportreview" onclick="openPage('reportreviewdiv', this)" id = "${uservo.userId}">리뷰글</button>
                         </div>
                     </div>
                 </div>
                 <div id="contentdiv">
                     
                 </div>
-                <div style="padding:50px 16px" id="boarddiv">
+                <div style="padding:50px 16px" id="boarddiv" class="tabcontent">
                     <h1>커뮤니티 글</h1>
                     <div class="admin-table-div" style = "text-align : center">
 						<table style="text-align: center; border : 1px solid black">
@@ -96,7 +96,7 @@
                     </table>
 					</div>
                 </div>
-                <div style="padding:50px 16px" id="useddiv">
+                <div style="padding:50px 16px" id="useddiv" class="tabcontent">
                     <h3>중고 글</h3>
                      <div class="admin-table-div" style = "text-align : center">
 						<table style="text-align: center; border : 1px solid black">
@@ -117,7 +117,7 @@
                     </table>
 					</div>
                 </div>
-                <div style="padding:50px 16px" id="comtdiv">
+                <div style="padding:50px 16px" id="comtdiv" class="tabcontent">
                     <h3>커뮤니티 댓글</h3>
                     <div class="admin-table-div" style = "text-align : center">
 						<table style="text-align: center; border : 1px solid black">
@@ -135,7 +135,7 @@
                     </table>
 					</div>
                 </div>
-                <div style="padding:50px 16px" id="reviewdiv">
+                <div style="padding:50px 16px" id="reviewdiv" class="tabcontent">
                     <h3>리뷰 글</h3>
                     <div class="admin-table-div" style = "text-align : center">
 						<table style="text-align: center; border : 1px solid black">
@@ -153,7 +153,7 @@
                     </table>
 					</div>
                 </div>
-                <div style="padding:50px 16px" id="reportboarddiv">
+                <div style="padding:50px 16px" id="reportboarddiv" class="tabcontent">
                     <h3>커뮤니티 신고글</h3>
                   <div class="admin-table-div" style = "text-align : center">
 						<table style="text-align: center; border : 1px solid black">
@@ -174,7 +174,7 @@
                     </table>
 					</div>                    
                 </div>
-                <div style="padding:50px 16px" id="reportuseddiv">
+                <div style="padding:50px 16px" id="reportuseddiv" class="tabcontent">
                     <h3>중고 신고글</h3>
                      <div class="admin-table-div" style = "text-align : center">
 						<table style="text-align: center; border : 1px solid black">
@@ -197,7 +197,7 @@
                     </table>
 					</div>                    
                 </div>
-                <div style="padding:50px 16px" id="reportcomtdiv">
+                <div style="padding:50px 16px" id="reportcomtdiv" class="tabcontent">
                     <h3>커뮤니티 신고댓글</h3>
                     <div class="admin-table-div" style = "text-align : center">
 						<table style="text-align: center; border : 1px solid black">
@@ -217,7 +217,7 @@
                     </table>
 					</div>                    
                 </div>
-                <div style="padding:50px 16px" id="reportreviewdiv">
+                <div style="padding:50px 16px" id="reportreviewdiv" class="tabcontent">
                     <h3>리뷰 신고글</h3>
                     <div class="admin-table-div" style = "text-align : center">
 						<table style="text-align: center; border : 1px solid black">
