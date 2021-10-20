@@ -121,10 +121,11 @@ top:-100px;
 	<div id ="total">
 		<nav id="nav2">
 
-			<p>전체</p>
+			<p>pp</p>
+			
 			<br>
 			<ul class="ulist">
-				<li><a href="GameLevelList">전체</a></li>
+				<li><a href="GameAllList">전체</a></li>
 				<li><a href="GameStrategyList">전략</a></li>
 				<li><a href="GameTemaList">테마</a></li>
 				<li><a href="GameFamilyList">가족</a></li>
@@ -138,7 +139,7 @@ top:-100px;
 		<aside></aside>
 
 		<section id="section2">
-			<div id="d1">전체</div>
+			<div id="d1">난이도 순</div>
 
 			<div id="search">
 			<form action="GameLevelList">
@@ -147,55 +148,7 @@ top:-100px;
 				</form>
 			</div>
 
-			<%-- 		<script>
-			$("#search_btn").click(searchF1);
-		      function searchF1(){
-		         if($("#text_name").val() == ""){
-		            alert("잘못 입력하셨습니다.");
-		            return;   
-		         }
-		         ajaxF1();
-		      }
-		      function ajaxF1(){
-		          {
-		            $.ajax({
-		               type:"post",
-		               url:"<%=request.getContextPath()%>/gamelist.ajax",
-		               data: { 
-		            	  gameKoName:$("#text_name").val(),	            	
-		            	  gameLevel:0,	            	 
-		            	  gameImage:"", 
-		           
-		               }, 
-		               dataType:"json",
-		               success: function(data){
-		//[{"productNo":"a","productName":"b","parentCategory":"c","childCategory":"d","quantity":1,"price":2,"productInfoUrl":"e","productOption":"f","minPrice":0,"maxPrice":0}]
-		                  resultHtml(data);
-		               },
-		               error: function(request, status, error){
-		                  alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
-		               }
-		            });
-		         }
-		      }
-		      
-		      function resultHtml(data){        
-		    	  var html="<button type='button' class='btn1' onclick='#'>";
-		         $.each(data, function(key, value){
-		        	 html += "<img src="+ request.getContextPath() +"/"+ vo.getGameImage()+ "width='250' height='250' />";
-			         html += "<div class='img-text'>";
-			         html += vo.getGameKoName();
-			         html += vo.getGameLevel();
-			         html += "</div>";	    
-		         });
-		         
-		         html += "</button>";
-		         $("#board_info").empty(); 
-		         $("#board_info").append(html);
-		      }
-			</script>
- --%>
-
+			
 
 
 			<select id="sort" onchange="window.open(value,'_self');">

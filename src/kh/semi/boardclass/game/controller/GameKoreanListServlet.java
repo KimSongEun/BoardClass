@@ -70,9 +70,12 @@ public class GameKoreanListServlet extends HttpServlet {
 		if(endPage > pageCount) endPage=pageCount;
 		
 		String cate = "한글";
-		// DB에서 값 읽어오기
-		ArrayList<Game> volist = new GameService().selectCateGameList(startRnum,endRnum,cate);
+		String search = request.getParameter("search");
+		System.out.println("검색어는 : " + search);
+
 		
+		// DB에서 값 읽어오기
+		ArrayList<Game> volist = new GameService().selectCateGameList(startRnum,endRnum,cate,search);
 		// Data 전달을 위해서 request에 셋
 		request.setAttribute("gamevolist", volist);
 		request.setAttribute("startPage", startPage);

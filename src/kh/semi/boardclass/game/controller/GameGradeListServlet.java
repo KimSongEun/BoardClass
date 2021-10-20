@@ -49,14 +49,13 @@ public class GameGradeListServlet extends HttpServlet {
 		int endRnum = 1; 
 		
 		String pageNum = request.getParameter("pagenum");
-		if(pageNum != null) {   // ������ �������� ����.
-			currentPage = Integer.parseInt(pageNum); // ������ ������
+		if(pageNum != null) {  
+			currentPage = Integer.parseInt(pageNum); 
 		}
-		// �� �ۼ�
+		
 		bCount = new GameService().getGameCount();
-		// �� �������� = (�ѱ۰��� / ��������ۼ�) + (�ѱ۰������� ��������ۼ��� ���� �������� 0�� �ƴ϶�� ������������ 1 ����)
 		pageCount = (bCount / PAGE_SIZE) + (bCount % PAGE_SIZE == 0 ? 0 : 1);
-		//rownum ���� ���
+		
 		startRnum = (currentPage-1) * PAGE_SIZE   + 1;   // 1//6//11/16//21
 		endRnum = startRnum + PAGE_SIZE -1; 
 		if(endRnum > bCount) endRnum=bCount;
@@ -69,10 +68,14 @@ public class GameGradeListServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1; 
 		if(endPage > pageCount) endPage=pageCount;
 		
-		// DB���� �� �о����
-		ArrayList<Game> volist = new GameService().selectGradeGameList(startRnum,endRnum);
+		String search = request.getParameter("search");
+		System.out.println("검색어는 : " + search);
+
 		
-		// Data ������ ���ؼ� request�� ��
+		// DB에서 값 읽어오기
+		ArrayList<Game> volist = new GameService().selectGradeGameList(startRnum,endRnum, search);
+		
+		
 		request.setAttribute("gamevolist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);

@@ -75,13 +75,13 @@ public class GameLevelListServlet extends HttpServlet {
 
 		
 		// DB에서 값 읽어오기
-		ArrayList<Game> volist1 = new GameService().selectLevelGameList(startRnum,endRnum, search);
+		ArrayList<Game> volist = new GameService().selectLevelGameList(startRnum,endRnum, search);
 		
 		
 		
 		
 		// Data 전달을 위해서 request에 셋
-		request.setAttribute("gamevolist", volist1);
+		request.setAttribute("gamevolist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);

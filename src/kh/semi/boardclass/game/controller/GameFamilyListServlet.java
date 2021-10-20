@@ -70,8 +70,13 @@ public class GameFamilyListServlet extends HttpServlet {
 		if(endPage > pageCount) endPage=pageCount;
 		
 		String cate = "가족";
+
+		String search = request.getParameter("search");
+		System.out.println("검색어는 : " + search);
+
+		
 		// DB에서 값 읽어오기
-		ArrayList<Game> volist = new GameService().selectCateGameList(startRnum,endRnum,cate);
+		ArrayList<Game> volist = new GameService().selectCateGameList(startRnum,endRnum,cate,search);
 		
 		// Data 전달을 위해서 request에 셋
 		request.setAttribute("gamevolist", volist);
