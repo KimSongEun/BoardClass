@@ -374,6 +374,15 @@ $(function(){
 	});
 		 
 	};
+	
+		$(".memberdelete").click(function () {
+				console.log("눌림");
+		var deleteid = $(this).attr("id");
+		if(confirm(deleteid+"님 강제 탈퇴하시겠습니까?")){
+			location.href = "userdelete?userId="+ deleteid;
+		} else {
+		}
+});		
     // $("#board").click(function(){
     //     console.log("클릭");
     //     $("#test").show();

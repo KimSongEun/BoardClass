@@ -27,12 +27,12 @@
                     </div>
 
                     <div class="admin_user_info">
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp; <span style = "color : red">회원번호 : </span>${uservo.userNo}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp; 아이디 : ${uservo.userId}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp; 이메일 : ${uservo.userEmail}</p>
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp; 주소 : ${uservo.userAddress}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp; <span style = "color : grey">회원번호 : </span>${uservo.userNo}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp; <span style = "color : grey">아이디 : </span>${uservo.userId}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp; <span style = "color : grey">이메일 : </span>${uservo.userEmail}</p>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp; <span style = "color : grey">주소 : </span>${uservo.userAddress}</p>
                         
-                        <div style = "text-align : right; margin-right : 20px;"><button class = "btn danger">탈퇴처리하기</button></div>
+                        <div style = "text-align : right; margin-right : 20px;"><button class = "btn danger memberdelete" id = "${uservo.userId}">탈퇴처리하기</button></div>
                     </div>
                     
                 </div>
