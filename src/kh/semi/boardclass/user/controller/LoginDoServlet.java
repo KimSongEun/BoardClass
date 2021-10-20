@@ -68,7 +68,7 @@ public class LoginDoServlet extends HttpServlet {
 		if (user != null) { // 로그인 성공
 			System.out.println("로그인성공");
 			HttpSession session = request.getSession();
-			session.setAttribute("user", user);
+			session.setAttribute("userSession", user);
 
 			voList.add(user);
 			voList.add(user);
