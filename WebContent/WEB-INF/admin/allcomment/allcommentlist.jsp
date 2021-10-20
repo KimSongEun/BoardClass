@@ -64,7 +64,7 @@
                          <tr>
                          	<td style = "vertical-align : middle" class = "commentNo">${c.commentNo}</td>
                             <td style = "vertical-align : middle"><a href="#원본글내용조회" style = "color : #754100">${c.boardTitle}</a></td>
-                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" ><a href="#" class = "comment-modal" id = "${c.commentNo}" style = "color : #754100">${c.commentContent}</a></td>
+                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" ><a href="#댓글보기" class = "comment-modal" id = "${c.commentNo}" style = "color : #754100">${c.commentContent}</a></td>
                             <td style = "vertical-align : middle"><a href="#회원정보조회" style = "color : #754100">${c.userId}</a></td>
                             <td style = "vertical-align : middle">${c.userNo}</td>
                             <td style = "vertical-align : middle">${c.commentRewriteDate}</td>
