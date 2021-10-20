@@ -50,7 +50,7 @@ public class UserService {
 	// 닉네임 중복 체크를 위한 메소드
 	public int checkNick(String userNickname) {
 		Connection conn = JDBCTemplate.getConnection();
-		int result = new UserDao().checkId(conn, userNickname);
+		int result = new UserDao().checkNick(conn, userNickname);
 		return result;
 	}
 	

@@ -11,7 +11,7 @@
                 return false;
             }
 
-            $.ajax({ // ajax를 통한 아이디 중복 값 체크
+           $.ajax({ // ajax를 통한 아이디 중복 값 체크
                 url: "dupidchk",
                 type: "post",
                 async: false,
@@ -162,15 +162,15 @@
             }
 
         });
-        $("#address").on("input", function () {
+        $("#userAddress").on("input", function () {
             var regex = /[가-힣]{2,}/;
-            var result = regex.exec($("#address").val());
+            var result = regex.exec($("#userAddress").val());
 
             if (result != null) {
-                $(".address.regex").html("");
+                $(".userAddress.regex").html("");
             } else {
-                $(".address.regex").html("올바른 주소 형식이 아닙니다");
-                $(".address.regex").css("color", "red");
+                $(".userAddress.regex").html("올바른 주소 형식이 아닙니다");
+                $(".userAddress.regex").css("color", "red");
             }
 
         });
@@ -248,10 +248,14 @@
                 return false;
             }
 
+      	
+
             //빈칸 없을 때 제출.
             $("#signform").submit();
+ 
+        });
 
-            $.ajax({
+	 /*$.ajax({
                 url: "signup.do",
                 type: "post",
                 async: false,
@@ -263,7 +267,7 @@
                     userPassword: $("#userPassword").val(),
                     userEmail: $("#userEmail").val(),
                     userPhone: $("#userPhone").val(),
-                    userAddress: $("#address").val()
+                    userAddress: $("#userAddress").val()
                 },
                 dataType: "text",
                 success: function (value) {
@@ -280,8 +284,7 @@
                         + request.responseText + "\n" + "error:"
                         + error);
                 }
-            });
-        });
+            }); */
 
         // 아이디 입력창에 값 입력시 hidden에 idUncheck를 세팅한다.
         // 중복체크 후 다시 아이디 창이 새로운 아이디를 입력했을 때 다시 중복체크
