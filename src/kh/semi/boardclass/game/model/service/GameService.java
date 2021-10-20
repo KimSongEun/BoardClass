@@ -34,6 +34,13 @@ public class GameService {
 		JDBCTemplate.close(conn);
 		return vo;
 	}
+	public GameReview InfoReview(int no) {
+		GameReview vo= null;
+		Connection conn = JDBCTemplate.getConnection();
+		vo = new GameDao().InfoReview(conn,no);
+		JDBCTemplate.close(conn);
+		return vo;
+	}
 	public ArrayList<GameReview> selectReview(int start, int end,int no) {
 		ArrayList<GameReview> volist = null;
 		Connection conn = JDBCTemplate.getConnection();

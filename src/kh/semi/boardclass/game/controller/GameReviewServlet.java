@@ -18,14 +18,14 @@ import kh.semi.boardclass.used.model.vo.Used;
 /**
  * Servlet implementation class GameInfoServlet
  */
-@WebServlet("/GameInfo")
-public class GameInfoServlet extends HttpServlet {
+@WebServlet("/GameReview")
+public class GameReviewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GameInfoServlet() {
+    public GameReviewServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,63 +40,16 @@ public class GameInfoServlet extends HttpServlet {
 		
         PrintWriter out=response.getWriter();    
         
-        String name = request.getParameter("GAME_KONAME");
-        String gamenum = request.getParameter("GAME_NO");
+        String gameno = request.getParameter("NUM222");
         
-        String reviewno1 = request.getParameter("REVIEW_NO");
-        if(reviewno1 == null){
-        	reviewno1 = "0";
-        }
+       System.out.println("c"+gameno);
        
-        String id =  "a";
         
-        String gamen =   request.getParameter("no");
-        if(gamen == null){
-        	gamen = "0";
-        }
-        int gameno = Integer.parseInt(gamen);
-       
-        String content =  request.getParameter("REVIEW_CONTENT");
-        
-        String sco =   request.getParameter("rating");
-        if(sco == null){
-        	sco = "0";
-        }
-        int score = Integer.parseInt(sco);
         
       
-        GameReview gvo= new GameReview(id, gameno, content, score);    
         
-        int result = new GameService().insertReview(gvo);
-        if (result < 1) {
-			System.out.println("글 입력 안됨");
-		} else {
-			System.out.println("글 입력 성공");
-		}
-        
-        int update = new GameService().updateGrade(gameno);
-    	
-        if (update == 0) {
-			System.out.println("평점 입력 안됨");
-		} else {
-			System.out.println("평점 입력 성공");
-		}
-        
-        Game vo = new GameService().InfoGame(name);
-        
-        String str = vo.getGamePlusImage();
-        
-        String[] str2 = str.split(","); 
-        String str3 = vo.getGamePlus();
-        String[] str4 = str3.split(","); 
-         
-        ArrayList<Used> vo2 = new GameService().usedlist(name);
-        
-        
-       
-        
-        final int PAGE_SIZE = 4;   // 한 페이지 당 글수
-		final int PAGE_BLOCK = 1;   // 한 화면에 나타날 페이지 링크 수
+        final int PAGE_SIZE = 7;   // 한 페이지 당 글수
+		final int PAGE_BLOCK = 3;   // 한 화면에 나타날 페이지 링크 수
 		int bCount = 0;   // 총 글수
 		int pageCount = 0; // 총 페이지수
 		int startPage = 1;   // 화면에 나타날 시작페이지
@@ -127,29 +80,23 @@ public class GameInfoServlet extends HttpServlet {
 		if(endPage > pageCount) endPage=pageCount;
 		
         try{   
-        int gameno2 = Integer.parseInt(gamenum);
-        ArrayList<GameReview> gvo2 = new GameService().selectReview(startRnum,endRnum,gameno2);
-        request.setAttribute("riviewvolist", gvo2);
-        }catch(Exception e){}
- 
-        try {
-        int reviewno2 = Integer.parseInt(reviewno1);   
-        GameReview vo3 = new GameService().InfoReview(reviewno2);
-        System.out.println("a"+reviewno1);
-        System.out.println("aa"+reviewno2);
-        System.out.println("aaa"+vo3);
-        request.setAttribute("reviewvolist", vo3);
-        }catch(Exception e){}
-       
+        int gameno2 = Integer.parseInt(gameno);
+        System.out.println("cc"+gameno2);
         
-        request.setAttribute("gamevolist", vo);
-        request.setAttribute("usedvolist", vo2);
-     
-        request.setAttribute("str2", str2);
-        request.setAttribute("str4", str4);
+        ArrayList<GameReview> gvo2 = new GameService().selectReview(startRnum,endRnum,gameno2);
+        System.out.println("ccc"+gvo2);
+        request.setAttribute("reviewvolist", gvo2);
+        
+        }catch(Exception e){}
+        request.setAttribute("startPage", startPage);
+		request.setAttribute("endPage", endPage);
+		request.setAttribute("pageCount", pageCount);
       
         
-		request.getRequestDispatcher("/WEB-INF/game/gameinfo/GameInfo.jsp").forward(request, response);
+        
+     
+        
+		request.getRequestDispatcher("/WEB-INF/game/gameinfo/GameReview.jsp").forward(request, response);
 		
     }
 		

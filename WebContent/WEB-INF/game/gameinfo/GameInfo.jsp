@@ -8,6 +8,7 @@
 	Game vo = (Game) request.getAttribute("gamevolist");
 	ArrayList<Used> vo2 = (ArrayList<Used>) request.getAttribute("usedvolist");
 	ArrayList<GameReview> go2 = (ArrayList<GameReview>) request.getAttribute("riviewvolist");
+	GameReview vo3 = (GameReview) request.getAttribute("reviewvolist");
 	
 	String[] str2 = (String[]) request.getAttribute("str2");
 	String[] str4 = (String[]) request.getAttribute("str4");
@@ -99,9 +100,9 @@
 }
 
 #btnReview {
-	position: relative;
-	top: -10px;
-	left: 100px;
+	position: absolute;
+	top: 130px;
+	left: 1100px;
 }
 
 .rule {
@@ -168,11 +169,28 @@
 	z-index: 1;
 	background-color: rgba(12, 12, 12, .3);
 }
+.modal2 {
+	display: none;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	z-index: 1;
+	background-color: rgba(12, 12, 12, .3);
+}
 
 .modal-content {
 	width: 680px;
 	height: 720px;
 	top: 200px;
+	margin: auto;
+	position: relative;
+	background-color: #e9ecef;
+	padding: 10px;
+}
+.modal-content2 {
+	width: 800px;
+	height: 900px;
+	top: 100px;
 	margin: auto;
 	position: relative;
 	background-color: #e9ecef;
@@ -185,7 +203,7 @@
 	width: 336px;
 	height: 100px;
 }
-#close{
+.close{
 	position: relative;
 	
 	width: 336px;
@@ -244,12 +262,13 @@ vertical-align: middle;
 	height: 5200px;
 }
 #rd{
-	width: 250px;
+	width: 290px;
 	height: 300px;
 	position: relative;
 	left: 100px;
 	float: left;
 	top: 30px;
+	margin-left: 20px;
 }
 #rdbtn{
 width: 250px; 
@@ -280,12 +299,15 @@ background-color:#CCFFFF;
 						<label for="1-star" class="star">★</label>
 				</div>
 				<textarea rows="25" cols="98" name = "REVIEW_CONTENT" ></textarea>
-				<input type="submit" value="등 록" class="btn1" onclick = "location = 'GameInfo?GAME_KONAME=텔레스트레이션'">
-
+				<input type="submit" value="등 록" class="btn1" >
 			</form>
-				<button value="취 소" id = "close" >취 소</button>
+				<button value="취 소" class = "close" >취 소</button>
 		</div>
 	</div>
+	
+
+	
+	
 	
 	<%@include file="/WEB-INF/index/header.jsp" %>
 		
@@ -416,22 +438,6 @@ background-color:#CCFFFF;
 		</div>
 
 
-		<script>
-			$("#btnModalShow").click(function() {
-				$(".modal").show();
-			});
-			$("#close").click(function() {
-				$(".modal").hide();
-			});
-
-			$(window).on("click", function(e) {
-				var modal = document.getElementById("modal_01");
-				if (e.target == modal) {
-					$(".modal").hide();
-				}
-			});
-		</script>
-
 
 		<div id="info2">
 			<div id="info2-1">
@@ -463,13 +469,19 @@ background-color:#CCFFFF;
 			<div id="info2-2">
 				<p class="infoP">리뷰</p>
 				<p class="infoPP">Hot Review</p>
-				<button id="btnReview" style="width: 200px; height: 50px; font-size: 25px;">최신글 보기>></button>
+				<form action="GameReview" method="post">
+					<input type = "hidden" value = "<%=vo.getGameNumber()%>" name = "NUM222">					
+					<button type = "submit" id="btnReview" style="width: 200px; height: 50px; font-size: 25px;">최신글 보기>></button>
+				</form>
 				<%
 					if (go2 != null) {
 					for (GameReview go : go2) {
 				%>
 					<div id = "rd">
-						<button id = "rdbtn" >
+						<input type = "hidden" value = "<%=go.getReviewNo()%>" name = "REVIEW_NO">
+						<input type = "hidden" value = "<%=vo.getGameKoName()%>" name = "GAME_KONAME">
+				
+						<button type = "button" name = "re" class = "rdbtn" id = "c_<%=go.getReviewNo()%>">
 						<table border = "1">
 							<tr>
 								<td width="120px">@@</td>
@@ -485,10 +497,57 @@ background-color:#CCFFFF;
 							
 						</table>
 						</button>
-					</div>
-					<%}} %>
+				</div>
+<!-- Modal Box -->
+<div id="modal_02" class="c_<%=go.getReviewNo()%> modal2">
+<div class="modal-content2">
+	<table border = "1">
+		<tr>
+			<td width="120px">@@</td>
+			<td width="120px">★   <%=go.getReviewScore()%> </td>								
+		</tr>
+		<tr>
+			<td colspan="2" height="200px"><%=go.getReviewContent()%></td>
+		</tr>
+		<tr>
+			<td>dd</td>
+			<td><%=go.getReviewDate()%></td>
+		</tr>
+		
+	</table>
+	<button value="취 소" class = "close" >취 소</button>			
+</div>
+</div>
+				<%}} %>
 
 			</div>
+			
+			
+		<script>
+			$(".rdbtn").click(function() {
+				var id= $(this).prop('id');
+				console.log(id);
+				var classid="."+id;
+				console.log($(".c_2"));
+				$(".c_2").hide();
+				$(".c_2").css("display","block");
+			});
+			$("#btnModalShow").click(function() {
+				$(".modal").show();
+			});
+			$(".close").click(function() {
+				$(".modal").hide();
+			});
+
+			$(window).on("click", function(e) {
+				var modal = document.getElementById("modal_01");
+				if (e.target == modal) {
+					$(".modal").hide();
+				}
+			});
+
+		</script>
+			
 			<br> <br>
 			<div class="info2-3">
 				<p class="infoP">게임 규칙</p>
