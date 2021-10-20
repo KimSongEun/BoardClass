@@ -83,17 +83,13 @@ public class UserService {
 		return volist;
 	}
 	
-	public ArrayList<User> checkUser(User user) {
-		ArrayList<User> volist = null;
+	public User checkUser(String userId) {
 		Connection conn = JDBCTemplate.getConnection();
-		
-		// TODO:
-		volist = new UserDao().checkUser(conn, user);
-		int result = new UserDao().checkPwd(conn, user);
-		
+		UserDao dao = new UserDao();
+		User user = dao.checkUser(conn, userId);
 		JDBCTemplate.close(conn);
-		return volist;
-	}
+		return user;
+}
 	
 	public int updateUser(User user) {
 		int result = 0;
