@@ -6,7 +6,7 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="./css/admin/main/adminHeader.css"/> 
-	<link rel="stylesheet" href="./css/admin/adminuser/adminUserDetail.css"/>
+	<link rel="stylesheet" href="./css/admin/adminuser/adminUserDetail.css?after"/>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 	<script type="text/javascript" src="./js/admin/adminuser/adminUserDetail.js"></script>
@@ -27,14 +27,14 @@
                     </div>
 
                     <div class="admin_user_info">
-                        <p>&nbsp;&nbsp;&nbsp;&nbsp; 회원번호 : ${uservo.userNo}</p>
-                        <br>
+                        <p>&nbsp;&nbsp;&nbsp;&nbsp; <span style = "color : red">회원번호 : </span>${uservo.userNo}</p>
                         <p>&nbsp;&nbsp;&nbsp;&nbsp; 아이디 : ${uservo.userId}</p>
-                        <br>
                         <p>&nbsp;&nbsp;&nbsp;&nbsp; 이메일 : ${uservo.userEmail}</p>
-                        <br>
                         <p>&nbsp;&nbsp;&nbsp;&nbsp; 주소 : ${uservo.userAddress}</p>
+                        
+                        <div style = "text-align : right; margin-right : 20px;"><button class = "btn danger">탈퇴처리하기</button></div>
                     </div>
+                    
                 </div>
 
                 <div class="navbar">
@@ -137,23 +137,105 @@
                 </div>
                 <div style="padding:50px 16px" id="reviewdiv">
                     <h3>리뷰 글</h3>
-                    <div>Hover over the "about", "services" or "partners" link to see the sub navigation menu.</div>
+                    <div class="admin-table-div" style = "text-align : center">
+						<table style="text-align: center; border : 1px solid black">
+						<thead>
+                        <tr style="text-align:center; font-size: 16px;">
+                        	<td>리뷰 번호</td>
+                            <td>리뷰가 달린 게임 명</td>
+                            <td>리뷰 내용</td>
+                            <td>작성일</td>
+                        </tr>
+                        </thead>
+                         <tbody id="input_data"></tbody>
+                         <tr>
+                        </tr> 
+                    </table>
+					</div>
                 </div>
                 <div style="padding:50px 16px" id="reportboarddiv">
                     <h3>커뮤니티 신고글</h3>
-                    <div>Hover over the "about", "services" or "partners" link to see the sub navigation menu.</div>
+                  <div class="admin-table-div" style = "text-align : center">
+						<table style="text-align: center; border : 1px solid black">
+						<thead>
+                        <tr style="text-align:center; font-size: 16px;">
+                        	<td>신고횟수</td>
+                        	<td>글번호</td>
+                            <td>게시판 카테고리</td>
+                            <td>게시판 타입</td>
+                            <td>글제목</td>
+                            <td>글작성일 </td>
+                            <td>삭제 </td>
+                        </tr>
+                        </thead>
+                         <tbody id="input_data"></tbody>
+                         <tr>
+                        </tr> 
+                    </table>
+					</div>                    
                 </div>
                 <div style="padding:50px 16px" id="reportuseddiv">
                     <h3>중고 신고글</h3>
-                    <div>Hover over the "about", "services" or "partners" link to see the sub navigation menu.</div>
+                     <div class="admin-table-div" style = "text-align : center">
+						<table style="text-align: center; border : 1px solid black">
+						<thead>
+                        <tr style="text-align:center; font-size: 16px;">
+                        	<td>신고횟수</td>
+                        	<td>중고글번호</td>
+                            <td>중고글제목</td>
+                            <td>상품상태</td>
+                            <td>교환여부</td>
+                            <td>거래방법</td>
+                            <td>상품가격 </td>
+                            <td>카테고리 </td>
+                            <td>삭제 </td>
+                        </tr>
+                        </thead>
+                         <tbody id="input_data"></tbody>
+                         <tr>
+                        </tr> 
+                    </table>
+					</div>                    
                 </div>
                 <div style="padding:50px 16px" id="reportcomtdiv">
                     <h3>커뮤니티 신고댓글</h3>
-                    <div>Hover over the "about", "services" or "partners" link to see the sub navigation menu.</div>
+                    <div class="admin-table-div" style = "text-align : center">
+						<table style="text-align: center; border : 1px solid black">
+						<thead>
+                        <tr style="text-align:center; font-size: 16px;">
+                        	<td>신고횟수</td>
+                        	<td>댓글 번호</td>
+                            <td>원본 글 제목</td>
+                            <td>댓글</td>
+                            <td>작성일</td>
+							<td>삭제 </td>                            
+                        </tr>
+                        </thead>
+                         <tbody id="input_data"></tbody>
+                         <tr>
+                        </tr> 
+                    </table>
+					</div>                    
                 </div>
                 <div style="padding:50px 16px" id="reportreviewdiv">
                     <h3>리뷰 신고글</h3>
-                    <div>Hover over the "about", "services" or "partners" link to see the sub navigation menu.</div>
+                    <div class="admin-table-div" style = "text-align : center">
+						<table style="text-align: center; border : 1px solid black">
+						<thead>
+                        <tr style="text-align:center; font-size: 16px;">
+                        	<td>신고횟수</td>
+                        	<td>리뷰 번호</td>
+                            <td>리뷰가 달린 게임 명</td>
+                            <td>리뷰 내용</td>
+                            <td>작성일</td>
+                            <td>삭제 </td> 
+                        </tr>
+                        </thead>
+                         <tbody id="input_data"></tbody>
+                         <tr>
+                        </tr> 
+                    </table>
+					</div>                    
                 </div>
             </div>
         </div>

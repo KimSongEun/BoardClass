@@ -1,16 +1,27 @@
 package kh.semi.boardclass.admin.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import kh.semi.boardclass.admin.model.service.AdminService;
+import kh.semi.boardclass.admin.model.vo.ReportReview;
+
 /**
  * Servlet implementation class UserDetailReviewListAjaxServlet
  */
-@WebServlet("/UserDetailReviewListAjaxServlet")
+@WebServlet("/userdetailreview.ajax")
 public class UserDetailReviewListAjaxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -34,8 +45,25 @@ public class UserDetailReviewListAjaxServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		
+		System.out.println("/userdetailreview.ajax 진입");
+		
+		String userId = request.getParameter("userId");
+		
+		PrintWriter out = response.getWriter();
+		Map<String, Object> map1 = new HashMap<String, Object>();  
+		
+		ArrayList<ReportReview> volist  = new AdminService().selectUserDetailReviewList(userId);
+		
+		map1.put("reviewvolist", volist);
+		Gson gson = new GsonBuilder().setPrettyPrinting().create();
+		String gsonStr = gson.toJson(map1);
+		out.append(gsonStr);
+		out.flush();
+		out.close();
 	}
 
 }

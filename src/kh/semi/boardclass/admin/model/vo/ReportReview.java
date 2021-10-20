@@ -81,6 +81,13 @@ public class ReportReview {
 	public void setReviewDate(Date reviewDate) {
 		this.reviewDate = reviewDate;
 	}
+
+	@Override
+	public String toString() {
+		return "ReportReview [reportCount=" + reportCount + ", reviewNo=" + reviewNo + ", gameKoName=" + gameKoName
+				+ ", reviewContent=" + reviewContent + ", userId=" + userId + ", userNo=" + userNo + ", reviewDate="
+				+ reviewDate + "]";
+	}
 	
 	
 

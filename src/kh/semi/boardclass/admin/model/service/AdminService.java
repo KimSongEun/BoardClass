@@ -543,130 +543,66 @@ public class AdminService {
 		return result;
 	}
 	
-	public int getUserDetailBoardCount(String userId) {
-		int result = 0;
-		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().getUserDetailBoardCount(conn, userId);
-		JDBCTemplate.close(conn);
-		return result;
-	}
-
-	public ArrayList<AllBoardUser> selectUserDetailBoardList(String userId, int start, int end) {
+	public ArrayList<AllBoardUser> selectUserDetailBoardList(String userId) {
 		ArrayList<AllBoardUser> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().selectUserDetailBoardList(conn, userId, start, end);
+		volist = new AdminDao().selectUserDetailBoardList(conn, userId);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
 
-	public int getUserDetailUsedCount(String userId) {
-		int result = 0;
-		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().getUserDetailUsedCount(conn, userId);
-		JDBCTemplate.close(conn);
-		return result;
-	}
-
-	public ArrayList<Used> selectUserDetailUsedList(String userId, int start, int end) {
+	public ArrayList<Used> selectUserDetailUsedList(String userId) {
 		ArrayList<Used> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().selectUserDetailUsedList(conn, userId, start, end);
+		volist = new AdminDao().selectUserDetailUsedList(conn, userId);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
-	
-	public int getUserDetailCommentCount(String userId) {
-		int result = 0;
-		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().getUserDetailCommentCount(conn, userId);
-		JDBCTemplate.close(conn);
-		return result;
-	}
 
-	public ArrayList<AllCommentUser> selectUserDetailCommentList(String userId, int start, int end) {
+	public ArrayList<AllCommentUser> selectUserDetailCommentList(String userId) {
 		ArrayList<AllCommentUser> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().selectUserDetailCommentList(conn, userId, start, end);
+		volist = new AdminDao().selectUserDetailCommentList(conn, userId);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
-	
-	public int getUserDetailReviewCount(String userId) {
-		int result = 0;
-		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().getUserDetailReviewCount(conn, userId);
-		JDBCTemplate.close(conn);
-		return result;
-	}
 
-	public ArrayList<ReportReview> selectUserDetailReviewList(String userId, int start, int end) {
+	public ArrayList<ReportReview> selectUserDetailReviewList(String userId) {
 		ArrayList<ReportReview> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().selectUserDetailReviewList(conn, userId, start, end);
+		volist = new AdminDao().selectUserDetailReviewList(conn, userId);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
-	
-	public int getUserDetailReportBoardCount(String userId) {
-		int result = 0;
-		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().getUserDetailReportBoardCount(conn, userId);
-		JDBCTemplate.close(conn);
-		return result;
-	}
 
-	public ArrayList<ReportBoard> selectUserDetailReportBoardList(String userId, int start, int end) {
+	public ArrayList<ReportBoard> selectUserDetailReportBoardList(String userId) {
 		ArrayList<ReportBoard> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().selectUserDetailReportBoardList(conn, userId, start, end);
+		volist = new AdminDao().selectUserDetailReportBoardList(conn, userId);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
-	
-	public int getUserDetailReportCommentCount(String userId) {
-		int result = 0;
-		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().getUserDetailReportCommentCount(conn, userId);
-		JDBCTemplate.close(conn);
-		return result;
-	}
 
-	public ArrayList<ReportComment> selectUserDetailReportCommentList(String userId, int start, int end) {
+	public ArrayList<ReportComment> selectUserDetailReportCommentList(String userId) {
 		ArrayList<ReportComment> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().selectUserDetailReportCommentList(conn, userId, start, end);
+		volist = new AdminDao().selectUserDetailReportCommentList(conn, userId);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
-	
-	public int gettUserDetailReportReviewCount(String userId) {
-		int result = 0;
-		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().gettUserDetailReportReviewCount(conn, userId);
-		JDBCTemplate.close(conn);
-		return result;
-	}
 
-	public ArrayList<ReportReview> selectUserDetailReportReviewList(String userId, int start, int end) {
+	public ArrayList<ReportReview> selectUserDetailReportReviewList(String userId) {
 		ArrayList<ReportReview> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().selectUserDetailReportReviewList(conn, userId, start, end);
+		volist = new AdminDao().selectUserDetailReportReviewList(conn, userId);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
-	
-	public int gettUserDetailReportUsedCount(String userId) {
-		int result = 0;
-		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().gettUserDetailReportUsedCount(conn, userId);
-		JDBCTemplate.close(conn);
-		return result;
-	}
 
-	public ArrayList<ReportUsed> selectUserDetailReportUsedList(String userId, int start, int end) {
+	public ArrayList<ReportUsed> selectUserDetailReportUsedList(String userId) {
 		ArrayList<ReportUsed> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().selectUserDetailReportUsedList(conn, userId, start, end);
+		volist = new AdminDao().selectUserDetailReportUsedList(conn, userId);
 		JDBCTemplate.close(conn);
 		return volist;
 	}

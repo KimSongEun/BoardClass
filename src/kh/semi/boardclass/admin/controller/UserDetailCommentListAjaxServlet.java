@@ -1,4 +1,4 @@
-package kh.semi.boardclass;
+package kh.semi.boardclass.admin.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -50,40 +50,13 @@ public class UserDetailCommentListAjaxServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		System.out.println("/userdetailcomment.ajax 진입");
-		int PAGE_SIZE = 5;
-		final int PAGE_BLOCK = 5; 
-		int aCount = 0; 
-		int pageCount = 0; 
-		int startPage = 1;
-		int endPage = 1;
-		int currentPage = 1;
-		int startRnum = 1;
-		int endRnum = 1; 
-		
-		String pageNum = request.getParameter("pagenum");
-		if(pageNum !=null) { 
-				currentPage=Integer.parseInt(pageNum);
-		}
 		
 		String userId = request.getParameter("userId");
-		aCount = new AdminService().getUserDetailCommentCount(userId);
-		pageCount = (aCount / PAGE_SIZE) + (aCount % PAGE_SIZE == 0 ? 0:1);
-		startRnum = (currentPage-1) * PAGE_SIZE + 1;  
-		endRnum = startRnum + PAGE_SIZE -1;
-		if(endRnum > aCount) endRnum = aCount;
-		
-		if (currentPage % PAGE_BLOCK == 0) {
-			startPage = (currentPage / PAGE_BLOCK -1) * PAGE_BLOCK + 1;
-		} else {
-			startPage = (currentPage / PAGE_BLOCK) * PAGE_BLOCK + 1;
-		}
-		endPage = startPage + PAGE_BLOCK -1;
-		if(endPage > pageCount) endPage = pageCount;
 		
 		PrintWriter out = response.getWriter();
 		Map<String, Object> map1 = new HashMap<String, Object>();  
 		
-		ArrayList<AllCommentUser> volist  = new AdminService().selectUserDetailCommentList(userId, startRnum, endRnum);
+		ArrayList<AllCommentUser> volist  = new AdminService().selectUserDetailCommentList(userId);
 		map1.put("commentvolist", volist);
 		
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();

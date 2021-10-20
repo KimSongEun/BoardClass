@@ -89,11 +89,11 @@
                       <span aria-hidden="true">&laquo;</span>
                     </a>
                   </li>
-  	<%for (int i = startPage; i <= endPage; i++) {%>
-		<li class="page-item"><a class="page-link" href="noticelist?pagenum=<%=i%>&viewcount=${viewcount}"><%=i%></a></li>
-		<%} if(endPage == pageCount){%>
-		<li class="page-item-next disabled">
-		<%}else{ %>
+  				<%for (int i = startPage; i <= endPage; i++) {%>
+				<li class="page-item"><a class="page-link" href="noticelist?pagenum=<%=i%>&viewcount=${viewcount}"><%=i%></a></li>
+				<%} if(endPage == pageCount){%>
+				<li class="page-item-next disabled">
+				<%}else{ %>
                   <li class="page-item-next">
                   <% }%>
                     <a class="page-link" href="noticelist?pagenum=${endPage+1}&viewcount=${viewcount}" aria-label="Next">
