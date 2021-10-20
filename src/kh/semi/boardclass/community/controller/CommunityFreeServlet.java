@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.taglibs.standard.tag.common.fmt.RequestEncodingSupport;
+
 import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.community.model.dao.CommunityDao;
 import kh.semi.boardclass.community.model.service.CommunityService;
@@ -39,7 +41,8 @@ public class CommunityFreeServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		int totCnt = new CommunityService().getBoardCount();
+		String category = "자유게시판";
+		int totCnt = new CommunityService().getBoardCount(category);
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum == null || pageNum.equals("")) {pageNum = "1";}
 		int currentPage = Integer.parseInt(pageNum);
@@ -47,7 +50,8 @@ public class CommunityFreeServlet extends HttpServlet {
 		int startRow = (currentPage - 1) * pageSize + 1;
 		int endRow = startRow + pageSize -1;
 		int startNum = totCnt - startRow +1;
-		ArrayList<Board> list = new CommunityService().selectBoardList(startRow, endRow);
+		
+		ArrayList<Board> list = new CommunityService().selectBoardList(startRow, endRow, category);
 		int pageCnt = (int)Math.ceil((double)totCnt/pageSize);
 		int startPage = (int)(currentPage -1) / blockSize * blockSize + 1;
 		int endPage = startPage + blockSize - 1;

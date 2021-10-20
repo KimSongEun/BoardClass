@@ -52,7 +52,7 @@ public class CommunityService {
 		ArrayList<Board> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
 		
-		volist = new CommunityDao().selectBoardList(conn, start, end);
+		volist = new CommunityDao().selectBoardList(conn, start, end, category);
 		
 		JDBCTemplate.close(conn);
 		return volist;
@@ -134,8 +134,16 @@ public class CommunityService {
 		return result;
 	}
 
-	public int insertUserBoard() {
-		int result = -1;
+	public int insertUserBoard(Board vo) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().insertUserBoard(conn, vo);
+	 if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
 		return result;
 	}
 
@@ -149,8 +157,16 @@ public class CommunityService {
 		return result;
 	}
 
-	public int insertGatheringBoard() {
-		int result = -1;
+	public int insertGatheringBoard(Board vo) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().insertGatheringBoard(conn, vo);
+	 if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
 		return result;
 	}
 

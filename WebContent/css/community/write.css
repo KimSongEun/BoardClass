@@ -1,7 +1,57 @@
 @charset "UTF-8";
-body{}
-nav {
+*{
+    margin: 0; padding: 0;
+    box-sizing: border-box;
+}
+li { list-style-type: none;}
+a { text-decoration: none;}
+img { border: 0;}
+table {  border-collapse: collapse;}
+div {display: block;}
+button {
+  overflow: visible;
+}
 
+
+#guide{
+	display:table;
+	table-layout: fixed;
+	width: 1100px;
+	margin: 0 auto;
+	padding: 50px 0 100px;	
+}
+#aside { /* 커뮤니티 게시판 카테고리 부분*/
+	display: table-cell;
+	width: 215px;
+	vertical-align: top;
+}
+#aside .as_inner {
+    width: 185px;
+    background: #ffffff;
+}
+
+#aside .as_inner .as_hgroup { /* 커뮤니티 큰 글씨*/
+    width: 185px;
+    height: 105px;
+    background-color: blue; /* 색깔변경하기*/
+    line-height: 105px;
+    text-align:center;
+}
+#aside .as_inner .as_hgroup > a {
+    font-weight: 700;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+#aside .as_inner .lnb > ul > li > a {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px 15px 15px 20px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 26px;
+    color: #444444;
 }
 section {
 	display:inline-block;
@@ -10,16 +60,68 @@ section {
 	padding: 30px 30px 60px;
 	background: #fff;
 }
-.write_header {
+
+.conwrap {
+    padding: 30px 30px 60px;
+   	overflow: hidden;
+    margin: -30px -30px 0;
+ 	 background-color: #ffffff;
 }
-nav {
-	top: 0;
-	
+
+.h3group .tit {
+	  float: left;
+    font-family: 'NanumSquare';
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 44px;
+    color: #2d2d2d;;
 }
-nav ul {}
-nav ul li {
-	
+.h3group .location {
+	float: right;
+	background-color: #ffffff;
 }
-nav ul li a {
-	font-size: 20px;
+.h3group .location .depth {
+    display: block;
+    float: left;
+    position: relative;
+    margin: 0 25px 0 0;
+    font-size: 14px;
+    line-height: 44px;
+    color: #777777;
+    background-color: #ffffff;
+}
+.h3group .location .this {
+    display: block;
+    float: left;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 44px;
+    color: #2d2d2d;
+    background-color: #ffffff;
+}
+.h3group .location .depth:after {
+    display: block;
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -15px;
+    width: 6px;
+    height: 9px;
+    margin: -4px 0 0;
+    background: url(ima/chevron.png) 0 0 no-repeat;
+}
+.board_write_wrap .section .hgroup {
+    margin: 0 0 5px;
+}
+.conwrap .hgroup p.tit {
+    font-weight: 700;
+    font-size: 16px;
+    color: #2d2d2d;
+}
+p {
+    max-height: 999999px;
+}
+/* 글쓰기 버튼 */
+.btn_wrap input:first-child {
+    margin: 0;
 }

@@ -8,8 +8,14 @@ public class BoardLike {
 	private int boardNO;
 	private String userId;
 
+
+
 	public BoardLike() {
-		// TODO Auto-generated constructor stub
+	}
+	
+	@Override
+	public String toString() {
+		return "BoardLike [boardLikeNo=" + boardLikeNo + ", boardNO=" + boardNO + ", userId=" + userId + "]";
 	}
 
 	public int getBoardLikeNo() {

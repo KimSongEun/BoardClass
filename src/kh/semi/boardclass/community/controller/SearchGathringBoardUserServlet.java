@@ -13,17 +13,18 @@ import kh.semi.boardclass.community.model.service.CommunityService;
 import kh.semi.boardclass.community.model.vo.Board;
 
 /**
- * Servlet implementation class SearchAllBoardUserIdServlet
+ * Servlet implementation class SearchGathringBoardUserServlet
  */
-@WebServlet("/searchallboarduserid")
-public class SearchAllBoardUserIdServlet extends HttpServlet {
+@WebServlet("/searchgathringboarduser")
+public class SearchGathringBoardUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchAllBoardUserIdServlet() {
+    public SearchGathringBoardUserServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -83,14 +84,14 @@ public class SearchAllBoardUserIdServlet extends HttpServlet {
 		System.out.println("여긴 유저아이디 검색창");
 		System.out.println("keyword"+keyword);
 		
-		request.getRequestDispatcher("/WEB-INF/community/freeBoard/FreeBoardMain.jsp").forward(request, response);
-		
+		request.getRequestDispatcher("/WEB-INF/community/GatheringBoard/GatheringMain.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
