@@ -1,0 +1,167 @@
+section {
+	height: 700px;
+	width: 970px;
+	margin-right: auto;
+	margin-left: auto;
+	margin-top: 80px;
+	margin-bottom: 80px;
+}
+
+/* Style the tab */
+.tab {
+	display: flex;
+	justify-content: center;
+	border: 1px solid #ccc;
+	background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+		font-family: ImcreSoojin;
+	width: 50%;
+	background-color: inherit;
+	border: none;
+	outline: none;
+	cursor: pointer;
+	padding: 20px 16px;
+	transition: 0.3s;
+	font-size: 24px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+	background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+	background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+	display: none;
+	padding: 6px 12px;
+	border: 1px solid #ccc;
+	border-top: none;
+}
+
+.tabcontent h1 {
+	margin: 50px;
+	text-align: center;
+}
+
+table {
+	border-collapse: collapse;
+	height: 100px;
+	width: 800px;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	margin-right: auto;
+	margin-left: auto;
+	letter-spacing: 2px;
+}
+
+tr {
+	border-bottom: 1px dotted black;
+}
+
+.id1, .pwd1 {
+	background-color: #f4e2f7;
+	padding: 10px;
+	width: 130px;
+	text-align: center;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+.id2, .pwd2 {
+	margin: auto;
+	width: 490px;
+	text-align: left;
+	padding: 15px 25px;
+}
+
+.id2 input[type=text], .id2 input[type=number], .pwd2 input[type=text] {
+	font-family: ImcreSoojin;
+	padding: 20px;
+	background-color: white;
+	margin: 20px;
+	width: 300px;
+	height: 45px;
+	font-size: 14px;
+	border-radius: 6px;
+	letter-spacing: 1px;
+	border: 2px #dfafd9 solid;
+}
+
+div#searchId, div#searchPwd {
+	width: 800px;
+	text-align: center;
+	padding: 50px 0 50px;
+	margin: auto;
+}
+
+.searchIdBtn, .resetIdBtn, .searchPwdBtn, .resetPwdBtn {
+	font-family: ImcreSoojin;
+	height: 45px;
+	width: auto;
+	margin: 0 5px;
+	padding: 0 15px;
+	color: black;
+	border: 4px solid #b125ca;
+	border-radius: 0.25rem;
+	letter-spacing: 1px;
+	font-weight: bold;
+	font-size: 15px;
+}
+
+#Result{
+	width:800px;
+	margin: 150px auto ;
+
+	text-align: center;
+	
+	border: 4px solid #eab4f1;
+	border-radius:20px;
+	
+}
+
+#idpwd{
+    border: 1px solid #eab4f1;
+}
+
+#Result p{
+		font-size: 30px;
+	margin: 50px 0 50px;
+}
+#Result .p {
+	font-size: 24px;
+	margin-top: 80px;
+}
+#Result #name, #Result #id{
+	font-size: 24px;
+	margin-top: 40px;
+}
+
+#Result #id {
+	margin-top: 0px;
+	margin-bottom: 40px;
+}
+#page{
+	margin:20px;
+}
+#mainpage, #signpage, #idpage, #pwdpage{
+	font-family: ImcreSoojin;
+	height: 45px;
+	width: auto;
+	margin: 40px 10px;
+	padding: 0 17px;
+	color: black;
+	border: 4px solid #b125ca;
+	border-radius: 0.25rem;
+	letter-spacing: 1px;
+	font-weight: bold;
+	font-size: 17px;
+	cursor: pointer;
+}
