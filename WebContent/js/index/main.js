@@ -2,7 +2,7 @@ $(function(){
 	console.log("시작");
 	var slideIndex = 1;
 	showSlides(slideIndex);
-	
+
 	function plusSlides(n) {
 	  showSlides(slideIndex += n);
 	}
@@ -27,4 +27,6 @@ $(function(){
 	  dots[slideIndex-1].className += " active";
 	  setTimeout(showSlides, 2000);
 	}
-});
+	
+	});
+

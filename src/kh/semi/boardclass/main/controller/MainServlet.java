@@ -1,23 +1,29 @@
 package kh.semi.boardclass.main.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.boardclass.admin.model.vo.Banner;
+import kh.semi.boardclass.admin.model.vo.Notice;
+import kh.semi.boardclass.main.model.service.MainService;
+
 /**
- * Servlet implementation class GetNoticeServlet
+ * Servlet implementation class GoGoMain
  */
-@WebServlet("/GetNoticeServlet")
-public class GetNoticeServlet extends HttpServlet {
+@WebServlet("/main")
+public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetNoticeServlet() {
+    public MainServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +32,18 @@ public class GetNoticeServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		
+		ArrayList<Notice> noticevolist  = new MainService().getNotice();
+		request.setAttribute("noticevolist", noticevolist);
+		
+		ArrayList<Banner> advolist  = new MainService().getAdList();
+		request.setAttribute("advolist", advolist);
+		
+		String viewPage = "/WEB-INF/index/main.jsp";
+		request.getRequestDispatcher(viewPage).forward(request, response);
 	}
 
 	/**
