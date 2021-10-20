@@ -141,8 +141,10 @@ top:-100px;
 			<div id="d1">전체</div>
 
 			<div id="search">
-				게임이름 <input type="text" id="text_name">
-				<button type="button" id="search_btn">검색</button>
+			<form action="GameLevelList">
+				게임이름 <input type="search" id="text_name" name="search">
+				<button type="submit" id="search_btn" >검색</button>
+				</form>
 			</div>
 
 			<%-- 		<script>

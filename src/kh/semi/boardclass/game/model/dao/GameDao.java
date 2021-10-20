@@ -248,20 +248,36 @@ public class GameDao {
 		return volist;
 	}
 
-	public ArrayList<Game> selectLevelGameList(Connection conn, int start, int end) {
+	public ArrayList<Game> selectLevelGameList(Connection conn, int start, int end, String search) {
 
 		ArrayList<Game> volist = null;
-
-		String sql = "select * from " + " (select Rownum r, t1.* from "
-				+ " (select * from BOARDGAME order by GAME_LEVEL asc) t1 ) t2 " + " where r between ? and ?";
-
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		String sql1 = "select * from " + " (select Rownum r, t1.* from "
+				+ " (select * from BOARDGAME order by GAME_LEVEL asc) t1 ) t2 " + " where r between ? and ?";
+
+		String sql2 = "select * from (select Rownum r, u.* from "
+				+ "(select * from BOARDGAME where GAME_KONAME like ? order by GAME_LEVEL asc) u) "
+				+ " where r between ? and ?";
+		String sql = "";
+		if (search != null && !search.equals("")) {
+			sql = sql2;
+		} else {
+			sql = sql1;
+		}
+		
 
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, start);
-			pstmt.setInt(2, end);
+			int idx = 0;
+			if (search != null && !search.equals("")) {
+				search = "%" + search + "%";
+				pstmt.setString(++idx, search);
+				
+			}
+			pstmt.setInt(++idx, start);
+			pstmt.setInt(++idx, end);
+			
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
 				volist = new ArrayList<Game>();

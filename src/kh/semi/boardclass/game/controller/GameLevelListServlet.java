@@ -70,10 +70,12 @@ public class GameLevelListServlet extends HttpServlet {
 		if(endPage > pageCount) endPage=pageCount;
 		
 
-		
+		String search = request.getParameter("search");
+		System.out.println("검색어는 : " + search);
+
 		
 		// DB에서 값 읽어오기
-		ArrayList<Game> volist1 = new GameService().selectLevelGameList(startRnum,endRnum);
+		ArrayList<Game> volist1 = new GameService().selectLevelGameList(startRnum,endRnum, search);
 		
 		
 		

@@ -96,10 +96,10 @@ public class GameService {
 		return volist;
 	}
 	
-	public ArrayList<Game> selectLevelGameList(int start, int end) {
+	public ArrayList<Game> selectLevelGameList(int start, int end, String search) {
 		ArrayList<Game> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new GameDao().selectLevelGameList(conn,start, end);
+		volist = new GameDao().selectLevelGameList(conn,start, end, search);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
