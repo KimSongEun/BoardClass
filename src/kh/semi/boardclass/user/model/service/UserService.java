@@ -95,6 +95,11 @@ public class UserService {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
 		result = new UserDao().updateUser(conn, user);
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
 		JDBCTemplate.close(conn);
 		return result;
 	}

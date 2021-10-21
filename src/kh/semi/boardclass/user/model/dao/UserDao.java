@@ -131,33 +131,33 @@ public class UserDao {
 		return result;
 	}
 
-	public User searchId(Connection conn,String userName, String userEmail, int userPhone) {
-		
+	public User searchId(Connection conn, String userName, String userEmail, int userPhone) {
+
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = "SELECT * FROM member where USER_NAME=? and USER_EMAIL=? and USER_PHONE=?";
-		User user =null;
+		User user = null;
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userName);
 			pstmt.setString(2, userEmail);
 			pstmt.setInt(3, userPhone);
 			rset = pstmt.executeQuery();
-			while(rset.next()) {	
+			while (rset.next()) {
 				user = new User();
-				user.setUserId(rset.getString("user_Id"));	
-				user.setUserNo(rset.getInt("user_No"));	
-				user.setUserPassword(rset.getString("user_Password"));	
+				user.setUserId(rset.getString("user_Id"));
+				user.setUserNo(rset.getInt("user_No"));
+				user.setUserPassword(rset.getString("user_Password"));
 				user.setUserName(rset.getString("user_Name"));
 				user.setUserNickname(rset.getString("user_Nickname"));
-				user.setUserEmail(rset.getString("user_Email"));	
-				user.setUserPhone(rset.getInt("user_Phone"));	
-				user.setUserAddress(rset.getString("user_Address"));	
-				user.setUserType(rset.getString("user_Type").charAt(0));	
+				user.setUserEmail(rset.getString("user_Email"));
+				user.setUserPhone(rset.getInt("user_Phone"));
+				user.setUserAddress(rset.getString("user_Address"));
+				user.setUserType(rset.getString("user_Type").charAt(0));
 				user.setUserImage(rset.getString("user_Image"));
 				user.setUserHistory(rset.getInt("user_History"));
 			}
-		} catch (SQLException e) { 
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(rset);
@@ -171,29 +171,29 @@ public class UserDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = "SELECT * FROM member where USER_NAME=? and USER_ID=? and USER_EMAIL=?";
-		User user =null;
+		User user = null;
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userName);
 			pstmt.setString(2, userId);
 			pstmt.setString(3, userEmail);
 			rset = pstmt.executeQuery();
-			while(rset.next()) {	
+			while (rset.next()) {
 				user = new User();
-				user.setUserId(rset.getString("user_Id"));	
-				user.setUserNo(rset.getInt("user_No"));	
-				user.setUserPassword(rset.getString("user_Password"));	
+				user.setUserId(rset.getString("user_Id"));
+				user.setUserNo(rset.getInt("user_No"));
+				user.setUserPassword(rset.getString("user_Password"));
 				user.setUserName(rset.getString("user_Name"));
 				user.setUserNickname(rset.getString("user_Nickname"));
-				user.setUserEmail(rset.getString("user_Email"));	
-				user.setUserPhone(rset.getInt("user_Phone"));	
-				user.setUserAddress(rset.getString("user_Address"));	
-				user.setUserType(rset.getString("user_Type").charAt(0));	
+				user.setUserEmail(rset.getString("user_Email"));
+				user.setUserPhone(rset.getInt("user_Phone"));
+				user.setUserAddress(rset.getString("user_Address"));
+				user.setUserType(rset.getString("user_Type").charAt(0));
 				user.setUserImage(rset.getString("user_Image"));
 				user.setUserHistory(rset.getInt("user_History"));
 			}
-		
-		} catch (SQLException e) { 
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(rset);
@@ -216,31 +216,31 @@ public class UserDao {
 		ArrayList<User> volist = null;
 		return volist;
 	}
-	
+
 	public User checkUser(Connection conn, String userId) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String query = "SELECT * FROM member where USER_ID=?";
-		User user =null;
+		User user = null;
 		try {
 			pstmt = conn.prepareStatement(query);
 			pstmt.setString(1, userId);
 			rset = pstmt.executeQuery();
-			if(rset.next()) {	
+			if (rset.next()) {
 				user = new User();
-				user.setUserId(rset.getString("user_Id"));	
-				user.setUserNo(rset.getInt("user_No"));	
-				user.setUserPassword(rset.getString("user_Password"));	
+				user.setUserId(rset.getString("user_Id"));
+				user.setUserNo(rset.getInt("user_No"));
+				user.setUserPassword(rset.getString("user_Password"));
 				user.setUserName(rset.getString("user_Name"));
 				user.setUserNickname(rset.getString("user_Nickname"));
-				user.setUserEmail(rset.getString("user_Email"));	
-				user.setUserPhone(rset.getInt("user_Phone"));	
-				user.setUserAddress(rset.getString("user_Address"));	
-				user.setUserType(rset.getString("user_Type").charAt(0));	
+				user.setUserEmail(rset.getString("user_Email"));
+				user.setUserPhone(rset.getInt("user_Phone"));
+				user.setUserAddress(rset.getString("user_Address"));
+				user.setUserType(rset.getString("user_Type").charAt(0));
 				user.setUserImage(rset.getString("user_Image"));
 				user.setUserHistory(rset.getInt("user_History"));
-			}		
-		} catch (SQLException e) { 
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			JDBCTemplate.close(rset);
@@ -260,7 +260,26 @@ public class UserDao {
 	}
 
 	public int updateUser(Connection conn, User user) {
+		PreparedStatement pstmt = null;
 		int result = 0;
+
+		String sql = "update MEMBER set USER_IMAGE=?,USER_NAME=?,USER_NICKNAME=?, USER_PASSWORD=?,USER_EMAIL=?,USER_PHONE=?,USER_ADDRESS=? where USER_ID=?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user.getUserImage());
+			pstmt.setString(2, user.getUserName());
+			pstmt.setString(3, user.getUserNickname());
+			pstmt.setString(4, user.getUserPassword());
+			pstmt.setString(5, user.getUserEmail());
+			pstmt.setInt(6, user.getUserPhone());
+			pstmt.setString(7, user.getUserAddress());
+			pstmt.setString(8, user.getUserId());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
 
