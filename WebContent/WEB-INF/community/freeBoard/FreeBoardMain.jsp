@@ -8,9 +8,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유 게시판</title>
+<title>BoardClass</title>
 <link rel="stylesheet" href="css/community/freeBoardMain.css" />
 <link rel="stylesheet" href="css/community/common.css" />
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
 
@@ -27,8 +28,8 @@
 			<ul>
 				<li><a href="#">공지사항</a></li>
 				<li><a href="./cf">자유게시판</a></li>
-				<li><a href="#">유저정보게시판</a></li>
-				<li><a href="#">모임게시판</a></li>
+				<li><a href="./cu">유저정보게시판</a></li>
+				<li><a href="./cg">모임게시판</a></li>
 			</ul>
 		</nav>
 		</div>
@@ -50,38 +51,61 @@
 	<div class="h4group">
 		<h4 class="tit">전체글 보기</h4>
 	</div>
-	<!--  선택옵션-->
-	<select id="b_category">
-	  <option value="freeboard">자유게시판</option>
-	  <option value="userboard">유저정보게시판</option>
-	  <option value="gathering">모임게시판</option>
-	</select>
-	<div id ="a1">
 	
+	<!-- 검색 영역 -->
+	<div class="data_srch_wrap bdt_n ">
+		<form action = "searchallboarduserid" method = "post" class = "searchselect">
+		<div class="slt_box">
+			<select class="search_select" name="type" style="width: 189px;">
+				<option value="제목" <c:if test = "${type == '제목'}"> selected </c:if>>제목</option>
+				<option value="내용" <c:if test = "${type == '내용'}"> selected </c:if>>내용</option>
+				<option value="작성자" <c:if test = "${type == '작성자'}"> selected </c:if>> 작성자 </option>
+				</select>
+		</div>
+		<div class="ipt_box">
+			<input type="text" id="keyword" name="keyword" class="ipt" value="${keyword }" placeholder="검색어를 입력해주세요">
+			 <button type="submit" class="w3-button w3-light-grey"></button>
+		</div>
+		
+	 </form>
 	</div>
 	
-	<div class="tbl-list">
-		<table class="c_table">
+	
+	<div class="tbl_list">
+		<table>
+		<tbody>
+		<colgroup>
+			<col style="width: 58px;">
+			<col style="width: auto;">
+			<col style="width: 172px;">
+		</colgroup>
 			<c:if test="${list != null }">
 			<c:forEach var="board" items="${list }">
 				<tr>
-					
 					<td class="idx">
 						${board.boardNo }
+						<div class="hidden" >${board.boardCategory }</div>
 					</td>
+					
 					<td class="obj">
-						<div class="tit">${board.boardType } </div>
-						<div class="title"><a href="cfdetail?boardNo=${board.boardNo }">${board.boardTitle }</a></div>
-						
+						<div class="tbox">
+						<div class="tit">
+							${board.boardType }
+							<a href="cfdetail?boardNo=${board.boardNo }">${board.boardTitle }</a>
+						</div>
+						</div>
+						<div class="util">
+							<div class="hit">조회수 : <span class="val">${board.boardViewCount }</span></div>
+							<div class="comt">댓글수: <span class="val">2</span> </div>
+						</div>
+					
 					</td>
-					<td>
-					<div>${board.userId }</div>
-					${board.boardWriteDate }
+			
+					<td class="etc">
+						<div class="userid">${board.userId }</div>
+						<div class="date">${board.boardWriteDate }</div>
 					</td>
-					<td style="width: 10%;"></td>
-	
-					<td class="util_hit" style="width: 10%; text-align: center;">조회수 : ${board.boardViewCount }</span></td>
-					<td class="util_commt"><div class="comt">댓글수: <span class="val">${comtCnt }</span> </div></td>
+			
 				</tr>
 			</c:forEach>
 			</c:if>
@@ -90,10 +114,12 @@
 					<td colspan="7">데이터가 없습니다</td>
 				</tr>
 			</c:if>
+			</tbody>
 		</table>
 		</div>
 	</section>
 	
+	<!-- 페이징  -->
 	<div style="text-align: centerl; margin-top:20px;" class="pagination">
 		<c:if test="${startPage > blockSize }">
 			<a href="cf?pageNum=${startPage-blockSize}">[이전]</a>
@@ -112,23 +138,17 @@
  	</div>
 	
 	<div class="btn_wrap">
-		<div class="fl_c">
-			<a href="./cfwrite" class="btn50 c3 reg" style="width: 240px;" tmp="contents/bod" mn="60" cn="0"><span class="write">글작성</span></a>
-		</div>
-	</div>
+  <div class="fl_c">
+    <a href="./cfwrite" class="btn50 c3 reg" style="width: 240px;" tmp="contents/bod" mn="60" cn="0"><span class="write">글작성</span></a>
+  </div>
+</div>
 	
 	<!-- 검색 영역 -->
 
-	<form action = "searchallboarduserid" method = "post" class = "searchselect">
-          <select class="search_select" name = "type">
-              <option value ="작성자" <c:if test = "${type == '작성자'}"> selected </c:if>>작성자 </option>
-              <option value ="내용" <c:if test = "${type == '내용'}"> selected </c:if>>내용</option>
-              <option value ="제목" <c:if test = "${type == '제목'}"> selected </c:if>>제목</option>
-          </select>
-   <input type="text" class="admin-allboard-search-input" name = "keyword" id = "keyword" value="${keyword }">
-   <button type="submit" class="admin-allboard-search-button">검색</button>
-   </form>
 
+
+	
+	
 	
 	
 <script>
@@ -156,22 +176,27 @@ $(function(){
 			}
 		});//ajax
 	}
+	
 	$(".search_select").change(f1);
 	f1();
 	function f1() {
 		console.log("변경");
-		if($(".search_select").val() == "작성자"){
-			$(".searchselect").attr("action", "searchallboarduserid");
-			/*console.log($(".searchselect").attr("action"));*/
+		if($(".search_select").val() == "제목"){
+			$(".searchselect").attr("action", "searchallboardtitle");
+			
+			
 		} else if ($(".search_select").val() == "내용") {
 			$(".searchselect").attr("action", "searchallboardcontent");
-			/*console.log($(".searchselect").attr("action"));*/
-		}else if ($(".search_select").val() == "제목") {
-			$(".searchselect").attr("action", "searchallboardtitle");
-			/*console.log($(".searchselect").attr("action"));*/
+			
+			
+		}else if ($(".search_select").val() == "작성자") {
+			$(".searchselect").attr("action", "searchallboarduserid");
+			
 		}
 	};	
 
+	
+	
 </script>
 
 

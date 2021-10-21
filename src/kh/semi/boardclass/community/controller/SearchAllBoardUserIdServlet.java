@@ -80,7 +80,9 @@ public class SearchAllBoardUserIdServlet extends HttpServlet {
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("type", type);
 		
-		System.out.println("type:" + type);
+		System.out.println("여긴 유저아이디 검색창");
+		System.out.println("keyword"+keyword);
+		
 		request.getRequestDispatcher("/WEB-INF/community/freeBoard/FreeBoardMain.jsp").forward(request, response);
 		
 	}

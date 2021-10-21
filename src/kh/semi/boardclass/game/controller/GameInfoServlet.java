@@ -34,105 +34,48 @@ public class GameInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("UTF-8");
-		
-        PrintWriter out=response.getWriter();    
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
         
-        String name = request.getParameter("GAME_KONAME");
-        String gamenum = request.getParameter("GAME_NO");
-        
-        
-        
-        String id =  "a";
-        
-        String gamen =   request.getParameter("no");
-        if(gamen == null){
-        	gamen = "0";
+        String gamenumstr = request.getParameter("GAME_NO");
+		int gamenum = 0;
+        try{   
+        	gamenum = Integer.parseInt(gamenumstr);       
+        }catch(Exception e){
+        	System.out.println("숫자 변환 실패 기본 값 0");
         }
-        int gameno = Integer.parseInt(gamen);
-       
-        String content =  request.getParameter("REVIEW_CONTENT");
+		System.out.println("gamenum:"+gamenum);
+
+        GameService service = new GameService();
         
-        String sco =   request.getParameter("rating");
-        if(sco == null){
-        	sco = "0";
+        // 게임 정보 읽기
+        Game vo = service.InfoGame(gamenum);
+        if(vo==null) {  // 게임 정보 읽지 못하면 게임리스트화면으로 이동
+        	response.sendRedirect("GameAllList");
+        	return;
         }
-        int score = Integer.parseInt(sco);
         
-      
-        GameReview gvo= new GameReview(id, gameno, content, score);    
-        
-        int result = new GameService().insertReview(gvo);
-        if (result < 1) {
-			System.out.println("글 입력 안됨");
-		} else {
-			System.out.println("글 입력 성공");
-		}
-        
-        int update = new GameService().updateGrade(gameno);
-    	
-        if (update == 0) {
-			System.out.println("평점 입력 안됨");
-		} else {
-			System.out.println("평점 입력 성공");
-		}
-        
-        Game vo = new GameService().InfoGame(name);
-        
+        // 게임정보가 있다면 이미지 구분하기
         String str = vo.getGamePlusImage();
-        
         String[] str2 = str.split(","); 
         String str3 = vo.getGamePlus();
         String[] str4 = str3.split(","); 
-         
-        ArrayList<Used> vo2 = new GameService().usedlist(name);
         
-        final int PAGE_SIZE = 5;   // 한 페이지 당 글수
-		final int PAGE_BLOCK = 3;   // 한 화면에 나타날 페이지 링크 수
-		int bCount = 0;   // 총 글수
-		int pageCount = 0; // 총 페이지수
-		int startPage = 1;   // 화면에 나타날 시작페이지
-		int endPage = 1;   // 화면에 나타날 마지막페이지
-		int currentPage = 1;
+        // 게임 관련 중고거래
+        ArrayList<Used> vo2 = service.usedlist(vo.getGameKoName());
+        
+        // 게임 관련 리뷰 - 최신4개
 		int startRnum = 1;   // 화면에 글
-		int endRnum = 1;  // 화면에 글
-		
-		String pageNum = request.getParameter("pagenum");
-		if(pageNum != null) {   // 눌려진 페이지가 있음.
-			currentPage = Integer.parseInt(pageNum); // 눌려진 페이지
-		}
-		// 총 글수
-		bCount = new GameService().getGameCount();
-		// 총 페이지수 = (총글개수 / 페이지당글수) + (총글개수에서 페이지당글수로 나눈 나머지가 0이 아니라면 페이지개수를 1 증가)
-		pageCount = (bCount / PAGE_SIZE) + (bCount % PAGE_SIZE == 0 ? 0 : 1);
-		//rownum 조건 계산
-		startRnum = (currentPage-1) * PAGE_SIZE   + 1;   // 1//6//11/16//21
-		endRnum = startRnum + PAGE_SIZE -1; 
-		if(endRnum > bCount) endRnum=bCount;
-		
-		if(currentPage % PAGE_BLOCK == 0) {
-			startPage = (currentPage / PAGE_BLOCK -1)  * PAGE_BLOCK + 1;
-		} else {
-			startPage = (currentPage / PAGE_BLOCK)  * PAGE_BLOCK + 1;
-		}
-		endPage = startPage + PAGE_BLOCK -1; 
-		if(endPage > pageCount) endPage=pageCount;
-		
-        try{   
-        int gameno2 = Integer.parseInt(gamenum);
-        ArrayList<GameReview> gvo2 = new GameService().selectReview(startRnum,endRnum,gameno2);
-        request.setAttribute("riviewvolist", gvo2);
-        }catch(Exception e){}
-        
-        
+		int endRnum = 4;  // 화면에 글
+        ArrayList<GameReview> gvo2 =service.selectReview(startRnum,endRnum,gamenum);
+
         request.setAttribute("gamevolist", vo);
         request.setAttribute("usedvolist", vo2);
-       
+        request.setAttribute("riviewvolist", gvo2);
+     
         request.setAttribute("str2", str2);
         request.setAttribute("str4", str4);
-      
         
 		request.getRequestDispatcher("/WEB-INF/game/gameinfo/GameInfo.jsp").forward(request, response);
 		

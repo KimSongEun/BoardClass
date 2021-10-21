@@ -49,14 +49,6 @@ public class AdminDao {
 		int result = 0;
 		return result;
 	}
-	public ArrayList<BoardReport> getRankReportBoard(Connection conn){
-		ArrayList<BoardReport> volist = null;
-		return volist;
-	}
-	public ArrayList<CommentReport> getRankReportComment(Connection conn){
-		ArrayList<CommentReport> volist = null;
-		return volist;
-	}
 	
 	public ArrayList<Notice> getNewestNotice(Connection conn){
 		ArrayList<Notice> volist = null;

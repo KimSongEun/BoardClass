@@ -21,11 +21,20 @@
 				<div class="div_table">
 					<table>
 						<tr class="tr_img">
-							<td rowspan=5><div id="thumbnail"></div></td>
+							<td class="td_thumbnail">
+								<div id="thumbnail">
+									<img src="${pageContext.request.contextPath}/${used.usedImg}">
+								</div>
+							</td>
+							<td>
+								<input type="file" name="usedImg" onchange="setImg(event);">
+							</td>
+						</tr>
+						<tr>
 							<td><label for="title">제목 : </label></td>
 							<td><input id="title" name="usedTitle"
 								placeholder="제목을 입력해주세요"></td>
-						</tr>
+						</tr>						
 						<tr class="tr_price">
 							<td><label for="price">가격 : </label></td>
 							<td><input id="price" name="usedPrice"
@@ -56,7 +65,6 @@
 							</select></td>
 						</tr>
 						<tr class="tr_file">
-							<td><input type="file" name="usedImg" onchange="setImg(event);">
 							<td><label for="gamecate">카테고리 : </label></td>
 							<td><select id="gamecate" name="usedCategory">
 									<option value="" selected>없음</option>
@@ -138,8 +146,9 @@
 				info.focus();
 				return false;
 			}
-
-			confirm("글을 등록하겠습니까?");
+			
+			return true;
+			
 		}
 
 		$("#search").keyup(searchCB);
@@ -232,8 +241,6 @@
 			reader.onload = function(event) {
 				var img = document.createElement("img");
 				img.setAttribute("src", event.target.result);
-				img.setAttribute("width", 150);
-				img.setAttribute("height", 150);
 				$("#thumbnail").empty();
 				document.querySelector("div#thumbnail").append(img);
 				var file= document.document.getElementById("usedImg");

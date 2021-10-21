@@ -19,9 +19,9 @@
 		<div class="article">
 		<div class="article_detail">
 				<div class="div_btn">
-					<c:if test="${used.userId eq user.userId}">
-						<button type="button" onclick="callUpdate();">수정</button>
-						<button type="button" onclick="callDelete();">삭제</button>
+					<c:if test="${used.userId eq userSession.userId}">
+						<button type="button" onclick="conUpdate();">수정</button>
+						<button type="button" onclick="conDelete();">삭제</button>
 					</c:if>
 				</div>
 				<div class="div_title">
@@ -81,8 +81,10 @@
 					</table>
 				</div>
 				<div class="div_contact">
-					<c:if test="${used.userId != user.userId}">
-						<button type="button" id="btn_like">찜</button>
+					<c:if test="${used.userId != userSession.userId}">
+						<div class="placement">
+      						<div class="heart" id="btn_like"></div>
+    					</div>
 						<button type="button" id="btn_contact">연락하기</button>
 						<button type="button" id="btn_report">신고하기</button>
 					</c:if>
@@ -102,7 +104,13 @@
 		
 <script>
 
-function callUpdate(){
+$(document).ready(function(){
+	if("${likeresult}" == 1){
+		$(".heart").toggleClass("is-active");
+	}
+});
+
+function conUpdate(){
 	if(window.confirm("수정하겠습니까?")){
 		location.href='UsedGetUpdate?usedNo=${used.usedNo}';
 	} else {
@@ -110,7 +118,7 @@ function callUpdate(){
 	}
 }
 
-function callDelete(){
+function conDelete(){
 	if(window.confirm("삭제하겠습니까?")){
 		location.href='useddelete?usedNo=${used.usedNo}';
 	} else {
@@ -120,9 +128,65 @@ function callDelete(){
 
 
 $("#btn_like").click(cbLike);
-$("#btn_contact").click();
+
+function cbLike(){
+	if(!"${userSession}"){
+		alert("로그인해주세요");
+		return;
+	}
+	$.ajax({
+		type : "post",
+		url : "usedunlike.ajax",
+		data : {
+			loginId : "${userSession.userId}",
+			thisUsedNo : "${used.usedNo}"
+		},
+		dataType : "json",
+		success : function(receive) {
+			console.log("receive값은:"  + receive)
+			$(".heart").toggleClass("is-active");
+		},
+		error : function(request, status, error) {
+			alert("code:" + request.status + "\n" + "message:"
+					+ request.responseText + "\n" + "error:"
+					+ error);
+		}
+	});
+}
+
+
+
+
 $("#btn_report").click(cbReport);
 
+function cbReport(){
+	if(!"${userSession}"){
+		alert("로그인해주세요");
+		return;
+	}
+	$.ajax({
+		type : "post",
+		url : "usedreport.ajax",
+		data : {
+			loginId : "${userSession.userId}",
+			thisUsedNo : "${used.usedNo}"
+		},
+		dataType : "json",
+		success : function(receive) {
+			console.log("");
+		},
+		error : function(request, status, error) {
+			alert("code:" + request.status + "\n" + "message:"
+					+ request.responseText + "\n" + "error:"
+					+ error);
+		}
+	});
+}
+
+
+
+
+$("#btn_contact").click();
 
 
 </script>

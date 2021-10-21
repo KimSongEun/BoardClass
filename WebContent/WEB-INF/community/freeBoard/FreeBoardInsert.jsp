@@ -13,28 +13,33 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자유게시판 새글쓰기</title>
+<title>BoardClass</title>
 <link rel="stylesheet" href="css/community/reset.css" />
 <link rel="stylesheet" href="css/community/write.css" />
-<link rel="stylesheet" href="css/community/main.css" />
+<link rel="stylesheet" href="css/community/common.css" />
 <script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
 </head>
 
 <body>
 <c:import url="../header.jsp" />
-
-	<nav id="c_category" class="c_category">
-		<ul>
-			<li><a href="./cmain">커뮤니티</a></li>
-			<li><a href="#">공지사항</a></li>
-			<li><a href="./cf">자유게시판</a></li>
-			<li><a href="#">유저정보게시판</a></li>
-			<li><a href="#">모임게시판</a></li>
-		</ul>
-	</nav>
+<div id="guide">
+	<aside id="aside" class="c_category">
+		<div class="as_inner">
+		<h2 class="as_hgroup"><a href="./cmain">커뮤니티</a></h2>
+		<nav id="lnb" class="lnb">
+			<ul>
+				<li><a href="#">공지사항</a></li>
+				<li><a href="./cf">자유게시판</a></li>
+				<li><a href="./cg">유저정보게시판</a></li>
+				<li><a href="#">모임게시판</a></li>
+			</ul>
+		</nav>
+		</div>
+	</aside>
+	
 <section>
 <div class="conwrap">
-	<div class="write_header">
+	<div class="h3group mb30">
 	<h1 class="tit">자유게시판</h1>
 	<div class="location">
 	<span class="depth">홈     ></span>
@@ -42,21 +47,20 @@
 	</div>
 	</div>
     <form method="post" action="cfwrite" >
-    <div class="title">
+    <div class="hgroup">
     	<input type="hidden" name="bno"  value="<%=boardNo%>" readonly >
-     <p> 제목</p>
+     <p class="tit">제목</p>
      <input type="text" name="title" required="required"><br>
-   </div>
 	<select name="type" id="type">
 				<option>사담</option>
 				<option>건의</option>
 				<option>질문</option>
 	</select>
-   <p>내용</p>
+	</div>
 	<textarea class ="form-control" name="content" id="p_content" required="required">
-	<div class="container">
+	
 	    <div class="content" style="width: 70%">
-	      <div class="row justify-content-md-center">
+	     
 	          <div class="col_c" style="margin-bottom: 30px">
 	                <div class="input-group">                 
 	                  <textarea class="form-control" id="p_content"></textarea>
@@ -71,26 +75,26 @@
 	                  </script>
 	                </div>
 	            </div> 
-	      </div>
-	      <div class="row justify-content-md-center">
-	            <div class="input-group mb-3">
+	    
+	           
 	              <div class="input-group-prepend">
 	                <span class="input-group-text" id="inputGroupFileAddon01">파일 추가</span>
 	              </div>
 	              <div class="custom-file">
 	                  &nbsp;<input type="file" class="form-control-file" id="exampleFormControlFile1">
 	              </div>
-	            </div>
-		      </div>
+	            
+		      
 		  </div>
-		</div>
+		
 	</textarea>
-<input type="submit" value="등록">
+		<input type="submit" value="등록">
 </form>
 </div>
 
 
 </section>
+</div>
 <c:import url="../footer.jsp" />
 </body>
 </html>

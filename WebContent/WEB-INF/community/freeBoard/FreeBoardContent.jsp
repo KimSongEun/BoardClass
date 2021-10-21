@@ -85,7 +85,7 @@
 								</button>
 							</div>
 							<div class="modal-body">
-								<form action="./BoardReport.jsp" method="post">
+								<form action="ccreport" method="post">
 									<div class="form-group">
 										<label>신고 제목</label>
 										<input type="text" name="reportTitle" class="form-control">

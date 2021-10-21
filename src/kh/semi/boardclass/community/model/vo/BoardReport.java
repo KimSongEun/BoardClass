@@ -7,8 +7,16 @@ public class BoardReport {
 	private String userId;
 
 	public BoardReport() {
-		// TODO Auto-generated constructor stub
 	}
+
+	
+	
+	@Override
+	public String toString() {
+		return "BoardReport [boardReportNo=" + boardReportNo + ", boardNo=" + boardNo + ", userId=" + userId + "]";
+	}
+
+
 
 	public int getBoardReportNo() {
 		return boardReportNo;

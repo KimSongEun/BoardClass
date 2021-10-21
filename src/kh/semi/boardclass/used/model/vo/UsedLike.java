@@ -3,17 +3,28 @@ package kh.semi.boardclass.used.model.vo;
 public class UsedLike {
 
 	private int usedLikeNo;
-	private int usedNum;
+	private int usedNo;
 	private String userId;
 	
 	public UsedLike() {
+		super();
 	}
-
-	public UsedLike(int usedLikeNo, int usedNum, String userId) {
+	
+	public UsedLike(int usedLikeNo, int usedNo, String userId) {
 		super();
 		this.usedLikeNo = usedLikeNo;
-		this.usedNum = usedNum;
+		this.usedNo = usedNo;
 		this.userId = userId;
+	}
+	public UsedLike(int usedNo, String userId) {
+		super();
+		this.usedNo = usedNo;
+		this.userId = userId;
+	}
+	
+	@Override
+	public String toString() {
+		return "UsedLike [usedLikeNo=" + usedLikeNo + ", usedNo=" + usedNo + ", userId=" + userId + "]";
 	}
 
 	public int getUsedLikeNo() {
@@ -24,12 +35,12 @@ public class UsedLike {
 		this.usedLikeNo = usedLikeNo;
 	}
 
-	public int getUsedNum() {
-		return usedNum;
+	public int getUsedNo() {
+		return usedNo;
 	}
 
-	public void setUsedNum(int usedNum) {
-		this.usedNum = usedNum;
+	public void setUsedNo(int usedNo) {
+		this.usedNo = usedNo;
 	}
 
 	public String getUserId() {
@@ -39,5 +50,5 @@ public class UsedLike {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
+	
 }

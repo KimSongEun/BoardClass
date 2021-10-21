@@ -70,7 +70,7 @@ public class AdUpdateServlet extends HttpServlet {
 		String title = multi.getParameter("title");
 		String content = multi.getParameter("content");
 		int promotionNo = Integer.parseInt(multi.getParameter("no"));
-		String img = "./upload/ad/" + file;
+		String img = "/upload/ad/" + file;
 		if (file == null) {
 			// 업로드 실패 시
 			img = multi.getParameter("originimg");
