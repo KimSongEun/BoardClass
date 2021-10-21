@@ -7,9 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kh.semi.boardclass.user.model.dao.UserDao;
-import kh.semi.boardclass.user.model.service.UserService;
-
 /**
  * Servlet implementation class CheckPhoneServlet
  */
