@@ -20,7 +20,13 @@ public class GameService {
 	}
 
 
-
+	public Game InfoGame(int no) {
+		Game vo= null;
+		Connection conn = JDBCTemplate.getConnection();
+		vo = new GameDao().InfoGame(conn,no);
+		JDBCTemplate.close(conn);
+		return vo;
+	}
 	public Game InfoGame(String name) {
 		Game vo= null;
 		Connection conn = JDBCTemplate.getConnection();
@@ -64,6 +70,20 @@ public class GameService {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
 		result = new GameDao().getGameCount(conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	public int getReviewCount(int gameno){
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new GameDao().getReviewCount(conn, gameno);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	public int getReviewCount(){
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new GameDao().getReviewCount(conn);
 		JDBCTemplate.close(conn);
 		return result;
 	}

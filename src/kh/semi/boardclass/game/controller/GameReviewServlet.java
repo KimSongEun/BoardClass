@@ -38,16 +38,15 @@ public class GameReviewServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("UTF-8");
 		
-        PrintWriter out=response.getWriter();    
-        
-        String gameno = request.getParameter("NUM222");
-        
-       System.out.println("c"+gameno);
+        String gamenumstr = request.getParameter("GAME_NO");
+		int gamenum = 0;
+        try{   
+        	gamenum = Integer.parseInt(gamenumstr);       
+        }catch(Exception e){
+        	System.out.println("숫자 변환 실패 기본 값 0");
+        }
+		System.out.println("GAME_NO:"+gamenum);
        
-        
-        
-      
-        
         final int PAGE_SIZE = 7;   // 한 페이지 당 글수
 		final int PAGE_BLOCK = 3;   // 한 화면에 나타날 페이지 링크 수
 		int bCount = 0;   // 총 글수
@@ -63,7 +62,8 @@ public class GameReviewServlet extends HttpServlet {
 			currentPage = Integer.parseInt(pageNum); // 눌려진 페이지
 		}
 		// 총 글수
-		bCount = new GameService().getGameCount();
+		bCount = new GameService().getReviewCount(gamenum);
+		
 		// 총 페이지수 = (총글개수 / 페이지당글수) + (총글개수에서 페이지당글수로 나눈 나머지가 0이 아니라면 페이지개수를 1 증가)
 		pageCount = (bCount / PAGE_SIZE) + (bCount % PAGE_SIZE == 0 ? 0 : 1);
 		//rownum 조건 계산
@@ -79,25 +79,22 @@ public class GameReviewServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1; 
 		if(endPage > pageCount) endPage=pageCount;
 		
-        try{   
-        int gameno2 = Integer.parseInt(gameno);
-        System.out.println("cc"+gameno2);
+		
+		System.out.println("bCount: "+bCount);
+		System.out.println("startRnum: "+startRnum);
+		System.out.println("endRnum: "+endRnum);
+		System.out.println("pageCount: "+pageCount);
+		
         
-        ArrayList<GameReview> gvo2 = new GameService().selectReview(startRnum,endRnum,gameno2);
-        System.out.println("ccc"+gvo2);
+        ArrayList<GameReview> gvo2 = new GameService().selectReview(startRnum,endRnum,gamenum);
+        System.out.println("gvo2:"+gvo2);
         request.setAttribute("reviewvolist", gvo2);
-        
-        }catch(Exception e){}
+        request.setAttribute("gameno", gamenum);
         request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
-      
-        
-        
-     
         
 		request.getRequestDispatcher("/WEB-INF/game/gameinfo/GameReview.jsp").forward(request, response);
-		
     }
 		
 	    

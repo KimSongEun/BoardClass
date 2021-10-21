@@ -6,7 +6,6 @@
 	pageEncoding="UTF-8"%>
 <%
 	ArrayList<GameReview> go2 = (ArrayList<GameReview>) request.getAttribute("reviewvolist");
-	
 	int startPage = (int) request.getAttribute("startPage");
 	int endPage = (int) request.getAttribute("endPage");
 	int pageCount = (int) request.getAttribute("pageCount");
@@ -124,7 +123,7 @@
 					}
 					for (int i = startPage; i <= endPage; i++) {
 				%>
-				<a href="./GameReview?pagenum=<%=i%>"> <%=i%></a>
+				<a href="./GameReview?GAME_NO=${gameno }&pagenum=<%=i%>"> <%=i%></a>
 				<%
 					if (i != endPage) {
 				%>
