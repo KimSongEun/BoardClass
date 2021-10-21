@@ -52,8 +52,9 @@ public class GamePartyListServlet extends HttpServlet {
 		if(pageNum != null) {   // ������ �������� ����.
 			currentPage = Integer.parseInt(pageNum); // ������ ������
 		}
-		// �� �ۼ�
-		bCount = new GameService().getGameCount();
+		String cate = "파티";
+		
+		bCount = new GameService().getGameCount(cate);
 		// �� �������� = (�ѱ۰��� / ��������ۼ�) + (�ѱ۰������� ��������ۼ��� ���� �������� 0�� �ƴ϶�� ������������ 1 ����)
 		pageCount = (bCount / PAGE_SIZE) + (bCount % PAGE_SIZE == 0 ? 0 : 1);
 		//rownum ���� ���
@@ -69,15 +70,31 @@ public class GamePartyListServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1; 
 		if(endPage > pageCount) endPage=pageCount;
 		
-		String cate = "파티";
+		
 		String search = request.getParameter("search");
 		System.out.println("검색어는 : " + search);
 
+		String sort = request.getParameter("sort");
+		if(sort == null) {
+			sort = "0";
+		}
+		if(sort == "0") {
+			ArrayList<Game> volist = new GameService().selectCateGameList(startRnum,endRnum,cate,search);
+			request.setAttribute("gamevolist", volist);
+		}else if(sort.equals("GameLevelList")) {
+			ArrayList<Game> volist = new GameService().selectLevelGameList(startRnum,endRnum,cate, search);
+			request.setAttribute("gamevolist", volist);
+		} else if(sort.equals("GameGradeList")) {
+			ArrayList<Game> volist = new GameService().selectGradeGameList(startRnum,endRnum,cate, search);
+			request.setAttribute("gamevolist", volist);
+		}else if(sort.equals("GameGradeDescList")) {
+			ArrayList<Game> volist = new GameService().selectGradeDescGameList(startRnum,endRnum,cate, search);
+			request.setAttribute("gamevolist", volist);
+		}else if(sort.equals("GameSortList")) {
+			ArrayList<Game> volist = new GameService().selectSortGameList(startRnum,endRnum,cate, search);
+			request.setAttribute("gamevolist", volist);
+		}
 		
-		// DB에서 값 읽어오기
-		ArrayList<Game> volist = new GameService().selectCateGameList(startRnum,endRnum,cate,search);
-		// Data ������ ���ؼ� request�� ��
-		request.setAttribute("gamevolist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);

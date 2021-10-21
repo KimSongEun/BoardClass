@@ -39,7 +39,8 @@ public class GameInfoServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
         
         String gamenumstr = request.getParameter("GAME_NO");
-		int gamenum = 0;
+		System.out.println("zz"+gamenumstr);
+        int gamenum = 0;
         try{   
         	gamenum = Integer.parseInt(gamenumstr);       
         }catch(Exception e){

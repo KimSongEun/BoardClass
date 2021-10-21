@@ -48,7 +48,7 @@ public class GameReviewServlet extends HttpServlet {
 		System.out.println("GAME_NO:"+gamenum);
        
         final int PAGE_SIZE = 7;   // 한 페이지 당 글수
-		final int PAGE_BLOCK = 3;   // 한 화면에 나타날 페이지 링크 수
+		final int PAGE_BLOCK = 10;   // 한 화면에 나타날 페이지 링크 수
 		int bCount = 0;   // 총 글수
 		int pageCount = 0; // 총 페이지수
 		int startPage = 1;   // 화면에 나타날 시작페이지
@@ -79,15 +79,13 @@ public class GameReviewServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1; 
 		if(endPage > pageCount) endPage=pageCount;
 		
-		
-		System.out.println("bCount: "+bCount);
-		System.out.println("startRnum: "+startRnum);
-		System.out.println("endRnum: "+endRnum);
-		System.out.println("pageCount: "+pageCount);
-		
+		System.out.println(bCount);
+		System.out.println(startPage);
+		System.out.println(endPage);
+        
         
         ArrayList<GameReview> gvo2 = new GameService().selectReview(startRnum,endRnum,gamenum);
-        System.out.println("gvo2:"+gvo2);
+        
         request.setAttribute("reviewvolist", gvo2);
         request.setAttribute("gameno", gamenum);
         request.setAttribute("startPage", startPage);

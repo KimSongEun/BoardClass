@@ -52,8 +52,9 @@ public class GameKoreanListServlet extends HttpServlet {
 		if(pageNum != null) {   // 눌려진 페이지가 있음.
 			currentPage = Integer.parseInt(pageNum); // 눌려진 페이지
 		}
+		String cate = "한글";
 		// 총 글수
-		bCount = new GameService().getGameCount();
+		bCount = new GameService().getGameCount(cate);
 		// 총 페이지수 = (총글개수 / 페이지당글수) + (총글개수에서 페이지당글수로 나눈 나머지가 0이 아니라면 페이지개수를 1 증가)
 		pageCount = (bCount / PAGE_SIZE) + (bCount % PAGE_SIZE == 0 ? 0 : 1);
 		//rownum 조건 계산
@@ -69,15 +70,31 @@ public class GameKoreanListServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1; 
 		if(endPage > pageCount) endPage=pageCount;
 		
-		String cate = "한글";
+		
 		String search = request.getParameter("search");
 		System.out.println("검색어는 : " + search);
 
+		String sort = request.getParameter("sort");
+		if(sort == null) {
+			sort = "0";
+		}
+		if(sort == "0") {
+			ArrayList<Game> volist = new GameService().selectCateGameList(startRnum,endRnum,cate,search);
+			request.setAttribute("gamevolist", volist);
+		}else if(sort.equals("GameLevelList")) {
+			ArrayList<Game> volist = new GameService().selectLevelGameList(startRnum,endRnum,cate, search);
+			request.setAttribute("gamevolist", volist);
+		} else if(sort.equals("GameGradeList")) {
+			ArrayList<Game> volist = new GameService().selectGradeGameList(startRnum,endRnum,cate, search);
+			request.setAttribute("gamevolist", volist);
+		}else if(sort.equals("GameGradeDescList")) {
+			ArrayList<Game> volist = new GameService().selectGradeDescGameList(startRnum,endRnum,cate, search);
+			request.setAttribute("gamevolist", volist);
+		}else if(sort.equals("GameSortList")) {
+			ArrayList<Game> volist = new GameService().selectSortGameList(startRnum,endRnum,cate, search);
+			request.setAttribute("gamevolist", volist);
+		}
 		
-		// DB에서 값 읽어오기
-		ArrayList<Game> volist = new GameService().selectCateGameList(startRnum,endRnum,cate,search);
-		// Data 전달을 위해서 request에 셋
-		request.setAttribute("gamevolist", volist);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);

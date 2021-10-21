@@ -142,18 +142,19 @@ top:-100px;
 			<div id="d1">테마</div>
 
 			<div id="search">
-				<form action="GameTemaList">
+				<form action="GameTemaList" method="post">
 				게임이름 <input type="search" id="text_name" name="search">
 				<button type="submit" id="search_btn" >검색</button>
 				</form>
 			</div>
-
-			<select id="sort" onchange="window.open(value,'_self');">
+		<form action="GameTemaList"  name="sort" method="post">
+			<select id="sort" name="sort" onchange="this.form.submit()" >
+				<option value="none">=== 정렬 선택 ===</option>
 				<option value="GameLevelList">난이도 순</option>
 				<option value="GameGradeList">평점 순</option>
 				<option value="GameGradeDescList">평점 낮은순</option>
 				<option value="GameSortList">가나다 순</option>
-			</select> <br>
+			</select> </form><br>
 			<%
 				if (volist != null) {
 					for (Game vo : volist) {
@@ -163,6 +164,8 @@ top:-100px;
 				<form name = "fom" method="get" action="GameInfo">
  				<div id="board_info">
 					<input type = "hidden" value = "<%=vo.getGameKoName()%>"  name="GAME_KONAME">
+					<input type = "hidden" value = "<%=vo.getGameNumber()%>"  name="GAME_NO">
+					
 					<button type="submit"    class="btn1" >
 						<img src="<%=request.getContextPath()%>/<%=vo.getGameImage()%>"
 							width="300" height="300" />
