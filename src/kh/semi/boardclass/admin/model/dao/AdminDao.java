@@ -669,7 +669,7 @@ public class AdminDao {
 	
 	public int insertAd(Connection conn, String title, String content, String writer, String img){
 		int result = 0;
-		String sql = "INSERT INTO BANNER VALUES (PROMOTION_NUM.nextval, ?, 2147483647, ?, ?, SYSDATE, ?)";
+		String sql = "INSERT INTO BANNER VALUES (PROMOTION_NUM.nextval, ?, 0, ?, ?, SYSDATE, ?)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -700,6 +700,23 @@ public class AdminDao {
 		}
 		return result;
 	}
+	
+	public int updateAdMain(Connection conn, int promotionNo, int promotionPlace){
+		int result = 0;
+		String sql = "UPDATE BANNER SET PROMOTION_PLACE = ? WHERE PROMOTION_NO = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null; 
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, promotionPlace);
+			pstmt.setInt(2, promotionNo);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
 	public int deleteAd(Connection conn, int promotionNo){
 		int result = 0;
 		PreparedStatement pstmt = null;
