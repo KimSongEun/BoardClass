@@ -8,7 +8,7 @@
 <title>BoardClass</title>
 <link rel="stylesheet" href="./css/index/maincss.css" />
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="./js/index/main.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/index/main.js"></script>
 </head>
 <body>
 	<c:import url="/WEB-INF/index/header.jsp" />
@@ -17,39 +17,41 @@
 
 			<div class="mySlides fade">
 				<div class="numbertext">1 / 3</div>
-				<img src="./img/adtest/테라포밍 마스 광고.jpg" style="width: 100%">
+				<img src="<%=request.getContextPath()%>/img/adtest/테라포밍 마스 광고.jpg" style="width: 100%">
 				<div class="text">Caption Text</div>
 			</div>
 
 			<div class="mySlides fade">
 				<div class="numbertext">2 / 3</div>
-				<img src="./img/adtest/사이드 광고.jpg" style="width: 100%">
+				<img src="<%=request.getContextPath()%>/img/adtest/사이드 광고.jpg" style="width: 100%">
 				<div class="text">Caption Two</div>
 			</div>
 
 			<div class="mySlides fade">
 				<div class="numbertext">3 / 3</div>
-				<img src="./img/adtest/카탄 3D 광고.jpg" style="width: 100%">
+				<img src="<%=request.getContextPath()%>/img/adtest/카탄 3D 광고.jpg" style="width: 100%">
 				<div class="text">Caption Three</div>
+				
 			</div>
 
-			<a class="prev" onclick="plusSlides(-1)">&#10094;</a> <a class="next"
-				onclick="plusSlides(1)">&#10095;</a>
+ 			<a class="prev" onclick="plusSlides(-1);">&#10094;</a> 
+			<a class="next" onclick="plusSlides(1);">&#10095;</a>
 		</div>
 		<br>
-
-		<div style="text-align: center">
-			<span class="dot" onclick="currentSlide(1)"></span> <span class="dot"
-				onclick="currentSlide(2)"></span> <span class="dot"
-				onclick="currentSlide(3)"></span>
-		</div>
+		
+		
+<div style="text-align:center">
+  <span class="dot" onclick="currentSlide(1);"></span> 
+  <span class="dot" onclick="currentSlide(2);"></span> 
+  <span class="dot" onclick="currentSlide(3);"></span> 
+</div>
 
 	</section>
 	<c:import url="/WEB-INF/index/footer.jsp" />
 	
 	<script>
-/* 	console.log("시작");
-	var slideIndex = 1;
+  	console.log("시작");
+ 	var slideIndex = 1;
 	showSlides(slideIndex);
 	
 	function plusSlides(n) {
@@ -69,13 +71,33 @@
 	  for (i = 0; i < slides.length; i++) {
 	      slides[i].style.display = "none";
 	  }
-	  for (i = 0; i < dots.length; i++) {
-	      dots[i].className = dots[i].className.replace(" active", "");
-	  }
+ 	  for (i = 0; i < dots.length; i++) {
+	      dots[i].className = dots[i].className.replace("active", "");
+	  }	 
 	  slides[slideIndex-1].style.display = "block";
-	  dots[slideIndex-1].className += " active";
-	  setTimeout(showSlides, 2000);
-	} */
+	   dots[slideIndex-1].className += " active"; 
+	}  
+	 
+	var slideIndexAuto = 0;
+	showSlidesAuto();
+
+	function showSlidesAuto() {
+	  var i;
+	  var slidesAuto = document.getElementsByClassName("mySlides");
+	  var dotsAuto = document.getElementsByClassName("dot");
+	  for (i = 0; i < slidesAuto.length; i++) {
+	    slidesAuto[i].style.display = "none";
+	  }
+	  slideIndexAuto++;
+	  if (slideIndexAuto > slidesAuto.length) {slideIndexAuto = 1}
+	  for (i = 0; i < dotsAuto.length; i++) {
+		    dotsAuto[i].className = dotsAuto[i].className.replace(" active", "");
+		  }
+	  slidesAuto[slideIndexAuto-1].style.display = "block";
+	  dotsAuto[slideIndexAuto-1].className += " active";
+	  setTimeout(showSlidesAuto, 2000); // Change image every 2 seconds
+	}
+	
 	</script>
 </body>
 </html>

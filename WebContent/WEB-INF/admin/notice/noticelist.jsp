@@ -63,12 +63,12 @@
                         <%if(volist !=null){
 						 for(Notice n : volist){ %> 
                         <tr>
-                            <td><%=n.getAnnounceNo() %></td>
-                            <td><a href = #사용자가보는공지사항화면새창열기 target = '_blank' style = "color : #754100"> <%=n.getAdminTitle() %></a></td>
-                            <td><%=n.getAdminWrDate() %></td>
-                            <td><%=n.getAdminRwrDate() %></td>
-                            <td><button class="update btn btn-danger" value="updatego" no="<%=n.getAnnounceNo()%>">글수정</button> </td>
-                            <td><button class="delete btn btn-primary" value="deletego" id="<%=n.getAnnounceNo() %>">글삭제</button> </td>
+                            <td style = "vertical-align : middle"><%=n.getAnnounceNo() %></td>
+                            <td style = "vertical-align : middle"><a href = #사용자가보는공지사항화면새창열기 target = '_blank' style = "color : #754100"> <%=n.getAdminTitle() %></a></td>
+                            <td style = "vertical-align : middle"><%=n.getAdminWrDate() %></td>
+                            <td style = "vertical-align : middle"><%=n.getAdminRwrDate() %></td>
+                            <td style = "vertical-align : middle"><button class="update btn btn-danger" value="updatego" no="<%=n.getAnnounceNo()%>">글수정</button> </td>
+                            <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" id="<%=n.getAnnounceNo() %>">글삭제</button> </td>
                         </tr>
                          <%} }%> 
                          <tr>

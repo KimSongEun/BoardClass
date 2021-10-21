@@ -13,6 +13,7 @@
 	justify-content: center;
 	flex-flow: row wrap;
 	margin: 0 auto;
+	max-width: 1330px;
 }
 
 .form_usedinfo{
@@ -24,12 +25,20 @@
 .div_usedinfo{
 	width: 205px;
 	height: 154px;
+	text-align:center;
+    display:table;
 }
 
-.div_usedinfo img{
-	 width: 205px;
-	 height: 154px;
-	 margin-bottom: 15px;
+.div_usedimg{
+	display:table-cell;
+    vertical-align:middle;
+    width: 205px;
+    height: 154px;
+}
+
+.div_usedimg img{
+	max-width: 100%;
+	max-height: 100%;
 }
 
 .div_img_text{

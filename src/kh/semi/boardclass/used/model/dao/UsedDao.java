@@ -195,7 +195,7 @@ public class UsedDao {
 	}
 
 	public int insertUsed(Connection conn, Used vo) {
-		int result = 0;
+		int result = -1;
 		PreparedStatement pstmt = null;
 		String sql = "INSERT INTO USED VALUES (USED_NUM.nextval, ?, ?, ?, ?, ?, ?, ?, sysdate, ?, ?, ?)";
 		try {
@@ -220,7 +220,7 @@ public class UsedDao {
 	}
 
 	public int updateUsed(Connection conn, Used vo, int usedNo) {
-		int result = 0;
+		int result = -1;
 		PreparedStatement pstmt = null;
 		String sql = "UPDATE USED SET USED_TITLE=?, USED_PRICE=?, USED_STATE=?, USED_CHANGE=?, USED_EXTYPE=?, USED_INFO=?, USED_IMG=?, USED_CATEGORY=?, USED_KEYWORD=? WHERE USED_NO=?";
 		try {
@@ -246,12 +246,65 @@ public class UsedDao {
 	}
 
 	public int deleteUsed(Connection conn, int usedNo) {
-		int result = 0;
+		int result = -1;
 		PreparedStatement pstmt = null;
 		String sql = "delete from USED where USED_NO = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, usedNo);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	public int countUsedLike(Connection conn, int usedNo, String userId) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String sql = "select count(*) from USED_LIKE where (USED_NO = ? and USER_ID = ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, usedNo);
+			pstmt.setString(2, userId);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	
+	public int deleteUsedLike(Connection conn, int usedNo, String userId) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String sql = "delete from USED_LIKE where (USED_NO = ? and USER_ID = ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, usedNo);
+			pstmt.setString(2, userId);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertUsedLike(Connection conn, int usedNo, String userId) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String sql = "insert into USED_LIKE values(USED_LIKE_NUM.nextval, ?, ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, usedNo);
+			pstmt.setString(2, userId);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -117,9 +117,9 @@ public class BoardgameUpdateServlet extends HttpServlet {
 		if (plus == null) {
 			plus = "plus 재설정 필요";
 		}
-		String image = "./game_img/" + fileImage;
-		String ruleimage = "./game_img/" + fileRuleImage;
-		String plusImage = "./game_img/" + filePlusImage;
+		String image = "/game_img/" + fileImage;
+		String ruleimage = "/game_img/" + fileRuleImage;
+		String plusImage = "/game_img/" + filePlusImage;
 		if (fileImage == null) {
 			// 업로드 실패 시
 			image = multi.getParameter("originimage");

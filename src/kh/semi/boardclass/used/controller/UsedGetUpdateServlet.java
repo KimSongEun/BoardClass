@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.boardclass.used.model.service.UsedService;
 import kh.semi.boardclass.used.model.vo.Used;
+import kh.semi.boardclass.user.model.vo.User;
 
 @WebServlet("/UsedGetUpdate")
 public class UsedGetUpdateServlet extends HttpServlet {
@@ -20,6 +21,12 @@ public class UsedGetUpdateServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		User loginSS = (User)request.getSession().getAttribute("userSession");
+		if(loginSS == null) {
+			request.getRequestDispatcher("/WEB-INF/error/loginAlert.jsp").forward(request, response);
+			return;
+		}
 		
 		int usedNo = Integer.parseInt(request.getParameter("usedNo"));
 		Used vo = new UsedService().getUsedDetail(usedNo);

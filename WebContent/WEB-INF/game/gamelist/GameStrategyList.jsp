@@ -31,9 +31,9 @@
 
 
 #page {
-	position: absolute;
-	top: 830px;
-	left: 900px;
+	position: relative;
+	top:  -80px;
+	left: 1100px;
 	font-size: 40px;
 }
 
@@ -142,13 +142,14 @@ top:-100px;
 			<div id="d1">전략</div>
 
 			<div id="search">
-				<form action="GameStrategyList">
+				<form action="GameStrategyList" method="post">
 				게임이름 <input type="search" id="text_name" name="search">
 				<button type="submit" id="search_btn" >검색</button>
 				</form>
 			</div>
-	<form action="GameStrategyList">
-			<select id="sort" onchange="window.open(value,'_self');">
+	<form action="GameStrategyList"  name="sort" method="post">
+			<select id="sort" name="sort" onchange="this.form.submit()">
+				<option value="none">=== 정렬 선택 ===</option>
 				<option value="GameLevelList" >난이도 순</option>
 				<option value="GameGradeList">평점 순</option>
 				<option value="GameGradeDescList">평점 낮은순</option>
@@ -163,6 +164,8 @@ top:-100px;
 			<form name = "fom" method="get" action="GameInfo">
  				<div id="board_info">
 					<input type = "hidden" value = "<%=vo.getGameKoName()%>"  name="GAME_KONAME">
+					<input type = "hidden" value = "<%=vo.getGameNumber()%>"  name="GAME_NO">
+					
 					<button type="submit"    class="btn1" >
 						<img src="<%=request.getContextPath()%>/<%=vo.getGameImage()%>"
 							width="300" height="300" />
@@ -177,7 +180,9 @@ top:-100px;
 				}
 				}
 			%>
-
+			
+		</section>
+</div>
 			<div id="page">
 				<%
 					if (startPage > 1) {
@@ -187,7 +192,7 @@ top:-100px;
 					}
 					for (int i = startPage; i <= endPage; i++) {
 				%>
-				<a href="./GameStrategyList?pagenum=<%=i%>"> <%=i%></a>
+				<a href="./GameStrategyList?GAME_CATEGORY=${gamecate}&pagenum=<%=i%>"> <%=i%></a>
 				<%
 					if (i != endPage) {
 				%>
@@ -204,9 +209,8 @@ top:-100px;
 			</div>
 
 
-		</section>
 
-	</div>
+	
 
 
 <%@include file="/WEB-INF/index/footer.jsp" %>

@@ -76,6 +76,7 @@ public class AdListServlet extends HttpServlet {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
+		System.out.println(volist);
 		request.getRequestDispatcher("/WEB-INF/admin/ad/adlist.jsp").forward(request, response);
 	}
 

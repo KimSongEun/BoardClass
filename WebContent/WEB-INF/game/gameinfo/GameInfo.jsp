@@ -2,8 +2,7 @@
 <%@page import="kh.semi.boardclass.game.model.vo.GameReview"%>
 <%@page import="kh.semi.boardclass.used.model.vo.Used"%>
 <%@page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%
 	Game vo = (Game) request.getAttribute("gamevolist");
 	ArrayList<Used> vo2 = (ArrayList<Used>) request.getAttribute("usedvolist");
@@ -287,7 +286,7 @@ background-color:#CCFFFF;
 	<div id="modal_01" class="modal">
 		<div class="modal-content">
 			<p style="font-size: 33px; background-color: #e9ecef"><%=vo.getGameKoName()%></p>
-			<form action="GameInfo" method="post" style="background-color: #e9ecef">
+			<form action="GameInsertReview" method="post" style="background-color: #e9ecef">
 				<div class="star-rating space-x-4 mx-auto">
 				<input type = "hidden" value = "<%=vo.getGameNumber()%>" name = "no">
 				<input type = "hidden" value = "<%=vo.getGameKoName()%>" name = "GAME_KONAME">
@@ -480,7 +479,7 @@ background-color:#CCFFFF;
 				<p class="infoP">리뷰</p>
 				<p class="infoPP">Hot Review</p>
 				<form action="GameReview" method="post">
-					<input type = "hidden" value = "<%=vo.getGameNumber()%>" name = "NUM222">					
+					<input type = "hidden" value = "<%=vo.getGameNumber()%>" name = "GAME_NO">					
 					<button type = "submit" id="btnReview" style="width: 200px; height: 50px; font-size: 25px;">최신글 보기>></button>
 				</form>
 				<%

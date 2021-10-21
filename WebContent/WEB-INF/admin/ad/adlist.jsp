@@ -52,7 +52,8 @@
                     <table class="table table-striped admin-ad-table" style="text-align: center;">
                         <tr style="text-align:center; font-size: 16px; font-weight: bold;">
                             <td>글번호</td>
-                            <td style="width : 300px;">광고제목</td>
+                            <td class = "text-center">메인등록</td>
+                            <td>광고제목</td>
                             <td>광고 작성일</td>
                             <td>수정 </td>
                             <td>삭제 </td>
@@ -60,15 +61,23 @@
                         <%if(volist !=null){
 						 for(Banner b : volist){ %> 
                         <tr>
-                            <td><%=b.getPromotionNo() %></td>
-                            <td><a href = #사용자가보는광고화면새창열기 target = '_blank' style = "color : #754100"> <%=b.getPromotionTitle() %></a></td>
-                            <td><%=b.getPromotionDate() %></td>
-                            <td><button class="update btn btn-danger" value="updatego" no="<%=b.getPromotionNo()%>">광고수정</button> </td>
-                            <td><button class="delete btn btn-primary" value="deletego" id="<%=b.getPromotionNo() %>">광고삭제</button> </td>
+                            <td style="vertical-align : middle" class = "promotionNo"><%=b.getPromotionNo() %></td>
+                            <td style="vertical-align : middle">
+                            	<div class="form-check">
+								  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked<%=b.getPromotionNo() %>"<%if(b.getPromotionPlace()==1){ %>checked<%} else{ }%>>
+								  <label class="form-check-label" for="flexCheckChecked<%=b.getPromotionNo() %>">
+								    	&nbsp; 메인노출
+								  </label>
+								</div>
+                            </td>
+                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href = #사용자가보는광고화면새창열기 target = '_blank' style = "color : #754100"> <%=b.getPromotionTitle() %></a></td>
+                            <td style = "vertical-align : middle"><%=b.getPromotionDate() %></td>
+                            <td style = "vertical-align : middle"><button class="update btn btn-danger" value="updatego" no="<%=b.getPromotionNo()%>">광고수정</button> </td>
+                            <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" id="<%=b.getPromotionNo() %>">광고삭제</button> </td>
                         </tr>
                          <%} }%> 
                          <tr>
-                          <td colspan = "5"><button type="button" class="insert btn btn-primary"
+                          <td colspan = "6"><button type="button" class="insert btn btn-primary"
                     style="float : right; background-color: #285226; color: #EAEAEA; border-radius: 5px;">광고작성</button></td>
                     </tr>
                     </table>

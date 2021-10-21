@@ -18,23 +18,32 @@
 		<div class="article_create">
 			<form class="form_create" action="usedupdate" method="post"
 				enctype="multipart/form-data">
+				<input type="hidden" name="usedNo" value="${used.usedNo}">
 				<div class="div_table">
 					<table>
 						<tr class="tr_img">
-							<td rowspan=5><div id="thumbnail"><img src="${pageContext.request.contextPath}/${used.usedImg}"></div></td>
+							<td class="td_thumbnail">
+								<div id="thumbnail">
+									<img src="${pageContext.request.contextPath}/${used.usedImg}">
+								</div>
+							</td>
+							<td>
+								<input type="file" name="usedImg" onchange="setImg(event);">
+							</td>
+						</tr>
+						<tr>
 							<td><label for="title">제목 : </label></td>
 							<td><input id="title" name="usedTitle"
-								placeholder="제목을 입력해주세요">${used.usedTitle}</td>
+								placeholder="제목을 입력해주세요" value="${used.usedTitle}"></td>
 						</tr>
 						<tr class="tr_price">
 							<td><label for="price">가격 : </label></td>
 							<td><input id="price" name="usedPrice"
-								placeholder="숫자만 입력하세요">${used.usedPrice}</td>
+								placeholder="숫자만 입력하세요" value="${used.usedPrice}"></td>
 						</tr>
 						<tr class="tr_state">
 							<td><label for="state">상태 : </label></td>
 							<td><select id="state" name="usedState">
-									<option selected disabled>${used.usedState}</option>
 									<option value="0">미개봉</option>
 									<option value="1">상태좋음</option>
 									<option value="2">사용흔적있음</option>
@@ -44,7 +53,6 @@
 						<tr class="tr_changeable">
 							<td><label for="changeable">교환여부 : </label></td>
 							<td><select id="changeable" name="usedChange">
-									<option selected disabled>${used.usedChange}</option>
 									<option value="0">교환가능</option>
 									<option value="1">교환불가</option>
 							</select></td>
@@ -52,17 +60,14 @@
 						<tr class="tr_changetype">
 							<td><label for="changetype">거래방식 : </label></td>
 							<td><select id="changetype" name="usedExtype">
-									<option selected disabled>${used.usedExtype}</option>
 									<option value="0">직거래&amp;택배</option>
 									<option value="1">직거래</option>
 									<option value="2">택배</option>
 							</select></td>
 						</tr>
 						<tr class="tr_file">
-							<td><input type="file" name="usedImg" onchange="setImg(event);">
 							<td><label for="gamecate">카테고리 : </label></td>
 							<td><select id="gamecate" name="usedCategory">
-									<option selected disabled>${used.usedCategory}</option>
 									<option value="">없음</option>
 									<option value="퍼즐">퍼즐</option>
 									<option value="전략">전략</option>
@@ -81,7 +86,7 @@
 				<div class="div_info">
 					<label for="info" class="label_down">상품정보</label>
 					<textarea id="info" name="usedInfo" placeholder="상품정보를 입력하세요"
-						autofocus>${used.usedKeyword}</textarea>
+						autofocus>${used.usedInfo}</textarea>
 					<div id="info_count">(0 / 1,000)</div>
 				</div>
 				<div class="div_keyword">
@@ -107,6 +112,31 @@
 	</section>
 	<%@include file="/WEB-INF/index/footer.jsp"%>
 	<script>
+	
+		$(document).ready(function(){
+			$("#state option").each(function(){
+				if($(this).val()=="${used.usedState}"){
+					$(this).attr("selected","true");
+				}
+			});
+			$("#changeable option").each(function(){
+				if($(this).val()=="${used.usedChange}"){
+					$(this).attr("selected","true");
+				}
+			});
+			$("#changetype option").each(function(){
+				if($(this).val()=="${used.usedExtype}"){
+					$(this).attr("selected","true");
+				}
+			});
+			$("#gamecate option").each(function(){
+				if($(this).val()=="${used.usedCategory}"){
+					$(this).attr("selected","true");
+				}
+			});
+		});
+	
+	
 		function checkValAll() {
 			console.log("checkValAll함수진입");
 
@@ -142,8 +172,9 @@
 				info.focus();
 				return false;
 			}
+			
+			return true;
 
-			confirm("글을 등록하겠습니까?");
 		}
 
 		$("#search").keyup(searchCB);
@@ -212,6 +243,14 @@
 					}
 				});
 
+		
+		$("#title").on("keyup", function() {
+			if ($(this).val().length > 200) {
+				$(this).val($(this).val().substring(0, 200));
+			}
+		});
+		
+		
 		$("#info").on("keyup", function() {
 			$("#info_count").html("(" + $(this).val().length + " / 1,000)");
 
@@ -236,8 +275,6 @@
 			reader.onload = function(event) {
 				var img = document.createElement("img");
 				img.setAttribute("src", event.target.result);
-				img.setAttribute("width", 150);
-				img.setAttribute("height", 150);
 				$("#thumbnail").empty();
 				document.querySelector("div#thumbnail").append(img);
 				var file= document.document.getElementById("usedImg");

@@ -300,6 +300,19 @@ public class AdminService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	
+	public int updateAdMain(int promotionNo, int promotionPlace) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().updateAdMain(conn, promotionNo, promotionPlace);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
 
 	public int deleteAd(int promotionNo) {
 		int result = 0;

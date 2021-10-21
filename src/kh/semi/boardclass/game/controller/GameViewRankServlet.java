@@ -53,7 +53,8 @@ public class GameViewRankServlet extends HttpServlet {
 			currentPage = Integer.parseInt(pageNum); // 눌려진 페이지
 		}
 		// 총 글수
-		bCount = new GameService().getGameCount();
+		String cate = "";
+		bCount = new GameService().getGameCount(cate);
 		// 총 페이지수 = (총글개수 / 페이지당글수) + (총글개수에서 페이지당글수로 나눈 나머지가 0이 아니라면 페이지개수를 1 증가)
 		pageCount = (bCount / PAGE_SIZE) + (bCount % PAGE_SIZE == 0 ? 0 : 1);
 		//rownum 조건 계산
