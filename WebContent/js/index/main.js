@@ -1,4 +1,4 @@
-$(function(){
+/*$(function(){
 	console.log("시작");
 	var slideIndex = 1;
 	showSlides(slideIndex);
@@ -30,3 +30,4 @@ $(function(){
 	
 	});
 
+*/
