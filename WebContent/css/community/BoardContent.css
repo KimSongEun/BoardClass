@@ -1,4 +1,10 @@
 @charset "UTF-8";
+* { margin: 0; padding: 0;}
+body {font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;}
+li { list-style-type: none;}
+a { text-decoration: none;}
+img { border: 0;}
+
 #guide{
 	display:table;
 	table-layout: fixed;
@@ -9,6 +15,35 @@
 #aside {
 	display: table-cell;
 	width: 215px;
+	vertical-align: top;
+}
+#aside .as_inner {
+    width: 185px;
+    background: #ffffff;
+}
+
+#aside .as_inner .as_hgroup { /* 커뮤니티 큰 글씨*/
+    width: 185px;
+    height: 105px;
+    background-color: blue; /* 색깔변경하기*/
+    line-height: 105px;
+    text-align:center;
+}
+#aside .as_inner .as_hgroup > a {
+    font-weight: 700;
+    font-size: 24px;
+    color: #ffffff;
+}
+
+#aside .as_inner .lnb > ul > li > a {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px 15px 15px 20px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 26px;
+    color: #444444;
 }
 #contnets {
     display: table-cell;

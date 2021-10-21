@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.community.model.dao.CommunityDao;
 import kh.semi.boardclass.community.model.vo.Board;
+import kh.semi.boardclass.community.model.vo.BoardReport;
 import kh.semi.boardclass.community.model.vo.Comment;
 
 public class CommunityService {
@@ -292,8 +293,16 @@ public class CommunityService {
 
 	}
 
-	public int insertReportBoard() {
-		int result = -1;
+	public int insertReportBoard(BoardReport br) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().insertReportBoard(conn, br);
+	 if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
 		return result;
 	}
 

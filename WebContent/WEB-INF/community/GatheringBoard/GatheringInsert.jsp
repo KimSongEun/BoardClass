@@ -42,36 +42,35 @@
 	<h1 class="tit">커뮤니티 글쓰기</h1>
 	
 	</div>
-    <form method="post" action="cgwrite" >
+<form method="post" action="cgwrite" >
     <div class="hgroup">
     	<input type="hidden" name="bno"  value="<%=boardNo%>" readonly >
-     <p class="tit">제목</p>
-     <input type="text" name="title" required="required"><br>
+		<p class="tit">제목</p>
+		<input type="text" name="title" required="required"><br>
 
-	<select class = "category-select" name = "selectCategory" id = "allboard-select-main">
-            <option value="자유게시판"<c:if test = "${category=='자유게시판'}">selected</c:if>>자유게시판</option>
-			<option value="유저정보게시판"<c:if test = "${category=='유저정보게시판'}">selected</c:if>>유저정보게시판</option>
-			<option value="모임게시판"<c:if test = "${category=='모임게시판'}">selected</c:if>>모임게시판</option>
-	</select>
-	 <select class="type-select" name="selectSubCategory" id = "allboard-select-sub">
-	 	<c:if test="${category=='자유게시판'}"> 
-			<option value="사담"<c:if test = "${type=='사담'}">selected</c:if>>사담</option>
-			<option value="건의"<c:if test = "${type=='건의'}">selected</c:if>>건의</option>
-			<option value="질문"<c:if test = "${type=='질문'}">selected</c:if>>질문</option>
-		</c:if>
-		<c:if test="${category=='유저정보게시판'}"> 
-			<option value="기사"<c:if test = "${type=='기사'}">selected</c:if>>기사</option>
-			<option value="후기"<c:if test = "${type=='후기'}">selected</c:if>>후기</option>
-			<option value="공식"<c:if test = "${type=='공식'}">selected</c:if>>공식</option>
-			<option value="팁"<c:if test = "${type=='팁'}">selected</c:if>>팁</option>
-		</c:if>
-			<c:if test="${category =='모임게시판'}"> 
-			<option value="모임후기"<c:if test = "${type=='모임후기'}">selected</c:if>>모임후기</option>
-			<option value="모집"<c:if test = "${type=='모집'}">selected</c:if>>모집</option>
-			<option value="일정안내"<c:if test = "${type=='일정안내'}">selected</c:if>>일정안내</option>
-		</c:if>
-      </select>
-
+		<select class = "category-select" name = "selectCategory" id = "allboard-select-main">
+	            <option value="자유게시판"<c:if test = "${category=='자유게시판'}">selected</c:if>>자유게시판</option>
+				<option value="유저정보게시판"<c:if test = "${category=='유저정보게시판'}">selected</c:if>>유저정보게시판</option>
+				<option value="모임게시판"<c:if test = "${category=='모임게시판'}">selected</c:if>>모임게시판</option>
+		</select>
+	 	<select class="type-select" name="selectSubCategory" id = "allboard-select-sub">
+		 	<c:if test="${category=='자유게시판'}"> 
+				<option value="사담"<c:if test = "${type=='사담'}">selected</c:if>>사담</option>
+				<option value="건의"<c:if test = "${type=='건의'}">selected</c:if>>건의</option>
+				<option value="질문"<c:if test = "${type=='질문'}">selected</c:if>>질문</option>
+			</c:if>
+			<c:if test="${category=='유저정보게시판'}"> 
+				<option value="기사"<c:if test = "${type=='기사'}">selected</c:if>>기사</option>
+				<option value="후기"<c:if test = "${type=='후기'}">selected</c:if>>후기</option>
+				<option value="공식"<c:if test = "${type=='공식'}">selected</c:if>>공식</option>
+				<option value="팁"<c:if test = "${type=='팁'}">selected</c:if>>팁</option>
+			</c:if>
+				<c:if test="${category =='모임게시판'}"> 
+				<option value="모임후기"<c:if test = "${type=='모임후기'}">selected</c:if>>모임후기</option>
+				<option value="모집"<c:if test = "${type=='모집'}">selected</c:if>>모집</option>
+				<option value="일정안내"<c:if test = "${type=='일정안내'}">selected</c:if>>일정안내</option>
+			</c:if>
+		</select>
 	</div>
 	<textarea class ="form-control" name="content" id="p_content" required="required">
 	
@@ -104,7 +103,7 @@
 		  </div>
 		
 	</textarea>
-		<input type="submit" value="등록">
+	<input type="submit" value="등록">
 </form>
 </div>
 
@@ -114,9 +113,9 @@
 <c:import url="../footer.jsp" />
 <script>
 
-$(".category-select").change(selectCategory);
-console.log("변경");
+$(".category-select").change(selectCategory);  
 function selectCategory() {
+	console.log("변경");
 	var index = $(".category-select").index(this);
 	var free = ["사담", "건의", "질문"];
 	var userInfo = [ "기사", "후기", "공식", "팁"];

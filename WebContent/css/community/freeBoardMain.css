@@ -1,16 +1,9 @@
 @charset "UTF-8";
-*{
-    margin: 0; padding: 0;
-    box-sizing: border-box;
-}
+* { margin: 0; padding: 0;}
+body {font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;}
 li { list-style-type: none;}
 a { text-decoration: none;}
 img { border: 0;}
-table {  border-collapse: collapse;}
-div {display: block;}
-button {
-  overflow: visible;
-}
 
 
 #guide{
@@ -18,7 +11,6 @@ button {
 	table-layout: fixed;
 	width: 1100px;
 	margin: 0 auto;
-	padding: 50px 0 100px;	
 }
 #aside { /* 커뮤니티 게시판 카테고리 부분*/
 	display: table-cell;
@@ -70,7 +62,6 @@ button {
 }
 .h3group .tit {
 	  float: left;
-    font-family: 'NanumSquare';
     font-weight: 700;
     font-size: 30px;
     line-height: 44px;

@@ -73,6 +73,8 @@ public class CommunityCommentServlet extends HttpServlet {
 			System.out.println("commentNo 숫자변환못함 - 댓글, 답글아님");
 		}
 		
+		
+		
 		Comment comment = new Comment();
 		comment.setBoardNo(boardNo);
 		comment.setUserId(userId);

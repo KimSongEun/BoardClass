@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.boardclass.community.model.service.CommunityService;
 import kh.semi.boardclass.community.model.vo.Board;
+import kh.semi.boardclass.user.model.vo.User;
 
 /**
  * Servlet implementation class CommunityFreeInsertServle
@@ -89,9 +90,14 @@ public class CommunityFreeInsertServle extends HttpServlet {
 			// 알아와야함. bref, bre_level, bre_step
 			oVo = new CommunityService().getBoard(boardNo); 
 		}
-		String writer = (String)request.getSession().getAttribute("memberLoginInfo");
-		if(writer == null || writer.equals("")) {
-			writer = "c";   // TODO: 임시 user 설정
+//		String writer = (String)request.getSession().getAttribute("memberLoginInfo");
+//		if(writer == null || writer.equals("")) {
+//			writer = "c";   // TODO: 임시 user 설정
+//		}
+		String userId = "c"; //TODO: 임시 user 설정
+		User userSS = (User) request.getSession().getAttribute("user");
+		if (userSS != null) {
+			userId = userSS.getUserId();
 		}
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
@@ -103,7 +109,7 @@ public class CommunityFreeInsertServle extends HttpServlet {
 		vo.setBoardContent(content);
 		vo.setBoardCategory(category);
 		vo.setBoardType(type);
-		vo.setUserId(writer);
+		vo.setUserId(userId);
 		int result = new CommunityService().insertFreeBoard(vo);
 		response.sendRedirect("cf");
 	}

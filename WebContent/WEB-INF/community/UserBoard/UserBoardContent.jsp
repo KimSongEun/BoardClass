@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="kh.semi.boardclass.community.model.vo.Board"%>
 <%@page import="java.util.ArrayList"%>
-<% Board vo = (Board)request.getAttribute("boardvo"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,7 +104,7 @@ h1 {
 			<h2 class="as_hgroup"><a href="./cmain">커뮤니티</a></h2>
 			<nav id="lnb" class="lnb">
 			<ul>
-				<li><a href="./cnotice">공지사항</a></li>
+				<li><a href="#">공지사항</a></li>
 				<li><a href="./cf">자유게시판</a></li>
 				<li><a href="./cu">유저정보게시판</a></li>
 				<li><a href="./cg">모임게시판</a></li>
@@ -117,21 +116,16 @@ h1 {
 <div class="conwrap">
 	<div class="h3group">
 		<h3 class="tit">커뮤니티</h3>
-		<div class="location">
-			<span class="depth">홈</span>
-			<span class="depth">커뮤니티</span><strong class="this">자유게시판</strong>
-		</div>
 	</div>
 	
 	<div class="viewbody">
-		<div class="hgroup">
-			<div class="tit">${board.boardTitle }</div>
-			<div class="util">
-				<div class="name">${board.userId }</div>
-				<div class="date">시간: ${board.boardWriteDate }</div>
-				<div class="hit">조회수: ${board.boardViewCount }</div>
+		<div class="h3group">
+			<h3 class="tit">유저정보게시판</h3>
+			<div class="location">
+				<span class="depth">홈</span>
+				<span class="depth">커뮤니티</span><strong class="this">유저정보게시판</strong>
 			</div>
-		</div>
+		</div>	
 		<div class= "content">
 		내용 : ${board.boardContent }
 	
@@ -147,13 +141,16 @@ h1 {
 	<div class="btn_wrap">
 	<!-- 아이디 확인한 후 버튼 생성 가능-->
 	
-		<a href="cfupdate?boardNo=${board.boardNo }" class="btn btn1">
+		<a href="cupdate?boardNo=${board.boardNo }" class="btn btn1">
 			<button>수정</button>
 		</a>
+		<input type="button" id="boardUpdate" class="btn btn1" value="수정" onclick="update()">
 		<input type="button" class="btn btn2" value="삭제" onclick="del()">
-		<a href="cf" class="btn btn3">
+		<input type="button" id="moveList" class="btn btn3" value="목록">
+		<a href="cu" class="btn btn3">
 			<button >목록</button>
 		</a>
+		
 	</div>
 	<!--  댓글  TODO 로그인과정 -->
 	<div class="comment">
@@ -216,34 +213,47 @@ h1 {
 					</div>
 			</div>
 		
-	</div>
-
+		</div>
 	</div>
 </div>
 <script>
+//모달창
+
+$("#report_modal").click(function() {
+	$(".modal").show();
+});
+$(".close").click(function() {
+	$(".modal").hide();
+});
+
+//신고
+
+function reportBtn() {
+   if (confirm("신고 후 취소하실 수 없습니다. 정말 신고하시겠습니까?")) {
+   		//전송
+             alert("신고가 완료되었습니다.");
+         } else {
+       	  alert("신고가 취소되었습니다.");
+         }
+	}
+	
+//삭제 수정 목록
+
 function del(){
 	const del = confirm("해당 게시물을 삭제하시겠습니까?");
 	if(del) {
-		location.href='cfdelete?boardNo=${board.boardNo }';
+		location.href='cudelete?boardNo=${board.boardNo }';
 	}
 }
-	
-	$("#report_modal").click(function() {
-		$(".modal").show();
-	});
-	$(".close").click(function() {
-		$(".modal").hide();
-	});
-	
-	function reportBtn() {
-    if (confirm("신고 후 취소하실 수 없습니다. 정말 신고하시겠습니까?")) {
-    		//전송
-              alert("신고가 완료되었습니다.");
-          } else {
-        	  alert("신고가 취소되었습니다.");
-          }
-		}
-	
+
+$("#boardUpdate").click(function(){
+	location.href="cupdate?boardNo=${board.boardNo }";
+})
+$("#moveList").click(function () {
+	location.href="cu";
+})
+
+
 </script>
 <%@include file="/WEB-INF/index/footer.jsp" %>
 </body>

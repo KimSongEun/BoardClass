@@ -16,8 +16,8 @@
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
 
 </head>
-<c:import url="../header.jsp" />
 <body>
+<%@include file="/WEB-INF/index/header.jsp" %>
 
 <div id="guide" class="row">
 	
@@ -70,7 +70,7 @@
 	 </form>
 	</div>
 	
-	
+	<!-- 글 리스트 -->
 	<div class="tbl_list">
 		<table>
 		<tbody>
@@ -201,6 +201,6 @@ $(function(){
 
 
 
-<c:import url="../footer.jsp" />
+<%@include file="/WEB-INF/index/footer.jsp" %>
 </body>
 </html>

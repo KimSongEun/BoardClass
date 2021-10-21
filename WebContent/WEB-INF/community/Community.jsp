@@ -11,7 +11,7 @@
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
-<c:import url="header.jsp" />
+<%@include file="/WEB-INF/index/header.jsp" %>
 <div id="guide" class="row">
 	<aside id="aside" class="c_category">
 		<div class="as_inner">
@@ -20,8 +20,8 @@
 		<ul>
 			<li><a href="#">공지사항</a></li>
 			<li><a href="./cf">자유게시판</a></li>
-			<li><a href="#">유저정보게시판</a></li>
-			<li><a href="#">모임게시판</a></li>
+			<li><a href="./cu">유저정보게시판</a></li>
+			<li><a href="./cg">모임게시판</a></li>
 		</ul>
 		</nav>
 		</div>
@@ -152,6 +152,6 @@
 </div>
 
 </section>
-<c:import url="footer.jsp" />
+<%@include file="/WEB-INF/index/footer.jsp" %>
 </body>
 </html>

@@ -19,8 +19,6 @@
 <link rel="stylesheet" href="css/community/common.css" />
 <script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
 </head>
-
-<body>
 <%@include file="/WEB-INF/index/footer.jsp" %>
 <div id="guide">
 	<aside id="aside" class="c_category">
@@ -40,21 +38,22 @@
 <section>
 <div class="conwrap">
 	<div class="h3group mb30">
-	<h1 class="tit">자유게시판</h1>
+	<h1 class="tit">유저정보게시판</h1>
 	<div class="location">
 	<span class="depth">홈     ></span>
-	<span class="depth">커뮤니티     > </span><strong class="this">자유게시판</strong>
+	<span class="depth">커뮤니티     > </span><strong class="this">유저정보게시판</strong>
 	</div>
 	</div>
-    <form method="post" action="cfwrite" >
+    <form method="post" action="cuwrite" >
     <div class="hgroup">
     	<input type="hidden" name="bno"  value="<%=boardNo%>" readonly >
      <p class="tit">제목</p>
      <input type="text" name="title" required="required"><br>
 	<select name="type" id="type">
-				<option>사담</option>
-				<option>건의</option>
-				<option>질문</option>
+				<option>기사</option>
+				<option>후기</option>
+				<option>공식</option>
+				<option>팁</option>
 	</select>
 	</div>
 	<textarea class ="form-control" name="content" id="p_content" required="required">
@@ -75,17 +74,15 @@
 	                  </script>
 	                </div>
 	            </div> 
-	    
-	           
+	   
 	              <div class="input-group-prepend">
 	                <span class="input-group-text" id="inputGroupFileAddon01">파일 추가</span>
 	              </div>
 	              <div class="custom-file">
 	                  &nbsp;<input type="file" class="form-control-file" id="exampleFormControlFile1">
 	              </div>
-	            
 		      
-		  </div>
+		</div>
 		
 	</textarea>
 		<input type="submit" value="등록">
@@ -96,5 +93,4 @@
 </section>
 </div>
 <%@include file="/WEB-INF/index/footer.jsp" %>
-</body>
 </html>

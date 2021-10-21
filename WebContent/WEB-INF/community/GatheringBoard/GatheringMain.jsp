@@ -10,8 +10,8 @@
 <link rel="stylesheet" href="css/community/freeBoardMain.css" />
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
-<c:import url="../header.jsp" />
 <body>
+<%@include file="/WEB-INF/index/header.jsp" %>
 <div id="guide" class="row">
 	
 	<aside id="aside" class="c_category">
@@ -21,8 +21,8 @@
 			<ul>
 				<li><a href="#">공지사항</a></li>
 				<li><a href="./cf">자유게시판</a></li>
-				<li><a href="./cg">유저정보게시판</a></li>
-				<li><a href="#">모임게시판</a></li>
+				<li><a href="./cu">유저정보게시판</a></li>
+				<li><a href="./cg">모임게시판</a></li>
 			</ul>
 		</nav>
 		</div>
@@ -34,10 +34,10 @@
 <div class="conwrap pb30">
 <section id="boardlsit">
 	<div class="h3group ">
-		<h3 class="tit">자유게시판</h3>
+		<h3 class="tit">모임게시판</h3>
 		<div class="location">
 			<span class="depth">홈</span>
-			<span class="depth">커뮤니티</span><strong class="this">자유게시판</strong>
+			<span class="depth">커뮤니티</span><strong class="this">모임게시판</strong>
 		</div>
 	</div>
 <div class="conwrap">
@@ -155,6 +155,6 @@ function f1() {
 	}
 };	
 </script>
-<c:import url="../footer.jsp" />
+<%@include file="/WEB-INF/index/footer.jsp" %>
 </body>
 </html>

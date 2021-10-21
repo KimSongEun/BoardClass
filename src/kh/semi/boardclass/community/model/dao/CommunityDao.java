@@ -10,6 +10,7 @@ import org.apache.taglibs.standard.tag.common.fmt.RequestEncodingSupport;
 import kh.semi.boardclass.admin.model.vo.AllBoardUser;
 import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.community.model.vo.Board;
+import kh.semi.boardclass.community.model.vo.BoardReport;
 import kh.semi.boardclass.community.model.vo.Comment;
 import oracle.jdbc.proxy.annotation.Pre;
 
@@ -373,7 +374,7 @@ public Board getBoard(Connection conn, int boardNo) {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getUserId());
 			pstmt.setString(2, vo.getBoardType()); // 사담/건의/질문
-			pstmt.setString(3, vo.getBoardCategory()); // 유저정보게시판
+			pstmt.setString(3, "유저정보게시판"); // 유저정보게시판
 			pstmt.setString(4, vo.getBoardTitle());
 			pstmt.setString(5, vo.getBoardContent()); 
 			pstmt.setInt(6, vo.getBoardViewCount());
@@ -412,7 +413,7 @@ public Board getBoard(Connection conn, int boardNo) {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getUserId());
 			pstmt.setString(2, vo.getBoardType()); // 사담/건의/질문
-			pstmt.setString(3, vo.getBoardCategory()); // 유저정보게시판
+			pstmt.setString(3, vo.getBoardCategory()); // 모임게시판
 			pstmt.setString(4, vo.getBoardTitle());
 			pstmt.setString(5, vo.getBoardContent()); 
 			pstmt.setInt(6, vo.getBoardViewCount());
@@ -817,9 +818,24 @@ public Board getBoard(Connection conn, int boardNo) {
 
 	}
 
-	public int insertReportBoard() {
-		int result = -1;
+	public int insertReportBoard(Connection conn, BoardReport br ) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		// boardNo, user_id
+		String sql = "insert into board_report values (BOARD_REPORT_NUM.nextval, ? , ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, br.getBoardNo());
+			pstmt.setString(2, br.getUserId());
+			result = pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
+		
 	}
 
 	public int insertReportComment() {

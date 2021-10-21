@@ -56,8 +56,13 @@ public class CommunityFreeServlet extends HttpServlet {
 		int startPage = (int)(currentPage -1) / blockSize * blockSize + 1;
 		int endPage = startPage + blockSize - 1;
 		if( endPage > pageCnt ) endPage = pageCnt;
-	
 		
+		// 조회수 불러오
+		//int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		//int comtCnt = new CommunityService().getCommentCount(boardNo);
+		
+		
+		//request.setAttribute("comtCnt", comtCnt);
 		request.setAttribute("totCnt", totCnt);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("currentPage", currentPage);
