@@ -76,7 +76,7 @@ public class AdMadeServlet extends HttpServlet {
 		if (writer == null) {
 			writer = "admin"; // TODO: 임시 writer 설정
 		}
-		String img = "./upload/ad/" + file;
+		String img = "/upload/ad/" + file;
 		if (file == null) {
 			// 업로드 실패 시
 			img = "썸네일 미등록";

@@ -112,9 +112,9 @@ public class BoardgameMadeServlet extends HttpServlet {
 		if (plus.isEmpty()) {
 			plus = "0";
 		}
-		String image = "./game_img/" + fileImage;
-		String ruleimage = "./game_img/" + fileRuleImage;
-		String plusImage = "./game_img/" + filePlusImage;
+		String image = "/game_img/" + fileImage;
+		String ruleimage = "/game_img/" + fileRuleImage;
+		String plusImage = "/game_img/" + filePlusImage;
 		if (fileImage == null) {
 			// 업로드 실패 시
 			image = "썸네일 미등록";
