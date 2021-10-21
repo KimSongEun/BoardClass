@@ -20,9 +20,6 @@ import kh.semi.boardclass.used.model.service.UsedService;
 import kh.semi.boardclass.used.model.vo.Used;
 import kh.semi.boardclass.user.model.vo.User;
 
-/**
- * Servlet implementation class UsedCreateServlet
- */
 @WebServlet("/usedcreate")
 public class UsedCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -37,6 +34,13 @@ public class UsedCreateServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		User loginSS = (User)request.getSession().getAttribute("userSession");
+			if(loginSS == null) {
+				System.out.println("로그아웃이 풀려서 메인으로 이동");
+				request.getRequestDispatcher("/WEB-INF/error/loginAlert.jsp").forward(request, response);
+				return;
+			}
 
 		int uploadSizeLimit = 10 * 1024 * 1024;
 		String encType = "UTF-8";
@@ -50,20 +54,14 @@ public class UsedCreateServlet extends HttpServlet {
 		MultipartRequest multi = new MultipartRequest(request, uploadPath, uploadSizeLimit, encType,
 				new DefaultFileRenamePolicy());
 
-		// TODO 임시계정
-		String userId = "c";
-		//String userId = "";
-		User userSS = (User) request.getSession().getAttribute("user");
-		if (userSS != null) {
-			userId = userSS.getUserId();
-		}
+		String userId = loginSS.getUserId();
 		String usedTitle = multi.getParameter("usedTitle");
 		int	usedPrice = Integer.parseInt(multi.getParameter("usedPrice"));
 		String usedState = multi.getParameter("usedState");
 		String usedChange = multi.getParameter("usedChange");
 		String usedExtype = multi.getParameter("usedExtype");
 		String usedInfo = multi.getParameter("usedInfo");
-		String usedImg = "./used_img/" + multi.getFilesystemName("usedImg");
+		String usedImg = "used_img/" + multi.getFilesystemName("usedImg");
 		String usedCategory = multi.getParameter("usedCategory");
 		String usedKeyword = multi.getParameter("keyword");
 

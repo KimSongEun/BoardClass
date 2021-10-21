@@ -44,19 +44,21 @@
 			<c:forEach var="r" items="${usedlist}">
 				<form class="form_usedinfo">
 					<div class="div_usedinfo">
-						<a href="usedinformation?no=${r.usedNo}">
-							<c:choose>
-								<c:when test="${r.usedImg != null}">
-									<img src="${pageContext.request.contextPath}/${r.usedImg}">
-								</c:when>
-								<c:when test="${!r.usedImg}">
-									<img src="./img/logo.png">
-								</c:when>
-							</c:choose>
-						</a>
-						<div class="div_img_text">
-							<a href="usedinformation?no=${r.usedNo}">${r.usedTitle}</a>
+						<div class="div_usedimg">
+							<a href="usedinformation?no=${r.usedNo}">
+								<c:choose>
+									<c:when test="${r.usedImg != null}">
+										<img src="${pageContext.request.contextPath}/${r.usedImg}">
+									</c:when>
+									<c:when test="${r.usedImg==null}">
+										<img src="./img/logo.png">
+									</c:when>
+								</c:choose>
+							</a>
 						</div>
+					</div>
+					<div class="div_img_text">
+						<a href="usedinformation?no=${r.usedNo}">${r.usedTitle}</a>
 					</div>
 				</form>
 			</c:forEach>
@@ -93,11 +95,11 @@
 $("#btn_write").click(loadWrite);
 
 function loadWrite(){
-	if("${user.user}" != null){
+	if(!"${userSession}"){
 		alert("로그인해주세요");
 		return;
 	}
-	return;
+	location.href="usedcreateview";
 }
 
 </script>

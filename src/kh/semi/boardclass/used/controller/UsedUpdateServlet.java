@@ -17,6 +17,7 @@ import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import kh.semi.boardclass.used.model.dao.UsedDao;
 import kh.semi.boardclass.used.model.service.UsedService;
 import kh.semi.boardclass.used.model.vo.Used;
+import kh.semi.boardclass.user.model.vo.User;
 
 @WebServlet("/usedupdate")
 public class UsedUpdateServlet extends HttpServlet {
@@ -32,7 +33,15 @@ public class UsedUpdateServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
+		User loginSS = (User)request.getSession().getAttribute("userSession");
+		if(loginSS == null) {
+			System.out.println("로그아웃이 풀려서 메인으로 이동");
+			request.getRequestDispatcher("/WEB-INF/error/loginAlert.jsp").forward(request, response);
+			return;
+		}
+		
+		System.out.println("수정본 받아서 등록하는 페이지 진입");
 		
 		int uploadSizeLimit = 10 * 1024 * 1024;
 		String encType = "UTF-8";
@@ -52,21 +61,21 @@ public class UsedUpdateServlet extends HttpServlet {
 		String usedChange = multi.getParameter("usedChange");
 		String usedExtype = multi.getParameter("usedExtype");
 		String usedInfo = multi.getParameter("usedInfo");
-		String usedImg = "./used_img/" + multi.getFilesystemName("usedImg");
+		String usedImg = "used_img/" + multi.getFilesystemName("usedImg");
 		String usedCategory = multi.getParameter("usedCategory");
 		String usedKeyword = multi.getParameter("keyword");
-		int usedNo = Integer.parseInt(request.getParameter("usedNo"));
+		int usedNo = Integer.parseInt(multi.getParameter("usedNo"));
 		
 		Used vo = new Used(usedTitle, usedPrice, usedState, usedChange, usedExtype, usedInfo, usedImg, usedCategory, usedKeyword);
 		
 		int result = new UsedService().updateUsed(vo, usedNo);
 		
 		if (result < 1) {
-			System.out.println("글 입력 안됨");
+			System.out.println("글 수정 안됨");
 			response.sendRedirect("usedmain");
 		} else {
-			System.out.println("글 입력 성공 - 그리고 main 이동");
-			response.sendRedirect(request.getContextPath() + "/useddetail?usedNo=" + usedNo);
+			System.out.println("글 입력 성공 - 상세보기");
+			response.sendRedirect(request.getContextPath() + "/usedinformation?no=" + usedNo);
 		}
 	}
 

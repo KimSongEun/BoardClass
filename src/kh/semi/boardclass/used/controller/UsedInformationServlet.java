@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.boardclass.used.model.service.UsedService;
 import kh.semi.boardclass.used.model.vo.Used;
+import kh.semi.boardclass.used.model.vo.UsedLike;
+import kh.semi.boardclass.user.model.vo.User;
 
 @WebServlet("/usedinformation")
 public class UsedInformationServlet extends HttpServlet {
@@ -24,6 +26,15 @@ public class UsedInformationServlet extends HttpServlet {
 		int usedNo = Integer.parseInt(request.getParameter("no"));
 		Used vo = new UsedService().getUsedDetail(usedNo);
 		
+		int countlike = 0;
+		
+		User loginSS = (User)request.getSession().getAttribute("userSession");
+		if(loginSS != null) {
+			String userId = loginSS.getUserId();
+			countlike = new UsedService().countUsedLike(usedNo, userId);
+		}
+		
+		request.setAttribute("likeresult", countlike);
 		request.setAttribute("used", vo);
 		request.getRequestDispatcher("/WEB-INF/used/useddetail.jsp").forward(request, response);
 	}

@@ -16,17 +16,23 @@
 	padding-top: 50px;
 }
 
-#thumbnail{
-	width:150px;
-	height:150px;
-	position: relative;
-	left: 50px;
+.td_thumbnail{
+	width: 205px;
+	height: 154px;
+	text-align:center;
+    display:table;
 }
 
-#img_thumbnail{
-	width:100%;
-    height:100%;
-    object-fit:cover;
+#thumbnail{
+	display:table-cell;
+    vertical-align:middle;
+    width: 205px;
+    height: 154px;
+}
+
+#thumbnail img{
+	max-width: 100%;
+	height: auto;
 }
 
 #info{
