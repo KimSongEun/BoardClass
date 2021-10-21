@@ -7,23 +7,29 @@
 <meta charset="UTF-8">
 <title>BoardClass</title>
 <link rel="stylesheet" href="./css/index/maincss.css" />
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/js/index/main.js"></script>
+<script type="text/javascript"
+	src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript"
+	src="<%=request.getContextPath()%>/js/index/main.js"></script>
 </head>
 <body>
 	<c:import url="/WEB-INF/index/header.jsp" />
 	<section>
 		<div class="slideshow-container">
-        <c:if test = "${advolist != null}">
-         <c:forEach items = "${advolist}" var="a" >			
-			<div class="mySlides fade">
-				<div class="numbertext">1 / 3</div>
-				<img src="<%=request.getContextPath()%>${a.promotionImg}" style="width: 100%">
-				<div class="text">Caption Text</div>
-			</div>
-		</c:forEach>
-		</c:if>
-	<%-- 		<div class="mySlides fade">
+			<c:if test="${advolist != null}">
+				<c:forEach items="${advolist}" var="a">
+					<div class="mySlides fade">
+						<div class="numbertext">${a.rownum}/ ${adCnt}</div>
+						<img src="<%=request.getContextPath()%>${a.promotionImg}"
+							style="width: 100%">
+					</div>
+					<div style="text-align: center">
+						<span class="dot" onclick="currentSlide(${a.rownum});"></span>
+					</div>
+
+				</c:forEach>
+			</c:if>
+			<%-- 		<div class="mySlides fade">
 				<div class="numbertext">2 / 3</div>
 				<img src="<%=request.getContextPath()%>/img/adtest/사이드 광고.jpg" style="width: 100%">
 				<div class="text">Caption Two</div>
@@ -36,21 +42,16 @@
 				
 			</div> --%>
 
- 			<a class="prev" onclick="plusSlides(-1);">&#10094;</a> 
-			<a class="next" onclick="plusSlides(1);">&#10095;</a>
+			<a class="prev" onclick="plusSlides(-1);">&#10094;</a> <a
+				class="next" onclick="plusSlides(1);">&#10095;</a>
 		</div>
 		<br>
-		
-		
-<div style="text-align:center">
-  <span class="dot" onclick="currentSlide(1);"></span> 
-  <span class="dot" onclick="currentSlide(2);"></span> 
-  <span class="dot" onclick="currentSlide(3);"></span> 
-</div>
+
+
 
 	</section>
 	<c:import url="/WEB-INF/index/footer.jsp" />
-	
+
 	<script>
   	console.log("시작");
  	var slideIndex = 1;

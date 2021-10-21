@@ -16,10 +16,11 @@ public class MainDao {
 	
 	public ArrayList<Banner> getAdList(Connection conn) {
 		ArrayList<Banner> volist = null;
-		String sql = "SELECT * \r\n" + 
+		String sql = "select * from (   select Rownum r, t1.* from (\r\n" + 
+				"SELECT * \r\n" + 
 				"FROM BANNER\r\n" + 
 				"WHERE PROMOTION_PLACE = 1\r\n" + 
-				"ORDER BY PROMOTION_DATE DESC";
+				"ORDER BY PROMOTION_DATE DESC) t1) t2";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -30,6 +31,7 @@ public class MainDao {
 			if (rset.next()) {
 				do {
 					Banner vo = new Banner();
+					vo.setRownum(rset.getInt(1));
 					vo.setUserId(rset.getString("USER_ID"));
 					vo.setPromotionPlace(rset.getInt("PROMOTION_PLACE"));
 					vo.setPromotionTitle(rset.getString("PROMOTION_TITLE"));
@@ -47,6 +49,31 @@ public class MainDao {
 			JDBCTemplate.close(pstmt);
 		}
 		return volist;
+	}
+	
+	public int getAdCount(Connection conn) {
+		int result = 0;
+		String sql = "SELECT count(*) FROM(\r\n" + 
+				"SELECT * \r\n" + 
+				"FROM BANNER\r\n" + 
+				"WHERE PROMOTION_PLACE = 1\r\n" + 
+				"ORDER BY PROMOTION_DATE DESC)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 	
 	public ArrayList<Notice> getNoticeList(Connection conn){

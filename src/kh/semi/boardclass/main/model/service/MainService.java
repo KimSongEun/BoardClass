@@ -3,6 +3,7 @@ package kh.semi.boardclass.main.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import kh.semi.boardclass.admin.model.dao.AdminDao;
 import kh.semi.boardclass.admin.model.vo.Banner;
 import kh.semi.boardclass.admin.model.vo.Notice;
 import kh.semi.boardclass.common.JDBCTemplate;
@@ -20,6 +21,14 @@ public class MainService {
 		JDBCTemplate.close(conn);
 		return volist;
 	}
+	
+	public int getAdCount() {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new AdminDao().getAdCount(conn);
+		JDBCTemplate.close(conn);
+		return result;
+	}	
 
 	public ArrayList<Notice> getNotice() {
 		ArrayList<Notice> volist = null;

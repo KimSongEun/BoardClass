@@ -43,6 +43,9 @@ public class MainServlet extends HttpServlet {
 		request.setAttribute("advolist", advolist);
 		System.out.println(advolist);
 		
+		int adCnt = new MainService().getAdCount();
+		request.setAttribute("adCnt", adCnt);
+		
 		String viewPage = "/WEB-INF/index/main.jsp";
 		request.getRequestDispatcher(viewPage).forward(request, response);
 	}
