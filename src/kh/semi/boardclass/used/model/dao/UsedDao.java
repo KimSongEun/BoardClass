@@ -261,19 +261,23 @@ public class UsedDao {
 		return result;
 	}
 	
-	
 	public int countUsedLike(Connection conn, int usedNo, String userId) {
 		int result = -1;
+		String sql = "select count(USED_LIKE_NO) from USED_LIKE where (USED_NO = ? and USER_ID = ?)";
 		PreparedStatement pstmt = null;
-		String sql = "select count(*) from USED_LIKE where (USED_NO = ? and USER_ID = ?)";
+		ResultSet rset = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, usedNo);
 			pstmt.setString(2, userId);
-			result = pstmt.executeUpdate();
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
+			JDBCTemplate.close(rset);
 			JDBCTemplate.close(pstmt);
 		}
 		return result;
@@ -301,6 +305,45 @@ public class UsedDao {
 		int result = -1;
 		PreparedStatement pstmt = null;
 		String sql = "insert into USED_LIKE values(USED_LIKE_NUM.nextval, ?, ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, usedNo);
+			pstmt.setString(2, userId);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public int countUsedReport(Connection conn, int usedNo, String userId) {
+		int result = -1;
+		String sql = "select count(BOARD_REPORT_NO) from USED_REPORT where (USED_NO = ? and USER_ID = ?)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, usedNo);
+			pstmt.setString(2, userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertUsedReport(Connection conn, int usedNo, String userId) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String sql = "insert into USED_REPORT values(BOARD_REPORT_NUM.nextval, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, usedNo);

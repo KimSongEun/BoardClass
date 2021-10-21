@@ -103,7 +103,7 @@
 
 		
 <script>
-
+let reportedThis = false;
 $(document).ready(function(){
 	if("${likeresult}" == 1){
 		$(".heart").toggleClass("is-active");
@@ -143,7 +143,7 @@ function cbLike(){
 		},
 		dataType : "json",
 		success : function(receive) {
-			console.log("receive값은:"  + receive)
+			console.log("receive값은:"  + receive);
 			$(".heart").toggleClass("is-active");
 		},
 		error : function(request, status, error) {
@@ -154,14 +154,29 @@ function cbLike(){
 	});
 }
 
+$("#btn_contact").click(conChat);
 
-
+function conChat(){
+	if(!"${userSession}"){
+		alert("로그인해주세요");
+		return;
+	}
+}
 
 $("#btn_report").click(cbReport);
 
 function cbReport(){
 	if(!"${userSession}"){
 		alert("로그인해주세요");
+		return;
+	}
+	if("${reportresult}" == 1){
+		alert("이미 신고하셨습니다.");
+		reportedThis = true;
+		return;
+	}
+	if(reportedThis){
+		alert("이미 신고하셨습니다.");
 		return;
 	}
 	$.ajax({
@@ -173,7 +188,14 @@ function cbReport(){
 		},
 		dataType : "json",
 		success : function(receive) {
-			console.log("");
+			console.log("신고receive값은:"+receive);
+			if(receive<1){
+				reportedThis = true;
+				alert("이미 접수되었습니다");
+				return;
+			}
+			reportedThis = true;
+			alert("신고가 접수되었습니다.");
 		},
 		error : function(request, status, error) {
 			alert("code:" + request.status + "\n" + "message:"
@@ -182,12 +204,6 @@ function cbReport(){
 		}
 	});
 }
-
-
-
-
-$("#btn_contact").click();
-
 
 </script>
 </body>

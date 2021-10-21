@@ -50,7 +50,7 @@ public class UsedUnlikeAjaxServlet extends HttpServlet {
 			System.out.println("찜등록 성공");
 		}
 		
-		System.out.println(result);
+		System.out.println("delete되었다면1이나온다:"+result);
 		
 		out.print(result);
 		out.flush();

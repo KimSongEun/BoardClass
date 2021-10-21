@@ -9,46 +9,59 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.boardclass.used.model.service.UsedService;
 import kh.semi.boardclass.user.model.vo.User;
-
 
 @WebServlet("/usedreport.ajax")
 public class UsedReportAjaxSevlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public UsedReportAjaxSevlet() {
-        super();
-    }
 
+	public UsedReportAjaxSevlet() {
+		super();
+	}
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		response.setContentType("application/json;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		
-		User loginSS = (User)request.getSession().getAttribute("userSession");
-		if(loginSS == null) {
+
+		User loginSS = (User) request.getSession().getAttribute("userSession");
+		if (loginSS == null) {
 			System.out.println("로그아웃이 풀려서 메인으로 이동");
 			request.getRequestDispatcher("/WEB-INF/error/loginAlert.jsp").forward(request, response);
 			return;
 		}
-		
+
 		int usedNo = Integer.parseInt(request.getParameter("thisUsedNo"));
 		String userId = request.getParameter("loginId");
 		
+		int result = new UsedService().countUsedReport(usedNo, userId);
 		
-		
-		
-		
-		
-		
+		int secondResult = -1;
+		if(result < 1) {
+			secondResult = new UsedService().insertUsedReport(usedNo, userId);
+			System.out.println("신고접수됨");
+		} else {
+			secondResult = 0;
+			System.out.println("이미 신고접수됨");
+		}
+
+		System.out.println(secondResult);
+
+		out.print(secondResult);
+		out.flush();
+		out.close();
+
 	}
 
 }

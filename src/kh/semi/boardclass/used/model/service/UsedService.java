@@ -92,5 +92,21 @@ public class UsedService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	
+	public int countUsedReport(int usedNo, String userId) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new UsedDao().countUsedReport(conn, usedNo, userId);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
+	public int insertUsedReport(int usedNo, String userId) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new UsedDao().insertUsedReport(conn, usedNo, userId);
+		JDBCTemplate.close(conn);
+		return result;
+	}
 
 }
