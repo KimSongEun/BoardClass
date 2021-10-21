@@ -14,14 +14,16 @@
 	<c:import url="/WEB-INF/index/header.jsp" />
 	<section>
 		<div class="slideshow-container">
-
+        <c:if test = "${advolist != null}">
+         <c:forEach items = "${advolist}" var="a" >			
 			<div class="mySlides fade">
 				<div class="numbertext">1 / 3</div>
-				<img src="<%=request.getContextPath()%>/img/adtest/테라포밍 마스 광고.jpg" style="width: 100%">
+				<img src="<%=request.getContextPath()%>${a.promotionImg}" style="width: 100%">
 				<div class="text">Caption Text</div>
 			</div>
-
-			<div class="mySlides fade">
+		</c:forEach>
+		</c:if>
+	<%-- 		<div class="mySlides fade">
 				<div class="numbertext">2 / 3</div>
 				<img src="<%=request.getContextPath()%>/img/adtest/사이드 광고.jpg" style="width: 100%">
 				<div class="text">Caption Two</div>
@@ -32,7 +34,7 @@
 				<img src="<%=request.getContextPath()%>/img/adtest/카탄 3D 광고.jpg" style="width: 100%">
 				<div class="text">Caption Three</div>
 				
-			</div>
+			</div> --%>
 
  			<a class="prev" onclick="plusSlides(-1);">&#10094;</a> 
 			<a class="next" onclick="plusSlides(1);">&#10095;</a>

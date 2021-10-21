@@ -41,6 +41,7 @@ public class MainServlet extends HttpServlet {
 		
 		ArrayList<Banner> advolist  = new MainService().getAdList();
 		request.setAttribute("advolist", advolist);
+		System.out.println(advolist);
 		
 		String viewPage = "/WEB-INF/index/main.jsp";
 		request.getRequestDispatcher(viewPage).forward(request, response);
