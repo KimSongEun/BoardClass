@@ -612,7 +612,6 @@ public class AdminDao {
 		String sql = "SELECT count(*) FROM(\r\n" + 
 				"SELECT * \r\n" + 
 				"FROM BANNER\r\n" + 
-				"WHERE PROMOTION_PLACE = 1\r\n" + 
 				"ORDER BY PROMOTION_DATE DESC)";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

@@ -76,6 +76,15 @@ public class NoticeListServlet extends HttpServlet {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
+		
+		System.out.println("viewcount : " + PAGE_SIZE);
+		System.out.println("startPage : " + startPage);
+		System.out.println("endPage : " + endPage);
+		System.out.println("pageCount : " + pageCount);
+		System.out.println("startRnum : " + startRnum);
+		System.out.println("endRnum : " + endRnum);
+		
+		
 		request.getRequestDispatcher("/WEB-INF/admin/notice/noticelist.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
