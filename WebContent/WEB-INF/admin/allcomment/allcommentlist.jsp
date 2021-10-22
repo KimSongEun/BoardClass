@@ -30,7 +30,7 @@
                     <select class="admin-allcomment-search-select" name = "type">
                         <option value ="작성자아이디" <c:if test = "${type == '작성자아이디'}"> selected </c:if>>작성자아이디 </option>
                         <option value ="작성자 회원번호" <c:if test = "${type == '작성자 회원번호'}"> selected </c:if>>작성자 회원번호</option>
-                        <option value ="글제목" <c:if test = "${type == '글제목'}"> selected </c:if>>글제목</option>
+                        <option value ="댓글내용" <c:if test = "${type == '댓글내용'}"> selected </c:if>>댓글내용</option>
                     </select>
                     <input type="text" class="admin-allcomment-search-input" name = "keyword" id = "keyword" value="${keyword }">
                     <button type="submit" class="admin-allcomment-search-button">검색</button>
