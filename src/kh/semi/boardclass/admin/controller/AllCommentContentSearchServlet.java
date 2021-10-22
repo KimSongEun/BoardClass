@@ -15,14 +15,14 @@ import kh.semi.boardclass.admin.model.vo.AllCommentUser;
 /**
  * Servlet implementation class AllCommentSearchServlet
  */
-@WebServlet("/allcommenttitlesearch")
-public class AllCommentTitleSearchServlet extends HttpServlet {
+@WebServlet("/allcommentcontentsearch")
+public class AllCommentContentSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AllCommentTitleSearchServlet() {
+    public AllCommentContentSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -57,7 +57,7 @@ public class AllCommentTitleSearchServlet extends HttpServlet {
 		}
 		String type = request.getParameter("type");
 		String keyword = request.getParameter("keyword");
-		aCount = new AdminService().getAllCommentTitleCount(keyword);
+		aCount = new AdminService().getAllCommentContentCount(keyword);
 		pageCount = (aCount / PAGE_SIZE) + (aCount % PAGE_SIZE == 0 ? 0:1);
 		startRnum = (currentPage-1) * PAGE_SIZE + 1;  
 		endRnum = startRnum + PAGE_SIZE -1;
@@ -71,7 +71,7 @@ public class AllCommentTitleSearchServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1;
 		if(endPage > pageCount) endPage = pageCount;
 		
-		ArrayList<AllCommentUser> volist  = new AdminService().searchAllCommentTitle(keyword, startRnum, endRnum);
+		ArrayList<AllCommentUser> volist  = new AdminService().searchAllCommentContent(keyword, startRnum, endRnum);
 		
 		request.setAttribute("viewcount", PAGE_SIZE);
 		request.setAttribute("allcommentuservolist", volist);
@@ -80,6 +80,10 @@ public class AllCommentTitleSearchServlet extends HttpServlet {
 		request.setAttribute("pageCount", pageCount);
 		request.setAttribute("keyword", keyword);
 		request.setAttribute("type", type);
+		
+		System.out.println(keyword);
+		System.out.println(startRnum);
+		System.out.println(endRnum);
 		request.getRequestDispatcher("/WEB-INF/admin/allcomment/allcommentlist.jsp").forward(request, response);
 	}
 

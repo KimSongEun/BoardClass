@@ -18,7 +18,21 @@ public class GameService {
 	public GameService() {
 		// TODO Auto-generated constructor stub
 	}
-
+	public int deleteGameLike(String userId, int gameNo) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new GameDao().deleteGameLike(conn, userId, gameNo);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
+	public int insertGameLike(String userId, int gameNo) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new GameDao().insertGameLike(conn, userId, gameNo);
+		JDBCTemplate.close(conn);
+		return result;
+	}
 
 	public Game InfoGame(int no) {
 		Game vo= null;
@@ -84,6 +98,13 @@ public class GameService {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
 		result = new GameDao().getReviewCount(conn, gameno);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	public int countGameLike(String userId, int gameNo){
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new GameDao().countGameLike(conn, userId, gameNo);
 		JDBCTemplate.close(conn);
 		return result;
 	}

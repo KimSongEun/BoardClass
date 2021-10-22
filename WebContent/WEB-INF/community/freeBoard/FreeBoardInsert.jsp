@@ -58,10 +58,9 @@
 	</select>
 	</div>
 	<textarea class ="form-control" name="content" id="p_content" required="required">
-	
-	    <div class="content" style="width: 70%">
+
 	     
-	          <div class="col_c" style="margin-bottom: 30px">
+	          <div class="col_c" style="margin-bottom: 30px; width: 70%">
 	                <div class="input-group">                 
 	                  <textarea class="form-control" id="p_content"></textarea>
 	                  <script type="text/javascript">
@@ -77,15 +76,7 @@
 	            </div> 
 	    
 	           
-	              <div class="input-group-prepend">
-	                <span class="input-group-text" id="inputGroupFileAddon01">파일 추가</span>
-	              </div>
-	              <div class="custom-file">
-	                  &nbsp;<input type="file" class="form-control-file" id="exampleFormControlFile1">
-	              </div>
-	            
-		      
-		  </div>
+	          
 		
 	</textarea>
 		<input type="submit" value="등록">

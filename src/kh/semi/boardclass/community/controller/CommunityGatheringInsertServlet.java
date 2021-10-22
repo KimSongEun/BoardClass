@@ -63,8 +63,7 @@ public class CommunityGatheringInsertServlet extends HttpServlet {
 		String content = request.getParameter("content");
 		String category = request.getParameter("category"); // 모임정보게시판
 		String type = request.getParameter("type");
-		String selectCategory = request.getParameterValues("selectCategory")[0];
-		String selectSubCategory = request.getParameterValues("selectSubCategory")[0];
+		
 		
 		
 	

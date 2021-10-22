@@ -35,7 +35,7 @@
 	<span class="depth">커뮤니티     > </span><strong class="this">자유게시판</strong>
 	</div>
 	</div>
-    <form action="<c:url value='cfupdate'/>" method="post">
+    <form action="<c:url value='cfupdate'/>" class="updateForm" method="post">
     <div class="title">
     	<input type="hidden" name="boardNo"  value="${board.boardNo }" readonly >
      <p> 제목</p>
@@ -90,5 +90,16 @@
 </section>
 
 <c:import url="../footer.jsp" />
+<script type="text/javascript">
+$(window).on("beforeunload", function() {
+	return "작성중인 글은 저장되지 않습니다. 페이지를 나가시겠습니까?";
+});
+
+$(document).ready(function() {
+    $(".updateForm").on("submit", function (e) {
+        $(window).off("beforeunload");
+        return true; })
+    });
+</script>
 </body>
 </html>

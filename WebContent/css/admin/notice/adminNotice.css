@@ -49,6 +49,7 @@
 .admin-notice-table{
 	width: 900px; 
 	margin-top: 20px;
+	table-layout : fixed;
 }
 .admin-notice-page-nav {
 	text-align : center;

@@ -73,7 +73,7 @@
                     <thead>
                         <tr>
                             <td colspan="2" style="text-align:left; font-size: 18px; font-weight: bold; padding-left:20px"> 📋 공지사항</td>
-                            <td style = "font-size : 10px; text-align:right;"><a href = "#공지사항으로이동">+더보기</a></td>
+                            <td style = "font-size : 10px; text-align:right;"><a href = "<%=request.getContextPath() %>/nmain">+더보기</a></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -86,7 +86,7 @@
 				<c:forEach items="${noticevolist}" var="n">						 
                     <tr>
                         <td>${n.announceNo}</td>
-                        <td style="white-space : nowrap; text-overflow : ellipsis; overflow : hidden" title = "${n.adminTitle}"><a href="#공지가항보러가깅" style = "color : #754100;">${n.adminTitle}</a></td>
+                        <td style="white-space : nowrap; text-overflow : ellipsis; overflow : hidden" title = "${n.adminTitle}"><a href="<%=request.getContextPath() %>/cnoticedetail?announceNo=${n.announceNo}" style = "color : #754100;">${n.adminTitle}</a></td>
                         <td>${n.adminRwrDate}</td>
                     </tr>
                    </c:forEach>

@@ -73,6 +73,13 @@
 
                 <div class="admin-report-board-table-div" style="margin:0 auto;">
                     <table class="table table-hover admin-report-board-table" style="text-align: center; width : 550px">
+                    <colgroup>
+	                   	<col width="100px">
+	                   	<col width="110px">
+	                   	<col width="120px">
+	                   	<col width="120px">
+	                   	<col width="100px">
+                   	</colgroup>
                         <thead>
                             <tr>
                                 <td colspan="5" class="table-active"
@@ -92,7 +99,7 @@
                         <tr>
                             <td style = "color : #f55354">${rb.reportCount}</td>
                             <td>${rb.boardNo}</td>
-                            <td><a href="#글내용조회" style = "color : #754100">${rb.boardTitle}</a></td>
+                            <td style="white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href="#글내용조회" style = "color : #754100" title="${rb.boardTitle}">${rb.boardTitle}</a></td>
                             <td><a href="#회원정보조회" style = "color : #754100">${rb.userId}</a></td>
                             <td><button class="deleteboard btn btn-primary" value="deletego" id = "${rb.boardNo}">삭제</button></td>
                         </tr>
@@ -103,6 +110,13 @@
 
                 <div class="admin-report-comment-table-div" style="margin:0 auto;">
                     <table class="table table-hover admin-report-comment-table" style="text-align: center; width : 550px">
+                    <colgroup>
+	                   	<col width="100px">
+	                   	<col width="110px">
+	                   	<col width="120px">
+	                   	<col width="120px">
+	                   	<col width="100px">
+                   	</colgroup>                    
                         <thead>
                             <tr>
                                 <td colspan="5" style="text-align:center; font-size: 18px; font-weight: bold;  background-color: #dedfe0;">신고 된 댓글
@@ -148,6 +162,13 @@
 
                 <div class="admin-report-board-table-div" style="margin:0 auto;">
                     <table class="table table-hover admin-report-board-table" style="text-align: center; width : 550px">
+                    <colgroup>
+	                   	<col width="100px">
+	                   	<col width="110px">
+	                   	<col width="120px">
+	                   	<col width="120px">
+	                   	<col width="100px">
+                   	</colgroup>                    
                         <thead>
                             <tr>
                                 <td colspan="5" class="table-active"
@@ -190,6 +211,13 @@
 
                 <div class="admin-report-comment-table-div" style="margin:0 auto;">
                     <table class="table table-hover admin-report-comment-table" style="text-align: center; width : 550px">
+                    <colgroup>
+	                   	<col width="100px">
+	                   	<col width="110px">
+	                   	<col width="120px">
+	                   	<col width="120px">
+	                   	<col width="100px">
+                   	</colgroup>                    
                         <thead>
                             <tr>
                                 <td colspan="5" style="text-align:center; font-size: 18px; font-weight: bold;  background-color: #dedfe0;">신고 된 중고글
@@ -220,7 +248,12 @@
             </div>
             
             <div class="admin-notice-div" style="margin:0 auto;">
-                <table class="table table-hover admin-notice-table" style="text-align: center;">
+                <table class="table table-hover admin-notice-table" style="text-align: center; width : 600px">
+                    <colgroup>
+	                   	<col width="100px">
+	                   	<col width="300px">
+	                   	<col width="200px">
+                   	</colgroup>                  
                     <thead>
                         <tr>
                             <td colspan="3" style="text-align:center; font-size: 18px; font-weight: bold; background-color: #dedfe0;">공지사항</td>
@@ -235,7 +268,7 @@
 						 for(Notice n : noticevolist){ %> 
                     <tr>
                         <td><%=n.getAnnounceNo() %></td>
-                        <td><a href="#공지가항보러가깅" style = "color : #754100"><%=n.getAdminTitle() %></a></td>
+                        <td style="white-space : nowrap; text-overflow : ellipsis; overflow : hidden""><a href="#공지가항보러가깅" style = "color : #754100" title = "<%=n.getAdminTitle() %>"><%=n.getAdminTitle() %></a></td>
                         <td><%=n.getAdminRwrDate() %></td>
                     </tr>
                    <%} }%> 

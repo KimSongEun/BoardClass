@@ -13,8 +13,8 @@ $(function(){
 		} else if ($(".admin-allcomment-search-select").val() == "작성자 회원번호") {
 			$(".searchselect").attr("action", "allcommentusernosearch");
 			/*console.log($(".searchselect").attr("action"));*/
-		}else if ($(".admin-allcomment-search-select").val() == "글제목") {
-			$(".searchselect").attr("action", "allcommenttitlesearch");
+		}else if ($(".admin-allcomment-search-select").val() == "댓글내용") {
+			$(".searchselect").attr("action", "allcommentcontentsearch");
 			/*console.log($(".searchselect").attr("action"));*/
 		}
 	};

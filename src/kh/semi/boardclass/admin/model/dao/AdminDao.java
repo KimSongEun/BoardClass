@@ -1162,9 +1162,9 @@ public class AdminDao {
 		}
 		return volist;
 	}
-	public int getAllCommentTitleCount(Connection conn, String keyword) {
+	public int getAllCommentContentCount(Connection conn, String keyword) {
 		int result = 0;
-		String sql = "select count(*) as total FROM COMT C JOIN BOARD B ON C.BOARD_NO=B.BOARD_NO JOIN MEMBER M ON C.USER_ID = M.USER_ID where BOARD_TITLE like (?)";
+		String sql = "select count(*) as total FROM COMT C JOIN BOARD B ON C.BOARD_NO=B.BOARD_NO JOIN MEMBER M ON C.USER_ID = M.USER_ID where COMMENT_CONTENT like (?)";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -1184,9 +1184,9 @@ public class AdminDao {
 		return result;
 	}
 	
-	public ArrayList<AllCommentUser> searchAllCommentTitle(Connection conn, String keyword, int start, int end){
+	public ArrayList<AllCommentUser> searchAllCommentContent(Connection conn, String keyword, int start, int end){
 		ArrayList<AllCommentUser> volist = null;
-		String sql = "select * from (   select Rownum r, t1.* from (SELECT C.COMMENT_NO, B.BOARD_TITLE, C.COMMENT_CONTENT, M.USER_ID, M.USER_NO, C.COMMENT_REWRITE_DATE FROM COMT C JOIN BOARD B ON C.BOARD_NO=B.BOARD_NO  JOIN MEMBER M ON C.USER_ID = M.USER_ID WHERE BOARD_TITLE like (?) ORDER BY COMMENT_REWRITE_DATE DESC) t1) t2 where r between ? and ?";
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT C.COMMENT_NO, B.BOARD_TITLE, C.COMMENT_CONTENT, M.USER_ID, M.USER_NO, C.COMMENT_REWRITE_DATE FROM COMT C JOIN BOARD B ON C.BOARD_NO=B.BOARD_NO  JOIN MEMBER M ON C.USER_ID = M.USER_ID WHERE COMMENT_CONTENT like (?) ORDER BY COMMENT_REWRITE_DATE DESC) t1) t2 where r between ? and ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 

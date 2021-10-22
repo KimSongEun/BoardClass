@@ -239,13 +239,6 @@ public class CommunityService {
 	public void searchGatheringBoard() {
 
 	}
-	// 댓글
-	public int getCommentCount(int boardNo) { 
-		int result = 0;
-		Connection conn = JDBCTemplate.getConnection();
-		result = new CommunityDao().getCommentCount(conn,boardNo);
-		return result;
-	}
 	
 	public ArrayList<Comment> selectComment(int boardNo) {
 		ArrayList<Comment> volist = null;
@@ -293,16 +286,18 @@ public class CommunityService {
 
 	}
 
-	public int insertReportBoard(BoardReport br) {
-		int result = 0;
+	public int insertReportBoard(int boardNo, String userId) {
+		int result = -1;
 		Connection conn = JDBCTemplate.getConnection();
-		 new CommunityDao().insertReportBoard(conn, br);
-	 if(result > 0) {
-			JDBCTemplate.commit(conn);
-		} else {
-			JDBCTemplate.rollback(conn);
-		}
-		JDBCTemplate.close(conn);
+		 new CommunityDao().insertReportBoard(conn, boardNo, userId);
+		 JDBCTemplate.close(conn);
+		return result;
+	}
+	public int CountBoardReport(int boardNo, String userId) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().CountBoardReport(conn, boardNo, userId);
+		 JDBCTemplate.close(conn);
 		return result;
 	}
 

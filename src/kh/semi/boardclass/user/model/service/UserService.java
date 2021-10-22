@@ -11,26 +11,26 @@ public class UserService {
 
 	public UserService() {
 	}
-	
+
 	public User login(String userId, String userPassword) {
 		Connection conn = JDBCTemplate.getConnection();
 		User user = new UserDao().login(conn, userId, userPassword);
 		// TODO:
-		
+
 		// result = new UserDao().updateHistory(conn, userId);
-		
+
 		JDBCTemplate.close(conn);
 		return user;
 	}
-	
+
 	public int signUp(User user) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		
+
 		// TODO:
 		result = new UserDao().signUp(conn, user);
-		//result = new UserDao().agree(conn, user);
-		
+		// result = new UserDao().agree(conn, user);
+
 		if (result > 0) {
 			JDBCTemplate.commit(conn);
 		} else {
@@ -39,7 +39,7 @@ public class UserService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
-	
+
 	// ID 중복 체크를 위한 메소드
 	public int checkId(String userId) {
 		Connection conn = JDBCTemplate.getConnection();
@@ -53,28 +53,28 @@ public class UserService {
 		int result = new UserDao().checkNick(conn, userNickname);
 		return result;
 	}
-	
-	public User searchId(String userName,String userEmail,int userPhone) {
+
+	public User searchId(String userName, String userEmail, int userPhone) {
 		Connection conn = JDBCTemplate.getConnection();
 		UserDao dao = new UserDao();
-		User user = dao.searchId(conn, userName,userEmail,userPhone);
+		User user = dao.searchId(conn, userName, userEmail, userPhone);
 //		result = new UserDao().byEmail(conn, user);
 //		result = new UserDao().byPhone(conn, user);
 
 		JDBCTemplate.close(conn);
 		return user;
 	}
-	
-	public User searchPwd(String userName,String userId, String userEmail) {
+
+	public User searchPwd(String userName, String userId, String userEmail) {
 		Connection conn = JDBCTemplate.getConnection();
 		UserDao dao = new UserDao();
-		User user = dao.searchPwd(conn, userName,userId,userEmail);
-		//result = new UserDao().byEmail(conn, user);
-		//result = new UserDao().byPhone(conn, user);
+		User user = dao.searchPwd(conn, userName, userId, userEmail);
+		// result = new UserDao().byEmail(conn, user);
+		// result = new UserDao().byPhone(conn, user);
 		JDBCTemplate.close(conn);
 		return user;
 	}
-	
+
 	public ArrayList<User> signUpComplete(User user) {
 		ArrayList<User> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
@@ -82,20 +82,20 @@ public class UserService {
 		JDBCTemplate.close(conn);
 		return volist;
 	}
-	
+
 	public User checkUser(String userId) {
 		Connection conn = JDBCTemplate.getConnection();
 		UserDao dao = new UserDao();
 		User user = dao.checkUser(conn, userId);
 		JDBCTemplate.close(conn);
 		return user;
-}
-	
+	}
+
 	public int updateUser(User user) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
 		result = new UserDao().updateUser(conn, user);
-		if(result>0) {
+		if (result > 0) {
 			JDBCTemplate.commit(conn);
 		} else {
 			JDBCTemplate.rollback(conn);
@@ -103,7 +103,7 @@ public class UserService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
-	
+
 	public int deleteUser(User user) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();

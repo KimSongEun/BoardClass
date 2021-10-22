@@ -466,18 +466,18 @@ public class AdminService {
 		return volist;
 	}
 
-	public int getAllCommentTitleCount(String keyword) {
+	public int getAllCommentContentCount(String keyword) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().getAllCommentTitleCount(conn, keyword);
+		result = new AdminDao().getAllCommentContentCount(conn, keyword);
 		JDBCTemplate.close(conn);
 		return result;
 	}
 
-	public ArrayList<AllCommentUser> searchAllCommentTitle(String keyword, int start, int end) {
+	public ArrayList<AllCommentUser> searchAllCommentContent(String keyword, int start, int end) {
 		ArrayList<AllCommentUser> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new AdminDao().searchAllCommentTitle(conn, keyword, start, end);
+		volist = new AdminDao().searchAllCommentContent(conn, keyword, start, end);
 		JDBCTemplate.close(conn);
 		return volist;
 	}

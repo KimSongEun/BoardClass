@@ -29,6 +29,7 @@ public class Board {
 	private int boardReplyLev;
 	private int boardReplySeq;
 	private String boardImg;
+	private int comment_no;
 	
 	public Board() {
 		// TODO Auto-generated constructor stub
@@ -49,14 +50,6 @@ public class Board {
 
 
 
-	@Override
-	public String toString() {
-		return "Board [boardNo=" + boardNo + ", userId=" + userId + ", boardType=" + boardType + ", boardCategory="
-				+ boardCategory + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent + ", boardWriteDate="
-				+ boardWriteDate + ", boardRewriteDate=" + boardRewriteDate + ", boardViewCount=" + boardViewCount
-				+ ", boardReplyRef=" + boardReplyRef + ", boardReplyLev=" + boardReplyLev + ", boardReplySeq="
-				+ boardReplySeq + ", boardImg=" + boardImg + "]";
-	}
 
 	public int getBoardNo() {
 		return boardNo;
@@ -160,6 +153,14 @@ public class Board {
 
 	public void setBoardImg(String boardImg) {
 		this.boardImg = boardImg;
+	}
+
+	public int getComment_no() {
+		return comment_no;
+	}
+
+	public void setComment_no(int comment_no) {
+		this.comment_no = comment_no;
 	}
 
 	
