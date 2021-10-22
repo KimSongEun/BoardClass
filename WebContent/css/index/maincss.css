@@ -203,12 +203,11 @@ img {vertical-align: middle;}
 /* 공지 */
 
 .notice-div{
-    margin : auto;
+    display : flex;
+    justify-content: center;
 }
 .notice-table {
     width : 550px;
-    margin: auto;
-    margin-bottom : 300px;
 }
 
 .table {
