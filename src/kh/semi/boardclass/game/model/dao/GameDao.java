@@ -252,10 +252,10 @@ public class GameDao {
 		String sql = "select count(GAME_NO) from BOARDGAME where GAME_CATEGORY like ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String cate1 = "%" + cate + "%";
+		cate = "%" + cate + "%";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1,  cate1);
+			pstmt.setString(1,  cate);
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
 				result = rset.getInt(1);
@@ -309,6 +309,7 @@ public class GameDao {
 		return result;
 	}
 
+	
 //	public int getReviewCount(Connection conn) {
 //		int result = 0;
 //		String sql = "select count(REVIEW_NO) from REVIEW";
@@ -335,35 +336,34 @@ public class GameDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql1 = "select * from BOARDGAME where GAME_CATEGORY like ? and Rownum between ? and ?";
-		
-		String sql2 = "select * from (select Rownum r, u.* from "
-				+ "(select * from BOARDGAME where GAME_KONAME like ?) u) "
+		String sql1 = "select * from (select Rownum r, u.* from "
+				+ "(select * from BOARDGAME where GAME_CATEGORY like ?) u) "
 				+ " where r between ? and ?";
-		String sql = "";
+				
+		String sql2 = "select * from (select Rownum r, u.* from "
+				+ "(select * from BOARDGAME where GAME_CATEGORY like ? and GAME_KONAME like ?) u) "
+				+ " where r between ? and ?";
 		
-		if (search != null && !search.equals("")) {
-			sql = sql2;
-		} else {
-			sql = sql1;
-		}
-		
+				
 		System.out.println("abc"+cate);
 		try {
-			pstmt = conn.prepareStatement(sql);
-			int idx = 0;
-			cate = "%" + cate + "%";
 			if (search != null && !search.equals("")) {
+				pstmt = conn.prepareStatement(sql2);
+				cate = "%" + cate + "%";
+				pstmt.setString(1, cate);
 				search = "%" + search + "%";
-				pstmt.setString(++idx, search);
-				
-			}else{
-			
-			pstmt.setString(++idx, cate);
+				pstmt.setString(2, search);
+				pstmt.setInt(3, start);
+				pstmt.setInt(4, end);
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, end);
+			} else {
+				pstmt = conn.prepareStatement(sql1);
+				cate = "%" + cate + "%";
+				pstmt.setString(1, cate);
+				pstmt.setInt(2, start);
+				pstmt.setInt(3, end);
 			}
-			pstmt.setInt(++idx, start);
-			pstmt.setInt(++idx, end);
-			
 
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
@@ -505,7 +505,7 @@ public class GameDao {
 		} else {
 			sql = sql1;
 		}
-
+		cate = "%" + cate + "%";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -581,7 +581,7 @@ public class GameDao {
 			sql = sql1;
 		}
 		
-
+		cate = "%" + cate + "%";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			int idx = 0;
@@ -655,7 +655,7 @@ public class GameDao {
 		} else {
 			sql = sql1;
 		}
-		
+		cate = "%" + cate + "%";
 
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -954,6 +954,62 @@ public class GameDao {
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public int deleteGameLike(Connection conn, String userId, int gameNo) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String sql = "delete from BOARDGAME_LIKE where (USER_ID = ? and GAME_NO = ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, gameNo);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertGameLike(Connection conn, String userId, int gameNo) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String sql = "insert into BOARDGAME_LIKE values(BOARDGAME_LIKE_NUM.nextval, ?, ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, gameNo);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public int countGameLike(Connection conn,  String userId, int gameNo) {
+		int result = -1;
+		String sql = "select count(BOARDGAME_LIKE_NO) from BOARDGAME_LIKE where (USER_ID = ? and GAME_NO = ?)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, gameNo);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
 		}
 		return result;
 	}

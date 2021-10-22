@@ -18,7 +18,7 @@
 		<h2 class="as_hgroup"><a href="./cmain">커뮤니티</a></h2>
 		<nav id="lnb" class="lnb">
 		<ul>
-			<li><a href="#">공지사항</a></li>
+			<li><a href="./nmain">공지사항</a></li>
 			<li><a href="./cf">자유게시판</a></li>
 			<li><a href="./cu">유저정보게시판</a></li>
 			<li><a href="./cg">모임게시판</a></li>

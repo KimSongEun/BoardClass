@@ -5,7 +5,7 @@ public class GameLike {
 	
 	private int boardGameLikeNo;
 	private String userId;
-	private int gameNo;
+	private int gameNumber;
 	
 	
 
@@ -19,7 +19,7 @@ public class GameLike {
 		super();
 		this.boardGameLikeNo = boardGameLikeNo;
 		this.userId = userId;
-		this.gameNo = gameNo;
+		this.gameNumber = gameNo;
 	}
 
 
@@ -49,13 +49,13 @@ public class GameLike {
 
 
 	public int getGameNo() {
-		return gameNo;
+		return gameNumber;
 	}
 
 
 
 	public void setGameNo(int gameNo) {
-		this.gameNo = gameNo;
+		this.gameNumber = gameNo;
 	}
 
 	

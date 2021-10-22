@@ -164,7 +164,7 @@ top:-100px;
 						// tr 이 volist 갯수 만큼 생기게 됨.
 						// <%= 은 화면에 출력을 위한 표현식을 작성하는 태그, ;없어야 함.
 			%>
-				<form name = "fom" method="get" action="GameInfo">
+				<form name = "fom" method="post" action="GameInfo">
  				<div id="board_info">
 					<input type = "hidden" value = "<%=vo.getGameKoName()%>"  name="GAME_KONAME">
 					<input type = "hidden" value = "<%=vo.getGameNumber()%>"  name="GAME_NO">

@@ -1,10 +1,11 @@
 <%@page import="kh.semi.boardclass.game.model.vo.Game"%>
 <%@page import="kh.semi.boardclass.game.model.vo.GameReview"%>
 <%@page import="kh.semi.boardclass.used.model.vo.Used"%>
+<%@page import="kh.semi.boardclass.game.model.vo.GameLike"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
 <%
-	Game vo = (Game) request.getAttribute("gamevolist");
+	Game vo = (Game) request.getAttribute("gamevo");
 	ArrayList<Used> vo2 = (ArrayList<Used>) request.getAttribute("usedvolist");
 	ArrayList<GameReview> go2 = (ArrayList<GameReview>) request.getAttribute("riviewvolist");
 	GameReview vo3 = (GameReview) request.getAttribute("reviewvolist");
@@ -279,6 +280,19 @@ width: 250px;
 height: 300px; 
 background-color:#CCFFFF;
 }
+.heart{
+	width: 100px;
+	height: 100px;
+	background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+	background-position: 0 0;
+	cursor: pointer;
+	transition: background-position .6s steps(28);
+	transition-duration: 0s;
+        }
+        .heart.is-active{
+	transition-duration: .6s;
+	background-position: -2800px 0;
+        }
 </style>
 </head>
 <body>
@@ -365,11 +379,53 @@ background-color:#CCFFFF;
 				</tr>
 				<tr>
 					<td></td>
-					<td style = "width: 200px; height: 70px"><button
-							style="height: 70px; width: 180px; font-size: 25px">> 찜하기</button></td>
-					
+					<td style = "width: 200px; height: 70px">
+					<c:if test="${game.userId != userSession.userId}">
+						<div class="placement">								
+					      <div class="heart" id="btn_like"></div>				
+    					</div>
+					</c:if>
 					<td colspan="2" style = "text-align: center;">
-						
+					<script>
+					$(document).ready(function(){
+						if("${likeresult}" == 1){
+							$(".heart").toggleClass("is-active");
+						}
+					});
+					
+					$("#btn_like").click(cbLike);
+
+					function cbLike(){
+						if(!"${userSession}"){
+							alert("로그인해주세요");
+							return;
+						}
+						$.ajax({
+							type : "post",
+							url : "gameLike.ajax",
+							data : {
+								loginId : "${userSession.userId}",
+								thisGameNo : "${gamevo.gameNumber}"
+							},
+							success : function(receive) {
+								console.log("receive값은:"  + receive);
+								// 1 : 좋아요 ->x
+								// 0 :x-> 좋아요
+								if(receive == 1) {
+									$(".heart").removeClass("is-active");
+								} else {
+									$(".heart").addClass("is-active");
+								}
+								//$(".heart").toggleClass("is-active");
+							},
+							error : function(request, status, error) {
+								alert("code:" + request.status + "\n" + "message:"
+										+ request.responseText + "\n" + "error:"
+										+ error);
+							}
+						});
+					}
+					</script>	
 					 
 					<% int star = vo.getGameGrade();
 					
@@ -434,7 +490,7 @@ background-color:#CCFFFF;
 			<table id="tab1">
 				<tr>
 					<td width="50" class="tc"></td>
-					<td class="tc">이 보드게임에 대한 @@님의 평가를 남겨보세요! >>></td>
+					<td class="tc">이 보드게임에 대한 여러분의 평가를 남겨보세요! >>></td>
 					<td width="300" class="tc"></td>
 
 					<td><button id="btnModalShow"

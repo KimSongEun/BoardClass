@@ -55,8 +55,8 @@
                         <tr style="text-align:center; font-size: 16px; font-weight: bold;">
                             <td style = "width : 80px">글번호</td>
                             <td style = "width : 120px">보드게임 분류</td>
-                            <td style = "width : 250px">한글상품명</td>
-                            <td style = "width : 250px">영어상품명</td>
+                            <td style = "width : 220px">한글상품명</td>
+                            <td style = "width : 220px">영어상품명</td>
                             <td style = "width : 100px">수정 </td>
                             <td style = "width : 100px">삭제 </td>
                         </tr>
@@ -65,8 +65,8 @@
                         <tr>
                             <td style = "vertical-align : middle"><%=g.getGameNumber() %></td>
                             <td style = "vertical-align : middle"><%=g.getGameCategory() %></td>
-                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href = #사용자가보는게임화면새창열기 target = '_blank' style = "color : #754100"> <%=g.getGameKoName() %></a></td>
-                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href = #사용자가보는게임화면새창열기 target = '_blank' style = "color : #754100"><%=g.getGameEnName() %></a></td>
+                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href = #사용자가보는게임화면새창열기 target = '_blank' style = "color : #754100" title = "<%=g.getGameKoName() %>"> <%=g.getGameKoName() %></a></td>
+                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href = #사용자가보는게임화면새창열기 target = '_blank' style = "color : #754100" title = "<%=g.getGameEnName() %>"><%=g.getGameEnName() %></a></td>
                             <td style = "vertical-align : middle"><button class="update btn btn-danger" value="updatego" no="<%=g.getGameNumber()%>">게임수정</button> </td>
                             <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" id="<%=g.getGameNumber() %>">게임삭제</button> </td>
                         </tr>

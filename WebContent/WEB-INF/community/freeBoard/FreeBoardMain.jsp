@@ -9,9 +9,9 @@
 <head>
 <meta charset="UTF-8">
 <title>BoardClass</title>
-<link rel="stylesheet" href="css/community/freeBoardMain.css" />
 <link rel="stylesheet" href="css/community/common.css" />
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="css/community/freeBoardMain.css" />
+
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
 
@@ -26,8 +26,8 @@
 		<h2 class="as_hgroup"><a href="./cmain">커뮤니티</a></h2>
 		<nav id="lnb" class="lnb">
 			<ul>
-				<li><a href="#">공지사항</a></li>
-				<li><a href="./cf">자유게시판</a></li>
+				<li><a href="nmain">공지사항</a></li>
+				<li style="color: red"><a href="./cf">자유게시판</a></li>
 				<li><a href="./cu">유저정보게시판</a></li>
 				<li><a href="./cg">모임게시판</a></li>
 			</ul>
@@ -96,7 +96,11 @@
 						</div>
 						<div class="util">
 							<div class="hit">조회수 : <span class="val">${board.boardViewCount }</span></div>
-							<div class="comt">댓글수: <span class="val">2</span> </div>
+							<div class="comt">댓글수: 
+								<span class="val">
+								${board.comment_no }
+								</span>
+							</div>
 						</div>
 					
 					</td>
@@ -143,7 +147,6 @@
   </div>
 </div>
 	
-	<!-- 검색 영역 -->
 
 
 
@@ -195,7 +198,8 @@ $(function(){
 		}
 	};	
 
-	
+
+
 	
 </script>
 

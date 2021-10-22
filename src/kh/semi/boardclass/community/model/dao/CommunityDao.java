@@ -7,12 +7,10 @@ import java.util.ArrayList;
 
 import org.apache.taglibs.standard.tag.common.fmt.RequestEncodingSupport;
 
-import kh.semi.boardclass.admin.model.vo.AllBoardUser;
 import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.community.model.vo.Board;
 import kh.semi.boardclass.community.model.vo.BoardReport;
 import kh.semi.boardclass.community.model.vo.Comment;
-import oracle.jdbc.proxy.annotation.Pre;
 
 public class CommunityDao {
 
@@ -100,11 +98,20 @@ public Board getBoard(Connection conn, int boardNo) {
 	// 전체 게시글 리스트 조회
 	public ArrayList<Board> selectBoardList(Connection conn, int start, int end) {
 	ArrayList<Board> volist = null;
-	String sql = "select BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT," 
-				+ " TO_CHAR(BOARD_WRITE_DATE, 'YY/MM/DD') as BOARD_WRITE_DATE, TO_CHAR(BOARD_REWRITE_DATE, 'YY/MM/DD') as BOARD_REWRITE_DATE,"  
-				+ " BOARD_VIEW_COUNT, BOARD_REPLY_REF, BOARD_REPLY_LEV, BOARD_REPLY_SEQ, BOARD_IMG  from" 
-				+ "	 (select Rownum r, t1.* from  (select * from board order by BOARD_REPLY_REF desc, BOARD_REPLY_SEQ asc) t1 ) t2" 
-				+ "  where r between ? and ? order by board_no desc";
+	String sql = "select BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT, " + 
+			" TO_CHAR(BOARD_WRITE_DATE, 'YY/MM/DD') as BOARD_WRITE_DATE, TO_CHAR(BOARD_REWRITE_DATE, 'YY/MM/DD') as BOARD_REWRITE_DATE, " + 
+			" BOARD_VIEW_COUNT, BOARD_REPLY_REF, BOARD_REPLY_LEV, BOARD_REPLY_SEQ, BOARD_IMG, NVL(t4.comment_no,0) comment_no" + 
+			" from (" + 
+			"   select *  from " + 
+			" (select Rownum r, t1.* from  (select * from board order by BOARD_REPLY_REF desc, BOARD_REPLY_SEQ asc) t1 ) t2" + 
+			"	where r between ? and ? order by board_no desc" + 
+			"    )t3 left outer join (SELECT COUNT(comment_no) comment_no, board_no FROM comt group by board_no) t4 using ( board_no ) ";
+//	String sql = "select BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT," 
+//				+ " TO_CHAR(BOARD_WRITE_DATE, 'YY/MM/DD') as BOARD_WRITE_DATE, TO_CHAR(BOARD_REWRITE_DATE, 'YY/MM/DD') as BOARD_REWRITE_DATE,"  
+//				+ " BOARD_VIEW_COUNT, BOARD_REPLY_REF, BOARD_REPLY_LEV, BOARD_REPLY_SEQ, BOARD_IMG  from" 
+//				+ "	 (select Rownum r, t1.* from  (select * from board order by BOARD_REPLY_REF desc, BOARD_REPLY_SEQ asc) t1 ) t2" 
+//				+ "  where r between ? and ? order by board_no desc";
+	
 //	String sql = "select * from "
 //			+ " (select Rownum r, t1.* from "
 //			+ " (select * from board order by BOARD_REPLY_REF desc, BOARD_REPLY_SEQ asc) t1 ) t2 "
@@ -135,6 +142,7 @@ public Board getBoard(Connection conn, int boardNo) {
 				vo.setBoardReplyRef(rset.getInt("BOARD_REPLY_REF"));
 				vo.setBoardReplyLev(rset.getInt("BOARD_REPLY_LEV"));
 				vo.setBoardReplySeq(rset.getInt("BOARD_REPLY_SEQ"));
+				vo.setComment_no(rset.getInt("comment_no"));
 				volist.add(vo);
 			} while (rset.next());
 		}
@@ -388,8 +396,22 @@ public Board getBoard(Connection conn, int boardNo) {
 		return result;
 	}
 
-	public int updateUserBoard() {
-		int result = -1;
+	public int updateUserBoard(Connection conn, Board vo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = "update board set board_title = ?, board_content = ?, board_type=? where board_no = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getBoardTitle());
+			pstmt.setString(2, vo.getBoardContent());
+			pstmt.setString(3, vo.getBoardType());
+			pstmt.setInt(4, vo.getBoardNo());
+			result = pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
 
@@ -672,21 +694,32 @@ public Board getBoard(Connection conn, int boardNo) {
 	public void searchGatheringBoard() {
 
 	}
-	//댓글 개수 조회
-	public int getCommentCount(Connection conn, int boardNo) { 
-		int result = 0;
-		PreparedStatement pstmt = null;
-		String sql = "SELECT COUNT(comment_no) FROM comt where board_no = ?";
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, boardNo);
-			result = pstmt.executeUpdate();
-		}catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
 	
-	}
+//	//댓글 개수 조회
+//	public int getCommentCount(Connection conn, int boardNo) { 
+//		int result = 0;
+//		PreparedStatement pstmt = null;
+////		String sql = "SELECT COUNT(comment_no) FROM comt where board_no = ?";
+//		String sql = "select BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT, " + 
+//				" TO_CHAR(BOARD_WRITE_DATE, 'YY/MM/DD') as BOARD_WRITE_DATE, TO_CHAR(BOARD_REWRITE_DATE, 'YY/MM/DD') as BOARD_REWRITE_DATE, " + 
+//				" BOARD_VIEW_COUNT, BOARD_REPLY_REF, BOARD_REPLY_LEV, BOARD_REPLY_SEQ, BOARD_IMG, NVL(t4.comment_no,0) comment_no" + 
+//				" from (" + 
+//				"   select *  from " + 
+//				" (select Rownum r, t1.* from  (select * from board order by BOARD_REPLY_REF desc, BOARD_REPLY_SEQ asc) t1 ) t2" + 
+//				"	where r between 1 and 10 order by board_no desc" + 
+//				"    )t3 left outer join (SELECT COUNT(comment_no) comment_no, board_no FROM comt group by board_no) t4 using ( board_no ) ";
+//		
+//		System.out.println("getCommentCount sql:"+sql);
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setInt(1, boardNo);
+//			result = pstmt.executeUpdate();
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//		return result;
+//	
+//	}
 	
 	public ArrayList<Comment> selectComment(Connection conn, int boardNo) {
 		ArrayList<Comment> volist = new ArrayList<Comment>();
@@ -818,16 +851,15 @@ public Board getBoard(Connection conn, int boardNo) {
 
 	}
 
-	public int insertReportBoard(Connection conn, BoardReport br ) {
-		int result = 0;
+	public int insertReportBoard(Connection conn,int boardNo, String userId  ) {
+		int result = -1;
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
 		// boardNo, user_id
 		String sql = "insert into board_report values (BOARD_REPORT_NUM.nextval, ? , ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, br.getBoardNo());
-			pstmt.setString(2, br.getUserId());
+			pstmt.setInt(1, boardNo);
+			pstmt.setString(2, userId);
 			result = pstmt.executeUpdate();
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -836,6 +868,28 @@ public Board getBoard(Connection conn, int boardNo) {
 		}
 		return result;
 		
+	}
+	public int CountBoardReport (Connection conn, int boardNo, String userId) {
+		int result = -1;
+		String sql = "select count(BOARD_REPORT_NO) from BOARD_REPORT where (BOARD_NO = ? and USER_ID = ?)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			pstmt.setString(2, userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		
+		}
+		return result;
 	}
 
 	public int insertReportComment() {

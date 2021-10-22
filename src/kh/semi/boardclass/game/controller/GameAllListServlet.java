@@ -35,8 +35,6 @@ public class GameAllListServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("UTF-8");
-        PrintWriter out=response.getWriter();    
-    	
         
 		final int PAGE_SIZE = 10;   // 한 페이지 당 글수
 		final int PAGE_BLOCK = 3;   // 한 화면에 나타날 페이지 링크 수
@@ -71,7 +69,8 @@ public class GameAllListServlet extends HttpServlet {
 		
 		String search = request.getParameter("search");
 		System.out.println("검색어는 : " + search);
-
+		
+		
 
 		String cate = "";
 		
@@ -79,9 +78,13 @@ public class GameAllListServlet extends HttpServlet {
 		if(sort == null) {
 			sort = "0";
 		}
+		System.out.println(startRnum);
+		System.out.println(endRnum);
+		
 		// DB에서 값 읽어오기
 		if(sort == "0") {
 			ArrayList<Game> volist = new GameService().selectCateGameList(startRnum,endRnum,cate,search);
+			System.out.println("전체:volist:"+volist);
 			request.setAttribute("gamevolist", volist);
 		}else if(sort.equals("GameLevelList")) {
 			ArrayList<Game> volist = new GameService().selectLevelGameList(startRnum,endRnum,cate, search);
@@ -103,6 +106,7 @@ public class GameAllListServlet extends HttpServlet {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
+		
 		// Page 이동하면서 Data도 전달함.
 		request.getRequestDispatcher("/WEB-INF/game/gamelist/GameAllList.jsp").forward(request, response);
 		

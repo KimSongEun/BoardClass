@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import kh.semi.boardclass.community.model.service.CommunityService;
 import kh.semi.boardclass.community.model.vo.Board;
 import kh.semi.boardclass.community.model.vo.BoardReport;
+import kh.semi.boardclass.used.model.service.UsedService;
+import kh.semi.boardclass.used.model.vo.Used;
+import kh.semi.boardclass.user.model.vo.User;
 
 /**
  * Servlet implementation class BoardReportServlet
@@ -30,54 +33,31 @@ public class BoardReportServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/community/freeBoard/BoardReport.jsp").forward(request, response);
-		// 관리자 신고 글 목록으로 이동
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		// TODO 로그인 시에만 가능 // 본인이 작성한 글에는 신고 불가능
+		User loginSS = (User)request.getSession().getAttribute("userSession");
+		int boardNo = Integer.parseInt(request.getParameter("no"));
+		Board vo = new CommunityService().getBoard(boardNo);
+		// 게시글
+		// 게시글 신고
+		int countreport = 0;
+		if(loginSS != null) {
+			String userId = loginSS.getUserId();
+			countreport = new CommunityService().CountBoardReport(boardNo, userId);
+		}
+		System.out.println("countreport="+countreport);
+		System.out.println("vo="+vo);
+		request.setAttribute("reportresult", countreport);
+		request.setAttribute("Board", vo);
+		request.getRequestDispatcher("/WEB-INF/community/BoardContent.jsp").forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		// TODO 로그인 시에만 가능 // 본인이 작성한 글에는 신고 불가능
-		String writer = (String)request.getSession().getAttribute("memberLoginInfo");
-		if(writer == null || writer.equals("")) {
-			writer = "c";   // TODO: 임시 user 설정
-		}
-		// 게시글 신고
-		// 게시글 번호/신고번호/ 신고자 아이디 
-		// 신고 한 번 후 끝
-		String boardNoStr = request.getParameter("boardNo");
-		String boardReportStr = request.getParameter("boardReport");
-		String userId = request.getParameter("userId");
-		int boardNo = 0, boardReportNo = 0;
-		try {
-			boardNo = Integer.parseInt(boardNoStr);
-		}catch( Exception e ) {
-			e.printStackTrace();
-			System.out.println("boardNoStr 숫자변환못함");
-			return;
-		}
-		try {
-			boardReportNo = Integer.parseInt(boardReportStr);		
-		}catch( Exception e ) {
-			e.printStackTrace();
-			System.out.println("boardReportNo 숫자변환못함 ");
-		}
-		
-		BoardReport br = new BoardReport();
-		br.setBoardNo(boardNo);
-		br.setUserId(userId);
-		br.setBoardReportNo(boardReportNo);
-		
-		
-		CommunityService cs = new CommunityService();
-		int result = cs.insertReportBoard(br);
-		
-		CommunityService bd = new CommunityService();
-		Board board = bd.getBoard(boardNo);
-		response.sendRedirect(request.getContextPath() + "/cfdetail?boardNo=" + boardNo);
+	
 	}
 
 }

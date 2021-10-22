@@ -51,7 +51,7 @@ public class CommunityFreeDetailServlet extends HttpServlet {
 		bo.setBoardNo(boardNo);
 		
 		String pageNum = request.getParameter("pageNum");
-		 new CommunityService().readCount(boardNo);
+		// new CommunityService().readCount(boardNo);
 		Board board = new CommunityService().getBoard(boardNo);
 		String date = board.getBoardWriteDate();
 		
@@ -78,7 +78,7 @@ public class CommunityFreeDetailServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		
 		
-		request.getRequestDispatcher("/WEB-INF/community/freeBoard/FreeBoardContent.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/community/BoardContent.jsp").forward(request, response);
 	}
 
 	/**
