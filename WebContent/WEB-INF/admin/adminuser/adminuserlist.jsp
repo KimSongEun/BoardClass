@@ -48,14 +48,14 @@
                 <div class="admin-adminuser-table-div">
                     <table class="table table-striped admin-adminuser-table" style="text-align: center;">
                         <tr style="text-align:center; font-size: 16px; font-weight: bold;">
-                        	<td style = "width : 80px">회원번호</td>
-                            <td style = "width : 100px">회원 아이디</td>
+                        	<td style = "width : 100px">회원번호</td>
+                            <td style = "width : 120px">회원 아이디</td>
                             <td style = "width : 130px">총 작성 글 개수</td>
                             <td style = "width : 150px">총 작성 댓글 개수</td>
                             <td style = "width : 150px">총 작성 리뷰 개수</td>
                             <td style = "width : 150px">총 작성 중고글 개수</td>
-                            <td>사이트 방문횟수 </td>
-                            <td>회원정보 상세보기</td>
+                            <td style = "width : 150px">사이트 방문횟수 </td>
+                            <td style = "width : 150px">회원정보 상세보기</td>
                             
                         </tr>
                        <c:if test = "${adminuservolist != null}">
