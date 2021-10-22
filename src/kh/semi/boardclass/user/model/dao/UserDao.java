@@ -51,6 +51,20 @@ public class UserDao {
 
 	public int updateHistory(Connection conn, String userId) {
 		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "UPDATE member SET USER_HISTORY = USER_HISTORY +1 WHERE USER_ID = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
 

@@ -23,6 +23,19 @@ public class UserService {
 		return user;
 	}
 
+	public int updateHistory(String userId) {
+
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new UserDao().updateHistory(conn, userId);
+		if (result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
 	public int signUp(User user) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
