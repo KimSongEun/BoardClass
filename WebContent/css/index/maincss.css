@@ -82,7 +82,35 @@ a {
 hr{
     margin: 0px;
 }
-/* carousel Start */
+/* TOP 버튼 */
+#myBtn {
+  display: none;
+  position: fixed;
+  bottom: 80px;
+  right: 100px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  color: white;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 4px;
+  width : 40px;
+  height : 40px;
+}
+
+.topbtnimg:hover {
+  background-color: #999;
+}
+
+.topbtnimg {
+	width : 40px;
+	height : 40px;
+	  border-radius: 4px;
+}
+
+/* 광고 */
 section {box-sizing: border-box}
 .mySlides {display: none}
 img {vertical-align: middle;}
@@ -172,7 +200,7 @@ img {vertical-align: middle;}
   .prev, .next,.text {font-size: 11px}
 }
 
-/* carousel End */
+/* 공지 */
 
 .notice-div{
     margin : auto;
@@ -215,7 +243,6 @@ img {vertical-align: middle;}
 .table tbody tr:last-of-type {
 	border-bottom: 2px solid #999879;
 }
-
 
 @media (max-width:767px) {
     .div_menu {

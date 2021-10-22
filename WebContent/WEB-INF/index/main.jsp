@@ -15,6 +15,8 @@
 <body>
 	<c:import url="/WEB-INF/index/header.jsp" />
 	<section>
+	<button onclick="topFunction()" id="myBtn" title="Go to top"><img class="topbtnimg" src = "./img/TOP.png"></button>
+		
 		<!--BC 검색창 넣을 부분 -->
 		<br>
 		<div class="slideshow-container">
@@ -80,11 +82,14 @@
 	  	console.log("시작");
 	 	var slideIndex = 1;
 		var slideIndexAuto = 0;
+		var mybutton = document.getElementById("myBtn");
 	  	
 	  	$(function(){
 			showSlides(slideIndex);
 			
 			showSlidesAuto();
+			
+			window.onscroll = function() {scrollFunction()};
 	  	});
 	</script>
 </body>

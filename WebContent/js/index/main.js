@@ -1,3 +1,17 @@
+	function scrollFunction() {
+	  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+	    mybutton.style.display = "block";
+	  } else {
+	    mybutton.style.display = "none";
+	  }
+	}
+	
+	function topFunction() {
+/*	  document.body.scrollTop = 0;
+	  document.documentElement.scrollTop = 0;*/
+	  window.scrollTo({top:0, behavior:'smooth'});
+	}
+
 	function plusSlides(n) {
 	  showSlides(slideIndex += n);
 	}
@@ -38,4 +52,5 @@
 	  dotsAuto[slideIndexAuto-1].className += " active";
 	  setTimeout(showSlidesAuto, 2000);
 	}	
+	
 
