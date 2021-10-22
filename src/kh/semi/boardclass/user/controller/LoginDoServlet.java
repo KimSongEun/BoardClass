@@ -26,27 +26,31 @@ import kh.semi.boardclass.user.model.vo.User;
 @WebServlet("/login.do")
 public class LoginDoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginDoServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public LoginDoServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		System.out.println("/login 진입");
 
 		response.setContentType("application/json;charset=UTF-8");
@@ -71,7 +75,10 @@ public class LoginDoServlet extends HttpServlet {
 			session.setAttribute("userSession", user);
 
 			voList.add(user);
-			voList.add(user);
+
+			int result = mservice.updateHistory(userId);
+			result++;
+			System.out.println("result   :     " + result);
 
 			Map<String, Object> map2 = new HashMap<String, Object>();
 			map2.put("result", "ok");
@@ -91,7 +98,7 @@ public class LoginDoServlet extends HttpServlet {
 		out.println(gobStr);
 		out.flush();
 		out.close();
-		
+
 	}
 
 }
