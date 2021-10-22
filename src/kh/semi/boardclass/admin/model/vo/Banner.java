@@ -10,13 +10,15 @@ public class Banner {
 	private String promotionContent;
 	private Date promotionDate;
 	private String promotionImg;
+	private int rownum;
 	
 	public Banner(){
 		
 	}
 	
+	
 	public Banner(int promotionNo, String userId, int promotionPlace, String promotionTitle, String promotionContent,
-			Date promotionDate, String promotionImg) {
+			Date promotionDate, String promotionImg, int rownum) {
 		super();
 		this.promotionNo = promotionNo;
 		this.userId = userId;
@@ -25,7 +27,9 @@ public class Banner {
 		this.promotionContent = promotionContent;
 		this.promotionDate = promotionDate;
 		this.promotionImg = promotionImg;
+		this.rownum = rownum;
 	}
+
 
 	public int getPromotionNo() {
 		return promotionNo;
@@ -94,13 +98,27 @@ public class Banner {
 	public void setPromotionImg(String promotionImg) {
 		this.promotionImg = promotionImg;
 	}
+	
+
+	public int getRownum() {
+		return rownum;
+	}
+
+
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Banner [promotionNo=" + promotionNo + ", userId=" + userId + ", promotionPlace=" + promotionPlace
 				+ ", promotionTitle=" + promotionTitle + ", promotionContent=" + promotionContent + ", promotionDate="
-				+ promotionDate + ", promotionImg=" + promotionImg + "]";
+				+ promotionDate + ", promotionImg=" + promotionImg + ", rownum=" + rownum + "]";
 	}
+
+
+
 
 
 

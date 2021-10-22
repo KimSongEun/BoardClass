@@ -64,8 +64,8 @@
                             <td style="vertical-align : middle" class = "promotionNo"><%=b.getPromotionNo() %></td>
                             <td style="vertical-align : middle">
                             	<div class="form-check">
-								  <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked<%=b.getPromotionNo() %>"<%if(b.getPromotionPlace()==1){ %>checked<%} else{ }%>>
-								  <label class="form-check-label" for="flexCheckChecked<%=b.getPromotionNo() %>">
+								  <input class="form-check-input" type="checkbox" value="" id="CheckChecked<%=b.getPromotionNo() %>"<%if(b.getPromotionPlace()==1){ %>checked<%} else{ }%>>
+								  <label class="form-check-label" for="CheckChecked<%=b.getPromotionNo() %>">
 								    	&nbsp; 메인노출
 								  </label>
 								</div>

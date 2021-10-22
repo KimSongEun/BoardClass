@@ -23,9 +23,11 @@ $(".insert").click(function () {
 
 	var chk;
 	$(".form-check-input").change(function(){
+	var checkid = $(this).attr("id");
+	console.log(checkid);
 	console.log("ajax 시작");
-	console.log($(".form-check-input").is(":checked"));
-	if($(".form-check-input").is(":checked")) {
+	console.log($("#"+checkid).is(":checked"));
+	if($("#"+checkid).is(":checked")) {
 		console.log("체크");
 		chk = 1;
 	} else {
@@ -34,6 +36,7 @@ $(".insert").click(function () {
 	}
 	console.log("chk : " +chk);
 	var index =$(".form-check-input").index(this); 
+	console.log("index : "+index);
 	var promotionNo = $(".promotionNo").eq(index).html();
 	console.log("promotionNo : " +promotionNo);
 	var chk = chk;
