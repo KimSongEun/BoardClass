@@ -100,9 +100,9 @@ public class UpdateDoUserServlet extends HttpServlet {
 		System.out.println(userAddress);
 		
 		HttpSession session = request.getSession(false);
-		User m = (User) session.getAttribute("user");
+		User m = (User) session.getAttribute("userSession");
 		UserService uservice = new UserService();
-		RequestDispatcher rd = request.getRequestDispatcher("user/alert.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user/alert.jsp");
 		if (m != null && m.getUserId().equals(userId)) { // 만약 ID 값이 기존값과 일치한다면 수정 실행
 			m.setUserPassword(userPassword);	
 			m.setUserName(userName);
@@ -126,36 +126,7 @@ public class UpdateDoUserServlet extends HttpServlet {
 		rd.forward(request, response);
 		out.flush();
 		out.close();
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//		User user = new User(userImage, userName, userNickname, userId, userPassword, userEmail, userPhone,
-//				userAddress);
-//		// vo를 가지고 회원가입하러 Dao로 출발
-//		UserService uservice = new UserService();
-//		int result = uservice.updateUser(user);
-//
-//		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user/alert.jsp");
-//		if (result >0) {
-//			System.out.println("회원정보 수정 성공");
-//			session.setAttribute("member", m);
-//			request.setAttribute("msg", "회원정보 수정에 성공했습니다!");
-//			request.setAttribute("loc", "usermain");
-//		
-//		} else {
-//			System.out.println("회원정보 수정 실패");
-//			request.setAttribute("msg", "회원정보 수정에 실패했습니다");
-//			request.setAttribute("loc", "usermain");
-//
-//		}
-//
-//		rd.forward(request, response);
+	
 	}
 
 }
