@@ -25,7 +25,7 @@
 					<div class="mySlides fade">
 						<div class="numbertext">${a.rownum}/ ${adCnt}</div>
 						<img src="<%=request.getContextPath()%>${a.promotionImg}"
-							style="width: 100%">
+							style="width: 100%" onerror="this.src='./img/adtest/기본 광고 이미지.png'">
 					</div>
 				</c:forEach>
 			</c:if>
@@ -38,8 +38,8 @@
 			</c:if>
 					</div>
 
-			<a class="prev" onclick="plusSlides(-1);">&#10094;</a> <a
-				class="next" onclick="plusSlides(1);">&#10095;</a>
+			<a class="prev" onclick="plusSlides(-1);">&#10094;</a> 
+			<a class="next" onclick="plusSlides(1);">&#10095;</a>
 		</div>
 		<br>
 
