@@ -38,6 +38,7 @@ public class MainServlet extends HttpServlet {
 		
 		ArrayList<Notice> noticevolist  = new MainService().getNotice();
 		request.setAttribute("noticevolist", noticevolist);
+		System.out.println(noticevolist);
 		
 		ArrayList<Banner> advolist  = new MainService().getAdList();
 		request.setAttribute("advolist", advolist);
