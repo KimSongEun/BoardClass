@@ -7,6 +7,20 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'Noto Sans KR';
+	src:url('./NotoSansKR-Regular.otf') format('opentype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Noto Sans KR light';
+	src:url('./NotoSansKR-Light.otf') format('opentype');
+	font-weight: normal;
+	font-style: normal;
+}
+
 body {
     margin: 0px;
     background-color: rgba(237, 237, 238, 0.89);

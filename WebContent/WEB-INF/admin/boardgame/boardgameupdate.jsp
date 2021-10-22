@@ -35,7 +35,7 @@
                                     id="photo_upload" onchange="loadImg(this)" id="boardgame-image">
                             </div>
                             <div class="boardgame-main_img" id="boardgame-img_viewer">
-                                <img id="boardgame-img_view" height="420" src = "${gamevo.gameImage}" style="max-width: 850px; max-height: 500px; text-align: center; vertical-align: middle;">
+                                <img id="boardgame-img_view" height="420" src = "<%=request.getContextPath()%>${gamevo.gameImage}" style="max-width: 850px; max-height: 500px; text-align: center; vertical-align: middle;">
                                 <button id="boardgame-img_del" class="boardgame-img_del_btn" type="button"> 지우기</button>
                             </div>
 
@@ -183,7 +183,7 @@
                                         <br> <br> <label class="boardgame-item_menu_label"> 규칙 이미지
                                             : </label>
                                             &nbsp; &nbsp;
-                                            <img id="boardgame-img_view2" height="420" src = "${gamevo.gameRuleImage}" style="max-width: 850px; max-height: 500px;">
+                                            <img id="boardgame-img_view2" height="420" src = "<%=request.getContextPath()%>${gamevo.gameRuleImage}" style="max-width: 850px; max-height: 500px;">
                                             <br><br>
                                         <div class="input-group mb-3" style="width : 875px;">
                                             &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
@@ -225,7 +225,7 @@
                                         <br> <br> <label class="boardgame-item_menu_label"> 확장판 이미지
                                             : </label>
                                             &nbsp; &nbsp;
-                                            <img id="boardgame-img_view3" height="420" src = "${gamevo.gamePlusImage}" style="max-width: 850px; max-height: 500px;">
+                                            <img id="boardgame-img_view3" height="420" src = "<%=request.getContextPath()%>${gamevo.gamePlusImage}" style="max-width: 850px; max-height: 500px;">
                                             <br><br>
                                         <div class="input-group mb-3" style="width : 875px;">
                                             &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
