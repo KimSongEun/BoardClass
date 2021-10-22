@@ -36,6 +36,14 @@ public class UsedService {
 		return result;
 	}
 	
+	public int getUsedCateCount(String cate) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new UsedDao().getUsedCateCount(conn, cate);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
 	public Used getUsedDetail(int usedNo) {
 		Used vo = null;
 		Connection conn = JDBCTemplate.getConnection();

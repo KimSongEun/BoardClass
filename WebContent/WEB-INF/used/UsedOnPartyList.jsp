@@ -39,26 +39,30 @@
 		</form>
 	</div>
 </div>
-<div class="secsecond">
+	<div class="secsecond">
 		<c:if test="${usedlist != null}">
 			<c:forEach var="r" items="${usedlist}">
-				<form class="form_usedinfo">
-					<div class="div_usedinfo">
-						<a href="usedinformation?no=${r.usedNo}">
-							<c:choose>
-								<c:when test="${r.usedImg != null}">
-									<img src="${pageContext.request.contextPath}/${r.usedImg}">
-								</c:when>
-								<c:when test="${!r.usedImg}">
-									<img src="./img/logo.png">
-								</c:when>
-							</c:choose>
-						</a>
-						<div class="div_img_text">
-							<a href="usedinformation?no=${r.usedNo}">${r.usedTitle}</a>
-						</div>
+				<div class="div_product">
+					<div class="div_img">
+							<a href="usedinformation?no=${r.usedNo}">
+								<c:choose>
+									<c:when test="${r.usedImg != null}">
+										<img src="${pageContext.request.contextPath}/${r.usedImg}">
+									</c:when>
+									<c:when test="${r.usedImg == null}">
+										<img src="./img/logo.png">
+									</c:when>
+								</c:choose>
+							</a>
 					</div>
-				</form>
+					<div class="div_img_text">
+						<p class="p_img_text">
+							<a href="usedinformation?no=${r.usedNo}">
+								${r.usedTitle}
+							</a>
+						</p>
+					</div>
+				</div>
 			</c:forEach>
 		</c:if>
 </div>
@@ -66,24 +70,24 @@
 		<button type="button" onclick="location.href='./usedcreateview'">글쓰기</button>
 </div>
 <div class="secfourth">
-	<div class="div_paging">
-		<c:if test="${startPage > 1}">
-			<a href="usedmain?pagenum=${startPage-1}" class="previous">&laquo;</a>
-		</c:if>
-		<c:if test="${startPage <= 1}">
-			<a href="usedmain?pagenum=1" class="previous">&laquo;</a>
-		</c:if>
-		<c:forEach var="p" begin="1" step="1" end="${endPage}">
-			<a href="usedmain?pagenum=${p}" class="current">${p}</a>
-		</c:forEach>
-		<c:if test="${endPage < pageCount}">
-			<a href="usedmain?pagenum=${endPage+1}" class="next">&raquo;</a>
-		</c:if>
-		<c:if test="${endPage >= pageCount}">
-			<a href="usedmain?pagenum=${pageCount}" class="next">&raquo;</a>
-		</c:if>
+		<div class="div_paging">
+			<c:if test="${startPage > 1}">
+				<a href="usedmain?pagenum=${startPage-1}" class="pageprevious">&laquo;</a>
+			</c:if>
+			<c:if test="${startPage <= 1}">
+				<a href="usedmain?pagenum=1" class="pageprevious">&laquo;</a>
+			</c:if>
+			<c:forEach var="p" begin="1" step="1" end="${endPage}">
+				<a href="usedmain?pagenum=${p}" class="pagecurrent">${p}</a>
+			</c:forEach>
+			<c:if test="${endPage < pageCount}">
+				<a href="usedmain?pagenum=${endPage+1}" class="pagenext">&raquo;</a>
+			</c:if>
+			<c:if test="${endPage >= pageCount}">
+				<a href="usedmain?pagenum=${pageCount}" class="pagenext">&raquo;</a>
+			</c:if>
+		</div>
 	</div>
-</div>
 </section>
 
 <%@include file="/WEB-INF/index/footer.jsp" %>

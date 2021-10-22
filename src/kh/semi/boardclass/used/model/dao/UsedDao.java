@@ -160,6 +160,28 @@ public class UsedDao {
 		}
 		return result;
 	}
+	
+	public int getUsedCateCount(Connection conn, String cate) {
+		int result = -1;
+		String sql = "select count(USED_NO) from USED where USED_CATEGORY like ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		cate = "%" + cate + "%";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, cate);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 
 	public Used getUsedDetail(Connection conn, int usedNo) {
 		Used vo = null;
@@ -356,4 +378,6 @@ public class UsedDao {
 		}
 		return result;
 	}
+	
+	
 }
