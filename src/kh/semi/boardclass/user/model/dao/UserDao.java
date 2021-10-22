@@ -67,6 +67,21 @@ public class UserDao {
 		}
 		return result;
 	}
+	
+	public int countForTodayVisit(Connection conn, String userId) {
+		int result = 0;
+
+		String sql = "INSERT INTO VISIT VALUES(1, SYSDATE, ?)";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}	
 
 	public int signUp(Connection conn, User user) {
 		PreparedStatement pstmt = null;

@@ -79,7 +79,8 @@ public class LoginDoServlet extends HttpServlet {
 			int result = mservice.updateHistory(userId);
 			result++;
 			System.out.println("result   :     " + result);
-
+			mservice.countForTodayVisit(userId);
+			
 			Map<String, Object> map2 = new HashMap<String, Object>();
 			map2.put("result", "ok");
 			map2.put("user_Name", user.getUserName());

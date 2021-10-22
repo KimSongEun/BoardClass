@@ -36,6 +36,19 @@ public class UserService {
 		return result;
 	}
 	
+	public int countForTodayVisit(String userId) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new UserDao().countForTodayVisit(conn, userId);
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
 	public int signUp(User user) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
