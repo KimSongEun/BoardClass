@@ -23,12 +23,17 @@
 						<img src="<%=request.getContextPath()%>${a.promotionImg}"
 							style="width: 100%">
 					</div>
-					<div style="text-align: center">
-						<span class="dot" onclick="currentSlide(${a.rownum});"></span>
-					</div>
-
 				</c:forEach>
 			</c:if>
+					<div style="text-align: center;">
+			<c:if test="${advolist != null}">
+				<c:forEach items="${advolist}" var="a">
+						<span class="dot" onclick="currentSlide(${a.rownum});"></span>
+				</c:forEach>
+			</c:if>
+					</div>
+
+
 			<%-- 		<div class="mySlides fade">
 				<div class="numbertext">2 / 3</div>
 				<img src="<%=request.getContextPath()%>/img/adtest/사이드 광고.jpg" style="width: 100%">
