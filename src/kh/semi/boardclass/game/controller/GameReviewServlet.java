@@ -3,6 +3,7 @@ package kh.semi.boardclass.game.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,6 +15,7 @@ import kh.semi.boardclass.game.model.service.GameService;
 import kh.semi.boardclass.game.model.vo.Game;
 import kh.semi.boardclass.game.model.vo.GameReview;
 import kh.semi.boardclass.used.model.vo.Used;
+import kh.semi.boardclass.user.model.vo.User;
 
 /**
  * Servlet implementation class GameInfoServlet
@@ -38,6 +40,8 @@ public class GameReviewServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("UTF-8");
 		
+		// LOGIN 되지 않아도 보게 해야
+		
         String gamenumstr = request.getParameter("GAME_NO");
 		int gamenum = 0;
         try{   
@@ -47,6 +51,14 @@ public class GameReviewServlet extends HttpServlet {
         }
 		System.out.println("GAME_NO:"+gamenum);
        
+		User loginSS = (User)request.getSession().getAttribute("userSession");
+		String userId=null;
+		int countlike = 0;		
+		if(loginSS != null) {
+			userId = loginSS.getUserId();
+			countlike = new GameService().countReviewLike(userId,gamenum);
+		}
+			
         final int PAGE_SIZE = 7;   // 한 페이지 당 글수
 		final int PAGE_BLOCK = 10;   // 한 화면에 나타날 페이지 링크 수
 		int bCount = 0;   // 총 글수
@@ -83,11 +95,12 @@ public class GameReviewServlet extends HttpServlet {
 		System.out.println(startPage);
 		System.out.println(endPage);
         
-        
-        ArrayList<GameReview> gvo2 = new GameService().selectReview(startRnum,endRnum,gamenum);
+        ArrayList<GameReview> gvo2 = new GameService().selectReview(startRnum,endRnum,gamenum, userId);
         
         request.setAttribute("reviewvolist", gvo2);
+        System.out.println("add"+gvo2);
         request.setAttribute("gameno", gamenum);
+        request.setAttribute("likeresult", countlike);
         request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);

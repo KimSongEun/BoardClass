@@ -33,6 +33,22 @@ public class GameService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	public int deleteReviewLike(String userId, int reviewNo,  int gameNo) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new GameDao().deleteReviewLike(conn, userId, reviewNo,gameNo);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
+	public int insertReviewLike(String userId, int reviewNo, int gameNo) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new GameDao().insertReviewLike(conn, userId, reviewNo, gameNo);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 
 	public Game InfoGame(int no) {
 		Game vo= null;
@@ -55,10 +71,10 @@ public class GameService {
 		JDBCTemplate.close(conn);
 		return vo;
 	}
-	public ArrayList<GameReview> selectReview(int start, int end,int no) {
+	public ArrayList<GameReview> selectReview(int start, int end,int no, String userId) {
 		ArrayList<GameReview> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new GameDao().selectReview(conn,start,end,no);
+		volist = new GameDao().selectReview(conn,start,end,no, userId);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
@@ -108,14 +124,16 @@ public class GameService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
-//	public int getReviewCount(){
-//		int result = 0;
-//		Connection conn = JDBCTemplate.getConnection();
-//		result = new GameDao().getReviewCount(conn);
-//		JDBCTemplate.close(conn);
-//		return result;
-//	}
-//	
+	public int countReviewLike(String userId, int gameNo){
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new GameDao().countReviewLike(conn, userId, gameNo);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
+	
+
 	public ArrayList<Used> usedlist(String name) {
 		ArrayList<Used> volist = null;
 		Connection conn = JDBCTemplate.getConnection();

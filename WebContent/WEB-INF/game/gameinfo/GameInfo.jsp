@@ -102,7 +102,7 @@
 #btnReview {
 	position: absolute;
 	top: 130px;
-	left: 1100px;
+	left: 1060px;
 }
 
 .rule {
@@ -384,8 +384,9 @@ background-color:#CCFFFF;
 						<div class="placement">								
 					      <div class="heart" id="btn_like"></div>				
     					</div>
-					</c:if>
+					</c:if></td>
 					<td colspan="2" style = "text-align: center;">
+				
 					<script>
 					$(document).ready(function(){
 						if("${likeresult}" == 1){
@@ -536,7 +537,7 @@ background-color:#CCFFFF;
 				<p class="infoPP">Hot Review</p>
 				<form action="GameReview" method="post">
 					<input type = "hidden" value = "<%=vo.getGameNumber()%>" name = "GAME_NO">					
-					<button type = "submit" id="btnReview" style="width: 200px; height: 50px; font-size: 25px;">최신글 보기>></button>
+					<button type = "submit" id="btnReview" style="width: 260px; height: 50px; font-size: 25px;">전체글 보기(${reviewcount}) >></button>
 				</form>
 				<%
 					if (go2 != null) {

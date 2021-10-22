@@ -80,6 +80,19 @@
 	left: 1100px;
 	font-size: 40px;
 }
+ .heart{
+	width: 100px;
+	height: 100px;
+	background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+	background-position: 0 0;
+	cursor: pointer;
+	transition: background-position .6s steps(28);
+	transition-duration: 0s;
+        }
+        .heart.is-active{
+	transition-duration: .6s;
+	background-position: -2800px 0;
+        } 
 </style>
 </head>
 
@@ -97,22 +110,23 @@
 		
 			<table border = "1" id = "tb">
 							<tr>
-								<td> &nbsp; @@</td>
+								<td class="reviewNo"><%=go.getReviewNo()%></td>
 								<td class = "td2" align=right >★   <%=go.getReviewScore()%> &nbsp; </td>								
 							</tr>
 							<tr>
 								<td colspan="2" height="200px"><%=go.getReviewContent()%></td>
 							</tr>
 							<tr>
-								<td> &nbsp; dd</td>
+							<td> &nbsp;
+								<c:if test="${game.userId != userSession.userId}">
+								<div class="placement">
+					     		 <div class="heart <%if(go.getLiked()>0) {%>is-active<%} %>" id="btn_like"></div>				
+    							</div>
+								</c:if></td>
 								<td class = "td2" align=right><%=go.getReviewDate()%> &nbsp;</td>
 							</tr>
-							
 						</table>
-			
-			
-		
-		<%}} %>
+					<%}} %>	
 </div>
 			<div id="page">
 				<%
@@ -138,8 +152,52 @@
 					}
 				%>
 			</div>
-		
-		
+
 <%@include file="/WEB-INF/index/footer.jsp" %>
+
+<script>
+	
+	$(".heart").click(cbLike);
+
+	function cbLike(){
+		console.log($(this));
+		var $eleClickThis = $(this);
+		var $eleTable = $(this).parents("table");
+		var $eleReviewNo = $eleTable.find(".reviewNo");
+		var reviewNo = $eleReviewNo.text();
+
+		if(!"${userSession}"){
+			alert("로그인해주세요");
+			return;
+		}
+		
+		$.ajax({
+			type : "post",
+			url : "reviewLike.ajax",
+			data : {
+				loginId : "${userSession.userId}",
+				thisReviewNo : reviewNo,
+				thisGameNo : "${gameno}"
+			},
+			
+			success : function(receive) {
+				console.log("receive값은:"  + receive);
+				// 1 : 좋아요 ->x
+				// 0 : x-> 좋아요
+				if(receive == 1) {
+					$eleClickThis.removeClass("is-active");
+				} else {
+					$eleClickThis.addClass("is-active");
+				}
+				//$(".heart").toggleClass("is-active");
+			},
+			error : function(request, status, error) {
+				alert("code:" + request.status + "\n" + "message:"
+						+ request.responseText + "\n" + "error:"
+						+ error);
+			}
+		});
+	} 
+</script>
 </body>
 </html>
