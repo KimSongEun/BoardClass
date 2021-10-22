@@ -49,6 +49,7 @@
 .admin-ad-table{
 	width: 900px; 
 	margin-top: 20px;
+	table-layout : fixed;
 }
 .admin-ad-page-nav {
 	text-align : center;

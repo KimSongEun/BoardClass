@@ -71,7 +71,7 @@
                             <td style = "width : 130px">게시판 카테고리</td>
                             <td>게시판 타입</td>
                             <td>글제목 </td>
-                            <td>작성자 아이디 </td>
+                            <td style = "width : 110px">작성자 아이디 </td>
                             <td style = "width : 160px">작성자 회원번호 </td>
                             <td>최초 작성일 </td>
                             <td>최종 수정일 </td>
