@@ -284,7 +284,21 @@ public class UserDao {
 	}
 
 	public int deleteUser(Connection conn, User user) {
+		PreparedStatement pstmt = null;
 		int result = 0;
+		
+		String sql = "delete from MEMBER where USER_ID=? and USER_PASSWORD=?";		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, user.getUserId());
+			pstmt.setString(2, user.getUserPassword());
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+
 		return result;
 	}
 

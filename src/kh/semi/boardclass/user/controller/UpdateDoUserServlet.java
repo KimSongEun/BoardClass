@@ -113,7 +113,7 @@ public class UpdateDoUserServlet extends HttpServlet {
 			m.setUserImage(userImage);
 			
 			if (uservice.updateUser(m) > 0) {
-				session.setAttribute("user", m);
+				session.setAttribute("userSession", m);
 				request.setAttribute("msg", "회원정보 수정에 성공했습니다!");
 				request.setAttribute("loc", "usermain");
 			} else {
