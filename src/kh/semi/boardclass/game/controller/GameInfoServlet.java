@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import kh.semi.boardclass.game.model.service.GameService;
 import kh.semi.boardclass.game.model.vo.Game;
 import kh.semi.boardclass.game.model.vo.GameReview;
+import kh.semi.boardclass.used.model.service.UsedService;
 import kh.semi.boardclass.used.model.vo.Used;
+import kh.semi.boardclass.user.model.vo.User;
 
 /**
  * Servlet implementation class GameInfoServlet
@@ -38,6 +40,7 @@ public class GameInfoServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
         
+		
         String gamenumstr = request.getParameter("GAME_NO");
 		System.out.println("zz"+gamenumstr);
         int gamenum = 0;
@@ -50,6 +53,15 @@ public class GameInfoServlet extends HttpServlet {
 
         GameService service = new GameService();
         
+        User loginSS = (User)request.getSession().getAttribute("userSession");
+	
+		int countlike = 0;		
+		if(loginSS != null) {
+			String userId = loginSS.getUserId();
+			countlike = new GameService().countGameLike(userId, gamenum);
+		}
+		
+		
         // 게임 정보 읽기
         Game vo = service.InfoGame(gamenum);
         if(vo==null) {  // 게임 정보 읽지 못하면 게임리스트화면으로 이동
@@ -71,10 +83,10 @@ public class GameInfoServlet extends HttpServlet {
 		int endRnum = 4;  // 화면에 글
         ArrayList<GameReview> gvo2 =service.selectReview(startRnum,endRnum,gamenum);
 
-        request.setAttribute("gamevolist", vo);
+        request.setAttribute("gamevo", vo);
         request.setAttribute("usedvolist", vo2);
         request.setAttribute("riviewvolist", gvo2);
-     
+    	request.setAttribute("likeresult", countlike);
         request.setAttribute("str2", str2);
         request.setAttribute("str4", str4);
         
