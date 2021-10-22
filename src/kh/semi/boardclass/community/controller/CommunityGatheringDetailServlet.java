@@ -44,7 +44,7 @@ public class CommunityGatheringDetailServlet extends HttpServlet {
 		}catch( Exception e ) {
 			e.printStackTrace();
 			System.out.println("boardNoStr 숫자변환못함");
-			response.sendRedirect("cf");
+			response.sendRedirect("cg");
 			return;
 		}
 		Board bo = new Board();
@@ -78,7 +78,7 @@ public class CommunityGatheringDetailServlet extends HttpServlet {
 		request.setAttribute("list", list);
 		
 		
-		request.getRequestDispatcher("/WEB-INF/community/GatheringBoard/GatheringContent.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/community/BoardContent.jsp").forward(request, response);
 	}
 
 	/**

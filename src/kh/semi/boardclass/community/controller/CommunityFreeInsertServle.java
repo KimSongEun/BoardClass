@@ -44,42 +44,7 @@ public class CommunityFreeInsertServle extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		PrintWriter out = response.getWriter();
-		// 답글이므로 어느글에 답글을 달것인가 정보가 전달되어 올 것임.
-//		Board oVo = null;
-//		String viewBno = request.getParameter("boardNo");
-//		System.out.println(viewBno);
-//		if(viewBno == null || viewBno.equals("")) {   // 기존 읽고 있던 글이 없다면 원본 새글쓰기로 인식
-//			oVo= new Board();
-//		} else {
-//			int boardNo = Integer.parseInt(viewBno);
-//			// 알아와야함. bref, bre_level, bre_step
-//			oVo = new CommunityService().getBoard(boardNo); 
-//		}
-//				
-//		String title = request.getParameter("title");  //내용부분입력된값이지요
-//		String content = request.getParameter("content");  //뭐라해야할지모를제목
-//		String type = request.getParameter("type"); // 사담/ 건의 / 질문
-//		String category = request.getParameter("category"); // 자유게시판
-//		String writer = (String)request.getSession().getAttribute("memberLoginInfo");
-//		if(writer == null || writer.equals("")) {
-//			writer = "c";   // TODO: 임시 user 설정
-//		}
-//		out.println("입력된 title: "+ title);
-//		out.println("<br>입력된 content: "+ content);
-//		
-////		Board vo = new Board(oVo.getBoardNo(), title, content, writer, type, category, oVo.getBoardReplyRef(), oVo.getBoardReplyLev(), oVo.getBoardReplySeq());		
-//		
-//		int result = new CommunityService().insertFreeBoard(vo);
-//		if(result == 0) {
-//			out.println("<br>게시글 되지 않았습니다. <br>작성된 글에 비속어가 포함되어 있습니다. <br>다시 작성해 주세요.");
-//		} else {
-//			out.println("<br>게시글 입력되었습니다.");
-//		}
 		
-	//	request.getRequestDispatcher("boardlist").forward(request, response);
-		
-		//2
-	//	 답글이므로 어느글에 답글을 달것인가 정보가 전달되어 올 것임.
 		Board oVo = null;
 		String viewBno = request.getParameter("boardNo");
 		System.out.println(viewBno);
@@ -90,11 +55,8 @@ public class CommunityFreeInsertServle extends HttpServlet {
 			// 알아와야함. bref, bre_level, bre_step
 			oVo = new CommunityService().getBoard(boardNo); 
 		}
-//		String writer = (String)request.getSession().getAttribute("memberLoginInfo");
-//		if(writer == null || writer.equals("")) {
-//			writer = "c";   // TODO: 임시 user 설정
-//		}
-		String userId = "c"; //TODO: 임시 user 설정
+
+		String userId = "c";
 		User userSS = (User) request.getSession().getAttribute("user");
 		if (userSS != null) {
 			userId = userSS.getUserId();
