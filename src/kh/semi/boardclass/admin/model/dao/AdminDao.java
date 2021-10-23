@@ -695,6 +695,7 @@ public class AdminDao {
 		}
 		return volist;
 	}
+	
 	public int insertBoardGame(Connection conn, String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus, String plusImage){
 		int result = 0;
 		String sql = "insert into BOARDGAME values(GAME_NUM.nextval,null,?,?,?,0,?,?,?,?,?,SYSDATE,?,?,?,?,?,null,?,null,?,?,?,?,?)";
@@ -862,9 +863,61 @@ public class AdminDao {
 		return volist;
 	}
 	
-	public Banner searchAd(Connection conn){
-		Banner vo = null;
-		return vo;
+	public int getAdSearchCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "select count(*) as total FROM BANNER WHERE PROMOTION_TITLE like (?)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<Banner> searchAd(Connection conn, String keyword, int start, int end){
+		ArrayList<Banner> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT * FROM BANNER WHERE PROMOTION_TITLE like (?)) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Banner>();
+			if (rset.next()) {
+				do {
+					Banner vo = new Banner();
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setPromotionPlace(rset.getInt("PROMOTION_PLACE"));
+					vo.setPromotionTitle(rset.getString("PROMOTION_TITLE"));
+					vo.setPromotionContent(rset.getString("PROMOTION_CONTENT"));
+					vo.setPromotionDate(rset.getDate("PROMOTION_DATE"));
+					vo.setPromotionImg(rset.getString("PROMOTION_IMG"));
+					vo.setPromotionNo(rset.getInt("PROMOTION_NO"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
 	}
 	
 	public int insertAd(Connection conn, String title, String content, String writer, String img){

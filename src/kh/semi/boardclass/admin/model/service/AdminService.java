@@ -282,13 +282,22 @@ public class AdminService {
 		return volist;
 	}
 
-	public Banner searchAd() {
-		Banner vo = null;
+	public int getAdSearchCount(String keyword) {
+		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		vo = new AdminDao().searchAd(conn);
+		result = new AdminDao().getAdSearchCount(conn, keyword);
 		JDBCTemplate.close(conn);
-		return vo;
+		return result;
 	}
+
+	public ArrayList<Banner> searchAd(String keyword, int start, int end) {
+		ArrayList<Banner> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchAd(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+
 
 	public int insertAd(String title, String content, String writer, String img) {
 		int result = 0;
