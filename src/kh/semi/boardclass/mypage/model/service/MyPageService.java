@@ -9,10 +9,10 @@ import kh.semi.boardclass.community.model.vo.BoardLike;
 import kh.semi.boardclass.community.model.vo.Comment;
 import kh.semi.boardclass.game.model.vo.Game;
 import kh.semi.boardclass.mypage.model.dao.MyPageDao;
+import kh.semi.boardclass.mypage.model.vo.MyGameLike;
 import kh.semi.boardclass.review.model.vo.Review;
 import kh.semi.boardclass.used.model.vo.Used;
 import kh.semi.boardclass.used.model.vo.UsedLike;
-
 
 //import kh.semi.boardclass.mypage.model.dao.Board;
 //import kh.semi.boardclass.mypage.model.dao.BoardLike;
@@ -68,18 +68,19 @@ public class MyPageService {
 		return result;
 	}
 
-	public ArrayList<BoardLike> myBoardGameList(BoardLike boardLike) {
-		ArrayList<BoardLike> volist = null;
+// 보드게임 찜리스트 
+	public int getMyBoardGameListCount(String userId) {
+		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new MyPageDao().myBoardGameList(conn, boardLike);
+		result = new MyPageDao().getMyBoardGameListCount(conn, userId);
 		JDBCTemplate.close(conn);
-		return volist;
+		return result;
 	}
 
-	public ArrayList<Game> myBoardGameListDetail(Game boardgame) {
-		ArrayList<Game> volist = null;
+	public ArrayList<MyGameLike> myBoardGameList(String userId, int start, int end) {
+		ArrayList<MyGameLike> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new MyPageDao().myBoardGameListDetail(conn, boardgame);
+		volist = new MyPageDao().myBoardGameList(conn, userId, start, end);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
