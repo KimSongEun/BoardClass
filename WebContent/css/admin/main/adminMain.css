@@ -107,7 +107,7 @@
 	border-bottom: 2px solid #999879;
 }
 
-.modal, .review-modal {
+.comment-modal, .review-modal {
   display: none; 
   position: fixed; 
   z-index: 1;
@@ -120,7 +120,7 @@
   background-color: rgba(0,0,0,0.4); 
 }
 
-.modal-review-content, .modal-content {
+.modal-review-content, .modal-comment-content {
   background-color: #fefefe;
   margin: 15% auto ; 
   padding: 20px;
@@ -128,22 +128,22 @@
   width: 40%; 
 }
 
-.close, .reviewclose {
+.commentclose, .reviewclose {
   color: #aaa;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
 
-.close:hover,
-.close:focus,
+.commentclose:hover,
+.commentclose:focus,
 .reviewclose:hover,
 .reviewclose:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;
 }
-#modal-content-detail, #modal-review-content-detail {
+#modal-comment-content-detail, #modal-review-content-detail {
 	text-align : center;
 	margin : 10px;
 }

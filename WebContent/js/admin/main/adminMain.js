@@ -1,5 +1,8 @@
 $(function(){
 	console.log ("시작");
+	        $(window).click(function(e){
+            console.log(e.target);
+        });
 	$(".deleteboard").click(function () {
     var deleteid = $(this).attr("id");
 	if(confirm(deleteid+"번 게시글 삭제하시겠습니까?")){
@@ -7,6 +10,18 @@ $(function(){
 	} else {
 	}
 	});
+	$(".boarddetail").click(function () {
+    var category = $(this).attr("category");
+	console.log(category);
+	var detailid = $(this).attr("id");
+		if(category == "자유 게시판"){
+			$(".boarddetail").attr("href", "cfdetail?boardNo="+detailid);
+		} else if (category == "유저정보 게시판") {
+			$(".boarddetail").attr("href", "cudetail?boardNo="+detailid);
+		}else if (category == "모임 게시판") {
+			$(".boarddetail").attr("href", "cgdetail?boardNo="+detailid);
+		}
+	});	
 	$(".deletecomment").click(function () {
     var deleteid = $(this).attr("id");
 	if(confirm(deleteid+"번 댓글 삭제하시겠습니까?")){
@@ -28,9 +43,21 @@ $(function(){
 	} else {
 	}
 	});
-	var modal = document.getElementById("myModal");
-	var span = document.getElementsByClassName("close")[0];
-	$(".comment-modal").click(comment);
+	$(".updatenotice").click(function () {
+    var updateid = $(this).attr('no');
+    var newWindow = window.open("about:blank");
+    newWindow.location.href = "noticecontent?no=" + updateid;
+	});
+	$(".deletenotice").click(function () {
+    var deleteid = $(this).attr("id");
+	if(confirm(deleteid+"번 공지 삭제하시겠습니까?")){
+    location.href = "noticedelete?id=" + deleteid;
+	} else {
+	}
+	});
+	var commentmodal = document.getElementById("myCommentModal");
+	var commentspan = document.getElementsByClassName("commentclose")[0];
+	$(".commentmodal").click(comment);
 	function comment() {
 		var comment_id = $(this).attr("id");
 		console.log(comment_id);
@@ -39,8 +66,8 @@ $(function(){
 		type : "post",
 		data : {commentNo : comment_id},
 		success : function(data){
-			$('#modal-content-detail').html(data);
-			modal.style.display = "block";
+			$('#modal-comment-content-detail').html(data);
+			commentmodal.style.display = "block";
 		},
 		error : function(){
 			console.log("ajax 실패");
@@ -48,15 +75,10 @@ $(function(){
 	});
 		 
 	};
-	span.onclick = function() {
- 	modal.style.display = "none";
+	commentspan.onclick = function() {
+ 	commentmodal.style.display = "none";
 	}
 	
-	window.onclick = function(event) {
-	  if (event.target == modal) {
-	    modal.style.display = "none";
-	  }
-	}
 	
 	var reviewmodal = document.getElementById("myReviewModal");
 	var reviewspan = document.getElementsByClassName("reviewclose")[0];
@@ -83,8 +105,11 @@ $(function(){
 	}
 	
 	window.onclick = function(event) {
-	  if (event.target == reviewmodal) {
-	    reviewmodal.style.display = "none";
-	  }
+		console.log("event:"+event.target);
+	  if (event.target == commentmodal) {
+	    commentmodal.style.display = "none";
+	  } else if (event.target == reviewmodal) {
+		reviewmodal.style.display = "none";
+	}
 	}
 });
