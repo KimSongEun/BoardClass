@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.apache.taglibs.standard.tag.common.fmt.RequestEncodingSupport;
 
@@ -11,6 +12,7 @@ import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.community.model.vo.Board;
 import kh.semi.boardclass.community.model.vo.BoardReport;
 import kh.semi.boardclass.community.model.vo.Comment;
+import oracle.jdbc.proxy.annotation.Pre;
 
 public class CommunityDao {
 
@@ -159,13 +161,20 @@ public Board getBoard(Connection conn, int boardNo) {
 	// category별  게시글 리스트 조회
 	public ArrayList<Board> selectBoardList(Connection conn, int start, int end, String category) {
 		ArrayList<Board> volist = null;
-		String sql = "select * from " 
-				 +" (select Rownum r, t1.* from"
-				 +"(select BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT," 
-				 +"	TO_CHAR(BOARD_WRITE_DATE, 'YY/MM/DD') AS BOARD_WRITE_DATE,"  
-				 +" TO_CHAR(BOARD_REWRITE_DATE, 'YY/MM/DD') AS BOARD_REWRITE_DATE," 
-				 +"	BOARD_VIEW_COUNT, BOARD_IMG from board where board_category= ? order by BOARD_REPLY_REF desc, BOARD_REPLY_SEQ asc) t1 ) t2"  
-				 +" where r between ? and ? order by board_no desc";
+		String sql = "select BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT, \r\n" 
+				+ 	" TO_CHAR(BOARD_WRITE_DATE, 'YY/MM/DD') as BOARD_WRITE_DATE, TO_CHAR(BOARD_REWRITE_DATE, 'YY/MM/DD') as BOARD_REWRITE_DATE, \r\n" 
+				+ 	" BOARD_VIEW_COUNT, BOARD_IMG, NVL(t4.comment_no,0) comment_no \r\n"  
+				+ 	" from (  select * from" 
+				+ 	" (select Rownum r, t1.* from\r\n" 
+				+ " (select * from board where board_category= ? order by BOARD_REPLY_REF desc, BOARD_REPLY_SEQ asc) t1 ) t2\r\n" 
+				+ 	"  where r between ? and ? order by board_no desc)t3 left outer join (SELECT COUNT(comment_no) comment_no, board_no FROM comt group by board_no) t4 using ( board_no ) ";
+//		String sql = "select * from " 
+//				 +" (select Rownum r, t1.* from"
+//				 +"(select BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT," 
+//				 +"	TO_CHAR(BOARD_WRITE_DATE, 'YY/MM/DD') AS BOARD_WRITE_DATE,"  
+//				 +" TO_CHAR(BOARD_REWRITE_DATE, 'YY/MM/DD') AS BOARD_REWRITE_DATE," 
+//				 +"	BOARD_VIEW_COUNT, BOARD_IMG from board where board_category= ? order by BOARD_REPLY_REF desc, BOARD_REPLY_SEQ asc) t1 ) t2"  
+//				 +" where r between ? and ? order by board_no desc";
 //		String sql = "SELECT BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT," + 
 //				" TO_CHAR(BOARD_WRITE_DATE, 'YYYY/MM/DD') AS BOARD_WRITE_DATE, TO_CHAR(BOARD_REWRITE_DATE, 'YYYY/MM/DD'), AS BOARD_REWRITE_DATE" + 
 //				" BOARD_VIEW_COUNT, BOARD_REPLY_REF, BOARD_REPLY_LEV, BOARD_REPLY_SEQ, BOARD_IMG  "
@@ -869,7 +878,7 @@ public Board getBoard(Connection conn, int boardNo) {
 		return result;
 		
 	}
-	public int CountBoardReport (Connection conn, int boardNo, String userId) {
+	public int countBoardReport (Connection conn, int boardNo, String userId) {
 		int result = -1;
 		String sql = "select count(BOARD_REPORT_NO) from BOARD_REPORT where (BOARD_NO = ? and USER_ID = ?)";
 		PreparedStatement pstmt = null;
@@ -896,9 +905,60 @@ public Board getBoard(Connection conn, int boardNo) {
 		int result = -1;
 		return result;
 	}
-
-	public int insertLikeBoard() {
+	
+	// 각 게시글에 좋아요 수 조회
+	public int 	CountLikeBoard (Connection conn, int boardNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = "SELECT COUNT(BOARD_LIKE_NO) AS BOARD_LIKE_NO FROM BOARD_LIKE WHERE BOARD_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertLikeBoard(Connection conn, int boardNo, String userId) {
 		int result = -1;
+		PreparedStatement pstmt = null;
+		String sql = "insert into BOARD_LIKE VALUES (BOARD_LIKE_NUM.NEXTVAL, ? ,? )";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			pstmt.setString(2, userId);
+			result = pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public int deleteLikeBoard (Connection conn, int boardNo, String userId) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String sql = "delete from BOARD_LIKE where (BOARD_NO = ? and USER_ID = ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			pstmt.setString(2, userId);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
 	

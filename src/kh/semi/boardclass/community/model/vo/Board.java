@@ -30,11 +30,26 @@ public class Board {
 	private int boardReplySeq;
 	private String boardImg;
 	private int comment_no;
+	private int boardLikeCount;
 	
 	public Board() {
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+	
+	@Override
+	public String toString() {
+		return "Board [boardNo=" + boardNo + ", userId=" + userId + ", boardType=" + boardType + ", boardCategory="
+				+ boardCategory + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent + ", boardWriteDate="
+				+ boardWriteDate + ", boardRewriteDate=" + boardRewriteDate + ", boardViewCount=" + boardViewCount
+				+ ", boardReplyRef=" + boardReplyRef + ", boardReplyLev=" + boardReplyLev + ", boardReplySeq="
+				+ boardReplySeq + ", boardImg=" + boardImg + ", comment_no=" + comment_no + ", boardLikeCount="
+				+ boardLikeCount + "]";
+	}
+
+
+
 	public Board(int boardNo, String title, String content, String writer, String type, String category, int boardReplyRef, int boardReplyLev, int boardReplySeq) {
 		super();
 		this.boardNo =boardNo;
@@ -47,8 +62,15 @@ public class Board {
 		this.boardType = type;
 		this.boardCategory = category;
 	}
-
-
+	
+	public Board(int boardNo, String boardTitle, String boardContent, String userId, String boardWriteDate, String boardRewriteDate, String boardImg, int  boardLikeCount) {
+		super();
+		this.boardNo = boardNo;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		
+	}
+	
 
 
 	public int getBoardNo() {
@@ -161,6 +183,14 @@ public class Board {
 
 	public void setComment_no(int comment_no) {
 		this.comment_no = comment_no;
+	}
+
+	public int getBoardLikeCount() {
+		return boardLikeCount;
+	}
+
+	public void setBoardLikeCount(int boardLikeCount) {
+		this.boardLikeCount = boardLikeCount;
 	}
 
 	

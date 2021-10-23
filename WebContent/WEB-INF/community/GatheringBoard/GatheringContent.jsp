@@ -15,49 +15,6 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <style>
 .hiddenText { display: none;}
-.modal {
-  display: none; 
-  position: fixed; 
-  z-index: 1; 
-  left: 0;
-  top: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgb(0,0,0); 
-  background-color: rgba(0,0,0,0.4); 
-}
-.modal_content {
-	background-color: #fff;
-  	margin: 15% auto; 
-  	padding: 20px;
-  	border: 1px solid #888;
-  	width: 400px;
-  	height: 400px;
-  	position: relative;
-}
-h1 {
-	padding:10px;
-	font-size: 18px;
-	font-weight: bold;
-}
-
-.modal .modal_content .report_title {
-	border-bottom: 1px solid #888;
-	padding: 10px;
-	margin-bottom: 20px;
-	
-}
-
-.modal .modal_content .report_content {
-	border-bottom: 1px solid #888;
-	padding-bottom: 10px;
-	margin-bottom: 10px;
-}
-.modal .modal_content .report_btn {
-	margin: 0 auto;
-	
-}
 </style>
 <script type="text/javascript">
 	var b = "a";
@@ -74,26 +31,6 @@ h1 {
 </head>
 <body>
 <%@include file="/WEB-INF/index/header.jsp" %>
-
-<div class="modal">
-	<div class="modal_content">
-			<div class="modal__style">
-				<h1>신고하기</h1>
-				<div class="report_title">
-					<input type="hidden" name="boardNo" value=${board.boardNo }>
-					<span class="report_">제   목:</span><span class="board_report"> ${board.boardTitle}</span><br>
-					<span class="report">작성자:</span><span class="board_report"> ${board.userId } </span>
-				</div>
-				<div class="report_content">
-					<textarea maxlength="1000" name="boardReport" placeholder="신고내용을 입력해주세요." rows="10" cols="40"></textarea>
-				</div>
-					<div class="report_btn">
-						<input type="button" value="전송" onclick="reportBtn()"/>
-						<input type="button" class="close" value="취소"/>
-					</div>
-				</div>
-	</div>
-</div>
 
 <div id="a"></div>
 <div id="b"></div>

@@ -75,7 +75,8 @@
 		</div>
 		<!-- 신고하기 -->
 			<input type="button" value="신고" onclick="reportBtn()" >
-	
+		<!-- 좋아요 -->
+			<input type="button" value="좋아요" onclick="">
 	
 	<div class="btn_wrap">
 	<!-- 아이디 확인한 후 버튼 생성 가능-->
@@ -88,6 +89,24 @@
 			<button >목록</button>
 		</a>
 	</div>
+	
+	<!-- 게시글 추천 -->
+	추천
+	<div class="boardlike">
+		<c:if test="${ userId == null }">
+			추천 기능은 <button type="button" id="newLogin"><b class="w3-text-blue">로그인</b></button> 후 사용 가능합니다.<br />
+			<i class="fa fa-heart" style="font-size:16px;color:red"></i>
+			<span class="rec_count"></span>					
+		</c:if>
+		<c:if test="${ userId != null }">
+			<button class="w3-button w3-black w3-round" id="rec_update">
+				<i class="fa fa-heart" style="font-size:16px;color:red"></i>
+				&nbsp;<span class="rec_count"></span>
+			</button> 
+		</c:if>
+	</div>
+	
+	
 	<!--  댓글  TODO 로그인과정 -->
 	<div class="comment">
 		<c:forEach var="comment" items="${list }">
@@ -109,6 +128,10 @@
 					<input type="button" value="답글" onclick="re('${comment.commentNo}')">
 					<!-- c:if 아이디 확인 부분 추가 -->
 					<input type="button" value="삭제" onclick="location.href='ccdelete?commentNo=${comment.commentNo}'">
+					
+					<!--  게시글 추천 -->
+		
+					
 					<!-- 답글 영역 -->
 					<div class="hiddenText" id="a${comment.commentNo }">
 						<form action="cclist?pageNum=${pageNum }" method="post" name="frm1" id="frm1">
@@ -157,7 +180,7 @@
 function del(){
 	const del = confirm("해당 게시물을 삭제하시겠습니까?");
 	if(del) {
-		location.href='cfdelete?boardNo=${board.boardNo }';
+		location.href='cgdetail?boardNo=${board.boardNo }';
 	}
 }
 
@@ -200,7 +223,7 @@ function del(){
 			}
 		});
 	}
-	
+
 	
 	
 </script>

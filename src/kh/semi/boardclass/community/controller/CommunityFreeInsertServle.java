@@ -56,11 +56,14 @@ public class CommunityFreeInsertServle extends HttpServlet {
 			oVo = new CommunityService().getBoard(boardNo); 
 		}
 
-		String userId = "c";
-		User userSS = (User) request.getSession().getAttribute("user");
-		if (userSS != null) {
-			userId = userSS.getUserId();
+		User loginSS = (User)request.getSession().getAttribute("userSession");
+		if(loginSS == null) {
+			System.out.println("로그아웃이 풀려서 메인으로 이동");
+			request.getRequestDispatcher("/WEB-INF/error/loginAlert.jsp").forward(request, response);
+			return;
 		}
+		String userId = loginSS.getUserId();
+		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
 		String category = request.getParameter("category"); // 자유게시판
