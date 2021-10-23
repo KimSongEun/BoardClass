@@ -35,18 +35,92 @@ public class AdminDao {
 
 	public int getAllUserCount(Connection conn){
 		int result = 0;
+		String sql = "SELECT COUNT(USER_NO)\r\n" + 
+					 "FROM MEMBER";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
+	
 	public int getTodayVisitCount(Connection conn){
 		int result = 0;
+		String sql = "SELECT SUM(VISIT_COUNT)\r\n" + 
+					 "FROM VISIT\r\n" + 
+					 "WHERE TO_DATE(VISIT_DATE, 'YYYY-MM-DD') = TO_DATE(SYSDATE, 'YYYY-MM-DD') AND USER_ID != 'admin'";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
-	public int getMonthVisitCount(Connection conn){
+	
+	public int getTotalVisitCount(Connection conn){
 		int result = 0;
+		String sql = "SELECT SUM(VISIT_COUNT)\r\n" + 
+					 "FROM VISIT\r\n" + 
+					 "WHERE USER_ID!='admin'";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
+	
 	public int getTodayBoardCount(Connection conn){
 		int result = 0;
+		String sql = "SELECT COUNT(BOARD_NO)\r\n" + 
+					 "FROM BOARD\r\n" + 
+					 "WHERE TO_CHAR(BOARD_WRITE_DATE, 'YYYY-MM-DD')  = TO_CHAR(SYSDATE , 'YYYY-MM-DD')";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
 	

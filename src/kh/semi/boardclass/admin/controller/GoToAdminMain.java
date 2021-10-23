@@ -39,6 +39,18 @@ public class GoToAdminMain extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
+		int userCnt = new AdminService().getAllUserCount();
+		request.setAttribute("userCnt", userCnt);
+		
+		int todayVisitCnt = new AdminService().getTodayVisitCount();
+		request.setAttribute("todayVisitCnt", todayVisitCnt);
+		
+		int totalVisitCnt = new AdminService().getTotalVisitCount();
+		request.setAttribute("totalVisitCnt", totalVisitCnt);		
+		
+		int todayBoardCnt = new AdminService().getTodayBoardCount();
+		request.setAttribute("todayBoardCnt", todayBoardCnt);	
+		
 		ArrayList<Notice> noticevolist  = new AdminService().getNewestNotice();
 		request.setAttribute("noticevolist", noticevolist);
 		

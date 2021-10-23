@@ -44,10 +44,10 @@ public class AdminService {
 		return result;
 	}
 
-	public int getMonthVisitCount() {
+	public int getTotalVisitCount() {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().getMonthVisitCount(conn);
+		result = new AdminDao().getTotalVisitCount(conn);
 		JDBCTemplate.close(conn);
 		return result;
 	}

@@ -30,40 +30,40 @@
                 <div class="admin-count-allmember-div">
                     <table class="admin-count-table">
                         <tr>
-                            <td style="text-align:center; font-size: 18px; font-weight: bold;">총 회원수</td>
+                            <td style="text-align:center; font-size: 18px;"> 📌 총 회원수📌</td>
                         </tr>
                         <tr>
-                            <td style="text-align:center; font-size: 18px; font-weight: bold;">0</td>
+                            <td style="text-align:center; font-size: 18px; font-weight: bold; color:#9A9483">${userCnt}</td>
                         </tr>
                     </table>
                 </div>
                 <div class="admin-count-todayvisit-div">
                     <table class="admin-count-table">
                         <tr>
-                            <td style="text-align:center; font-size: 18px; font-weight: bold;">일일 방문횟수</td>
+                            <td style="text-align:center; font-size: 18px;">📌일일 방문횟수📌</td>
                         </tr>
                         <tr>
-                            <td style="text-align:center; font-size: 18px; font-weight: bold;">0</td>
+                            <td style="text-align:center; font-size: 18px; font-weight: bold; color:#9A9483">${todayVisitCnt}</td>
                         </tr>
                     </table>
                 </div>
                 <div class="admin-count-monthvisit-div">
                     <table class="admin-count-table">
                         <tr>
-                            <td style="text-align:center; font-size: 18px; font-weight: bold;">월간 방문횟수</td>
+                            <td style="text-align:center; font-size: 18px;">📌총 방문횟수📌</td>
                         </tr>
                         <tr>
-                            <td style="text-align:center; font-size: 18px; font-weight: bold;">0</td>
+                            <td style="text-align:center; font-size: 18px; font-weight: bold; color:#9A9483">${totalVisitCnt}</td>
                         </tr>
                     </table>
                 </div>
                 <div class="admin-count-todayboard-div">
                     <table class="admin-count-table">
                         <tr>
-                            <td style="text-align:center; font-size: 18px; font-weight: bold;">일일 등록글 수</td>
+                            <td style="text-align:center; font-size: 18px;">📌일일 등록글 수📌</td>
                         </tr>
                         <tr>
-                            <td style="text-align:center; font-size: 18px; font-weight: bold;">0</td>
+                            <td style="text-align:center; font-size: 18px; font-weight: bold; color:#9A9483">${todayBoardCnt}</td>
                         </tr>
                     </table>
                 </div>
@@ -83,7 +83,7 @@
                         <thead>
                             <tr>
                                 <td colspan="5" class="table-active"
-                                    style="text-align:center; font-size: 18px; font-weight: bold; background-color: #dedfe0;">신고 된 글 리스트
+                                    style="text-align:center; font-size: 18px; padding : 5px"> 🚨 신고 된 글 리스트 🚨
                                 </td>
                             </tr>
                         </thead>
@@ -119,8 +119,7 @@
                    	</colgroup>                    
                         <thead>
                             <tr>
-                                <td colspan="5" style="text-align:center; font-size: 18px; font-weight: bold;  background-color: #dedfe0;">신고 된 댓글
-                                    리스트
+                                <td colspan="5" style="text-align:center; font-size: 18px; padding : 5px">🚨 신고 된 댓글  리스트 🚨
                                 </td>
                             </tr>
                         </thead>
@@ -172,7 +171,7 @@
                         <thead>
                             <tr>
                                 <td colspan="5" class="table-active"
-                                    style="text-align:center; font-size: 18px; font-weight: bold; background-color: #dedfe0;">신고 된 리뷰 리스트
+                                    style="text-align:center; font-size: 18px; padding : 5px">🚨 신고 된 리뷰 리스트 🚨
                                 </td>
                             </tr>
                         </thead>
@@ -220,9 +219,7 @@
                    	</colgroup>                    
                         <thead>
                             <tr>
-                                <td colspan="5" style="text-align:center; font-size: 18px; font-weight: bold;  background-color: #dedfe0;">신고 된 중고글
-                                    리스트
-                                </td>
+                                <td colspan="5" style="text-align:center; font-size: 18px; padding : 5px">🚨 신고 된 중고글 리스트 🚨</td>
                             </tr>
                         </thead>
                         <tr style="text-align:center; font-size: 16px; font-weight: bold;">
@@ -256,7 +253,7 @@
                    	</colgroup>                  
                     <thead>
                         <tr>
-                            <td colspan="3" style="text-align:center; font-size: 18px; font-weight: bold; background-color: #dedfe0;">공지사항</td>
+                            <td colspan="3" style="text-align:center; font-size: 18px; font-weight: bold;">공지사항</td>
                         </tr>
                     </thead>
                     <tr style="text-align:center; font-size: 16px; font-weight: bold;">
