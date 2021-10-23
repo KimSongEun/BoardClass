@@ -145,6 +145,9 @@
   <div class="fl_c">
     <a href="./cfwrite" class="btn50 c3 reg" style="width: 240px;" tmp="contents/bod" mn="60" cn="0"><span class="write">글작성</span></a>
   </div>
+  <div class="btn_wrap">
+		<button type="button" id="btn_write">글쓰기</button>
+	</div>
 </div>
 	
 
@@ -197,8 +200,17 @@ $(function(){
 			
 		}
 	};	
+	
+	//글쓰기 좋아요 확인
+	$("#btn_write").click(loadWrite);
 
-
+	function loadWrite(){
+		if(!"${userSession}"){
+			alert("로그인해주세요");
+			return;
+		}
+		location.href="cfwrite";
+	}
 
 	
 </script>

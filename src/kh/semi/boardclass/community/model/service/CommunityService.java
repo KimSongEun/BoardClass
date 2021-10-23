@@ -293,10 +293,10 @@ public class CommunityService {
 		 JDBCTemplate.close(conn);
 		return result;
 	}
-	public int CountBoardReport(int boardNo, String userId) {
+	public int countBoardReport(int boardNo, String userId) {
 		int result = -1;
 		Connection conn = JDBCTemplate.getConnection();
-		 new CommunityDao().CountBoardReport(conn, boardNo, userId);
+		 new CommunityDao().countBoardReport(conn, boardNo, userId);
 		 JDBCTemplate.close(conn);
 		return result;
 	}
@@ -306,8 +306,25 @@ public class CommunityService {
 		return result;
 	}
 
-	public int insertLikeBoard() {
+	public int CountLikeBoard (int boardNo) {
 		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().CountLikeBoard(conn, boardNo);
+		 JDBCTemplate.close(conn);
+		return result;
+	}
+	public int insertLikeBoard(int boardNo, String userId) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().insertLikeBoard(conn, boardNo, userId);
+		 JDBCTemplate.close(conn);
+		return result;
+	}
+	public int deleteLikeBoard(int boardNo, String userId) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().deleteLikeBoard(conn, boardNo, userId);
+		 JDBCTemplate.close(conn);
 		return result;
 	}
 

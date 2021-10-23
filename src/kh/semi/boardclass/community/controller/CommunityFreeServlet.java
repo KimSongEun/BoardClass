@@ -51,8 +51,8 @@ public class CommunityFreeServlet extends HttpServlet {
 		int endRow = startRow + pageSize -1;
 		int startNum = totCnt - startRow +1;
 		
-//		ArrayList<Board> list = new CommunityService().selectBoardList(startRow, endRow, category);
-		ArrayList<Board> list = new CommunityService().selectBoardList(startRow, endRow);
+		ArrayList<Board> list = new CommunityService().selectBoardList(startRow, endRow, category);
+//		ArrayList<Board> list = new CommunityService().selectBoardList(startRow, endRow);
 		int pageCnt = (int)Math.ceil((double)totCnt/pageSize);
 		int startPage = (int)(currentPage -1) / blockSize * blockSize + 1;
 		int endPage = startPage + blockSize - 1;
