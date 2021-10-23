@@ -129,6 +129,12 @@ public class UserService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	
+	public int deleteChkPwd(String userId,String userPassword) {
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new UserDao().deleteChkPwd(conn, userId, userPassword);
+		return result;
+	}
 
 	public int deleteUser(User user) {
 		int result = 0;
