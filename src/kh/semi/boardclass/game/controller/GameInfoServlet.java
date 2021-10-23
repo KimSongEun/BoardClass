@@ -82,11 +82,11 @@ public class GameInfoServlet extends HttpServlet {
         // 게임 관련 리뷰 - 최신4개
 		int startRnum = 1;   // 화면에 글
 		int endRnum = 4;  // 화면에 글
-        ArrayList<GameReview> gvo2 =service.selectReview(startRnum,endRnum,gamenum, userId);
+        ArrayList<GameReview> gvo3 =service.selectHotReview(startRnum,endRnum,gamenum, userId);
 
         request.setAttribute("gamevo", vo);
         request.setAttribute("usedvolist", vo2);
-        request.setAttribute("riviewvolist", gvo2);
+        request.setAttribute("riviewvolist3", gvo3);
     	request.setAttribute("likeresult", countlike);
     	request.setAttribute("reviewcount", count);
     	

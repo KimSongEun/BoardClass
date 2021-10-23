@@ -38,7 +38,7 @@
 		<div class="nav">
 			<nav class="navcategory">
 				<a href="#">카테고리</a> | <a href="#">게임랭킹</a> | <a href="#">중고거래</a> |
-				<a href="#">게시판</a> | <a href="#">보드게임정보</a>
+				<a href="#">게시판</a> | <a href="GameAllList">보드게임정보</a>
 			</nav>
 		</div>
 		<br>

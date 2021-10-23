@@ -8,6 +8,8 @@
 	Game vo = (Game) request.getAttribute("gamevo");
 	ArrayList<Used> vo2 = (ArrayList<Used>) request.getAttribute("usedvolist");
 	ArrayList<GameReview> go2 = (ArrayList<GameReview>) request.getAttribute("riviewvolist");
+	ArrayList<GameReview> go3 = (ArrayList<GameReview>) request.getAttribute("riviewvolist3");
+	
 	GameReview vo3 = (GameReview) request.getAttribute("reviewvolist");
 	
 	String[] str2 = (String[]) request.getAttribute("str2");
@@ -293,6 +295,7 @@ background-color:#CCFFFF;
 	transition-duration: .6s;
 	background-position: -2800px 0;
         }
+      
 </style>
 </head>
 <body>
@@ -327,7 +330,7 @@ background-color:#CCFFFF;
 <!-- Modal Box -->
 <div id="modal_02" class="modal">
 <div class="modal-content2">
-				
+			
 </div>
 </div>
 	
@@ -497,7 +500,6 @@ background-color:#CCFFFF;
 					<td><button id="btnModalShow"
 							style="height: 70px; width: 200px; background-color: #E2E2E2; font-size: 25px">
 							평가 남기기</button></td>
-
 				</tr>
 			</table>
 
@@ -540,8 +542,8 @@ background-color:#CCFFFF;
 					<button type = "submit" id="btnReview" style="width: 260px; height: 50px; font-size: 25px;">전체글 보기(${reviewcount}) >></button>
 				</form>
 				<%
-					if (go2 != null) {
-					for (GameReview go : go2) {
+					if (go3 != null) {
+					for (GameReview go : go3) {
 				%>
 					<div id="rd">
 						<input type = "hidden" value = "<%=go.getReviewNo()%>" name = "REVIEW_NO">
@@ -550,14 +552,14 @@ background-color:#CCFFFF;
 						<button type="button" name="re" class="rdbtn" id="c_<%=go.getReviewNo()%>">
 						<table border = "1" class="normal-table">
 							<tr>
-								<td width="120px">@@</td>
+								<td width="120px"><%=go.getUserId()%></td>
 								<td width="120px">★   <%=go.getReviewScore()%> </td>								
 							</tr>
 							<tr>
 								<td colspan="2" height="200px"><%=go.getReviewContent()%></td>
 							</tr>
 							<tr>
-								<td>dd</td>
+								<td>♥ <%=go.getLikecount()%>개</td>
 								<td><%=go.getReviewDate()%></td>
 							</tr>
 							
@@ -569,19 +571,32 @@ background-color:#CCFFFF;
 			</div>
 			
 		<script>
+		$("#btnModalShow").click(cbLike1);
+
+		function cbLike1(){
+			if(!"${userSession}"){
+				alert("로그인해주세요");
+				
+				return;
+			}else 
+				$("#btnModalShow").click(function() {
+					$("#modal_01").show();
+				});
+				$(".close").click(function() {
+					$(".modal").hide();
+				});
+		}
 			$(".rdbtn").click(function() {
 				var html= $(this).html();
 				console.log(html);
 				$(".modal-content2").html("");
 				$(".modal-content2").append(html);
-				html='<br><button value="취 소" class="close">취 소</button>';
-				$(".modal-content2").append(html);
+				//html='<br><button value="취 소" class="close">취 소</button>';
+				//$(".modal-content2").append(html);
 				$("#modal_02").show();
 				//$(".c_2").css("display","block");
 			});
-			$("#btnModalShow").click(function() {
-				$("#modal_01").show();
-			});
+			
 			$(".close").click(function() {
 				$(".modal").hide();
 			});

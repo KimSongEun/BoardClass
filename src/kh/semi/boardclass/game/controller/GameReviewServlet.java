@@ -91,9 +91,7 @@ public class GameReviewServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1; 
 		if(endPage > pageCount) endPage=pageCount;
 		
-		System.out.println(bCount);
-		System.out.println(startPage);
-		System.out.println(endPage);
+		
         
         ArrayList<GameReview> gvo2 = new GameService().selectReview(startRnum,endRnum,gamenum, userId);
         

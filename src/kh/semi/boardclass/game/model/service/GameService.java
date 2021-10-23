@@ -79,6 +79,13 @@ public class GameService {
 		return volist;
 	}
 	
+	public ArrayList<GameReview> selectHotReview(int start, int end,int no, String userId) {
+		ArrayList<GameReview> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new GameDao().selectHotReview(conn,start,end,no,userId);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
 
 	public ArrayList<Game> selectGame(String name) {
 		ArrayList<Game> volist = null;
@@ -132,7 +139,21 @@ public class GameService {
 		return result;
 	}
 	
-	
+//	public int countGameReport(int reviewNo, String userId) {
+//		int result = -1;
+//		Connection conn = JDBCTemplate.getConnection();
+//		result = new UsedDao().countUsedReport(conn, reviewNo, userId);
+//		JDBCTemplate.close(conn);
+//		return result;
+//	}
+//	
+//	public int insertGameReport(int reviewNo, String userId) {
+//		int result = -1;
+//		Connection conn = JDBCTemplate.getConnection();
+//		result = new UsedDao().insertUsedReport(conn, reviewNo, userId);
+//		JDBCTemplate.close(conn);
+//		return result;
+//	}
 
 	public ArrayList<Used> usedlist(String name) {
 		ArrayList<Used> volist = null;

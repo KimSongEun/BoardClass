@@ -88,11 +88,18 @@
 	cursor: pointer;
 	transition: background-position .6s steps(28);
 	transition-duration: 0s;
+	display: flex;
+         justify-content: space-around;
         }
         .heart.is-active{
 	transition-duration: .6s;
 	background-position: -2800px 0;
         } 
+        
+        .placement{
+        display: flex;
+         justify-content: space-around;
+         }
 </style>
 </head>
 
@@ -110,6 +117,7 @@
 		
 			<table border = "1" id = "tb">
 							<tr>
+								<td ><%=go.getUserId()%></td>
 								<td class="reviewNo"><%=go.getReviewNo()%></td>
 								<td class = "td2" align=right >★   <%=go.getReviewScore()%> &nbsp; </td>								
 							</tr>
@@ -120,9 +128,12 @@
 							<td> &nbsp;
 								<c:if test="${game.userId != userSession.userId}">
 								<div class="placement">
-					     		 <div class="heart <%if(go.getLiked()>0) {%>is-active<%} %>" id="btn_like"></div>				
+					     		 <div class="heart <%if(go.getLiked()>0) {%>is-active<%} %>" id="btn_like"></div>
+					     		 <p>♥ <%=go.getLikecount()%>개 </p>	
+					     		 <td><button type="button" id ="btn_report">신고하기</button>	</td>		
     							</div>
 								</c:if></td>
+								
 								<td class = "td2" align=right><%=go.getReviewDate()%> &nbsp;</td>
 							</tr>
 						</table>

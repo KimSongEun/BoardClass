@@ -149,12 +149,15 @@ public class GameDao {
 		}
 		return vo;
 	}
-	public ArrayList<GameReview> selectReview(Connection conn, int start, int end, int no, String userId) {
+	public ArrayList<GameReview> selectReview(Connection conn, int start, int end,  int no , String userId) {
 		ArrayList<GameReview> volist = null;
 //		String sql = "select * from (select rownum rnum, t1.* from (select * from REVIEW where GAME_NO = ? order by REVIEW_DATE desc) t1) t2 where rnum between ? and ?";
-		String sql = "select t3.*, NVL(t4.liked,0) as liked from (select * from (select rownum rnum, t1.* from (select * from REVIEW where GAME_NO = ? order by REVIEW_DATE desc) t1) t2 where rnum between ? and ? ) t3 "
-				+ " left outer join (select count(*) as liked, review_no from review_LIKE where user_id=? and GAME_NO=? group by review_no) t4 "
-				+ " on t3.review_no=t4.review_no ";
+		String sql = "select t3.*, NVL(t4.liked,0) as liked, NVL(t5.likecount,0) as likecount from (select * from (select rownum rnum, t1.* from "
+			    +"(select * from REVIEW where GAME_NO = ? order by REVIEW_DATE desc) t1) t2 where rnum between ? and ? ) t3 "
+			    +"left outer join (select count(*) as liked, review_no from review_LIKE where user_id= ? and GAME_NO= ? group by review_no) t4 "
+			    +"on t3.review_no=t4.review_no "
+			    +"left outer join (select count(*) as likecount, review_no from review_like where GAME_NO = ? group by review_no) t5 "
+			    +"on t3.review_no=t5.review_no";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -168,6 +171,8 @@ public class GameDao {
 			}
 			pstmt.setString(4, userId);   // 오류 날나면
 			pstmt.setInt(5, no);
+			pstmt.setInt(6, no);   
+			
 			rset = pstmt.executeQuery();
 			
 			if (rset.next()) {
@@ -182,7 +187,60 @@ public class GameDao {
 					vo.setReviewScore(rset.getInt("REVIEW_SCORE"));
 					vo.setReviewDate(rset.getDate("REVIEW_DATE"));
 					vo.setLiked(rset.getInt("liked"));
-							
+					vo.setLikecount(rset.getInt("likecount"));
+					
+					volist.add(vo);
+				} while (rset.next());
+			}
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}  finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	public ArrayList<GameReview> selectHotReview(Connection conn, int start, int end,  int no, String userId) {
+		ArrayList<GameReview> volist = null;
+		String sql = "select t3.*, NVL(t4.liked,0) as liked, NVL(t5.likecount,0) as likecount from (select * from (select rownum rnum, t1.* from "
+    + "(select * from REVIEW where GAME_NO = ? order by REVIEW_DATE desc) t1) t2 where rnum between ? and ? ) t3 "
+    + "left outer join (select count(*) as liked, review_no from review_LIKE where user_id= ? and GAME_NO = ? group by review_no) t4 "
+    + "on t3.review_no=t4.review_no "
+    + "left outer join (select count(*) as likecount, review_no from review_like where GAME_NO = ? group by review_no) t5 "
+    + "on t3.review_no=t5.review_no order by likecount desc";
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			if(userId == null){
+				userId="";
+			}
+			pstmt.setString(4, userId);   // 오류 날나면
+			pstmt.setInt(5, no);
+			pstmt.setInt(6, no);   
+			
+			rset = pstmt.executeQuery();
+			
+			if (rset.next()) {
+				volist = new ArrayList<GameReview>();
+				do {
+					GameReview vo = new GameReview();
+
+					vo.setReviewNo(rset.getInt("REVIEW_NO"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setGameNo(rset.getInt("GAME_NO"));
+					vo.setReviewContent(rset.getString("REVIEW_CONTENT"));
+					vo.setReviewScore(rset.getInt("REVIEW_SCORE"));
+					vo.setReviewDate(rset.getDate("REVIEW_DATE"));
+					vo.setLiked(rset.getInt("liked"));
+					vo.setLikecount(rset.getInt("likecount"));
+					
 					volist.add(vo);
 				} while (rset.next());
 			}
@@ -1081,15 +1139,44 @@ public class GameDao {
 		return result;
 	}
 	
-	
-	public void updateUsed(Connection conn, Used used) {
-
-	}
-
-	public int chatUset(Connection conn, Used used) {
-		int result = 0;
-		return result;
-	}
+//	public int countGameReport(Connection conn, int reviewNo, String userId) {
+//		int result = -1;
+//		String sql = "select count(COMMENT_REPORT_NO) from REVIEW_REPORT where (REVIEW_NO = ? and USER_ID = ?)";
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setInt(1, reviewNo);
+//			pstmt.setString(2, userId);
+//			rset = pstmt.executeQuery();
+//			if (rset.next()) {
+//				result = rset.getInt(1);
+//			}
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			JDBCTemplate.close(rset);
+//			JDBCTemplate.close(pstmt);
+//		}
+//		return result;
+//	}
+//	
+//	public int insertGameReport(Connection conn, int reviewNo, String userId) {
+//		int result = -1;
+//		PreparedStatement pstmt = null;
+//		String sql = "insert into REVIEW_REPORT values(REVIEW_REPORT_NUM.nextval, ?, ?)";
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setInt(1, reviewNo);
+//			pstmt.setString(2, userId);
+//			result = pstmt.executeUpdate();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		} finally {
+//			JDBCTemplate.close(pstmt);
+//		}
+//		return result;
+//	}
 
 	public List<Game> searchList(Connection conn, String searchKeyword) {
 		List<Game> volist = null;
