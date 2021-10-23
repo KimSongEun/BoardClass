@@ -38,7 +38,7 @@
                     <select class="admin-notice-search-select">
                         <option>공지 제목 </option>
                     </select>
-                    <input type="text" class="admin-notice-search-input" name = "keyword" id = "keyword">
+                    <input type="text" class="admin-notice-search-input" name = "keyword" id = "keyword" value="${keyword }">
                     <input type="submit" value="검색" class="admin-notice-search-button">
                     </form>
                     </td>

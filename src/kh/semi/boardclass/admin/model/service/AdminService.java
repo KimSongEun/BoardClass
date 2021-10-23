@@ -203,12 +203,20 @@ public class AdminService {
 		return volist;
 	}
 
-	public Game searchBoardGame() {
-		Game vo = null;
+	public int getBoardGameSearchCount(String keyword) {
+		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		vo = new AdminDao().searchBoardGame(conn);
+		result = new AdminDao().getBoardGameSearchCount(conn, keyword);
 		JDBCTemplate.close(conn);
-		return vo;
+		return result;
+	}
+
+	public ArrayList<Game> searchBoardGame(String keyword, int start, int end) {
+		ArrayList<Game> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchBoardGame(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
 	}
 
 	public int insertBoardGame(String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer,String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus, String plusImage) {

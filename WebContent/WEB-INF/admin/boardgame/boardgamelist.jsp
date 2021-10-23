@@ -33,11 +33,13 @@
                 <table class="admin-boardgame-search">
                 <tr>
                 	<td>
+                	<form action = "boardgamesearch" method = "post">
                     <select class="admin-boardgame-search-select">
                         <option>게임명 </option>
                     </select>
-                    <input type="text" class="admin-boardgame-search-input">
-                    <input type="button" value="검색" class="admin-boardgame-search-button">
+                    <input type="text" class="admin-boardgame-search-input" name = "keyword" id = "keyword" value="${keyword }">
+                    <input type="submit" value="검색" class="admin-boardgame-search-button">
+                    </form>
                     </td>
                     
                     <td style = "text-align : right; font-size : 15px">

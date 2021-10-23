@@ -78,6 +78,7 @@ public class NoticeSearchServlet extends HttpServlet {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
+		request.setAttribute("keyword", keyword);
 		request.setAttribute("type", type);
 		request.getRequestDispatcher("/WEB-INF/admin/notice/noticelist.jsp").forward(request, response);
 	}
