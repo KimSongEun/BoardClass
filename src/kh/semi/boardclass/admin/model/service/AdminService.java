@@ -99,7 +99,6 @@ public class AdminService {
 		JDBCTemplate.close(conn);
 		return volist;
 	}
-	// 여기
 
 	public Notice getNotice(int announceNo) {
 		Notice vo = null;
@@ -124,13 +123,21 @@ public class AdminService {
 		JDBCTemplate.close(conn);
 		return volist;
 	}
-
-	public Notice searchNotice(int announceNo) {
-		Notice vo = null;
+	
+	public int getNoticeSearchCount(String keyword) {
+		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		vo = new AdminDao().searchNotice(conn, announceNo);
+		result = new AdminDao().getNoticeSearchCount(conn, keyword);
 		JDBCTemplate.close(conn);
-		return vo;
+		return result;
+	}
+
+	public ArrayList<Notice> searchNotice(String keyword, int start, int end) {
+		ArrayList<Notice> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchNotice(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
 	}
 
 	public int insertNotice(String title, String content, String writer) {
@@ -502,7 +509,6 @@ public class AdminService {
 		JDBCTemplate.close(conn);
 		return vo;
 	}
-	// 여기 하기
 	
 	public int getAdminUserCount() {
 		int result = 0;

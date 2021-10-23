@@ -395,9 +395,60 @@ public class AdminDao {
 		return volist;
 	}
 	
-	public Notice searchNotice(Connection conn, int announceNo){
-		Notice vo = null;
-		return vo;
+	public int getNoticeSearchCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "select count(*) as total FROM NOTICE WHERE ADMIN_TITLE like (?)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<Notice> searchNotice(Connection conn, String keyword, int start, int end){
+		ArrayList<Notice> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT * FROM NOTICE WHERE ADMIN_TITLE like (?)) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Notice>();
+			if (rset.next()) {
+				do {
+					Notice vo = new Notice();
+					vo.setAdminContent(rset.getString("ADMIN_CONTENT"));
+					vo.setAdminRwrDate(rset.getDate("ADMIN_RWR_DATE"));
+					vo.setAdminWrDate(rset.getDate("ADMIN_WR_DATE"));
+					vo.setAdminTitle(rset.getString("ADMIN_TITLE"));
+					vo.setAnnounceNo(rset.getInt("ANNOUNCE_NO"));
+					vo.setUserId(rset.getString("USER_ID"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
 	}
 	
 	public int insertNotice(Connection conn, String title, String content, String writer){
