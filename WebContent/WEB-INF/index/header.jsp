@@ -119,10 +119,14 @@ $(function() {
 
      $("#modal_close_btn").click(function () {
          $("#modal").fadeOut();
+         $('#userid').val('');
+         $('#userpwd').val('');
      });
 
      $(".modal_layer").click(function () {
          $("#modal").fadeOut();
+         $('#userid').val('');
+         $('#userpwd').val('');
      });
 
 });
