@@ -45,8 +45,8 @@
 				<c:forEach items="${advolist}" var="a">
 					<div class="mySlides fade">
 						<div class="numbertext">${a.rownum}/ ${adCnt}</div>
-						<img src="<%=request.getContextPath()%>${a.promotionImg}"
-							style="width: 100%" onerror="this.src='./img/adtest/기본 광고 이미지.png'">
+						<a href="${a.promotionURL }" target="_blank"><img src="<%=request.getContextPath()%>${a.promotionImg}"
+							style="width: 100%" onerror="this.src='./img/adtest/기본 광고 이미지.png'"></a>
 					</div>
 				</c:forEach>
 			</c:if>

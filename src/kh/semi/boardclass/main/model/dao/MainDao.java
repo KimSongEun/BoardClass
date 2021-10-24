@@ -40,6 +40,7 @@ public class MainDao {
 					vo.setPromotionDate(rset.getDate("PROMOTION_DATE"));
 					vo.setPromotionImg(rset.getString("PROMOTION_IMG"));
 					vo.setPromotionNo(rset.getInt("PROMOTION_NO"));
+					vo.setPromotionURL(rset.getString("PROMOTION_URL"));
 					volist.add(vo);
 				} while (rset.next());
 			}
