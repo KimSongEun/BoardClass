@@ -36,51 +36,24 @@ public class CommunityMainServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		// TODO
-		//new CommunityService().selectFreeBoardList() 처럼 인기글, .. 조회해서 옴 각각의 변수 volist1
-		//new CommunityService().selectFreeBoardList() 처럼 인기글, .. 조회해서 옴 각각의 변수 volist2
-		//new CommunityService().selectFreeBoardList() 처럼 인기글, .. 조회해서 옴 각각의 변수 volist3
-//		PrintWriter out = response.getWriter();
-//		
-//		final int PAGE_SIZE = 20;   // 한 페이지 당 글수
-//		final int PAGE_BLOCK = 3;   // 한 화면에 나타날 페이지 링크 수
-//		int bCount = 0;   // 총 글수
-//		int pageCount = 0; // 총 페이지수
-//		int startPage = 1;   // 화면에 나타날 시작페이지
-//		int endPage = 1;   // 화면에 나타날 마지막페이지
-//		int currentPage = 1;
-//		int startRnum = 1;   // 화면에 글
-//		int endRnum = 1;  // 화면에 글
-//		
-//		String pageNum = request.getParameter("pagenum");
-//		if(pageNum != null) {   // 눌려진 페이지가 있음.
-//			currentPage = Integer.parseInt(pageNum); // 눌려진 페이지
-//		}
-//		// 총 글수
-//		bCount = new CommunityService().getBoardCount();
-//		// 총 페이지수 = (총글개수 / 페이지당글수) + (총글개수에서 페이지당글수로 나눈 나머지가 0이 아니라면 페이지개수를 1 증가)
-//		pageCount = (bCount / PAGE_SIZE) + (bCount % PAGE_SIZE == 0 ? 0 : 1);
-//		//rownum 조건 계산
-//		startRnum = (currentPage-1) * PAGE_SIZE + 1;   // 1//6//11/16//21
-//		endRnum = startRnum + PAGE_SIZE -1; 
-//		if(endRnum > bCount) endRnum=bCount;
-//		
-//		if(currentPage % PAGE_BLOCK == 0) {
-//			startPage = (currentPage / PAGE_BLOCK -1)  * PAGE_BLOCK + 1;
-//		} else {
-//			startPage = (currentPage / PAGE_BLOCK)  * PAGE_BLOCK + 1;
-//		}
-//		endPage = startPage + PAGE_BLOCK -1; 
-//		if(endPage > pageCount) endPage=pageCount;
-//		
-//		ArrayList<Board> volist3 = new CommunityService().selectBoardList(1, 10);
-//		
-////				ArrayList<Board> volist3 = new CommunityService().selectFreeBoardList();
-////				request.setAttribute("boardRankList", volist1);
-////				request.setAttribute("userRankList", volist2);
-//		request.setAttribute("boardList", volist3);
-//		System.out.print("volsit3 :");
-//		System.out.print(volist3);
+		
+		//자유게시판 조회수 랭킹
+		ArrayList<Board> bestfreeone = new CommunityService().bestFreeViewone();
+		request.setAttribute("bestfreeone", bestfreeone);
+		ArrayList<Board> bestfreetwo = new CommunityService().bestFreeViewtwo();
+		request.setAttribute("bestfreetwo", bestfreetwo);
+		ArrayList<Board> bestfreethree = new CommunityService().bestFreeViewthree();
+		request.setAttribute("bestfreethree", bestfreethree);
+		ArrayList<Board> bestfreefour = new CommunityService().bestFreeViewfour();
+		request.setAttribute("bestfreefour", bestfreefour);
+		ArrayList<Board> bestfreefive = new CommunityService().bestFreeViewfive();
+		request.setAttribute("bestfreefive", bestfreefive);
+		
+		// 자유게시판 댓글순 랭킹
+		ArrayList<Board> bestfreecomtone = new CommunityService().bestFreeComtOne();
+		request.setAttribute("bestfreecomtone", bestfreecomtone);
+		ArrayList<Board> bestfreecomttwo = new CommunityService().bestFreeComtTwo();
+		request.setAttribute("bestfreecomttwo", bestfreecomttwo);
 		
 		int totCnt = new CommunityService().getBoardCount();
 		String pageNum = request.getParameter("pageNum");

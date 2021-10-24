@@ -37,7 +37,7 @@ public class CommunityCommentDeleteServlet extends HttpServlet {
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("result", result);
 //		request.getRequestDispatcher("WEB-INF/community/CommentDelete.jsp").forward(request, response);
-		response.sendRedirect(request.getContextPath() + "/cfdetail?boardNo=" + boardNo);
+		response.sendRedirect(request.getContextPath() + "/bdetail?boardNo=" + boardNo);
 	}
 
 	/**

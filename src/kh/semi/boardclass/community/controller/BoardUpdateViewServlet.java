@@ -1,8 +1,6 @@
 package kh.semi.boardclass.community.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,26 +9,28 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.boardclass.community.model.service.CommunityService;
 import kh.semi.boardclass.community.model.vo.Board;
+import kh.semi.boardclass.user.model.vo.User;
 
 /**
- * Servlet implementation class CommunityGatheringInsertServlet
+ * Servlet implementation class BoardUpdateViewServlet
  */
-@WebServlet("/cgwrite")
-public class CommunityGatheringInsertServlet extends HttpServlet {
+@WebServlet("/bupdateview")
+public class BoardUpdateViewServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommunityGatheringInsertServlet() {
+    public BoardUpdateViewServlet() {
         super();
+        // TODO Auto-generated constructor stub
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/community/GatheringBoard/GatheringInsert.jsp").forward(request, response);
+		
 	}
 
 	/**
@@ -40,42 +40,33 @@ public class CommunityGatheringInsertServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		PrintWriter out =response.getWriter();
-		
-		Board oVo = null;
-		String viewBno = request.getParameter("boardNo");
-		
-		
-		System.out.println(viewBno);
-		if(viewBno == null || viewBno.equals("")) {   // 기존 읽고 있던 글이 없다면 원본 새글쓰기로 인식
-			oVo= new Board();
-		} else {
-			int boardNo = Integer.parseInt(viewBno);
-			// 알아와야함. bref, bre_level, bre_step
-			oVo = new CommunityService().getBoard(boardNo); 
+	
+		User loginSS = (User)request.getSession().getAttribute("userSession");
+		if(loginSS == null) {
+			System.out.println("로그아웃이 풀려서 메인으로 이동");
+			request.getRequestDispatcher("/WEB-INF/error/loginAlert.jsp").forward(request, response);
+			return;
 		}
-		String writer = (String)request.getSession().getAttribute("memberLoginInfo");
-		if(writer == null || writer.equals("")) {
-			writer = "c";   // TODO: 임시 user 설정
-		}
-		
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");
-		String category = request.getParameter("category"); // 모임정보게시판
+		String category = request.getParameter("category"); // 자유게시판
 		String type = request.getParameter("type");
 		
-		
-		
-	
 		Board vo = new Board();
 		vo.setBoardTitle(title);
 		vo.setBoardContent(content);
 		vo.setBoardCategory(category);
 		vo.setBoardType(type);
-		vo.setUserId(writer);
-		System.out.println(type);
-		int result = new CommunityService().insertGatheringBoard(vo);
-		response.sendRedirect("cg");
+		
+		CommunityService co = new CommunityService();
+		int rowCount = co.updateBoard(vo, boardNo);
+		if(rowCount > 0) {
+			response.sendRedirect(request.getContextPath() + "/cfdetail?boardNo=" + boardNo);
+		} else {
+			response.sendRedirect(request.getContextPath() + "/cfdetail?boardNo=" + boardNo);
+		}
+		
 	}
 
 }

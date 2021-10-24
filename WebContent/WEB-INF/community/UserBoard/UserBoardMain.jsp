@@ -22,7 +22,7 @@
 		<h2 class="as_hgroup"><a href="./cmain">커뮤니티</a></h2>
 		<nav id="lnb" class="lnb">
 			<ul>
-				<li><a href="#">공지사항</a></li>
+				<li><a href="nmain">공지사항</a></li>
 				<li><a href="./cf">자유게시판</a></li>
 				<li><a href="./cu">유저정보게시판</a></li>
 				<li><a href="./cg">모임게시판</a></li>
@@ -87,12 +87,13 @@
 					<td class="obj">
 						<div class="tbox">
 						<div class="tit">${board.boardType }
-							<a href="cudetail?boardNo=${board.boardNo }">${board.boardTitle }</a>
+							<a href="bdetail?boardNo=${board.boardNo }">${board.boardTitle }</a>
 						</div>
 						</div>
 						<div class="util">
 							<div class="hit">조회수 : <span class="val">${board.boardViewCount }</span></div>
-							<div class="comt">댓글수: <span class="val">2</span> </div>
+							<div class="comt">댓글수: <span class="val">${board.comment_no }</span>
+							</div>
 						</div>
 					
 					</td>
@@ -133,15 +134,12 @@
 		</c:if>
  	</div>
 	
-	<div class="btn_wrap">
-  <div class="fl_c">
-    <a href="./cuwrite" class="btn50 c3 reg" style="width: 240px;" tmp="contents/bod" mn="60" cn="0"><span class="write">글작성</span></a>
-  </div>
-</div>
+  <div class="btn_wrap">
+		<button type="button" id="btn_write">글쓰기</button>
+	</div>
 </div>	
 </div>
 </div>
-	<!-- 검색 영역 -->
 
 
 
@@ -193,7 +191,15 @@ $(function(){
 		}
 	};	
 
-	
+	$("#btn_write").click(loadWrite);
+
+	function loadWrite(){
+		if(!"${userSession}"){
+			alert("로그인해주세요");
+			return;
+		}
+		location.href='boardcreateview';
+	}
 	
 </script>
 

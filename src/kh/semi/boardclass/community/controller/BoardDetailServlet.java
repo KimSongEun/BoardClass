@@ -12,18 +12,20 @@ import javax.servlet.http.HttpServletResponse;
 import kh.semi.boardclass.community.model.service.CommunityService;
 import kh.semi.boardclass.community.model.vo.Board;
 import kh.semi.boardclass.community.model.vo.Comment;
+import kh.semi.boardclass.used.model.service.UsedService;
+import kh.semi.boardclass.user.model.vo.User;
 
 /**
- * Servlet implementation class CommunityGatheringDetailServlet
+ * Servlet implementation class BoardDetailServlet
  */
-@WebServlet("/cgdetail")
-public class CommunityGatheringDetailServlet extends HttpServlet {
+@WebServlet("/bdetail")
+public class BoardDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommunityGatheringDetailServlet() {
+    public BoardDetailServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,14 +46,14 @@ public class CommunityGatheringDetailServlet extends HttpServlet {
 		}catch( Exception e ) {
 			e.printStackTrace();
 			System.out.println("boardNoStr 숫자변환못함");
-			response.sendRedirect("cg");
+			response.sendRedirect("cf");
 			return;
 		}
 		Board bo = new Board();
 		bo.setBoardNo(boardNo);
 		
 		String pageNum = request.getParameter("pageNum");
-		 new CommunityService().readCount(boardNo);
+		new CommunityService().readCount(boardNo);
 		Board board = new CommunityService().getBoard(boardNo);
 		String date = board.getBoardWriteDate();
 		
@@ -67,7 +69,7 @@ public class CommunityGatheringDetailServlet extends HttpServlet {
 		//댓글
 		int commentNo = 0, commentRef = 0, commentReStep = 0, commentReLevel = 0;
 		CommunityService cd = new CommunityService();
-		
+
 		request.setAttribute("commentNo", commentNo);
 		request.setAttribute("commentRef", commentRef);
 		request.setAttribute("commentReLevel", commentReLevel);
@@ -77,6 +79,26 @@ public class CommunityGatheringDetailServlet extends HttpServlet {
 		
 		request.setAttribute("list", list);
 		
+		//추천
+		User loginSS = (User)request.getSession().getAttribute("userSession");
+		//신고
+		int countlike = 0;		
+		if(loginSS != null) {
+			String userId = loginSS.getUserId();
+			countlike = new CommunityService().CountLikeBoard(boardNo);
+		}
+		
+		int countreport = 0;
+		if(loginSS != null) {
+			String userId = loginSS.getUserId();
+			countreport = new CommunityService().countBoardReport(boardNo, userId);
+		}
+		
+		System.out.println("countlike="+countlike);
+		System.out.println("countreport="+countreport);
+		
+		request.setAttribute("reportresult", countreport);
+		request.setAttribute("likeresult", countlike);
 		
 		request.getRequestDispatcher("/WEB-INF/community/BoardContent.jsp").forward(request, response);
 	}

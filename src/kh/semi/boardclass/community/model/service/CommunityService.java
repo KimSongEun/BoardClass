@@ -70,7 +70,74 @@ public class CommunityService {
 		new CommunityDao().updateCount(conn, vo);
 		JDBCTemplate.close(conn);
 	}
-	
+	public ArrayList<Board> bestFreeView () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		
+		list = new CommunityDao().bestFreeView(conn);
+		
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<Board> bestFreeViewone () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		
+		list = new CommunityDao().bestFreeViewone(conn);
+		
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<Board> bestFreeViewtwo(){
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		
+		list = new CommunityDao().bestFreeViewtwo(conn);
+		
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<Board> bestFreeViewthree(){
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+
+		list = new CommunityDao().bestFreeViewthree(conn);
+		
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<Board> bestFreeViewfour(){
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+
+		list = new CommunityDao().bestFreeViewfour(conn);
+		
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<Board> bestFreeViewfive(){
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+
+		list = new CommunityDao().bestFreeViewfive(conn);
+		
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<Board> bestFreeComtOne () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestFreeComtOne(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<Board> bestFreeComtTwo () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestFreeComtTwo(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
 	public ArrayList<Board> selectUserBoardList() {
 		ArrayList<Board> volist = null;
 		return volist;
@@ -95,6 +162,40 @@ public class CommunityService {
 		Board vo = null;
 		return vo;
 	}
+	public int insertBoard(Board vo) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().insertBoard(conn, vo);
+		 JDBCTemplate.close(conn);
+			return result;
+	}
+	public int updateBoard(Board vo, int boardNo) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().updateBoard(conn, vo, boardNo);
+	 if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+		
+	}
+	public int deleteBoard (int boardNo) { 
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().deleteBoard(conn, boardNo);
+	 if(result > 0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		JDBCTemplate.close(conn);
+		return result;
+		
+	}
+	
 	// 자유게시판 글쓰기
 	public int insertFreeBoard(Board vo) {
 		int result = 0;
@@ -248,10 +349,10 @@ public class CommunityService {
 		return volist;
 	}
 
-	public int insertComment(Comment comment) {
+	public int insertComment(Comment comment,  String userId) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		 new CommunityDao().insertComment(conn, comment);
+		 new CommunityDao().insertComment(conn, comment, userId);
 	 if(result > 0) {
 			JDBCTemplate.commit(conn);
 		} else {

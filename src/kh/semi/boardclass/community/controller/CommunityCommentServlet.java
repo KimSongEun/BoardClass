@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import kh.semi.boardclass.community.model.service.CommunityService;
 import kh.semi.boardclass.community.model.vo.Board;
 import kh.semi.boardclass.community.model.vo.Comment;
+import kh.semi.boardclass.user.model.vo.User;
 
 /**
  * Servlet implementation class CommunityCommentServlet
@@ -41,13 +42,20 @@ public class CommunityCommentServlet extends HttpServlet {
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		String userId = request.getParameter("userId");
 		String pageNum = request.getParameter("pageNum");
 		String boardNoStr = request.getParameter("boardNo");
 		String commentNoStr = request.getParameter("commentNo");
 		String commentRefStr = request.getParameter("commentRef");
 		String commentReLevelStr = request.getParameter("commentReLevel");
 		String commentReStepStr = request.getParameter("commentReStep");
+		
+		User loginSS = (User)request.getSession().getAttribute("userSession");
+		if(loginSS == null) {
+			System.out.println("로그아웃이 풀려서 메인으로 이동");
+			request.getRequestDispatcher("/WEB-INF/error/loginAlert.jsp").forward(request, response);
+			return;
+		}
+		String userId = loginSS.getUserId();
 		
 		int boardNo = 0;
 		int commentNo = 0;
@@ -85,7 +93,7 @@ public class CommunityCommentServlet extends HttpServlet {
 		comment.setCommentReStep(commentReStep);
 		
 		CommunityService cs = new CommunityService();
-		int result = cs.insertComment(comment);
+		int result = cs.insertComment(comment, userId);
 		
 		CommunityService bd = new CommunityService();
 		Board board = bd.getBoard(boardNo);
@@ -103,10 +111,10 @@ public class CommunityCommentServlet extends HttpServlet {
 		request.setAttribute("commentReLevel", comment.getCommentReLevel());
 		request.setAttribute("commentReStep", comment.getCommentReStep());
 		request.setAttribute("result", result);
-		
+		System.out.println("userId :" + userId);
 		
 		//request.getRequestDispatcher("/WEB-INF/community/freeBoard/Comment.jsp").forward(request, response);
-		response.sendRedirect(request.getContextPath() + "/cfdetail?boardNo=" + boardNo);
+		response.sendRedirect(request.getContextPath() + "/bdetail?boardNo=" + boardNo);
 	}
 
 }

@@ -3,27 +3,33 @@ package kh.semi.boardclass.community.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
 import kh.semi.boardclass.community.model.service.CommunityService;
 import kh.semi.boardclass.community.model.vo.Board;
 import kh.semi.boardclass.user.model.vo.User;
 
 /**
- * Servlet implementation class CommunityFreeInsertServle
+ * Servlet implementation class BoardCreateServlet
  */
-@WebServlet("/cfwrite")   // get 방식은 jsp 파일 열기, post 방식은 jsp에서 입력된 데이터 받아서 db에 저장하기
-public class CommunityFreeInsertServle extends HttpServlet {
+@WebServlet("/boardcreate")
+public class BoardCreateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommunityFreeInsertServle() {
+    public BoardCreateServlet() {
         super();
     }
 
@@ -31,7 +37,6 @@ public class CommunityFreeInsertServle extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/community/freeBoard/FreeBoardInsert.jsp").forward(request, response);
 		
 	}
 
@@ -75,8 +80,10 @@ public class CommunityFreeInsertServle extends HttpServlet {
 		vo.setBoardCategory(category);
 		vo.setBoardType(type);
 		vo.setUserId(userId);
-		int result = new CommunityService().insertFreeBoard(vo);
-		response.sendRedirect("cf");
+		int result = new CommunityService().insertBoard(vo);
+		System.out.println("vo" + vo);
+		response.sendRedirect("cmain");
+			
+		}
 	}
 
-}

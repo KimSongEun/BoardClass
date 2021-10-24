@@ -1,6 +1,8 @@
 package kh.semi.boardclass.community.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,7 +19,7 @@ import kh.semi.boardclass.user.model.vo.User;
 /**
  * Servlet implementation class BoardReportServlet
  */
-@WebServlet("/creport")
+@WebServlet("/creport.ajax")
 public class BoardReportServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,31 +35,44 @@ public class BoardReportServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("text/html; charset=UTF-8");
-		// TODO 로그인 시에만 가능 // 본인이 작성한 글에는 신고 불가능
-		User loginSS = (User)request.getSession().getAttribute("userSession");
-		int boardNo = Integer.parseInt(request.getParameter("no"));
-		Board vo = new CommunityService().getBoard(boardNo);
-		// 게시글
-		// 게시글 신고
-		int countreport = 0;
-		if(loginSS != null) {
-			String userId = loginSS.getUserId();
-			countreport = new CommunityService().CountBoardReport(boardNo, userId);
-		}
-		System.out.println("countreport="+countreport);
-		System.out.println("vo="+vo);
-		request.setAttribute("reportresult", countreport);
-		request.setAttribute("Board", vo);
-		request.getRequestDispatcher("/WEB-INF/community/BoardContent.jsp").forward(request, response);
+
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+
+		User loginSS = (User) request.getSession().getAttribute("userSession");
+		if (loginSS == null) {
+			System.out.println("로그아웃이 풀려서 메인으로 이동");
+			request.getRequestDispatcher("/WEB-INF/error/loginAlert.jsp").forward(request, response);
+			return;
+		}
+
+		int boardNo = Integer.parseInt(request.getParameter("thisboardNo"));
+		String userId = request.getParameter("loginId");
+		
+		int result = new CommunityService().countBoardReport(boardNo, userId);
+		
+		int secondResult = -1;
+		if(result < 1) {
+			secondResult = new CommunityService().insertReportBoard(boardNo, userId);
+			System.out.println("신고접수됨");
+		} else {
+			secondResult = 0;
+			System.out.println("이미 신고접수됨");
+		}
+
+		System.out.println(secondResult);
+
+		out.print(secondResult);
+		out.flush();
+		out.close();
 	}
 
 }

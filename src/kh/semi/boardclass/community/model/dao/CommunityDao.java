@@ -161,12 +161,12 @@ public Board getBoard(Connection conn, int boardNo) {
 	// category별  게시글 리스트 조회
 	public ArrayList<Board> selectBoardList(Connection conn, int start, int end, String category) {
 		ArrayList<Board> volist = null;
-		String sql = "select BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT, \r\n" 
-				+ 	" TO_CHAR(BOARD_WRITE_DATE, 'YY/MM/DD') as BOARD_WRITE_DATE, TO_CHAR(BOARD_REWRITE_DATE, 'YY/MM/DD') as BOARD_REWRITE_DATE, \r\n" 
-				+ 	" BOARD_VIEW_COUNT, BOARD_IMG, NVL(t4.comment_no,0) comment_no \r\n"  
-				+ 	" from (  select * from" 
-				+ 	" (select Rownum r, t1.* from\r\n" 
-				+ " (select * from board where board_category= ? order by BOARD_REPLY_REF desc, BOARD_REPLY_SEQ asc) t1 ) t2\r\n" 
+		String sql = "select BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT," 
+				+ 	" TO_CHAR(BOARD_WRITE_DATE, 'YY/MM/DD') as BOARD_WRITE_DATE, TO_CHAR(BOARD_REWRITE_DATE, 'YY/MM/DD') as BOARD_REWRITE_DATE, " 
+				+ 	" BOARD_VIEW_COUNT, BOARD_IMG, NVL(t4.comment_no,0) AS comment_no "  
+				+ 	" from (  select * from " 
+				+ 	" (select Rownum r, t1.* from" 
+				+ " (select * from board where board_category= ? ) t1 ) t2" 
 				+ 	"  where r between ? and ? order by board_no desc)t3 left outer join (SELECT COUNT(comment_no) comment_no, board_no FROM comt group by board_no) t4 using ( board_no ) ";
 //		String sql = "select * from " 
 //				 +" (select Rownum r, t1.* from"
@@ -209,6 +209,7 @@ public Board getBoard(Connection conn, int boardNo) {
 					vo.setBoardRewriteDate(rset.getString("board_rewrite_date"));
 					vo.setBoardViewCount(rset.getInt("board_view_count"));
 					vo.setBoardImg(rset.getString("board_img"));
+					vo.setComment_no(rset.getInt("comment_no"));
 					volist.add(vo);
 				} while (rset.next());
 			}
@@ -283,6 +284,296 @@ public Board getBoard(Connection conn, int boardNo) {
 		return vo;
 		
 	}
+	//best글 조회
+	public ArrayList<Board> bestFreeView (Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = new ArrayList<Board>();
+		String sql = "select BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT,"  
+				 + 	" TO_CHAR(BOARD_WRITE_DATE, 'YY/MM/DD') as BOARD_WRITE_DATE," 
+				 + 	" TO_CHAR(BOARD_REWRITE_DATE, 'YY/MM/DD') as BOARD_REWRITE_DATE, BOARD_VIEW_COUNT,board_img"
+				 + 	"  from (select rownum r, a.* from (select * from board where board_category = '자유게시판' order by board_view_count desc) a) "
+				 + " where r between 1 and 5";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				do {
+					Board vo = new Board();
+					vo.setBoardNo(rset.getInt("board_no"));
+					vo.setUserId(rset.getString("user_id"));
+					vo.setBoardType(rset.getString("board_type"));
+					vo.setBoardCategory(rset.getString("board_category"));
+					vo.setBoardTitle(rset.getString("board_title"));
+					vo.setBoardContent(rset.getString("board_content"));
+					vo.setBoardWriteDate(rset.getString("board_write_date"));
+					vo.setBoardRewriteDate(rset.getString("board_rewrite_date"));
+					vo.setBoardViewCount(rset.getInt("board_view_count"));
+					vo.setBoardImg(rset.getString("board_img"));
+					list.add(vo);
+				}while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+	public ArrayList<Board> bestFreeViewone (Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = new ArrayList<Board>();
+		String sql = "select BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT,"  
+				 + 	" TO_CHAR(BOARD_WRITE_DATE, 'YY/MM/DD') as BOARD_WRITE_DATE," 
+				 + 	" TO_CHAR(BOARD_REWRITE_DATE, 'YY/MM/DD') as BOARD_REWRITE_DATE, BOARD_VIEW_COUNT,board_img"
+				 + 	"  from (select rownum r, a.* from (select * from board where board_category = '자유게시판' order by board_view_count desc) a) "
+				 + " where r = 1";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				do {
+					Board vo = new Board();
+					vo.setBoardNo(rset.getInt("board_no"));
+					vo.setUserId(rset.getString("user_id"));
+					vo.setBoardType(rset.getString("board_type"));
+					vo.setBoardCategory(rset.getString("board_category"));
+					vo.setBoardTitle(rset.getString("board_title"));
+					vo.setBoardContent(rset.getString("board_content"));
+					vo.setBoardWriteDate(rset.getString("board_write_date"));
+					vo.setBoardRewriteDate(rset.getString("board_rewrite_date"));
+					vo.setBoardViewCount(rset.getInt("board_view_count"));
+					vo.setBoardImg(rset.getString("board_img"));
+					list.add(vo);
+				}while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+	public ArrayList<Board> bestFreeViewtwo (Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = new ArrayList<Board>();
+		String sql = "select BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT,"  
+				 + 	" TO_CHAR(BOARD_WRITE_DATE, 'YY/MM/DD') as BOARD_WRITE_DATE," 
+				 + 	" TO_CHAR(BOARD_REWRITE_DATE, 'YY/MM/DD') as BOARD_REWRITE_DATE, BOARD_VIEW_COUNT,board_img"
+				 + 	"  from (select rownum r, a.* from (select * from board where board_category = '자유게시판' order by board_view_count desc) a) "
+				 + " where r = 2";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				do {
+					Board vo = new Board();
+					vo.setBoardNo(rset.getInt("board_no"));
+					vo.setUserId(rset.getString("user_id"));
+					vo.setBoardType(rset.getString("board_type"));
+					vo.setBoardCategory(rset.getString("board_category"));
+					vo.setBoardTitle(rset.getString("board_title"));
+					vo.setBoardContent(rset.getString("board_content"));
+					vo.setBoardWriteDate(rset.getString("board_write_date"));
+					vo.setBoardRewriteDate(rset.getString("board_rewrite_date"));
+					vo.setBoardViewCount(rset.getInt("board_view_count"));
+					vo.setBoardImg(rset.getString("board_img"));
+					list.add(vo);
+				}while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+	public ArrayList<Board> bestFreeViewthree (Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = new ArrayList<Board>();
+		String sql = "select BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT,"  
+				 + 	" TO_CHAR(BOARD_WRITE_DATE, 'YY/MM/DD') as BOARD_WRITE_DATE," 
+				 + 	" TO_CHAR(BOARD_REWRITE_DATE, 'YY/MM/DD') as BOARD_REWRITE_DATE, BOARD_VIEW_COUNT,board_img"
+				 + 	"  from (select rownum r, a.* from (select * from board where board_category = '자유게시판' order by board_view_count desc) a) "
+				 + " where r = 3";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				do {
+					Board vo = new Board();
+					vo.setBoardNo(rset.getInt("board_no"));
+					vo.setUserId(rset.getString("user_id"));
+					vo.setBoardType(rset.getString("board_type"));
+					vo.setBoardCategory(rset.getString("board_category"));
+					vo.setBoardTitle(rset.getString("board_title"));
+					vo.setBoardContent(rset.getString("board_content"));
+					vo.setBoardWriteDate(rset.getString("board_write_date"));
+					vo.setBoardRewriteDate(rset.getString("board_rewrite_date"));
+					vo.setBoardViewCount(rset.getInt("board_view_count"));
+					vo.setBoardImg(rset.getString("board_img"));
+					list.add(vo);
+				}while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+	public ArrayList<Board> bestFreeViewfour (Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = new ArrayList<Board>();
+		String sql = "select BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT,"  
+				 + 	" TO_CHAR(BOARD_WRITE_DATE, 'YY/MM/DD') as BOARD_WRITE_DATE," 
+				 + 	" TO_CHAR(BOARD_REWRITE_DATE, 'YY/MM/DD') as BOARD_REWRITE_DATE, BOARD_VIEW_COUNT,board_img"
+				 + 	"  from (select rownum r, a.* from (select * from board where board_category = '자유게시판' order by board_view_count desc) a) "
+				 + " where r = 4";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				do {
+					Board vo = new Board();
+					vo.setBoardNo(rset.getInt("board_no"));
+					vo.setUserId(rset.getString("user_id"));
+					vo.setBoardType(rset.getString("board_type"));
+					vo.setBoardCategory(rset.getString("board_category"));
+					vo.setBoardTitle(rset.getString("board_title"));
+					vo.setBoardContent(rset.getString("board_content"));
+					vo.setBoardWriteDate(rset.getString("board_write_date"));
+					vo.setBoardRewriteDate(rset.getString("board_rewrite_date"));
+					vo.setBoardViewCount(rset.getInt("board_view_count"));
+					vo.setBoardImg(rset.getString("board_img"));
+					list.add(vo);
+				}while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+	public ArrayList<Board> bestFreeViewfive (Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = new ArrayList<Board>();
+		String sql = "select BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT,"  
+				 + 	" TO_CHAR(BOARD_WRITE_DATE, 'YY/MM/DD') as BOARD_WRITE_DATE," 
+				 + 	" TO_CHAR(BOARD_REWRITE_DATE, 'YY/MM/DD') as BOARD_REWRITE_DATE, BOARD_VIEW_COUNT,board_img"
+				 + 	"  from (select rownum r, a.* from (select * from board where board_category = '자유게시판' order by board_view_count desc) a) "
+				 + " where r = 5";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				do {
+					Board vo = new Board();
+					vo.setBoardNo(rset.getInt("board_no"));
+					vo.setUserId(rset.getString("user_id"));
+					vo.setBoardType(rset.getString("board_type"));
+					vo.setBoardCategory(rset.getString("board_category"));
+					vo.setBoardTitle(rset.getString("board_title"));
+					vo.setBoardContent(rset.getString("board_content"));
+					vo.setBoardWriteDate(rset.getString("board_write_date"));
+					vo.setBoardRewriteDate(rset.getString("board_rewrite_date"));
+					vo.setBoardViewCount(rset.getInt("board_view_count"));
+					vo.setBoardImg(rset.getString("board_img"));
+					list.add(vo);
+				}while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+	
+	public ArrayList<Board> bestFreeComtOne (Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = new ArrayList<Board>();
+		String sql = "select * from (select rownum r,a.*  from" + 
+				" ( select * from (select * from board where board_category = '자유게시판' ) t1" + 
+				" left outer join (SELECT COUNT(comment_no) comment_no, board_no FROM comt group by board_no  order by comment_no desc ) t2 using ( board_no ))a" + 
+				"  ) where r = 1";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				do {
+					Board vo = new Board();
+					vo.setBoardNo(rset.getInt("board_no"));
+					vo.setUserId(rset.getString("user_id"));
+					vo.setBoardType(rset.getString("board_type"));
+					vo.setBoardCategory(rset.getString("board_category"));
+					vo.setBoardTitle(rset.getString("board_title"));
+					vo.setBoardContent(rset.getString("board_content"));
+					vo.setBoardWriteDate(rset.getString("board_write_date"));
+					vo.setBoardRewriteDate(rset.getString("board_rewrite_date"));
+					vo.setBoardViewCount(rset.getInt("board_view_count"));
+					vo.setBoardImg(rset.getString("board_img"));
+					vo.setComment_no(rset.getInt("comment_no"));
+					list.add(vo);
+				}while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
+	public ArrayList<Board> bestFreeComtTwo (Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = new ArrayList<Board>();
+		String sql = "select * from (select rownum r,a.*  from" + 
+				" ( select * from (select * from board where board_category = '자유게시판' ) t1" + 
+				" left outer join (SELECT COUNT(comment_no) comment_no, board_no FROM comt group by board_no  order by comment_no desc ) t2 using ( board_no ))a" + 
+				"  ) where r = 2";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				do {
+					Board vo = new Board();
+					vo.setBoardNo(rset.getInt("board_no"));
+					vo.setUserId(rset.getString("user_id"));
+					vo.setBoardType(rset.getString("board_type"));
+					vo.setBoardCategory(rset.getString("board_category"));
+					vo.setBoardTitle(rset.getString("board_title"));
+					vo.setBoardContent(rset.getString("board_content"));
+					vo.setBoardWriteDate(rset.getString("board_write_date"));
+					vo.setBoardRewriteDate(rset.getString("board_rewrite_date"));
+					vo.setBoardViewCount(rset.getInt("board_view_count"));
+					vo.setBoardImg(rset.getString("board_img"));
+					vo.setComment_no(rset.getInt("comment_no"));
+					list.add(vo);
+				}while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
 //	
 //	public ArrayList<Board> selectFreeBoardList(Connection conn, int start, int end, String category) {
 //		ArrayList<Board> volist = null;
@@ -313,6 +604,68 @@ public Board getBoard(Connection conn, int boardNo) {
 		Board vo = null;
 		return vo;
 	}
+	
+	public int insertBoard(Connection conn, Board vo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = "INSERT INTO BOARD (BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE, BOARD_CONTENT," 
+				+ 	" BOARD_WRITE_DATE, BOARD_VIEW_COUNT, BOARD_IMG)"  
+				+ 	" VALUES (BOARD_NUM.NEXTVAL, ?, ?, ?, ?, ?, TO_DATE(SYSDATE, 'YYYY/MM/DD SS'), ?, ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getUserId());
+			pstmt.setString(2, vo.getBoardType()); // 사담/건의/질문
+			pstmt.setString(3, vo.getBoardCategory()); // 자유게시판
+			pstmt.setString(4, vo.getBoardTitle());
+			pstmt.setString(5, vo.getBoardContent()); 
+			pstmt.setInt(6, vo.getBoardViewCount());
+			pstmt.setString(7, vo.getBoardImg());
+			result = pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public int updateBoard(Connection conn, Board vo, int boardNo) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = "update board set board_title = ?, board_content = ?, board_type=?, board_category = ?, board_img = ? where board_no = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, vo.getBoardTitle());
+			pstmt.setString(2, vo.getBoardContent());
+			pstmt.setString(3, vo.getBoardType());
+			pstmt.setString(4, vo.getBoardCategory());
+			pstmt.setString(5, vo.getBoardImg());
+			pstmt.setInt(6, boardNo);
+			result = pstmt.executeUpdate();
+		}catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public int deleteBoard (Connection conn, int boardNo) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String sql = "delete from board where board_No = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
 	// 자유게시판 글쓰기
 	// 글쓰기 전 로그인 확인 , 카테고리, 라벨 추가
 	public int insertFreeBoard(Connection conn, Board vo) {
@@ -770,7 +1123,7 @@ public Board getBoard(Connection conn, int boardNo) {
 		return volist;
 	}
 
-	public int insertComment(Connection conn, Comment comment) {
+	public int insertComment(Connection conn, Comment comment, String userId ) {
 		int commentRef = comment.getCommentRef();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

@@ -1,52 +1,63 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@page import="kh.semi.boardclass.community.model.vo.Board"%>
 <%@page import="java.util.ArrayList"%>
-    <%
-	Board board = (Board)request.getAttribute("BoardNo");
-	%>
+<%@page import="kh.semi.boardclass.community.model.vo.Board"%>
+<% 
+	String boardNo = request.getParameter("board_no");
+	if(boardNo == null || boardNo.equals("")) {
+		boardNo="";
+	}
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>BoardClass</title>
+<link rel="stylesheet" href="css/community/reset.css" />
+<link rel="stylesheet" href="css/community/write.css" />
+<link rel="stylesheet" href="css/community/common.css" />
 <script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
-	<c:import url="../header.jsp" />
-
-	<nav id="c_category" class="c_category">
-		<ul>
-			<li><a href="./cmain">커뮤니티</a></li>
-			<li><a href="#">공지사항</a></li>
-			<li><a href="./cf">자유게시판</a></li>
-			<li><a href="#">유저정보게시판</a></li>
-			<li><a href="#">모임게시판</a></li>
-		</ul>
-	</nav>
+<%@include file="/WEB-INF/index/footer.jsp" %>
+<div id="guide">
+	<aside id="aside" class="c_category">
+		<div class="as_inner">
+		<h2 class="as_hgroup"><a href="./cmain">커뮤니티</a></h2>
+		<nav id="lnb" class="lnb">
+			<ul>
+				<li><a href="#">공지사항</a></li>
+				<li><a href="./cf">자유게시판</a></li>
+				<li><a href="./cg">유저정보게시판</a></li>
+				<li><a href="./cu">모임게시판</a></li>
+			</ul>
+		</nav>
+		</div>
+	</aside>
 	
 <section>
 <div class="conwrap">
-	<div class="write_header">
-	<h1 class="tit">자유게시판</h1>
+	<div class="h3group mb30">
+	<h1 class="tit">커뮤니티 </h1>
 	<div class="location">
 	<span class="depth">홈     ></span>
-	<span class="depth">커뮤니티     > </span><strong class="this">자유게시판</strong>
+	<span class="depth">커뮤니티     > </span><strong class="this">글 작성</strong>
 	</div>
 	</div>
-    <form action="<c:url value='cfupdate'/>" class="updateForm" method="post">
-    <div class="title">
-    	<input type="hidden" name="boardNo"  value="${board.boardNo }" readonly >
-     <p> 제목</p>
-     <input type="text" name="title" value="${board.boardTitle}"  required="required"><br>
-   </div>
-<select class = "category-select" name = "selectCategory" id = "allboard-select-main">
+    <form method="post" action="boardcreate" >
+    <div class="hgroup">
+    	
+     <p class="tit">제목</p>
+     <input type="text" name="title" required="required"><br>
+	<select class = "category-select" name = "category" id = "allboard-select-main">
 	            <option value="자유게시판"<c:if test = "${category=='자유게시판'}">selected</c:if>>자유게시판</option>
 				<option value="유저정보게시판"<c:if test = "${category=='유저정보게시판'}">selected</c:if>>유저정보게시판</option>
 				<option value="모임게시판"<c:if test = "${category=='모임게시판'}">selected</c:if>>모임게시판</option>
 		</select>
-	 	<select class="type-select" name="selectSubCategory" id = "allboard-select-sub">
+	 	<select class="type-select" name="type" id = "allboard-select-sub">
 		 	<c:if test="${category=='자유게시판'}"> 
 				<option value="사담"<c:if test = "${type=='사담'}">selected</c:if>>사담</option>
 				<option value="건의"<c:if test = "${type=='건의'}">selected</c:if>>건의</option>
@@ -64,14 +75,10 @@
 				<option value="일정안내"<c:if test = "${type=='일정안내'}">selected</c:if>>일정안내</option>
 			</c:if>
 		</select>
-   <p>내용</p>
-	
-	<div class="container">
-	    <div class="content" style="width: 70%">
-	      <div class="row justify-content-md-center">
-	          <div class="col_c" style="margin-bottom: 30px">
+	</div>
+	          <div class="col_c" style="margin-bottom: 30px; width: 70%">
 	                <div class="input-group">                 
-	                  <textarea class="form-control" id="p_content">${board.boardContent}</textarea>
+	                  <textarea class="form-control" name="content" id="p_content"  required="required"></textarea>
 	                  <script type="text/javascript">
 	                  CKEDITOR.replace('p_content' , {
 	                	  	height: 500,
@@ -83,42 +90,17 @@
 	                  </script>
 	                </div>
 	            </div> 
-	      </div>
-	      <div class="row justify-content-md-center">
-	            <div class="input-group mb-3">
-	              <div class="input-group-prepend">
-	                <span class="input-group-text" id="inputGroupFileAddon01">파일 추가</span>
-	              </div>
-	              <div class="custom-file">
-	                  &nbsp;<input type="file" class="form-control-file" id="exampleFormControlFile1">
-	              </div>
-	            </div>
-		      </div>
-		  </div>
-		</div>
-	</textarea>
-       <div>
-           <input type="submit" value="글수정"/>
-           <input type="reset" value="초기화"/>
-       </div>
+	<button class='btn btn-warning' value='등록' type="submit">등록</button>
+		
 </form>
 </div>
 
 
 </section>
-
-<c:import url="../footer.jsp" />
+</div>
+<%@include file="/WEB-INF/index/footer.jsp" %>
 <script type="text/javascript">
-$(window).on("beforeunload", function() {
-	return "작성중인 글은 저장되지 않습니다. 페이지를 나가시겠습니까?";
-});
 
-$(document).ready(function() {
-    $(".updateForm").on("submit", function (e) {
-        $(window).off("beforeunload");
-        return true; })
-    });
-    
 $(".category-select").change(selectCategory);  
 function selectCategory() {
 	console.log("변경");
@@ -140,8 +122,7 @@ function selectCategory() {
 		var option = $("<option>" + changeItem[count] + "</option>");
 		$('.type-select').eq(index).append(option);
 	}
-};   
- 
+};
 </script>
 </body>
 </html>

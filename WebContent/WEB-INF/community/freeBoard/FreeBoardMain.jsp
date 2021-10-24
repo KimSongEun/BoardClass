@@ -91,7 +91,7 @@
 						<div class="tbox">
 						<div class="tit">
 							${board.boardType }
-							<a href="cfdetail?boardNo=${board.boardNo }">${board.boardTitle }</a>
+							<a href="bdetail?boardNo=${board.boardNo }">${board.boardTitle }</a>
 						</div>
 						</div>
 						<div class="util">
@@ -148,6 +148,7 @@
   <div class="btn_wrap">
 		<button type="button" id="btn_write">글쓰기</button>
 	</div>
+
 </div>
 	
 
@@ -209,7 +210,7 @@ $(function(){
 			alert("로그인해주세요");
 			return;
 		}
-		location.href="cfwrite";
+		location.href='boardcreateview';
 	}
 
 	

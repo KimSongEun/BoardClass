@@ -32,10 +32,10 @@ public class Board {
 	private int comment_no;
 	private int boardLikeCount;
 	
-	public Board() {
-		// TODO Auto-generated constructor stub
-	}
 	
+	public Board() {
+		
+	}
 	
 	
 	@Override
@@ -48,7 +48,15 @@ public class Board {
 				+ boardLikeCount + "]";
 	}
 
-
+	public Board(String userId, String boardTitle, String boardContent, String boardType, String boardCategory, String boardImg) {
+		super();
+		this.userId = userId;
+		this.boardTitle = boardTitle;
+		this.boardContent = boardContent;
+		this.boardType = boardType;
+		this.boardCategory = boardCategory;
+		this.boardImg = boardImg;
+	}
 
 	public Board(int boardNo, String title, String content, String writer, String type, String category, int boardReplyRef, int boardReplyLev, int boardReplySeq) {
 		super();

@@ -10,16 +10,16 @@ import javax.servlet.http.HttpServletResponse;
 import kh.semi.boardclass.community.model.service.CommunityService;
 
 /**
- * Servlet implementation class CommunityFreeDeleteServlet
+ * Servlet implementation class BoardDeleteServlet
  */
-@WebServlet("/cfdelete")
-public class CommunityFreeDeleteServlet extends HttpServlet {
+@WebServlet("/bdelete")
+public class BoardDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CommunityFreeDeleteServlet() {
+    public BoardDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +31,20 @@ public class CommunityFreeDeleteServlet extends HttpServlet {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		String pageNum = request.getParameter("pageNum");
 		CommunityService cs = new CommunityService();
-		int result = cs.deleteFreeBoard(boardNo);
+		int result = cs.deleteBoard(boardNo);
 		
 		request.setAttribute("boardNo", boardNo);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("result", result);
 		
-		response.sendRedirect("cf");
-//		response.sendRedirect(request.getContextPath() + "/cfdetail?boardNo=" + boardNo);
+		response.sendRedirect("cmain");
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

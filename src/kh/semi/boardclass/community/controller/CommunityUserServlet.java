@@ -43,6 +43,7 @@ public class CommunityUserServlet extends HttpServlet {
 		int startRow = (currentPage - 1) * pageSize + 1;
 		int endRow = startRow + pageSize -1;
 		int startNum = totCnt - startRow +1;
+		
 		ArrayList<Board> list = new CommunityService().selectBoardList(startRow, endRow, category);
 		int pageCnt = (int)Math.ceil((double)totCnt/pageSize);
 		int startPage = (int)(currentPage -1) / blockSize * blockSize + 1;
@@ -59,7 +60,7 @@ public class CommunityUserServlet extends HttpServlet {
 		request.setAttribute("pageCnt", pageCnt);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
-		request.setAttribute("category", category);
+		
 		request.getRequestDispatcher("/WEB-INF/community/UserBoard/UserBoardMain.jsp").forward(request, response);
 	}
 

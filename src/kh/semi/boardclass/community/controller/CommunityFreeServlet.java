@@ -58,6 +58,7 @@ public class CommunityFreeServlet extends HttpServlet {
 		int endPage = startPage + blockSize - 1;
 		if( endPage > pageCnt ) endPage = pageCnt;
 		
+		
 		request.setAttribute("totCnt", totCnt);
 		request.setAttribute("pageNum", pageNum);
 		request.setAttribute("currentPage", currentPage);

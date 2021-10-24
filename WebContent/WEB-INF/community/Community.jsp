@@ -43,36 +43,68 @@
     <div class="rbox">
       <dl>
       	<dt>자유게시판 인기글</dt>
-       <dd>
-       	<ol>
-       		<li>
+    
+		 <dd>	
+		 <select class = "category-select" name = "category" id = "allboard-select-main">
+		 </select>
+				<ol>	
+		 			 <c:forEach var="freebest" items="${bestfreeone }">
+			 			<li>
+				 			 <div class="rank">1</div>
+				              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
+				              <div class="commt">${freebest.boardViewCount }</div>
+			             </li>
+		             </c:forEach>
+		             <c:forEach var="freebest" items="${bestfreetwo }">
+			 			<li>
+				 			<div class="rank">2</div>
+			              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
+			           	  <div class="commt">${freebest.boardViewCount }</div>
+			             </li>
+		             </c:forEach>
+		            <c:forEach var="freebest" items="${bestfreethree }">
+			 			<li>
+			 			 <div class="rank">3</div>
+			              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
+			              <div class="commt">${freebest.boardViewCount }</div>
+			             </li>
+		             </c:forEach>
+		              <c:forEach var="freebest" items="${bestfreefour }">
+			 			<li>
+			 			 <div class="rank">4</div>
+			              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
+			              <div class="commt">${freebest.boardViewCount }</div>
+			            </li>
+		             </c:forEach>
+		             <c:forEach var="freebest" items="${bestfreefive }">
+			 			<li>
+			 			 <div class="rank">5</div>
+			              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
+			              <div class="commt">${freebest.boardViewCount }</div>
+			            </li>
+		             </c:forEach>
+	       		</ol>
+	   		
+		</dd>
+		<dd>
+		 <ol>
+		  <c:forEach var="freebest" items="${bestfreecomtone }">
+            <li>
               <div class="rank">1</div>
-              <a href="#" class="tit">내용</a>
-              <div class="commt">댓글수</div>
+              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
+              <div class="commt">${freebest.comment_no }</div>
             </li>
+            </c:forEach>
+            <c:forEach var="freebest" items="${bestfreecomttwo }">
             <li>
               <div class="rank">2</div>
-              <a href="#" class="tit">내용</a>
-              <div class="commt">댓글수</div>
+              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
+              <div class="commt">${freebest.comment_no }</div>
             </li>
-            <li>
-              <div class="rank">3</div>
-              <a href="#" class="tit">내용</a>
-              <div class="commt">댓글수</div>
-            </li>
-            <li>
-              <div class="rank">4</div>
-              <a href="#" class="tit">내용</a>
-              <div class="commt">댓글수</div>
-            </li>
-            <li>
-              <div class="rank">5</div>
-              <a href="#" class="tit">내용</a>
-              <div class="commt">조회수</div>
-            </li>
-          </ol>
-        </dd>
-      </dl>
+            </c:forEach>
+		</ol>
+		</dd>
+	</dl>
     </div>
     <div class="cbox">
       <dl>
@@ -105,6 +137,8 @@
               <div class="commt">조회수</div>
             </li>
           </ol>
+          
+          
         </dd>
       </dl>
     </div>
@@ -133,7 +167,7 @@
 				${board.boardNo }
 			</td>
 			<td style="width: 40%; font-weight: bold; font-size: 18px">
-				<a href="cfdetail?boardNo=${board.boardNo }&pageNum=${currentPage}">${board.boardTitle }</a>
+				<a href="bdetail?boardNo=${board.boardNo }&pageNum=${currentPage}">${board.boardTitle }</a>
 			</td>
 			<td style="width: 10%; text-align: center;">${board.userId }</td>
 			<td style="width: 10%;">${board.boardWriteDate }</td>

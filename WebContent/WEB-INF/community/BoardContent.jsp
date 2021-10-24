@@ -2,8 +2,6 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="kh.semi.boardclass.community.model.vo.Board"%>
-<%@page import="java.util.ArrayList"%>
-<% Board vo = (Board)request.getAttribute("boardvo");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +10,7 @@
 <link rel="stylesheet" href="css/community/BoardContent.css" />
 <link rel="stylesheet" href="css/index/maincss.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
+<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <style>
 .hiddenText { display: none;}
@@ -57,7 +55,7 @@
 <div id="b"></div>
 
 <div id="guide" class="row">
-	<aside id="aside" class="c_category">
+	<aside id="aside" class="c_">
 			<div class="as_inner">
 			<h2 class="as_hgroup"><a href="./cmain">커뮤니티</a></h2>
 			<nav id="lnb" class="lnb">
@@ -91,13 +89,13 @@
 		</div>
 		<div class= "content">
 		내용 : ${board.boardContent }
-	
 		</div>
 		
 	
 		<!-- 추천 -->
-		<button type="button" id="btn_report">신고하기</button>
-			
+		<c:if test="${used.userId != userSession.userId}">
+			<button type="button" id="btn_report">신고하기</button>
+		</c:if>
 				
 				<div class="placement">								
 			      <div class="heart" id="btn_like"></div>				
@@ -108,23 +106,31 @@
 	
 	
 	<div class="btn_wrap">
-	<!-- 아이디 확인한 후 버튼 생성 가능-->
-	
-		<a href="cfupdate?boardNo=${board.boardNo }" class="btn btn1">
-			<button>수정</button>
-		</a>
-		<input type="button" class="btn btn2" value="삭제" onclick="del()">
+		
+		<c:if test="${board.userId eq userSession.userId}">
+			<button type="button" onclick="boardUpdate();">수정</button>
+			<button type="button" onclick="boardDelete();">삭제</button>
+		</c:if>
+
+		<c:if test="${board.boardCategory =='자유게시판'}">
 		<a href="cf" class="btn btn3">
 			<button >목록</button>
 		</a>
+		</c:if>
+		<c:if test="${board.boardCategory =='유저정보게시판'}">
+		<a href="cu" class="btn btn3">
+			<button >목록</button>
+		</a>
+		</c:if>
+		<c:if test="${board.boardCategory =='모임게시판'}">
+		<a href="cg" class="btn btn3">
+			<button >목록</button>
+		</a>
+		</c:if>
 	</div>
 	
 	
 	
-	
-	
-	
-	<!--  댓글  TODO 로그인과정 -->
 	<div class="comment">
 		<c:forEach var="comment" items="${list }">
 			<div class=getComment>
@@ -143,8 +149,9 @@
 					<div class="createDate">${comment.commentWriteDate }</div>
 				</div>
 					<input type="button" value="답글" onclick="re('${comment.commentNo}')">
-					<!-- c:if 아이디 확인 부분 추가 -->
+					<c:if test="${comment.userId eq userSession.userId}">
 					<input type="button" value="삭제" onclick="location.href='ccdelete?commentNo=${comment.commentNo}'">
+					</c:if>
 					<!-- 답글 영역 -->
 					<div class="hiddenText" id="a${comment.commentNo }">
 						<form action="cclist?pageNum=${pageNum }" method="post" name="frm1" id="frm1">
@@ -158,7 +165,7 @@
 							<div><span class="left"><label for="name">${comment.userId }</label></span></div>
 							<div><textarea name="commentContent" id="commentContent" maxlength="800" required="required" placeholder="답글을 입력해주세요"></textarea></div>
 							
-							<div><input type="submit" value="등록" id="submitBtn"></div>
+							<div><input type="submit" value="등록" id="comtBtn"></div>
 						</form>
 					</div>
 					</c:forEach>
@@ -180,7 +187,7 @@
 							<div class="inputComment">
 								<div><textarea name="commentContent" id="commentContent" maxlength="800" required="required" placeholder="댓글을 입력해주세요"></textarea></div>
 							</div>
-							<div class="btnFix"><input type="submit" value="등록" id="submitBtn"></div>
+							<div class="btnFix"><input type="submit" value="등록" class="commentbtn" id="comtBtn"></div>
 						</form>
 					</div>
 			</div>
@@ -189,17 +196,44 @@
 
 	</div>
 </div>
+
 <script>
-function del(){
-	const del = confirm("해당 게시물을 삭제하시겠습니까?");
-	if(del) {
-		location.href='cfdelete?boardNo=${board.boardNo }';
+function boardUpdate(){
+	if(window.confirm("수정하겠습니까?")){
+		location.href='bupdate?boardNo=${board.boardNo }';
+	} else {
+		return;
 	}
 }
 
-	$("#btn_report").click(cbReport);
+function boardDelete(){
+	if(window.confirm("삭제하겠습니까?")){
+		location.href='bdelete?boardNo=${board.boardNo }';
+	} else {
+		return;
+	}
+}
 
-	function cbReport(){
+
+function del(){
+	const del = confirm("해당 게시물을 삭제하시겠습니까?");
+	if(del) {
+		location.href='bdetail?boardNo=${board.boardNo }';
+	}
+}
+$("#comtBtn").click(comtBtn);
+function comtBtn(){
+	if(!"${userSession}"){
+		alert("로그인해주세요");
+		return;
+	}
+	}
+
+// 신고
+let reportedThis = false;
+$("#btn_report").click(cbReport);
+
+function cbReport(){
 	if(!"${userSession}"){
 		alert("로그인해주세요");
 		return;
@@ -215,10 +249,10 @@ function del(){
 	}
 	$.ajax({
 		type : "post",
-		url : "boardreport.ajax",
+		url : "creport.ajax",
 		data : {
 			loginId : "${userSession.userId}",
-			thisBoardNo : "${board.boardNo }"
+			thisboardNo : "${board.boardNo}"
 		},
 		dataType : "json",
 		success : function(receive) {
@@ -237,8 +271,8 @@ function del(){
 					+ error);
 		}
 	});
-}
-
+	
+	//추천
 	$("#btn_like").click(cbLike);
 
 	function cbLike(){
@@ -269,7 +303,7 @@ function del(){
 			}
 		});
 	}
-	
+}
 	   
 	   
 </script>
