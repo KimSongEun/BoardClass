@@ -80,8 +80,8 @@
                          <tr>
                          	<td style = "vertical-align : middle; color : #f55354">${r.reportCount}</td>
                          	<td style = "vertical-align : middle">${r.usedNo}</td>
-                         	<td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" title = "${r.usedTitle}"><a href="#원본글내용조회" style = "color : #754100">${r.usedTitle}</a></td>
-                         	<td style = "vertical-align : middle"><a href="#회원정보조회" style = "color : #754100">${r.userId}</a></td>
+                         	<td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" title = "${r.usedTitle}"><a href="usedinformation?no=${r.usedNo}" target="_blank" style = "color : #754100">${r.usedTitle}</a></td>
+                         	<td style = "vertical-align : middle"><a href="adminuserdetail?userId=${r.userId}" target="_blank" style = "color : #754100">${r.userId}</a></td>
                          	<td style = "vertical-align : middle">${r.userNo}</td>
                          	<td style = "vertical-align : middle">${r.usedDate}</td>
                             <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" id = "${r.usedNo}">삭제</button> </td>
