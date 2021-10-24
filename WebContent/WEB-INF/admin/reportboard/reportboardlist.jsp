@@ -13,6 +13,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
     <script type="text/javascript" src="./js/admin/reportboard/adminReportBoard.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>  
+    <link rel="icon" href="./img/dicedice.ico" type="image/x-icon" sizes="16x16">
     <title>신고 게시글 목록</title>
 </head>
 

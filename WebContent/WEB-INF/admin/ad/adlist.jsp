@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script type="text/javascript" src="./js/admin/ad/adminAd.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>  
+    <link rel="icon" href="./img/dicedice.ico" type="image/x-icon" sizes="16x16">
     <title>광고 조회</title>
 </head>
 

@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="./css/admin/main/adminMain.css" />
    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
    <script type="text/javascript" src="./js/admin/main/adminMain.js"></script>
+   <link rel="icon" href="./img/dicedice.ico" type="image/x-icon" sizes="16x16">
 </head>
 <body>
 	<%@include file="/WEB-INF/admin/main/adminHeader.jsp" %>
