@@ -73,11 +73,11 @@ public class LoginDoServlet extends HttpServlet {
 			System.out.println("로그인성공");
 			HttpSession session = request.getSession();
 			session.setAttribute("userSession", user);
-
+			session.setAttribute("userType", String.valueOf(user.getUserType()));
+			System.out.println("userType   :     " + user.getUserType());
 			voList.add(user);
 
 			int result = mservice.updateHistory(userId);
-			result++;
 			System.out.println("result   :     " + result);
 			mservice.countForTodayVisit(userId);
 			
