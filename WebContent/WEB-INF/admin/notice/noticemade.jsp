@@ -38,7 +38,7 @@
                 <tr>
                     <td><br><button class='btn btn-warning' value='등록' type="submit">등록</button>
                         &nbsp;
-                        <button class = 'btn btn-warning' onclick="if(confirm('공지사항 작성을 취소하시겠습니까?')){window.close()}else{}">취소</button>
+                        <button type="button" class = 'btn btn-warning' onclick="if(confirm('공지사항 작성을 취소하시겠습니까?')){window.close()}else{}">취소</button>
                     </td>
                 </tr>
             </table>

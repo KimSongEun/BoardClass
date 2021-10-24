@@ -887,7 +887,7 @@ public class AdminDao {
 	
 	public ArrayList<Banner> searchAd(Connection conn, String keyword, int start, int end){
 		ArrayList<Banner> volist = null;
-		String sql = "select * from (   select Rownum r, t1.* from (SELECT * FROM BANNER WHERE PROMOTION_TITLE like (?)) t1) t2 where r between ? and ?";
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT * FROM BANNER WHERE PROMOTION_TITLE like (?) ORDER BY PROMOTION_DATE DESC) t1) t2 where r between ? and ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
