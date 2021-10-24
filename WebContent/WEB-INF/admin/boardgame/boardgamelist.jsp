@@ -67,8 +67,8 @@
                         <tr>
                             <td style = "vertical-align : middle"><%=g.getGameNumber() %></td>
                             <td style = "vertical-align : middle"><%=g.getGameCategory() %></td>
-                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href = #사용자가보는게임화면새창열기 target = '_blank' style = "color : #754100" title = "<%=g.getGameKoName() %>"> <%=g.getGameKoName() %></a></td>
-                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href = #사용자가보는게임화면새창열기 target = '_blank' style = "color : #754100" title = "<%=g.getGameEnName() %>"><%=g.getGameEnName() %></a></td>
+                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href = "GameInfo?GAME_NO=<%=g.getGameNumber()%>" target = '_blank' style = "color : #754100" title = "<%=g.getGameKoName() %>"> <%=g.getGameKoName() %></a></td>
+                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href = "GameInfo?GAME_NO=<%=g.getGameNumber()%>" target = '_blank' style = "color : #754100" title = "<%=g.getGameEnName() %>"><%=g.getGameEnName() %></a></td>
                             <td style = "vertical-align : middle"><button class="update btn btn-danger" value="updatego" no="<%=g.getGameNumber()%>">게임수정</button> </td>
                             <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" id="<%=g.getGameNumber() %>">게임삭제</button> </td>
                         </tr>
