@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kh.semi.boardclass.community.model.dao.CommunityDao;
 import kh.semi.boardclass.community.model.service.CommunityService;
 import kh.semi.boardclass.community.model.vo.Board;
 import kh.semi.boardclass.community.model.vo.Comment;
+import kh.semi.boardclass.user.model.vo.User;
 
 /**
  * Servlet implementation class CommunityFreeDetailServlet
@@ -51,7 +51,7 @@ public class CommunityFreeDetailServlet extends HttpServlet {
 		bo.setBoardNo(boardNo);
 		
 		String pageNum = request.getParameter("pageNum");
-		// new CommunityService().readCount(boardNo);
+		new CommunityService().readCount(boardNo);
 		Board board = new CommunityService().getBoard(boardNo);
 		String date = board.getBoardWriteDate();
 		
@@ -77,6 +77,24 @@ public class CommunityFreeDetailServlet extends HttpServlet {
 		
 		request.setAttribute("list", list);
 		
+		//추천
+		User loginSS = (User)request.getSession().getAttribute("userSession");
+		int countlike = 0;		
+		if(loginSS != null) {
+			String userId = loginSS.getUserId();
+			countlike = new CommunityService().CountLikeBoard(boardNo);
+		}
+		//신고
+		int countreport = 0;
+		if(loginSS != null) {
+			String userId = loginSS.getUserId();
+			countreport = new CommunityService().countBoardReport(boardNo, userId);
+		}
+		System.out.println("countlike="+countlike);
+		System.out.println("countreport="+countreport);
+		
+		request.setAttribute("likeresult", countlike);
+		request.setAttribute("reportresult", countreport);
 		
 		request.getRequestDispatcher("/WEB-INF/community/BoardContent.jsp").forward(request, response);
 	}

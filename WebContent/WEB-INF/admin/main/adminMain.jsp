@@ -30,40 +30,40 @@
                 <div class="admin-count-allmember-div">
                     <table class="admin-count-table">
                         <tr>
-                            <td style="text-align:center; font-size: 18px; font-weight: bold;">총 회원수</td>
+                            <td style="text-align:center; font-size: 18px;"> 📌 총 회원수📌</td>
                         </tr>
                         <tr>
-                            <td style="text-align:center; font-size: 18px; font-weight: bold;">0</td>
+                            <td style="text-align:center; font-size: 18px; font-weight: bold; color:#9A9483">${userCnt}</td>
                         </tr>
                     </table>
                 </div>
                 <div class="admin-count-todayvisit-div">
                     <table class="admin-count-table">
                         <tr>
-                            <td style="text-align:center; font-size: 18px; font-weight: bold;">일일 방문횟수</td>
+                            <td style="text-align:center; font-size: 18px;">📌일일 방문횟수📌</td>
                         </tr>
                         <tr>
-                            <td style="text-align:center; font-size: 18px; font-weight: bold;">0</td>
+                            <td style="text-align:center; font-size: 18px; font-weight: bold; color:#9A9483">${todayVisitCnt}</td>
                         </tr>
                     </table>
                 </div>
                 <div class="admin-count-monthvisit-div">
                     <table class="admin-count-table">
                         <tr>
-                            <td style="text-align:center; font-size: 18px; font-weight: bold;">월간 방문횟수</td>
+                            <td style="text-align:center; font-size: 18px;">📌총 방문횟수📌</td>
                         </tr>
                         <tr>
-                            <td style="text-align:center; font-size: 18px; font-weight: bold;">0</td>
+                            <td style="text-align:center; font-size: 18px; font-weight: bold; color:#9A9483">${totalVisitCnt}</td>
                         </tr>
                     </table>
                 </div>
                 <div class="admin-count-todayboard-div">
                     <table class="admin-count-table">
                         <tr>
-                            <td style="text-align:center; font-size: 18px; font-weight: bold;">일일 등록글 수</td>
+                            <td style="text-align:center; font-size: 18px;">📌일일 등록글 수📌</td>
                         </tr>
                         <tr>
-                            <td style="text-align:center; font-size: 18px; font-weight: bold;">0</td>
+                            <td style="text-align:center; font-size: 18px; font-weight: bold; color:#9A9483">${todayBoardCnt}</td>
                         </tr>
                     </table>
                 </div>
@@ -83,7 +83,7 @@
                         <thead>
                             <tr>
                                 <td colspan="5" class="table-active"
-                                    style="text-align:center; font-size: 18px; font-weight: bold; background-color: #dedfe0;">신고 된 글 리스트
+                                    style="text-align:center; font-size: 18px; padding : 5px"> 🚨 신고 된 글 리스트 🚨
                                 </td>
                             </tr>
                         </thead>
@@ -99,8 +99,8 @@
                         <tr>
                             <td style = "color : #f55354">${rb.reportCount}</td>
                             <td>${rb.boardNo}</td>
-                            <td style="white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href="#글내용조회" style = "color : #754100" title="${rb.boardTitle}">${rb.boardTitle}</a></td>
-                            <td><a href="#회원정보조회" style = "color : #754100">${rb.userId}</a></td>
+                            <td style="white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href="#글내용조회" class="boarddetail" category="${rb.boardCategory }" target="_blank" id="${rb.boardNo}" style = "color : #754100" title="${rb.boardTitle}">${rb.boardTitle}</a></td>
+                            <td><a href="adminuserdetail?userId=${rb.userId}" target="_blank" style = "color : #754100">${rb.userId}</a></td>
                             <td><button class="deleteboard btn btn-primary" value="deletego" id = "${rb.boardNo}">삭제</button></td>
                         </tr>
                         </c:forEach>
@@ -119,8 +119,7 @@
                    	</colgroup>                    
                         <thead>
                             <tr>
-                                <td colspan="5" style="text-align:center; font-size: 18px; font-weight: bold;  background-color: #dedfe0;">신고 된 댓글
-                                    리스트
+                                <td colspan="5" style="text-align:center; font-size: 18px; padding : 5px">🚨 신고 된 댓글  리스트 🚨
                                 </td>
                             </tr>
                         </thead>
@@ -136,19 +135,19 @@
                         <tr>
                             <td style = "color : #f55354">${rc.reportCount}</td>
                             <td>${rc.commentNo}</td>
-                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" ><a href="#댓글내용" class = "comment-modal" id = "${rc.commentNo}" style = "color : #754100">${rc.commentContent}</a></td>
-                            <td><a href="#회원정보조회" style = "color : #754100">${rc.userId}</a></td>
+                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" ><a href="#댓글내용" class = "commentmodal" id = "${rc.commentNo}" style = "color : #754100">${rc.commentContent}</a></td>
+                            <td><a href="adminuserdetail?userId=${rc.userId}" target="_blank" style = "color : #754100">${rc.userId}</a></td>
                             <td><button class="deletecomment btn btn-primary" value="deletego" id = "${rc.commentNo}">삭제</button></td>
                         </tr>
 								<!-- The Modal -->
-								<div id="myModal" class="modal">
+								<div id="myCommentModal" class="comment-modal">
 
 									<!-- Modal content -->
-									<div class="modal-content">
-										<span class="close">&times;</span>
+									<div class="modal-comment-content">
+										<span class="commentclose">&times;</span>
 										<h3 style = "color : gray">댓글 내용 상세보기</h3>
 										<br>
-										<p id = "modal-content-detail"></p>
+										<p id = "modal-comment-content-detail"></p>
 									</div>
 
 								</div>                        
@@ -172,7 +171,7 @@
                         <thead>
                             <tr>
                                 <td colspan="5" class="table-active"
-                                    style="text-align:center; font-size: 18px; font-weight: bold; background-color: #dedfe0;">신고 된 리뷰 리스트
+                                    style="text-align:center; font-size: 18px; padding : 5px">🚨 신고 된 리뷰 리스트 🚨
                                 </td>
                             </tr>
                         </thead>
@@ -189,7 +188,7 @@
                             <td style = "color : #f55354">${rr.reportCount}</td>
                             <td>${rr.reviewNo}</td>
                             <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" ><a href="#리뷰내용" class = "reviewmodal" id = "${rr.reviewNo}" style = "color : #754100">${rr.reviewContent}</a></td>
-                            <td><a href="#회원정보조회" style = "color : #754100">${rr.userId}</a></td>
+                            <td><a href="adminuserdetail?userId=${rr.userId}" target="_blank" style = "color : #754100">${rr.userId}</a></td>
                             <td><button class="deletereview btn btn-primary" value="deletego" id = "${rr.reviewNo}">삭제</button></td>
                         </tr>
 								<!-- The Modal -->
@@ -220,9 +219,7 @@
                    	</colgroup>                    
                         <thead>
                             <tr>
-                                <td colspan="5" style="text-align:center; font-size: 18px; font-weight: bold;  background-color: #dedfe0;">신고 된 중고글
-                                    리스트
-                                </td>
+                                <td colspan="5" style="text-align:center; font-size: 18px; padding : 5px">🚨 신고 된 중고글 리스트 🚨</td>
                             </tr>
                         </thead>
                         <tr style="text-align:center; font-size: 16px; font-weight: bold;">
@@ -237,8 +234,8 @@
                         <tr>
                             <td style = "color : #f55354">${ru.reportCount}</td>
                             <td>${ru.usedNo}</td>
-                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" ><a href="#중고글조회" id = "${ru.usedNo}" style = "color : #754100" title = "${ru.usedTitle}">${ru.usedTitle}</a></td>
-                            <td><a href="#회원정보조회" style = "color : #754100">${ru.userId}</a></td>
+                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" ><a href="usedinformation?no=${ru.usedNo}" target="_blank" id = "${ru.usedNo}" style = "color : #754100" title = "${ru.usedTitle}">${ru.usedTitle}</a></td>
+                            <td><a href="adminuserdetail?userId=${ru.userId}" target="_blank" style = "color : #754100">${ru.userId}</a></td>
                             <td><button class="deleteused btn btn-primary" value="deletego" id = "${ru.usedNo}">삭제</button></td>
                         </tr>
                         </c:forEach>
@@ -248,28 +245,34 @@
             </div>
             
             <div class="admin-notice-div" style="margin:0 auto;">
-                <table class="table table-hover admin-notice-table" style="text-align: center; width : 600px">
+                <table class="table table-hover admin-notice-table" style="text-align: center; width : 750px">
                     <colgroup>
 	                   	<col width="100px">
 	                   	<col width="300px">
-	                   	<col width="200px">
+	                   	<col width="150px">
+	                   	<col width="100px">
+	                   	<col width="100px">
                    	</colgroup>                  
                     <thead>
                         <tr>
-                            <td colspan="3" style="text-align:center; font-size: 18px; font-weight: bold; background-color: #dedfe0;">공지사항</td>
+                            <td colspan="5" style="text-align:center; font-size: 18px; font-weight: bold;">공지사항</td>
                         </tr>
                     </thead>
                     <tr style="text-align:center; font-size: 16px; font-weight: bold;">
                         <td style="width : 100px">공지 번호</td>
                         <td>공지 제목</td>
                         <td>공지 작성일</td>
+                        <td>수정</td>
+                        <td>삭제</td>
                     </tr>
                         <%if(noticevolist !=null){
 						 for(Notice n : noticevolist){ %> 
                     <tr>
                         <td><%=n.getAnnounceNo() %></td>
-                        <td style="white-space : nowrap; text-overflow : ellipsis; overflow : hidden""><a href="#공지가항보러가깅" style = "color : #754100" title = "<%=n.getAdminTitle() %>"><%=n.getAdminTitle() %></a></td>
+                        <td style="white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href="cnoticedetail?announceNo=<%=n.getAnnounceNo() %>" target="_blank" style = "color : #754100" title = "<%=n.getAdminTitle() %>"><%=n.getAdminTitle() %></a></td>
                         <td><%=n.getAdminRwrDate() %></td>
+                        <td><button class="updatenotice btn btn-primary" value="updatego" no = "<%=n.getAnnounceNo() %>">수정</button></td>
+                        <td><button class="deletenotice btn btn-primary" value="deletego" id = "<%=n.getAnnounceNo() %>">삭제</button></td>
                     </tr>
                    <%} }%> 
                 </table>

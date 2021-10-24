@@ -32,11 +32,13 @@
                 <table class="admin-ad-search">
                 <tr>
                 	<td>
+                	<form action = "adsearch" method = "post">
                     <select class="admin-ad-search-select">
                         <option>광고제목 </option>
                     </select>
-                    <input type="text" class="admin-ad-search-input">
-                    <input type="button" value="검색" class="admin-ad-search-button">
+                    <input type="text" class="admin-ad-search-input" name = "keyword" id = "keyword" value="${keyword }">
+                    <input type="submit" value="검색" class="admin-ad-search-button">
+                    </form>
                     </td>
                     <td style = "text-align : right; font-size : 15px">
                     	표시글 개수 : <select style = "height : 30px" name = "selectno" id = "selectno" onchange = "window.open(value, '_self');">

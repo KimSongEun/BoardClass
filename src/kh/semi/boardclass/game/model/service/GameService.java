@@ -33,6 +33,22 @@ public class GameService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
+	public int deleteReviewLike(String userId, int reviewNo,  int gameNo) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new GameDao().deleteReviewLike(conn, userId, reviewNo,gameNo);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
+	public int insertReviewLike(String userId, int reviewNo, int gameNo) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new GameDao().insertReviewLike(conn, userId, reviewNo, gameNo);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
 
 	public Game InfoGame(int no) {
 		Game vo= null;
@@ -55,14 +71,21 @@ public class GameService {
 		JDBCTemplate.close(conn);
 		return vo;
 	}
-	public ArrayList<GameReview> selectReview(int start, int end,int no) {
+	public ArrayList<GameReview> selectReview(int start, int end,int no, String userId) {
 		ArrayList<GameReview> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new GameDao().selectReview(conn,start,end,no);
+		volist = new GameDao().selectReview(conn,start,end,no, userId);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
 	
+	public ArrayList<GameReview> selectHotReview(int start, int end,int no, String userId) {
+		ArrayList<GameReview> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new GameDao().selectHotReview(conn,start,end,no,userId);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
 
 	public ArrayList<Game> selectGame(String name) {
 		ArrayList<Game> volist = null;
@@ -108,14 +131,30 @@ public class GameService {
 		JDBCTemplate.close(conn);
 		return result;
 	}
-//	public int getReviewCount(){
-//		int result = 0;
+	public int countReviewLike(String userId, int gameNo){
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new GameDao().countReviewLike(conn, userId, gameNo);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
+//	public int countGameReport(int reviewNo, String userId) {
+//		int result = -1;
 //		Connection conn = JDBCTemplate.getConnection();
-//		result = new GameDao().getReviewCount(conn);
+//		result = new UsedDao().countUsedReport(conn, reviewNo, userId);
 //		JDBCTemplate.close(conn);
 //		return result;
 //	}
 //	
+//	public int insertGameReport(int reviewNo, String userId) {
+//		int result = -1;
+//		Connection conn = JDBCTemplate.getConnection();
+//		result = new UsedDao().insertUsedReport(conn, reviewNo, userId);
+//		JDBCTemplate.close(conn);
+//		return result;
+//	}
+
 	public ArrayList<Used> usedlist(String name) {
 		ArrayList<Used> volist = null;
 		Connection conn = JDBCTemplate.getConnection();

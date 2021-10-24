@@ -34,11 +34,13 @@
                 <table class="admin-notice-search">
                 	<tr>
                 	<td>
+                	<form action = "noticesearch" method = "post">
                     <select class="admin-notice-search-select">
-                        <option>글제목 </option>
+                        <option>공지 제목 </option>
                     </select>
-                    <input type="text" class="admin-notice-search-input">
-                    <input type="button" value="검색" class="admin-notice-search-button">
+                    <input type="text" class="admin-notice-search-input" name = "keyword" id = "keyword" value="${keyword }">
+                    <input type="submit" value="검색" class="admin-notice-search-button">
+                    </form>
                     </td>
                     <td style = "text-align : right; font-size : 15px">
                                              표시글 개수 : <select style = "height : 30px" name = "selectno" id = "selectno" onchange = "window.open(value, '_self');">

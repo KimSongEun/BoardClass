@@ -54,13 +54,14 @@ public class GameInfoServlet extends HttpServlet {
         GameService service = new GameService();
         
         User loginSS = (User)request.getSession().getAttribute("userSession");
-	
+        String userId = null;
 		int countlike = 0;		
 		if(loginSS != null) {
-			String userId = loginSS.getUserId();
+			userId = loginSS.getUserId();
 			countlike = new GameService().countGameLike(userId, gamenum);
 		}
 		
+		int count = new GameService().getReviewCount(gamenum);
 		
         // 게임 정보 읽기
         Game vo = service.InfoGame(gamenum);
@@ -81,12 +82,14 @@ public class GameInfoServlet extends HttpServlet {
         // 게임 관련 리뷰 - 최신4개
 		int startRnum = 1;   // 화면에 글
 		int endRnum = 4;  // 화면에 글
-        ArrayList<GameReview> gvo2 =service.selectReview(startRnum,endRnum,gamenum);
+        ArrayList<GameReview> gvo3 =service.selectHotReview(startRnum,endRnum,gamenum, userId);
 
         request.setAttribute("gamevo", vo);
         request.setAttribute("usedvolist", vo2);
-        request.setAttribute("riviewvolist", gvo2);
+        request.setAttribute("riviewvolist3", gvo3);
     	request.setAttribute("likeresult", countlike);
+    	request.setAttribute("reviewcount", count);
+    	
         request.setAttribute("str2", str2);
         request.setAttribute("str4", str4);
         

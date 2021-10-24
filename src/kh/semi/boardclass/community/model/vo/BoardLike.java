@@ -5,17 +5,29 @@ public class BoardLike {
 //	    BOARD_NO NUMBER,
 //	    USER_ID VARCHAR2(20),
 	private int boardLikeNo;
-	private int boardNO;
+	private int boardNo;
 	private String userId;
-
 
 
 	public BoardLike() {
 	}
 	
+	public BoardLike(int boardLikeNo, int boardNo, String userId) {
+		super();
+		this.boardLikeNo = boardLikeNo;
+		this.boardNo = boardNo;
+		this.userId = userId;
+	}
+	
+	public BoardLike(int boardLikeNo, String userId) {
+		super();
+		this.boardLikeNo = boardLikeNo;
+		this.userId = userId;
+	}
+	
 	@Override
 	public String toString() {
-		return "BoardLike [boardLikeNo=" + boardLikeNo + ", boardNO=" + boardNO + ", userId=" + userId + "]";
+		return "BoardLike [boardLikeNo=" + boardLikeNo + ", boardNO=" + boardNo + ", userId=" + userId + "]";
 	}
 
 	public int getBoardLikeNo() {
@@ -26,12 +38,12 @@ public class BoardLike {
 		this.boardLikeNo = boardLikeNo;
 	}
 
-	public int getBoardNO() {
-		return boardNO;
+	public int getboardNo() {
+		return boardNo;
 	}
 
-	public void setBoardNO(int boardNO) {
-		this.boardNO = boardNO;
+	public void setboardNo(int boardNO) {
+		this.boardNo = boardNo;
 	}
 
 	public String getUserId() {

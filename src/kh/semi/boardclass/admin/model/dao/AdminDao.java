@@ -35,18 +35,92 @@ public class AdminDao {
 
 	public int getAllUserCount(Connection conn){
 		int result = 0;
+		String sql = "SELECT COUNT(USER_NO)\r\n" + 
+					 "FROM MEMBER";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
+	
 	public int getTodayVisitCount(Connection conn){
 		int result = 0;
+		String sql = "SELECT SUM(VISIT_COUNT)\r\n" + 
+					 "FROM VISIT\r\n" + 
+					 "WHERE TO_DATE(VISIT_DATE, 'YYYY-MM-DD') = TO_DATE(SYSDATE, 'YYYY-MM-DD') AND USER_ID != 'admin'";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
-	public int getMonthVisitCount(Connection conn){
+	
+	public int getTotalVisitCount(Connection conn){
 		int result = 0;
+		String sql = "SELECT SUM(VISIT_COUNT)\r\n" + 
+					 "FROM VISIT\r\n" + 
+					 "WHERE USER_ID!='admin'";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
+	
 	public int getTodayBoardCount(Connection conn){
 		int result = 0;
+		String sql = "SELECT COUNT(BOARD_NO)\r\n" + 
+					 "FROM BOARD\r\n" + 
+					 "WHERE TO_CHAR(BOARD_WRITE_DATE, 'YYYY-MM-DD')  = TO_CHAR(SYSDATE , 'YYYY-MM-DD')";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
 	
@@ -321,9 +395,60 @@ public class AdminDao {
 		return volist;
 	}
 	
-	public Notice searchNotice(Connection conn, int announceNo){
-		Notice vo = null;
-		return vo;
+	public int getNoticeSearchCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "select count(*) as total FROM NOTICE WHERE ADMIN_TITLE like (?)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<Notice> searchNotice(Connection conn, String keyword, int start, int end){
+		ArrayList<Notice> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT * FROM NOTICE WHERE ADMIN_TITLE like (?)) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Notice>();
+			if (rset.next()) {
+				do {
+					Notice vo = new Notice();
+					vo.setAdminContent(rset.getString("ADMIN_CONTENT"));
+					vo.setAdminRwrDate(rset.getDate("ADMIN_RWR_DATE"));
+					vo.setAdminWrDate(rset.getDate("ADMIN_WR_DATE"));
+					vo.setAdminTitle(rset.getString("ADMIN_TITLE"));
+					vo.setAnnounceNo(rset.getInt("ANNOUNCE_NO"));
+					vo.setUserId(rset.getString("USER_ID"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
 	}
 	
 	public int insertNotice(Connection conn, String title, String content, String writer){
@@ -494,10 +619,83 @@ public class AdminDao {
 		return volist;
 	}
 	
-	public Game searchBoardGame(Connection conn){
-		Game vo = null;
-		return vo;
+	public int getBoardGameSearchCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "select count(*) as total FROM BOARDGAME WHERE GAME_KONAME like (?) OR  GAME_ENNAME like (?)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setString(2, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
+	
+	public ArrayList<Game> searchBoardGame(Connection conn, String keyword, int start, int end){
+		ArrayList<Game> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT * FROM BOARDGAME WHERE GAME_KONAME like (?) OR  GAME_ENNAME like (?)) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setString(2, "%"+keyword+"%");
+			pstmt.setInt(3, start);
+			pstmt.setInt(4, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Game>();
+			if (rset.next()) {
+				do {
+					Game vo = new Game();
+					vo.setGameNumber(rset.getInt("GAME_NO"));
+					vo.setGameKoName(rset.getString("GAME_KONAME"));
+					vo.setGameEnName(rset.getString("GAME_ENNAME"));
+					vo.setGameCategory(rset.getString("GAME_CATEGORY"));
+					vo.setGameView(rset.getInt("GAME_VIEW"));
+					vo.setGameAge(rset.getString("GAME_AGE"));
+					vo.setGamePlayer(rset.getString("GAME_PLAYER"));
+					vo.setGameTime(rset.getString("GAME_TIME"));
+					vo.setGamePrice(rset.getInt("GAME_PRICE"));
+					vo.setGameGrade(rset.getInt("GAME_GRADE"));
+					vo.setGameDate(rset.getDate("GAME_DATE"));
+					vo.setGameLevel(rset.getInt("GAME_LEVEL"));
+					vo.setGameDesigner(rset.getString("GAME_DESIGNER"));
+					vo.setGameWriter(rset.getString("GAME_WRITER"));
+					vo.setGameBrand(rset.getString("GAME_BRAND"));
+					vo.setGameReleaseDate(rset.getString("GAME_RELEASEDATE"));
+					vo.setGameRank(rset.getInt("GAME_RANK"));
+					vo.setGameLanguage(rset.getString("GAME_LANGUAGE"));
+					vo.setGameReview(rset.getString("GAME_REVIEW"));
+					vo.setGameImage(rset.getString("GAME_IMAGE"));
+					vo.setGameRuleImage(rset.getString("GAME_RULE_IMAGE"));
+					vo.setGameVideo(rset.getString("GAME_VIDEO"));
+					vo.setGamePlus(rset.getString("GAME_PLUS"));
+					vo.setGamePlusImage(rset.getString("GAME_PLUSIMAGE"));
+					vo.setUsedNum(rset.getInt("USED_NO"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	
 	public int insertBoardGame(Connection conn, String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus, String plusImage){
 		int result = 0;
 		String sql = "insert into BOARDGAME values(GAME_NUM.nextval,null,?,?,?,0,?,?,?,?,?,SYSDATE,?,?,?,?,?,null,?,null,?,?,?,?,?)";
@@ -665,9 +863,61 @@ public class AdminDao {
 		return volist;
 	}
 	
-	public Banner searchAd(Connection conn){
-		Banner vo = null;
-		return vo;
+	public int getAdSearchCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "select count(*) as total FROM BANNER WHERE PROMOTION_TITLE like (?)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<Banner> searchAd(Connection conn, String keyword, int start, int end){
+		ArrayList<Banner> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT * FROM BANNER WHERE PROMOTION_TITLE like (?)) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Banner>();
+			if (rset.next()) {
+				do {
+					Banner vo = new Banner();
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setPromotionPlace(rset.getInt("PROMOTION_PLACE"));
+					vo.setPromotionTitle(rset.getString("PROMOTION_TITLE"));
+					vo.setPromotionContent(rset.getString("PROMOTION_CONTENT"));
+					vo.setPromotionDate(rset.getDate("PROMOTION_DATE"));
+					vo.setPromotionImg(rset.getString("PROMOTION_IMG"));
+					vo.setPromotionNo(rset.getInt("PROMOTION_NO"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
 	}
 	
 	public int insertAd(Connection conn, String title, String content, String writer, String img){

@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="kh.semi.boardclass.community.model.vo.Board"%>
 <%@page import="java.util.ArrayList"%>
-<% Board vo = (Board)request.getAttribute("boardvo"); %>
+<% Board vo = (Board)request.getAttribute("boardvo");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,11 +11,31 @@
 <title>BoardClass</title>
 <link rel="stylesheet" href="css/community/BoardContent.css" />
 <link rel="stylesheet" href="css/index/maincss.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
-<script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <style>
 .hiddenText { display: none;}
+.heart{
+	width: 100px;
+	height: 100px;
+	background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
+	background-position: 0 0;
+	cursor: pointer;
+	transition: background-position .6s steps(28);
+	transition-duration: 0s;
+	display: flex;
+         justify-content: space-around;
+        }
+        .heart.is-active{
+	transition-duration: .6s;
+	background-position: -2800px 0;
+        } 
+        
+        .placement{
+        display: flex;
+         justify-content: space-around;
+         }
 </style>
 <script type="text/javascript">
 	var b = "a";
@@ -73,8 +93,18 @@
 		내용 : ${board.boardContent }
 	
 		</div>
-		<!-- 신고하기 -->
-			<input type="button" value="신고" onclick="reportBtn()" >
+		
+	
+		<!-- 추천 -->
+		<button type="button" id="btn_report">신고하기</button>
+			
+				
+				<div class="placement">								
+			      <div class="heart" id="btn_like"></div>				
+				</div>	
+		
+ 
+</div>
 	
 	
 	<div class="btn_wrap">
@@ -88,6 +118,12 @@
 			<button >목록</button>
 		</a>
 	</div>
+	
+	
+	
+	
+	
+	
 	<!--  댓글  TODO 로그인과정 -->
 	<div class="comment">
 		<c:forEach var="comment" items="${list }">
@@ -161,37 +197,70 @@ function del(){
 	}
 }
 
-	function reportBtn(){
+	$("#btn_report").click(cbReport);
+
+	function cbReport(){
+	if(!"${userSession}"){
+		alert("로그인해주세요");
+		return;
+	}
+	if("${reportresult}" == 1){
+		alert("이미 신고하셨습니다.");
+		reportedThis = true;
+		return;
+	}
+	if(reportedThis){
+		alert("이미 신고하셨습니다.");
+		return;
+	}
+	$.ajax({
+		type : "post",
+		url : "boardreport.ajax",
+		data : {
+			loginId : "${userSession.userId}",
+			thisBoardNo : "${board.boardNo }"
+		},
+		dataType : "json",
+		success : function(receive) {
+			console.log("신고receive값은:"+receive);
+			if(receive<1){
+				reportedThis = true;
+				alert("이미 접수되었습니다");
+				return;
+			}
+			reportedThis = true;
+			alert("신고가 접수되었습니다.");
+		},
+		error : function(request, status, error) {
+			alert("code:" + request.status + "\n" + "message:"
+					+ request.responseText + "\n" + "error:"
+					+ error);
+		}
+	});
+}
+
+	$("#btn_like").click(cbLike);
+
+	function cbLike(){
 		if(!"${userSession}"){
 			alert("로그인해주세요");
 			return;
 		}
-		if("${reportresult}" == 1){
-			alert("이미 신고하셨습니다.");
-			reportedThis = true;
-			return;
-		}
-		if(reportedThis){
-			alert("이미 신고하셨습니다.");
+		if("${board.userId}" == "${userSession.userId}") {
+			alert("본인이 작성한 게시글에는 '추천' 할 수 없습니다.");
 			return;
 		}
 		$.ajax({
 			type : "post",
-			url : "boardreport.ajax",
+			url : "boardlike.ajax",
 			data : {
 				loginId : "${userSession.userId}",
-				thisUsedNo : "${board.boardNo }"
+				thisBoardNo : "${board.boardNo}"
 			},
 			dataType : "json",
 			success : function(receive) {
-				console.log("신고receive값은:"+receive);
-				if(receive<1){
-					reportedThis = true;
-					alert("이미 접수되었습니다");
-					return;
-				}
-				reportedThis = true;
-				alert("신고가 접수되었습니다.");
+				console.log("receive값은:"  + receive);
+				$(".heart").toggleClass("is-active");
 			},
 			error : function(request, status, error) {
 				alert("code:" + request.status + "\n" + "message:"
@@ -201,6 +270,8 @@ function del(){
 		});
 	}
 	
+	   
+	   
 </script>
 <%@include file="/WEB-INF/index/footer.jsp" %>
 </body>

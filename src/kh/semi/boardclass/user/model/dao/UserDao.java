@@ -51,8 +51,37 @@ public class UserDao {
 
 	public int updateHistory(Connection conn, String userId) {
 		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		String query = "UPDATE member SET USER_HISTORY = USER_HISTORY +1 WHERE USER_ID = ?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return result;
 	}
+	
+	public int countForTodayVisit(Connection conn, String userId) {
+		int result = 0;
+
+		String sql = "INSERT INTO VISIT VALUES(1, SYSDATE, ?)";
+		PreparedStatement pstmt = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}	
 
 	public int signUp(Connection conn, User user) {
 		PreparedStatement pstmt = null;
@@ -283,6 +312,30 @@ public class UserDao {
 		return result;
 	}
 
+	public int deleteChkPwd(Connection conn, String userId, String userPassword) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		// id로 테이블을 조회하여 있으면 1 이상, 없으면 0인 쿼리 작성
+		String query = "SELECT COUNT(*) FROM MEMBER WHERE USER_ID = ? and USER_PASSWORD=?";
+		try {
+			pstmt = conn.prepareStatement(query);
+			pstmt.setString(1, userId);
+			pstmt.setString(2, userPassword);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+			//	result= 2; // 이미 존재하는 회원
+			result = rset.getInt(1); // rset의 첫 컬럼의 숫자값을 가져온다
+			} 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
 	public int deleteUser(Connection conn, User user) {
 		PreparedStatement pstmt = null;
 		int result = 0;

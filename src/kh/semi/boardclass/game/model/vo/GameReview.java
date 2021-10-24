@@ -12,6 +12,8 @@ public class GameReview {
 	private String reviewContent;
 	private int reviewScore;
 	private Date reviewDate;
+	private int liked;
+	private int likecount;
 	
 	public GameReview(){
 		
@@ -25,7 +27,7 @@ public class GameReview {
 		this.reviewScore = reviewScore;
 		
 	}
-	public GameReview(int reviewNo, String userId, int gameNo, String reviewContent, int reviewScore, Date reviewDate) {
+	public GameReview(int reviewNo, String userId, int gameNo, String reviewContent, int reviewScore, Date reviewDate,int liked, int likecount) {
 		super();
 		this.reviewNo = reviewNo;
 		this.userId = userId;
@@ -33,15 +35,32 @@ public class GameReview {
 		this.reviewContent = reviewContent;
 		this.reviewScore = reviewScore;
 		this.reviewDate = reviewDate;
+		this.liked = liked;
+		this.likecount = likecount;
 	}
 
 	
+	
+
+
 	@Override
 	public String toString() {
-		return "GameReview [reviewNo=" + reviewNo + ", user_Id=" + userId + ", gameNo=" + gameNo + ", reviewContent="
-				+ reviewContent + ", reviewScore=" + reviewScore + ", reviewDate=" + reviewDate + "]";
+		return "GameReview [reviewNo=" + reviewNo + ", userId=" + userId + ", gameNo=" + gameNo + ", reviewContent="
+				+ reviewContent + ", reviewScore=" + reviewScore + ", reviewDate=" + reviewDate + ", liked=" + liked
+				+ ", likecount=" + likecount + "]";
 	}
-
+	public int getLikecount() {
+		return likecount;
+	}
+	public void setLikecount(int likecount) {
+		this.likecount = likecount;
+	}
+	public int getLiked() {
+		return liked;
+	}
+	public void setLiked(int liked) {
+		this.liked = liked;
+	}
 	public int getReviewNo() {
 		return reviewNo;
 	}
@@ -89,6 +108,7 @@ public class GameReview {
 	public void setReviewDate(Date reviewDate) {
 		this.reviewDate = reviewDate;
 	}
+	
 	
 	
 }

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.boardclass.game.model.service.GameService;
 import kh.semi.boardclass.game.model.vo.GameReview;
+import kh.semi.boardclass.user.model.vo.User;
 
 /**
  * Servlet implementation class GameInfoServlet
@@ -36,7 +37,6 @@ public class GameInsertReviewServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		        
         String name = request.getParameter("GAME_KONAME");
-        String id =  "a";
         
         System.out.println("yoo : name깨져? "+name);
         
@@ -45,7 +45,16 @@ public class GameInsertReviewServlet extends HttpServlet {
         	gamen = "0";
         }
         int gameno = Integer.parseInt(gamen);
-       
+        
+        User loginSS = (User)request.getSession().getAttribute("userSession");
+		String userId=null;
+		
+		int countlike = 0;		
+		if(loginSS != null) {
+			userId = loginSS.getUserId();
+			countlike = new GameService().countReviewLike(userId,gameno);
+		}
+        
         String content =  request.getParameter("REVIEW_CONTENT");
         
         String sco =   request.getParameter("rating");
@@ -55,7 +64,7 @@ public class GameInsertReviewServlet extends HttpServlet {
         int score = Integer.parseInt(sco);
         
       
-        GameReview gvo= new GameReview(id, gameno, content, score);    
+        GameReview gvo= new GameReview(userId, gameno, content, score);    
       
         
         int update = new GameService().updateGrade(gameno);

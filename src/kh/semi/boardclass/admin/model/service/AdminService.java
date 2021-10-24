@@ -44,10 +44,10 @@ public class AdminService {
 		return result;
 	}
 
-	public int getMonthVisitCount() {
+	public int getTotalVisitCount() {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().getMonthVisitCount(conn);
+		result = new AdminDao().getTotalVisitCount(conn);
 		JDBCTemplate.close(conn);
 		return result;
 	}
@@ -99,7 +99,6 @@ public class AdminService {
 		JDBCTemplate.close(conn);
 		return volist;
 	}
-	// 여기
 
 	public Notice getNotice(int announceNo) {
 		Notice vo = null;
@@ -124,13 +123,21 @@ public class AdminService {
 		JDBCTemplate.close(conn);
 		return volist;
 	}
-
-	public Notice searchNotice(int announceNo) {
-		Notice vo = null;
+	
+	public int getNoticeSearchCount(String keyword) {
+		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		vo = new AdminDao().searchNotice(conn, announceNo);
+		result = new AdminDao().getNoticeSearchCount(conn, keyword);
 		JDBCTemplate.close(conn);
-		return vo;
+		return result;
+	}
+
+	public ArrayList<Notice> searchNotice(String keyword, int start, int end) {
+		ArrayList<Notice> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchNotice(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
 	}
 
 	public int insertNotice(String title, String content, String writer) {
@@ -196,12 +203,20 @@ public class AdminService {
 		return volist;
 	}
 
-	public Game searchBoardGame() {
-		Game vo = null;
+	public int getBoardGameSearchCount(String keyword) {
+		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		vo = new AdminDao().searchBoardGame(conn);
+		result = new AdminDao().getBoardGameSearchCount(conn, keyword);
 		JDBCTemplate.close(conn);
-		return vo;
+		return result;
+	}
+
+	public ArrayList<Game> searchBoardGame(String keyword, int start, int end) {
+		ArrayList<Game> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchBoardGame(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
 	}
 
 	public int insertBoardGame(String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer,String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus, String plusImage) {
@@ -267,13 +282,22 @@ public class AdminService {
 		return volist;
 	}
 
-	public Banner searchAd() {
-		Banner vo = null;
+	public int getAdSearchCount(String keyword) {
+		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		vo = new AdminDao().searchAd(conn);
+		result = new AdminDao().getAdSearchCount(conn, keyword);
 		JDBCTemplate.close(conn);
-		return vo;
+		return result;
 	}
+
+	public ArrayList<Banner> searchAd(String keyword, int start, int end) {
+		ArrayList<Banner> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new AdminDao().searchAd(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+
 
 	public int insertAd(String title, String content, String writer, String img) {
 		int result = 0;
@@ -502,7 +526,6 @@ public class AdminService {
 		JDBCTemplate.close(conn);
 		return vo;
 	}
-	// 여기 하기
 	
 	public int getAdminUserCount() {
 		int result = 0;
