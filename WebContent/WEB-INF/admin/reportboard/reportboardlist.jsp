@@ -85,8 +85,8 @@
                          	<td style = "vertical-align : middle">${r.boardNo}</td>
                          	<td style = "vertical-align : middle">${r.boardType}</td>
                          	<td style = "vertical-align : middle">${r.boardCategory}</td>
-                         	<td style = "vertical-align : middle"><a href="#원본글내용조회" style = "color : #754100">${r.boardTitle}</a></td>
-                         	<td style = "vertical-align : middle"><a href="#회원정보조회" style = "color : #754100">${r.userId}</a></td>
+                         	<td style = "vertical-align : middle;white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href="bdetail?boardNo=${r.boardNo }" target="_blank" style = "color : #754100">${r.boardTitle}</a></td>
+                         	<td style = "vertical-align : middle"><a href="adminuserdetail?userId=${r.userId}" target="_blank"style = "color : #754100">${r.userId}</a></td>
                          	<td style = "vertical-align : middle">${r.userNo}</td>
                          	<td style = "vertical-align : middle">${r.boardWriteDate}</td>
                          	<td style = "vertical-align : middle">${r.boardRewriteDate}</td>
