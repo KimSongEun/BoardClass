@@ -66,7 +66,7 @@
 						 for(Notice n : volist){ %> 
                         <tr>
                             <td style = "vertical-align : middle"><%=n.getAnnounceNo() %></td>
-                            <td style = "vertical-align : middle;white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href = #사용자가보는공지사항화면새창열기 target = '_blank' style = "color : #754100" title = "<%=n.getAdminTitle() %>"> <%=n.getAdminTitle() %></a></td>
+                            <td style = "vertical-align : middle;white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href = "cnoticedetail?announceNo=<%=n.getAnnounceNo() %>" target="_blank" style = "color : #754100" title = "<%=n.getAdminTitle() %>" target = '_blank' style = "color : #754100" title = "<%=n.getAdminTitle() %>"> <%=n.getAdminTitle() %></a></td>
                             <td style = "vertical-align : middle"><%=n.getAdminWrDate() %></td>
                             <td style = "vertical-align : middle"><%=n.getAdminRwrDate() %></td>
                             <td style = "vertical-align : middle"><button class="update btn btn-danger" value="updatego" no="<%=n.getAnnounceNo()%>">글수정</button> </td>

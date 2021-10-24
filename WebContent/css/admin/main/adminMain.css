@@ -1,20 +1,13 @@
 @charset "UTF-8";
 .admin-main-section{
-/*     position :absolute;
-    left : 250px;
-    top : 40px;
-    width : 83.6%;
     padding: 50px;
-    background-color : ivory; */
-    padding: 50px;
-    background-color: rgba(237, 237, 238, 0.89);
     display: flex;
     min-height: 100vh;
     flex-direction: column;
     box-sizing:border-box;
 }
 .admin-main-title{
-	font-size: 34px;
+	font-size: 30px;
 	text-align: center;
     margin: auto;
 }
@@ -24,23 +17,23 @@
 }
 .admin-count-allmember-div {
     display: inline-block;
-    margin: 40px;
+    margin: 10px 40px;
 }
 .admin-count-todayvisit-div {
     display: inline-block;
-    margin: 40px;
+    margin: 10px 40px;
 }
 .admin-count-monthvisit-div {
     display: inline-block;
-    margin: 40px;
+    margin: 10px 40px;
 }
 .admin-count-todayboard-div {
     display: inline-block;
-    margin: 40px;
+    margin: 10px 40px;
 }
 .admin-count-table {
-    border: 1px solid black;
-    border-radius: 20px !important;
+    border: 3px solid black;
+    border-radius: 20px;
 }
 .admin-report-div{
     height : 400px;

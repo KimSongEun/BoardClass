@@ -255,7 +255,7 @@
                    	</colgroup>                  
                     <thead>
                         <tr>
-                            <td colspan="5" style="text-align:center; font-size: 18px; font-weight: bold;">공지사항</td>
+                            <td colspan="5" style="text-align:center; font-size: 18px; font-weight: bold;"> 📋  공지사항 📋</td>
                         </tr>
                     </thead>
                     <tr style="text-align:center; font-size: 16px; font-weight: bold;">

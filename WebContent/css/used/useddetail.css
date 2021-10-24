@@ -24,8 +24,9 @@
 	padding: 20px 5px 20px 5px;
 	width: 550px;
 	font-size: 25px;
-	border: dotted 0.5px;
-	font-family: 'Gugi';
+	border-top: dotted 0.5px;
+	border-bottom: dotted 0.5px;
+	font-family: 'Noto Sans KR';
 	white-space: initial;
 }
 
@@ -34,7 +35,7 @@
 	height: 300px;
 	text-align:center;
     display:table;
-    border:1px solid #cecece;
+    border: none;
 	padding: 20px 5px 20px 5px;
 }
 
@@ -53,9 +54,24 @@
 	padding-bottom: 30px;
 }
 
+.div_price span{
+	font-size: 24px;
+	font-weight: bold;
+}
+
 .div_detail{
 	padding-top: 20px;
 	padding-bottom: 20px;
+}
+
+.div_detail th{
+	text-align: left;
+	font-family: 'Noto Sans KR';
+}
+
+.div_detail td{
+	text-align: left;
+	font-family: 'Noto Sans KR light';
 }
 
 .div_contact{
@@ -63,7 +79,12 @@
 	padding-bottom: 20px;
 }
 
+.placement{
+	text-align: center;
+}
+
 .heart{
+	display:inline-block;
 	width: 100px;
 	height: 100px;
 	background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
@@ -78,17 +99,23 @@
 	background-position: -2800px 0;
         }
 
+.div_report{
+	margin-top: 20px;
+	text-align: center;
+	}
+
 .div_info{
 	padding-top: 60px;
 }
 
 .p_info_title{
 	font-size: 20px;
-	font-family: 'Gugi';
+	font-family: 'Noto Sans KR';
 }
 
 .p_info{
 	width:550px; 
 	border-top: 1px dotted gray;
 	border-bottom: 1px dotted gray;
+	font-family: 'Noto Sans KR light';
 }

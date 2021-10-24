@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import kh.semi.boardclass.mypage.model.service.MyPageService;
 import kh.semi.boardclass.mypage.model.vo.MyGameLike;
+import kh.semi.boardclass.mypage.model.vo.MyGameReview;
 import kh.semi.boardclass.user.model.vo.User;
 
 /**
@@ -49,9 +50,23 @@ public class MyBoardGameServlet extends HttpServlet {
 		int startRnum = 1; // 화면에 나타날 글 번호
 		int endRnum = 1; // 화면에 나타날 글 번호
 		
+		final int PAGE_SIZE2 = 4; // 한 페이지 당 글 개수
+		final int PAGE_BLOCK2 = 3; // 한 화면에 나타날 페이지 링크수
+		int bCount2 = 0; // 총 글수
+		int pageCount2 = 0; // 총 페이지수
+		int startPage2 = 1; // 화면에 나타날 시작페이지
+		int endPage2 = 1; // 화면에 나타날 마지막페이지
+		int currentPage2 = 1; // 눌려진 페이지
+		int startRnum2 = 1; // 화면에 나타날 글 번호
+		int endRnum2 = 1; // 화면에 나타날 글 번호
+
 		String pageNum = request.getParameter("pagenum");
 		if (pageNum != null) { // 눌려진 페이지가 있음.
 			currentPage = Integer.parseInt(pageNum);
+		}
+		String pageNum2 = request.getParameter("pagenum2");
+		if (pageNum2 != null) { // 눌려진 페이지가 있음.
+			currentPage2 = Integer.parseInt(pageNum2);
 		}
 		
 		HttpSession session = request.getSession();
@@ -59,7 +74,10 @@ public class MyBoardGameServlet extends HttpServlet {
 		System.out.println(userId);
 		bCount = new MyPageService().getMyBoardGameListCount(userId);
 		System.out.println("토탈컨텐츠 : " + bCount);
-		
+		bCount2 = new MyPageService().getMyBoardGameReviewCount(userId);
+		System.out.println("토탈컨텐츠2 : " + bCount2);
+		// 총 페이지수 = (총 글 개수 / 페이지당 글수) + (총 글 개수에서 페이지당 글수로 나눈 나머지가 0이 아니라면 페이지개수를 1증가)
+		// : 78글 / 한 페이지당 글 개수 5
 		pageCount = (bCount / PAGE_SIZE) + (bCount % PAGE_SIZE == 0 ? 0 : 1);
 
 		// rownum 조건 계산
@@ -84,6 +102,31 @@ public class MyBoardGameServlet extends HttpServlet {
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
+		
+		pageCount2 = (bCount2 / PAGE_SIZE2) + (bCount2 % PAGE_SIZE2 == 0 ? 0 : 1);
+
+		// rownum 조건 계산
+		startRnum2 = (currentPage2 - 1) * PAGE_SIZE2 + 1; // 1-6-11-16-21 페이지
+		endRnum2 = startRnum2 + PAGE_SIZE2 - 1;
+		if (endRnum2 > bCount2)
+			endRnum2 = bCount2;
+
+		if (currentPage2 % PAGE_BLOCK2 == 0) {
+			startPage2 = (currentPage2 / PAGE_BLOCK2 - 1) * PAGE_BLOCK2 + 1;
+		} else {
+			startPage2 = (currentPage2 / PAGE_BLOCK2) * PAGE_BLOCK2 + 1;
+		}
+		endPage2 = startPage2 + PAGE_BLOCK2 - 1;
+		if (endPage2 > pageCount2)
+			endPage2 = pageCount2;
+
+		ArrayList<MyGameReview> volist2 = new MyPageService().myBoardGameReviewList(userId, startRnum2, endRnum2);
+		System.out.println("volist2 " + volist2);
+
+		request.setAttribute("volist2", volist2);
+		request.setAttribute("startPage2", startPage2);
+		request.setAttribute("endPage2", endPage2);
+		request.setAttribute("pageCount2", pageCount2);
 		
 		request.getRequestDispatcher("/WEB-INF/mypage/myGameList.jsp").forward(request, response);
 	}

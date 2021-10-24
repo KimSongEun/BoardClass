@@ -10,6 +10,7 @@ import kh.semi.boardclass.community.model.vo.Comment;
 import kh.semi.boardclass.game.model.vo.Game;
 import kh.semi.boardclass.mypage.model.dao.MyPageDao;
 import kh.semi.boardclass.mypage.model.vo.MyGameLike;
+import kh.semi.boardclass.mypage.model.vo.MyGameReview;
 import kh.semi.boardclass.review.model.vo.Review;
 import kh.semi.boardclass.used.model.vo.Used;
 import kh.semi.boardclass.used.model.vo.UsedLike;
@@ -84,19 +85,19 @@ public class MyPageService {
 		JDBCTemplate.close(conn);
 		return volist;
 	}
-
-	public ArrayList<Review> myBoardGameReviewList(Review review) {
-		ArrayList<Review> volist = null;
+	//보드게임  리뷰
+	public int getMyBoardGameReviewCount(String userId) {
+		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new MyPageDao().myBoardGameReviewList(conn, review);
+		result = new MyPageDao().getMyBoardGameReviewCount(conn, userId);
 		JDBCTemplate.close(conn);
-		return volist;
+		return result;
 	}
 
-	public ArrayList<Review> myBoardGameReviewDetail(Review review) {
-		ArrayList<Review> volist = null;
+	public ArrayList<MyGameReview> myBoardGameReviewList(String userId, int start, int end) {
+		ArrayList<MyGameReview> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new MyPageDao().myBoardGameReviewDetail(conn, review);
+		volist = new MyPageDao().myBoardGameReviewList(conn, userId, start, end);
 		JDBCTemplate.close(conn);
 		return volist;
 	}

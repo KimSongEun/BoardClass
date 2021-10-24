@@ -40,16 +40,18 @@
 					</div>
 				</div>
 				<div class="div_price">
-					${used.usedPrice}
+					<span>&#8361;  ${used.usedPrice}</span>
 				</div>
 				<div class="div_detail">
 					<table>
 						<tr>
-							<td>판매자</td>
+							<th>판매자</th>
+							<td></td>
 							<td>${used.userId}</td>
 						</tr>
 						<tr>
-							<td>상품상태</td>
+							<th>상품상태</th>
+							<td></td>
 							<td>
 								<c:choose>
 									<c:when test="${used.usedState eq '0'}">미개봉</c:when>
@@ -60,7 +62,8 @@
 							</td>
 						</tr>
 						<tr>
-							<td>교환여부</td>
+							<th>교환여부</th>
+							<td></td>
 							<td>
 								<c:choose>
 									<c:when test="${used.usedChange eq '0'}">교환가능</c:when>
@@ -69,7 +72,8 @@
 							</td>
 						</tr>
 						<tr>
-							<td>거래방법</td>
+							<th>거래방법</th>
+							<td></td>
 							<td>
 								<c:choose>
 									<c:when test="${used.usedExtype eq '0'}">직거래&amp;택배</c:when>
@@ -85,8 +89,9 @@
 						<div class="placement">
       						<div class="heart" id="btn_like"></div>
     					</div>
-						<button type="button" id="btn_contact">연락하기</button>
-						<button type="button" id="btn_report">신고하기</button>
+    					<div class="div_report">
+							<button type="button" id="btn_report">신고하기</button>
+						</div>
 					</c:if>
 				</div>
 				<div class="div_info">
@@ -152,15 +157,6 @@ function cbLike(){
 					+ error);
 		}
 	});
-}
-
-$("#btn_contact").click(conChat);
-
-function conChat(){
-	if(!"${userSession}"){
-		alert("로그인해주세요");
-		return;
-	}
 }
 
 $("#btn_report").click(cbReport);
