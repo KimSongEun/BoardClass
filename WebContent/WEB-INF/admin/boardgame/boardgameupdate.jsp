@@ -239,6 +239,7 @@
                                     <input type="hidden" name="no" value = "${gameno}" />
                                     <input type="hidden" name="originimage" value = "${gamevo.gameImage}" />
                                     <input type="hidden" name="originruleimage" value = "${gamevo.gameRuleImage}" />
+                                    <input type="hidden" name="originplusimage" value = "${gamevo.gamePlusImage}" />
                                     <textarea name = "originvideo" style = "display : none">${gamevo.gameVideo}</textarea>
                                     <div class="boardgame-item_upload">
                                         <div class="boardgame-upload_text">
