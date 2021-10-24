@@ -99,7 +99,7 @@
                         <tr>
                             <td style = "color : #f55354">${rb.reportCount}</td>
                             <td>${rb.boardNo}</td>
-                            <td style="white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href="#글내용조회" class="boarddetail" category="${rb.boardCategory }" target="_blank" id="${rb.boardNo}" style = "color : #754100" title="${rb.boardTitle}">${rb.boardTitle}</a></td>
+                            <td style="white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href="bdetail?boardNo=${rb.boardNo }" target="_blank" style = "color : #754100">${rb.boardTitle}</a></td>
                             <td><a href="adminuserdetail?userId=${rb.userId}" target="_blank" style = "color : #754100">${rb.userId}</a></td>
                             <td><button class="deleteboard btn btn-primary" value="deletego" id = "${rb.boardNo}">삭제</button></td>
                         </tr>

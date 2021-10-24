@@ -92,8 +92,8 @@
 									</c:if>
                             </select>
                             </td>
-                            <td style = "vertical-align : middle"><a href="#글내용조회" style = "color : #754100">${b.boardTitle}</a></td>
-                            <td style = "vertical-align : middle"><a href="#회원정보조회" style = "color : #754100">${b.userId}</a></td>
+                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href="bdetail?boardNo=${b.boardNo }" target="_blank" style = "color : #754100">${b.boardTitle}</a></td>
+                            <td style = "vertical-align : middle"><a href="adminuserdetail?userId=${b.userId}" target="_blank" style = "color : #754100">${b.userId}</a></td>
                             <td style = "vertical-align : middle">${b.userNo}</td>
                             <td style = "vertical-align : middle">${b.boardRewriteDate}</td>
                             <td style = "vertical-align : middle"><button class="update btn btn-danger" value="updatego">수정</button> </td>
