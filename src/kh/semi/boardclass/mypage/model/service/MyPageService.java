@@ -11,6 +11,7 @@ import kh.semi.boardclass.game.model.vo.Game;
 import kh.semi.boardclass.mypage.model.dao.MyPageDao;
 import kh.semi.boardclass.mypage.model.vo.MyGameLike;
 import kh.semi.boardclass.mypage.model.vo.MyGameReview;
+import kh.semi.boardclass.mypage.model.vo.UserMyUsed;
 import kh.semi.boardclass.review.model.vo.Review;
 import kh.semi.boardclass.used.model.vo.Used;
 import kh.semi.boardclass.used.model.vo.UsedLike;
@@ -85,7 +86,8 @@ public class MyPageService {
 		JDBCTemplate.close(conn);
 		return volist;
 	}
-	//보드게임  리뷰
+
+	// 보드게임 리뷰
 	public int getMyBoardGameReviewCount(String userId) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
@@ -102,34 +104,37 @@ public class MyPageService {
 		return volist;
 	}
 
-	public ArrayList<Used> myTradeList(Used used) {
+// 중고거래 판매글 
+	public int getMyTradeListCount(String userId) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new MyPageDao().getMyTradeListCount(conn, userId);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<Used> myTradeList(String userId, int start, int end) {
 		ArrayList<Used> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new MyPageDao().myTradeList(conn, used);
+		volist = new MyPageDao().myTradeList(conn, userId, start, end);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
 
-	public ArrayList<Used> myTradeListDetail(Used used) {
-		ArrayList<Used> volist = null;
+// 중고거래 찜 
+
+	public int getMyLikeTradeListCount(String userId) {
+		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new MyPageDao().myTradeListDetail(conn, used);
+		result = new MyPageDao().getMyLikeTradeListCount(conn, userId);
 		JDBCTemplate.close(conn);
-		return volist;
+		return result;
 	}
 
-	public ArrayList<UsedLike> myLikeTradeList(UsedLike usedLike) {
-		ArrayList<UsedLike> volist = null;
+	public ArrayList<UserMyUsed> myLikeTradeList(String userId, int start, int end) {
+		ArrayList<UserMyUsed> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new MyPageDao().myLikeTradeList(conn, usedLike);
-		JDBCTemplate.close(conn);
-		return volist;
-	}
-
-	public ArrayList<Used> myLikeTradeListDetail(Used used) {
-		ArrayList<Used> volist = null;
-		Connection conn = JDBCTemplate.getConnection();
-		volist = new MyPageDao().myLikeTradeListDetail(conn, used);
+		volist = new MyPageDao().myLikeTradeList(conn, userId, start, end);
 		JDBCTemplate.close(conn);
 		return volist;
 	}

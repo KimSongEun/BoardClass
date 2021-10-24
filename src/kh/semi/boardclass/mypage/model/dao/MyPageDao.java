@@ -12,10 +12,10 @@ import kh.semi.boardclass.community.model.vo.Comment;
 import kh.semi.boardclass.game.model.vo.Game;
 import kh.semi.boardclass.mypage.model.vo.MyGameLike;
 import kh.semi.boardclass.mypage.model.vo.MyGameReview;
+import kh.semi.boardclass.mypage.model.vo.UserMyUsed;
 import kh.semi.boardclass.review.model.vo.Review;
 import kh.semi.boardclass.used.model.vo.Used;
 import kh.semi.boardclass.used.model.vo.UsedLike;
-
 
 public class MyPageDao {
 
@@ -47,8 +47,8 @@ public class MyPageDao {
 		int result = 0;
 		return result;
 	}
-	
-    // 보드게임 찜 리스트
+
+	// 보드게임 찜 리스트
 	public int getMyBoardGameListCount(Connection conn, String userId) {
 		int result = 0;
 		String sql = "Select count(*) from BOARDGAME_LIKE where user_Id =? ";
@@ -69,14 +69,14 @@ public class MyPageDao {
 		}
 		return result;
 	}
-	
+
 	public ArrayList<MyGameLike> myBoardGameList(Connection conn, String userId, int start, int end) {
 		ArrayList<MyGameLike> volist = null;
-		String sql = "select * from ( select Rownum r, t1.* from (\r\n" + 
-				"SELECT B.GAME_NO, L.BOARDGAME_LIKE_NO,B.GAME_CATEGORY, B.GAME_KONAME, L.USER_ID, B.GAME_GRADE, B.GAME_IMAGE\r\n" + 
-				"FROM BOARDGAME_LIKE L JOIN BOARDGAME B ON L.GAME_NO = B.GAME_NO where L.USER_ID = ? \r\n" + 
-				"GROUP BY B.GAME_NO, L.BOARDGAME_LIKE_NO,B.GAME_CATEGORY, B.GAME_KONAME, L.USER_ID, B.GAME_GRADE, B.GAME_IMAGE \r\n" + 
-				"ORDER BY BOARDGAME_LIKE_NO DESC) t1) t2 where r between ? and ?";
+		String sql = "select * from ( select Rownum r, t1.* from (\r\n"
+				+ "SELECT B.GAME_NO, L.BOARDGAME_LIKE_NO,B.GAME_CATEGORY, B.GAME_KONAME, L.USER_ID, B.GAME_GRADE, B.GAME_IMAGE\r\n"
+				+ "FROM BOARDGAME_LIKE L JOIN BOARDGAME B ON L.GAME_NO = B.GAME_NO where L.USER_ID = ? \r\n"
+				+ "GROUP BY B.GAME_NO, L.BOARDGAME_LIKE_NO,B.GAME_CATEGORY, B.GAME_KONAME, L.USER_ID, B.GAME_GRADE, B.GAME_IMAGE \r\n"
+				+ "ORDER BY BOARDGAME_LIKE_NO DESC) t1) t2 where r between ? and ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
@@ -86,7 +86,7 @@ public class MyPageDao {
 			pstmt.setInt(3, end);
 			rset = pstmt.executeQuery();
 			volist = new ArrayList<MyGameLike>();
-			
+
 			while (rset.next()) {
 				MyGameLike vo = new MyGameLike();
 				vo.setBoardGameLikeNo(rset.getInt("BOARDGAME_LIKE_NO"));
@@ -94,7 +94,7 @@ public class MyPageDao {
 				vo.setGameKoName(rset.getString("GAME_KONAME"));
 				vo.setGameCategory(rset.getString("GAME_CATEGORY"));
 				vo.setUserId(rset.getString("USER_ID"));
-				vo.setGameGrade(rset.getInt("GAME_GRADE"));			
+				vo.setGameGrade(rset.getInt("GAME_GRADE"));
 				vo.setGameImage(rset.getString("GAME_IMAGE"));
 				volist.add(vo);
 			}
@@ -107,8 +107,8 @@ public class MyPageDao {
 		return volist;
 
 	}
-	
-	//보드게임 리뷰 리스트
+
+	// 보드게임 리뷰 리스트
 	public int getMyBoardGameReviewCount(Connection conn, String userId) {
 		int result = 0;
 		String sql = "Select count(*) from REVIEW where user_Id =? ";
@@ -129,14 +129,14 @@ public class MyPageDao {
 		}
 		return result;
 	}
-	
+
 	public ArrayList<MyGameReview> myBoardGameReviewList(Connection conn, String userId, int start, int end) {
 		ArrayList<MyGameReview> volist = null;
-		String sql = "select * from ( select Rownum r, t1.* from (\r\n" + 
-				"SELECT B.GAME_NO, V.REVIEW_NO,V.REVIEW_SCORE, B.GAME_CATEGORY, B.GAME_KONAME, V.USER_ID,B.GAME_IMAGE\r\n" + 
-				"FROM REVIEW V JOIN BOARDGAME B ON V.GAME_NO = B.GAME_NO where V.USER_ID = ? \r\n" + 
-				"GROUP BY   B.GAME_NO, V.REVIEW_NO,V.REVIEW_SCORE, B.GAME_CATEGORY, B.GAME_KONAME, V.USER_ID,B.GAME_IMAGE\r\n" + 
-				"ORDER BY REVIEW_NO DESC) t1) t2 where r between ? and ?";
+		String sql = "select * from ( select Rownum r, t1.* from (\r\n"
+				+ "SELECT B.GAME_NO, V.REVIEW_NO,V.REVIEW_SCORE, B.GAME_CATEGORY, B.GAME_KONAME, V.USER_ID,B.GAME_IMAGE\r\n"
+				+ "FROM REVIEW V JOIN BOARDGAME B ON V.GAME_NO = B.GAME_NO where V.USER_ID = ? \r\n"
+				+ "GROUP BY   B.GAME_NO, V.REVIEW_NO,V.REVIEW_SCORE, B.GAME_CATEGORY, B.GAME_KONAME, V.USER_ID,B.GAME_IMAGE\r\n"
+				+ "ORDER BY REVIEW_NO DESC) t1) t2 where r between ? and ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
@@ -153,7 +153,7 @@ public class MyPageDao {
 				vo.setGameKoName(rset.getString("GAME_KONAME"));
 				vo.setGameCategory(rset.getString("GAME_CATEGORY"));
 				vo.setUserId(rset.getString("USER_ID"));
-				vo.setReviewScore(rset.getInt("REVIEW_SCORE"));			
+				vo.setReviewScore(rset.getInt("REVIEW_SCORE"));
 				vo.setGameImage(rset.getString("GAME_IMAGE"));
 				volist.add(vo);
 			}
@@ -166,23 +166,112 @@ public class MyPageDao {
 		return volist;
 	}
 
-	public ArrayList<Used> myTradeList(Connection conn, Used used) {
+// 중고거래 작성글 
+	public int getMyTradeListCount(Connection conn, String userId) {
+		int result = 0;
+		String sql = "Select count(*) from used where user_Id = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<Used> myTradeList(Connection conn, String userId, int start, int end) {
 		ArrayList<Used> volist = null;
+		String sql = "select * from(select rownum rnum, B.* from( SELECT * FROM used B where USER_ID =? order by USED_NO desc) B) where rnum between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Used>();
+			while (rset.next()) {
+				Used vo = new Used();
+				vo.setUsedNo(rset.getInt("USED_NO"));
+				vo.setUserId(rset.getString("USER_ID"));
+				vo.setUsedTitle(rset.getString("USED_TITLE"));
+				vo.setUsedPrice(rset.getInt("USED_PRICE"));
+				vo.setUsedDay(rset.getString("USED_DAY"));
+				vo.setUsedCategory(rset.getString("USED_CATEGORY"));
+				vo.setUsedImg(rset.getString("USED_IMG"));
+				volist.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return volist;
 	}
 
-	public ArrayList<Used> myTradeListDetail(Connection conn, Used used) {
-		ArrayList<Used> volist = null;
-		return volist;
+// 중고거래 찜 
+	public int getMyLikeTradeListCount(Connection conn, String userId) {
+		int result = 0;
+		String sql = "Select count(*) from USED_LIKE where user_Id = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
-	public ArrayList<UsedLike> myLikeTradeList(Connection conn, UsedLike usedLike) {
-		ArrayList<UsedLike> volist = null;
-		return volist;
-	}
-
-	public ArrayList<Used> myLikeTradeListDetail(Connection conn, Used used) {
-		ArrayList<Used> volist = null;
+	public ArrayList<UserMyUsed> myLikeTradeList(Connection conn, String userId, int start, int end) {
+		ArrayList<UserMyUsed> volist = null;
+		String sql = "select * from ( select Rownum r, t1.* from (SELECT U.USED_NO, L.USED_LIKE_NO, U.USED_CATEGORY, U.USED_TITLE, U.USER_ID, U.USED_PRICE,U.USED_IMG FROM USED_LIKE L JOIN USED U ON L.USED_NO = U.USED_NO where U.USER_ID = ? GROUP BY U.USED_NO, L.USED_LIKE_NO, U.USED_CATEGORY, U.USED_TITLE, U.USER_ID, U.USED_PRICE,U.USED_IMG ORDER BY USED_LIKE_NO DESC) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<UserMyUsed>();
+			while (rset.next()) {
+				UserMyUsed vo = new UserMyUsed();
+				vo.setUsedNo(rset.getInt("USED_NO"));
+				vo.setUserId(rset.getString("USER_ID"));
+				vo.setUsedTitle(rset.getString("USED_TITLE"));
+				vo.setUsedPrice(rset.getInt("USED_PRICE"));
+				vo.setUsedCategory(rset.getString("USED_CATEGORY"));
+				vo.setUsedImg(rset.getString("USED_IMG"));
+				vo.setUsedLikeNo(rset.getInt("USED_LIKE_NO"));
+				volist.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return volist;
 	}
 
