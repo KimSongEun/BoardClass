@@ -12,6 +12,7 @@ import kh.semi.boardclass.community.model.vo.Comment;
 import kh.semi.boardclass.game.model.vo.Game;
 import kh.semi.boardclass.mypage.model.vo.MyGameLike;
 import kh.semi.boardclass.mypage.model.vo.MyGameReview;
+import kh.semi.boardclass.mypage.model.vo.UserMyComt;
 import kh.semi.boardclass.mypage.model.vo.UserMyUsed;
 import kh.semi.boardclass.review.model.vo.Review;
 import kh.semi.boardclass.used.model.vo.Used;
@@ -275,23 +276,125 @@ public class MyPageDao {
 		return volist;
 	}
 
-	public ArrayList<Board> myCommunityList(Connection conn, Board board) {
+// 커뮤니티 작성글 
+	public int getMyBoardCount(Connection conn, String userId) {
+		int result = 0;
+		String sql = "Select count(*) from BOARD where user_Id = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+
+	public ArrayList<Board> myBoardList(Connection conn, String userId, int start, int end) {
 		ArrayList<Board> volist = null;
+		String sql = "select * from(select rownum rnum, B.* from( select * from board B where USER_ID = ? order by BOARD_NO desc) B) where rnum between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Board>();
+			while (rset.next()) {
+				Board vo = new Board();
+				vo.setBoardNo(rset.getInt("BOARD_NO"));
+				vo.setUserId(rset.getString("USER_ID"));
+				vo.setBoardCategory(rset.getString("BOARD_CATEGORY"));
+				vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+				vo.setBoardContent(rset.getString("BOARD_CONTENT"));
+				vo.setBoardWriteDate(rset.getString("BOARD_WRITE_DATE"));
+				vo.setBoardViewCount(rset.getInt("BOARD_VIEW_COUNT"));
+				volist.add(vo);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return volist;
 	}
 
-	public ArrayList<Board> myCommunityDetail(Connection conn, Board board) {
-		ArrayList<Board> volist = null;
-		return volist;
+// 커뮤니티 댓글 
+	public int getMyBoardComtCount(Connection conn, String userId) {
+		int result = 0;
+		String sql = "Select count(*) from COMT where user_Id = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
 	}
 
-	public ArrayList<Comment> myCommentList(Connection conn, Comment comment) {
-		ArrayList<Comment> volist = null;
-		return volist;
-	}
+	public ArrayList<UserMyComt> myBoardCommentList(Connection conn, String userId, int start, int end) {
+		ArrayList<UserMyComt> volist = null;
+		String sql = "select * from ( select Rownum r, t1.* from (\r\n"
+				+ "SELECT B.BOARD_NO,C.USER_ID,B.BOARD_TITLE,B.BOARD_CONTENT,B.BOARD_WRITE_DATE,B.BOARD_VIEW_COUNT,B.BOARD_CATEGORY, C.COMMENT_NO,C.COMMENT_CONTENT, C.COMMENT_WRITE_DATE, C.COMMENT_RE_LEVEL,C.COMMENT_REF,C.COMMENT_RE_STEP\r\n"
+				+ "FROM COMT C JOIN BOARD B ON C.BOARD_NO = B.BOARD_NO where C.USER_ID = ? \r\n"
+				+ "GROUP BY B.BOARD_NO,C.USER_ID,B.BOARD_TITLE,B.BOARD_CONTENT,B.BOARD_WRITE_DATE,B.BOARD_VIEW_COUNT,B.BOARD_CATEGORY, C.COMMENT_NO,C.COMMENT_CONTENT, C.COMMENT_WRITE_DATE, C.COMMENT_RE_LEVEL,C.COMMENT_REF,C.COMMENT_RE_STEP\r\n"
+				+ "order by COMMENT_REF desc, COMMENT_RE_STEP asc) t1) t2 where r between ? and ?";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 
-	public ArrayList<Comment> myCommentDetail(Connection conn, Comment comment) {
-		ArrayList<Comment> volist = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, userId);
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<UserMyComt>();
+			while (rset.next()) {
+
+				UserMyComt vo = new UserMyComt();
+				vo.setBoardNo(rset.getInt("BOARD_NO"));
+				vo.setUserId(rset.getString("USER_ID"));
+				vo.setBoardCategory(rset.getString("BOARD_CATEGORY"));
+				vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+				vo.setBoardContent(rset.getString("BOARD_CONTENT"));
+				vo.setBoardWriteDate(rset.getString("BOARD_WRITE_DATE"));
+				vo.setBoardViewCount(rset.getInt("BOARD_VIEW_COUNT"));
+				vo.setCommentNo(rset.getInt("COMMENT_NO"));
+				vo.setCommentContent(rset.getString("COMMENT_CONTENT"));
+				vo.setCommentWriteDate(rset.getString("COMMENT_WRITE_DATE"));
+				vo.setCommentReLevel(rset.getInt("COMMENT_RE_LEVEL"));
+				vo.setCommentReLevel(rset.getInt("COMMENT_RE_STEP"));
+				vo.setCommentReLevel(rset.getInt("COMMENT_RE_LEVEL"));
+				volist.add(vo);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
 		return volist;
 	}
 }

@@ -11,6 +11,7 @@ import kh.semi.boardclass.game.model.vo.Game;
 import kh.semi.boardclass.mypage.model.dao.MyPageDao;
 import kh.semi.boardclass.mypage.model.vo.MyGameLike;
 import kh.semi.boardclass.mypage.model.vo.MyGameReview;
+import kh.semi.boardclass.mypage.model.vo.UserMyComt;
 import kh.semi.boardclass.mypage.model.vo.UserMyUsed;
 import kh.semi.boardclass.review.model.vo.Review;
 import kh.semi.boardclass.used.model.vo.Used;
@@ -139,34 +140,36 @@ public class MyPageService {
 		return volist;
 	}
 
-	public ArrayList<Board> myCommunityList(Board board) {
+	// 커뮤니티 작성글
+	public int getMyBoardCount(String userId) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new MyPageDao().getMyBoardCount(conn, userId);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+
+	public ArrayList<Board> myBoardList(String userId, int start, int end) {
 		ArrayList<Board> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new MyPageDao().myCommunityList(conn, board);
+		volist = new MyPageDao().myBoardList(conn, userId, start, end);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
 
-	public ArrayList<Board> myCommunityDetail(Board board) {
-		ArrayList<Board> volist = null;
+// 커뮤니티 댓글 
+	public int getMyBoardComtCount(String userId) {
+		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new MyPageDao().myCommunityDetail(conn, board);
+		result = new MyPageDao().getMyBoardComtCount(conn, userId);
 		JDBCTemplate.close(conn);
-		return volist;
+		return result;
 	}
 
-	public ArrayList<Comment> myCommentList(Comment comment) {
-		ArrayList<Comment> volist = null;
+	public ArrayList<UserMyComt> myBoardCommentList(String userId, int start, int end) {
+		ArrayList<UserMyComt> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new MyPageDao().myCommentList(conn, comment);
-		JDBCTemplate.close(conn);
-		return volist;
-	}
-
-	public ArrayList<Comment> myCommentDetail(Comment comment) {
-		ArrayList<Comment> volist = null;
-		Connection conn = JDBCTemplate.getConnection();
-		volist = new MyPageDao().myCommentDetail(conn, comment);
+		volist = new MyPageDao().myBoardCommentList(conn, userId, start, end);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
