@@ -1,65 +1,80 @@
 @charset "UTF-8";
-.admin-main-section{
-    padding: 50px;
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-    box-sizing:border-box;
+
+.admin-main-section {
+	padding: 50px;
+	display: flex;
+	min-height: 100vh;
+	flex-direction: column;
+	box-sizing: border-box;
 }
-.admin-main-title{
+
+.admin-main-title {
 	font-size: 30px;
 	text-align: center;
-    margin: auto;
+	margin: auto;
 }
-.admin-count-div{
-    margin : 50px auto;
-    text-align: center;
+
+.admin-count-div {
+	margin: 50px auto;
+	text-align: center;
 }
+
 .admin-count-allmember-div {
-    display: inline-block;
-    margin: 10px 40px;
+	display: inline-block;
+	margin: 10px 40px;
 }
+
 .admin-count-todayvisit-div {
-    display: inline-block;
-    margin: 10px 40px;
+	display: inline-block;
+	margin: 10px 40px;
 }
+
 .admin-count-monthvisit-div {
-    display: inline-block;
-    margin: 10px 40px;
+	display: inline-block;
+	margin: 10px 40px;
 }
+
 .admin-count-todayboard-div {
-    display: inline-block;
-    margin: 10px 40px;
+	display: inline-block;
+	margin: 10px 40px;
 }
+
 .admin-count-table {
-    border: 3px solid black;
-    border-radius: 20px;
+	border: 3px solid black;
+	border-radius: 20px;
 }
-.admin-report-div{
-    height : 400px;
-    display : flex;
+
+.admin-report-div {
+	height: 400px;
+	display: flex;
 }
-.admin-report-board-table-div{
-    float : left;
-    margin: auto 40px;
-} 
-.admin-report-board-table{
-	width: 500px; 
+
+.admin-report-board-table-div {
+	float: left;
+	margin: auto 40px;
 }
-.admin-report-comment-table-div{
-    float: right;
+
+.admin-report-board-table {
+	width: 500px;
 }
-.admin-report-comment-table{
-	width: 500px; 
+
+.admin-report-comment-table-div {
+	float: right;
 }
-.admin-notice-div{
-    margin : auto;
+
+.admin-report-comment-table {
+	width: 500px;
 }
+
+.admin-notice-div {
+	margin: auto;
+}
+
 .admin-notice-table {
-    width : 600px;
-    margin: auto;
-    margin-bottom : 300px;
-    table-layout : fixed;
+	width: 600px;
+	margin: auto;
+	margin-bottom: 300px;
+	table-layout: fixed;
 }
 
 .table {
@@ -74,7 +89,7 @@
 }
 
 .table-active {
-	height:10px;
+	height: 10px;
 }
 
 .table thead tr {
@@ -101,42 +116,65 @@
 }
 
 .comment-modal, .review-modal {
-  display: none; 
-  position: fixed; 
-  z-index: 1;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgb(0,0,0); 
-  background-color: rgba(0,0,0,0.4); 
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-review-content, .modal-comment-content {
-  background-color: #fefefe;
-  margin: 15% auto ; 
-  padding: 20px;
-  border: 1px solid #888;
-  width: 40%; 
+	background-color: #fefefe;
+	margin: 15% auto;
+	padding: 20px;
+	border: 1px solid #888;
+	width: 40%;
 }
 
 .commentclose, .reviewclose {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
 }
 
-.commentclose:hover,
-.commentclose:focus,
-.reviewclose:hover,
-.reviewclose:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
+.commentclose:hover, .commentclose:focus, .reviewclose:hover,
+	.reviewclose:focus {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
 }
+
 #modal-comment-content-detail, #modal-review-content-detail {
-	text-align : center;
-	margin : 10px;
+	text-align: center;
+	margin: 10px;
+}
+
+.btn {
+	border: 2px solid black;
+}
+
+.btn.warning {
+	border-color: #e74c3c;
+	color: #e74c3c;
+}
+
+.btn.warning:hover, .btn.warning.hover {
+	background: #e74c3c;
+	color: #fff;
+}
+
+.btn.primary {
+	border-color: #3498db;
+	color: #3498db
+}
+
+.btn.primary:hover, .btn.primary.hover {
+	background: #3498db;
+	color: #fff
 }

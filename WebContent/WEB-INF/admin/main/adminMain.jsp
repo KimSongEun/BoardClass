@@ -101,7 +101,7 @@
                             <td>${rb.boardNo}</td>
                             <td style="white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href="bdetail?boardNo=${rb.boardNo }" target="_blank" style = "color : #754100">${rb.boardTitle}</a></td>
                             <td><a href="adminuserdetail?userId=${rb.userId}" target="_blank" style = "color : #754100">${rb.userId}</a></td>
-                            <td><button class="deleteboard btn btn-primary" value="deletego" id = "${rb.boardNo}">삭제</button></td>
+                            <td><button class="deleteboard btn warning" value="deletego" id = "${rb.boardNo}">삭제</button></td>
                         </tr>
                         </c:forEach>
                         </c:if>
@@ -137,7 +137,7 @@
                             <td>${rc.commentNo}</td>
                             <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" ><a href="#댓글내용" class = "commentmodal" id = "${rc.commentNo}" style = "color : #754100">${rc.commentContent}</a></td>
                             <td><a href="adminuserdetail?userId=${rc.userId}" target="_blank" style = "color : #754100">${rc.userId}</a></td>
-                            <td><button class="deletecomment btn btn-primary" value="deletego" id = "${rc.commentNo}">삭제</button></td>
+                            <td><button class="deletecomment btn warning" value="deletego" id = "${rc.commentNo}">삭제</button></td>
                         </tr>
 								<!-- The Modal -->
 								<div id="myCommentModal" class="comment-modal">
@@ -189,7 +189,7 @@
                             <td>${rr.reviewNo}</td>
                             <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" ><a href="#리뷰내용" class = "reviewmodal" id = "${rr.reviewNo}" style = "color : #754100">${rr.reviewContent}</a></td>
                             <td><a href="adminuserdetail?userId=${rr.userId}" target="_blank" style = "color : #754100">${rr.userId}</a></td>
-                            <td><button class="deletereview btn btn-primary" value="deletego" id = "${rr.reviewNo}">삭제</button></td>
+                            <td><button class="deletereview btn warning" value="deletego" id = "${rr.reviewNo}">삭제</button></td>
                         </tr>
 								<!-- The Modal -->
 								<div id="myReviewModal" class="review-modal">
@@ -236,7 +236,7 @@
                             <td>${ru.usedNo}</td>
                             <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" ><a href="usedinformation?no=${ru.usedNo}" target="_blank" id = "${ru.usedNo}" style = "color : #754100" title = "${ru.usedTitle}">${ru.usedTitle}</a></td>
                             <td><a href="adminuserdetail?userId=${ru.userId}" target="_blank" style = "color : #754100">${ru.userId}</a></td>
-                            <td><button class="deleteused btn btn-primary" value="deletego" id = "${ru.usedNo}">삭제</button></td>
+                            <td><button class="deleteused btn warning" value="deletego" id = "${ru.usedNo}">삭제</button></td>
                         </tr>
                         </c:forEach>
                         </c:if>
@@ -271,8 +271,8 @@
                         <td><%=n.getAnnounceNo() %></td>
                         <td style="white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href="cnoticedetail?announceNo=<%=n.getAnnounceNo() %>" target="_blank" style = "color : #754100" title = "<%=n.getAdminTitle() %>"><%=n.getAdminTitle() %></a></td>
                         <td><%=n.getAdminRwrDate() %></td>
-                        <td><button class="updatenotice btn btn-primary" value="updatego" no = "<%=n.getAnnounceNo() %>">수정</button></td>
-                        <td><button class="deletenotice btn btn-primary" value="deletego" id = "<%=n.getAnnounceNo() %>">삭제</button></td>
+                        <td><button class="updatenotice btn primary" value="updatego" no = "<%=n.getAnnounceNo() %>">수정</button></td>
+                        <td><button class="deletenotice btn warning" value="deletego" id = "<%=n.getAnnounceNo() %>">삭제</button></td>
                     </tr>
                    <%} }%> 
                 </table>
