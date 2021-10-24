@@ -644,7 +644,7 @@ public class AdminDao {
 	
 	public ArrayList<Game> searchBoardGame(Connection conn, String keyword, int start, int end){
 		ArrayList<Game> volist = null;
-		String sql = "select * from (   select Rownum r, t1.* from (SELECT * FROM BOARDGAME WHERE GAME_KONAME like (?) OR  GAME_ENNAME like (?)) t1) t2 where r between ? and ?";
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT * FROM BOARDGAME WHERE GAME_KONAME like (?) OR GAME_ENNAME like (?) ORDER BY GAME_KONAME) t1) t2 where r between ? and ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -698,7 +698,7 @@ public class AdminDao {
 	
 	public int insertBoardGame(Connection conn, String kotitle, String entitle, String category, String age, String player, String time, int price, int grade, int level, String designer, String writer, String brand, String releasedate, String language, String image, String ruleimage, String video, String plus, String plusImage){
 		int result = 0;
-		String sql = "insert into BOARDGAME values(GAME_NUM.nextval,null,?,?,?,0,?,?,?,?,?,SYSDATE,?,?,?,?,?,null,?,null,?,?,?,?,?)";
+		String sql = "insert into BOARDGAME values(GAME_NUM.nextval,null,?,?,?,0,?,?,?,?,?,SYSDATE,?,?,?,?,?,null,?,null,?,?,?,?,?,0)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -887,7 +887,7 @@ public class AdminDao {
 	
 	public ArrayList<Banner> searchAd(Connection conn, String keyword, int start, int end){
 		ArrayList<Banner> volist = null;
-		String sql = "select * from (   select Rownum r, t1.* from (SELECT * FROM BANNER WHERE PROMOTION_TITLE like (?)) t1) t2 where r between ? and ?";
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT * FROM BANNER WHERE PROMOTION_TITLE like (?) ORDER BY PROMOTION_DATE DESC) t1) t2 where r between ? and ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 

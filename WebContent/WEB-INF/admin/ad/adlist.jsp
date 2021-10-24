@@ -52,6 +52,14 @@
 
                 <div class="admin-ad-table-div">
                     <table class="table table-striped admin-ad-table" style="text-align: center;">
+                    <colgroup>
+	                   	<col width="100px">
+	                   	<col width="100px">
+	                   	<col width="250px">
+	                   	<col width="150px">
+	                   	<col width="100px">
+	                   	<col width="100px">
+                   	</colgroup>                       
                         <tr style="text-align:center; font-size: 16px; font-weight: bold;">
                             <td>글번호</td>
                             <td class = "text-center">메인등록</td>
