@@ -9,6 +9,59 @@
 <link rel="stylesheet" href="css/community/community.css" />
 <link rel="stylesheet" href="css/community/common.css" />
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<style>
+/* 사이드 */
+/* input[type="radio"] { display: none; } */
+input:nth-of-type(1) { display: none; }
+input:nth-of-type(2) { display: none; }
+
+/* input ~ div {display:none;} */
+input:nth-of-type(1) ~ div:nth-of-type(1){display:none;}
+input:nth-of-type(2) ~ div:nth-of-type(2){display:none;}
+/* 눌려진 div 보이게 */
+input:nth-of-type(1):checked ~ div:nth-of-type(1) {display: block;}
+input:nth-of-type(2):checked ~ div:nth-of-type(2) {display: block;}
+
+/* 탭모양 */
+.cbox > label {
+    display: block; float: right;
+
+    text-align: center;
+    line-height: 30px;
+
+    border: 1px solid black;
+    box-sizing: border-box;
+
+    background-color: black;
+    color: white;
+}
+input:nth-of-type(1):checked ~ label:nth-of-type(1) {
+    background-color: white;
+    color:black;
+}
+input:nth-of-type(2):checked ~ label:nth-of-type(2){
+    background-color: white;
+    color:black;
+}
+/* 탭목록 */
+.tab_item .item {
+    overflow: hidden;
+    padding: 10px;
+    border: 1px solid black;
+    border-top: none;
+}
+.item .thumbnail {
+    float: left;
+}
+.item .description {
+    float: left;
+    margin-left: 10px;
+    width: 120px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+</style>
 </head>
 <body>
 <%@include file="/WEB-INF/index/header.jsp" %>
@@ -45,8 +98,8 @@
       	<dt>자유게시판 인기글</dt>
     
 		 <dd>	
-		 <select class = "category-select" name = "category" id = "allboard-select-main">
-		 </select>
+
+		 
 				<ol>	
 		 			 <c:forEach var="freebest" items="${bestfreeone }">
 			 			<li>
@@ -83,65 +136,109 @@
 			              <div class="commt">${freebest.boardViewCount }</div>
 			            </li>
 		             </c:forEach>
+		            
 	       		</ol>
 	   		
 		</dd>
-		<dd>
-		 <ol>
-		  <c:forEach var="freebest" items="${bestfreecomtone }">
-            <li>
-              <div class="rank">1</div>
-              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-              <div class="commt">${freebest.comment_no }</div>
-            </li>
-            </c:forEach>
-            <c:forEach var="freebest" items="${bestfreecomttwo }">
-            <li>
-              <div class="rank">2</div>
-              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-              <div class="commt">${freebest.comment_no }</div>
-            </li>
-            </c:forEach>
-		</ol>
-		</dd>
 	</dl>
     </div>
+<div class="board_rank_wrap">
     <div class="cbox">
-      <dl>
-        <dt>유저정보게시판 인기글</dt>
-        <dd>
-          <ol>
-            <li>
-              <div class="rank">1</div>
-              <a href="#" class="tit">내용</a>
-              <div class="commt">댓글수</div>
-            </li>
-            <li>
-              <div class="rank">2</div>
-              <a href="#" class="tit">내용</a>
-              <div class="commt">댓글수</div>
-            </li>
-            <li>
-              <div class="rank">3</div>
-              <a href="#" class="tit">내용</a>
-              <div class="commt">댓글수</div>
-            </li>
-            <li>
-              <div class="rank">4</div>
-              <a href="#" class="tit">내용</a>
-              <div class="commt">댓글수</div>
-            </li>
-            <li>
-              <div class="rank">5</div>
-              <a href="#" class="tit">내용</a>
-              <div class="commt">조회수</div>
-            </li>
-          </ol>
-          
-          
-        </dd>
-      </dl>
+     <dl>
+      	<dt>자유게시판 인기글</dt>
+    
+		 <dd>	
+         <input type="radio" id="r_first" name="tab" checked>
+         <input type="radio" id="r_second" name="tab">
+         <label for="r_first">조회순</label>
+         <label for="r_second">댓글순</label>
+         <br>
+          <div class="tab_item">
+          	<ol>
+         		<c:forEach var="freebest" items="${bestfreeone }">
+		 			<li>
+			 			 <div class="rank">1</div>
+			              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
+			              <div class="commt">${freebest.boardViewCount }</div>
+		             </li>
+	             </c:forEach>
+	             <c:forEach var="freebest" items="${bestfreetwo }">
+		 			<li>
+			 			<div class="rank">2</div>
+		              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
+		           	  <div class="commt">${freebest.boardViewCount }</div>
+		             </li>
+	             </c:forEach>
+	            <c:forEach var="freebest" items="${bestfreethree }">
+		 			<li>
+		 			 <div class="rank">3</div>
+		              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
+		              <div class="commt">${freebest.boardViewCount }</div>
+		             </li>
+	             </c:forEach>
+	              <c:forEach var="freebest" items="${bestfreefour }">
+		 			<li>
+		 			 <div class="rank">4</div>
+		              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
+		              <div class="commt">${freebest.boardViewCount }</div>
+		            </li>
+	             </c:forEach>
+	             <c:forEach var="freebest" items="${bestfreefive }">
+		 			<li>
+		 			 <div class="rank">5</div>
+		              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
+		              <div class="commt">${freebest.boardViewCount }</div>
+		            </li>
+	             </c:forEach>
+          	</ol>
+          	</dt>
+          	</dl>
+          </div>
+           <div class="tab_item">
+           <dl>
+           	<dt>
+           	<ol>
+           		<c:forEach var="freebest" items="${bestfreeone }">
+		 			<li>
+			 			 <div class="rank">1</div>
+			              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
+			              <div class="commt">${freebest.comment_no }</div>
+		             </li>
+	             </c:forEach>
+	             <c:forEach var="freebest" items="${bestfreetwo }">
+		 			<li>
+			 			<div class="rank">2</div>
+		              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
+		           	  <div class="commt">${freebest.comment_no }</div>
+		             </li>
+	             </c:forEach>
+	            <c:forEach var="freebest" items="${bestfreethree }">
+		 			<li>
+		 			 <div class="rank">3</div>
+		              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
+		              <div class="commt">${freebest.comment_no }</div>
+		             </li>
+	             </c:forEach>
+	              <c:forEach var="freebest" items="${bestfreefour }">
+		 			<li>
+		 			 <div class="rank">4</div>
+		              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
+		              <div class="commt">${freebest.comment_no }</div>
+		            </li>
+	             </c:forEach>
+	             <c:forEach var="freebest" items="${bestfreefive }">
+		 			<li>
+		 			 <div class="rank">5</div>
+		              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
+		              <div class="commt">${freebest.comment_no }</div>
+		            </li>
+	             </c:forEach>
+	        </ol>
+	           </dt>
+          	</dl>
+           </div>
     </div>
+</div>    
    	</div>
 </article>
 

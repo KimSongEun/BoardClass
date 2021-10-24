@@ -36,7 +36,7 @@
             </div>
         </form>
    		</div>
-		
+
 		<!--광고 넣을 부분 -->
 		<br>
 		<div class="slideshow-container">
@@ -72,8 +72,8 @@
                    	</colgroup>
                     <thead>
                         <tr>
-                            <td colspan="2" style="text-align:left; font-size: 18px; font-weight: bold; padding-left:20px"> 📋 공지사항</td>
-                            <td style = "font-size : 10px; text-align:right;"><a href = "<%=request.getContextPath() %>/nmain">+더보기</a></td>
+                            <td colspan="2" style="text-align:left; font-size: 18px; font-weight: bold; padding-left:20px">📋 공지사항</td>
+                            <td style = "font-size : 10px; text-align:right;"><a href = "<%=request.getContextPath() %>/cmain">+더보기</a></td>
                         </tr>
                     </thead>
                     <tbody>
@@ -95,6 +95,54 @@
                 </table>
             </div>
 			<br>
+				<!-- 커뮤 인기글 -->
+				 <div class="commu-div" style="margin:0 auto;">
+                <table class="tab commu-table" style="text-align: center;">
+                    <colgroup>
+	                   	<col width="100px">
+	                   	<col width="200px">
+                   	</colgroup>
+                    <thead>
+                        <tr>
+                            <td colspan="2" style="text-align:left; font-size: 18px; font-weight: bold; padding-left:20px">👍 커뮤니티 인기글</td>
+                            <td style = "font-size : 10px; text-align:right;"><a href = "<%=request.getContextPath() %>/cmain">+더보기</a></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+					 <c:forEach var="board" items="${boardlistone }">
+					 <tr>
+			 			<td><div class="rank">1</div> </td>
+				        <td><a href="bdetail?boardNo=${board.boardNo }" class="tit">${board.boardTitle }</a></td>
+		             </c:forEach>
+		             <c:forEach var="board" items="${boardlisttwo }">
+		             <tr>
+				 		<td><div class="rank">2</div></td>
+			            <td><a href="bdetail?boardNo=${board.boardNo }" class="tit">${board.boardTitle }</a></td>
+			         </tr>
+		             </c:forEach>
+		            <c:forEach var="board" items="${boardlistthree }">
+		            <tr>
+			 			 <td><div class="board">3</div></td>
+			             <td><a href="bdetail?boardNo=${board.boardNo }" class="tit">${board.boardTitle }</a></td>
+			         </tr>
+		             </c:forEach>
+		              <c:forEach var="board" items="${boardlistfour }">
+		              <tr>
+						<td><div class="board">4</div></td>
+			            <td><a href="bdetail?boardNo=${board.boardNo }" class="tit">${board.boardTitle }</a></td>
+			          </tr>
+		             </c:forEach>
+		             <c:forEach var="board" items="${boardlistfive }">
+		             <tr>
+			 			 <td><div class="rank">5</div></td>
+			              <td><a href="bdetail?boardNo=${board.boardNo }" class="tit">${board.boardTitle }</a></td>
+			          </tr>
+		             </c:forEach>
+                   </tbody>
+                </table>
+   				</div>
+
+		
 	</section>
 	<c:import url="/WEB-INF/index/footer.jsp" />
 

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.boardclass.admin.model.vo.Banner;
 import kh.semi.boardclass.admin.model.vo.Notice;
+import kh.semi.boardclass.community.model.vo.Board;
 import kh.semi.boardclass.main.model.service.MainService;
 
 /**
@@ -46,6 +47,18 @@ public class MainServlet extends HttpServlet {
 		
 		int adCnt = new MainService().getAdCount();
 		request.setAttribute("adCnt", adCnt);
+		
+		ArrayList<Board> boardlistone = new MainService().getBestBoardOne();
+		request.setAttribute("boardlistone", boardlistone);
+		ArrayList<Board> boardlisttwo = new MainService().getBestBoardTwo();
+		request.setAttribute("boardlisttwo", boardlisttwo);
+		ArrayList<Board> boardlistthree = new MainService().getBestBoardThree();
+		request.setAttribute("boardlistthree", boardlistthree);
+		ArrayList<Board> boardlistfour = new MainService().getBestBoardFour();
+		request.setAttribute("boardlistfour", boardlistfour);
+		ArrayList<Board> boardlistfive = new MainService().getBestBoardFive();
+		request.setAttribute("boardlistfive", boardlistfive);
+		
 		
 		String viewPage = "/WEB-INF/index/main.jsp";
 		request.getRequestDispatcher(viewPage).forward(request, response);

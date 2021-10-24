@@ -362,6 +362,47 @@ img {vertical-align: middle;}
             background: #fadc81;
         }
 
+/* 인기글 */
+.commu-div{
+    display : flex;
+    justify-content: center;
+}
+.commu-table {
+    width : 300px;
+}
+
+.tab {
+	border-collapse: collapse;
+	margin: 25px 0;
+	min-width: 400px;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+	justify-content: center;
+	margin-left: auto;
+	margin-right: auto;
+	table-layout: fixed; 
+}
+
+.tab thead tr {
+	background-color: #FFE699;
+	color: black;
+	border-bottom: 1px solid grey;
+}
+
+.tab th table td {
+	padding: 10px 13px;
+}
+
+.tab tbody tr {
+	border-bottom: 1px solid #d3d1c4;
+}
+
+.tab tbody tr:nth-of-type(even) {
+	background-color: #f3f3f3;
+}
+
+.tab tbody tr:last-of-type {
+	border-bottom: 2px solid #999879;
+}
 
 /* footer*/
 .footer {
