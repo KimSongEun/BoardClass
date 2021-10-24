@@ -4,10 +4,47 @@
 	display: flex;
 	justify-content: flex-end;
 	padding-top: 30px;
-	padding-right: 50px;
+	padding-right: 150px;
 	padding-bottom: 30px;
+	margin-top: 45px;
+	margin-bottom: 45px;
+	min-height: 42px;
 }
 
+#gameCategory{
+	height:100%;
+	border: 1px solid #FFE699;
+}
+
+.div_search{
+	min-height: 42px;
+}
+
+#searchTandC input[type=search] {
+			height:100%;
+            padding: 10px;
+            font-size: 17px;
+            border: 1px solid #FFE699;
+            background: white;
+            float: left;
+        }
+        
+#searchTandC button {
+			height:100%;
+            padding: 10px;
+            background: #FFE699;
+            color: white;
+            font-size: 17px;
+            border: 1px solid #FFE699;
+            border-left: none;
+            cursor: pointer;
+            float: left;
+        }
+        
+#searchTandC button:hover {
+            background: #fadc81;
+        }
+        
 .secsecond{
             display: flex;
             flex-wrap: wrap;
@@ -22,11 +59,15 @@
             margin-left: -1px;
             margin-top: -1px;
         }
+        
+.div_product:hover{
+	border: 2px solid #FFE699;
+}
 
 .div_img {
             width: 200px;
             height: 200px;
-            margin: 15px;
+            padding: 15px;
         }
 
 .div_img img {
@@ -50,6 +91,7 @@
             line-height: 1.2em;
             padding-left: 14.5px;
             padding-right: 11px;
+            font-family: 'Noto Sans KR light';
         }
 
 .secthird{
@@ -57,7 +99,21 @@
 	justify-content: flex-end;
 	padding-top: 30px;
 	padding-bottom: 30px;
-	padding-right: 50px;
+	padding-right: 150px;
+	margin-top: 45px;
+	margin-bottom: 45px;
+}
+
+#btn_write{
+	background-color:black;
+	color : #FFE699;
+	border: 1px #FFE699;
+	font-size: 2rem;
+}
+
+#btn_write:active{
+	background-color: #FFE699;
+	color : black;
 }
 
 .secfourth{
@@ -98,6 +154,7 @@
 @media (max-width:767px) {
     .secfirst {
         justify-content: center;
+        padding-right: 0px;
     }
     
     .secsecond{

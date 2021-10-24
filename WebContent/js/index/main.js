@@ -51,6 +51,5 @@
 	  slidesAuto[slideIndexAuto-1].style.display = "block";
 	  dotsAuto[slideIndexAuto-1].className += " active";
 	  setTimeout(showSlidesAuto, 2000);
-	}	
-	
+	}		
 

@@ -19,30 +19,31 @@
 			<form class="form_create" action="usedupdate" method="post"
 				enctype="multipart/form-data">
 				<input type="hidden" name="usedNo" value="${used.usedNo}">
+				<div class="div_thumbnail">
+					<div id="thumbnail">
+							<img src="${pageContext.request.contextPath}/${used.usedImg}">
+					</div>
+				</div>
+				<div class="div_img_file">
+					<input type="file" name="usedImg" onchange="setImg(event);">
+				</div>
 				<div class="div_table">
-					<table>
-						<tr class="tr_img">
-							<td class="td_thumbnail">
-								<div id="thumbnail">
-									<img src="${pageContext.request.contextPath}/${used.usedImg}">
-								</div>
-							</td>
-							<td>
-								<input type="file" name="usedImg" onchange="setImg(event);">
-							</td>
-						</tr>
+					<table class="table_tb">
 						<tr>
-							<td><label for="title">제목 : </label></td>
+							<th><label for="title">제목 : </label></th>
+							<td></td>
 							<td><input id="title" name="usedTitle"
 								placeholder="제목을 입력해주세요" value="${used.usedTitle}"></td>
 						</tr>
 						<tr class="tr_price">
-							<td><label for="price">가격 : </label></td>
+							<th><label for="price">가격 : </label></th>
+							<td></td>
 							<td><input id="price" name="usedPrice"
 								placeholder="숫자만 입력하세요" value="${used.usedPrice}"></td>
 						</tr>
 						<tr class="tr_state">
-							<td><label for="state">상태 : </label></td>
+							<th><label for="state">상태 : </label></th>
+							<td></td>
 							<td><select id="state" name="usedState">
 									<option value="0">미개봉</option>
 									<option value="1">상태좋음</option>
@@ -51,14 +52,16 @@
 							</select></td>
 						</tr>
 						<tr class="tr_changeable">
-							<td><label for="changeable">교환여부 : </label></td>
+							<th><label for="changeable">교환여부 : </label></th>
+							<td></td>
 							<td><select id="changeable" name="usedChange">
 									<option value="0">교환가능</option>
 									<option value="1">교환불가</option>
 							</select></td>
 						</tr>
 						<tr class="tr_changetype">
-							<td><label for="changetype">거래방식 : </label></td>
+							<th><label for="changetype">거래방식 : </label></th>
+							<td></td>
 							<td><select id="changetype" name="usedExtype">
 									<option value="0">직거래&amp;택배</option>
 									<option value="1">직거래</option>
@@ -66,7 +69,8 @@
 							</select></td>
 						</tr>
 						<tr class="tr_file">
-							<td><label for="gamecate">카테고리 : </label></td>
+							<th><label for="gamecate">카테고리 : </label></th>
+							<td></td>
 							<td><select id="gamecate" name="usedCategory">
 									<option value="">없음</option>
 									<option value="퍼즐">퍼즐</option>

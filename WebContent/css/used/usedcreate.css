@@ -12,27 +12,56 @@
 	background-color: white;
 }
 
-.div_table{
-	padding-top: 50px;
-}
-
-.td_thumbnail{
-	width: 205px;
-	height: 154px;
+.div_thumbnail{
+	width: 550px;
+	height: 500px;
 	text-align:center;
     display:table;
+    margin:auto;
 }
 
 #thumbnail{
 	display:table-cell;
     vertical-align:middle;
-    width: 205px;
-    height: 154px;
+    width: 550px;
+	height: 500px;
 }
 
 #thumbnail img{
-	max-width: 100%;
-	height: auto;
+	width: 550px;
+	height: 500px;
+	object-fit: scale-down;
+}
+
+.div_img_file{
+	margin-top: 20px;
+	margin-left: 50px;
+	text-align: center;
+}
+
+.div_table{
+	padding-top: 50px;
+}
+
+
+.table_tb{
+	margin-left: auto; margin-right: auto;
+}
+
+label{
+	font-family: 'Noto Sans KR';
+}
+
+input{
+	font-family: 'Noto Sans KR light';
+}
+
+select{
+	font-family: 'Noto Sans KR light';
+}
+
+select option{
+	font-family: 'Noto Sans KR light';
 }
 
 #info{
