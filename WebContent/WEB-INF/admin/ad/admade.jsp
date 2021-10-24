@@ -29,8 +29,12 @@
                 <tr>
                     <td colspan = "2"><textarea id="ckeditor" name="content" class="content" required></textarea></td>
                 </tr>
+                <tr>
+                	<td style = "width : 200px; text-align : center; vertical-align:bottom; font-size : 18px; margin-top:10px;">광고 URL</td>
+                	<td><input name=promotionURL type="text" style="width: 100%; margin-top:10px;" placeholder="광고 URL을 입력해주세요." required></td>
+                </tr>
 				<tr>
-                	<td style = "width : 200px; text-align : left; font-size : 18px">광고 썸네일 이미지 등록</td>
+                	<td style = "width : 200px; text-align : center; font-size : 18px">광고 썸네일 이미지 등록</td>
                 	<!-- <td><br><input type="file" name="uploadFile" /></td> -->
                 	<td>
                 	<br>

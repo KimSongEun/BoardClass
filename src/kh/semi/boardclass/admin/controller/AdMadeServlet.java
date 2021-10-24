@@ -85,7 +85,8 @@ public class AdMadeServlet extends HttpServlet {
 			System.out.println("첨부파일명 : " + file);
 			System.out.println("업로드 성공!!!");
 		}
-		int result = new AdminService().insertAd(title, content, writer, img);
+		String promotionURL = multi.getParameter("promotionURL");
+		int result = new AdminService().insertAd(title, content, writer, img, promotionURL);
 
 		System.out.println(title);
 		System.out.println(content);

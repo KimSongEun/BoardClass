@@ -11,14 +11,15 @@ public class Banner {
 	private Date promotionDate;
 	private String promotionImg;
 	private int rownum;
+	private String promotionURL;
 	
 	public Banner(){
 		
 	}
 	
-	
+
 	public Banner(int promotionNo, String userId, int promotionPlace, String promotionTitle, String promotionContent,
-			Date promotionDate, String promotionImg, int rownum) {
+			Date promotionDate, String promotionImg, int rownum, String promotionURL) {
 		super();
 		this.promotionNo = promotionNo;
 		this.userId = userId;
@@ -28,6 +29,7 @@ public class Banner {
 		this.promotionDate = promotionDate;
 		this.promotionImg = promotionImg;
 		this.rownum = rownum;
+		this.promotionURL = promotionURL;
 	}
 
 
@@ -110,18 +112,22 @@ public class Banner {
 	}
 
 
+	public String getPromotionURL() {
+		return promotionURL;
+	}
+
+
+	public void setPromotionURL(String promotionURL) {
+		this.promotionURL = promotionURL;
+	}
+
+
 	@Override
 	public String toString() {
 		return "Banner [promotionNo=" + promotionNo + ", userId=" + userId + ", promotionPlace=" + promotionPlace
 				+ ", promotionTitle=" + promotionTitle + ", promotionContent=" + promotionContent + ", promotionDate="
-				+ promotionDate + ", promotionImg=" + promotionImg + ", rownum=" + rownum + "]";
+				+ promotionDate + ", promotionImg=" + promotionImg + ", rownum=" + rownum + ", promotionURL="
+				+ promotionURL + "]";
 	}
-
-
-
-
-
-
-	
 	
 }

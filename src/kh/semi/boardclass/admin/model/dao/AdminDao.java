@@ -795,6 +795,7 @@ public class AdminDao {
 				vo.setPromotionContent(rset.getString("PROMOTION_CONTENT"));
 				vo.setPromotionDate(rset.getDate("PROMOTION_DATE"));
 				vo.setPromotionImg(rset.getString("PROMOTION_IMG"));
+				vo.setPromotionURL(rset.getNString("PROMOTION_URL"));
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -851,6 +852,7 @@ public class AdminDao {
 					vo.setPromotionDate(rset.getDate("PROMOTION_DATE"));
 					vo.setPromotionImg(rset.getString("PROMOTION_IMG"));
 					vo.setPromotionNo(rset.getInt("PROMOTION_NO"));
+					vo.setPromotionURL(rset.getNString("PROMOTION_URL"));
 					volist.add(vo);
 				} while (rset.next());
 			}
@@ -908,6 +910,7 @@ public class AdminDao {
 					vo.setPromotionDate(rset.getDate("PROMOTION_DATE"));
 					vo.setPromotionImg(rset.getString("PROMOTION_IMG"));
 					vo.setPromotionNo(rset.getInt("PROMOTION_NO"));
+					vo.setPromotionURL(rset.getNString("PROMOTION_URL"));
 					volist.add(vo);
 				} while (rset.next());
 			}
@@ -920,25 +923,26 @@ public class AdminDao {
 		return volist;
 	}
 	
-	public int insertAd(Connection conn, String title, String content, String writer, String img){
+	public int insertAd(Connection conn, String title, String content, String writer, String img, String promotionURL){
 		int result = 0;
-		String sql = "INSERT INTO BANNER VALUES (PROMOTION_NUM.nextval, ?, 0, ?, ?, SYSDATE, ?)";
+		String sql = "INSERT INTO BANNER VALUES (PROMOTION_NUM.nextval, ?, 0, ?, SYSDATE, ?, ?, ?)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, writer);
 			pstmt.setString(2, title);
-			pstmt.setString(3, content);
-			pstmt.setString(4, img);
+			pstmt.setString(3, img);
+			pstmt.setString(4, content);
+			pstmt.setString(5, promotionURL);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return result;
 	}
-	public int updateAd(Connection conn, String title, String content, String img, int promotionNo){
+	public int updateAd(Connection conn, String title, String content, String img, int promotionNo, String promotionURL){
 		int result = 0;
-		String sql = "UPDATE BANNER SET PROMOTION_TITLE = ? , PROMOTION_CONTENT =?, PROMOTION_IMG = ? WHERE PROMOTION_NO=?";
+		String sql = "UPDATE BANNER SET PROMOTION_TITLE = ? , PROMOTION_CONTENT =?, PROMOTION_IMG = ?, PROMOTION_URL = ? WHERE PROMOTION_NO=?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null; 
 		try {
@@ -946,7 +950,8 @@ public class AdminDao {
 			pstmt.setString(1, title);
 			pstmt.setString(2, content);
 			pstmt.setString(3, img);
-			pstmt.setInt(4, promotionNo);
+			pstmt.setInt(5, promotionNo);
+			pstmt.setString(4, promotionURL);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

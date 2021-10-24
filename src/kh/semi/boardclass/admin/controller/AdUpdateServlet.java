@@ -69,6 +69,7 @@ public class AdUpdateServlet extends HttpServlet {
 		
 		String title = multi.getParameter("title");
 		String content = multi.getParameter("content");
+		String promotionURL = multi.getParameter("promotionURL");
 		int promotionNo = Integer.parseInt(multi.getParameter("no"));
 		String img = "/upload/ad/" + file;
 		if (file == null) {
@@ -79,7 +80,7 @@ public class AdUpdateServlet extends HttpServlet {
 			System.out.println("첨부파일명 : " + file);
 			System.out.println("업로드 성공!!!");
 		}
-		int result = new AdminService().updateAd(title, content, img, promotionNo);
+		int result = new AdminService().updateAd(title, content, img, promotionNo, promotionURL);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/admin/ad/adalert.jsp");
 		

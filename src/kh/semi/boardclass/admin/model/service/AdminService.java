@@ -299,10 +299,10 @@ public class AdminService {
 	}
 
 
-	public int insertAd(String title, String content, String writer, String img) {
+	public int insertAd(String title, String content, String writer, String img, String promotionURL) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().insertAd(conn, title, content, writer, img);
+		result = new AdminDao().insertAd(conn, title, content, writer, img, promotionURL);
 		if(result > 0) {
 			JDBCTemplate.commit(conn);
 		} else {
@@ -312,10 +312,10 @@ public class AdminService {
 		return result;
 	}
 
-	public int updateAd(String title, String content, String img, int promotionNo) {
+	public int updateAd(String title, String content, String img, int promotionNo, String promotionURL) {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new AdminDao().updateAd(conn, title, content, img, promotionNo);
+		result = new AdminDao().updateAd(conn, title, content, img, promotionNo, promotionURL);
 		if(result > 0) {
 			JDBCTemplate.commit(conn);
 		} else {

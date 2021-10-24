@@ -26,28 +26,32 @@
         <form method="post" action="adupdate" enctype = "multipart/form-data">
             <table style="text-align: center; font-size: 15px; margin: 0 auto; margin-top: 50px; width : 900px">
                 <tr>
-                    <td style="text-align: left; font-size: 34px; font-weight: bold;">광고수정</td>
+                    <td colspan = "2" style="text-align: left; font-size: 34px; font-weight: bold;">광고수정</td>
                 </tr>
                 <tr style="text-align: left; font-size: 16px;">
                 <%if(b !=null){%>
-                    <td style="font-weight: bold;"><input name=title type="text" style="width: 100%;" value = "<%=b.getPromotionTitle()%>" required><br></td>
+                    <td colspan = "2" style="font-weight: bold;"><input name=title type="text" style="width: 100%;" value = "<%=b.getPromotionTitle()%>" required><br></td>
                 </tr>
                 <tr>
-                    <td><textarea id="ckeditor" name="content" class="content" required><%=b.getPromotionContent() %></textarea></td>
+                    <td colspan="2"><textarea id="ckeditor" name="content" class="content" required><%=b.getPromotionContent() %></textarea></td>
                 </tr>
-                
+                <tr>
+                	<td style = "width : 200px; text-align : center; vertical-align:bottom; font-size : 18px; margin-top:10px;">광고 URL : </td>
+                	<td><input name=promotionURL type="text" style="width: 100%; margin-top:10px;" value="<%=b.getPromotionURL()%>"  required></td>
+                </tr>
                 <tr style="text-align: left; font-size: 16px;">
-					<td><br>현재 광고 썸네일 이미지 : <%=b.getPromotionImg()%> </td>
+					<td style = "width : 200px; text-align : center; vertical-align:bottom; font-size : 18px"><br>현재 광고 썸네일 이미지 : </td>
+					<td style = "font-size : 18px;"><br><%=b.getPromotionImg()%> </td>
 				</tr>
 				<tr>
-					<td style = "text-align: left; font-size: 16px; color : #F08080">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								👆🏻수정 파일 등록 : <input style = "display : inline-block"type="file" name="uploadFile"/></td>
+					<td style = "width : 200px"></td>
+					<td style = "text-align: left; font-size: 16px; color : #F08080">👆🏻수정 파일 등록 : <input style = "display : inline-block"type="file" name="uploadFile"/></td>
 				</tr>
 				<input type="hidden" name="no" value = "${promotionno}" />
 				<input type="hidden" name="originimg" value="<%=b.getPromotionImg()%>"/>
 				<%} %>
                 <tr>
-                    <td><br><button class='btn btn-warning' value='등록' type="submit">수정</button>
+                    <td colspan = "2"><br><button class='btn btn-warning' value='등록' type="submit">수정</button>
                         &nbsp;
                         <button type="button" class = 'btn btn-warning' onclick="if(confirm('광고 수정을 취소하시겠습니까?')){window.close()}else{}">취소</button>
                     </td>
