@@ -419,7 +419,7 @@ public class AdminDao {
 	
 	public ArrayList<Notice> searchNotice(Connection conn, String keyword, int start, int end){
 		ArrayList<Notice> volist = null;
-		String sql = "select * from (   select Rownum r, t1.* from (SELECT * FROM NOTICE WHERE ADMIN_TITLE like (?)) t1) t2 where r between ? and ?";
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT * FROM NOTICE WHERE ADMIN_TITLE like (?) ORDER BY ADMIN_RWR_DATE DESC) t1) t2 where r between ? and ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 

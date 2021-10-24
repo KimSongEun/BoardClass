@@ -20,7 +20,7 @@
 	<c:if test="${userType == '1'}">
 		<nav class="navlogin">
 			<a href="<%=request.getContextPath()%>/logout">로그아웃</a> | <a
-				href="<%=request.getContextPath()%>/adminmain">관리자 페이지</a>
+				href="<%=request.getContextPath()%>/adminmain" target="_blank">관리자 페이지</a>
 		</nav>
 	</c:if>
 	<c:if test="${userType == '0'}">

@@ -44,7 +44,7 @@
                 <tr>
                     <td><br><button class='btn btn-warning' value='등록' type="submit">수정</button>
                         &nbsp;
-                        <button type="reset" class = 'btn btn-warning'>취소</button>
+                        <button type="button" class = 'btn btn-warning' onclick="if(confirm('공지사항 수정을 취소하시겠습니까?')){window.close()}else{}">취소</button>
                     </td>
                 </tr>
             </table>
