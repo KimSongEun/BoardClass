@@ -1,0 +1,154 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'ImcreSoojin';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+* {
+	font-family: 'ImcreSoojin';
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+.container {
+	width: 100%;
+	height: 100%;
+	margin: 0 auto;
+}
+
+.sidenav {
+	position: absolute;
+	width: 230px;
+	top:45%;
+	margin-left: 2%;
+	background: #eee;
+	overflow-x: hidden;
+	padding: 12px 0;
+}
+
+/*
+.sidenav {
+  width: 130px;
+  position: fixed;
+  z-index: 1;
+  top: 20px;
+  left: 10px;
+  background: #eee;
+  overflow-x: hidden;
+  padding: 8px 0;
+}
+*/
+.sidenav a {
+	padding: 10px 8px 6px 16px;
+	text-decoration: none;
+	font-size: 18px;
+	color: #2196F3;
+	display: block;
+	letter-spacing: 3px;
+	text-indent: 3px;
+}
+
+.sidenav a:hover {
+	color: #064579;
+}
+
+.userInfo, .mypage {
+	margin: 50px 20px 40px;
+}
+
+.sidenav .title {
+	margin-bottom: 10px;
+	padding: 6px 8px 0px 16px;
+	text-decoration: none;
+	font-size: 19px;
+	color: #818181;
+	display: block;
+	font-weight: bold;
+	letter-spacing: 3px;
+	text-indent: 3px;
+}
+
+.main {
+	margin: 0 240px; /* Same width as the sidebar + left position in px */
+	font-size: 18px; /* Increased text to enable scrolling */
+	padding: 0px 10px;
+	text-align: center;
+}
+
+@media screen and (max-height: 450px) {
+	.sidenav {
+		padding-top: 15px;
+	}
+	.sidenav a {
+		font-size: 16px;
+	}
+}
+
+/*Content */
+.main h1 {
+	text-align: center;
+	margin: 80px 0 100px;
+}
+
+.info{
+	margin: 20px 40px 70px 40px;
+	display:inline-block;
+	border: 1px solid blue;
+	border-radius: 25px;
+	font-weight: bold;
+	letter-spacing: 2px;
+	text-indent: 2px;
+	
+}
+table .a {
+	
+	padding: 0;
+	
+}
+
+table .info_text {
+	
+	text-align:left;
+	margin-left: 10px;
+	width: 410px;
+	line-height:55px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#page{
+	text-align: center;
+	
+}
+#page a{
+	padding:3px 11px; margin:2px; text-align: center;
+	border: #ccc 3px solid; color: #999;
+	font-weight: bold;
+}
+#page a:hover,#page a:active,#page a:focus {BORDER: 3px solid #2196F3; COLOR: #2196F3;}
+.clear{
+	clear:both
+}
+#test.on{background-color: red}
+
+
+
+#hrdash{
+	height:2px;
+	border:none;
+	margin: 40px;
+	background-color:gray;
+
+}
+.p{
+	font-size: 22px;
+	font-weight: bold;
+	margin-bottom: 100px;
+}

@@ -1,20 +1,20 @@
 
-<%@page import="kh.semi.boardclass.mypage.model.vo.MyGameReview"%>
-<%@page import="kh.semi.boardclass.mypage.model.vo.MyGameLike"%>
+<%@page import="kh.semi.boardclass.mypage.model.vo.UserMyUsed"%>
+<%@page import="kh.semi.boardclass.used.model.vo.Used"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%
-	ArrayList<MyGameLike> volist = (ArrayList<MyGameLike>) request.getAttribute("volist");
-int startPage = (int) request.getAttribute("startPage");
-int endPage = (int) request.getAttribute("endPage");
-int pageCount = (int) request.getAttribute("pageCount");
+<% 
+ArrayList<Used> volist = (ArrayList<Used>) request.getAttribute("volist");
+int startPage = (int)request.getAttribute("startPage");
+int endPage = (int)request.getAttribute("endPage");
+int pageCount = (int)request.getAttribute("pageCount");
 
-ArrayList<MyGameReview> volist2 = (ArrayList<MyGameReview>) request.getAttribute("volist2");
-int startPage2 = (int) request.getAttribute("startPage2");
-int endPage2 = (int) request.getAttribute("endPage2");
-int pageCount2 = (int) request.getAttribute("pageCount2");
+ArrayList<UserMyUsed> volist2 = (ArrayList<UserMyUsed>) request.getAttribute("volist2");
+int startPage2 = (int)request.getAttribute("startPage2");
+int endPage2 = (int)request.getAttribute("endPage2");
+int pageCount2 = (int)request.getAttribute("pageCount2");
 %>
 
 <!DOCTYPE html>
@@ -23,9 +23,9 @@ int pageCount2 = (int) request.getAttribute("pageCount2");
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="css/index/maincss.css">
-<link rel="stylesheet" href="css/mypage/myGameList.css">
+<link rel="stylesheet" href="css/mypage/myUsedList.css">
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<title>마이페이지 보드게임 조회</title>
+<title>마이페이지 중고거래 조회</title>
 </head>
 
 <body>
@@ -48,47 +48,40 @@ int pageCount2 = (int) request.getAttribute("pageCount2");
 			</div>
 		</div>
 
-
-
 		<div class="main">
 
 			<h1>
-				<img src="img/card.png" width="55px" height="55px" /> 보드게임 찜 리스트 <img
+				<img src="img/card.png" width="55px" height="55px" /> 판매 게시글 <img
 					src="img/card.png" width="55px" height="55px" />
 			</h1>
 			<%
 				if (volist == null || volist.isEmpty()) {
 			%>
-			<div class="p">※ 찜을 한 보드게임이 없습니다. ※</div>
+			<div class="p">※ 작성한 판매 게시글이 없습니다. ※</div>
 			<%
 				} else {
-			for (MyGameLike vo : volist) {
+			for (Used vo : volist) {
 			%>
 
 			<table class="info">
 				<tr>
 					<td class="a"><img
-						src="<%=request.getContextPath()%>/<%=vo.getGameImage()%>"
-						width="300" height="300" style="border-radius: 25px"/></td>
-				</tr>
-				<tr>
-					<td class="b">
+						src="<%=request.getContextPath()%>/<%=vo.getUsedImg()%>"
+						width="200" height="200" style="border-radius: 25px"/></td>
+						<td class="b">
 						<div class="info_text">
-							<%=vo.getGameKoName()%><br>
-							<%=vo.getGameCategory()%><br>
-							<%=vo.getGameGrade()%></div>
+							제목 : <%=vo.getUsedTitle()%><br>
+							가격 : <%=vo.getUsedPrice()%><br>
+							등록날짜 : <%=vo.getUsedDay()%></div>
 					</td>
-
 				</tr>
 			</table>
 
 			<%
-				}
 			}
-			%>
-
+		}
+		%>
 			<div id="page">
-		
 				<%
 					
 					if (startPage > 1) {
@@ -98,8 +91,8 @@ int pageCount2 = (int) request.getAttribute("pageCount2");
 					}
 				for (int i = startPage; i <= endPage; i++) {
 				%>
-				<a href="./myboardgame?pagenum=<%=i%>"> <%=i%></a>
-	
+				<a href="./mytrade?pagenum=<%=i%>"> <%=i%></a>
+
 				<%
 		
 				}
@@ -114,41 +107,37 @@ int pageCount2 = (int) request.getAttribute("pageCount2");
 			<hr id="hrdash">
 
 			<h1>
-				<img src="img/card.png" width="55px" height="55px" /> 리뷰를 작성한 보드게임 <img
+				<img src="img/card.png" width="55px" height="55px" /> 찜리스트 <img
 					src="img/card.png" width="55px" height="55px" />
 			</h1>
+
 			<%
 				if (volist2 == null || volist2.isEmpty()) {
 			%>
-			<div class="p">※ 리뷰를 작성한 보드게임이 없습니다. ※</div>
+			<div class="p">※ 찜한 중고거래가 없습니다. ※</div>
 			<%
 				} else {
-			for (MyGameReview R : volist2) {
+			for (UserMyUsed L : volist2) {
 			%>
 
 			<table class="info">
 				<tr>
-					<td class="a"><img
-						src="<%=request.getContextPath()%>/<%=R.getGameImage()%>"
-						width="300" height="300" style="border-radius: 25px"/></td>
-				</tr>
-				<tr>
+					<td class="a"><div class="imgR"><img
+						src="<%=request.getContextPath()%>/<%=L.getUsedNo()%>" width="200" height="200" style="border-radius: 25px"/></div></td>
 					<td class="b">
 						<div class="info_text">
-							<%=R.getGameKoName()%><br>
-							<%=R.getGameCategory()%><br>
-							<%=R.getReviewScore()%></div>
+							제목 : <%=L.getUsedTitle()%><br>
+							가격 : <%=L.getUsedPrice()%><br>
+							카테고리 : <%=L.getUsedCategory()%></div>
 					</td>
-
 				</tr>
+			
 			</table>
-
 			<%
-				}
 			}
-			%>
-
-<div id="page">
+		}
+		%>
+			<div id="page">
 				<%
 					if (startPage2 > 1) {
 				%>
@@ -157,7 +146,7 @@ int pageCount2 = (int) request.getAttribute("pageCount2");
 					}
 				for (int j = startPage2; j <= endPage2; j++) {
 				%>
-			<a href="./myboardgame?pagenum2=<%=j%>"> <%=j%></a>
+				<a href="./mytrade?pagenum2=<%=j%>"> <%=j%></a>
 				<%
 			
 				}
@@ -168,8 +157,6 @@ int pageCount2 = (int) request.getAttribute("pageCount2");
 					}
 				%>
 			</div>
-		</div>
-		<%@include file="/WEB-INF/index/footer.jsp"%>
-
-	</body>
+			<%@include file="/WEB-INF/index/footer.jsp"%>
+</body>
 </html>
