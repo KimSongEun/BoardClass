@@ -29,6 +29,7 @@ public class Game {
 	private String gameVideo;
 	private String gamePlus;
 	private String gamePlusImage;
+	private int r;
 
 	public Game() {
 		// TODO Auto-generated constructor stub
@@ -37,7 +38,7 @@ public class Game {
 	public Game(int gameNumber, int usedNo, String gameKoName, String gameEnName, String gameCategory, int gameView, String gameAge,
 			String gamePlayer, String gameTime, int gamePrice, int gameGrade, Date gameDate, int gameLevel,
 			String gameDesigner, String gameWriter, String gameBrand, String gameReleaseDate, int gameRank,
-			String gameLanguage, String gameReview, String gameImage, String gameRuleImage, String gameVideo, String gamePlus, String gamePlusImage ) {
+			String gameLanguage, String gameReview, String gameImage, String gameRuleImage, String gameVideo, String gamePlus, String gamePlusImage, int r ) {
 		super();
 		this.gameNumber = gameNumber;
 		this.usedNum = usedNo;
@@ -65,7 +66,10 @@ public class Game {
 		this.gameVideo = gameVideo;
 		this.gamePlus = gamePlus;
 		this.gamePlusImage = gamePlusImage;
+		this.r=r;
 	}
+
+
 
 
 	@Override
@@ -77,7 +81,16 @@ public class Game {
 				+ ", gameDesigner=" + gameDesigner + ", gameWriter=" + gameWriter + ", gameBrand=" + gameBrand
 				+ ", gameReleaseDate=" + gameReleaseDate + ", gameRank=" + gameRank + ", gameLanguage=" + gameLanguage
 				+ ", gameReview=" + gameReview + ", gameImage=" + gameImage + ", gameRuleImage=" + gameRuleImage
-				+ ", gameVideo=" + gameVideo + ", gamePlus=" + gamePlus + ", gamePlusImage=" + gamePlusImage + "]";
+				+ ", gameVideo=" + gameVideo + ", gamePlus=" + gamePlus + ", gamePlusImage=" + gamePlusImage + ", r="
+				+ r + "]";
+	}
+
+	public int getR() {
+		return r;
+	}
+
+	public void setR(int r) {
+		this.r = r;
 	}
 
 	public String getGamePlusImage() {

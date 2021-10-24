@@ -71,15 +71,16 @@ public class GameAllListServlet extends HttpServlet {
 		System.out.println("검색어는 : " + search);
 		
 		
+		
 
 		String cate = "";
+		
 		
 		String sort = request.getParameter("sort");
 		if(sort == null) {
 			sort = "0";
 		}
-		System.out.println(startRnum);
-		System.out.println(endRnum);
+		
 		
 		// DB에서 값 읽어오기
 		if(sort == "0") {

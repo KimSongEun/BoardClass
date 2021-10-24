@@ -114,18 +114,41 @@ border: 1px solid grey;
 		
 		<nav id="nav2">
 
-			<p>ㅇㅇㅇ</p>
+			
 			<br>
-			<ul class="ulist">
-				<li><a href="GameLevelList">전체</a></li> 
-				<li><a href="GameStrategyList">전략</a></li>
-				<li><a href="GameTemaList">테마</a></li>
-				<li><a href="GameFamilyList">가족</a></li>
-				<li><a href="GamePartyList">파티</a></li>
-				<li><a href="GameKoreanList">한글</a></li>
-
-			</ul>
-
+			<form action="GameGradeRank"  name="sort" method="post">
+			<select id="sort1" name="sort1"  >
+				<option value="" hidden>=== 대상 연령 ===</option>
+				<option value="8세">8세 이상</option>
+				<option value="12세">12세 이상</option>
+				<option value="13세">13세 이상</option>
+				<option value="14세">14세 이상</option>
+			</select> <br>
+			<select id="sort2" name="sort2"  >
+				<option value="" hidden>=== 게임 인원 ===</option>
+				<option value="2명">2명 정도</option>
+				<option value="4명">4명 정도</option>
+				<option value="5명">5명 정도</option>
+				<option value="10명">10명 정도</option>
+				<option value="12명">12명 정도</option>
+			</select> <br>
+			<select id="sort3" name="sort3"  >
+				<option value="" hidden>=== 게임 시간 ===</option>
+				<option value="30">30분</option>
+				<option value="60">60분</option>
+				<option value="90">90분</option>
+				<option value="120">120분</option>
+			</select> <br>
+			<select id="sort4" name="sort4"  >
+				<option value="" hidden>=== 게임 장르 ===</option>
+				<option value="전략">전략</option>
+				<option value="테마">테마</option>
+				<option value="가족">가족</option>
+				<option value="파티">파티</option>
+				<option value="한글">한글</option>
+			</select> <br>
+			<input type = "submit" value = "검색">
+		</form>
 		</nav>
 
 		<aside></aside>
@@ -153,19 +176,21 @@ border: 1px solid grey;
 				if (volist != null) {
 					for (Game vo : volist) {
 						// tr 이 volist 갯수 만큼 생기게 됨.
-						// <%= 은 화면에 출력을 위한 표현식을 작성하는 태그, ;없어야 함.
+						// <%= 은 화면에 출력을 위한 표현식을 작성하는 태그, ;없어야 함.				
 			%>
-			
-			
+		
 			<form name = "fom" method="get" action="GameInfo">
 			<div id="board_info">
 				<input type = "hidden" value = "<%=vo.getGameKoName()%>"  name="GAME_KONAME">			
+				<h2><%=vo.getR()%>등</h2>
 				<button type="submit"    class="btn1" >
+				
 						<img src="<%=request.getContextPath()%>/<%=vo.getGameImage()%>"
 						width="300" height="300" />
 					<div class="img-text">
+						
 						<%=vo.getGameKoName()%><br>
-						게임 인원 : <%=vo.getGameLevel()%>명<br>
+						게임 인원 : <%=vo.getGamePlayer()%><br>
 						게임 연령 : <%=vo.getGameAge()%><br>
 						게임 시간 : <%=vo.getGameTime()%>분
 						

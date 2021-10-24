@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import kh.semi.boardclass.game.model.service.GameService;
 import kh.semi.boardclass.game.model.vo.Game;
 import kh.semi.boardclass.game.model.vo.GameReview;
+import kh.semi.boardclass.used.model.service.UsedService;
 import kh.semi.boardclass.used.model.vo.Used;
 import kh.semi.boardclass.user.model.vo.User;
 
@@ -52,11 +53,24 @@ public class GameReviewServlet extends HttpServlet {
 		System.out.println("GAME_NO:"+gamenum);
        
 		User loginSS = (User)request.getSession().getAttribute("userSession");
+		
+		int reviewNo = 0;
+		try{ 
+		reviewNo = Integer.parseInt(request.getParameter("no"));
+		}catch(Exception e){
+        	System.out.println("숫자 변환 실패 기본 값 0");
+        }
+		
 		String userId=null;
 		int countlike = 0;		
 		if(loginSS != null) {
 			userId = loginSS.getUserId();
 			countlike = new GameService().countReviewLike(userId,gamenum);
+		}
+		int countreport = 0;
+		if(loginSS != null) {
+			userId = loginSS.getUserId();
+			countreport = new GameService().countReviewReport(reviewNo, userId);
 		}
 			
         final int PAGE_SIZE = 7;   // 한 페이지 당 글수
@@ -97,7 +111,9 @@ public class GameReviewServlet extends HttpServlet {
         
         request.setAttribute("reviewvolist", gvo2);
         System.out.println("add"+gvo2);
+        
         request.setAttribute("gameno", gamenum);
+        request.setAttribute("reportresult", countreport);
         request.setAttribute("likeresult", countlike);
         request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);

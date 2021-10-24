@@ -74,13 +74,29 @@ public class GameJjimRankServlet extends HttpServlet {
 		
 		//String grade = "GAME_GRADE";
 		// DB에서 값 읽어오기
-		ArrayList<Game> volist1 = new GameService().selectJjimRankList(startRnum,endRnum);
 		
+		String sort1 = request.getParameter("sort1");
+		String sort2 = request.getParameter("sort2");
+		String sort3 = request.getParameter("sort3");
+		String sort4 = request.getParameter("sort4");
+		
+		if(sort1 ==null){
+			sort1 = "0";
+		}
+		//String grade = "GAME_GRADE";
+		// DB에서 값 읽어오기
+		
+		if(sort1 != "0"){
+			ArrayList<Game> volist1 = new GameService().selectSortJjimRankList(startRnum,endRnum,sort1,sort2,sort3,sort4);
+			request.setAttribute("gamevolist", volist1);
+		}else{
+			ArrayList<Game> volist1 = new GameService().selectJjimRankList(startRnum,endRnum);
+			request.setAttribute("gamevolist", volist1);
+		}
 		
 		
 		
 		// Data 전달을 위해서 request에 셋
-		request.setAttribute("gamevolist", volist1);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);

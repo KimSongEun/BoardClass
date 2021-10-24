@@ -96,6 +96,33 @@ public class GameFamilyListServlet extends HttpServlet {
 			ArrayList<Game> volist = new GameService().selectSortGameList(startRnum,endRnum,cate, search);
 			request.setAttribute("gamevolist", volist);
 		}
+		
+//		String sort1 = request.getParameter("sort1");
+//		String s1 = "8세";
+//		String s2 = "12세";
+//		String s3 = "13세";
+//		String s4 = "14세";
+//		
+//		if(sort1 == null) {
+//			sort1 = "0";
+//		}
+//		if(sort1 == "0") {
+//			ArrayList<Game> volist = new GameService().selectCateGameList(startRnum,endRnum,cate,search);
+//			request.setAttribute("gamevolist", volist);
+//			}else if(sort1.equals("eight")) {
+//				ArrayList<Game> volist = new GameService().selectAgeGameList(startRnum,endRnum,cate, s1);
+//				request.setAttribute("gamevolist", volist);
+//			} else if(sort1.equals("twelve")) {
+//				ArrayList<Game> volist = new GameService().selectAgeGameList(startRnum,endRnum,cate, s2);
+//				request.setAttribute("gamevolist", volist);
+//			}else if(sort1.equals("thirteen")) {
+//				ArrayList<Game> volist = new GameService().selectAgeGameList(startRnum,endRnum,cate, s3);
+//				request.setAttribute("gamevolist", volist);
+//			}else if(sort1.equals("fourteen")) {
+//				ArrayList<Game> volist = new GameService().selectAgeGameList(startRnum,endRnum,cate, s4);
+//				request.setAttribute("gamevolist", volist);
+//			}
+		
 		// Data 전달을 위해서 request에 셋
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);

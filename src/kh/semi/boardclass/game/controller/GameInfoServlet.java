@@ -79,6 +79,9 @@ public class GameInfoServlet extends HttpServlet {
         // 게임 관련 중고거래
         ArrayList<Used> vo2 = service.usedlist(vo.getGameKoName());
         
+        // 조회수
+        int ViewCount = service.updateViewCount(gamenum);
+        
         // 게임 관련 리뷰 - 최신4개
 		int startRnum = 1;   // 화면에 글
 		int endRnum = 4;  // 화면에 글

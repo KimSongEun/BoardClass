@@ -139,21 +139,21 @@ public class GameService {
 		return result;
 	}
 	
-//	public int countGameReport(int reviewNo, String userId) {
-//		int result = -1;
-//		Connection conn = JDBCTemplate.getConnection();
-//		result = new UsedDao().countUsedReport(conn, reviewNo, userId);
-//		JDBCTemplate.close(conn);
-//		return result;
-//	}
-//	
-//	public int insertGameReport(int reviewNo, String userId) {
-//		int result = -1;
-//		Connection conn = JDBCTemplate.getConnection();
-//		result = new UsedDao().insertUsedReport(conn, reviewNo, userId);
-//		JDBCTemplate.close(conn);
-//		return result;
-//	}
+	public int countReviewReport(int reviewNo, String userId) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new GameDao().countReviewReport(conn, reviewNo, userId);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
+	public int insertReivewReport(int reviewNo, String userId) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new GameDao().insertReivewReport(conn, reviewNo, userId);
+		JDBCTemplate.close(conn);
+		return result;
+	}
 
 	public ArrayList<Used> usedlist(String name) {
 		ArrayList<Used> volist = null;
@@ -173,6 +173,13 @@ public class GameService {
 		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
 		result = new GameDao().updateGrade(conn, gameno);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	public int updateViewCount(int gameno) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new GameDao().updateViewCount(conn, gameno);
 		JDBCTemplate.close(conn);
 		return result;
 	}
@@ -218,6 +225,27 @@ public class GameService {
 		ArrayList<Game> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
 		volist = new GameDao().selectGradeRankList(conn, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	public ArrayList<Game> selectSortGradeRankList(int start, int end,String sort1,String sort2,String sort3,String sort4) {
+		ArrayList<Game> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new GameDao().selectSortGradeRankList(conn, start, end,sort1,sort2,sort3,sort4);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	public ArrayList<Game> selectSortViewRankList(int start, int end,String sort1,String sort2,String sort3,String sort4) {
+		ArrayList<Game> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new GameDao().selectSortViewRankList(conn, start, end,sort1,sort2,sort3,sort4);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	public ArrayList<Game> selectSortJjimRankList(int start, int end,String sort1,String sort2,String sort3,String sort4) {
+		ArrayList<Game> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new GameDao().selectSortJjimRankList(conn, start, end,sort1,sort2,sort3,sort4);
 		JDBCTemplate.close(conn);
 		return volist;
 	}
