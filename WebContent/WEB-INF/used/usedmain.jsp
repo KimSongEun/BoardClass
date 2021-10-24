@@ -35,7 +35,7 @@
 		<div class="div_search">
 			<form id="searchTandC" action="usedmain">
 				<input type="search" name="search" placeholder="검색어를 입력해주세요">
-				<button type="submit">검색</button>
+				<button type="submit"><i class="fa fa-search"></i></button>
 			</form>
 		</div>
 	</div>
@@ -67,7 +67,7 @@
 		</c:if>
 </div>
 	<div class="secthird">
-		<button type="button" id="btn_write">글쓰기</button>
+		<button type="button" id="btn_write"><i class="fas fa-pencil-alt"></i></button>
 	</div>
 	<div class="secfourth">
 		<div class="div_paging">

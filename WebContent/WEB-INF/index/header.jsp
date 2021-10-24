@@ -3,7 +3,7 @@
 <header>
     <div class="header_logo">
         <div class="div_logo">
-            <a href="#">
+            <a href="main">
                 <img src="./img/logo.png">
             </a>
         </div>
