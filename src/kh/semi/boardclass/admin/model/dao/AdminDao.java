@@ -1271,7 +1271,7 @@ public class AdminDao {
 	
 	public ArrayList<AllCommentUser> selectAllCommentList(Connection conn, int start, int end){
 		ArrayList<AllCommentUser> volist = null;
-		String sql = "select * from (   select Rownum r, t1.* from (SELECT C.COMMENT_NO, B.BOARD_TITLE, C.COMMENT_CONTENT, M.USER_ID, M.USER_NO, C.COMMENT_REWRITE_DATE FROM COMT C JOIN BOARD B ON C.BOARD_NO=B.BOARD_NO JOIN MEMBER M ON C.USER_ID = M.USER_ID ORDER BY COMMENT_REWRITE_DATE DESC) t1) t2 where r between ? and ?";
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT C.COMMENT_NO, B.BOARD_TITLE, C.BOARD_NO, C.COMMENT_CONTENT, M.USER_ID, M.USER_NO, C.COMMENT_REWRITE_DATE FROM COMT C JOIN BOARD B ON C.BOARD_NO=B.BOARD_NO JOIN MEMBER M ON C.USER_ID = M.USER_ID ORDER BY COMMENT_REWRITE_DATE DESC) t1) t2 where r between ? and ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -1290,6 +1290,7 @@ public class AdminDao {
 					vo.setUserId(rset.getString("USER_ID"));
 					vo.setUserNo(rset.getInt("USER_NO"));
 					vo.setCommentRewriteDate(rset.getDate("COMMENT_REWRITE_DATE"));
+					vo.setBoardNo(rset.getInt(4));
 					volist.add(vo);
 				} while (rset.next());
 			}

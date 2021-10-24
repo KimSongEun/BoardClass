@@ -9,12 +9,14 @@ public class AllCommentUser {
 	private String userId;
 	private int userNo;
 	private Date commentRewriteDate;
+	private int boardNo;
 	
 	public AllCommentUser() {
 	}
 
+
 	public AllCommentUser(int commentNo, String boardTitle, String commentContent, String userId, int userNo,
-			Date commentRewriteDate) {
+			Date commentRewriteDate, int boardNo) {
 		super();
 		this.commentNo = commentNo;
 		this.boardTitle = boardTitle;
@@ -22,7 +24,9 @@ public class AllCommentUser {
 		this.userId = userId;
 		this.userNo = userNo;
 		this.commentRewriteDate = commentRewriteDate;
+		this.boardNo = boardNo;
 	}
+
 
 	public int getCommentNo() {
 		return commentNo;
@@ -72,12 +76,26 @@ public class AllCommentUser {
 		this.commentRewriteDate = commentRewriteDate;
 	}
 
+	
+	public int getBoardNo() {
+		return boardNo;
+	}
+
+
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
+
+
 	@Override
 	public String toString() {
 		return "AllCommentUser [commentNo=" + commentNo + ", boardTitle=" + boardTitle + ", commentContent="
 				+ commentContent + ", userId=" + userId + ", userNo=" + userNo + ", commentRewriteDate="
-				+ commentRewriteDate + "]";
+				+ commentRewriteDate + ", boardNo=" + boardNo + "]";
 	}
+
+
+
 	
 	
 }
