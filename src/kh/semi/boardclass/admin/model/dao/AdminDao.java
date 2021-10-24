@@ -2391,14 +2391,14 @@ public class AdminDao {
 	
 	public ArrayList<ReportComment> selectReportCommentList(Connection conn, int start, int end){
 		ArrayList<ReportComment> volist = null;
-		String sql = "select * from (   select Rownum r, t1.* from (SELECT  count(*) 신고횟수, C.COMMENT_NO, B.BOARD_TITLE, C.COMMENT_CONTENT, C.USER_ID, M.USER_NO, C.COMMENT_WRITE_DATE, C.COMMENT_REWRITE_DATE\r\n" + 
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT  count(*) 신고횟수, C.COMMENT_NO, B.BOARD_TITLE, C.COMMENT_CONTENT, C.USER_ID, M.USER_NO, C.COMMENT_WRITE_DATE, C.COMMENT_REWRITE_DATE, C.BOARD_NO\r\n" + 
 				"FROM COMMENT_REPORT R JOIN COMT C\r\n" + 
 				"ON R.COMMENT_NO = C.COMMENT_NO\r\n" + 
 				"JOIN BOARD B\r\n" + 
 				"ON C.BOARD_NO = B.BOARD_NO\r\n" + 
 				"JOIN MEMBER M\r\n" + 
 				"ON C.USER_ID = M.USER_ID\r\n" + 
-				"GROUP BY C.COMMENT_NO, B.BOARD_TITLE, C.COMMENT_CONTENT, C.USER_ID, M.USER_NO, C.COMMENT_WRITE_DATE, C.COMMENT_REWRITE_DATE\r\n" + 
+				"GROUP BY C.COMMENT_NO, B.BOARD_TITLE, C.COMMENT_CONTENT, C.USER_ID, M.USER_NO, C.COMMENT_WRITE_DATE, C.COMMENT_REWRITE_DATE, C.BOARD_NO\r\n" + 
 				"ORDER BY 신고횟수 DESC) t1) t2 where r between ? and ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -2420,6 +2420,7 @@ public class AdminDao {
 					vo.setUserNo(rset.getInt(7));
 					vo.setCommentWriteDate(rset.getDate(8));
 					vo.setCommentRewriteDate(rset.getDate(9));
+					vo.setBoardNo(rset.getInt(10));
 					volist.add(vo);
 				} while (rset.next());
 			}

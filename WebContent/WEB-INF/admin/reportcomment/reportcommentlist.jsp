@@ -82,9 +82,9 @@
                          <tr>
                          	<td style = "vertical-align : middle; color : #f55354">${r.reportCount}</td>
                          	<td style = "vertical-align : middle" class = "commentNo">${r.commentNo}</td>
-                         	<td style = "vertical-align : middle">${r.boardTitle}</td>
+                         	<td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href="bdetail?boardNo=${r.boardNo }" target="_blank"  style = "color : #754100">${r.boardTitle}</a></td>
                          	<td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" ><a href="#" class = "comment-modal" id = "${r.commentNo}" style = "color : #754100">${r.commentContent}</a></td>
-                         	<td style = "vertical-align : middle"><a href="#회원정보조회" style = "color : #754100">${r.userId}</a></td>
+                         	<td style = "vertical-align : middle"><a href="adminuserdetail?userId=${r.userId}" target="_blank" style = "color : #754100">${r.userId}</a></td>
                          	<td style = "vertical-align : middle">${r.userNo}</td>
                          	<td style = "vertical-align : middle">${r.commentWriteDate}</td>
                          	<td style = "vertical-align : middle">${r.commentRewriteDate}</td>

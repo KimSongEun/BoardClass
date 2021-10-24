@@ -11,12 +11,14 @@ public class ReportComment {
 	private int userNo;
 	private Date commentWriteDate;
 	private Date commentRewriteDate;
+	private int boardNo;
 	
 	public ReportComment() {
 	}
 
+
 	public ReportComment(int reportCount, int commentNo, String boardTitle, String commentContent, String userId,
-			int userNo, Date commentWriteDate, Date commentRewriteDate) {
+			int userNo, Date commentWriteDate, Date commentRewriteDate, int boardNo) {
 		super();
 		this.reportCount = reportCount;
 		this.commentNo = commentNo;
@@ -26,7 +28,9 @@ public class ReportComment {
 		this.userNo = userNo;
 		this.commentWriteDate = commentWriteDate;
 		this.commentRewriteDate = commentRewriteDate;
+		this.boardNo = boardNo;
 	}
+
 
 	public int getReportCount() {
 		return reportCount;
@@ -90,6 +94,14 @@ public class ReportComment {
 
 	public void setCommentRewriteDate(Date commentRewriteDate) {
 		this.commentRewriteDate = commentRewriteDate;
+	}
+
+	public int getBoardNo() {
+		return boardNo;
+	}
+
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
 	}
 	
 	
