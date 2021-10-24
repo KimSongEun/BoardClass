@@ -10,12 +10,14 @@ public class ReportReview {
 	private String userId;
 	private int userNo;
 	private Date reviewDate;
+	private int gameNo;
 	
 	public ReportReview() {
 	}
 
+
 	public ReportReview(int reportCount, int reviewNo, String gameKoName, String reviewContent, String userId,
-			int userNo, Date reviewDate) {
+			int userNo, Date reviewDate, int gameNo) {
 		super();
 		this.reportCount = reportCount;
 		this.reviewNo = reviewNo;
@@ -24,6 +26,7 @@ public class ReportReview {
 		this.userId = userId;
 		this.userNo = userNo;
 		this.reviewDate = reviewDate;
+		this.gameNo = gameNo;
 	}
 
 	public int getReportCount() {
@@ -82,13 +85,20 @@ public class ReportReview {
 		this.reviewDate = reviewDate;
 	}
 
+	public int getGameNo() {
+		return gameNo;
+	}
+
+	public void setGameNo(int gameNo) {
+		this.gameNo = gameNo;
+	}
+
 	@Override
 	public String toString() {
 		return "ReportReview [reportCount=" + reportCount + ", reviewNo=" + reviewNo + ", gameKoName=" + gameKoName
 				+ ", reviewContent=" + reviewContent + ", userId=" + userId + ", userNo=" + userNo + ", reviewDate="
-				+ reviewDate + "]";
+				+ reviewDate + ", gameNo=" + gameNo + "]";
 	}
-	
-	
+
 
 }

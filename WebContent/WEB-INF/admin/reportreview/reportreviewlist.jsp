@@ -81,9 +81,9 @@
                          <tr>
                          	<td style = "vertical-align : middle; color : #f55354">${r.reportCount}</td>
                          	<td style = "vertical-align : middle" class = "commentNo">${r.reviewNo}</td>
-                         	<td style = "vertical-align : middle">${r.gameKoName}</td>
-                         	<td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" ><a href="#" class = "review-modal" id = "${r.reviewNo}" style = "color : #754100">${r.reviewContent}</a></td>
-                         	<td style = "vertical-align : middle"><a href="#회원정보조회" style = "color : #754100">${r.userId}</a></td>
+                         	<td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href = "GameInfo?GAME_NO=${r.gameNo}" target = '_blank' style = "color : #754100" title = "${r.gameKoName}">${r.gameKoName}</a></td>
+                         	<td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden" ><a href="#리뷰보기" class = "review-modal" id = "${r.reviewNo}" style = "color : #754100">${r.reviewContent}</a></td>
+                         	<td style = "vertical-align : middle"><a href="adminuserdetail?userId=${c.userId}" target="_blank" style = "color : #754100">${r.userId}</a></td>
                          	<td style = "vertical-align : middle">${r.userNo}</td>
                          	<td style = "vertical-align : middle">${r.reviewDate}</td>
                             <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" id = "${r.reviewNo}">삭제</button> </td>

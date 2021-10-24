@@ -2663,14 +2663,14 @@ public class AdminDao {
 	
 	public ArrayList<ReportReview> selectReportReviewList(Connection conn, int start, int end){
 		ArrayList<ReportReview> volist = null;
-		String sql = "select * from (   select Rownum r, t1.* from (SELECT  count(*) 신고횟수, V.REVIEW_NO, B.GAME_KONAME, V.REVIEW_CONTENT, V.USER_ID, M.USER_NO, V.REVIEW_DATE\r\n" + 
+		String sql = "select * from (   select Rownum r, t1.* from (SELECT  count(*) 신고횟수, V.REVIEW_NO, B.GAME_KONAME, V.REVIEW_CONTENT, V.USER_ID, M.USER_NO, V.REVIEW_DATE, B.GAME_NO\r\n" + 
 				"FROM REVIEW_REPORT R JOIN REVIEW V\r\n" + 
 				"ON R.REVIEW_NO = V.REVIEW_NO\r\n" + 
 				"JOIN BOARDGAME B\r\n" + 
 				"ON B.GAME_NO = V.GAME_NO\r\n" + 
 				"JOIN MEMBER M\r\n" + 
 				"ON V.USER_ID = M.USER_ID\r\n" + 
-				"GROUP BY V.REVIEW_NO, B.GAME_KONAME, V.REVIEW_CONTENT, V.USER_ID, M.USER_NO, V.REVIEW_DATE\r\n" + 
+				"GROUP BY V.REVIEW_NO, B.GAME_KONAME, V.REVIEW_CONTENT, V.USER_ID, M.USER_NO, V.REVIEW_DATE, B.GAME_NO\r\n" + 
 				"ORDER BY 신고횟수 DESC) t1) t2 where r between ? and ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -2691,6 +2691,7 @@ public class AdminDao {
 					vo.setUserId(rset.getString(6));
 					vo.setUserNo(rset.getInt(7));
 					vo.setReviewDate(rset.getDate(8));
+					vo.setGameNo(rset.getInt(9));
 					volist.add(vo);
 				} while (rset.next());
 			}
