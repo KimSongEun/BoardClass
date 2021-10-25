@@ -134,6 +134,14 @@ public class CommunityService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
+	//자유게시판 추천순
+	public ArrayList<Board> bestFreeLike () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestFreeLike(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
 //	public ArrayList<Board> bestFreeComtTwo () {
 //		ArrayList<Board> list = null;
 //		Connection conn = JDBCTemplate.getConnection();
@@ -162,6 +170,14 @@ public class CommunityService {
 //		JDBCTemplate.close(conn);
 //		return list;
 //	}
+	//유저정보게시판 인기글 추천순 
+	public ArrayList<Board> bestUserLike () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestUserLike(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
 	// 유저정보게시판 인기글
 	public ArrayList<Board> bestUserViewOne () {
 		ArrayList<Board> list = null;
