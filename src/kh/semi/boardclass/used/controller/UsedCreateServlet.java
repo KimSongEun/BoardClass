@@ -61,7 +61,12 @@ public class UsedCreateServlet extends HttpServlet {
 		String usedChange = multi.getParameter("usedChange");
 		String usedExtype = multi.getParameter("usedExtype");
 		String usedInfo = multi.getParameter("usedInfo");
-		String usedImg = "used_img/" + multi.getFilesystemName("usedImg");
+		String usedImg = "";
+		if(usedImg == null || usedImg == "") {
+			usedImg = "used_img/noImgFound.jpg";
+		} else {
+			usedImg = "used_img/" + multi.getFilesystemName("usedImg");
+		}
 		String usedCategory = multi.getParameter("usedCategory");
 		String usedKeyword = multi.getParameter("keyword");
 

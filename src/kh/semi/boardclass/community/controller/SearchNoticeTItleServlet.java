@@ -9,22 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import kh.semi.boardclass.admin.model.service.AdminService;
 import kh.semi.boardclass.admin.model.vo.Notice;
 import kh.semi.boardclass.community.model.service.CommunityService;
-import kh.semi.boardclass.community.model.vo.Board;
 
 /**
- * Servlet implementation class SearchNoticeContentServlet
+ * Servlet implementation class SearchNoticeTItleServlet
  */
-@WebServlet("/searchnoticecontent")
-public class SearchNoticeContentServlet extends HttpServlet {
+@WebServlet("/searchnoticetitle")
+public class SearchNoticeTItleServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchNoticeContentServlet() {
+    public SearchNoticeTItleServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -59,7 +57,7 @@ public class SearchNoticeContentServlet extends HttpServlet {
 		}
 		String type = request.getParameter("type");
 		String keyword = request.getParameter("keyword");
-		aCount = new CommunityService().getNoticeSearchCount(keyword);
+		aCount = new CommunityService().getNoticeSearchTitleCount(keyword);
 		pageCount = (aCount / PAGE_SIZE) + (aCount % PAGE_SIZE == 0 ? 0:1);
 		startRnum = (currentPage-1) * PAGE_SIZE + 1;  
 		endRnum = startRnum + PAGE_SIZE -1;
@@ -73,7 +71,7 @@ public class SearchNoticeContentServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1;
 		if(endPage > pageCount) endPage = pageCount;
 		
-		ArrayList<Notice> list  = new CommunityService().searchNoticeContent(keyword, startRnum, endRnum);
+		ArrayList<Notice> list  = new CommunityService().searchNoticeTitle(keyword, startRnum, endRnum);
 		
 		
 		request.setAttribute("viewcount", PAGE_SIZE);

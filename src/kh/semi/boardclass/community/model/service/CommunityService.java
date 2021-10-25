@@ -3,6 +3,8 @@ package kh.semi.boardclass.community.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import kh.semi.boardclass.admin.model.dao.AdminDao;
+import kh.semi.boardclass.admin.model.vo.Notice;
 import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.community.model.dao.CommunityDao;
 import kh.semi.boardclass.community.model.vo.Board;
@@ -132,6 +134,14 @@ public class CommunityService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
+	//자유게시판 추천순
+	public ArrayList<Board> bestFreeLike () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestFreeLike(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
 //	public ArrayList<Board> bestFreeComtTwo () {
 //		ArrayList<Board> list = null;
 //		Connection conn = JDBCTemplate.getConnection();
@@ -160,6 +170,14 @@ public class CommunityService {
 //		JDBCTemplate.close(conn);
 //		return list;
 //	}
+	//유저정보게시판 인기글 추천순 
+	public ArrayList<Board> bestUserLike () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestUserLike(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
 	// 유저정보게시판 인기글
 	public ArrayList<Board> bestUserViewOne () {
 		ArrayList<Board> list = null;
@@ -428,8 +446,36 @@ public class CommunityService {
 		result = new CommunityDao().getAllBoardContentCount(conn, keyword);
 		return result;
 	}
-	
-	
+	//공지검색
+	public ArrayList<Notice> searchNoticeContent(String keyword, int start, int end) {
+		ArrayList<Notice> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new CommunityDao().searchNoticeContent(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+		
+	}
+	public int getNoticeSearchCount(String keyword) { 
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new CommunityDao().getNoticeSearchCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	public ArrayList<Notice> searchNoticeTitle (String keyword, int start, int end) {
+		ArrayList<Notice> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new CommunityDao().searchNoticeTitle(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	public int getNoticeSearchTitleCount(String keyword) { 
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new CommunityDao().getNoticeSearchTitleCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
 	public void searchUserBoard() {
 
 	}

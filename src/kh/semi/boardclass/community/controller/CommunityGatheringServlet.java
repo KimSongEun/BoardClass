@@ -34,7 +34,7 @@ public class CommunityGatheringServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
-		String category = "모임정보게시판";
+		String category = "모임게시판";
 		int totCnt = new CommunityService().getBoardCount(category);
 		String pageNum = request.getParameter("pageNum");
 		if(pageNum == null || pageNum.equals("")) {pageNum = "1";}

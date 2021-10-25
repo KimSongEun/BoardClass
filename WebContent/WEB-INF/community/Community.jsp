@@ -77,6 +77,7 @@
 			    <div class="tab">
 		  			<button class="tablinks" onclick="openRank(event, 'leftview')" id="defaultOpen" >조회순</button>
 		  			<button class="tablinks" onclick="openRank(event, 'leftcomt')">댓글순</button>
+		  			<button class="tablinks" onclick="openRank(event, 'leftlike')">추천순</button>
 				</div>
 			          <div class="tabcontent" id="leftview">
 			          	<ol>
@@ -128,6 +129,21 @@
 							 			 <div class="rank">${freebest.boardRank }</div>
 							              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
 							              <div class="commt">${freebest.commentCount}</div>
+						             </li>
+					             </c:forEach>
+					       	 </ul>	
+				        </div>
+				       </dd>
+			         </dl>
+			         <dl>
+		          	<dd>
+			    		<div class="tabcontent" id="leftlike">
+			    			<ul>
+				           		<c:forEach var="freebest" items="${bestfreelike }">
+						 			<li class="item">
+							 			 <div class="rank">${freebest.boardRank }</div>
+							              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
+							              <div class="commt">${freebest.boardLikeCount}</div>
 						             </li>
 					             </c:forEach>
 					       	 </ul>	
@@ -236,40 +252,12 @@
 		          	<dd>
 			    		<div class="usercontent" id="rightlike">
 				          	 	<ol>
-				           		<c:forEach var="freebest" items="${bestfreecomtone }">
-						 			<li class="item">
-							 			 <div class="rank">1</div>
+				           		<c:forEach var="freebest" items="${bestuserlike }">
+								 	<li class="item">
+							 			 <div class="rank">${freebest.boardRank }</div>
 							              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-							              <div class="commt">${freebest.comment_no }</div>
+							              <div class="commt">${freebest.boardLikeCount}</div>
 						             </li>
-					             </c:forEach>
-					             <c:forEach var="freebest" items="${bestfreecomttwo }">
-						 			<li class="item">
-							 			<div class="rank">2</div>
-						              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-						           	  <div class="commt">${freebest.comment_no }</div>
-						             </li>
-					             </c:forEach>
-					            <c:forEach var="freebest" items="${bestfreecomtthree }">
-						 			<li class="item">
-						 			 <div class="rank">3</div>
-						              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-						              <div class="commt">${freebest.comment_no }</div>
-						             </li>
-					             </c:forEach>
-					              <c:forEach var="freebest" items="${bestfreecomtfour }">
-						 			<li class="item">
-						 			 <div class="rank">4</div>
-						              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-						              <div class="commt">${freebest.comment_no }</div>
-						            </li>
-					             </c:forEach>
-					             <c:forEach var="freebest" items="${bestfreecomtfive }">
-						 			<li class="item">
-						 			 <div class="rank">5</div>
-						              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-						              <div class="commt">${freebest.comment_no }</div>
-						            </li>
 					             </c:forEach>
 					       	 </ol>	
 				        </div>

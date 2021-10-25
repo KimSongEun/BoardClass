@@ -49,9 +49,6 @@
 									<c:when test="${r.usedImg != null}">
 										<img src="${pageContext.request.contextPath}/${r.usedImg}">
 									</c:when>
-									<c:when test="${r.usedImg == null}">
-										<img src="./img/logo.png">
-									</c:when>
 								</c:choose>
 							</a>
 					</div>

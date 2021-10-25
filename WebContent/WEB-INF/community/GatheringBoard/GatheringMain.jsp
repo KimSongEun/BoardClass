@@ -130,9 +130,9 @@
  	</div>
  	
 	<!-- 글쓰기 영역 -->
-	<div class="btn_wrap">
-  <div class="fl_c">
-    <a href="./cgwrite" class="btn50 c3 reg" style="width: 240px;" tmp="contents/bod" mn="60" cn="0"><span class="write">글작성</span></a>
+		  <div class="btn_wrap">
+			<button type="button" class="btn write" id="btn_write">글쓰기</button>
+		</div>
   </div>
 </div>
 </div>
@@ -159,6 +159,16 @@ function f1() {
 		
 	}
 };	
+
+$("#btn_write").click(loadWrite);
+
+function loadWrite(){
+	if(!"${userSession}"){
+		alert("로그인해주세요");
+		return;
+	}
+	location.href='boardcreateview';
+}
 </script>
 <%@include file="/WEB-INF/index/footer.jsp" %>
 </body>

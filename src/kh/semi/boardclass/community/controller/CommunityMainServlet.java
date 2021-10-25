@@ -55,6 +55,10 @@ public class CommunityMainServlet extends HttpServlet {
 		System.out.println("랭킹");
 		System.out.println("bestfreecomt: " + bestfreecomt);
 		
+		//자유게시판 추천순 랭킹
+		ArrayList<Board> bestfreelike = new CommunityService().bestFreeLike();
+		request.setAttribute("bestfreelike", bestfreelike);
+		
 		//유저정보 조회수 랭킹
 		ArrayList<Board> bestuserviewone = new CommunityService().bestUserViewOne();
 		request.setAttribute("bestuserviewone", bestuserviewone);
@@ -79,7 +83,9 @@ public class CommunityMainServlet extends HttpServlet {
 		ArrayList<Board> bestusercomtfive = new CommunityService().bestUserComtFive();
 		request.setAttribute("bestusercomtfive", bestusercomtfive);
 		
-		
+		//유저정보 추천순
+		ArrayList<Board> bestuserlike = new CommunityService().bestUserLike();
+		request.setAttribute("bestuserlike", bestuserlike);
 		
 		int totCnt = new CommunityService().getBoardCount();
 		String pageNum = request.getParameter("pageNum");
