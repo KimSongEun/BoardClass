@@ -20,13 +20,12 @@
 		
 		<!-- 검색 -->
 		<div class="search-container">
-        <form class="form_search" action="#">
+        <form class="form_search" action="MainSearch" method="get">
             <div class="custom-select">
-                <select>
-                    <option value="0">--선택--</option>
-                    <option value="1">cate1</option>
-                    <option value="2">cate2</option>
-                    <option value="3">cate3</option>
+                <select name="selectSearch">
+                	<option value="">--선택--</option>
+                    <option value="보드게임">보드게임</option>
+                    <option value="중고거래">중고거래</option>
                 </select>
             </div>
             <div>
