@@ -50,7 +50,7 @@
 #info2 {
 	position: relative;
 	width: 1500px;
-	height: 4300px;
+	height: 4100px;
 	left: 200px;
 	top: 340px;
 	border: 1px solid black;
@@ -170,25 +170,40 @@
 	position: fixed;
 	z-index: 1;
 	background-color: rgba(12, 12, 12, .3);
+	backdrop-filter: blur(4px);
+	
 }
 
 .modal-content {
-	width: 680px;
-	height: 720px;
+	width: 710px;
+	height: 700px;
 	top: 200px;
 	margin: auto;
 	position: relative;
-	background-color: #e9ecef;
+	background-color: #D9F3F8;
 	padding: 10px;
-}
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius:5px; 
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border: 5px solid  burlywood;
+	}
 .modal-content2 {
 	width: 800px;
 	height: 365px;
 	top: 100px;
 	margin: auto;
 	position: relative;
-	background-color: #e9ecef;
+	background-color: #D9F3F8;
 	padding: 10px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius:5px; 
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border: 5px solid  burlywood;
+	border-collapse:collapse;
+    border-right:none;
+	border-left:none;
 }
 /* Modal Box content에 내용 크게 키우기 */
 .modal-content2 .normal-table td {
@@ -198,26 +213,27 @@
 }
 #rd .normal-table td {
 	width:120px;
+	
 }
 
 
 .btn1 {
  	position: relative;
 	top: 15px;
-	width: 336px;
+	width: 345px;
 	height: 100px;
 	float:left;
+	background-color: #D9E5FF;
 }
 .close{
  	position: relative;
 	top: 15px;
-	left: 4px;
-	width: 336px;
+	left: 15px;
+	width: 345px;
 	height: 100px;
 	float:left;
-/* 	left:340px;
-	top:-86px; */
-}
+	background-color: #D9E5FF;
+	}
 .star-rating {
 	display: flex;
 	flex-direction: row-reverse;
@@ -253,7 +269,7 @@ vertical-align: middle;
 	-webkit-text-stroke-width: 2.3px;
 	-webkit-text-stroke-color: #2b2a29;
 	cursor: pointer;
-	background-color: #e9ecef;
+	background-color: #D9F3F8;
 }
 
 .star-rating :checked ~ label {
@@ -266,7 +282,7 @@ vertical-align: middle;
 #total{
 	position: relative;
 	width: 2000px;
-	height: 5200px;
+	height: 5000px;
 }
 #rd{
 	width: 290px;
@@ -276,12 +292,25 @@ vertical-align: middle;
 	float: left;
 	top: 30px;
 	margin-left: 20px;
+	
+	
 }
-#rdbtn{
-width: 250px; 
-height: 300px; 
-background-color:#CCFFFF;
+.normal-table{
+border-collapse:collapse;
+    border-right:none;
+	border-left:none;
+	border: 1px solid burlywood;
+	
+	
 }
+.rdbtn{
+border-bottom-left-radius: 5px;
+	border-bottom-right-radius:5px; 
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	border: 1px solid burlywood;
+}
+
 .heart{
 	width: 100px;
 	height: 100px;
@@ -302,8 +331,8 @@ background-color:#CCFFFF;
 
 	<div id="modal_01" class="modal">
 		<div class="modal-content">
-			<p style="font-size: 33px; background-color: #e9ecef"><%=vo.getGameKoName()%></p>
-			<form action="GameInsertReview" method="post" style="background-color: #e9ecef">
+			<p style="font-size: 33px; background-color: #D9F3F8"><%=vo.getGameKoName()%></p>
+			<form action="GameInsertReview" method="post" style="background-color: #D9F3F8">
 				<div class="star-rating space-x-4 mx-auto">
 				<input type = "hidden" value = "<%=vo.getGameNumber()%>" name = "no">
 				<input type = "hidden" value = "<%=vo.getGameKoName()%>" name = "GAME_KONAME">
@@ -345,15 +374,14 @@ background-color:#CCFFFF;
 						src="<%=request.getContextPath()%>/<%=vo.getGameImage()%>"
 						width="500" height="500" /></th>
 					<td></td>
-					<td colspan="3" height="50px" width="600px" style="font-size: 40px">전체순위</td>
 				</tr>
 				<tr>
 					<td width = 250px></td>
-					<td colspan="3" height="50px" style="font-size: 50px"><%=vo.getGameKoName()%></td>
+					<td colspan="3" height="50px" width="1000px" style="font-size: 40px"><%=vo.getGameKoName()%></td>
 				</tr>
 				<tr>
 					<td></td>
-					<td colspan="3" height="50px" style="font-size: 40px"><%=vo.getGameEnName()%></td>
+					<td colspan="3" height="50px" style="font-size: 35px"><%=vo.getGameEnName()%></td>
 				</tr>
 				<tr>
 					<td height="30"></td>
@@ -388,7 +416,7 @@ background-color:#CCFFFF;
 					      <div class="heart" id="btn_like"></div>				
     					</div>
 					</c:if></td>
-					<td colspan="2" style = "text-align: center;">
+					<td colspan="2" style = "text-align: center; vertical-align: middle;">
 				
 					<script>
 					$(document).ready(function(){
@@ -640,9 +668,9 @@ background-color:#CCFFFF;
 					if (vo2 != null) {
 						for (Used vo22 : vo2) {
 				%>
-				<button class="rule">
+				<button class="rule" style = "width: 220px;">
 					<img src="<%=request.getContextPath()%>/<%=vo22.getUsedImg()%>"
-						width="250" height="250" />
+						width="200" height="200" />
 					<div id="plus">
 						<%=vo22.getUsedTitle()%>
 					</div>

@@ -1100,8 +1100,8 @@ public class GameDao {
 		ArrayList<Game> volist = null;
 
 		String sql = "select t3.*, NVL(t4.likecount,0) as likecount from (select * from  (select Rownum r, t1.* from (select * from BOARDGAME) t1) t2  where r between ? and ?) t3 "
-				+" left outer join (select game_no, count(*) as likecount from BOARDGAME_LIKE group by game_no order by likecount asc) t4 "
-				+" on t3.game_no = t4.game_no order by likecount desc";
+				+" left outer join (select game_no, count(*) as likecount from BOARDGAME_LIKE group by game_no order by likecount desc) t4 "
+				+" on t3.game_no = t4.game_no";
 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;

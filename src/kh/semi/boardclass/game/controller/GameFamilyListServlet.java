@@ -86,15 +86,23 @@ public class GameFamilyListServlet extends HttpServlet {
 		}else if(sort.equals("GameLevelList")) {
 			ArrayList<Game> volist = new GameService().selectLevelGameList(startRnum,endRnum,cate, search);
 			request.setAttribute("gamevolist", volist);
+			String a= "난이도 순";
+			request.setAttribute("ASort", a);
 		} else if(sort.equals("GameGradeList")) {
 			ArrayList<Game> volist = new GameService().selectGradeGameList(startRnum,endRnum,cate, search);
 			request.setAttribute("gamevolist", volist);
+			String a= "평점  순";
+			request.setAttribute("ASort", a);
 		}else if(sort.equals("GameGradeDescList")) {
 			ArrayList<Game> volist = new GameService().selectGradeDescGameList(startRnum,endRnum,cate, search);
 			request.setAttribute("gamevolist", volist);
+			String a= "평점 낮은 순";
+			request.setAttribute("ASort", a);
 		}else if(sort.equals("GameSortList")) {
 			ArrayList<Game> volist = new GameService().selectSortGameList(startRnum,endRnum,cate, search);
 			request.setAttribute("gamevolist", volist);
+			String a= "가나다 순";
+			request.setAttribute("ASort", a);
 		}
 		
 //		String sort1 = request.getParameter("sort1");

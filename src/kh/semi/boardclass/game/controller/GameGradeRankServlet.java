@@ -84,14 +84,17 @@ public class GameGradeRankServlet extends HttpServlet {
 		if(sort1 != "0"){
 		ArrayList<Game> volist1 = new GameService().selectSortGradeRankList(startRnum,endRnum,sort1,sort2,sort3,sort4);
 		request.setAttribute("gamevolist", volist1);
+		ArrayList<String> sort = new ArrayList<String>();
+		sort.add(sort1);
+		sort.add(sort2);
+		sort.add(sort3);
+		sort.add(sort4);
+		request.setAttribute("Sort", sort);
 		
 		}else{
 			ArrayList<Game> volist1 = new GameService().selectGradeRankList(startRnum,endRnum);
 		request.setAttribute("gamevolist", volist1);
 		}
-		
-		
-		
 		
 		// Data 전달을 위해서 request에 셋
 		

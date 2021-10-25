@@ -32,13 +32,14 @@
 
 #page {
 	position: absolute;
-	top: 800px;
-	left: 900px;
+	top: 850px;
+	left: 670px;
 	font-size: 40px;
 }
 #nav2 {
 	position: relative;
 	left: 30px;
+	top: 70px;
 	font-size: 45px;
 }
 .ulist {
@@ -49,10 +50,10 @@
 }
 #section2 {
 	position: relative;
-	width: 2100px;
-	height: 400px;
+	width: 1450px;
+	height: 1000px;
 	left: 300px;
-	top: -50px;
+	top: -60px;
 }
 #board_info {
 	position: relative;
@@ -60,26 +61,34 @@
 	float: left;
 	margin: 30px;
 }
+#d2{
+	position: relative;
+	
+	top: -15px;
+	width: 900px;
+	height: 100px;
+	font-size: 50px;
+}
 #d1 {
 	position: relative;
 	text-align: center;
-	left:-250px;
+	left: 240px;
 	width: 900px;
 	height: 100px;
 	font-size: 50px;
 }
 #search {
 	position: relative;
-	top: -400px;
-	left: -220px;
+	top : -270px;
+	
 	font-size: 40px;
-	display: flex;
-    justify-content: space-around;
+	
+    
 }
 #hrline{
 position: relative;
 top: -410px;
-width: 90%;
+width: 95%;
 border: 1px solid grey;
 }
 #text_name {
@@ -92,18 +101,31 @@ border: 1px solid grey;
 
 #sort {
 	position: relative;
-	left: 1600px;
+	left: 1120px;
 	top: -330px;
 	width: 250px;
 	height: 50px;
 }
 #total{
 	position: relative;
-	width: 2000px;
-	height: 1400px;
+	width: 1300px;
+	height: 1250px;
 }
-
-
+.btn1{
+	height: 300px;
+	width: 220px;
+	border: 1px solid burlywood;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius:5px; 
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
+#result{
+	position: relative;
+	width: 200x;
+	font-size: 20px;
+	top: 70px;
+}
 
 </style>
 </head>
@@ -117,14 +139,14 @@ border: 1px solid grey;
 			
 			<br>
 			<form action="GameGradeRank"  name="sort" method="post">
-			<select id="sort1" name="sort1"  >
+			<select id="sort1" name="sort1" style = "width: 150px; height: 50px;" >
 				<option value="" hidden>=== 대상 연령 ===</option>
 				<option value="8세">8세 이상</option>
 				<option value="12세">12세 이상</option>
 				<option value="13세">13세 이상</option>
 				<option value="14세">14세 이상</option>
 			</select> <br>
-			<select id="sort2" name="sort2"  >
+			<select id="sort2" name="sort2"  style = "width: 150px; height: 50px;">
 				<option value="" hidden>=== 게임 인원 ===</option>
 				<option value="2명">2명 정도</option>
 				<option value="4명">4명 정도</option>
@@ -132,14 +154,14 @@ border: 1px solid grey;
 				<option value="10명">10명 정도</option>
 				<option value="12명">12명 정도</option>
 			</select> <br>
-			<select id="sort3" name="sort3"  >
+			<select id="sort3" name="sort3" style = "width: 150px; height: 50px;" >
 				<option value="" hidden>=== 게임 시간 ===</option>
 				<option value="30">30분</option>
 				<option value="60">60분</option>
 				<option value="90">90분</option>
 				<option value="120">120분</option>
 			</select> <br>
-			<select id="sort4" name="sort4"  >
+			<select id="sort4" name="sort4" style = "width: 150px; height: 50px;" >
 				<option value="" hidden>=== 게임 장르 ===</option>
 				<option value="전략">전략</option>
 				<option value="테마">테마</option>
@@ -147,8 +169,9 @@ border: 1px solid grey;
 				<option value="파티">파티</option>
 				<option value="한글">한글</option>
 			</select> <br>
-			<input type = "submit" value = "검색">
+			<input type = "submit" value = "검색" style = "width: 80px; height: 20px;" >
 		</form>
+		<div id ="result">${Sort}</div>
 		</nav>
 
 		<aside></aside>
@@ -156,7 +179,7 @@ border: 1px solid grey;
 		<section id="section2">
 
 		<div id="search">
-				<p>게임 순위</p>
+				<div id="d2">게임 순위</div>
 				<div id="d1">평점 순</div>
 				
 				
@@ -186,7 +209,7 @@ border: 1px solid grey;
 				<button type="submit"    class="btn1" >
 				
 						<img src="<%=request.getContextPath()%>/<%=vo.getGameImage()%>"
-						width="300" height="300" />
+						width="200" height="200" />
 					<div class="img-text">
 						
 						<%=vo.getGameKoName()%><br>

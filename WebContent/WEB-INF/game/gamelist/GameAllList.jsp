@@ -4,7 +4,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	ArrayList<Game> volist = (ArrayList<Game>) request.getAttribute("gamevolist");
-
+	String ASort = (String) request.getAttribute("ASort");
 	int startPage = (int) request.getAttribute("startPage");
 	int endPage = (int) request.getAttribute("endPage");
 	int pageCount = (int) request.getAttribute("pageCount");
@@ -90,7 +90,7 @@ top:-100px;
 	top: -6px;
 	width: 250px;
 	height: 40px;
-	font-size: 15px;
+	font-size: 10px;
 }
 
 #search_btn {
@@ -108,7 +108,7 @@ top:-100px;
 }
 #total{
 	position: relative;
-	width: 1550px;
+	width: 1600px;
 	height: 1200px;
 }
 .btn1{
@@ -119,6 +119,13 @@ top:-100px;
 	border-bottom-right-radius:5px; 
 	border-top-right-radius: 5px;
 	border-top-left-radius: 5px;
+}
+#result{
+	position: relative;
+	left: 1250px;
+	width: 150px;
+	
+	top: -450px;
 }
 
 </style>
@@ -147,23 +154,32 @@ top:-100px;
 		<aside></aside>
 
 		<section id="section2">
-			<div id="d1">전체</div>
-
+			<div id="d1">전체 </div>
+			<div id='result'> 
+			<p style = "font-size: 25px;">${ASort}</p>
+			</div>
 			<div id="search">
 			<form action="GameAllList" method="post" >
-				게임이름 <input type="search" id="text_name" name="search">
+				게임정보 <input type="search" id="text_name" name="search">
 				<button type="submit" id="search_btn" >검색</button>
 				</form>
 			</div>
 
 	<form action="GameAllList"  name="sort" method="post">
-			<select id="sort" name="sort" onchange="this.form.submit()" >
+			<select id="sort" name="sort" onchange="this.form.submit()">
 				<option value="" hidden>=== 정렬 선택 ===</option>
 				<option value="GameLevelList">난이도 순</option>
 				<option value="GameGradeList">평점 순</option>
 				<option value="GameGradeDescList">평점 낮은순</option>
 				<option value="GameSortList">가나다 순</option>
-			</select> </form><br>
+			</select> </form>
+	
+			
+			
+			<br>
+			
+			 
+		
 
 
 			<%

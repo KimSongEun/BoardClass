@@ -51,8 +51,8 @@
 
 #total{
 	position: relative;
-	width: 2000px;
-	height: 2600px;
+	width: 1500px;
+	height: 3500px;
 }
 #rd{
 	width: 290px;
@@ -64,20 +64,24 @@
 #tb{
 	position:relative;
 	top: 100px;
-	left: 450px;
+	left: 400px;
 	width: 1100px;
 	height: 300px;
 	margin-bottom: 30px;
 	font-size: 30px;
+	border-collapse:collapse;
+    border-right:none;
+border-left:none;
 }
+
 .td2{
 	margin-right: 20px;
 }
 
 #page {
 	position: relative;
-	top: -80px;
-	left: 1100px;
+	top: -60px;
+	left: 950px;
 	font-size: 40px;
 }
  .heart{
@@ -97,14 +101,21 @@
         } 
         
 .placement{
+	height:30px;
+	position: relative;
+	top : -50px;
      display: flex;
     justify-content: space-around;
  }
          
 .btn_report{
+	position: relative;
+	top : 25px;
       height: 50px; 
       width: 130px;
 }
+
+
 </style>
 </head>
 
@@ -122,7 +133,7 @@
 		
 			<table border = "1" id = "tb">
 							<tr>
-								<td ><%=go.getUserId()%></td>
+								<td width="450px;"><%=go.getUserId()%>님</td>
 								<td class="reviewNo"><%=go.getReviewNo()%></td>
 								<td class = "td2" align=right >★   <%=go.getReviewScore()%> &nbsp; </td>								
 							</tr>
@@ -130,13 +141,13 @@
 								<td colspan="3" height="200px"><%=go.getReviewContent()%></td>
 							</tr>
 							<tr>
-							<td colspan="2"> &nbsp;
+							<td colspan="2" > &nbsp;
 								<c:if test="${game.userId != userSession.userId}">
-								<div class="placement">
+								<div class="placement" >
 					     		 <div class="heart <%if(go.getLiked()>0) {%>is-active<%} %>" id="btn_like"></div>
 					     		 <p>♥ <%=go.getLikecount()%>개 </p>	
 					     		 
-					     		 <button type="button" class ="btn_report"  >신고하기</button>	
+					     		 <button type="button" class ="btn_report">신고하기</button>	
     							 
     							</div>
 								</c:if></td>
@@ -248,6 +259,7 @@
 				thisReviewNo : reviewNo,
 				thisGameNo : "${gameno}"
 			},
+			
 			success : function(receive) {
 				console.log("신고receive값은:"+receive);
 				if(receive<1){

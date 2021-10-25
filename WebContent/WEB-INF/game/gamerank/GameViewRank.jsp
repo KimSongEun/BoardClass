@@ -28,16 +28,16 @@
 
 @MEDIA {
 }
-
 #page {
 	position: absolute;
-	top: 800px;
-	left: 900px;
+	top: 850px;
+	left: 670px;
 	font-size: 40px;
 }
 #nav2 {
 	position: relative;
 	left: 30px;
+	top: 70px;
 	font-size: 45px;
 }
 .ulist {
@@ -48,10 +48,10 @@
 }
 #section2 {
 	position: relative;
-	width: 2100px;
-	height: 400px;
+	width: 1450px;
+	height: 1000px;
 	left: 300px;
-	top: -50px;
+	
 }
 #board_info {
 	position: relative;
@@ -59,26 +59,34 @@
 	float: left;
 	margin: 30px;
 }
+#d2{
+	position: relative;
+	
+	top: -15px;
+	width: 900px;
+	height: 100px;
+	font-size: 50px;
+}
 #d1 {
 	position: relative;
 	text-align: center;
-	left:-250px;
+	left: 240px;
 	width: 900px;
 	height: 100px;
 	font-size: 50px;
 }
 #search {
 	position: relative;
-	top: -400px;
-	left: -220px;
+	top : -270px;
+	
 	font-size: 40px;
-	display: flex;
-    justify-content: space-around;
+	
+    
 }
 #hrline{
 position: relative;
 top: -410px;
-width: 90%;
+width: 95%;
 border: 1px solid grey;
 }
 #text_name {
@@ -91,16 +99,26 @@ border: 1px solid grey;
 
 #sort {
 	position: relative;
-	left: 1600px;
+	left: 1120px;
 	top: -330px;
 	width: 250px;
 	height: 50px;
 }
 #total{
 	position: relative;
-	width: 2000px;
-	height: 1400px;
+	width: 1300px;
+	height: 1250px;
 }
+.btn1{
+	height: 300px;
+	width: 220px;
+	border: 1px solid burlywood;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius:5px; 
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
+
 
 
 </style>
@@ -113,7 +131,7 @@ border: 1px solid grey;
 		
 		<nav id="nav2">
 
-			<form action="GameGradeRank"  name="sort" method="post">
+			<form action="GameGradeRank"  name="sort" method="post" style = "width: 300px;">
 			<select id="sort1" name="sort1"  >
 				<option value="" hidden>=== 대상 연령 ===</option>
 				<option value="8세">8세 이상</option>
@@ -144,7 +162,7 @@ border: 1px solid grey;
 				<option value="파티">파티</option>
 				<option value="한글">한글</option>
 			</select> <br>
-			<input type = "submit" value = "검색">
+			<input type = "submit" value = "검색" id = "btn2">
 		</form>
 
 		</nav>
@@ -153,7 +171,7 @@ border: 1px solid grey;
 
 		<section id="section2">
 	<div id="search">
-				게임 순위
+				<div id="d2">게임 순위</div>
 				<div id="d1">조회수 순</div>
 				
 				
@@ -179,7 +197,7 @@ border: 1px solid grey;
 							<h2><%=vo.getR()%>등</h2>
 				<button type="submit"    class="btn1" >
 						<img src="<%=request.getContextPath()%>/<%=vo.getGameImage()%>"
-						width="300" height="300" />
+						width="200" height="200" />
 					<div class="img-text">
 						<%=vo.getGameKoName()%><br>
 						게임 인원 : <%=vo.getGameLevel()%>명<br>

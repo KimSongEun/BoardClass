@@ -118,7 +118,13 @@ top:-100px;
 	border-top-right-radius: 5px;
 	border-top-left-radius: 5px;
 }
-
+#result{
+	position: relative;
+	left: 1250px;
+	width: 150px;
+	
+	top: -450px;
+}
 </style>
 </head>
 <body>
@@ -147,7 +153,9 @@ top:-100px;
 
 		<section id="section2">
 			<div id="d1">가족</div>
-
+<div id='result'> 
+			<p style = "font-size: 25px;">${ASort}</p>
+			</div>
 			<div id="search">
 				<form action="GameFamilyList" method="post">
 				게임이름 <input type="search" id="text_name" name="search">
