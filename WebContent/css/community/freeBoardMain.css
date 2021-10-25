@@ -1,5 +1,5 @@
 @charset "UTF-8";
-* { margin: 0; padding: 0;}
+* { margin: 0; padding: 0; box-sizing: border-box;}
 body {display: felx;}
 li { list-style-type: none;}
 a { text-decoration: none;}
@@ -275,55 +275,38 @@ a:link {
     appearance: none;
 }
 /* 검색 */
-
-.data_srch_wrap {
-    margin: 0 -30px;
-    border: solid #e6e6e8;
-    border-width: 1px 0;
-    background: #ffffff;
-	width: 100%;
-  overflow: auto;
-}
-.data_srch_wrap .slt_box {
-	float: left;
-}
-
-.data_srch_wrap .slt_box select {
-  width: 20%;
-  text-align: center;
- /*padding: 12px 0;*/   
+form.searchselect input[type=text] {
   font-size: 14px;
-  line-height: 36px;
-  padding: 10px 45px 10px 30px;
-  color: #777777;
+  float: left;
+  width: 65%;
+  background: #fff;
   border: none;
-  background: #ffffff url(/img/commuslt2.png) right center no-repeat;
+  padding: 10px 0 10px 30px;
 }
-.data_srch_wrap .ipt_box .ipt {
-	width: 60%;
-    height: 56px;
-    padding: 10px 0 10px 30px;
-    border: none;
-    background: #ffffff;
-    font-size: 14px;
-}
-.data_srch_wrap .ipt_box .search_button {
-    width: 10%;
-    height: 56px;
-     background: #ffffff url("../img/commu_srch.png") center center no-repeat;
-    font-size: 14px;
-    line-height: 36px;
-   text-indent: -9999em;
-}
-.data_srch_wrap .ipt_box .w3-button  {
-    width: 80px;
-    height: 56px;
-    background: #ffffff url("../img/commu_srch.png") center center no-repeat;
-    font-size: 14px;
+form.searchselect select {
+	float: left;
+	width: 10%;
+  
+	padding: 10px 45px 10px 30px;
+	border: none;
+	background: #ffffff;
+	font-size: 14px;
     line-height: 36px;
     color: #777777;
-    text-indent: -9999em;
 }
+
+form.searchselect button {
+  float: right;
+  width: 10%;
+  padding: 10px;
+  background: #fff;
+  color: #777;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+
 .pagination {
     overflow: hidden;
     position: relative;

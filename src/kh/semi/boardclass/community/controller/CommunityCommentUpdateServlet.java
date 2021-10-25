@@ -7,6 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kh.semi.boardclass.community.model.service.CommunityService;
+import kh.semi.boardclass.community.model.vo.Board;
+import kh.semi.boardclass.user.model.vo.User;
+
 /**
  * Servlet implementation class CommunityCommentUpdateServlet
  */
@@ -26,8 +30,21 @@ public class CommunityCommentUpdateServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
+		
+		User loginSS = (User)request.getSession().getAttribute("userSession");
+		if(loginSS == null) {
+			request.getRequestDispatcher("/WEB-INF/error/loginAlert.jsp").forward(request, response);
+			return;
+		}
+		
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		Board vo = new CommunityService().getBoard(boardNo);
+		
+		request.setAttribute("board", vo);
+		request.getRequestDispatcher("/WEB-INF/community/BoardUpdate.jsp").forward(request, response);
 	}
 
 	/**
