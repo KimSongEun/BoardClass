@@ -11,24 +11,44 @@
 <head>
 <meta charset="UTF-8">
  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<link rel="stylesheet" href="css/index/maincss.css">
+<link rel="stylesheet" href="css/user/deleteUser.css">
+
 </head>
 <body>
  
-
+ <%@include file="/WEB-INF/user/userHeader.jsp" %>
 	<%
 		if (m != null) {
 	%>
 
 	<form name="form" method="post" id="deleteform" action="deleteuser.do" enctype="multipart/form-data">
 		<div class="container">
-			<div class="insert">
+		<div class="sidenav">
+			<div class="mypage">
+				<p class="title">마이페이지</p>
+				<a href="<%=request.getContextPath()%>/myactivity">- 내 활동</a> <a
+					href="<%=request.getContextPath()%>/myboardgame">- 보드게임</a> <a
+					href="<%=request.getContextPath()%>/mytrade">- 중고거래</a> <a
+					href="<%=request.getContextPath()%>/mycommunity">- 커뮤니티</a>
+			</div>
+
+			<div class="userInfo">
+				<p class="title">회원정보 관리</p>
+				<a href="<%=request.getContextPath()%>/checkuser">- 회원정보 조회</a> <a
+					href="<%=request.getContextPath()%>/updateuser">- 회원정보 수정</a> <a
+					href="<%=request.getContextPath()%>/deleteuser">- 회원탈퇴</a>
+			</div>
+		</div>
+		
+		
+				<div class="main">
 				<table>
 					<caption>
 						<h2>회원탈퇴</h2>
 					</caption>
 								<tr>
 						<td class="col1">프로필사진</td>
-						<p>사진 null아닌디</p>
 						<td class="col2">
 						<img alt="" src="<%=m.getUserImage()%>">
 					</tr>
@@ -53,7 +73,7 @@
 	<%
 		}
 	%>
-	
+	<%@include file="/WEB-INF/user/userFooter.jsp" %>
 	<script>
     $(function () {
 	$("#deleteBtn").on("click", function(){
