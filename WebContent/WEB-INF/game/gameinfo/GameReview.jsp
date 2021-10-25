@@ -187,13 +187,13 @@ border-left:none;
 								<div class="placement" >
 								 <p>♥ <%=go.getLikecount()%>개 </p>	
 								
-								<% if(userId!=go.getUserId()){%>
+								<% if(!userId.equals(go.getUserId())){%>
 					     		 <div class="heart <%if(go.getLiked()>0) {%>is-active<%} %>" id="btn_like"></div>
 					     		
 					     		 
 					     		 <button type="button" class ="btn_report">신고하기</button>
 								<%}%>
-					     		 <% if(userId == go.getUserId()){
+					     		 <% if(userId.equals(go.getUserId())){
 					     		 %>
     							 <button type="button" class ="btn_report2">삭제</button>
     							<%}%>

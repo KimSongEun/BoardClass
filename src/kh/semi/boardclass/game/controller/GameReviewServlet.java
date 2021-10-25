@@ -41,7 +41,12 @@ public class GameReviewServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		request.setCharacterEncoding("UTF-8");
 		
-		// LOGIN 되지 않아도 보게 해야
+		User loginSS = (User)request.getSession().getAttribute("userSession");
+		if(loginSS == null) {
+			System.out.println("로그아웃이 풀려서 메인으로 이동");
+			request.getRequestDispatcher("/WEB-INF/error/loginNeedAlert.jsp").forward(request, response);
+			return;
+		}
 		
         String gamenumstr = request.getParameter("GAME_NO");
 		int gamenum = 0;
@@ -52,7 +57,6 @@ public class GameReviewServlet extends HttpServlet {
         }
 		System.out.println("GAME_NO:"+gamenum);
        
-		User loginSS = (User)request.getSession().getAttribute("userSession");
 		
 		int reviewNo = 0;
 		try{ 
