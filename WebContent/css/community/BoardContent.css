@@ -190,8 +190,13 @@ img { border: 0;}
 .comment {
 	position: relative;
     padding: 0 0 10px 0;
+    display: flex;
 }
-
+img.recomment {
+	width: 30px; 
+	height: 30px;
+	margin-right: 10px;
+}
 .comment_box .material-icons {
 	width: 20px;
 	height: 20px;
@@ -200,6 +205,7 @@ img { border: 0;}
 .comment_box .comment_writer {
 	margin-bottom: 4px;
 	display: inline-block;
+	
 }
 .comment_box .text_comment {
 line-height: 17px;
@@ -274,6 +280,62 @@ line-height: 17px;
 }
 .comment_inbox textarea.comment_inbox_text {
     max-height: 500px;
+}
+
+
+
+.CommentWriterRe {
+	position: relative;
+}
+.CommentWriterRe .comment_inbox {
+    position: relative;
+    margin-bottom: 10px;
+}
+.CommentWriterRe .comment_inbox_name {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 700;
+    font-size: 13px;
+}
+.CommentWriterRe .comment_inbox_text {
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: block;
+    width: 100%;
+    min-height: 17px;
+    padding-right: 1px;
+    border: 0;
+    font-size: 13px;
+    -webkit-appearance: none;
+    resize: none;
+    box-sizing: border-box;
+    background: transparent;
+    color: #000000;
+    outline: 0;
+}
+
+.CommentWriterRe .comment_attach .register_box {
+	width: 15px;
+	margin: auto;
+	right: 50px;
+	bottom: 10px;
+	position: absolute;
+}
+.CommentWriterRe .comment_attach .register_box .button {
+    min-width: 46px;
+    height: 34px;
+    border: 1px solid #fff;
+  background-color: white;
+  color: black;
+  padding: 5px;
+  font-size: 11px;
+  cursor: pointer;
+  display: inline-block;
+}
+.CommentWriterRe .comment_inbox textarea.comment_inbox_text {
+    max-height: 500px;
+    padding: 10px;
+    border: 1px solid #777;
 }
 /*버튼*/
 .movelist {

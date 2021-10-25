@@ -140,9 +140,12 @@
 		<c:forEach var="comment" items="${list }">
 			<div class=getComment>
 				<div class="comment">
-					<c:if test="${comment.commentReLevel > 0 }">
-						<img src="./img/comtimg.png" width="${comment.commentReLevel*10 }">
-					</c:if>
+					<div class="imgcomt">
+						<c:if test="${comment.commentReLevel > 0 }">
+							<img src="img/relevel.png" width="${comment.commentReLevel*20 }">
+							<img src="img/recomment.png" class="recomment">
+						</c:if>
+					</div>
 				
 			<div class="comment_box">
 				<span class="material-icons">account_circle</span>
@@ -167,6 +170,7 @@
 					</div>	
 					</div>
 					<!-- 답글 영역 -->
+				<div class="CommentWriterRe">
 					<div class="hiddenText" id="a${comment.commentNo }">
 						<form action="cclist?pageNum=${pageNum }" method="post" name="frm1" id="frm1">
 							<input type="hidden" name="userId" value="${comment.userId }">
@@ -175,13 +179,18 @@
 							<input type="hidden" name="commentRef" value="${comment.commentRef }">
 							<input type="hidden" name="commentReLevel" value="${comment.commentReLevel }">
 							<input type="hidden" name="commentReStep" value="${comment.commentReStep }">
-						
-							<div><span class="left"><label for="name">${comment.userId }</label></span></div>
-							<div><textarea name="commentContent" id="commentContent" maxlength="800" required="required" placeholder="답글을 입력해주세요"></textarea></div>
 							
-							<div><input type="submit" value="등록" id="comtBtn"></div>
+							<div class="comment_inbox">
+							<div><span class="left"><label for="name">${comment.userId }</label></span></div>
+							<textarea name="commentContent" id="commentContent" maxlength="800" required="required" class="comment_inbox_text"  placeholder="답글을 입력해주세요"></textarea>
+							</div>
+							<div class="comment_attach">
+							<div class="register_box"><input type="submit" class="button btn_register" value="등록" id="comtBtn"></div>
+							</div>
+							
 						</form>
 					</div>
+				</div>
 					</div>
 	</c:forEach>
 					<!-- 댓글 insert 영역 -->
@@ -200,9 +209,7 @@
 								<div class="left"><label for="name">${comment.userId }</label></div>
 								<textarea name="commentContent" id="commentContent" class="comment_inbox_text" maxlength="800" required="required" placeholder="댓글을 입력해주세요"></textarea>
 							</div>
-							<div class="inputComment">
-								
-							</div>
+
 							<div class="comment_attach">
 								<div class="register_box"><input type="submit" value="등록" class="button btn_register" id="comtBtn"></div>
 							</div>
