@@ -927,7 +927,7 @@ public class AdminDao {
 	
 	public int insertAd(Connection conn, String title, String content, String writer, String img, String promotionURL){
 		int result = 0;
-		String sql = "INSERT INTO BANNER VALUES (PROMOTION_NUM.nextval, ?, 0, ?, SYSDATE, ?, ?, ?)";
+		String sql = "INSERT INTO BANNER VALUES (PROMOTION_NUM.nextval, ?, 0, ?, ?, ?, ?, SYSDATE)";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql);
