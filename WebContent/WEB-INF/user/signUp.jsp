@@ -6,12 +6,12 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
   <link rel="stylesheet" href="./css/user/signUp.css">
-  <link rel="stylesheet" href="./css/user/loginHeaderFooter.css">
+  <link rel="stylesheet" href="css/index/maincss.css">
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="./js/user/signUp.js"></script>
 </head>
 <body>
- <%@include file="/WEB-INF/user/userHeader.jsp" %>
+  <%@include file="/WEB-INF/index/header.jsp" %>
 <form name="form" method="post" id="signform" action="signup.do" enctype="multipart/form-data">
         <div class="container">
             <div class="insert">

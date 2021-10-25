@@ -22,8 +22,9 @@ int pageCount2 = (int) request.getAttribute("pageCount2");
 
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="css/index/maincss.css">
 <link rel="stylesheet" href="css/mypage/myGameList.css">
+<link rel="stylesheet" href="css/index/maincss.css">
+
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <title>마이페이지 보드게임 조회</title>
 </head>

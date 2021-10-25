@@ -28,7 +28,7 @@
 
 <body>
 
-	<%@include file="/WEB-INF/user/userHeader.jsp"%>
+	 <%@include file="/WEB-INF/index/header.jsp" %>
 	<div class="container">
 		<div class="sidenav">
 			<div class="mypage">
@@ -134,6 +134,6 @@
 
 		</div>
 		</div>
-		<%@include file="/WEB-INF/user/userFooter.jsp"%>
+		<%@include file="/WEB-INF/index/footer.jsp" %>
 </body>
 </html>

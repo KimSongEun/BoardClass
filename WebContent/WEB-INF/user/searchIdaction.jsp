@@ -12,14 +12,13 @@ User user = (User)request.getAttribute("users");
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
- <link rel="stylesheet" href="css/user/loginHeaderFooter.css">
+<link rel="stylesheet" href="css/index/maincss.css">
 <link rel="stylesheet" href="css/user/searchIdPwd.css">
 
 </head>
 <body>
 
-	<%@include file="/WEB-INF/user/userHeader.jsp"%>
+	 <%@include file="/WEB-INF/index/header.jsp" %>
 
 <section>
 	
@@ -68,12 +67,8 @@ User user = (User)request.getAttribute("users");
 	</div>
 
 </section>
-	
 
-
-	<%@include file="/WEB-INF/user/userFooter.jsp"%>
-	
-
+	 <%@include file="/WEB-INF/index/footer.jsp" %>
 
 </body>
 </html>

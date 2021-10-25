@@ -10,20 +10,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<title>회원정보 탈퇴</title>
  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<link rel="stylesheet" href="css/index/maincss.css">
 <link rel="stylesheet" href="css/user/deleteUser.css">
-
+<link rel="stylesheet" href="css/index/maincss.css">
 </head>
 <body>
  
- <%@include file="/WEB-INF/user/userHeader.jsp" %>
-	<%
-		if (m != null) {
-	%>
-
-	<form name="form" method="post" id="deleteform" action="deleteuser.do" enctype="multipart/form-data">
-		<div class="container">
+ <%@include file="/WEB-INF/index/header.jsp" %>
+ <div class="container">
 		<div class="sidenav">
 			<div class="mypage">
 				<p class="title">마이페이지</p>
@@ -40,19 +35,27 @@
 					href="<%=request.getContextPath()%>/deleteuser">- 회원탈퇴</a>
 			</div>
 		</div>
-		
-		
-				<div class="main">
+	<%
+		if (m != null) {
+	%>
+
+	<form name="form" method="post" id="deleteform" action="deleteuser.do" enctype="multipart/form-data">
+		<div class="main">
 				<table>
 					<caption>
-						<h2>회원탈퇴</h2>
+						<h1>회원탈퇴</h1>
 					</caption>
-								<tr>
-						<td class="col1">프로필사진</td>
-						<td class="col2">
-						<img alt="" src="<%=m.getUserImage()%>">
-					</tr>
 				<tr>
+					<div id="imgname">									
+						<th class="col3" rowspan="4"><img src="<%=request.getContextPath()%>/<%=m.getUserImage()%>" width="250px" height="250px">
+						<div id="name"><%=m.getUserName()%> 님</div></th>
+					</div>
+				</tr>
+					<tr>
+						<th class="col4" colspan="2">정말 회원을 탈퇴하시겠습니까?</th>
+						
+					</tr>
+					<tr>
 						<td class="col1">아이디</td>
 						<td class="col2"><input type="text" name="userId" id="userId"
 							value="<%=m.getUserId()%>" readonly="readonly">
@@ -60,7 +63,7 @@
 					<tr>
 						<td class="col1">비밀번호</td>
 						<td class="col2"><input type="password" name="userPassword"
-							id="userPassword"> 
+							id="userPassword" placeholder="비밀번호를 입력해주세요."> 
 					</tr>
 
 				</table>
@@ -68,12 +71,12 @@
 			<div class="create">		
 				<input class="deleteBtn" id="deleteBtn" type="button" value="회원 탈퇴">
 			</div>
-		</div>
+	
 	</form>
 	<%
 		}
 	%>
-	<%@include file="/WEB-INF/user/userFooter.jsp" %>
+	 <%@include file="/WEB-INF/index/footer.jsp" %>
 	<script>
     $(function () {
 	$("#deleteBtn").on("click", function(){

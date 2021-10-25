@@ -10,15 +10,12 @@
 <head>
 <meta charset="UTF-8">
 <title>회원정보 관리</title>
-<link rel="stylesheet" href="css/index/maincss.css">
 <link rel="stylesheet" href="css/user/myinfo.css">
+<link rel="stylesheet" href="css/index/maincss.css">
 </head>
 <body>
-  <%@include file="/WEB-INF/user/userHeader.jsp" %>
-	<%
-		if (m != null) {
-	%>
-<div class="container">
+  <%@include file="/WEB-INF/index/header.jsp" %>
+  <div class="container">
 		<div class="sidenav">
 			<div class="mypage">
 				<p class="title">마이페이지</p>
@@ -36,60 +33,53 @@
 			</div>
 		</div>
 		
+	<%
+		if (m != null) {
+	%>
+
+		
 	<form method="post" id="checkUser" action="updateuser" enctype="multipart/form-data">
 		<div class="main">
 				<table>
 					<caption>
-						<h2>회원정보조회</h2>
+						<h1>회원정보 조회</h1>
 					</caption>
-					<tr>
-						<td class="col1">프로필사진</td>
-						<td class="col2">
-						<img alt="" src="<%=m.getUserImage()%>">
-					</tr>
-				
-					<tr>
-						<td class="col1">이름</td>
-						<td class="col2"><input type="text" name="userName"
-							id="userName" value="<%=m.getUserName()%>" readonly="readonly"></td>
+				<tr>
+					<div id="imgname">									
+						<th  class="col3" rowspan="7"><img src="<%=request.getContextPath()%>/<%=m.getUserImage()%>" width="300px" height="300px">
+						<div id="name"><%=m.getUserName()%> 님</div></th>
+					</div>
+				</tr>
 					
-					</tr>
 					<tr>
 						<td class="col1">닉네임</td>
-						<td class="col2"><input type="text" name="userNickname"
-							id="userNickname" value="<%=m.getUserNickname()%>" readonly="readonly"> 
-			
+						<td class="col2"><%=m.getUserNickname()%> </td>
 					</tr>
 					<tr>
 						<td class="col1">아이디</td>
-						<td class="col2"><input type="text" name="userId" id="userId"
-							value="<%=m.getUserId()%>" readonly="readonly">
+						<td class="col2"><%=m.getUserId()%> </td>
 					</tr>
 
 					<tr>
 						<td class="col1">비밀번호</td>
-						<td class="col2"><input type="password" name="userPassword"
-							id="userPassword" value="<%=m.getUserPassword()%>" readonly="readonly"> 
+						<td class="col2"><%=m.getUserPassword()%> </td>
 					</tr>
 
 
 					<tr>
 						<td class="col1">이메일</td>
-						<td class="col2"><input type="text" name="userEmail"
-							id="userEmail" value="<%=m.getUserEmail()%>" readonly="readonly"></td>
+						<td class="col2"><%=m.getUserEmail()%></td>
 					
 					</tr>
 					<tr>
 						<td class="col1">휴대폰 번호</td>
-						<td class="col2"><input type="number" name="userPhone"
-							id="userPhone" value="0<%=m.getUserPhone()%>" readonly="readonly"> 
+						<td class="col2"><%=m.getUserPhone()%></td>
 
 					</tr>
 	
 					<tr>
 						<td class="col1">주소 (선택)</td>
-						<td class="col2"><input type="text" name="userAddress"
-							id="userAddress" value="<%=m.getUserAddress()%>" readonly="readonly"></td>
+						<td class="col2"><%=m.getUserAddress()%></td>
 					</tr>
 	
 				</table>
@@ -97,11 +87,11 @@
 			<div class="create">		
 				<input class="updateBtn" id="updateBtn" type="submit" value="회원정보 수정" >
 			</div>
-		</div>
+	
 	</form>
 	<%
 		}
 	%>
-   <%@include file="/WEB-INF/user/userFooter.jsp" %>
+    <%@include file="/WEB-INF/index/footer.jsp" %>
 </body>
 </html>
