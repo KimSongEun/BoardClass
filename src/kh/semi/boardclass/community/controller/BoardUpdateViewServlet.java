@@ -62,9 +62,9 @@ public class BoardUpdateViewServlet extends HttpServlet {
 		CommunityService co = new CommunityService();
 		int rowCount = co.updateBoard(vo, boardNo);
 		if(rowCount > 0) {
-			response.sendRedirect(request.getContextPath() + "/cfdetail?boardNo=" + boardNo);
+			response.sendRedirect(request.getContextPath() + "/bdetail?boardNo=" + boardNo);
 		} else {
-			response.sendRedirect(request.getContextPath() + "/cfdetail?boardNo=" + boardNo);
+			response.sendRedirect(request.getContextPath() + "/bdetail?boardNo=" + boardNo);
 		}
 		
 	}

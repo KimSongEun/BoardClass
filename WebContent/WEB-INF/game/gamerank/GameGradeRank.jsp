@@ -30,10 +30,11 @@
 @MEDIA {
 }
 
+
 #page {
 	position: absolute;
-	top: 850px;
-	left: 670px;
+	top: 1480px;
+	left: 890px;
 	font-size: 40px;
 }
 #nav2 {
@@ -125,6 +126,40 @@ border: 1px solid grey;
 	width: 200x;
 	font-size: 20px;
 	top: 70px;
+}
+.div_paging_before{
+	display: flex;
+	justify-content: center;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.div_paging {
+	padding-bottom: 20px;
+}
+
+.pageprevious {
+	background-color: black;
+	color: white;
+	text-decoration: none;
+	padding: 5px 13px;
+}
+
+.pagecurrent {
+	color: black;
+	text-decoration: none;
+	padding: 5px 13px;
+}
+
+.pagecurrent:hover {
+	background-color: #ddd;
+}
+
+.pagenext {
+	background-color: black;
+	color: white;
+	text-decoration: none;
+	padding: 5px 13px;
 }
 
 </style>
@@ -225,36 +260,38 @@ border: 1px solid grey;
 				}
 				}
 			%>
+	</section>
 
-			<div id="page">
+	</div>
+
+		<div class="div_paging_before">
+			<div id="page" class="div_paging">
 				<%
 					if (startPage > 1) {
 				%>
-				이전
+				<a href="GameGradeRank?pagenum=${startPage-1}" class="pageprevious">&laquo;</a>
 				<%
-					}
+					} else {
+				%>
+				<a href="GameGradeRank?pagenum=1" class="pageprevious">&laquo;</a>
+				<%	}
 					for (int i = startPage; i <= endPage; i++) {
 				%>
-				<a href="./GameGradeRank?pagenum=<%=i%>"> <%=i%></a>
+				<a href="GameGradeRank?pagenum=<%=i%>" class="pagecurrent"> <%=i%></a>
 				<%
-					if (i != endPage) {
-				%>
-				,
-				<%
-					}
 					}
 					if (endPage < pageCount) {
 				%>
-				다음
+				<a href="GameGradeRank?pagenum=${endPage+1}" class="pagenext">&raquo;</a>
 				<%
-					}
+					} else {
 				%>
+				<a href="GameGradeRank?pagenum=${pageCount}" class="pagenext">&raquo;</a>
+				<% } %>
 			</div>
+		</div>
 
-
-		</section>
-
-	</div>
+	
 <%@include file="/WEB-INF/index/footer.jsp" %>
 
 

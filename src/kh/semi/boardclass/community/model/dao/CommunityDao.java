@@ -1597,7 +1597,7 @@ public Board getBoard(Connection conn, int boardNo) {
 	}
 	
 	// 각 게시글에 좋아요 수 조회
-	public int 	CountLikeBoard (Connection conn, int boardNo) {
+	public int 	totalLikeBoard (Connection conn, int boardNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -1618,10 +1618,33 @@ public Board getBoard(Connection conn, int boardNo) {
 		return result;
 	}
 	
+	//로그인한 유저가 추천 눌렀는지 조회
+	public int countLikeBoard(Connection conn, int boardNo, String userId) {
+		int result = -1;
+		String sql = "select count(BOARD_LIKE_NO) from BOARD_LIKE where (BOARD_NO = ? and USER_ID = ?)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			pstmt.setString(2, userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
 	public int insertLikeBoard(Connection conn, int boardNo, String userId) {
 		int result = -1;
 		PreparedStatement pstmt = null;
-		String sql = "insert into BOARD_LIKE VALUES (BOARD_LIKE_NUM.NEXTVAL, ? ,? )";
+		String sql = "insert into BOARD_LIKE VALUES (BOARD_LIKE_NUM.NEXTVAL, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, boardNo);
@@ -1650,7 +1673,7 @@ public Board getBoard(Connection conn, int boardNo) {
 		} finally {
 			JDBCTemplate.close(pstmt);
 		}
-		System.out.println("dao에요"+result);
+		System.out.println("dao에서deletelike+"+result);
 		return result;
 	}
 	

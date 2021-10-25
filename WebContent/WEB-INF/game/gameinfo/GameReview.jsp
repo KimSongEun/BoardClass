@@ -52,7 +52,7 @@
 #total{
 	position: relative;
 	width: 1500px;
-	height: 3500px;
+	height: 2950px;
 }
 #rd{
 	width: 290px;
@@ -80,8 +80,7 @@ border-left:none;
 
 #page {
 	position: relative;
-	top: -60px;
-	left: 950px;
+	
 	font-size: 40px;
 }
  .heart{
@@ -114,6 +113,47 @@ border-left:none;
       height: 50px; 
       width: 130px;
 }
+.btn_report2{
+	position: relative;
+	top : 25px;
+      height: 50px; 
+      width: 130px;
+}
+
+.div_paging_before{
+	display: flex;
+	justify-content: center;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.div_paging {
+	padding-bottom: 20px;
+}
+
+.pageprevious {
+	background-color: black;
+	color: white;
+	text-decoration: none;
+	padding: 5px 13px;
+}
+
+.pagecurrent {
+	color: black;
+	text-decoration: none;
+	padding: 5px 13px;
+}
+
+.pagecurrent:hover {
+	background-color: #ddd;
+}
+
+.pagenext {
+	background-color: black;
+	color: white;
+	text-decoration: none;
+	padding: 5px 13px;
+}
 
 
 </style>
@@ -131,7 +171,7 @@ border-left:none;
 					for (GameReview go : go2) {
 				%>
 		
-			<table border = "1" id = "tb">
+		<table border = "1" id = "tb">
 							<tr>
 								<td width="450px;"><%=go.getUserId()%>님</td>
 								<td class="reviewNo"><%=go.getReviewNo()%></td>
@@ -142,49 +182,77 @@ border-left:none;
 							</tr>
 							<tr>
 							<td colspan="2" > &nbsp;
-								<c:if test="${game.userId != userSession.userId}">
 								<div class="placement" >
+								 <p>♥ <%=go.getLikecount()%>개 </p>	
+								<c:if test="${game.userId != userSession.userId}">
+								
 					     		 <div class="heart <%if(go.getLiked()>0) {%>is-active<%} %>" id="btn_like"></div>
-					     		 <p>♥ <%=go.getLikecount()%>개 </p>	
+					     		
 					     		 
-					     		 <button type="button" class ="btn_report">신고하기</button>	
-    							 
+					     		 <button type="button" class ="btn_report">신고하기</button>
+								</c:if>
+					     		<c:if test="${game.userId != userSession.userId}">
+    							 <button type="button" class ="btn_report2">삭제</button>
+								</c:if>
     							</div>
-								</c:if></td>
+							</td>
 								
 								<td class = "td2" align=right><%=go.getReviewDate()%> &nbsp;</td>
 							</tr>
 						</table>
 					<%}} %>	
 </div>
-			<div id="page">
+
+				
+				
+				
+				
+		<div class="div_paging_before">
+			<div id="page" class="div_paging">
 				<%
 					if (startPage > 1) {
 				%>
-				이전
+				<a href="GameReview?GAME_NO=${gameno }&pagenum=${startPage-1}" class="pageprevious">&laquo;</a>
 				<%
-					}
+					} else {
+				%>
+				<a href="GameReview?GAME_NO=${gameno }&pagenum=1" class="pageprevious">&laquo;</a>
+				<%	}
 					for (int i = startPage; i <= endPage; i++) {
 				%>
-				<a href="./GameReview?GAME_NO=${gameno }&pagenum=<%=i%>"> <%=i%></a>
+				<a href="GameReview?GAME_NO=${gameno }&pagenum=<%=i%>" class="pagecurrent"> <%=i%></a>
 				<%
-					if (i != endPage) {
-				%>
-				,
-				<%
-					}
 					}
 					if (endPage < pageCount) {
 				%>
-				다음
+				<a href="GameReview?GAME_NO=${gameno }&pagenum=${endPage+1}" class="pagenext">&raquo;</a>
 				<%
-					}
+					} else {
 				%>
+				<a href="GameReview?GAME_NO=${gameno }&pagenum=${pageCount}" class="pagenext">&raquo;</a>
+				<% } %>
 			</div>
+		</div>
+			
 
 <%@include file="/WEB-INF/index/footer.jsp" %>
 
 <script>
+
+$(".btn_report2").click(conDelete);
+
+function conDelete(){
+	console.log($(this));
+	var $eleClickThis = $(this);
+	var $eleTable = $(this).parents("table");
+	var $eleReviewNo = $eleTable.find(".reviewNo");
+	var reviewNo = $eleReviewNo.text();
+	if(window.confirm("삭제하겠습니까?")){
+		location.href='reviewdeletee?reviewNo='+reviewNo;
+	} else {
+		return;
+	}
+}
 	
 	$(".heart").click(cbLike);
 

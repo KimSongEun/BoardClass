@@ -34,6 +34,7 @@
     display: flex;
 	justify-content: space-around;
 }
+
 </style>
 <script type="text/javascript">
 	var b = "a";
@@ -79,29 +80,30 @@
 	</div>
 	
 	<div class="viewbody">
-		<div class="hgroup">
-			<div class="tit">${board.boardTitle }</div>
-			<div class="util">
-				<div class="name">${board.userId }</div>
-				<div class="date">시간: ${board.boardWriteDate }</div>
-				<div class="hit">조회수: ${board.boardViewCount }</div>
+			<div class="hgroup">
+				<div class="tit">${board.boardTitle }</div>
+				<div class="util">
+					<div class="name">${board.userId }</div>
+					<div class="date"> ${board.boardWriteDate }</div>
+					<div class="hit">조회수: ${board.boardViewCount }</div>
+				</div>
 			</div>
-		</div>
-		<div class= "content">
-		내용 : ${board.boardContent }
-		</div>
+			<div class="board_content">
+			 ${board.boardContent }
+			</div>
 		
 	
 		<!-- 추천 -->
-		<c:if test="${board.userId != userSession.userId}">
-			<button type="button" id="btn_report">신고하기</button>
+			<div class="heart_like">
+			<c:if test="${board.userId != userSession.userId}">
 				<!-- 좋아요 -->
 				<div class="placement">								
-			      <div class="heart" id="btn_like"></div>	
+				      <div class="heart" id="btn_like"></div>	
+				      <span class="countheart">${totallike}개</span>	
 				</div>	
-		</c:if>
-				 <div class="countheart">${likeresult }개</div>	
-		
+			</c:if>
+			
+			</div>
  
 </div>
 	
@@ -109,23 +111,25 @@
 	<div class="btn_wrap">
 		
 		<c:if test="${board.userId eq userSession.userId}">
-			<button type="button" onclick="boardUpdate();">수정</button>
-			<button type="button" onclick="boardDelete();">삭제</button>
+			<button type="button" class="movelist list" onclick="boardUpdate();">수정</button>
+			<button type="button" class="movelist list" onclick="boardDelete();">삭제</button>
 		</c:if>
-
+		<c:if test="${board.userId != userSession.userId}">
+			<button type="button" id="btn_report" class="movelist list">신고하기</button>
+		</c:if>
 		<c:if test="${board.boardCategory =='자유게시판'}">
-		<a href="cf" class="btn btn3">
-			<button >목록</button>
+		<a href="cf">
+			<button class="movelist list" >목록</button>
 		</a>
 		</c:if>
 		<c:if test="${board.boardCategory =='유저정보게시판'}">
-		<a href="cu" class="btn btn3">
-			<button >목록</button>
+		<a href="cu">
+			<button class="movelist list" >목록</button>
 		</a>
 		</c:if>
 		<c:if test="${board.boardCategory =='모임게시판'}">
-		<a href="cg" class="btn btn3">
-			<button >목록</button>
+		<a href="cg">
+			<button class="movelist list" >목록</button>
 		</a>
 		</c:if>
 	</div>
@@ -151,7 +155,7 @@
 					
 					<div class="comment_info_box">
 						<div class="createDate">${comment.commentWriteDate }</div>
-						<button type="button" class="info_btn" onclick="re('${comment.commentNo}')">답글</button>
+						<button type="button" class="infobtn recomt" onclick="re('${comment.commentNo}')">답글</button>
 						<c:if test="${comment.userId eq userSession.userId}">
 							<button type="button" class="infobtn delete" value="삭제" onclick="location.href='ccdelete?commentNo=${comment.commentNo}'">삭제</button>
 						</c:if>
@@ -182,7 +186,7 @@
 	</c:forEach>
 					<!-- 댓글 insert 영역 -->
 					
-					<div class="inputtxt">
+					<div class="CommentWriter">
 						<form action="cclist" method="post" name="frm2">
 							<input type="hidden" name="pageNum" value="${pageNum }">
 							<input type="hidden" name="userId" value="${comment.userId }">
@@ -192,13 +196,16 @@
 							<input type="hidden" name="commentReLevel" value="${comment.commentReLevel }">
 							<input type="hidden" name="commentReStep" value="${comment.commentReStep }">
 							
-							<div>
-								<span class="left"><label for="name">${comment.userId }</label></span>
+							<div class="comment_inbox">
+								<div class="left"><label for="name">${comment.userId }</label></div>
+								<textarea name="commentContent" id="commentContent" class="comment_inbox_text" maxlength="800" required="required" placeholder="댓글을 입력해주세요"></textarea>
 							</div>
 							<div class="inputComment">
-								<div><textarea name="commentContent" id="commentContent" maxlength="800" required="required" placeholder="댓글을 입력해주세요"></textarea></div>
+								
 							</div>
-							<div class="btnFix"><input type="submit" value="등록" class="commentbtn" id="comtBtn"></div>
+							<div class="comment_attach">
+								<div class="register_box"><input type="submit" value="등록" class="button btn_register" id="comtBtn"></div>
+							</div>
 						</form>
 					</div>
 </div>
@@ -229,26 +236,24 @@ function del(){
 		location.href='bdetail?boardNo=${board.boardNo }';
 	}
 }
+
 $("#comtBtn").click(comtBtn);
 function comtBtn(){
 	if(!"${userSession}"){
 		alert("로그인해주세요");
 		return;
 	}
-	}
+}
 
 // 신고
 let reportedThis = false;
 $("#btn_report").click(cbReport);
 
 function cbReport(){
-	
 	if(!"${userSession}"){
 		alert("로그인해주세요");
 		return;
 	}
-	var reportedThis = false;
-
 	if("${reportresult}" == 1){
 		alert("이미 신고하셨습니다.");
 		reportedThis = true;
@@ -265,7 +270,7 @@ function cbReport(){
 			loginId : "${userSession.userId}",
 			thisboardNo : "${board.boardNo}"
 		},
-		
+		dataType : "json",
 		success : function(receive) {
 			console.log("신고receive값은:"+receive);
 			if(receive<1){
@@ -282,13 +287,14 @@ function cbReport(){
 					+ error);
 		}
 	});
+}
 
 $(document).ready(function(){
-		if("${likeresult}" == 1){
-			$(".heart").toggleClass("is-active");
-		}
-	});
-}
+	if("${likeresult}" == 1){
+		$(".heart").toggleClass("is-active");
+	}
+});
+
 $("#btn_like").click(cbLike);
 
 	function cbLike(){
@@ -296,7 +302,6 @@ $("#btn_like").click(cbLike);
 			alert("로그인해주세요");
 			return;
 		}
-		
 		$.ajax({
 			type : "post",
 			url : "boardlike.ajax",

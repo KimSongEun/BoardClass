@@ -377,7 +377,7 @@ border-bottom-left-radius: 5px;
 				</tr>
 				<tr>
 					<td width = 250px></td>
-					<td colspan="3" height="50px" width="1000px" style="font-size: 40px"><%=vo.getGameKoName()%></td>
+					<td colspan="3" height="50px" width="1200px;" style="font-size: 40px"><%=vo.getGameKoName()%></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -388,12 +388,12 @@ border-bottom-left-radius: 5px;
 				</tr>
 				<tr>
 					<td></td>
-					<td width="170px" height="30px" align="center"
-						style="font-size: 30px">게임 인원</td>
-					<td width="170px" height="30px" align="center"
-						style="font-size: 30px">사용 연령</td>
-					<td width="170px" height="30px" align="center"
-						style="font-size: 30px">플레이 시간</td>
+					<td width="250px" height="30px" align="center"
+						style="font-size: 25px">게임 인원</td>
+					<td width="150px" height="30px" align="center"
+						style="font-size: 25px">사용 연령</td>
+					<td width="150px" height="30px" align="center"
+						style="font-size: 25px">플레이 시간</td>
 				</tr>
 				<tr>
 					<td></td>
