@@ -60,7 +60,7 @@
 			<h2 class="as_hgroup"><a href="./cmain">커뮤니티</a></h2>
 			<nav id="lnb" class="lnb">
 			<ul>
-				<li><a href="./cnotice">공지사항</a></li>
+				<li><a href="./nmain">공지사항</a></li>
 				<li><a href="./cf">자유게시판</a></li>
 				<li><a href="./cu">유저정보게시판</a></li>
 				<li><a href="./cg">모임게시판</a></li>
@@ -96,10 +96,11 @@
 		<c:if test="${used.userId != userSession.userId}">
 			<button type="button" id="btn_report">신고하기</button>
 		</c:if>
-				
+				<!-- 좋아요 -->
 				<div class="placement">								
-			      <div class="heart" id="btn_like"></div>				
+			      <div class="heart" class="btn_like"></div>	
 				</div>	
+				 <div class="countheart">${likeresult }개</div>	
 		
  
 </div>
@@ -130,32 +131,37 @@
 	</div>
 	
 	
-	
-	<div class="comment">
+	<!-- 댓글 영역 -->
+	<div class="fullcomment">
 		<c:forEach var="comment" items="${list }">
 			<div class=getComment>
-				<div class="getWriter">
+				<div class="comment">
 					<c:if test="${comment.commentReLevel > 0 }">
 						<img src="./img/comtimg.png" width="${comment.commentReLevel*10 }">
 					</c:if>
-					
-					<span class="material-icons">account_circle</span>
-					${comment.userId }
-				</div>
-						
-				<br>
+				
+			<div class="comment_box">
+				<span class="material-icons">account_circle</span>
+					<div class="comment_writer">
+						${comment.userId }
+					</div>
+				
 				<div class="cmt_area" style="margin-left: ${comment.commentReLevel*15}px; " >
-					<div class="getTxt">${comment.commentContent }</div>
-					<div class="createDate">${comment.commentWriteDate }</div>
-				</div>
-					<input type="button" value="답글" onclick="re('${comment.commentNo}')">
-					<c:if test="${comment.userId eq userSession.userId}">
-					<input type="button" value="삭제" onclick="location.href='ccdelete?commentNo=${comment.commentNo}'">
-					</c:if>
-					<c:if test="${comment.userId != userSession.userId}">
-						<button type="button" id="btn_report_comt">신고하기</button>
-					</c:if>
+					<span class="text_comment">${comment.commentContent }</span>
 					
+					<div class="comment_info_box">
+						<div class="createDate">${comment.commentWriteDate }</div>
+						<button type="button" class="info_btn" onclick="re('${comment.commentNo}')">답글</button>
+						<c:if test="${comment.userId eq userSession.userId}">
+							<button type="button" class="infobtn delete" value="삭제" onclick="location.href='ccdelete?commentNo=${comment.commentNo}'">삭제</button>
+						</c:if>
+						<c:if test="${comment.userId != userSession.userId}">
+							<button type="button" class="infobtn report"  onclick="comtReport('${comment.commentNo}')" >신고</button>
+						</c:if>
+					</div>
+				</div>
+					</div>	
+					</div>
 					<!-- 답글 영역 -->
 					<div class="hiddenText" id="a${comment.commentNo }">
 						<form action="cclist?pageNum=${pageNum }" method="post" name="frm1" id="frm1">
@@ -172,7 +178,8 @@
 							<div><input type="submit" value="등록" id="comtBtn"></div>
 						</form>
 					</div>
-					</c:forEach>
+					</div>
+	</c:forEach>
 					<!-- 댓글 insert 영역 -->
 					
 					<div class="inputtxt">
@@ -194,12 +201,9 @@
 							<div class="btnFix"><input type="submit" value="등록" class="commentbtn" id="comtBtn"></div>
 						</form>
 					</div>
-			</div>
-		
-	</div>
-
-	</div>
 </div>
+	</div>
+	</div>
 
 <script>
 function boardUpdate(){
@@ -277,7 +281,7 @@ function cbReport(){
 	});
 	
 	//추천
-	$("#btn_like").click(cbLike);
+	//$(".btn_like").click(cblike);
 
 	function cbLike(){
 		if(!"${userSession}"){
@@ -311,14 +315,14 @@ function cbReport(){
 
 //댓글 신고
 let reportedComtThis = false;
-$("#btn_report_comt").click(comtReport);
+//$("#btn_report_comt").click(comtReport);
 
-function comtReport(){
+function comtReport(comment_no){
 	if(!"${userSession}"){
 		alert("로그인해주세요");
 		return;
 	}
-	if("${reportresult}" == 1){
+	if("${countcomtreport }" == 1){
 		alert("이미 신고하셨습니다.");
 		reportedComtThis = true;
 		return;
@@ -327,18 +331,19 @@ function comtReport(){
 		alert("이미 신고하셨습니다.");
 		return;
 	}
+	console.log(comment_no);
 	$.ajax({
 		type : "post",
 		url : "ccreport.ajax",
 		data : {
 			loginId : "${userSession.userId }",
-			thisCommntNo : "${comment.commentNo }"
+			thisCommntNo : comment_no
 		},
 		dataType : "json",
 		success : function(receive) {
 			console.log("신고receive값은:"+receive);
 			if(receive<1){
-				reportedThis = true;
+				reportedComtThis = true;
 				alert("이미 접수되었습니다");
 				return;
 			}

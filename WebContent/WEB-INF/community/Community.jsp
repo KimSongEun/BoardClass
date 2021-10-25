@@ -24,23 +24,17 @@
   transition: 0.3s;
   font-size: 12px;
 }
-
-/* Change background color of buttons on hover */
 .tab button:hover {
   background-color: #FFE699;
 }
 
-/* Create an active/current tablink class */
 .tab button.active {
   background-color: #FFE699;
 }
 
-/* Style the tab content */
 .usercontent {
   display: none;
 }
-
-/* Style the tab content */
 .usercontent {
   display: none;
 }
@@ -329,7 +323,7 @@
 	</div>
 </div>
 </section>
-<%@include file="/WEB-INF/index/footer.jsp" %>
+
 <script type="text/javascript">
 function openRank(evt, rankName) {
 	  var i, tabcontent, tablinks;
@@ -363,5 +357,6 @@ function openRank(evt, rankName) {
 	// Get the element with id="defaultOpen" and click on it
 	document.getElementById("defaultOpen2").click();
 </script>
+<%@include file="/WEB-INF/index/footer.jsp" %>
 </body>
 </html>

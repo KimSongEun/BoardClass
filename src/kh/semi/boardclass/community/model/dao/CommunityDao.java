@@ -1534,6 +1534,28 @@ public Board getBoard(Connection conn, int boardNo) {
 		}
 		return result;
 	}
+	public int countComtReport (Connection conn, int commentNo, String userId) {
+		int result = -1;
+		String sql = "select count(comment_Report_No) from Comment_Report where (comment_No = ? and USER_ID = ?)";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, commentNo);
+			pstmt.setString(2, userId);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		
+		}
+		return result;
+	}
 
 	public int insertReportComment(Connection conn,int commentNo, String userId  ) {
 		int result = -1;
@@ -1553,7 +1575,7 @@ public Board getBoard(Connection conn, int boardNo) {
 	}
 	public int countReportComment (Connection conn, int commentNo, String userId) {
 		int result = -1;
-		String sql = "select count(COMMENT_REPORT_NO) from COMMENT_REPORT where (COMMENT_NO = ? and USER_ID = ?)";
+		String sql = "select count(COMMENT_REPORT_NO) COMMENT_REPORT_NO from COMMENT_REPORT where (COMMENT_NO = ? and USER_ID = ?)";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {

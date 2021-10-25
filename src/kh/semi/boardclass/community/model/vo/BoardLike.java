@@ -7,6 +7,7 @@ public class BoardLike {
 	private int boardLikeNo;
 	private int boardNo;
 	private String userId;
+	private int likecount;
 
 
 	public BoardLike() {
@@ -38,20 +39,28 @@ public class BoardLike {
 		this.boardLikeNo = boardLikeNo;
 	}
 
-	public int getboardNo() {
-		return boardNo;
-	}
-
-	public void setboardNo(int boardNO) {
-		this.boardNo = boardNo;
-	}
-
 	public String getUserId() {
 		return userId;
 	}
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public int getBoardNo() {
+		return boardNo;
+	}
+
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
+
+	public int getLikecount() {
+		return likecount;
+	}
+
+	public void setLikecount(int likecount) {
+		this.likecount = likecount;
 	}
 
 }

@@ -93,11 +93,21 @@ public class BoardDetailServlet extends HttpServlet {
 			String userId = loginSS.getUserId();
 			countreport = new CommunityService().countBoardReport(boardNo, userId);
 		}
+		//댓글 신고
+		int countcomtreport = 0;
+		if(loginSS != null) {
+			String userId = loginSS.getUserId();
+			countcomtreport = new CommunityService().countReportComment(commentNo, userId);
+		}
 		
 		System.out.println("countlike="+countlike);
 		System.out.println("countreport="+countreport);
+		System.out.println("countcomtreport: " + countcomtreport);
 		
 		request.setAttribute("reportresult", countreport);
+		
+		request.setAttribute("countcomtreport", countcomtreport);
+		
 		request.setAttribute("likeresult", countlike);
 		
 		request.getRequestDispatcher("/WEB-INF/community/BoardContent.jsp").forward(request, response);

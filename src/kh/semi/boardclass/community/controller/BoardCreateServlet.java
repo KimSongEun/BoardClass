@@ -67,7 +67,11 @@ public class BoardCreateServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/error/loginAlert.jsp").forward(request, response);
 			return;
 		}
+		if (!ServletFileUpload.isMultipartContent(request))
+			System.out.println("error");
+
 		String userId = loginSS.getUserId();
+		
 		
 		String title = request.getParameter("title");
 		String content = request.getParameter("content");

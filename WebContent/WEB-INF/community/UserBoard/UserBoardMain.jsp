@@ -24,7 +24,7 @@
 			<ul>
 				<li><a href="nmain">공지사항</a></li>
 				<li><a href="./cf">자유게시판</a></li>
-				<li><a href="./cu">유저정보게시판</a></li>
+				<li><a href="./cu" style="color:#ffd642;">유저정보게시판</a></li>
 				<li><a href="./cg">모임게시판</a></li>
 			</ul>
 		</nav>
@@ -140,7 +140,7 @@
 </div>	
 </div>
 </div>
-
+</div>
 
 
 	

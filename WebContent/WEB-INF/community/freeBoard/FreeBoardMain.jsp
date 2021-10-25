@@ -9,12 +9,11 @@
 <head>
 <meta charset="UTF-8">
 <title>BoardClass</title>
-<link rel="stylesheet" href="css/community/common.css" />
 <link rel="stylesheet" href="css/community/freeBoardMain.css" />
+<link rel="stylesheet" href="css/index/maincss.css" />
 
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
-
 </head>
 <body>
 <%@include file="/WEB-INF/index/header.jsp" %>
@@ -126,32 +125,29 @@
 	<!-- 페이징  -->
 	<div style="text-align: centerl; margin-top:20px;" class="pagination">
 		<c:if test="${startPage > blockSize }">
-			<a href="cf?pageNum=${startPage-blockSize}">[이전]</a>
+			<a href="cf?pageNum=${startPage-blockSize}">&laquo;</a>
 		</c:if>
 		<c:forEach var="i" begin="${startPage }" end="${endPage }">
 			<c:if test="${pageNum == i }">
-				<a href="cf?pageNum=${i }" style="color: blue;">[${i }]</a>
+				<a href="cf?pageNum=${i }" style="color: #555;">[${i }]</a>
 			</c:if>
 		<c:if test="${pageNum != i }">
 			<a href="cf?pageNum=${i }">[${i }]</a>
 		</c:if>
 		</c:forEach>
 		<c:if test="${endPage < pageCnt }">
-			<a href="cf?pageNum=${startPage + blockSize }">[다음]</a>
+			<a href="cf?pageNum=${startPage + blockSize }">&raquo;</a>
 		</c:if>
  	</div>
 	
-	<div class="btn_wrap">
-  <div class="fl_c">
-    <a href="./cfwrite" class="btn50 c3 reg" style="width: 240px;" tmp="contents/bod" mn="60" cn="0"><span class="write">글작성</span></a>
-  </div>
+
   <div class="btn_wrap">
-		<button type="button" id="btn_write">글쓰기</button>
+		<button type="button" class="btn write" id="btn_write">글쓰기</button>
 	</div>
-
-</div>
 	
-
+</div>
+</div>
+</div>
 
 
 	

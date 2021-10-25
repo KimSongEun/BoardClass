@@ -9,6 +9,11 @@
 <link rel="stylesheet" href="css/community/common.css" />
 <link rel="stylesheet" href="css/community/freeBoardMain.css" />
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<style>
+body{
+display: felx;
+}
+</style>
 </head>
 <body>
 <%@include file="/WEB-INF/index/header.jsp" %>
@@ -20,9 +25,9 @@
 		<h2 class="as_hgroup"><a href="./cmain">커뮤니티</a></h2>
 		<nav id="lnb" class="lnb">
 			<ul>
-				<li><a href="./cnotice">공지사항</a></li>
+				<li><a href="./cnotice" style="color:#ffd642;">공지사항</a></li>
 				<li><a href="./cf">자유게시판</a></li>
-				<li><a href="./cu">유저정보게시판</a></li>
+				<li><a href="./cu" >유저정보게시판</a></li>
 				<li><a href="./cg">모임게시판</a></li>
 			</ul>
 		</nav>
@@ -124,7 +129,9 @@
 		</c:if>
  	</div>
             
-	
+</div>
+</div>
+</div>
 	
 	
 	

@@ -49,9 +49,10 @@ public class CommentReportServlet extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/error/loginAlert.jsp").forward(request, response);
 			return;
 		}
-
-		int	commentNo = Integer.parseInt(request.getParameter("thisCommntNo"));
+	
+		int commentNo = Integer.parseInt(request.getParameter("thisCommntNo"));
 		String userId = request.getParameter("loginId");
+		System.out.println("commentNo는 : " +  commentNo);
 		
 		int result = new CommunityService().countReportComment(commentNo, userId);
 		

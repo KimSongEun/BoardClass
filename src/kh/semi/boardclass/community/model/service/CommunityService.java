@@ -498,6 +498,13 @@ public class CommunityService {
 		 JDBCTemplate.close(conn);
 		return result;
 	}
+	public int countComtReport (int commentNo, String userId) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().countComtReport(conn, commentNo, userId);
+		 JDBCTemplate.close(conn);
+		return result;
+	}
 
 	public int insertReportComment(int commentNo, String userId) {
 		int result = -1;

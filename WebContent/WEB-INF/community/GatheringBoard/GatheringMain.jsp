@@ -19,10 +19,10 @@
 		<h2 class="as_hgroup"><a href="./cmain">커뮤니티</a></h2>
 		<nav id="lnb" class="lnb">
 			<ul>
-				<li><a href="#">공지사항</a></li>
+				<li><a href="nmain">공지사항</a></li>
 				<li><a href="./cf">자유게시판</a></li>
 				<li><a href="./cu">유저정보게시판</a></li>
-				<li><a href="./cg">모임게시판</a></li>
+				<li><a href="./cg" style="color:#ffd642;">모임게시판</a></li>
 			</ul>
 		</nav>
 		</div>
@@ -135,6 +135,11 @@
     <a href="./cgwrite" class="btn50 c3 reg" style="width: 240px;" tmp="contents/bod" mn="60" cn="0"><span class="write">글작성</span></a>
   </div>
 </div>
+</div>
+</div>
+</div>
+
+
 
 <script>
 $(".search_select").change(f1);

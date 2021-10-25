@@ -92,6 +92,7 @@
 	                </div>
 	            </div> 
 	<button class='btn btn-warning' value='등록' type="submit">등록</button>
+	<button class='btn btn-reset' onclick="if(confirm('게시글 작성을 취소하시겠습니까?')){window.close()}else{}" >취소</button>
 		
 </form>
 </div>
@@ -124,6 +125,7 @@ function selectCategory() {
 		$('.type-select').eq(index).append(option);
 	}
 };
+CKEDITOR.config.extraPlugins = 'youtube';
 </script>
 </body>
 </html>

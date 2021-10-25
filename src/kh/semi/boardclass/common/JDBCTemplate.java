@@ -19,7 +19,7 @@ public class JDBCTemplate {
 			try {
 				Context initContext = new InitialContext(); 
 				Context envContext = (Context)initContext.lookup("java:/comp/env");
-				DataSource ds = (DataSource) envContext.lookup("jdbc/bcmasterDclass");
+				DataSource ds = (DataSource) envContext.lookup("jdbc/bcmasterlocal");
 				conn = ds.getConnection();
 				
 				if(conn != null) System.out.println("연결성공");
