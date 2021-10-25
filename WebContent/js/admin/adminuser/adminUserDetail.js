@@ -8,6 +8,11 @@ function openPage(pageName,elmnt) {
     document.getElementById(pageName).style.display = "block"; 
   }
 $(function(){
+	        $(window).click(function(e){
+             console.log(e.target);
+           
+        });
+	
 	$(".board").click(boarddetail);
 	function boarddetail() {
 		var user_id = $(this).attr("id");
@@ -113,11 +118,37 @@ $(function(){
 				html += "<tr>"
 				html += "<td>"+data.commentvolist[i].commentNo+"</td>";
 				html += "<td>"+data.commentvolist[i].boardTitle+"</td>";
-				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden' id = 'tda'><a href = #댓글조회가기 target='blank'>"+data.commentvolist[i].commentContent+"</a></td>";
+				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden' id = 'tda'><a href = '#댓글조회' class='commentmodal' id='"+data.commentvolist[i].commentNo+"'>"+data.commentvolist[i].commentContent+"</a></td>";
 				html += "<td>"+data.commentvolist[i].commentRewriteDate+"</td>";
 				html += "</tr>";
 		}
 		$("#input_data_comt").html(html);
+		
+		var commentmodal = document.getElementById("myCommentModal");
+		var commentspan = document.getElementsByClassName("commentclose")[0];
+		$(".commentmodal").click(comment);
+		function comment() {
+			console.log("눌림");
+			var comment_id = $(this).attr("id");
+			console.log(comment_id);
+			$.ajax({
+			url : "allcommentgetdetail.ajax",
+			type : "post",
+			data : {commentNo : comment_id},
+			success : function(data){
+				$('#modal-comment-content-detail').html(data);
+				commentmodal.style.display = "block";
+			},
+			error : function(){
+				console.log("ajax 실패");
+			}
+		});
+			 
+		};
+		commentspan.onclick = function() {
+	 	commentmodal.style.display = "none";
+		}
+		
 		},
 		error : function(){
 			console.log("ajax 실패");
@@ -125,6 +156,8 @@ $(function(){
 	});
 		 
 	};
+	
+
 	
 	$(".review").click(reviewdetail);
 	function reviewdetail() {
@@ -142,11 +175,35 @@ $(function(){
 				html += "<tr>"
 				html += "<td>"+data.reviewvolist[i].reviewNo+"</td>";
 				html += "<td>"+data.reviewvolist[i].gameKoName+"</td>";
-				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden' id = 'tda'><a href = #리뷰 조회가기 target='blank'>"+data.reviewvolist[i].reviewContent+"</a></td>";
+				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden' id = 'tda'><a href = #리뷰조회 class='reviewmodal' id='"+data.reviewvolist[i].reviewNo+"'>"+data.reviewvolist[i].reviewContent+"</a></td>";
 				html += "<td>"+data.reviewvolist[i].reviewDate+"</td>";
 				html += "</tr>";
 		}
 		$("#input_data_review").html(html);
+		
+		var reviewmodal = document.getElementById("myReviewModal");
+		var reviewspan = document.getElementsByClassName("reviewclose")[0];
+		$(".reviewmodal").click(review);
+		function review() {
+			var review_id = $(this).attr("id");
+			console.log(review_id);
+			$.ajax({
+			url : "reviewgetdetail.ajax",
+			type : "post",
+			data : {reviewNo : review_id},
+			success : function(data){
+				$('#modal-review-content-detail').html(data);
+				reviewmodal.style.display = "block";
+		},
+		error : function(){
+			console.log("ajax 실패");
+		}
+	});
+		 
+	};
+	reviewspan.onclick = function() {
+ 	reviewmodal.style.display = "none";
+	}
 		},
 		error : function(){
 			console.log("ajax 실패");
@@ -284,7 +341,7 @@ $(function(){
 				html += "<td style = 'color : #f55354'>"+data.reportcommentvolist[i].reportCount+"</td>";
 				html += "<td>"+data.reportcommentvolist[i].commentNo+"</td>";
 				html += "<td>"+data.reportcommentvolist[i].boardTitle+"</td>";
-				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden' id = 'tda'><a href = #댓글조회가기 target='blank'>"+data.reportcommentvolist[i].commentContent+"</a></td>";
+				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden' id = 'tda'><a href = '#신고댓글조회' class='reportcommentmodal' id='"+data.reportcommentvolist[i].commentNo+"'>"+data.reportcommentvolist[i].commentContent+"</a></td>";
 				html += "<td>"+data.reportcommentvolist[i].commentRewriteDate+"</td>";
 				html += "<td style = 'vertical-align : middle'><button class='delete btn warning' value='deletego' id = '"+data.reportcommentvolist[i].commentNo+"'>삭제</button></td>";
 				html += "</tr>";
@@ -297,7 +354,32 @@ $(function(){
 			location.href = "userdetailreportcommentdelete?userId="+user_id+"&commentNo=" + deleteid;
 		} else {
 		}
-});		
+		});	
+		
+		var reportcommentmodal = document.getElementById("myReportCommentModal");
+		var reportcommentspan = document.getElementsByClassName("reportcommentclose")[0];
+		$(".reportcommentmodal").click(comment);
+		function comment() {
+			console.log("눌림");
+			var comment_id = $(this).attr("id");
+			console.log(comment_id);
+			$.ajax({
+			url : "allcommentgetdetail.ajax",
+			type : "post",
+			data : {commentNo : comment_id},
+			success : function(data){
+				$('#modal-reportcomment-content-detail').html(data);
+				reportcommentmodal.style.display = "block";
+			},
+			error : function(){
+				console.log("ajax 실패");
+			}
+		});
+			 
+		};
+		reportcommentspan.onclick = function() {
+	 	reportcommentmodal.style.display = "none";
+		}			
 		},
 		error : function(){
 			console.log("ajax 실패");
@@ -323,7 +405,7 @@ $(function(){
 				html += "<td style = 'color : #f55354'>"+data.reportreviewvolist[i].reportCount+"</td>";
 				html += "<td>"+data.reportreviewvolist[i].reviewNo+"</td>";
 				html += "<td>"+data.reportreviewvolist[i].gameKoName+"</td>";
-				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden' id = 'tda'><a href = #리뷰 조회가기 target='blank'>"+data.reportreviewvolist[i].reviewContent+"</a></td>";
+				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden' id = 'tda'><a href = #신고리뷰조회 class='reportreviewmodal' id='"+data.reportreviewvolist[i].reviewNo+"'>"+data.reportreviewvolist[i].reviewContent+"</a></td>";
 				html += "<td>"+data.reportreviewvolist[i].reviewDate+"</td>";
 				html += "<td style = 'vertical-align : middle'><button class='delete btn warning' value='deletego' id = '"+data.reportreviewvolist[i].reviewNo+"'>삭제</button></td>";
 				html += "</tr>";
@@ -336,7 +418,30 @@ $(function(){
 			location.href = "userdetailreportreviewdelete?userId="+user_id+"&reviewNo=" + deleteid;
 		} else {
 		}
-});		
+		});		
+		var reportreviewmodal = document.getElementById("myReportReviewModal");
+		var reportreviewspan = document.getElementsByClassName("reportreviewclose")[0];
+		$(".reportreviewmodal").click(review);
+		function review() {
+			var review_id = $(this).attr("id");
+			console.log(review_id);
+			$.ajax({
+			url : "reviewgetdetail.ajax",
+			type : "post",
+			data : {reviewNo : review_id},
+			success : function(data){
+				$('#modal-reportreview-content-detail').html(data);
+				reportreviewmodal.style.display = "block";
+		},
+		error : function(){
+			console.log("ajax 실패");
+		}
+	});
+		 
+	};
+	reportreviewspan.onclick = function() {
+ 	reportreviewmodal.style.display = "none";
+	}		
 		},
 		error : function(){
 			console.log("ajax 실패");
@@ -352,5 +457,18 @@ $(function(){
 			location.href = "userdelete?userId="+ deleteid;
 		} else {
 		}
-});		
+	});		
+
+	window.onclick = function(event) {
+		console.log("event:"+event.target);
+	  if (event.target == document.getElementById("myCommentModal")) {
+	    document.getElementById("myCommentModal").style.display = "none";
+	  } else if (event.target == document.getElementById("myReviewModal")) {
+		document.getElementById("myReviewModal").style.display = "none";
+	} else if (event.target == document.getElementById("myReportCommentModal")) {
+		document.getElementById("myReportCommentModal").style.display = "none";
+	} else if (event.target == document.getElementById("myReportReviewModal")) {
+		document.getElementById("myReportReviewModal").style.display = "none";
+	}
+	}
 })

@@ -241,5 +241,54 @@
             </div>
         </div>
     </section>
+<!-- The Modal -->
+<div id="myCommentModal" class="comment-modal">
+
+	<!-- Modal content -->
+<div class="modal-comment-content">
+	<span class="commentclose">&times;</span>
+	<h3 style = "color : gray">커뮤니티 댓글 내용 상세보기</h3>
+		<br>
+		<p id = "modal-comment-content-detail"></p>
+	</div>
+</div> 
+
+<!-- The Modal -->
+<div id="myReviewModal" class="review-modal">
+
+	<!-- Modal content -->
+<div class="modal-review-content">
+	<span class="reviewclose">&times;</span>
+	<h3 style = "color : gray">리뷰 내용 상세보기</h3>
+		<br>
+		<p id = "modal-review-content-detail"></p>
+	</div>
+
+</div>       
+
+<!-- The Modal -->
+<div id="myReportCommentModal" class="reportcomment-modal">
+
+	<!-- Modal content -->
+<div class="modal-reportcomment-content">
+	<span class="reportcommentclose">&times;</span>
+	<h3 style = "color : gray">신고된 커뮤니티 댓글 내용 상세보기</h3>
+		<br>
+		<p id = "modal-reportcomment-content-detail"></p>
+	</div>
+</div> 
+
+<!-- The Modal -->
+<div id="myReportReviewModal" class="reportreview-modal">
+
+	<!-- Modal content -->
+<div class="modal-reportreview-content">
+	<span class="reportreviewclose">&times;</span>
+	<h3 style = "color : gray">신고된 리뷰 내용 상세보기</h3>
+		<br>
+		<p id = "modal-reportreview-content-detail"></p>
+	</div>
+
+</div>                    
 </body>
 </html>
