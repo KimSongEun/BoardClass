@@ -11,6 +11,7 @@
 	ArrayList<GameReview> go3 = (ArrayList<GameReview>) request.getAttribute("riviewvolist3");
 	
 	GameReview vo3 = (GameReview) request.getAttribute("reviewvolist");
+	ArrayList<Game> plusNo = (ArrayList<Game>) request.getAttribute("plusNo");
 	
 	String[] str2 = (String[]) request.getAttribute("str2");
 	String[] str4 = (String[]) request.getAttribute("str4");
@@ -700,7 +701,7 @@ border-bottom-left-radius: 5px;
 						for (int i = 0; i < str2.length; i++) {
 				%>
 				<button class="rule"
-					onclick="location.href='./GameInfo?GAME_KONAME=<%=str4[i]%>'">
+					onclick="location.href='./GameInfo?GAME_NO=${plusNo}'">
 					<img src="<%=request.getContextPath()%>/<%=str2[i]%>" width="250"
 						height="250" />
 					<div id="plus">

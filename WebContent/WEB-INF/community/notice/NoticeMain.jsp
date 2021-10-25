@@ -8,6 +8,7 @@
 <title>BoardClass</title>
 <link rel="stylesheet" href="css/community/common.css" />
 <link rel="stylesheet" href="css/community/freeBoardMain.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <style>
 body{
@@ -45,27 +46,24 @@ display: felx;
 		</div>
 	</div>
 	
-	<!-- 검색창 -->
+
+	
+	
+	
+<div class="conwrap">
+
+		<!-- 검색창 -->
 	<div class="data_srch_wrap bdt_n ">
 		<form action = "searchnoticetitle" method = "post" class = "searchselect">
-		<div class="slt_box">
-			<select class="search_select" name="type" style="width: 189px;">
-				<option value="제목" <c:if test = "${type == '제목'}"> selected </c:if>>제목</option>
-				<option value="내용" <c:if test = "${type == '내용'}"> selected </c:if>>내용</option>
-			</select>
-		</div>
-		<div class="ipt_box">
-			<input type="text" id="keyword" name="keyword" class="ipt" value="${keyword }" placeholder="검색어를 입력해주세요">
-				 <button type="submit" class="w3-button w3-light-grey"></button>
-			</div>
-			
+				<select class="search_select" name="type" style="width: 189px;">
+					<option value="제목" <c:if test = "${type == '제목'}"> selected </c:if>>제목</option>
+					<option value="내용" <c:if test = "${type == '내용'}"> selected </c:if>>내용</option>
+				</select>
+				<input type="text" id="keyword" name="keyword" class="ipt" value="${keyword }" placeholder="검색어를 입력해주세요">
+				<button type="submit"><i class="fa fa-search"></i></button>
 		 </form>
-	</div>
-<div class="conwrap">
-	<div class="h4group">
-		<h4 class="tit">공지글 보기</h4>
-	</div>
 	
+	</div>
 	<!-- 글 리스트 -->
 	<div class="tbl_list">
 		<table>

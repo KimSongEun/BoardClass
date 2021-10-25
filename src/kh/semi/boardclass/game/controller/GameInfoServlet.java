@@ -85,10 +85,13 @@ public class GameInfoServlet extends HttpServlet {
         }
         	String[] str4 = str3.split(",");
         	
+//        	ArrayList<Game> plusNo = service.gamePlusNo(str4[0],str4[1]);
+//        	System.out.println("p1"+plusNo);
+        	
         	request.setAttribute("str4", str4);
         	
         
-         
+       
         
         // 게임 관련 중고거래
         ArrayList<Used> vo2 = service.usedlist(vo.getGameKoName());
@@ -100,7 +103,9 @@ public class GameInfoServlet extends HttpServlet {
 		int startRnum = 1;   // 화면에 글
 		int endRnum = 4;  // 화면에 글
         ArrayList<GameReview> gvo3 =service.selectHotReview(startRnum,endRnum,gamenum, userId);
-
+        
+//        request.setAttribute("plusNo", plusNo);
+//        System.out.println("plus"+plusNo);
         request.setAttribute("gamevo", vo);
         request.setAttribute("usedvolist", vo2);
         request.setAttribute("riviewvolist3", gvo3);

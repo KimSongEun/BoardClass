@@ -1509,4 +1509,37 @@ public class GameDao {
 		return result;
 	}
 
+	public ArrayList<Game> gamePlusNo(Connection conn,String s1, String s2) {
+
+		ArrayList<Game> volist = null;
+
+		String sql = "select GAME_NO from BOARDGAME where game_plus like ? and game_plus like ?";
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, s1);
+			pstmt.setString(2, s2);
+			// pstmt.setString(3, grade);
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				volist = new ArrayList<Game>();
+				do {
+					Game vo = new Game();
+					vo.setGameNumber(rset.getInt("GAME_NO"));
+					
+					volist.add(vo);
+
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
 }

@@ -22,7 +22,6 @@
 	cursor: pointer;
 	transition: background-position .6s steps(28);
 	transition-duration: 0s;
-	display: flex;
     justify-content: space-around;
 }
 .heart.is-active{
@@ -30,11 +29,19 @@
 	background-position: -2800px 0;
 } 
         
-.placement{
-    display: flex;
-	justify-content: space-around;
+.like_article{
+    display : inline-block;
+    position: relative;
+    vertical-align: top;
+    font-size: 13px;
 }
-
+.like_article .button_like_list {
+	position: absolute;
+    top: -2px;
+    left: 20px;
+    right: 0;
+    bottom: -2px;
+}
 </style>
 <script type="text/javascript">
 	var b = "a";
@@ -94,16 +101,13 @@
 		
 	
 		<!-- 추천 -->
-			<div class="heart_like">
 			<c:if test="${board.userId != userSession.userId}">
 				<!-- 좋아요 -->
-				<div class="placement">								
+				<div class="like_article">								
 				      <div class="heart" id="btn_like"></div>	
-				      <span class="countheart">${totallike}개</span>	
+				      <div class="button_like_list">좋아요 ${totallike}</div>	
 				</div>	
 			</c:if>
-			
-			</div>
  
 </div>
 	
@@ -140,9 +144,12 @@
 		<c:forEach var="comment" items="${list }">
 			<div class=getComment>
 				<div class="comment">
-					<c:if test="${comment.commentReLevel > 0 }">
-						<img src="./img/comtimg.png" width="${comment.commentReLevel*10 }">
-					</c:if>
+					<div class="imgcomt">
+						<c:if test="${comment.commentReLevel > 0 }">
+							<img src="img/relevel.png" width="${comment.commentReLevel*20 }">
+							<img src="img/recomment.png" class="recomment">
+						</c:if>
+					</div>
 				
 			<div class="comment_box">
 				<span class="material-icons">account_circle</span>
@@ -162,11 +169,13 @@
 						<c:if test="${comment.userId != userSession.userId}">
 							<button type="button" class="infobtn report"  onclick="comtReport('${comment.commentNo}')" >신고</button>
 						</c:if>
+
 					</div>
 				</div>
 					</div>	
 					</div>
 					<!-- 답글 영역 -->
+				<div class="CommentWriterRe">
 					<div class="hiddenText" id="a${comment.commentNo }">
 						<form action="cclist?pageNum=${pageNum }" method="post" name="frm1" id="frm1">
 							<input type="hidden" name="userId" value="${comment.userId }">
@@ -175,13 +184,18 @@
 							<input type="hidden" name="commentRef" value="${comment.commentRef }">
 							<input type="hidden" name="commentReLevel" value="${comment.commentReLevel }">
 							<input type="hidden" name="commentReStep" value="${comment.commentReStep }">
-						
-							<div><span class="left"><label for="name">${comment.userId }</label></span></div>
-							<div><textarea name="commentContent" id="commentContent" maxlength="800" required="required" placeholder="답글을 입력해주세요"></textarea></div>
 							
-							<div><input type="submit" value="등록" id="comtBtn"></div>
+							<div class="comment_inbox">
+							<div><span class="left"><label for="name">${comment.userId }</label></span></div>
+							<textarea name="commentContent" id="commentContent" maxlength="800" required="required" class="comment_inbox_text"  placeholder="답글을 입력해주세요"></textarea>
+							</div>
+							<div class="comment_attach">
+							<div class="register_box"><input type="submit" class="button btn_register" value="등록" id="comtBtn"></div>
+							</div>
+							
 						</form>
 					</div>
+				</div>
 					</div>
 	</c:forEach>
 					<!-- 댓글 insert 영역 -->
@@ -200,9 +214,7 @@
 								<div class="left"><label for="name">${comment.userId }</label></div>
 								<textarea name="commentContent" id="commentContent" class="comment_inbox_text" maxlength="800" required="required" placeholder="댓글을 입력해주세요"></textarea>
 							</div>
-							<div class="inputComment">
-								
-							</div>
+
 							<div class="comment_attach">
 								<div class="register_box"><input type="submit" value="등록" class="button btn_register" id="comtBtn"></div>
 							</div>
@@ -220,6 +232,7 @@ function boardUpdate(){
 		return;
 	}
 }
+
 
 function boardDelete(){
 	if(window.confirm("삭제하겠습니까?")){

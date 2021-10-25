@@ -8,6 +8,7 @@
 <title>BoardClass</title>
 <link rel="stylesheet" href="css/community/common.css" />
 <link rel="stylesheet" href="css/community/freeBoardMain.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 </head>
 <body>
@@ -47,20 +48,15 @@
 	
 	<!-- 검색 -->
 	<div class="data_srch_wrap bdt_n ">
-		<form action = "searchgathringboarduser" method = "post" class = "searchselect">
-		<div class="slt_box">
-			<select class="search_select" name="type" style="width: 189px;">
-				<option value="제목" <c:if test = "${type == '제목'}"> selected </c:if>>제목</option>
-				<option value="내용" <c:if test = "${type == '내용'}"> selected </c:if>>내용</option>
-				<option value="작성자" <c:if test = "${type == '작성자'}"> selected </c:if>> 작성자 </option>
+		<form action = "searchgathringboardtitle" method = "post" class = "searchselect">
+				<select class="search_select" name="type" style="width: 189px;">
+					<option value="제목" <c:if test = "${type == '제목'}"> selected </c:if>>제목</option>
+					<option value="내용" <c:if test = "${type == '내용'}"> selected </c:if>>내용</option>
+					<option value="작성자" <c:if test = "${type == '작성자'}"> selected </c:if>> 작성자 </option>
 				</select>
-		</div>
-		<div class="ipt_box">
-			<input type="text" id="keyword" name="keyword" class="ipt" value="${keyword }" placeholder="검색어를 입력해주세요">
-			 <button type="submit" class="w3-button w3-light-grey"></button>
-		</div>
-		
-	 </form>
+				<input type="text" id="keyword" name="keyword" class="ipt" value="${keyword }" placeholder="검색어를 입력해주세요">
+				<button type="submit"><i class="fa fa-search"></i></button>
+		 </form>
 	</div>
 	
 <div class="tbl_list">
@@ -83,7 +79,7 @@
 					<div class="tbox">
 					<div class="tit">
 						${board.boardType }
-						<a href="cgdetail?boardNo=${board.boardNo }">${board.boardTitle }</a>
+						<a href="bdetail?boardNo=${board.boardNo }">${board.boardTitle }</a>
 					</div>
 					</div>
 					<div class="util">

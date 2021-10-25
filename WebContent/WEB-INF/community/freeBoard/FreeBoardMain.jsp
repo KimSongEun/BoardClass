@@ -11,7 +11,7 @@
 <title>BoardClass</title>
 <link rel="stylesheet" href="css/community/freeBoardMain.css" />
 <link rel="stylesheet" href="css/index/maincss.css" />
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
 </head>
@@ -54,19 +54,15 @@
 	<!-- 검색 영역 -->
 	<div class="data_srch_wrap bdt_n ">
 		<form action = "searchallboarduserid" method = "post" class = "searchselect">
-		<div class="slt_box">
-			<select class="search_select" name="type" style="width: 189px;">
-				<option value="제목" <c:if test = "${type == '제목'}"> selected </c:if>>제목</option>
-				<option value="내용" <c:if test = "${type == '내용'}"> selected </c:if>>내용</option>
-				<option value="작성자" <c:if test = "${type == '작성자'}"> selected </c:if>> 작성자 </option>
+				<select class="search_select" name="type" style="width: 189px;">
+					<option value="제목" <c:if test = "${type == '제목'}"> selected </c:if>>제목</option>
+					<option value="내용" <c:if test = "${type == '내용'}"> selected </c:if>>내용</option>
+					<option value="작성자" <c:if test = "${type == '작성자'}"> selected </c:if>> 작성자 </option>
 				</select>
-		</div>
-		<div class="ipt_box">
-			<input type="text" id="keyword" name="keyword" class="ipt" value="${keyword }" placeholder="검색어를 입력해주세요">
-			 <button type="submit" class="w3-button w3-light-grey"></button>
-		</div>
-		
-	 </form>
+				<input type="text" id="keyword" name="keyword" class="ipt" value="${keyword }" placeholder="검색어를 입력해주세요">
+				<button type="submit"><i class="fa fa-search"></i></button>
+		 </form>
+	
 	</div>
 	
 	<!-- 글 리스트 -->
