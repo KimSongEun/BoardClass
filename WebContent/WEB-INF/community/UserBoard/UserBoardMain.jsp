@@ -134,9 +134,9 @@
 		</c:if>
  	</div>
 	
-  <div class="btn_wrap">
-		<button type="button" id="btn_write">글쓰기</button>
-	</div>
+<div class="btn_wrap">
+	<button type="button" class="btn write" id="btn_write">글쓰기</button>
+</div>
 </div>	
 </div>
 </div>

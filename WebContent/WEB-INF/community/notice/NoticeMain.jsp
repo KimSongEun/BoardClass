@@ -47,7 +47,7 @@ display: felx;
 	
 	<!-- 검색창 -->
 	<div class="data_srch_wrap bdt_n ">
-		<form action = "searchnoticecontent" method = "post" class = "searchselect">
+		<form action = "searchnoticetitle" method = "post" class = "searchselect">
 		<div class="slt_box">
 			<select class="search_select" name="type" style="width: 189px;">
 				<option value="제목" <c:if test = "${type == '제목'}"> selected </c:if>>제목</option>
@@ -167,7 +167,7 @@ $(function(){
 	function f1() {
 		console.log("변경");
 		if($(".search_select").val() == "제목"){
-			$(".searchselect").attr("action", "searchnoticecontent");
+			$(".searchselect").attr("action", "searchnoticetitle");
 			
 			
 		} else if ($(".search_select").val() == "내용") {

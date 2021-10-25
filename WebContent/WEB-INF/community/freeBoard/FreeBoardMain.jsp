@@ -198,7 +198,7 @@ $(function(){
 		}
 	};	
 	
-	//글쓰기 좋아요 확인
+	//글쓰기 확인
 	$("#btn_write").click(loadWrite);
 
 	function loadWrite(){

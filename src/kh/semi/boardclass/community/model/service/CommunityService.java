@@ -3,6 +3,8 @@ package kh.semi.boardclass.community.model.service;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import kh.semi.boardclass.admin.model.dao.AdminDao;
+import kh.semi.boardclass.admin.model.vo.Notice;
 import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.community.model.dao.CommunityDao;
 import kh.semi.boardclass.community.model.vo.Board;
@@ -428,8 +430,36 @@ public class CommunityService {
 		result = new CommunityDao().getAllBoardContentCount(conn, keyword);
 		return result;
 	}
-	
-	
+	//공지검색
+	public ArrayList<Notice> searchNoticeContent(String keyword, int start, int end) {
+		ArrayList<Notice> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new CommunityDao().searchNoticeContent(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+		
+	}
+	public int getNoticeSearchCount(String keyword) { 
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new CommunityDao().getNoticeSearchCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	public ArrayList<Notice> searchNoticeTitle (String keyword, int start, int end) {
+		ArrayList<Notice> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new CommunityDao().searchNoticeTitle(conn, keyword, start, end);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	public int getNoticeSearchTitleCount(String keyword) { 
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new CommunityDao().getNoticeSearchTitleCount(conn, keyword);
+		JDBCTemplate.close(conn);
+		return result;
+	}
 	public void searchUserBoard() {
 
 	}

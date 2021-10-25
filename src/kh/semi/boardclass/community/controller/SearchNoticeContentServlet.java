@@ -59,7 +59,7 @@ public class SearchNoticeContentServlet extends HttpServlet {
 		}
 		String type = request.getParameter("type");
 		String keyword = request.getParameter("keyword");
-		aCount = new AdminService().getNoticeSearchCount(keyword);
+		aCount = new CommunityService().getNoticeSearchCount(keyword);
 		pageCount = (aCount / PAGE_SIZE) + (aCount % PAGE_SIZE == 0 ? 0:1);
 		startRnum = (currentPage-1) * PAGE_SIZE + 1;  
 		endRnum = startRnum + PAGE_SIZE -1;
@@ -73,10 +73,11 @@ public class SearchNoticeContentServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1;
 		if(endPage > pageCount) endPage = pageCount;
 		
-		ArrayList<Notice> list  = new AdminService().searchNotice(keyword, startRnum, endRnum);
+		ArrayList<Notice> list  = new CommunityService().searchNoticeContent(keyword, startRnum, endRnum);
+		
 		
 		request.setAttribute("viewcount", PAGE_SIZE);
-		request.setAttribute("list", list);
+		request.setAttribute("noticevolist", list);
 		request.setAttribute("startPage", startPage);
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("pageCount", pageCount);
