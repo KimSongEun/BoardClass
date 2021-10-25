@@ -1,3 +1,4 @@
+<%@page import="java.io.Console"%>
 <%@page import="kh.semi.boardclass.game.model.vo.Game"%>
 <%@page import="kh.semi.boardclass.game.model.vo.GameReview"%>
 <%@page import="kh.semi.boardclass.used.model.vo.Used"%>
@@ -111,14 +112,14 @@ border-left:none;
 .btn_report{
 	position: relative;
 	top : 25px;
-      height: 50px; 
-      width: 130px;
+    height: 50px; 
+    width: 130px;
 }
 .btn_report2{
 	position: relative;
 	top : 25px;
-      height: 50px; 
-      width: 130px;
+    height: 50px; 
+    width: 130px;
 }
 
 .div_paging_before{
@@ -192,7 +193,8 @@ border-left:none;
 					     		 
 					     		 <button type="button" class ="btn_report">신고하기</button>
 								<%}%>
-					     		 <% if(userId == go.getUserId()){%>
+					     		 <% if(userId == go.getUserId()){
+					     		 %>
     							 <button type="button" class ="btn_report2">삭제</button>
     							<%}%>
     							</div>
@@ -201,6 +203,10 @@ border-left:none;
 								<td class = "td2" align=right><%=go.getReviewDate()%> &nbsp;</td>
 							</tr>
 						</table>
+						<script>
+						
+						
+						</script>
 					<%}} %>	
 </div>
 

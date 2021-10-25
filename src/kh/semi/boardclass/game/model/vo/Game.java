@@ -35,6 +35,10 @@ public class Game {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Game(int gameNumber) {
+		super();
+		this.gameNumber = gameNumber;
+	}
 	public Game(int gameNumber, int usedNo, String gameKoName, String gameEnName, String gameCategory, int gameView, String gameAge,
 			String gamePlayer, String gameTime, int gamePrice, int gameGrade, Date gameDate, int gameLevel,
 			String gameDesigner, String gameWriter, String gameBrand, String gameReleaseDate, int gameRank,

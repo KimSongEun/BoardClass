@@ -297,5 +297,11 @@ public class GameService {
 		return result;
 	}
 	
-
+	public ArrayList<Game> gamePlusNo(String s1, String s2) {
+		ArrayList<Game> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new GameDao().gamePlusNo(conn, s1, s2);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
 }
