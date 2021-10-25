@@ -8,47 +8,6 @@ function openPage(pageName,elmnt) {
     document.getElementById(pageName).style.display = "block"; 
   }
 $(function(){
- /*   $(".board").click(function(){
-        $("#contentdiv").text("");
-        $("#contentdiv").append($("#boarddiv"));
-        $("#boarddiv").fadeIn(300);
-    })
-    $(".used").click(function(){
-        $("#contentdiv").text("");
-        $("#contentdiv").append($("#useddiv"));
-        $("#useddiv").fadeIn(500);
-    })
-    $(".comt").click(function(){
-        $("#contentdiv").text("");
-        $("#contentdiv").append($("#comtdiv"));
-        $("#comtdiv").fadeIn(500);
-    })
-    $(".review").click(function(){
-        $("#contentdiv").text("");
-        $("#contentdiv").append($("#reviewdiv"));
-        $("#reviewdiv").fadeIn(500);
-    })
-    $(".reportboard").click(function(){
-        $("#contentdiv").text("");
-        $("#contentdiv").append($("#reportboarddiv"));
-        $("#reportboarddiv").fadeIn(300);
-    })
-    $(".reportused").click(function(){
-        $("#contentdiv").text("");
-        $("#contentdiv").append($("#reportuseddiv"));
-        $("#reportuseddiv").fadeIn(500);
-    })
-    $(".reportcomt").click(function(){
-        $("#contentdiv").text("");
-        $("#contentdiv").append($("#reportcomtdiv"));
-        $("#reportcomtdiv").fadeIn(500);
-    })
-    $(".reportreview").click(function(){
-        $("#contentdiv").text("");
-        $("#contentdiv").append($("#reportreviewdiv"));
-        $("#reportreviewdiv").fadeIn(500);
-    })*/
-
 	$(".board").click(boarddetail);
 	function boarddetail() {
 		var user_id = $(this).attr("id");
@@ -66,7 +25,7 @@ $(function(){
 				html += "<td>"+data.allboarduservolist[i].boardNo+"</td>";
 				html += "<td>"+data.allboarduservolist[i].boardCategory+"</td>";
 				html += "<td>"+data.allboarduservolist[i].boardType+"</td>";
-				html += "<td id = 'tda'><a href = #게시글조회가기 target='blank'>"+data.allboarduservolist[i].boardTitle+"</a></td>";
+				html += "<td id = 'tda' style='white-space : nowrap; text-overflow : ellipsis; overflow : hidden'><a href = 'bdetail?boardNo="+data.allboarduservolist[i].boardNo+"' target='blank'>"+data.allboarduservolist[i].boardTitle+"</a></td>";
 				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden'>"+data.allboarduservolist[i].boardContent+"</td>";
 				html += "<td>"+data.allboarduservolist[i].boardRewriteDate+"</td>";
 				html += "</tr>";
@@ -120,7 +79,7 @@ $(function(){
 				console.log(usedState);
 				html += "<tr>"
 				html += "<td>"+data.usedvolist[i].usedNo+"</td>";
-				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden' id = 'tda'><a href = #중고글조회가기 target='blank'>"+data.usedvolist[i].usedTitle+"</a></td>";
+				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden' id = 'tda'><a href = 'usedinformation?no="+data.usedvolist[i].usedNo+"' target='blank'>"+data.usedvolist[i].usedTitle+"</a></td>";
 				html += "<td>"+usedState+"</td>";
 				html += "<td>"+usedChange+"</td>";
 				html += "<td>"+usedExtype+"</td>";
@@ -214,7 +173,7 @@ $(function(){
 				html += "<td>"+data.reportboardvolist[i].boardNo+"</td>";
 				html += "<td>"+data.reportboardvolist[i].boardCategory+"</td>";
 				html += "<td>"+data.reportboardvolist[i].boardType+"</td>";
-				html += "<td id = 'tda'><a href = #게시글조회가기 target='blank'>"+data.reportboardvolist[i].boardTitle+"</a></td>";
+				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden' id = 'tda'><a href = 'bdetail?boardNo="+data.reportboardvolist[i].boardNo+"' target='blank'>"+data.reportboardvolist[i].boardTitle+"</a></td>";
 				html += "<td>"+data.reportboardvolist[i].boardRewriteDate+"</td>";
 				html += "<td style = 'vertical-align : middle'><button class='delete btn warning' value='deletego' id = '"+data.reportboardvolist[i].boardNo+"'>삭제</button></td>";
 				html += "</tr>";
@@ -281,7 +240,7 @@ $(function(){
 				html += "<tr>"
 				html += "<td style = 'color : #f55354'>"+data.reportusedvolist[i].reportCount+"</td>";
 				html += "<td>"+data.reportusedvolist[i].usedNo+"</td>";
-				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden' id = 'tda'><a href = #중고글조회가기 target='blank'>"+data.reportusedvolist[i].usedTitle+"</a></td>";
+				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden' id = 'tda'><a href = 'usedinformation?no="+data.reportusedvolist[i].usedNo+"' target='blank'>"+data.reportusedvolist[i].usedTitle+"</a></td>";
 				html += "<td>"+usedState+"</td>";
 				html += "<td>"+usedChange+"</td>";
 				html += "<td>"+usedExtype+"</td>";
@@ -394,58 +353,4 @@ $(function(){
 		} else {
 		}
 });		
-    // $("#board").click(function(){
-    //     console.log("클릭");
-    //     $("#test").show();
-    // });
-    // //$(".subnav").mouseover();
-    // $(".subnav").mouseover(function(){
-    //     $(this).show();
-    // });
-    // $(".subnav").(function(){
-    //     $(this).show();
-    // });
-    // $(".a").click(function(){
-    //     var clickedIdx = $(this).index();
-    //     $(".b").each(function(index,element){
-    //         if(index==clickedIdx) {
-    //             $(element).fadeIn();
-    //         } else {
-    //             $(element).hide();
-    //         }
-    //     })
-    // });
-
-    // $(".c").click(function(){
-    //     var clickedIdx = $(this).index();
-    //     $(".d").each(function(index,element){
-    //         if(index==clickedIdx) {
-    //             $(element).fadeIn();
-    //         } else {
-    //             $(element).hide();
-    //         }
-    //     })
-    // });
-
-    // $(".e").click(function(){
-    //     var clickedIdx = $(this).index();
-    //     $(".f").each(function(index,element){
-    //         if(index==clickedIdx) {
-    //             $(element).fadeIn();
-    //         } else {
-    //             $(element).hide();
-    //         }
-    //     })
-    // });
-
-    // $(".g").click(function(){
-    //     var clickedIdx = $(this).index();
-    //     $(".h").each(function(index,element){
-    //         if(index==clickedIdx) {
-    //             $(element).fadeIn();
-    //         } else {
-    //             $(element).hide();
-    //         }
-    //     })
-    // });
 })
