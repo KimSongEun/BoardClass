@@ -47,7 +47,7 @@ display: felx;
 	
 	<!-- 검색창 -->
 	<div class="data_srch_wrap bdt_n ">
-		<form action = "searchallboarduserid" method = "post" class = "searchselect">
+		<form action = "searchnoticecontent" method = "post" class = "searchselect">
 		<div class="slt_box">
 			<select class="search_select" name="type" style="width: 189px;">
 				<option value="제목" <c:if test = "${type == '제목'}"> selected </c:if>>제목</option>
