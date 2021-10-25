@@ -152,6 +152,10 @@
 					<c:if test="${comment.userId eq userSession.userId}">
 					<input type="button" value="삭제" onclick="location.href='ccdelete?commentNo=${comment.commentNo}'">
 					</c:if>
+					<c:if test="${comment.userId != userSession.userId}">
+						<button type="button" id="btn_report_comt">신고하기</button>
+					</c:if>
+					
 					<!-- 답글 영역 -->
 					<div class="hiddenText" id="a${comment.commentNo }">
 						<form action="cclist?pageNum=${pageNum }" method="post" name="frm1" id="frm1">
@@ -304,8 +308,50 @@ function cbReport(){
 		});
 	}
 }
-	   
-	   
+
+//댓글 신고
+let reportedComtThis = false;
+$("#btn_report_comt").click(comtReport);
+
+function comtReport(){
+	if(!"${userSession}"){
+		alert("로그인해주세요");
+		return;
+	}
+	if("${reportresult}" == 1){
+		alert("이미 신고하셨습니다.");
+		reportedComtThis = true;
+		return;
+	}
+	if(reportedComtThis){
+		alert("이미 신고하셨습니다.");
+		return;
+	}
+	$.ajax({
+		type : "post",
+		url : "ccreport.ajax",
+		data : {
+			loginId : "${userSession.userId }",
+			thisCommntNo : "${comment.commentNo }"
+		},
+		dataType : "json",
+		success : function(receive) {
+			console.log("신고receive값은:"+receive);
+			if(receive<1){
+				reportedThis = true;
+				alert("이미 접수되었습니다");
+				return;
+			}
+			reportedComtThis = true;
+			alert("신고가 접수되었습니다.");
+		},
+		error : function(request, status, error) {
+			alert("code:" + request.status + "\n" + "message:"
+					+ request.responseText + "\n" + "error:"
+					+ error);
+		}
+	});
+}
 </script>
 <%@include file="/WEB-INF/index/footer.jsp" %>
 </body>

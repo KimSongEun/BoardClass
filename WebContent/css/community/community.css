@@ -27,7 +27,7 @@ img { border: 0;}
 #aside .as_inner .as_hgroup { /* 커뮤니티 큰 글씨*/
     width: 185px;
     height: 105px;
-    background-color: blue; /* 색깔변경하기*/
+    background-color: #ffd642; /* 색깔변경하기*/
     line-height: 105px;
     text-align:center;
 }
@@ -91,47 +91,47 @@ img { border: 0;}
 .bdb_n {
     border-bottom: none !important;
 }
-.pb30 {
-	 border-bottom: none !important;
-}
+
 .conwrap {
     padding: 30px 30px 60px;
    	overflow: hidden;
     margin: 0 0 20px;
  	background-color: #ffffff;
 }
+.pb30 {
+	 border-bottom: none !important;
+}
 /* 인기글 랭킹 부분 */
 .board_rank_wrap {
-    display: inline-block;
     width: 100%;
 }
 .board_rank_wrap .rbox {/* 인기글 박스 왼쪽 부분*/
     width: 402px;
     float: left;
     position: relative;
-    border-top: 3px solid #ff4057;
+    border-top: 3px solid #FFE699;
     border-bottom: 3px solid #f1f1f2;
 }
 .board_rank_wrap .cbox { /* 인기글 박스 오른쪽 부분*/
     width: 402px;
     float: right;
     position: relative;
-    border-top: 3px solid #ff4057;
+    border-top: 3px solid #FFE699;
     border-bottom: 3px solid #f1f1f2;
 }
-.board_rank_wrap dl dt {
+.board_rank_wrap dt {
     padding: 0 20px;
     border-bottom: 1px solid #e6e6e8;
     font-weight: 700;
     font-size: 14px;
     line-height: 44px;
-    color: #ff4057;
+    color:  #ffd642;
 }
 .board_rank_wrap dl {
     border: solid #e6e6e8;
     border-width: 0 1px 1px;
 }
-.board_rank_wrap dl dd ol {
+.board_rank_wrap ol {
     padding: 7px 20px 8px;
 }
 
@@ -144,15 +144,15 @@ img { border: 0;}
     line-height: 25px;
     color: #333333;
 }
-.board_rank_wrap dl dd ol li:first-child {
+.board_rank_wrap li:first-child {
     border-top: none;
 }
-.board_rank_wrap dl dd ol li { /* 인기글 순위 제목 부분 */
+.board_rank_wrap  ol li { /* 인기글 순위 제목 부분 */
     position: relative;
     padding: 0 48px 0 37px;
 
 }
-.board_rank_wrap dl dd ol li .tit { /* 인기글 제목 */
+.board_rank_wrap .tit { /* 인기글 제목 */
     display: inline-block;
     overflow: hidden;
     max-width: 100%;
@@ -163,7 +163,7 @@ img { border: 0;}
     text-overflow: ellipsis;
     word-break: break-all;
 }
-.board_rank_wrap dl dd ol li .commt { /* 댓글 수 */
+.board_rank_wrap .commt { /* 댓글 수 */
     position: absolute;
     top: 10px;
     right: 0;
@@ -171,7 +171,7 @@ img { border: 0;}
     background: url(../../images/common/ico_reply.png) 0 center no-repeat;
     font-size: 12px;
     line-height: 19px;
-    color: #ff4057;
+    color: #ffd642;
 }
 .btn_wrap a:first-child {
 	margin: 0;
