@@ -73,7 +73,7 @@ public class UpdateDoUserServlet extends HttpServlet {
 
 		// 업로드 된 파일 이름 얻어오기
 		String file = multi.getFilesystemName("uploadFile");
-		String userImage = "./upload/userprofile/" + file;
+		String userImage = "/upload/userprofile/" + file;
 		if (file == null) {
 			userImage = multi.getParameter("image");
 			System.out.println("업로드 실패");

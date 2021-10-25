@@ -71,7 +71,7 @@ public class MyTradeServlet extends HttpServlet {
 			currentPage2 = Integer.parseInt(pageNum2);
 		}
 		HttpSession session = request.getSession();
-		String userId = ((User) session.getAttribute("user")).getUserId();
+		String userId = ((User) session.getAttribute("userSession")).getUserId();
 		System.out.println(userId);
 		bCount = new MyPageService().getMyTradeListCount(userId);
 		System.out.println("토탈컨텐츠 : " + bCount);

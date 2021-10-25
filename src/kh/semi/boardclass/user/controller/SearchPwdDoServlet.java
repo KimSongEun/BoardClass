@@ -44,18 +44,10 @@ public class SearchPwdDoServlet extends HttpServlet {
 		System.out.println("userId:" + userId);
 		System.out.println("userEmail:" + userEmail);
 
-//		
-//		String userId = request.getParameter("userId");
-//		System.out.println("userId:" + userId);
+
 		UserService service = new UserService();
 		 User user = service.searchPwd(userName,userId, userEmail);
-		 
-	//	 User user = service.searchId(user);
-		
-		// User user = service.searchId(userName, userEmail, userPhone);
-//		UserService service = new UserService();
-//		int user = service.searchId(user);
-//		System.out.println("user:" + user);
+
 
 		if (user != null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user/searchPwdaction.jsp");
@@ -67,24 +59,7 @@ public class SearchPwdDoServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user/searchPwdaction.jsp");
 			rd.forward(request, response);
 		}
-		
-//		if (result == 1) {
-//			System.out.println( userName + " 아이디 찾기 성공");
-//		request.getSession().setAttribute("messageType", "성공 메시지");
-//		request.getSession().setAttribute("messageContent", "회원가입에 성공했습니다.");
-//
-//		out.append("ok"); 
-//		response.sendRedirect("usermain");
-//		} else {
-//			System.out.println("아이디 찾기 실패");
-//			request.getSession().setAttribute("messageType", "오류 메시지");
-//			request.getSession().setAttribute("messageContent", "이미 존재하는 회원입니다.");
-//		
-//			out.append("fail"); 
-//			request.getRequestDispatcher("/WEB-INF/user/searchId.jsp").forward(request, response);
-//			}
-		
-	
+
 	}
 
 	/**

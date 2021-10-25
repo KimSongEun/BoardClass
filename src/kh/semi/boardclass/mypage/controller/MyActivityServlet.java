@@ -37,7 +37,7 @@ public class MyActivityServlet extends HttpServlet {
 //		PrintWriter out = response.getWriter();
 
 		HttpSession session = request.getSession();
-		String userId = ((User) session.getAttribute("user")).getUserId();
+		String userId = ((User) session.getAttribute("userSession")).getUserId();
 		System.out.println(userId);
 		
 		

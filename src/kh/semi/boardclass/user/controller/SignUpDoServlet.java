@@ -65,15 +65,15 @@ public class SignUpDoServlet extends HttpServlet {
 
 		// 업로드 된 파일 이름 얻어오기
 		String file = multi.getFilesystemName("uploadFile");
-		String userImage = "./upload/userprofile/" + file;
+		String userImage = "/upload/userprofile/" + file;
 	
 		if (file == null) {
 			// 업로드 실패 시
-		userImage = "./upload/userprofile/user.png";
+		userImage = "/upload/userprofile/user.png";
 			System.out.println("업로드 실패");
 		} else {
 			// 업로드 성공 시
-			userImage = "./upload/userprofile/" + file;
+			userImage = "/upload/userprofile/" + file;
 			System.out.println("업로드 성공");
 		}
 

@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8" import="kh.semi.boardclass.user.model.vo.*"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	User m = (User) session.getAttribute("user");
+	User m = (User) session.getAttribute("userSession");
 %>
 
 

@@ -94,7 +94,7 @@ $(function() {
 					if(d.result == "ok"){ 
 						 $("#modal").hide(); 
 							var text = 
-								"<a href='logout'>로그아웃</a> | <a href='checkuser'>회원정보 관리</a> | <a href='#'>마이페이지</a>";
+								"<a href='logout'>로그아웃</a> | <a href='checkuser'>회원정보 관리</a> | <a href='myactivity'>마이페이지</a>";
 						
 								$(".navlogin").html(text);
 								location.href="main"

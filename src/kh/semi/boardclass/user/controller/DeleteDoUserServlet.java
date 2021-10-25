@@ -75,15 +75,15 @@ public class DeleteDoUserServlet extends HttpServlet {
 
 		// 업로드 된 파일 이름 얻어오기
 		String file = multi.getFilesystemName("uploadFile");
-		String userImage = "./upload/userprofile/" + file;
+		String userImage = "/upload/userprofile/" + file;
 
 		if (file == null) {
 			// 업로드 실패 시
-			userImage = "./upload/userprofile/user.png";
+			userImage = "/upload/userprofile/user.png";
 			System.out.println("업로드 실패");
 		} else {
 			// 업로드 성공 시
-			userImage = "./upload/userprofile/" + file;
+			userImage = "/upload/userprofile/" + file;
 			System.out.println("업로드 성공");
 		}
 
@@ -102,7 +102,7 @@ public class DeleteDoUserServlet extends HttpServlet {
 //		}
 
 		HttpSession session = request.getSession(false);
-		User user = (User) session.getAttribute("user");
+		User user = (User) session.getAttribute("userSession");
 		UserService uservice = new UserService();
 		
 
@@ -115,23 +115,12 @@ public class DeleteDoUserServlet extends HttpServlet {
 			uservice.deleteUser(user);
 			session.invalidate();
 			System.out.println("회원탈퇴에 성공했습니다.");
-			response.sendRedirect("usermain");
-//			System.out.println("deleteuser3 진입");
-//			request.setAttribute("msg", "회원탈퇴에 성공했습니다!");
-//			System.out.println("deleteuser4 진입");
-//			request.setAttribute("loc", "usermain");
-//			System.out.println("deleteuser5 진입");
+			response.sendRedirect("main");
+
 		} else {
-//			request.setAttribute("msg", "회원탈퇴에 실패했습니다");
-//			request.setAttribute("loc", "usermain");
+
 		}
-//		System.out.println("deleteuser6 진입");
-//		rdd.forward(request, response);
-//		System.out.println("deleteuser7 진입");
-//		out.flush();
-//		System.out.println("deleteuser8 진입");
-//		out.close();
-//		System.out.println("deleteuser9 진입");
+
 
 	}
 

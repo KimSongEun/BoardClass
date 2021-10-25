@@ -70,7 +70,7 @@ public class MyBoardGameServlet extends HttpServlet {
 		}
 		
 		HttpSession session = request.getSession();
-		String userId = ((User) session.getAttribute("user")).getUserId();
+		String userId = ((User) session.getAttribute("userSession")).getUserId();
 		System.out.println(userId);
 		bCount = new MyPageService().getMyBoardGameListCount(userId);
 		System.out.println("토탈컨텐츠 : " + bCount);
