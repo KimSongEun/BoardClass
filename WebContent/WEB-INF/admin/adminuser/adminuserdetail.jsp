@@ -59,8 +59,8 @@
                         <div class="subnav-content" style = "padding-left : 400px">
                         	<a href="#"></a>
                         	<a href="#"></a>
-                            <button class="tablink reportboard" onclick="openPage('reportcomtdiv', this)" id = "${uservo.userId}">커뮤니티글</button>
-                            <button class="tablink reportused" onclick="openPage('reportreviewdiv', this)" id = "${uservo.userId}">중고거래글</button>
+                            <button class="tablink reportboard" onclick="openPage('reportboarddiv', this)" id = "${uservo.userId}">커뮤니티글</button>
+                            <button class="tablink reportused" onclick="openPage('reportuseddiv', this)" id = "${uservo.userId}">중고거래글</button>
                         </div>
                     </div>
                     <div class="subnav">
@@ -91,7 +91,7 @@
                             <td>글작성일 </td>
                         </tr>
                         </thead>
-                         <tbody id="input_data"></tbody>
+                         <tbody id="input_data_board"></tbody>
                          <tr>
                         </tr> 
                     </table>
@@ -112,7 +112,7 @@
                             <td>카테고리 </td>
                         </tr>
                         </thead>
-                         <tbody id="input_data"></tbody>
+                         <tbody id="input_data_used"></tbody>
                          <tr>
                         </tr> 
                     </table>
@@ -130,7 +130,7 @@
                             <td>작성일</td>
                         </tr>
                         </thead>
-                         <tbody id="input_data"></tbody>
+                         <tbody id="input_data_comt"></tbody>
                          <tr>
                         </tr> 
                     </table>
@@ -148,7 +148,7 @@
                             <td>작성일</td>
                         </tr>
                         </thead>
-                         <tbody id="input_data"></tbody>
+                         <tbody id="input_data_review"></tbody>
                          <tr>
                         </tr> 
                     </table>
@@ -169,7 +169,7 @@
                             <td>삭제 </td>
                         </tr>
                         </thead>
-                         <tbody id="input_data"></tbody>
+                         <tbody id="input_data_reportboard"></tbody>
                          <tr>
                         </tr> 
                     </table>
@@ -192,7 +192,7 @@
                             <td>삭제 </td>
                         </tr>
                         </thead>
-                         <tbody id="input_data"></tbody>
+                         <tbody id="input_data_reportused"></tbody>
                          <tr>
                         </tr> 
                     </table>
@@ -212,7 +212,7 @@
 							<td>삭제 </td>                            
                         </tr>
                         </thead>
-                         <tbody id="input_data"></tbody>
+                         <tbody id="input_data_reportcomt"></tbody>
                          <tr>
                         </tr> 
                     </table>
@@ -232,7 +232,7 @@
                             <td>삭제 </td> 
                         </tr>
                         </thead>
-                         <tbody id="input_data"></tbody>
+                         <tbody id="input_data_reportreview"></tbody>
                          <tr>
                         </tr> 
                     </table>
