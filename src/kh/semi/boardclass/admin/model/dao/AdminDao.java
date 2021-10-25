@@ -58,8 +58,9 @@ public class AdminDao {
 	public int getTodayVisitCount(Connection conn){
 		int result = 0;
 		String sql = "SELECT SUM(VISIT_COUNT)\r\n" + 
-					 "FROM VISIT\r\n" + 
-					 "WHERE TO_DATE(VISIT_DATE, 'YYYY-MM-DD') = TO_DATE(SYSDATE, 'YYYY-MM-DD') AND USER_TYPE != 1";
+				"FROM VISIT V JOIN MEMBER M\r\n" + 
+				"ON V.USER_ID = M.USER_ID\r\n" + 
+				"WHERE TO_DATE(VISIT_DATE, 'YYYY-MM-DD') = TO_DATE(SYSDATE, 'YYYY-MM-DD') AND USER_TYPE != 1";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -81,7 +82,8 @@ public class AdminDao {
 	public int getTotalVisitCount(Connection conn){
 		int result = 0;
 		String sql = "SELECT SUM(VISIT_COUNT)\r\n" + 
-					 "FROM VISIT\r\n" + 
+					 "FROM VISIT V JOIN MEMBER M\r\n" + 
+					 "ON V.USER_ID = M.USER_ID\r\n" +
 					 "WHERE USER_TYPE != 1";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
