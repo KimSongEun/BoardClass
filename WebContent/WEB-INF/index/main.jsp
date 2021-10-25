@@ -23,7 +23,7 @@
         <form class="form_search" action="MainSearch" method="get">
             <div class="custom-select">
                 <select name="selectSearch">
-                	<option value="">--선택--</option>
+                	<option value="보드게임과중고거래">--전체--</option>
                     <option value="보드게임">보드게임</option>
                     <option value="중고거래">중고거래</option>
                 </select>

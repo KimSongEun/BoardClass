@@ -20,6 +20,14 @@ public class UsedService {
 		return volist;
 	}
 	
+	public ArrayList<Used> selectUsedList(String searchWord) {
+		ArrayList<Used> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new UsedDao().selectUsedList(conn, searchWord);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
+	
 	public ArrayList<Used> selectCateUsedList(int start, int end, String cate, String search) {
 		ArrayList<Used> volist = null;
 		Connection conn = JDBCTemplate.getConnection();

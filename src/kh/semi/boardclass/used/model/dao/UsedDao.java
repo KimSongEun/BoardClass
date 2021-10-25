@@ -76,6 +76,45 @@ public class UsedDao {
 		return volist;
 	}
 
+	public ArrayList<Used> selectUsedList(Connection conn, String searchWord) {
+		ArrayList<Used> volist = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = "select USED_NO, USER_ID, USED_TITLE, USED_PRICE, USED_STATE, USED_CHANGE, USED_EXTYPE, USED_INFO, TO_CHAR(USED_DAY, 'mm/dd hh24:mi') USED_DAY, USED_IMG, USED_CATEGORY, USED_KEYWORD from USED where (USED_TITLE like ? or USED_INFO like ?) order by USED_DAY desc";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			searchWord = "%" + searchWord + "%";
+			pstmt.setString(1, searchWord);
+			pstmt.setString(2, searchWord);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Used>();
+			if (rset.next()) {
+				do {
+					Used vo = new Used();
+					vo.setUsedNo(rset.getInt("USED_NO"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setUsedTitle(rset.getString("USED_TITLE"));
+					vo.setUsedPrice(rset.getInt("USED_PRICE"));
+					vo.setUsedState(rset.getString("USED_STATE"));
+					vo.setUsedChange(rset.getString("USED_CHANGE"));
+					vo.setUsedExtype(rset.getString("USED_EXTYPE"));
+					vo.setUsedInfo(rset.getString("USED_INFO"));
+					vo.setUsedDay(rset.getString("USED_DAY"));
+					vo.setUsedImg(rset.getString("USED_IMG"));
+					vo.setUsedCategory(rset.getString("USED_CATEGORY"));
+					vo.setUsedKeyword(rset.getString("USED_KEYWORD"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+
 	public ArrayList<Used> selectCateUsedList(Connection conn, int start, int end, String cate, String search) {
 		ArrayList<Used> volist = null;
 		PreparedStatement pstmt = null;
@@ -140,8 +179,8 @@ public class UsedDao {
 		}
 		return volist;
 	}
-	
-	public ArrayList<Used> selectNewUsedList(Connection conn){
+
+	public ArrayList<Used> selectNewUsedList(Connection conn) {
 		ArrayList<Used> volist = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -188,7 +227,7 @@ public class UsedDao {
 		}
 		return result;
 	}
-	
+
 	public int getUsedCateCount(Connection conn, String cate) {
 		int result = -1;
 		String sql = "select count(USED_NO) from USED where USED_CATEGORY like ?";
@@ -313,7 +352,7 @@ public class UsedDao {
 		}
 		return result;
 	}
-	
+
 	public int countUsedLike(Connection conn, int usedNo, String userId) {
 		int result = -1;
 		String sql = "select count(USED_LIKE_NO) from USED_LIKE where (USED_NO = ? and USER_ID = ?)";
@@ -335,8 +374,7 @@ public class UsedDao {
 		}
 		return result;
 	}
-	
-	
+
 	public int deleteUsedLike(Connection conn, int usedNo, String userId) {
 		int result = -1;
 		PreparedStatement pstmt = null;
@@ -353,7 +391,7 @@ public class UsedDao {
 		}
 		return result;
 	}
-	
+
 	public int insertUsedLike(Connection conn, int usedNo, String userId) {
 		int result = -1;
 		PreparedStatement pstmt = null;
@@ -370,7 +408,7 @@ public class UsedDao {
 		}
 		return result;
 	}
-	
+
 	public int countUsedReport(Connection conn, int usedNo, String userId) {
 		int result = -1;
 		String sql = "select count(BOARD_REPORT_NO) from USED_REPORT where (USED_NO = ? and USER_ID = ?)";
@@ -392,7 +430,7 @@ public class UsedDao {
 		}
 		return result;
 	}
-	
+
 	public int insertUsedReport(Connection conn, int usedNo, String userId) {
 		int result = -1;
 		PreparedStatement pstmt = null;
@@ -409,6 +447,5 @@ public class UsedDao {
 		}
 		return result;
 	}
-	
-	
+
 }
