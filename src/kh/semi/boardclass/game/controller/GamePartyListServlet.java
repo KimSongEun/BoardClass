@@ -38,26 +38,24 @@ public class GamePartyListServlet extends HttpServlet {
         PrintWriter out=response.getWriter();    
     	
         
-		final int PAGE_SIZE = 10;   // �� ������ �� �ۼ�
-		final int PAGE_BLOCK = 3;   // �� ȭ�鿡 ��Ÿ�� ������ ��ũ ��
-		int bCount = 0;   // �� �ۼ�
-		int pageCount = 0; // �� ��������
-		int startPage = 1;   // ȭ�鿡 ��Ÿ�� ����������
-		int endPage = 1;   // ȭ�鿡 ��Ÿ�� ������������
+		final int PAGE_SIZE = 10;   
+		final int PAGE_BLOCK = 5;   
+		int bCount = 0;   
+		int pageCount = 0; 
+		int startPage = 1;   
+		int endPage = 1;  
 		int currentPage = 1;
-		int startRnum = 1;   // ȭ�鿡 ��
-		int endRnum = 1;  // ȭ�鿡 ��
+		int startRnum = 1;   
+		int endRnum = 1;  
 		
 		String pageNum = request.getParameter("pagenum");
-		if(pageNum != null) {   // ������ �������� ����.
-			currentPage = Integer.parseInt(pageNum); // ������ ������
+		if(pageNum != null) {   
+			currentPage = Integer.parseInt(pageNum); 
 		}
 		String cate = "파티";
 		
 		bCount = new GameService().getGameCount(cate);
-		// �� �������� = (�ѱ۰��� / ��������ۼ�) + (�ѱ۰������� ��������ۼ��� ���� �������� 0�� �ƴ϶�� ������������ 1 ����)
 		pageCount = (bCount / PAGE_SIZE) + (bCount % PAGE_SIZE == 0 ? 0 : 1);
-		//rownum ���� ���
 		startRnum = (currentPage-1) * PAGE_SIZE   + 1;   // 1//6//11/16//21
 		endRnum = startRnum + PAGE_SIZE -1; 
 		if(endRnum > bCount) endRnum=bCount;

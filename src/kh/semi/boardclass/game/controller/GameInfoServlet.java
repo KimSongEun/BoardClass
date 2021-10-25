@@ -72,9 +72,20 @@ public class GameInfoServlet extends HttpServlet {
         
         // 게임정보가 있다면 이미지 구분하기
         String str = vo.getGamePlusImage();
-        String[] str2 = str.split(","); 
+        if(str == null){
+        	str ="0";
+        }
+        	String[] str2 = str.split(","); 
+        	request.setAttribute("str2", str2);
+        
         String str3 = vo.getGamePlus();
-        String[] str4 = str3.split(","); 
+        if(str3 == null){
+        	str3 ="0";
+        }
+        	String[] str4 = str3.split(",");
+        	 request.setAttribute("str4", str4);
+        
+         
         
         // 게임 관련 중고거래
         ArrayList<Used> vo2 = service.usedlist(vo.getGameKoName());
@@ -93,8 +104,8 @@ public class GameInfoServlet extends HttpServlet {
     	request.setAttribute("likeresult", countlike);
     	request.setAttribute("reviewcount", count);
     	
-        request.setAttribute("str2", str2);
-        request.setAttribute("str4", str4);
+        
+       
         
 		request.getRequestDispatcher("/WEB-INF/game/gameinfo/GameInfo.jsp").forward(request, response);
 		

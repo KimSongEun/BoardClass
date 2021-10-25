@@ -147,10 +147,18 @@ public class GameService {
 		return result;
 	}
 	
-	public int insertReivewReport(int reviewNo, String userId) {
+	public int insertReivewReport(int reviewNo, String userId,int gameNo) {
 		int result = -1;
 		Connection conn = JDBCTemplate.getConnection();
-		result = new GameDao().insertReivewReport(conn, reviewNo, userId);
+		result = new GameDao().insertReviewReport(conn, reviewNo, userId,gameNo);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
+	public int deleteReivewReport(int reviewNo, String userId,int gameNo) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new GameDao().deleteReviewReport(conn, reviewNo, userId,gameNo);
 		JDBCTemplate.close(conn);
 		return result;
 	}

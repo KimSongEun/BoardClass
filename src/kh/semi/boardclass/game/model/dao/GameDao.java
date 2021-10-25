@@ -377,25 +377,7 @@ public class GameDao {
 	}
 
 	
-//	public int getReviewCount(Connection conn) {
-//		int result = 0;
-//		String sql = "select count(REVIEW_NO) from REVIEW";
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			rset = pstmt.executeQuery();
-//			if (rset.next()) {
-//				result = rset.getInt(1);
-//			}
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			JDBCTemplate.close(rset);
-//			JDBCTemplate.close(pstmt);
-//		}
-//		return result;
-//	}
+
 
 	public ArrayList<Game> selectCateGameList(Connection conn, int start, int end, String cate, String search) {
 
@@ -565,10 +547,10 @@ public class GameDao {
 		ResultSet rset = null;
 		
 		String sql1 = "select * from " + " (select Rownum r, t1.* from "
-				+ " (select * from BOARDGAME where GAME_CATEGORY like ? order by GAME_GRADE asc) t1 ) t2 " + " where r between ? and ?";
+				+ " (select * from BOARDGAME where GAME_CATEGORY like ? order by GAME_GRADE desc) t1 ) t2 " + " where r between ? and ?";
 
 		String sql2 = "select * from (select Rownum r, u.* from "
-				+ "(select * from BOARDGAME where GAME_KONAME like ? order by GAME_LEVEL asc) u) "
+				+ "(select * from BOARDGAME where GAME_KONAME like ? order by GAME_LEVEL desc) u) "
 				+ " where r between ? and ?";
 		String sql = "";
 
@@ -642,9 +624,9 @@ public class GameDao {
 		ResultSet rset = null;
 		
 		String sql1 = "select * from " + " (select Rownum r, t1.* from "
-				+ " (select * from BOARDGAME where GAME_CATEGORY like ? order by GAME_GRADE desc) t1 ) t2 " + " where r between ? and ?";
+				+ " (select * from BOARDGAME where GAME_CATEGORY like ? order by GAME_GRADE asc) t1 ) t2 " + " where r between ? and ?";
 		String sql2 = "select * from (select Rownum r, u.* from "
-				+ "(select * from BOARDGAME where GAME_KONAME like ? order by GAME_GRADE desc) u) "
+				+ "(select * from BOARDGAME where GAME_KONAME like ? order by GAME_GRADE asc) u) "
 				+ " where r between ? and ?";
 		String sql = "";
 		if (search != null && !search.equals("")) {
@@ -1380,6 +1362,7 @@ public class GameDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, reviewNo);
 			pstmt.setString(2, userId);
+			
 			rset = pstmt.executeQuery();
 			if (rset.next()) {
 				result = rset.getInt(1);
@@ -1393,14 +1376,33 @@ public class GameDao {
 		return result;
 	}
 	
-	public int insertReivewReport(Connection conn, int reviewNo, String userId) {
+	public int deleteReviewReport(Connection conn, int reviewNo, String userId, int gameNo) {
 		int result = -1;
 		PreparedStatement pstmt = null;
-		String sql = "insert into REVIEW_REPORT values(REVIEW_REPORT_NUM.nextval, ?, ?)";
+		String sql = "delete from BOARDGAME_LIKE where (REVIEW_NO = ? and USER_ID = ? and GAME_NO = ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, reviewNo);
 			pstmt.setString(2, userId);
+			pstmt.setInt(3, gameNo);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public int insertReviewReport(Connection conn, int reviewNo, String userId, int gameNo) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String sql = "insert into REVIEW_REPORT values(REVIEW_REPORT_NUM.nextval, ?, ?, ?)";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			pstmt.setString(2, userId);
+			pstmt.setInt(3, gameNo);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();

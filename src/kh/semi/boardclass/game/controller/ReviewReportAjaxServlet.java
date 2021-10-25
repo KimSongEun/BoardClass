@@ -42,14 +42,18 @@ public class ReviewReportAjaxServlet extends HttpServlet {
 			return;
 		}
 
-		int reviewNo = Integer.parseInt(request.getParameter("thisReviewNo"));
 		String userId = request.getParameter("loginId");
 		
-		int result = new GameService().countReviewReport(reviewNo, userId);
+		try{
+			int reviewNo = Integer.parseInt(request.getParameter("thisReviewNo"));
+			int gameNo = Integer.parseInt(request.getParameter("thisGameNo"));
+			
+			
+			int result = new GameService().countReviewReport(reviewNo, userId);
 		
 		int secondResult = -1;
 		if(result < 1) {
-			secondResult = new GameService().insertReivewReport(reviewNo, userId);
+			secondResult = new GameService().insertReivewReport(reviewNo, userId, gameNo);
 			System.out.println("신고접수됨");
 		} else {
 			secondResult = 0;
@@ -61,6 +65,9 @@ public class ReviewReportAjaxServlet extends HttpServlet {
 		out.print(secondResult);
 		out.flush();
 		out.close();
-	}
+	} catch (NumberFormatException ex) {
+	} catch (Exception e) {
 
+	}
+	}
 }

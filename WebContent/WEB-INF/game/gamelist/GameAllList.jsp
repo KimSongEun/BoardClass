@@ -30,10 +30,11 @@
 @MEDIA {
 }
 
+
 #page {
-	position: relative;
-	top:  -80px;
-	left: 1100px;
+	position: absolute;
+	top: 1380px;
+	left: 1000px;
 	font-size: 40px;
 }
 
@@ -53,17 +54,17 @@ top:-100px;
 
 #section2 {
 	position: relative;
-	width: 2100px;
-	height: 400px;
-	left: 300px;
+	width: 1450px;
+	height: 1000px;
+	left: 250px;
 	top : -150px;
 }
 
 #board_info {
 	position: relative;
-	top: -280px;
+	top: -310px;
 	float: left;
-	margin: 30px;
+	margin: 35px;
 }
 
 #d1 {
@@ -71,7 +72,7 @@ top:-100px;
 	text-align: center;
 	line-height: 200px;
 	background-color: burlywood;
-	width: 1880px;
+	width: 1430px;
 	height: 180px;
 	font-size: 50px;
 	top : -320px;
@@ -79,7 +80,7 @@ top:-100px;
 
 #search {
 	position: relative;
-	left: 630px;
+	left: 400px;
 	font-size: 40px;
 	top : -270px;
 }
@@ -89,29 +90,36 @@ top:-100px;
 	top: -6px;
 	width: 250px;
 	height: 40px;
-	font-size: 20px;
+	font-size: 15px;
 }
 
 #search_btn {
 	position: relative;
 	top: -7px;
 	width: 100px;
-	height: 50px;
+	height: 40px;
 }
-
 #sort {
 	position: relative;
-	left: 1600px;
+	left: 1150px;
 	width: 250px;
 	height: 50px;
 	top: -320px;
 }
 #total{
 	position: relative;
-	width: 2000px;
-	height: 1300px;
+	width: 1550px;
+	height: 1200px;
 }
-
+.btn1{
+	height: 275px;
+	width: 215px;
+	border: 1px solid burlywood;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius:5px; 
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+}
 
 </style>
 </head>
@@ -142,7 +150,7 @@ top:-100px;
 			<div id="d1">전체</div>
 
 			<div id="search">
-			<form action="GameAllList" method="post">
+			<form action="GameAllList" method="post" >
 				게임이름 <input type="search" id="text_name" name="search">
 				<button type="submit" id="search_btn" >검색</button>
 				</form>
@@ -170,10 +178,68 @@ top:-100px;
 					<input type = "hidden" value = "<%=vo.getGameNumber()%>"  name="GAME_NO">
 					<button type="submit"    class="btn1" >
 						<img src="<%=request.getContextPath()%>/<%=vo.getGameImage()%>"
-							width="300" height="300" />
+							width="200" height="200" />
 						<div class="img-text">
 							<%=vo.getGameKoName()%>
-							<%=vo.getGameLevel()%>
+								
+								<% int star = vo.getGameGrade();
+					
+					if(star<2 && star >0){%>
+					<div class="star-rating1 space-x-4 mx-auto">
+					<label for="1-star" class="star" style = "color: gold">★</label>
+					<label for="5-stars" class="star pr-4">★</label>  
+						<label for="4-stars" class="star">★</label>  
+						<label for="3-stars" class="star">★</label> 
+						<label for="2-stars"class="star">★</label> 
+						 
+				</div>
+				<%}else if(star>=2 && star <3){ %>
+				<div class="star-rating1 space-x-4 mx-auto">
+						<label for="2-stars"class="star"style = "color: gold">★</label> 
+						 <label for="1-star" class="star" style = "color: gold">★</label>
+					<label for="5-stars" class="star pr-4">★</label>  
+						<label for="4-stars" class="star">★</label>  
+						<label for="3-stars" class="star">★</label> 
+					
+				</div>
+				<%}else if(star>=3 && star <4){ %>
+				<div class="star-rating1 space-x-4 mx-auto">
+				<label for="3-stars" class="star" style = "color: gold">★</label> 
+						<label for="2-stars"class="star" style = "color: gold" >★</label> 
+						 <label for="1-star" class="star" style = "color: gold">★</label>
+				<label for="5-stars" class="star pr-4" >★</label>  
+						<label for="4-stars" class="star">★</label>  
+						
+				</div>
+				<%}else if(star>=4 && star <5){ %>
+				<div class="star-rating1 space-x-4 mx-auto">
+				<label for="4-stars" class="star" style = "color: gold">★</label>  
+						<label for="3-stars" class="star" style = "color: gold">★</label> 
+						<label for="2-stars"class="star" style = "color: gold" >★</label> 
+						 <label for="1-star" class="star" style = "color: gold ">★</label>
+				<label for="5-stars" class="star pr-4" >★</label>  
+						
+				</div>
+				<%}else if(star == 5){ %>
+				<div class="star-rating1 space-x-4 mx-auto">
+				<label for="5-stars" class="star pr-4" style = "color: gold">★</label>  
+						<label for="4-stars" class="star" style = "color: gold">★</label>  
+						<label for="3-stars" class="star" style = "color: gold">★</label> 
+						<label for="2-stars"class="star" style = "color: gold">★</label> 
+						 <label for="1-star" class="star" style = "color: gold" >★</label>
+				</div>
+				<%}else if(star == 0){ %>
+					<div class="star-rating1 space-x-4 mx-auto">
+					<label for="5-stars" class="star pr-4" >★</label>  
+						<label for="4-stars" class="star" >★</label>  
+						<label for="3-stars" class="star" >★</label> 
+						<label for="2-stars"class="star" >★</label> 
+						 <label for="1-star" class="star" >★</label>
+				</div>
+				
+				<%} %>
+				<%=vo.getGameGrade()%>			
+							
 						</div>
 					</button>
 				</div>

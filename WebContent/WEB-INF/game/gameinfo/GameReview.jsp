@@ -64,8 +64,8 @@
 #tb{
 	position:relative;
 	top: 100px;
-	left: 400px;
-	width: 1520px;
+	left: 450px;
+	width: 1100px;
 	height: 300px;
 	margin-bottom: 30px;
 	font-size: 30px;
@@ -96,10 +96,15 @@
 	background-position: -2800px 0;
         } 
         
-        .placement{
-        display: flex;
-         justify-content: space-around;
-         }
+.placement{
+     display: flex;
+    justify-content: space-around;
+ }
+         
+.btn_report{
+      height: 50px; 
+      width: 130px;
+}
 </style>
 </head>
 
@@ -122,20 +127,17 @@
 								<td class = "td2" align=right >★   <%=go.getReviewScore()%> &nbsp; </td>								
 							</tr>
 							<tr>
-								<td colspan="2" height="200px"><%=go.getReviewContent()%></td>
+								<td colspan="3" height="200px"><%=go.getReviewContent()%></td>
 							</tr>
 							<tr>
-							<td> &nbsp;
+							<td colspan="2"> &nbsp;
 								<c:if test="${game.userId != userSession.userId}">
 								<div class="placement">
 					     		 <div class="heart <%if(go.getLiked()>0) {%>is-active<%} %>" id="btn_like"></div>
 					     		 <p>♥ <%=go.getLikecount()%>개 </p>	
-					     		 <td>
-					     		 <form action="GameReview" method="post">
-					     		 <input type= "hidden" value = "<%=go.getReviewNo()%>" name = "no">
-					     		  <input type= "hidden" value = "<%=go.getGameNo()%>" name = "GAME_NO">					     		
-					     		 <input type="submit" id ="btn_report" value = "신고하기" >		
-    							</form></td>
+					     		 
+					     		 <button type="button" class ="btn_report"  >신고하기</button>	
+    							 
     							</div>
 								</c:if></td>
 								
@@ -213,54 +215,57 @@
 						+ error);
 			}
 		});
-		
-		$("#btn_report").click(cbReport);
-
-		function cbReport(){
-			console.log($(this));
-			var $eleClickThis = $(this);
-			var $eleTable = $(this).parents("table");
-			var $eleReviewNo = $eleTable.find(".reviewNo");
-			var reviewNo = $eleReviewNo.text();
-		}
-			if(!"${userSession}"){
-				alert("로그인해주세요");
-				return;
-			}
-			if("${reportresult}" == 1){
-				alert("이미 신고하셨습니다.");
-				reportedThis = true;
-				return;
-			}
-			if(reportedThis){
-				alert("이미 신고하셨습니다.");
-				return;
-			}
-			$.ajax({
-				type : "post",
-				url : "reviewReport.ajax",
-				data : {
-					loginId : "${userSession.userId}",
-					thisReviewNo : reviewNo,
-				},
-				success : function(receive) {
-					console.log("신고receive값은:"+receive);
-					if(receive<1){
-						reportedThis = true;
-						alert("이미 접수되었습니다");
-						return;
-					}
-					reportedThis = true;
-					alert("신고가 접수되었습니다.");
-				},
-				error : function(request, status, error) {
-					alert("code:" + request.status + "\n" + "message:"
-							+ request.responseText + "\n" + "error:"
-							+ error);
-				}
-			});
-			
 	} 
+	$(".btn_report").click(cbReport);
+
+	function cbReport(){
+		console.log($(this));
+		var $eleClickThis = $(this);
+		var $eleTable = $(this).parents("table");
+		var $eleReviewNo = $eleTable.find(".reviewNo");
+		var reviewNo = $eleReviewNo.text();
+		
+		var reportedThis = false;
+		
+		if(!"${userSession}"){
+			alert("로그인해주세요");
+			return;
+		}
+		if("${reportresult}" == 1){
+			alert("이미 신고하셨습니다.");
+			reportedThis = true;
+			return;
+		}
+		if(reportedThis){
+			alert("이미 신고하셨습니다.");
+			return;
+		}
+		$.ajax({
+			type : "post",
+			url : "reviewReport.ajax",
+			data : {
+				loginId : "${userSession.userId}",
+				thisReviewNo : reviewNo,
+				thisGameNo : "${gameno}"
+			},
+			success : function(receive) {
+				console.log("신고receive값은:"+receive);
+				if(receive<1){
+					reportedThis = true;
+					alert("이미 접수되었습니다");
+					return;
+				}
+				reportedThis = true;
+				alert("신고가 접수되었습니다.");
+			},
+			error : function(request, status, error) {
+				alert("code:" + request.status + "\n" + "message:"
+						+ request.responseText + "\n" + "error:"
+						+ error);
+			}
+		});
+	}
+
 </script>
 </body>
 </html>

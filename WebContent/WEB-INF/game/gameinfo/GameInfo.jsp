@@ -41,7 +41,7 @@
 
 #info {
 	position: relative;
-	width: 1500px;
+	width: 1250px;
 	height: 400px;
 	left: 300px;
 	top: 100px;
@@ -49,10 +49,10 @@
 
 #info2 {
 	position: relative;
-	width: 1550px;
-	height: 4450px;
+	width: 1500px;
+	height: 4300px;
 	left: 200px;
-	top: 290px;
+	top: 340px;
 	border: 1px solid black;
 }
 
@@ -141,10 +141,10 @@
 
 #ReviewWrite {
 	position: relative;
-	width: 1550px;
+	width: 1500px;
 	height: 100px;
 	left: 200px;
-	top: 260px;
+	top: 320px;
 	background-color: #D9E5FF;
 	display: flex;
 	justify-content: center;
@@ -183,7 +183,7 @@
 }
 .modal-content2 {
 	width: 800px;
-	height: 900px;
+	height: 365px;
 	top: 100px;
 	margin: auto;
 	position: relative;
@@ -616,7 +616,7 @@ background-color:#CCFFFF;
 			
 			<br> <br>
 			<div class="info2-3">
-				<p class="infoP">게임 규칙</p>
+				<p class="infoP">게임 이미지</p>
 				<br> <br> <img class="rule"
 					src="<%=request.getContextPath()%>/<%=vo.getGameRuleImage()%>"
 					width="1200" height="600" />
