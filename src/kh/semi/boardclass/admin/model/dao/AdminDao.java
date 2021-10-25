@@ -1524,7 +1524,7 @@ public class AdminDao {
 				"(SELECT COUNT(*) FROM REVIEW WHERE USER_ID = M.USER_ID) AS REVIEWCOUNT,\r\n" + 
 				"(SELECT COUNT(*) FROM USED WHERE USER_ID = M.USER_ID) AS USEDCOUNT,\r\n" + 
 				"M.USER_HISTORY\r\n" + 
-				"FROM MEMBER M))";
+				"FROM MEMBER M WHERE USER_TYPE != 1))";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -1553,7 +1553,7 @@ public class AdminDao {
 				"(SELECT COUNT(*) FROM REVIEW WHERE USER_ID = M.USER_ID) AS REVIEWCOUNT,\r\n" + 
 				"(SELECT COUNT(*) FROM USED WHERE USER_ID = M.USER_ID) AS USEDCOUNT,\r\n" + 
 				"M.USER_HISTORY\r\n" + 
-				"FROM MEMBER M)) t1) t2 where r between ? and ?";
+				"FROM MEMBER M WHERE USER_TYPE != 1)) t1) t2 where r between ? and ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -1596,7 +1596,7 @@ public class AdminDao {
 				"(SELECT COUNT(*) FROM REVIEW WHERE USER_ID = M.USER_ID) AS REVIEWCOUNT,\r\n" + 
 				"(SELECT COUNT(*) FROM USED WHERE USER_ID = M.USER_ID) AS USEDCOUNT,\r\n" + 
 				"M.USER_HISTORY\r\n" + 
-				"FROM MEMBER M)\r\n" + 
+				"FROM MEMBER M WHERE USER_TYPE != 1)\r\n" + 
 				"WHERE USER_ID like(?))";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -1627,7 +1627,7 @@ public class AdminDao {
 				"(SELECT COUNT(*) FROM REVIEW WHERE USER_ID = M.USER_ID) AS REVIEWCOUNT,\r\n" + 
 				"(SELECT COUNT(*) FROM USED WHERE USER_ID = M.USER_ID) AS USEDCOUNT,\r\n" + 
 				"M.USER_HISTORY\r\n" + 
-				"FROM MEMBER M)\r\n" + 
+				"FROM MEMBER M WHERE USER_TYPE != 1)\r\n" + 
 				"WHERE USER_ID like(?)) t1) t2 where r between ? and ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -1671,7 +1671,7 @@ public class AdminDao {
 				"(SELECT COUNT(*) FROM REVIEW WHERE USER_ID = M.USER_ID) AS REVIEWCOUNT,\r\n" + 
 				"(SELECT COUNT(*) FROM USED WHERE USER_ID = M.USER_ID) AS USEDCOUNT,\r\n" + 
 				"M.USER_HISTORY\r\n" + 
-				"FROM MEMBER M)\r\n" + 
+				"FROM MEMBER M WHERE USER_TYPE != 1)\r\n" + 
 				"WHERE USER_NO like(?))";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -1702,7 +1702,7 @@ public class AdminDao {
 				"(SELECT COUNT(*) FROM REVIEW WHERE USER_ID = M.USER_ID) AS REVIEWCOUNT,\r\n" + 
 				"(SELECT COUNT(*) FROM USED WHERE USER_ID = M.USER_ID) AS USEDCOUNT,\r\n" + 
 				"M.USER_HISTORY\r\n" + 
-				"FROM MEMBER M)\r\n" + 
+				"FROM MEMBER M WHERE USER_TYPE != 1)\r\n" + 
 				"WHERE USER_NO like(?)) t1) t2 where r between ? and ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
