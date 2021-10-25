@@ -73,7 +73,7 @@
 					</tr>
 					<tr>
 						<td class="col1">휴대폰 번호</td>
-						<td class="col2"><%=m.getUserPhone()%></td>
+						<td class="col2">0<%=m.getUserPhone()%></td>
 
 					</tr>
 	

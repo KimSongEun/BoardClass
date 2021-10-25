@@ -1,3 +1,38 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'ImcreSoojin';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+* {
+	font-family: 'ImcreSoojin';
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+#signtext {
+	height: 120px;
+	width: 970px;
+	margin: 60px auto 0 auto;
+}
+
+#signtext h1{
+	text-align: center;
+	margin: 60px;
+}
+
+#signtext h2,#signtext h4{
+	display: inline;
+	margin: 5px 10px;
+}
+
+
+
 table {
 	border-collapse: collapse;
 	height: 500px;
@@ -6,7 +41,7 @@ table {
 	border-bottom: 3px solid black;
 	margin-right: auto;
 	margin-left: auto;
-	margin-top: 50px;
+	margin-top: 20px;
 	letter-spacing: 2px;
 }
 
@@ -14,22 +49,22 @@ tr {
 	border-bottom: 1px dotted black;
 }
 
-caption h1 {
-	padding: 15px 0 25px;
+caption .signtext h1 {
+	padding:100px 0 25px;
 }
 
-caption h2, caption h4 {
+caption .signtext h2, caption .signtext h4 {
 	line-height: 30px;
-	display: inline;
+	
 	float: left;
 	padding: 0 10px;
-	margin: 10px 0;
+	margin: 100px 0;
 }
 
 .col1 {
-	background-color: #f4e2f7;
+	background-color: #e2e2e2;
 	padding: 10px;
-	width: 130px;
+	width: 150px;
 	text-align: center;
 	font-weight: bold;
 	font-size: 15px;
@@ -37,7 +72,7 @@ caption h2, caption h4 {
 
 .col2 {
 	margin: auto;
-	width: 490px;
+	width: 470px;
 	text-align: left;
 	padding: 15px 25px;
 }
@@ -61,12 +96,15 @@ caption h2, caption h4 {
 	margin: 0 15px;
 	padding: 10px 15px;
 	color: black;
-	background-color: #f0d2ed;
-	border: none;
+	border: 3px solid #2196F3;
 	border-radius: 0.25rem;
 	letter-spacing: 1px;
 	font-weight: bold;
 	font-size: 13px;
+}
+
+.CheckBtn:hover {
+	background-color: #c2e2fc;
 }
 
 input[type=file] {
@@ -84,11 +122,11 @@ input[type=text], [type=number], [type=password] {
 	font-size: 14px;
 	border-radius: 6px;
 	letter-spacing: 1px;
-	border: 2px #dfafd9 solid;
+	border: 2px #2196F3 solid;
 }
 
 input:focus {
-	outline: 2px solid #d50000;
+	outline: 2px solid #0c75cb;
 }
 
 div.create {
@@ -98,16 +136,20 @@ div.create {
 	margin: auto;
 }
 
-.signupBtn, .cancelBtn {
+.create .signupBtn, .create .cancelBtn {
 	font-family: ImcreSoojin;
 	height: 50px;
 	width: auto;
 	margin: 0 5px;
 	padding: 0 20px;
 	color: black;
-	border: 4px solid #b125ca;
+	border: 4px solid #2196F3;
 	border-radius: 0.25rem;
 	letter-spacing: 1px;
 	font-weight: bold;
 	font-size: 15px;
+}
+
+.create .signupBtn:hover, .create .cancelBtn:hover {
+	background-color: #c2e2fc;
 }

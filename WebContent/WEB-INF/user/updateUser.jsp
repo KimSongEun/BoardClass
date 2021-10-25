@@ -13,7 +13,7 @@
 <link rel="stylesheet" href="css/index/maincss.css">
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type="text/javascript" src="./js/user/signUp.js"></script>
+<script type="text/javascript" src="./js/user/updateUser.js"></script>
 </head>
 <body>
 	<%@include file="/WEB-INF/index/header.jsp"%>
@@ -38,7 +38,7 @@
 			if (m != null) {
 		%>
 
-		<form method="post" id="updateform" action="updateuser.do"
+		<form name="form" method="post" id="updateform" action="updateuser.do"
 			enctype="multipart/form-data">
 
 
@@ -70,11 +70,12 @@
 
 					<tr>
 						<td class="col1">닉네임</td>
-						<td class="col2"><input type="text" name="userNickname"
+						<td class="col2"><input type="text" name="userNickname" 
 							id="userNickname" value="<%=m.getUserNickname()%>" maxlength="8"
 							placeholder="닉네임을 입력해주세요."> <input
-							class='dupnicknamechkBtn' id="dupnicknamechkBtn" type="button"
-							value="중복확인" onclick=""></td>
+							class='dupnicknamechkBtn' id="dupnicknamechkBtn" name="dupnicknamechkBtn" type="button"
+							
+							value="중복확인" disabled="disabled" ></td>
 						<td>
 							<div id="nicknamecheck"></div>
 						</td>
@@ -85,14 +86,8 @@
 						<td class="col1">아이디</td>
 						<td class="col2"><input type="text" name="userId" id="userId"
 							value="<%=m.getUserId()%>" maxlength="20" readonly="readonly"
-							placeholder="아이디를 입력해주세요." onkeydown="inputIdChk()"> <input
-							class='dupidchkBtn' id="dupidchkBtn" type="button" value="중복확인">
+							placeholder="아이디를 입력해주세요." onkeydown="inputIdChk()"> 
 						</td>
-						<td>
-							<div id="idcheck"></div>
-						</td>
-						<td><input type="hidden" name="idDuplication"
-							value="idUncheck"></td>
 					</tr>
 
 					<tr>
@@ -115,7 +110,7 @@
 					<tr>
 						<td class="col1">휴대폰 번호</td>
 						<td class="col2"><input type="number" name="userPhone"
-							id="userPhone" value="<%=m.getUserPhone()%>"
+							id="userPhone" value="0<%=m.getUserPhone()%>"
 							placeholder="휴대폰 번호를 입력해주세요.">
 							<div id="phone">- 를 제외하고 숫자만 10~11자리 입력 EX)01012345678</div></td>
 
@@ -142,5 +137,10 @@
 			}
 		%>
 		<%@include file="/WEB-INF/index/footer.jsp"%>
+		
+		<script>
+	
+		
+		</script>
 </body>
 </html>

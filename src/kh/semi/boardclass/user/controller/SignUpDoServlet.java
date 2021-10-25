@@ -103,11 +103,11 @@ public class SignUpDoServlet extends HttpServlet {
 		if (result == 1) {
 			System.out.println(userId + "님 가입되었습니다. 환영합니다.");
 			request.setAttribute("msg", "회원가입에 성공했습니다!");
-			request.setAttribute("loc", "usermain");
+			request.setAttribute("loc", "main");
 		} else {
 			System.out.println("회원가입 실패");
 			request.setAttribute("msg", "회원가입에 실패했습니다!");
-			request.setAttribute("loc", "usermain");
+			request.setAttribute("loc", "main");
 		}
 
 		rd.forward(request, response);

@@ -184,7 +184,6 @@
             var pw = $("#userPassword").val();
             var email = $("#userEmail").val();
             var phone = $("#userPhone").val();
-            var confirmNum = $("#confirmNum").val();
 
             var nameregex = /[가-힣]{2,}/;
             var nicknameregex = /^[A-Za-z0-9가-힣]{1,8}$/;
@@ -192,7 +191,7 @@
             var pwregex = /^[a-zA-Z0-9]{5,20}$/;
             var emailregex = /^[A-Za-z0-9]*[@]{1}[A-Za-z0-9]+[A-Za-z0-9]*[.]{1}[A-Za-z]{1,3}$/;
             var phoneregex = /^01\d\d{3,4}\d{4}$/;
-            var confirmnumregex = /^[0-9]{6}$/
+        
 
             var nameregex = nameregex.exec(name);
             if (nameregex == null) {
@@ -208,7 +207,7 @@
                 retrun;
             }
             if (form.nickDuplication.value != "nicknameCheck") {
-                alert("닉넹임 중복체크를 해주세요.");
+                alert("닉네임 중복체크를 해주세요.");
                 return false;
             }
 
@@ -241,50 +240,11 @@
                 return false;
             }
 
-            var confirmnumregex = confirmnumregex.exec(confirmNum);
-            if (confirmnumregex == null) {
-                alert("휴대폰 인증번호를 다시 확인해주세요 \n 인증번호는 숫자 6자리만 입력가능합니다.");
-                form.confirmNum.focus();
-                return false;
-            }
-
-      	
-
             //빈칸 없을 때 제출.
             $("#signform").submit();
  
         });
 
-	 /*$.ajax({
-                url: "signup.do",
-                type: "post",
-                async: false,
-                data: {
-                    userImage: $('#userImage').val(),
-                    userName: $('#userName').val(),
-                    userNickname: $('#userNickname').val(),
-                    userId: $("#userId").val(),
-                    userPassword: $("#userPassword").val(),
-                    userEmail: $("#userEmail").val(),
-                    userPhone: $("#userPhone").val(),
-                    userAddress: $("#userAddress").val()
-                },
-                dataType: "text",
-                success: function (value) {
-                    if (value === "fail") {
-                        alert("회원가입에 실패하였습니다. \n 회원가입을 다시 시도해주세요.")
-
-                    } else {
-                        alert("환영합니다! 회원가입에 성공하였습니다. \n 로그인 후 이용해주세요.")
-                        location.href = "usermain"
-                    }
-                },
-                error: function (request, status, error) {
-                    alert("code:" + request.status + "\n" + "message:"
-                        + request.responseText + "\n" + "error:"
-                        + error);
-                }
-            }); */
 
         // 아이디 입력창에 값 입력시 hidden에 idUncheck를 세팅한다.
         // 중복체크 후 다시 아이디 창이 새로운 아이디를 입력했을 때 다시 중복체크

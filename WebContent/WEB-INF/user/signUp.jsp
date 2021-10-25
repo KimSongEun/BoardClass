@@ -16,11 +16,11 @@
         <div class="container">
             <div class="insert">
                 <table>
-                    <caption>
-                        <h1>회원가입</h1>
-                        <h2>정보입력</h2>
-                        <h4>*은 필수작성 항목입니다.</h4>
-                    </caption>
+                    <div id="signtext">
+                        <h1 class="signtext">회원가입</h1>
+                        <h2 class="signtext">정보입력</h2>
+                        <h4 class="signtext">*은 필수작성 항목입니다.</h4>
+                    </div>
 					<tr>
 						<td class="col1">프로필사진</td>
 						<td class="col2"><input type="file" name="uploadFile" id="userImage" /></td>
@@ -43,7 +43,7 @@
                         </td>
                         <td class="col3">
                                 <div id="nicknamecheck"></div>
-                                <input type="button" name="nickDuplication" value="nicknameUncheck">
+                                <input type="hidden" name="nickDuplication" value="nicknameUncheck">
                         </td>
                     </tr>
 					<tr>
@@ -53,7 +53,7 @@
 							onkeydown="inputIdChk()"> <input class='CheckBtn'
 							id="dupidchkBtn" type="button" value="중복확인"></td>
 						<td class="col3">
-							<div id="idcheck"></div> <input type="button"
+							<div id="idcheck"></div> <input type="hidden"
 							name="idDuplication" value="idUncheck">
 						</td>
 					</tr>
@@ -87,22 +87,16 @@
                         <td class="col1">* 핸드폰 번호</td>
                         <td class="col2">
                             <input type="number"  name="userPhone" id="userPhone" placeholder="핸드폰 번호를 입력해주세요.">
-                            <input class='CheckBtn' type="button" value="인증번호 전송" onclick="">
                              <div> - 를 제외하고 숫자만 10~11자리 입력  EX)01012345678 </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td class="col1">* 인증번호 확인</td>
-                        <td class="col2"><input type="number" name="confirmNum" id="confirmNum" maxlength="6" placeholder="전송받은 인증번호 입력">
-                            <input class='CheckBtn' type="button" value="인증번호 확인" onclick="">
-                        </td>
-                    </tr>
+                    
                     <tr>
                         <td class="col1">주소 (선택)</td>
                         <td class="col2"><input type="text" name="userAddress" id="userAddress" maxlength="25" placeholder="주소를 입력해주세요."></td>
-                    <td class="col3">
+                   		<td class="col3">
                                 <div class="userAddress regex"></div>
-                            </td>
+                         </td>
                     </tr>
 					
 				</table>
@@ -114,6 +108,6 @@
             </div>
         </div>
   </form>
-   <%@include file="/WEB-INF/user/userFooter.jsp" %>
+   <%@include file="/WEB-INF/index/footer.jsp" %>
 </body>
 </html>

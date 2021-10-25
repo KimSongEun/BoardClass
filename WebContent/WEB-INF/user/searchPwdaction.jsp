@@ -43,7 +43,7 @@ User user = (User)request.getAttribute("users");
 
 		<div id="page">
 			<button id="mainpage"
-				onclick="location.href = '<%=request.getContextPath()%>/usermain'">
+				onclick="location.href = '<%=request.getContextPath()%>/main'">
 				메인페이지로 이동</button>
 			
 		</div>
@@ -57,7 +57,7 @@ User user = (User)request.getAttribute("users");
 		
 		<div id="page">
 			<button id="mainpage"
-				onclick="location.href = '<%=request.getContextPath()%>/usermain'">
+				onclick="location.href = '<%=request.getContextPath()%>/main'">
 				메인페이지로 이동</button>
 			<button id="signpage"
 				onclick="location.href = '<%=request.getContextPath()%>/signup'">

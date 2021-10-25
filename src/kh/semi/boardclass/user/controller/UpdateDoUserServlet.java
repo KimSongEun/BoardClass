@@ -26,32 +26,34 @@ import kh.semi.boardclass.user.model.vo.User;
 @WebServlet("/updateuser.do")
 public class UpdateDoUserServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UpdateDoUserServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-				response.getWriter().append("Served at: ").append(request.getContextPath());
+	public UpdateDoUserServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		System.out.println("/signupservlet 진입");
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
-	
-		
+
 		PrintWriter out = response.getWriter();
 
 		// 파일 저장 경로 (web 경로 밑에 해당 폴더를 생성해 주어야 한다)
@@ -92,41 +94,39 @@ public class UpdateDoUserServlet extends HttpServlet {
 		String userEmail = multi.getParameter("userEmail");
 		int userPhone = Integer.parseInt(multi.getParameter("userPhone"));
 		String userAddress = multi.getParameter("userAddress");
-		if(userAddress.isEmpty()) {
+		if (userAddress.isEmpty()) {
 			userAddress = multi.getParameter("address");
 		}
 		System.out.println(userId);
 		System.out.println(userImage);
 		System.out.println(userAddress);
-		
+
 		HttpSession session = request.getSession(false);
 		User m = (User) session.getAttribute("userSession");
 		UserService uservice = new UserService();
 		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/user/alert.jsp");
 		if (m != null && m.getUserId().equals(userId)) { // 만약 ID 값이 기존값과 일치한다면 수정 실행
-			m.setUserPassword(userPassword);	
+			m.setUserPassword(userPassword);
 			m.setUserName(userName);
 			m.setUserNickname(userNickname);
 			m.setUserEmail(userEmail);
 			m.setUserPhone(userPhone);
 			m.setUserAddress(userAddress);
 			m.setUserImage(userImage);
-			
+
 			if (uservice.updateUser(m) > 0) {
 				session.setAttribute("userSession", m);
 				request.setAttribute("msg", "회원정보 수정에 성공했습니다!");
-				request.setAttribute("loc", "usermain");
+				request.setAttribute("loc", "main");
 			} else {
 				out.append("<script>alert('회원 정보 수정 오류!\n'+'관리자에게 문의하세요!');</script>");
 			}
 		} else {
 			request.setAttribute("msg", "회원정보 수정에 실패했습니다");
-		request.setAttribute("loc", "usermain");
+			request.setAttribute("loc", "main");
 		}
 		rd.forward(request, response);
 		out.flush();
 		out.close();
-	
 	}
-
 }
