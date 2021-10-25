@@ -57,7 +57,7 @@ public class SearchUserBoardTitleServlet extends HttpServlet {
 		}
 		String type = request.getParameter("type");
 		String keyword = request.getParameter("keyword");
-		aCount = new CommunityService().getAllBoardTitleCount(keyword);
+		aCount = new CommunityService().UserBoardTitleCount(keyword);
 		pageCount = (aCount / PAGE_SIZE) + (aCount % PAGE_SIZE == 0 ? 0:1);
 		startRnum = (currentPage-1) * PAGE_SIZE + 1;  
 		endRnum = startRnum + PAGE_SIZE -1;
@@ -71,7 +71,7 @@ public class SearchUserBoardTitleServlet extends HttpServlet {
 		endPage = startPage + PAGE_BLOCK -1;
 		if(endPage > pageCount) endPage = pageCount;
 		
-		ArrayList<Board> list  = new CommunityService().searchAllBoardTitle(keyword, startRnum, endRnum);
+		ArrayList<Board> list  = new CommunityService().UserBoardSearchTitle(keyword, startRnum, endRnum);
 		
 		request.setAttribute("viewcount", PAGE_SIZE);
 		request.setAttribute("list", list);

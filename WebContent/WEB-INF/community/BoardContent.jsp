@@ -42,6 +42,7 @@
     right: 0;
     bottom: -2px;
 }
+
 </style>
 <script type="text/javascript">
 	var b = "a";
@@ -81,8 +82,7 @@
 	<div class="h3group">
 		<h3 class="tit">커뮤니티</h3>
 		<div class="location">
-			<span class="depth">홈</span>
-			<span class="depth">커뮤니티</span><strong class="this">자유게시판</strong>
+
 		</div>
 	</div>
 	
