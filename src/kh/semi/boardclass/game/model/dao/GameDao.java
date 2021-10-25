@@ -1411,6 +1411,21 @@ public class GameDao {
 		}
 		return result;
 	}
+	public int deleteReview(Connection conn, int reviewNo) {
+		int result = -1;
+		PreparedStatement pstmt = null;
+		String sql = "delete from REVIEW where REVIEW_NO = ?";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, reviewNo);
+			result = pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
 
 	public List<Game> searchList(Connection conn, String searchKeyword) {
 		List<Game> volist = null;

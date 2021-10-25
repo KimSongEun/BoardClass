@@ -163,6 +163,15 @@ public class GameService {
 		return result;
 	}
 
+
+	public int deleteReview(int reviewNo) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new GameDao().deleteReview(conn, reviewNo);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
 	public ArrayList<Used> usedlist(String name) {
 		ArrayList<Used> volist = null;
 		Connection conn = JDBCTemplate.getConnection();

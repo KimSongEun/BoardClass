@@ -31,8 +31,8 @@
 
 #page {
 	position: absolute;
-	top: 700px;
-	left: 700px;
+	top: 1400px;
+	left: 930px;
 	font-size: 40px;
 }
 
@@ -124,6 +124,41 @@ top:-100px;
 	width: 150px;
 	
 	top: -450px;
+}
+
+.div_paging_before{
+	display: flex;
+	justify-content: center;
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+.div_paging {
+	padding-bottom: 20px;
+}
+
+.pageprevious {
+	background-color: black;
+	color: white;
+	text-decoration: none;
+	padding: 5px 13px;
+}
+
+.pagecurrent {
+	color: black;
+	text-decoration: none;
+	padding: 5px 13px;
+}
+
+.pagecurrent:hover {
+	background-color: #ddd;
+}
+
+.pagenext {
+	background-color: black;
+	color: white;
+	text-decoration: none;
+	padding: 5px 13px;
 }
 
 
@@ -253,36 +288,38 @@ top:-100px;
 				}
 				}
 			%>
+	</section>
 
-			<div id="page">
+	</div>
+		<div class="div_paging_before">
+			<div id="page" class="div_paging">
 				<%
 					if (startPage > 1) {
 				%>
-				이전
+				<a href="GamePartyList?pagenum=${startPage-1}" class="pageprevious">&laquo;</a>
 				<%
-					}
+					} else {
+				%>
+				<a href="GamePartyList?pagenum=1" class="pageprevious">&laquo;</a>
+				<%	}
 					for (int i = startPage; i <= endPage; i++) {
 				%>
-				<a href="./GamePartyList?pagenum=<%=i%>"> <%=i%></a>
+				<a href="GamePartyList?pagenum=<%=i%>" class="pagecurrent"> <%=i%></a>
 				<%
-					if (i != endPage) {
-				%>
-				,
-				<%
-					}
 					}
 					if (endPage < pageCount) {
 				%>
-				다음
+				<a href="GamePartyList?pagenum=${endPage+1}" class="pagenext">&raquo;</a>
 				<%
-					}
+					} else {
 				%>
+				<a href="GamePartyList?pagenum=${pageCount}" class="pagenext">&raquo;</a>
+				<% } %>
 			</div>
+		</div>
+			
 
-
-		</section>
-
-	</div>
+	
 
 
 <%@include file="/WEB-INF/index/footer.jsp" %>

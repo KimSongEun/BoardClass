@@ -33,8 +33,8 @@
 
 #page {
 	position: absolute;
-	top: 1380px;
-	left: 1000px;
+	top: 1400px;
+	left: 860px;
 	font-size: 40px;
 }
 
@@ -317,7 +317,7 @@ top:-100px;
 				<%	}
 					for (int i = startPage; i <= endPage; i++) {
 				%>
-				<a href="./GameAllList?pagenum=<%=i%>" class="pagecurrent"> <%=i%></a>
+				<a href="GameAllList?pagenum=<%=i%>" class="pagecurrent"> <%=i%></a>
 				<%
 					}
 					if (endPage < pageCount) {
