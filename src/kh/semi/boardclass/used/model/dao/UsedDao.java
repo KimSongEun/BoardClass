@@ -145,7 +145,7 @@ public class UsedDao {
 		ArrayList<Used> volist = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = "select ROWNUM, USED_TITLE, USED_PRICE, USED_IMG from (select USED_TITLE, USED_PRICE, USED_IMG from USED order by USED_DAY desc) where ROWNUM <= 5";
+		String sql = "select ROWNUM, USED_NO, USED_TITLE, USED_PRICE, USED_IMG from (select USED_NO, USED_TITLE, USED_PRICE, USED_IMG from USED order by USED_DAY desc) where ROWNUM <= 5";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
@@ -153,6 +153,7 @@ public class UsedDao {
 			if (rset.next()) {
 				do {
 					Used vo = new Used();
+					vo.setUsedNo(rset.getInt("USED_NO"));
 					vo.setUsedTitle(rset.getString("USED_TITLE"));
 					vo.setUsedPrice(rset.getInt("USED_PRICE"));
 					vo.setUsedImg(rset.getString("USED_IMG"));

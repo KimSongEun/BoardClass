@@ -123,6 +123,33 @@
                    </tbody>
                 </table>
             </div>
+            <div class="secsecond">
+				<c:if test="${usedNewList != null}">
+					<c:forEach var="r" items="${usedNewList}">
+						<div class="div_product">
+							<div class="div_img">
+								<a href="usedinformation?no=${r.usedNo}">
+									<c:choose>
+										<c:when test="${r.usedImg != null}">
+											<img src="${pageContext.request.contextPath}/${r.usedImg}">
+										</c:when>
+										<c:when test="${r.usedImg == null}">
+											<img src="./img/logo.png">
+										</c:when>
+									</c:choose>
+								</a>
+							</div>
+							<div class="div_img_text">
+								<p class="p_img_text">
+									<a href="usedinformation?no=${r.usedNo}">
+										${r.usedTitle}
+									</a>
+								</p>
+							</div>
+						</div>
+					</c:forEach>
+				</c:if>
+			</div>
 			
 			
 			

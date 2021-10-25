@@ -428,3 +428,56 @@ img {vertical-align: middle;}
     }
 }
 
+/*중고최신글 */
+
+.secsecond{
+            display: flex;
+            flex-wrap: wrap;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 100px;
+            margin-bottom: 100px;
+            max-width: 1175px;
+        }
+        
+.div_product {
+            width: 232px;
+            height: 313px;
+            border: 1px solid rgba(138, 138, 138, 0.993);
+            margin-left: -1px;
+            margin-top: -1px;
+        }
+        
+.div_product:hover{
+	border: 2px solid #FFE699;
+}
+
+.div_img {
+            width: 200px;
+            height: 200px;
+            padding: 15px;
+        }
+
+.div_img img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+        }
+
+.div_img_text {
+            width: 100%;
+            height: 80px;
+            overflow: hidden;
+            margin-top: 1px;
+        }
+
+.p_img_text {
+            padding: 0px;
+            margin: 0px;
+            text-align: left;
+            white-space: normal;
+            line-height: 1.2em;
+            padding-left: 14.5px;
+            padding-right: 11px;
+            font-family: 'Noto Sans KR light';
+        }
