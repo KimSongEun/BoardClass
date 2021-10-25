@@ -26,11 +26,11 @@ $(function(){
 		var party = [ "모임후기", "모집", "일정안내"];
 		var selectItem = $(".admin-select").eq(index).val();
 		var changeItem;
-		if (selectItem == "자유 게시판") {
+		if (selectItem == "자유게시판") {
 			changeItem = free;
-		} else if (selectItem == "유저정보 게시판") {
+		} else if (selectItem == "유저정보게시판") {
 			changeItem = userInfo;
-		} else if (selectItem == "모임 게시판") {
+		} else if (selectItem == "모임게시판") {
 			changeItem = party;
 		} 
 		$('.admin-sub-select').eq(index).empty();
