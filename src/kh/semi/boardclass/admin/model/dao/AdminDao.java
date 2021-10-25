@@ -36,7 +36,7 @@ public class AdminDao {
 	public int getAllUserCount(Connection conn){
 		int result = 0;
 		String sql = "SELECT COUNT(USER_NO)\r\n" + 
-					 "FROM MEMBER";
+					 "FROM MEMBER WHERE USER_TYPE != 1";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -59,7 +59,7 @@ public class AdminDao {
 		int result = 0;
 		String sql = "SELECT SUM(VISIT_COUNT)\r\n" + 
 					 "FROM VISIT\r\n" + 
-					 "WHERE TO_DATE(VISIT_DATE, 'YYYY-MM-DD') = TO_DATE(SYSDATE, 'YYYY-MM-DD') AND USER_ID != 'admin'";
+					 "WHERE TO_DATE(VISIT_DATE, 'YYYY-MM-DD') = TO_DATE(SYSDATE, 'YYYY-MM-DD') AND USER_TYPE != 1";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -82,7 +82,7 @@ public class AdminDao {
 		int result = 0;
 		String sql = "SELECT SUM(VISIT_COUNT)\r\n" + 
 					 "FROM VISIT\r\n" + 
-					 "WHERE USER_ID!='admin'";
+					 "WHERE USER_TYPE != 1";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
