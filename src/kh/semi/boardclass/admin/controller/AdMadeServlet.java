@@ -15,6 +15,7 @@ import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import kh.semi.boardclass.admin.model.service.AdminService;
+import kh.semi.boardclass.user.model.vo.User;
 
 /**
  * Servlet implementation class AdMadeServlet
@@ -49,7 +50,7 @@ public class AdMadeServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
-
+		
 		String fileSavePath = "upload/ad";
 		int uploadSizeLimit = 10 * 1024 * 1024;
 		String encType = "UTF-8";
@@ -72,10 +73,7 @@ public class AdMadeServlet extends HttpServlet {
 
 		String title = multi.getParameter("title");
 		String content = multi.getParameter("content");
-		String writer = (String) request.getSession().getAttribute("userSession"); // TODO: 관리자계정 넣는 것에 따라서 바꾸기
-		if (writer == null) {
-			writer = "admin"; // TODO: 임시 writer 설정
-		}
+		String writer = "admin";		
 		String img = "/upload/ad/" + file;
 		if (file == null) {
 			// 업로드 실패 시

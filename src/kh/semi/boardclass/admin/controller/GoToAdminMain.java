@@ -15,6 +15,7 @@ import kh.semi.boardclass.admin.model.vo.ReportBoard;
 import kh.semi.boardclass.admin.model.vo.ReportComment;
 import kh.semi.boardclass.admin.model.vo.ReportReview;
 import kh.semi.boardclass.admin.model.vo.ReportUsed;
+import kh.semi.boardclass.user.model.vo.User;
 
 /**
  * Servlet implementation class OpenView

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import kh.semi.boardclass.admin.model.service.AdminService;
+import kh.semi.boardclass.user.model.vo.User;
 
 /**
  * Servlet implementation class AnnounceMadeServlet
@@ -32,14 +33,12 @@ public class NoticeMadeServlet extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
-
+		
+		
 		String title = request.getParameter("title"); 
 		String content = request.getParameter("content");
-		String writer = (String)request.getSession().getAttribute("userSession"); //TODO: 관리자계정 넣는 것에 따라서 바꾸기
-		if(writer == null) {
-			writer = "admin";
-		}		
-		
+		String writer = "admin";
+		System.out.println("writer"+ writer);
 		int result = new AdminService().insertNotice(title,content, writer);
 		response.sendRedirect("noticelist");
 	}
