@@ -68,9 +68,9 @@
                          	<td style = "vertical-align : middle" class = "boardNo">${b.boardNo}</td>
                             <td style = "vertical-align : middle" id = "select-main-td">
                              <select class = "admin-select" name = "selectCategory" id = "allboard-select-main">
-                          		<option value="자유게시판"<c:if test = "${b.boardCategory=='자유 게시판'}">selected</c:if>>자유게시판</option>
-								<option value="유저정보게시판"<c:if test = "${b.boardCategory=='유저정보게시판'}">selected</c:if>>유저정보 게시판</option>
-								<option value="모임게시판"<c:if test = "${b.boardCategory=='모임 게시판'}">selected</c:if>>모임게시판</option>
+                          		<option value="자유게시판"<c:if test = "${b.boardCategory=='자유게시판'}">selected</c:if>>자유게시판</option>
+								<option value="유저정보게시판"<c:if test = "${b.boardCategory=='유저정보게시판'}">selected</c:if>>유저정보게시판</option>
+								<option value="모임게시판"<c:if test = "${b.boardCategory=='모임게시판'}">selected</c:if>>모임게시판</option>
                             </select>
                             </td>
                             <td style = "vertical-align : middle">
