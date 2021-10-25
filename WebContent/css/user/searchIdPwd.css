@@ -1,5 +1,23 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'ImcreSoojin';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.3/ImcreSoojin.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+* {
+	font-family: 'ImcreSoojin';
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 section {
-	height: 700px;
+	height: 750px;
 	width: 970px;
 	margin-right: auto;
 	margin-left: auto;
@@ -67,7 +85,7 @@ tr {
 }
 
 .id1, .pwd1 {
-	background-color: #f4e2f7;
+	background-color: #e2e2e2;
 	padding: 10px;
 	width: 130px;
 	text-align: center;
@@ -84,15 +102,15 @@ tr {
 
 .id2 input[type=text], .id2 input[type=number], .pwd2 input[type=text] {
 	font-family: ImcreSoojin;
-	padding: 20px;
+	padding: 10px;
 	background-color: white;
-	margin: 20px;
+	margin: 10px;
 	width: 300px;
-	height: 45px;
+	height: 40px;
 	font-size: 14px;
 	border-radius: 6px;
 	letter-spacing: 1px;
-	border: 2px #dfafd9 solid;
+	border: 2px #2196F3 solid;
 }
 
 div#searchId, div#searchPwd {
@@ -109,26 +127,26 @@ div#searchId, div#searchPwd {
 	margin: 0 5px;
 	padding: 0 15px;
 	color: black;
-	border: 4px solid #b125ca;
+	border: 4px solid #2196F3;
 	border-radius: 0.25rem;
 	letter-spacing: 1px;
 	font-weight: bold;
 	font-size: 15px;
 }
-
+.searchIdBtn:hover , .resetIdBtn:hover , .searchPwdBtn:hover , .resetPwdBtn:hover  {
+	background-color: #a4d3fb;
+}
 #Result{
 	width:800px;
 	margin: 150px auto ;
-
-	text-align: center;
-	
-	border: 4px solid #eab4f1;
+	text-align: center;	
+	border: 4px solid #a4d3fb;
 	border-radius:20px;
 	
 }
 
 #idpwd{
-    border: 1px solid #eab4f1;
+    border: 1px solid #a4d3fb;
 }
 
 #Result p{
@@ -158,7 +176,7 @@ div#searchId, div#searchPwd {
 	margin: 40px 10px;
 	padding: 0 17px;
 	color: black;
-	border: 4px solid #b125ca;
+	border: 4px solid #2196F3;
 	border-radius: 0.25rem;
 	letter-spacing: 1px;
 	font-weight: bold;
