@@ -97,7 +97,7 @@
 			<div class="create">		
 				<input class="updateBtn" id="updateBtn" type="submit" value="회원정보 수정" >
 			</div>
-		
+		</div>
 	</form>
 	<%
 		}
