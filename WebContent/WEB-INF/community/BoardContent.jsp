@@ -23,17 +23,17 @@
 	transition: background-position .6s steps(28);
 	transition-duration: 0s;
 	display: flex;
-         justify-content: space-around;
-        }
-        .heart.is-active{
+    justify-content: space-around;
+}
+.heart.is-active{
 	transition-duration: .6s;
 	background-position: -2800px 0;
-        } 
+} 
         
-        .placement{
-        display: flex;
-         justify-content: space-around;
-         }
+.placement{
+    display: flex;
+	justify-content: space-around;
+}
 </style>
 <script type="text/javascript">
 	var b = "a";
@@ -93,13 +93,13 @@
 		
 	
 		<!-- 추천 -->
-		<c:if test="${used.userId != userSession.userId}">
+		<c:if test="${board.userId != userSession.userId}">
 			<button type="button" id="btn_report">신고하기</button>
-		</c:if>
 				<!-- 좋아요 -->
 				<div class="placement">								
-			      <div class="heart" class="btn_like"></div>	
+			      <div class="heart" id="btn_like"></div>	
 				</div>	
+		</c:if>
 				 <div class="countheart">${likeresult }개</div>	
 		
  
@@ -242,10 +242,13 @@ let reportedThis = false;
 $("#btn_report").click(cbReport);
 
 function cbReport(){
+	
 	if(!"${userSession}"){
 		alert("로그인해주세요");
 		return;
 	}
+	var reportedThis = false;
+
 	if("${reportresult}" == 1){
 		alert("이미 신고하셨습니다.");
 		reportedThis = true;
@@ -262,7 +265,7 @@ function cbReport(){
 			loginId : "${userSession.userId}",
 			thisboardNo : "${board.boardNo}"
 		},
-		dataType : "json",
+		
 		success : function(receive) {
 			console.log("신고receive값은:"+receive);
 			if(receive<1){
@@ -279,19 +282,21 @@ function cbReport(){
 					+ error);
 		}
 	});
-	
-	//추천
-	//$(".btn_like").click(cblike);
+
+$(document).ready(function(){
+		if("${likeresult}" == 1){
+			$(".heart").toggleClass("is-active");
+		}
+	});
+}
+$("#btn_like").click(cbLike);
 
 	function cbLike(){
 		if(!"${userSession}"){
 			alert("로그인해주세요");
 			return;
 		}
-		if("${board.userId}" == "${userSession.userId}") {
-			alert("본인이 작성한 게시글에는 '추천' 할 수 없습니다.");
-			return;
-		}
+		
 		$.ajax({
 			type : "post",
 			url : "boardlike.ajax",
@@ -311,7 +316,7 @@ function cbReport(){
 			}
 		});
 	}
-}
+
 
 //댓글 신고
 let reportedComtThis = false;

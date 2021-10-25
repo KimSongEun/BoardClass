@@ -33,7 +33,7 @@
 
 	<div class="header_logo">
 		<div class="div_logo">
-			<a href="#"> <img src="./img/logo.png">
+			<a href="main"> <img src="./img/logo.png">
 			</a>
 		</div>
 		<div></div>

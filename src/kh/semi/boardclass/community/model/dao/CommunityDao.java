@@ -1632,6 +1632,7 @@ public Board getBoard(Connection conn, int boardNo) {
 		} finally {
 			JDBCTemplate.close(pstmt);
 		}
+		System.out.println("insertdao"+result);
 		return result;
 	}
 	
@@ -1649,6 +1650,7 @@ public Board getBoard(Connection conn, int boardNo) {
 		} finally {
 			JDBCTemplate.close(pstmt);
 		}
+		System.out.println("dao에요"+result);
 		return result;
 	}
 	
