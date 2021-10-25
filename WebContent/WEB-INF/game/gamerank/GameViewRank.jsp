@@ -162,7 +162,7 @@ border: 1px solid grey;
 				<option value="파티">파티</option>
 				<option value="한글">한글</option>
 			</select> <br>
-			<input type = "submit" value = "검색" id = "btn2">
+			<input type = "submit" value = "검색" id = "btn2" style = "width: 80px; height: 30px;">
 		</form>
 
 		</nav>
