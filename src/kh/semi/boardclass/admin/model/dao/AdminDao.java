@@ -933,8 +933,8 @@ public class AdminDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, writer);
 			pstmt.setString(2, title);
-			pstmt.setString(3, img);
-			pstmt.setString(4, content);
+			pstmt.setString(4, img);
+			pstmt.setString(3, content);
 			pstmt.setString(5, promotionURL);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {

@@ -81,7 +81,7 @@
 								  </label>
 								</div>
                             </td>
-                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href = #사용자가보는광고화면새창열기 target = '_blank' style = "color : #754100" title="<%=b.getPromotionTitle() %>"> <%=b.getPromotionTitle() %></a></td>
+                            <td style = "vertical-align : middle; white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href = "<%=b.getPromotionURL() %>" target = '_blank' style = "color : #754100" title="<%=b.getPromotionTitle() %>"> <%=b.getPromotionTitle() %></a></td>
                             <td style = "vertical-align : middle"><%=b.getPromotionDate() %></td>
                             <td style = "vertical-align : middle"><button class="update btn btn-danger" value="updatego" no="<%=b.getPromotionNo()%>">광고수정</button> </td>
                             <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" id="<%=b.getPromotionNo() %>">광고삭제</button> </td>
