@@ -5,25 +5,13 @@ import java.util.ArrayList;
 
 import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.community.model.vo.Board;
-import kh.semi.boardclass.community.model.vo.BoardLike;
-import kh.semi.boardclass.community.model.vo.Comment;
-import kh.semi.boardclass.game.model.vo.Game;
 import kh.semi.boardclass.mypage.model.dao.MyPageDao;
 import kh.semi.boardclass.mypage.model.vo.MyGameLike;
 import kh.semi.boardclass.mypage.model.vo.MyGameReview;
 import kh.semi.boardclass.mypage.model.vo.UserMyComt;
 import kh.semi.boardclass.mypage.model.vo.UserMyUsed;
-import kh.semi.boardclass.review.model.vo.Review;
 import kh.semi.boardclass.used.model.vo.Used;
-import kh.semi.boardclass.used.model.vo.UsedLike;
 
-//import kh.semi.boardclass.mypage.model.dao.Board;
-//import kh.semi.boardclass.mypage.model.dao.BoardLike;
-//import kh.semi.boardclass.mypage.model.dao.Boardgame;
-//import kh.semi.boardclass.mypage.model.dao.Comment;
-//import kh.semi.boardclass.mypage.model.dao.Review;
-//import kh.semi.boardclass.mypage.model.dao.Used;
-//import kh.semi.boardclass.mypage.model.dao.UsedLike;
 
 public class MyPageService {
 
@@ -31,45 +19,7 @@ public class MyPageService {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int countMyBoardGame() {
-		int result = 0;
-		Connection conn = JDBCTemplate.getConnection();
-		result = new MyPageDao().countMyBoardGame(conn);
-		JDBCTemplate.close(conn);
-		return result;
-	}
-
-	public int countMyTrade() {
-		int result = 0;
-		Connection conn = JDBCTemplate.getConnection();
-		result = new MyPageDao().countMyTrade(conn);
-		JDBCTemplate.close(conn);
-		return result;
-	}
-
-	public int countLikeTrade() {
-		int result = 0;
-		Connection conn = JDBCTemplate.getConnection();
-		result = new MyPageDao().countLikeTrade(conn);
-		JDBCTemplate.close(conn);
-		return result;
-	}
-
-	public int countMyCommunity() {
-		int result = 0;
-		Connection conn = JDBCTemplate.getConnection();
-		result = new MyPageDao().countMyCommunity(conn);
-		JDBCTemplate.close(conn);
-		return result;
-	}
-
-	public int countMyComment() {
-		int result = 0;
-		Connection conn = JDBCTemplate.getConnection();
-		result = new MyPageDao().countMyComment(conn);
-		JDBCTemplate.close(conn);
-		return result;
-	}
+	
 
 // 보드게임 찜리스트 
 	public int getMyBoardGameListCount(String userId) {

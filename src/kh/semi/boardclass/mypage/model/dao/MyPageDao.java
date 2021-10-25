@@ -7,46 +7,17 @@ import java.util.ArrayList;
 
 import kh.semi.boardclass.common.JDBCTemplate;
 import kh.semi.boardclass.community.model.vo.Board;
-import kh.semi.boardclass.community.model.vo.BoardLike;
-import kh.semi.boardclass.community.model.vo.Comment;
-import kh.semi.boardclass.game.model.vo.Game;
 import kh.semi.boardclass.mypage.model.vo.MyGameLike;
 import kh.semi.boardclass.mypage.model.vo.MyGameReview;
 import kh.semi.boardclass.mypage.model.vo.UserMyComt;
 import kh.semi.boardclass.mypage.model.vo.UserMyUsed;
-import kh.semi.boardclass.review.model.vo.Review;
 import kh.semi.boardclass.used.model.vo.Used;
-import kh.semi.boardclass.used.model.vo.UsedLike;
+
 
 public class MyPageDao {
 
 	public MyPageDao() {
 		// TODO Auto-generated constructor stub
-	}
-
-	public int countMyBoardGame(Connection conn) {
-		int result = 0;
-		return result;
-	}
-
-	public int countMyTrade(Connection conn) {
-		int result = 0;
-		return result;
-	}
-
-	public int countLikeTrade(Connection conn) {
-		int result = 0;
-		return result;
-	}
-
-	public int countMyCommunity(Connection conn) {
-		int result = 0;
-		return result;
-	}
-
-	public int countMyComment(Connection conn) {
-		int result = 0;
-		return result;
 	}
 
 	// 보드게임 찜 리스트
