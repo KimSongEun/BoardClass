@@ -487,59 +487,73 @@ public class CommunityService {
 	public int insertReportBoard(int boardNo, String userId) {
 		int result = -1;
 		Connection conn = JDBCTemplate.getConnection();
-		 new CommunityDao().insertReportBoard(conn, boardNo, userId);
-		 JDBCTemplate.close(conn);
+		result = new CommunityDao().insertReportBoard(conn, boardNo, userId);
+		JDBCTemplate.close(conn);
 		return result;
 	}
+	
 	public int countBoardReport(int boardNo, String userId) {
 		int result = -1;
 		Connection conn = JDBCTemplate.getConnection();
-		 new CommunityDao().countBoardReport(conn, boardNo, userId);
-		 JDBCTemplate.close(conn);
+		result = new CommunityDao().countBoardReport(conn, boardNo, userId);
+		JDBCTemplate.close(conn);
 		return result;
 	}
+	
 	public int countComtReport (int commentNo, String userId) {
 		int result = -1;
 		Connection conn = JDBCTemplate.getConnection();
-		 new CommunityDao().countComtReport(conn, commentNo, userId);
-		 JDBCTemplate.close(conn);
+		result = new CommunityDao().countComtReport(conn, commentNo, userId);
+		JDBCTemplate.close(conn);
 		return result;
 	}
 
 	public int insertReportComment(int commentNo, String userId) {
 		int result = -1;
 		Connection conn = JDBCTemplate.getConnection();
-		 new CommunityDao().insertReportComment(conn, commentNo, userId);
-		 JDBCTemplate.close(conn);
+		result = new CommunityDao().insertReportComment(conn, commentNo, userId);
+		JDBCTemplate.close(conn);
 		return result;
 	}
 	public int countReportComment (int commentNo, String userId) {
 		int result = -1;
 		Connection conn = JDBCTemplate.getConnection();
-		 new CommunityDao().countReportComment(conn, commentNo, userId);
-		 JDBCTemplate.close(conn);
+		result = new CommunityDao().countReportComment(conn, commentNo, userId);
+		JDBCTemplate.close(conn);
 		return result;
 	}
 
-	public int CountLikeBoard (int boardNo) {
-		int result = -1;
+	public int totalLikeBoard (int boardNo) {
+		int result = 0;
 		Connection conn = JDBCTemplate.getConnection();
-		 new CommunityDao().CountLikeBoard(conn, boardNo);
-		 JDBCTemplate.close(conn);
+		result = new CommunityDao().totalLikeBoard(conn, boardNo);
+		JDBCTemplate.close(conn);
 		return result;
 	}
+	
+	public int countLikeBoard(int boardNo, String userId) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new CommunityDao().countLikeBoard(conn, boardNo, userId);
+		JDBCTemplate.close(conn);
+		return result;
+	}
+	
 	public int insertLikeBoard(int boardNo, String userId) {
 		int result = -1;
 		Connection conn = JDBCTemplate.getConnection();
-		 new CommunityDao().insertLikeBoard(conn, boardNo, userId);
-		 JDBCTemplate.close(conn);
+		result = new CommunityDao().insertLikeBoard(conn, boardNo, userId);
+		JDBCTemplate.close(conn);
+		System.out.println("서비스insertlike="+result);
 		return result;
 	}
+	
 	public int deleteLikeBoard(int boardNo, String userId) {
 		int result = -1;
 		Connection conn = JDBCTemplate.getConnection();
-		 new CommunityDao().deleteLikeBoard(conn, boardNo, userId);
-		 JDBCTemplate.close(conn);
+		result = new CommunityDao().deleteLikeBoard(conn, boardNo, userId);
+		JDBCTemplate.close(conn);
+		System.out.println("서비스deletelike="+result);
 		return result;
 	}
 

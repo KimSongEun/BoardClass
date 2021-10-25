@@ -96,11 +96,11 @@
 		<c:if test="${board.userId != userSession.userId}">
 			<button type="button" id="btn_report">신고하기</button>
 				<!-- 좋아요 -->
-				<div class="placement">								
+			<div class="placement">								
 			      <div class="heart" id="btn_like"></div>	
-				</div>	
+			</div>	
 		</c:if>
-				 <div class="countheart">${likeresult }개</div>	
+			<div class="countheart">${totallike}개</div>	
 		
  
 </div>
@@ -229,26 +229,24 @@ function del(){
 		location.href='bdetail?boardNo=${board.boardNo }';
 	}
 }
+
 $("#comtBtn").click(comtBtn);
 function comtBtn(){
 	if(!"${userSession}"){
 		alert("로그인해주세요");
 		return;
 	}
-	}
+}
 
 // 신고
 let reportedThis = false;
 $("#btn_report").click(cbReport);
 
 function cbReport(){
-	
 	if(!"${userSession}"){
 		alert("로그인해주세요");
 		return;
 	}
-	var reportedThis = false;
-
 	if("${reportresult}" == 1){
 		alert("이미 신고하셨습니다.");
 		reportedThis = true;
@@ -265,7 +263,7 @@ function cbReport(){
 			loginId : "${userSession.userId}",
 			thisboardNo : "${board.boardNo}"
 		},
-		
+		dataType : "json",
 		success : function(receive) {
 			console.log("신고receive값은:"+receive);
 			if(receive<1){
@@ -282,13 +280,14 @@ function cbReport(){
 					+ error);
 		}
 	});
+}
 
 $(document).ready(function(){
-		if("${likeresult}" == 1){
-			$(".heart").toggleClass("is-active");
-		}
-	});
-}
+	if("${likeresult}" == 1){
+		$(".heart").toggleClass("is-active");
+	}
+});
+
 $("#btn_like").click(cbLike);
 
 	function cbLike(){
@@ -296,7 +295,6 @@ $("#btn_like").click(cbLike);
 			alert("로그인해주세요");
 			return;
 		}
-		
 		$.ajax({
 			type : "post",
 			url : "boardlike.ajax",
