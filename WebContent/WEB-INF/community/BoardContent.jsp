@@ -104,10 +104,13 @@
 			<c:if test="${board.userId != userSession.userId}">
 				<!-- 좋아요 -->
 				<div class="like_article">								
-				      <div class="heart" id="btn_like"></div>	
-				      <div class="button_like_list">좋아요 ${totallike}</div>	
+				      <div class="heart" id="btn_like"></div>
+				 </div>	
+			</c:if>	
+				<div class="countlike">		
+					      <div class="button_like_list">좋아요 ${totallike}</div>	
+					
 				</div>	
-			</c:if>
  
 </div>
 	

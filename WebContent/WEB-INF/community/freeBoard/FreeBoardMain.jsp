@@ -85,7 +85,6 @@
 					<td class="obj">
 						<div class="tbox">
 						<div class="tit">
-							${board.boardType }
 							<a href="bdetail?boardNo=${board.boardNo }">${board.boardTitle }</a>
 						</div>
 						</div>

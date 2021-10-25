@@ -9,9 +9,8 @@
 <script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
-<link rel="stylesheet" href="css/community/reset.css" />
+<link rel="stylesheet" href="css/index/maincss.css" />
 <link rel="stylesheet" href="css/community/write.css" />
-<link rel="stylesheet" href="css/community/common.css" />
 </head>
 <body>
 <%@include file="/WEB-INF/index/header.jsp" %>
@@ -21,7 +20,7 @@
 		<h2 class="as_hgroup"><a href="./cmain">커뮤니티</a></h2>
 		<nav id="lnb" class="lnb">
 			<ul>
-				<li><a href="#">공지사항</a></li>
+				<li><a href="nmain">공지사항</a></li>
 				<li><a href="./cf">자유게시판</a></li>
 				<li><a href="./cg">유저정보게시판</a></li>
 				<li><a href="./cu">모임게시판</a></li>
@@ -39,33 +38,41 @@
 	</div>
 	</div>
     <form method="post" action="bupdateview" >
-    <div class="hgroup">
+    <div class="WritingContent">
     	<input type="hidden" name="boardNo"  value="${board.boardNo }" readonly >
-     <p> 제목</p>
-     <input type="text" name="title" value="${board.boardTitle}"  required="required"><br>
-	<select class = "category-select" name = "category" id = "allboard-select-main">
-	            <option value="자유게시판"<c:if test = "${category=='자유게시판'}">selected</c:if>>자유게시판</option>
-				<option value="유저정보게시판"<c:if test = "${category=='유저정보게시판'}">selected</c:if>>유저정보게시판</option>
-				<option value="모임게시판"<c:if test = "${category=='모임게시판'}">selected</c:if>>모임게시판</option>
-		</select>
-	 	<select class="type-select" name="type" id = "allboard-select-sub">
-		 	<c:if test="${category=='자유게시판'}"> 
-				<option value="사담"<c:if test = "${type=='사담'}">selected</c:if>>사담</option>
-				<option value="건의"<c:if test = "${type=='건의'}">selected</c:if>>건의</option>
-				<option value="질문"<c:if test = "${type=='질문'}">selected</c:if>>질문</option>
-			</c:if>
-			<c:if test="${category=='유저정보게시판'}"> 
-				<option value="기사"<c:if test = "${type=='기사'}">selected</c:if>>기사</option>
-				<option value="후기"<c:if test = "${type=='후기'}">selected</c:if>>후기</option>
-				<option value="공식"<c:if test = "${type=='공식'}">selected</c:if>>공식</option>
-				<option value="팁"<c:if test = "${type=='팁'}">selected</c:if>>팁</option>
-			</c:if>
-				<c:if test="${category =='모임게시판'}"> 
-				<option value="모임후기"<c:if test = "${type=='모임후기'}">selected</c:if>>모임후기</option>
-				<option value="모집"<c:if test = "${type=='모집'}">selected</c:if>>모집</option>
-				<option value="일정안내"<c:if test = "${type=='일정안내'}">selected</c:if>>일정안내</option>
-			</c:if>
-		</select>
+	<div class="row">
+		<div class="column_title">
+		
+		<div class="FormSelectBox menu_candidates_selectbox">
+			<select class = "category-select" name = "category" id = "allboard-select-main">
+		            <option value="자유게시판"<c:if test = "${category=='자유게시판'}">selected</c:if>>자유게시판</option>
+					<option value="유저정보게시판"<c:if test = "${category=='유저정보게시판'}">selected</c:if>>유저정보게시판</option>
+					<option value="모임게시판"<c:if test = "${category=='모임게시판'}">selected</c:if>>모임게시판</option>
+			</select>
+		</div>
+		
+		<div class="column_category">
+		 	<select class="type-select" name="type" id = "allboard-select-sub">
+			 	<c:if test="${category=='자유게시판'}"> 
+					<option value="사담"<c:if test = "${type=='사담'}">selected</c:if>>사담</option>
+					<option value="건의"<c:if test = "${type=='건의'}">selected</c:if>>건의</option>
+					<option value="질문"<c:if test = "${type=='질문'}">selected</c:if>>질문</option>
+				</c:if>
+				<c:if test="${category=='유저정보게시판'}"> 
+					<option value="기사"<c:if test = "${type=='기사'}">selected</c:if>>기사</option>
+					<option value="후기"<c:if test = "${type=='후기'}">selected</c:if>>후기</option>
+					<option value="공식"<c:if test = "${type=='공식'}">selected</c:if>>공식</option>
+					<option value="팁"<c:if test = "${type=='팁'}">selected</c:if>>팁</option>
+				</c:if>
+					<c:if test="${category =='모임게시판'}"> 
+					<option value="모임후기"<c:if test = "${type=='모임후기'}">selected</c:if>>모임후기</option>
+					<option value="모집"<c:if test = "${type=='모집'}">selected</c:if>>모집</option>
+					<option value="일정안내"<c:if test = "${type=='일정안내'}">selected</c:if>>일정안내</option>
+				</c:if>
+			</select>
+		</div>
+	</div>
+		     <input type="text" name="title" value="${board.boardTitle}" class="boardtitle" required="required">
 	</div>
 	          <div class="col_c" style="margin-bottom: 30px; width: 70%">
 	                <div class="input-group">                 
@@ -81,8 +88,8 @@
 	                  </script>
 	                </div>
 	            </div> 
-	<button class='btn btn-warning' value='등록' type="submit">글 수정</button>
-		
+			<button class='movelist list' value='등록' type="submit">글 수정</button>
+	</div>	
 </form>
 </div>
 </section>

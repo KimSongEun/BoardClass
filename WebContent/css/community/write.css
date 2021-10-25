@@ -59,6 +59,7 @@ section {
 	margin: 0 0 20px;
 	padding: 30px 30px 60px;
 	background: #fff;
+	display: flex;
 }
 
 .conwrap {
@@ -66,10 +67,13 @@ section {
    	overflow: hidden;
     margin: -30px -30px 0;
  	 background-color: #ffffff;
+ 	 display: block;
 }
-
+.h3group {
+	display: block;
+}
 .h3group .tit {
-	  float: left;
+	display: block;
     font-family: 'NanumSquare';
     font-weight: 700;
     font-size: 30px;
@@ -118,10 +122,47 @@ section {
     font-size: 16px;
     color: #2d2d2d;
 }
-p {
-    max-height: 999999px;
+/* 글쓰기 */
+.column_title {
+	display: flex;
+	padding-right: 5px;
+}
+.row .column_title select {
+	display: inline-block;
+	padding: 5px;
+	margin: 10px 0;
+}
+.boardtitle {
+	width: 740px;
+	margin: auto;
+	padding: 10px;
+	margin-bottom: 10px;
 }
 /* 글쓰기 버튼 */
 .btn_wrap input:first-child {
     margin: 0;
 }
+section {
+	
+}
+.movelist {
+	float: right;
+	margin: 10px;
+  border: 2px solid black;
+  background-color: white;
+  color: black;
+  padding: 10px 15px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.list {
+  border-color: #ffd642;
+  color: orange;
+}
+
+.list:hover {
+  background: #ffd642;
+  color: white;
+}
+
+
