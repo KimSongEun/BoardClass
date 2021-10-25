@@ -76,6 +76,7 @@ public class GameInfoServlet extends HttpServlet {
         	str ="0";
         }
         	String[] str2 = str.split(","); 
+        	
         	request.setAttribute("str2", str2);
         
         String str3 = vo.getGamePlus();
@@ -83,7 +84,9 @@ public class GameInfoServlet extends HttpServlet {
         	str3 ="0";
         }
         	String[] str4 = str3.split(",");
-        	 request.setAttribute("str4", str4);
+        	
+        	request.setAttribute("str4", str4);
+        	
         
          
         

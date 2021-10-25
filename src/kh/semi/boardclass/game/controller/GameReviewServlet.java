@@ -62,6 +62,7 @@ public class GameReviewServlet extends HttpServlet {
         }
 		
 		String userId=null;
+		
 		int countlike = 0;		
 		if(loginSS != null) {
 			userId = loginSS.getUserId();
@@ -72,7 +73,7 @@ public class GameReviewServlet extends HttpServlet {
 			userId = loginSS.getUserId();
 			countreport = new GameService().countReviewReport(reviewNo, userId);
 		}
-			
+	
         final int PAGE_SIZE = 7;   // 한 페이지 당 글수
 		final int PAGE_BLOCK = 10;   // 한 화면에 나타날 페이지 링크 수
 		int bCount = 0;   // 총 글수
@@ -112,6 +113,8 @@ public class GameReviewServlet extends HttpServlet {
         request.setAttribute("reviewvolist", gvo2);
         System.out.println("add"+gvo2);
         
+        request.setAttribute("userId", userId);
+        System.out.println("add"+userId);
         request.setAttribute("gameno", gamenum);
         request.setAttribute("reportresult", countreport);
         request.setAttribute("likeresult", countlike);

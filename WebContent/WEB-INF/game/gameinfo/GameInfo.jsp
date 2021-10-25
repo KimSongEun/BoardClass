@@ -668,9 +668,9 @@ border-bottom-left-radius: 5px;
 					if (vo2 != null) {
 						for (Used vo22 : vo2) {
 				%>
-				<button class="rule" style = "width: 220px;">
+				<button class="rule" style = "width: 220px;" onclick="location.href='./usedinformation?no=<%=vo22.getUsedNo()%>'">
 					<img src="<%=request.getContextPath()%>/<%=vo22.getUsedImg()%>"
-						width="200" height="200" />
+						width="250" height="250" />
 					<div id="plus">
 						<%=vo22.getUsedTitle()%>
 					</div>

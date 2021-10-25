@@ -6,6 +6,7 @@
 	pageEncoding="UTF-8"%>
 <%
 	ArrayList<GameReview> go2 = (ArrayList<GameReview>) request.getAttribute("reviewvolist");
+	String userId = (String) request.getAttribute("userId");
 	int startPage = (int) request.getAttribute("startPage");
 	int endPage = (int) request.getAttribute("endPage");
 	int pageCount = (int) request.getAttribute("pageCount");
@@ -184,18 +185,18 @@ border-left:none;
 							<td colspan="2" > &nbsp;
 								<div class="placement" >
 								 <p>♥ <%=go.getLikecount()%>개 </p>	
-								<c:if test="${game.userId != userSession.userId}">
 								
+								<% if(userId!=go.getUserId()){%>
 					     		 <div class="heart <%if(go.getLiked()>0) {%>is-active<%} %>" id="btn_like"></div>
 					     		
 					     		 
 					     		 <button type="button" class ="btn_report">신고하기</button>
-								</c:if>
-					     		<c:if test="${game.userId != userSession.userId}">
+								<%}%>
+					     		 <% if(userId == go.getUserId()){%>
     							 <button type="button" class ="btn_report2">삭제</button>
-								</c:if>
+    							<%}%>
     							</div>
-							</td>
+								</td>
 								
 								<td class = "td2" align=right><%=go.getReviewDate()%> &nbsp;</td>
 							</tr>

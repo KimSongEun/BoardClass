@@ -1158,7 +1158,7 @@ public class GameDao {
 	
 	public ArrayList<Used> usedlist(Connection conn, String name) {
 		ArrayList<Used> volist = null;
-		String sql = "select USED_TITLE, USED_IMG from USED where USED_KEYWORD = ?";
+		String sql = "select USED_NO, USED_TITLE, USED_IMG from USED where USED_KEYWORD = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -1170,6 +1170,7 @@ public class GameDao {
 				volist = new ArrayList<Used>();
 				do {
 					Used vo = new Used();
+					vo.setUsedNo(rset.getInt("USED_NO"));
 					vo.setUsedTitle(rset.getString("USED_TITLE"));
 					vo.setUsedImg(rset.getString("USED_IMG"));
 					
@@ -1210,7 +1211,8 @@ public class GameDao {
 
 	public int updateGrade(Connection conn, int gameno){
 		int result = 0;
-		String sql = "update BOARDGAME set GAME_GRADE = (select round(avg(REVIEW_SCORE)) from REVIEW where GAME_NO = ?) where GAME_NO = ?";
+		String sql = "update BOARDGAME set GAME_GRADE = (select round(avg(REVIEW_SCORE))"
+				  + " from REVIEW where GAME_NO = ?) where GAME_NO = ?";
 		PreparedStatement pstmt = null;
 		try {
 			pstmt = conn.prepareStatement(sql);

@@ -37,9 +37,6 @@ public class GameInsertReviewServlet extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		        
         String name = request.getParameter("GAME_KONAME");
-        
-        System.out.println("yoo : name깨져? "+name);
-        
         String gamen =   request.getParameter("no");
         if(gamen == null){
         	gamen = "0";
@@ -53,8 +50,7 @@ public class GameInsertReviewServlet extends HttpServlet {
 		if(loginSS != null) {
 			userId = loginSS.getUserId();
 			countlike = new GameService().countReviewLike(userId,gameno);
-		}
-        
+		}     
         String content =  request.getParameter("REVIEW_CONTENT");
         
         String sco =   request.getParameter("rating");
@@ -62,11 +58,9 @@ public class GameInsertReviewServlet extends HttpServlet {
         	sco = "0";
         }
         int score = Integer.parseInt(sco);
-        
-      
+
         GameReview gvo= new GameReview(userId, gameno, content, score);    
-      
-        
+
         int update = new GameService().updateGrade(gameno);
     	
         if (update == 0) {
@@ -74,7 +68,6 @@ public class GameInsertReviewServlet extends HttpServlet {
 		} else {
 			System.out.println("평점 입력 성공");
 		}
-        
         int result = new GameService().insertReview(gvo);
         if (result < 1) {
 			System.out.println("글 입력 안됨");
@@ -82,7 +75,6 @@ public class GameInsertReviewServlet extends HttpServlet {
 			System.out.println("글 입력 성공");
 			
 		}
-
        // request.setAttribute("name", name);
         //request.setAttribute("gamenum", gameno);
         
