@@ -5,7 +5,7 @@
     <header>
 		<div class="admin-header">
 			<div class="admin-con1"> 
-				<span style="font-weight: bold;" class="admin-con1-span"><a class="admin-header-a" href = "adminmain">BoardClass</span> <span style="font-weight: nomal;">ADMINPAGE</a></span>
+				<span style="font-weight: bold;" class="admin-con1-span"><a class="admin-header-a" href = "main" target="_blank">BoardClass</a></span> <span style="font-weight: nomal;"><a class="admin-header-a" href = "adminmain">ADMINPAGE</a></span>
 				<span style="float: right; line-height: 14px;"><a href="<%=request.getContextPath()%>/logout" style="text-decoration:none;color:white;padding-right: 10px;line-height:20px;">LOGOUT</a></span>
 			</div>
 		</div>	
