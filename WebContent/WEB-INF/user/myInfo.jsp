@@ -10,18 +10,34 @@
 <head>
 <meta charset="UTF-8">
 <title>회원정보 관리</title>
-<link rel="stylesheet" href="./css/user/loginHeaderFooter.css">
-
+<link rel="stylesheet" href="css/index/maincss.css">
+<link rel="stylesheet" href="css/user/myinfo.css">
 </head>
 <body>
   <%@include file="/WEB-INF/user/userHeader.jsp" %>
 	<%
 		if (m != null) {
 	%>
+<div class="container">
+		<div class="sidenav">
+			<div class="mypage">
+				<p class="title">마이페이지</p>
+				<a href="<%=request.getContextPath()%>/myactivity">- 내 활동</a> <a
+					href="<%=request.getContextPath()%>/myboardgame">- 보드게임</a> <a
+					href="<%=request.getContextPath()%>/mytrade">- 중고거래</a> <a
+					href="<%=request.getContextPath()%>/mycommunity">- 커뮤니티</a>
+			</div>
 
+			<div class="userInfo">
+				<p class="title">회원정보 관리</p>
+				<a href="<%=request.getContextPath()%>/checkuser">- 회원정보 조회</a> <a
+					href="<%=request.getContextPath()%>/updateuser">- 회원정보 수정</a> <a
+					href="<%=request.getContextPath()%>/deleteuser">- 회원탈퇴</a>
+			</div>
+		</div>
+		
 	<form method="post" id="checkUser" action="updateuser" enctype="multipart/form-data">
-		<div class="container">
-			<div class="insert">
+		<div class="main">
 				<table>
 					<caption>
 						<h2>회원정보조회</h2>
@@ -81,7 +97,7 @@
 			<div class="create">		
 				<input class="updateBtn" id="updateBtn" type="submit" value="회원정보 수정" >
 			</div>
-		</div>
+		
 	</form>
 	<%
 		}
