@@ -134,8 +134,21 @@ img { border: 0;}
 .board_rank_wrap ol {
     padding: 7px 20px 8px;
 }
+.board_rank_wrap ul {
+    padding: 7px 20px 8px;
+}
+
 
 .board_rank_wrap dl dd ol li .rank {/* 인기글 순위 숫자 부분 */
+    position: absolute;
+    top: 7px;
+    left: 0;
+    font-style: italic;
+    font-size: 18px;
+    line-height: 25px;
+    color: #333333;
+}
+.board_rank_wrap dl dd ul li .rank {/* 인기글 순위 숫자 부분 */
     position: absolute;
     top: 7px;
     left: 0;
@@ -148,6 +161,11 @@ img { border: 0;}
     border-top: none;
 }
 .board_rank_wrap  ol li { /* 인기글 순위 제목 부분 */
+    position: relative;
+    padding: 0 48px 0 37px;
+
+}
+.board_rank_wrap  ul li { /* 인기글 순위 제목 부분 */
     position: relative;
     padding: 0 48px 0 37px;
 

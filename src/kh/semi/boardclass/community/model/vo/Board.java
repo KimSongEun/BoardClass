@@ -30,23 +30,28 @@ public class Board {
 	private int boardReplySeq;
 	private String boardImg;
 	private int comment_no;
+	private int commentCount;
 	private int boardLikeCount;
+	private int boardRank;
 	
 	
 	public Board() {
 		
 	}
+
 	
-	
+
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", userId=" + userId + ", boardType=" + boardType + ", boardCategory="
 				+ boardCategory + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent + ", boardWriteDate="
 				+ boardWriteDate + ", boardRewriteDate=" + boardRewriteDate + ", boardViewCount=" + boardViewCount
 				+ ", boardReplyRef=" + boardReplyRef + ", boardReplyLev=" + boardReplyLev + ", boardReplySeq="
-				+ boardReplySeq + ", boardImg=" + boardImg + ", comment_no=" + comment_no + ", boardLikeCount="
-				+ boardLikeCount + "]";
+				+ boardReplySeq + ", boardImg=" + boardImg + ", comment_no=" + comment_no + ", commentCount="
+				+ commentCount + ", boardLikeCount=" + boardLikeCount + ", boardRank=" + boardRank + "]";
 	}
+
+
 
 	public Board(String userId, String boardTitle, String boardContent, String boardType, String boardCategory, String boardImg) {
 		super();
@@ -193,12 +198,30 @@ public class Board {
 		this.comment_no = comment_no;
 	}
 
+	public int getCommentCount() {
+		return commentCount;
+	}
+
+	public void setCommentCount(int commentCount) {
+		this.commentCount = commentCount;
+	}
+
 	public int getBoardLikeCount() {
 		return boardLikeCount;
 	}
 
 	public void setBoardLikeCount(int boardLikeCount) {
 		this.boardLikeCount = boardLikeCount;
+	}
+
+
+	public int getBoardRank() {
+		return boardRank;
+	}
+
+
+	public void setBoardRank(int boardRank) {
+		this.boardRank = boardRank;
 	}
 
 	

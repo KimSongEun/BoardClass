@@ -96,6 +96,36 @@
                 </table>
             </div>
 			<br>
+			<!-- 커뮤 인기글 -->
+			 <div class="notice-div" style="margin:0 auto;">
+                <table class="table  notice-table" style="text-align: center;">
+                    <colgroup>
+	                   	<col width="100px">
+	                   	<col width="300px">
+	                   	<col width="150px">
+                   	</colgroup>
+                    <thead>
+                        <tr>
+                            <td colspan="2" style="text-align:left; font-size: 18px; font-weight: bold; padding-left:20px"> 👍 커뮤니티 인기글</td>
+                            <td style = "font-size : 10px; text-align:right;"><a href = "<%=request.getContextPath() %>/cmain">+더보기</a></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+			<c:if test="${boardlist != null}">
+				<c:forEach items="${boardlist}" var="board">						 
+                    <tr>
+                        <td>${board.boardRank}</td>
+                        <td style="white-space : nowrap; text-overflow : ellipsis; overflow : hidden" title = "${board.boardTitle}"><a href="<%=request.getContextPath() %>/bdetail?boardNo=${board.boardNo}" style = "color : #754100;">${board.boardTitle}</a></td>
+                        <td>${board.boardViewCount}</td>
+                    </tr>
+                   </c:forEach>
+                   </c:if>
+                   </tbody>
+                </table>
+            </div>
+			
+			
+			
 	</section>
 	<c:import url="/WEB-INF/index/footer.jsp" />
 

@@ -27,7 +27,7 @@
 		<nav id="lnb" class="lnb">
 			<ul>
 				<li><a href="nmain">공지사항</a></li>
-				<li style="color: red"><a href="./cf">자유게시판</a></li>
+				<li><a href="./cf" style="color: #ffd642">자유게시판</a></li>
 				<li><a href="./cu">유저정보게시판</a></li>
 				<li><a href="./cg">모임게시판</a></li>
 			</ul>
@@ -98,7 +98,7 @@
 							<div class="hit">조회수 : <span class="val">${board.boardViewCount }</span></div>
 							<div class="comt">댓글수: 
 								<span class="val">
-								${board.comment_no }
+								${board.commentCount }
 								</span>
 							</div>
 						</div>

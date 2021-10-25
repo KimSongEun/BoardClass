@@ -38,10 +38,10 @@ public class MainService {
 		JDBCTemplate.close(conn);
 		return volist;
 	}
-	public ArrayList<Board> getBestBoardOne() {
+	public ArrayList<Board> getBestBoard() {
 		ArrayList<Board> volist = null;
 		Connection conn = JDBCTemplate.getConnection();
-		volist = new MainDao().getBestBoardOne(conn);
+		volist = new MainDao().getBestBoard(conn);
 		JDBCTemplate.close(conn);
 		return volist;
 	}

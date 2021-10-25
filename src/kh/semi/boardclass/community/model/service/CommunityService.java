@@ -124,41 +124,42 @@ public class CommunityService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
-	public ArrayList<Board> bestFreeComtOne () {
+	// 자유게시판 댓글순
+	public ArrayList<Board> bestFreeComt () {
 		ArrayList<Board> list = null;
 		Connection conn = JDBCTemplate.getConnection();
-		list = new CommunityDao().bestFreeComtOne(conn);
+		list = new CommunityDao().bestFreeComt(conn);
 		JDBCTemplate.close(conn);
 		return list;
 	}
-	public ArrayList<Board> bestFreeComtTwo () {
-		ArrayList<Board> list = null;
-		Connection conn = JDBCTemplate.getConnection();
-		list = new CommunityDao().bestFreeComtTwo(conn);
-		JDBCTemplate.close(conn);
-		return list;
-	}
-	public ArrayList<Board> bestFreeComtThree () {
-		ArrayList<Board> list = null;
-		Connection conn = JDBCTemplate.getConnection();
-		list = new CommunityDao().bestFreeComtThree(conn);
-		JDBCTemplate.close(conn);
-		return list;
-	}
-	public ArrayList<Board> bestFreeComtFour () {
-		ArrayList<Board> list = null;
-		Connection conn = JDBCTemplate.getConnection();
-		list = new CommunityDao().bestFreeComtFour(conn);
-		JDBCTemplate.close(conn);
-		return list;
-	}
-	public ArrayList<Board> bestFreeComtFive () {
-		ArrayList<Board> list = null;
-		Connection conn = JDBCTemplate.getConnection();
-		list = new CommunityDao().bestFreeComtFive(conn);
-		JDBCTemplate.close(conn);
-		return list;
-	}
+//	public ArrayList<Board> bestFreeComtTwo () {
+//		ArrayList<Board> list = null;
+//		Connection conn = JDBCTemplate.getConnection();
+//		list = new CommunityDao().bestFreeComtTwo(conn);
+//		JDBCTemplate.close(conn);
+//		return list;
+//	}
+//	public ArrayList<Board> bestFreeComtThree () {
+//		ArrayList<Board> list = null;
+//		Connection conn = JDBCTemplate.getConnection();
+//		list = new CommunityDao().bestFreeComtThree(conn);
+//		JDBCTemplate.close(conn);
+//		return list;
+//	}
+//	public ArrayList<Board> bestFreeComtFour () {
+//		ArrayList<Board> list = null;
+//		Connection conn = JDBCTemplate.getConnection();
+//		list = new CommunityDao().bestFreeComtFour(conn);
+//		JDBCTemplate.close(conn);
+//		return list;
+//	}
+//	public ArrayList<Board> bestFreeComtFive () {
+//		ArrayList<Board> list = null;
+//		Connection conn = JDBCTemplate.getConnection();
+//		list = new CommunityDao().bestFreeComtFive(conn);
+//		JDBCTemplate.close(conn);
+//		return list;
+//	}
 	// 유저정보게시판 인기글
 	public ArrayList<Board> bestUserViewOne () {
 		ArrayList<Board> list = null;

@@ -109,12 +109,12 @@ public class MainDao {
 		}
 		return volist;
 	}
-	public ArrayList<Board> getBestBoardOne (Connection conn) {
+	public ArrayList<Board> getBestBoard (Connection conn) {
 		ArrayList<Board> volist = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = "select *  from (select rownum r, a.* from (select * from board order by board_view_count desc) a) " 
-				+ " where r = 1";
+				+ " where r between 1 and 5";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rset = pstmt.executeQuery();
@@ -132,6 +132,7 @@ public class MainDao {
 					vo.setBoardRewriteDate(rset.getString("board_rewrite_date"));
 					vo.setBoardViewCount(rset.getInt("board_view_count"));
 					vo.setBoardImg(rset.getString("board_img"));
+					vo.setBoardRank(rset.getInt("r"));
 					volist.add(vo);
 				}while (rset.next());
 			}

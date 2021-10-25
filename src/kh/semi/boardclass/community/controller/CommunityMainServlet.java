@@ -50,16 +50,10 @@ public class CommunityMainServlet extends HttpServlet {
 		request.setAttribute("bestfreefive", bestfreefive);
 		
 		// 자유게시판 댓글순 랭킹
-		ArrayList<Board> bestfreecomtone = new CommunityService().bestFreeComtOne();
-		request.setAttribute("bestfreecomtone", bestfreecomtone);
-		ArrayList<Board> bestfreecomttwo = new CommunityService().bestFreeComtTwo();
-		request.setAttribute("bestfreecomttwo", bestfreecomttwo);
-		ArrayList<Board> bestfreecomtthree = new CommunityService().bestFreeComtThree();
-		request.setAttribute("bestfreecomtthree", bestfreecomtthree);
-		ArrayList<Board> bestfreecomtfour = new CommunityService().bestFreeComtFour();
-		request.setAttribute("bestfreecomtfour", bestfreecomtfour);
-		ArrayList<Board> bestfreecomtfive = new CommunityService().bestFreeComtFive();
-		request.setAttribute("bestfreecomtfive", bestfreecomtfive);
+		ArrayList<Board> bestfreecomt = new CommunityService().bestFreeComt();
+		request.setAttribute("bestfreecomt", bestfreecomt);
+		System.out.println("랭킹");
+		System.out.println("bestfreecomt: " + bestfreecomt);
 		
 		//유저정보 조회수 랭킹
 		ArrayList<Board> bestuserviewone = new CommunityService().bestUserViewOne();

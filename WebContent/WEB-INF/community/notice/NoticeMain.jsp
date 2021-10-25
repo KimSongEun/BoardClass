@@ -39,6 +39,23 @@
 			<span class="depth">커뮤니티</span><strong class="this">공지사항</strong>
 		</div>
 	</div>
+	
+	<!-- 검색창 -->
+	<div class="data_srch_wrap bdt_n ">
+		<form action = "searchallboarduserid" method = "post" class = "searchselect">
+		<div class="slt_box">
+			<select class="search_select" name="type" style="width: 189px;">
+				<option value="제목" <c:if test = "${type == '제목'}"> selected </c:if>>제목</option>
+				<option value="내용" <c:if test = "${type == '내용'}"> selected </c:if>>내용</option>
+			</select>
+		</div>
+		<div class="ipt_box">
+			<input type="text" id="keyword" name="keyword" class="ipt" value="${keyword }" placeholder="검색어를 입력해주세요">
+				 <button type="submit" class="w3-button w3-light-grey"></button>
+			</div>
+			
+		 </form>
+	</div>
 <div class="conwrap">
 	<div class="h4group">
 		<h4 class="tit">공지글 보기</h4>
@@ -137,6 +154,21 @@ $(function(){
 			}
 		});//ajax
 	}
+	
+	$(".search_select").change(f1);
+	f1();
+	function f1() {
+		console.log("변경");
+		if($(".search_select").val() == "제목"){
+			$(".searchselect").attr("action", "searchnoticecontent");
+			
+			
+		} else if ($(".search_select").val() == "내용") {
+			$(".searchselect").attr("action", "searchnoticecontent");	
+			
+		}
+	};	
+	
 	
 	
 	

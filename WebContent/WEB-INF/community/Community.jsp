@@ -128,43 +128,15 @@
 		          	<dl>
 		          	<dd>
 			    		<div class="tabcontent" id="leftcomt">
-				          	 	<ol>
-				           		<c:forEach var="freebest" items="${bestfreecomtone }">
+			    			<ul>
+				           		<c:forEach var="freebest" items="${bestfreecomt }">
 						 			<li class="item">
-							 			 <div class="rank">1</div>
+							 			 <div class="rank">${freebest.boardRank }</div>
 							              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-							              <div class="commt">${freebest.comment_no }</div>
+							              <div class="commt">${freebest.commentCount}</div>
 						             </li>
 					             </c:forEach>
-					             <c:forEach var="freebest" items="${bestfreecomttwo }">
-						 			<li class="item">
-							 			<div class="rank">2</div>
-						              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-						           	  <div class="commt">${freebest.comment_no }</div>
-						             </li>
-					             </c:forEach>
-					            <c:forEach var="freebest" items="${bestfreecomtthree }">
-						 			<li class="item">
-						 			 <div class="rank">3</div>
-						              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-						              <div class="commt">${freebest.comment_no }</div>
-						             </li>
-					             </c:forEach>
-					              <c:forEach var="freebest" items="${bestfreecomtfour }">
-						 			<li class="item">
-						 			 <div class="rank">4</div>
-						              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-						              <div class="commt">${freebest.comment_no }</div>
-						            </li>
-					             </c:forEach>
-					             <c:forEach var="freebest" items="${bestfreecomtfive }">
-						 			<li class="item">
-						 			 <div class="rank">5</div>
-						              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-						              <div class="commt">${freebest.comment_no }</div>
-						            </li>
-					             </c:forEach>
-					       	 </ol>	
+					       	 </ul>	
 				        </div>
 				       </dd>
 			         </dl>

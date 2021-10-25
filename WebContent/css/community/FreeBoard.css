@@ -28,7 +28,7 @@ img { border: 0;}
 #aside .as_inner .as_hgroup { /* 커뮤니티 큰 글씨*/
     width: 185px;
     height: 105px;
-    background-color: blue; /* 색깔변경하기*/
+    background-color: #ffd642; /* 색깔변경하기*/
     line-height: 105px;
     text-align:center;
 }

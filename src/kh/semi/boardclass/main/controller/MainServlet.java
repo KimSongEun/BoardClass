@@ -48,16 +48,8 @@ public class MainServlet extends HttpServlet {
 		int adCnt = new MainService().getAdCount();
 		request.setAttribute("adCnt", adCnt);
 		
-		ArrayList<Board> boardlistone = new MainService().getBestBoardOne();
-		request.setAttribute("boardlistone", boardlistone);
-		ArrayList<Board> boardlisttwo = new MainService().getBestBoardTwo();
-		request.setAttribute("boardlisttwo", boardlisttwo);
-		ArrayList<Board> boardlistthree = new MainService().getBestBoardThree();
-		request.setAttribute("boardlistthree", boardlistthree);
-		ArrayList<Board> boardlistfour = new MainService().getBestBoardFour();
-		request.setAttribute("boardlistfour", boardlistfour);
-		ArrayList<Board> boardlistfive = new MainService().getBestBoardFive();
-		request.setAttribute("boardlistfive", boardlistfive);
+		ArrayList<Board> boardlist = new MainService().getBestBoard();
+		request.setAttribute("boardlist", boardlist);
 		
 		
 		String viewPage = "/WEB-INF/index/main.jsp";
