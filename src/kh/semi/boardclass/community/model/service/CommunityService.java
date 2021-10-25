@@ -138,6 +138,102 @@ public class CommunityService {
 		JDBCTemplate.close(conn);
 		return list;
 	}
+	public ArrayList<Board> bestFreeComtThree () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestFreeComtThree(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<Board> bestFreeComtFour () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestFreeComtFour(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<Board> bestFreeComtFive () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestFreeComtFive(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	// 유저정보게시판 인기글
+	public ArrayList<Board> bestUserViewOne () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestUserViewOne(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<Board> bestUserViewTwo () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestUserViewTwo(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<Board> bestUserViewThree () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestUserViewThree(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<Board> bestUserViewFour () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestUserViewFour(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<Board> bestUserViewFive () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestUserViewFive(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	//유저정보게시판 댓글순
+	public ArrayList<Board> bestUserComtOne () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestUserComtOne(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<Board> bestUserComtTwo () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestUserComtTwo(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<Board> bestUserComtThree () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestUserComtThree(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<Board> bestUserComtFour () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestUserComtFour(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	public ArrayList<Board> bestUserComtFive () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestUserComtFive(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	
+	
+	
 	public ArrayList<Board> selectUserBoardList() {
 		ArrayList<Board> volist = null;
 		return volist;
@@ -402,8 +498,18 @@ public class CommunityService {
 		return result;
 	}
 
-	public int insertReportComment() {
+	public int insertReportComment(int commentNo, String userId) {
 		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().insertReportComment(conn, commentNo, userId);
+		 JDBCTemplate.close(conn);
+		return result;
+	}
+	public int countReportComment (int commentNo, String userId) {
+		int result = -1;
+		Connection conn = JDBCTemplate.getConnection();
+		 new CommunityDao().countReportComment(conn, commentNo, userId);
+		 JDBCTemplate.close(conn);
 		return result;
 	}
 

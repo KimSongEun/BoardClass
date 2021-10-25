@@ -54,6 +54,38 @@ public class CommunityMainServlet extends HttpServlet {
 		request.setAttribute("bestfreecomtone", bestfreecomtone);
 		ArrayList<Board> bestfreecomttwo = new CommunityService().bestFreeComtTwo();
 		request.setAttribute("bestfreecomttwo", bestfreecomttwo);
+		ArrayList<Board> bestfreecomtthree = new CommunityService().bestFreeComtThree();
+		request.setAttribute("bestfreecomtthree", bestfreecomtthree);
+		ArrayList<Board> bestfreecomtfour = new CommunityService().bestFreeComtFour();
+		request.setAttribute("bestfreecomtfour", bestfreecomtfour);
+		ArrayList<Board> bestfreecomtfive = new CommunityService().bestFreeComtFive();
+		request.setAttribute("bestfreecomtfive", bestfreecomtfive);
+		
+		//유저정보 조회수 랭킹
+		ArrayList<Board> bestuserviewone = new CommunityService().bestUserViewOne();
+		request.setAttribute("bestuserviewone", bestuserviewone);
+		ArrayList<Board> bestuserviewtwo = new CommunityService().bestUserViewTwo();
+		request.setAttribute("bestuserviewtwo", bestuserviewtwo);
+		ArrayList<Board> bestuserviewthree = new CommunityService().bestUserViewThree();
+		request.setAttribute("bestuserviewthree", bestuserviewthree);
+		ArrayList<Board> bestuserviewfour = new CommunityService().bestUserViewFour();
+		request.setAttribute("bestuserviewfour", bestuserviewfour);
+		ArrayList<Board> bestuserviewfive = new CommunityService().bestUserViewFive();
+		request.setAttribute("bestuserviewfive", bestuserviewfive);
+		
+		//유저정보 댓글순
+		ArrayList<Board> bestusercomtone = new CommunityService().bestUserComtOne();
+		request.setAttribute("bestusercomtone", bestusercomtone);
+		ArrayList<Board> bestusercomttwo = new CommunityService().bestUserComtTwo();
+		request.setAttribute("bestusercomttwo", bestusercomttwo);
+		ArrayList<Board> bestusercomtthree = new CommunityService().bestUserComtThree();
+		request.setAttribute("bestusercomtthree", bestusercomtthree);
+		ArrayList<Board> bestusercomtfour = new CommunityService().bestUserComtFour();
+		request.setAttribute("bestusercomtfour", bestusercomtfour);
+		ArrayList<Board> bestusercomtfive = new CommunityService().bestUserComtFive();
+		request.setAttribute("bestusercomtfive", bestusercomtfive);
+		
+		
 		
 		int totCnt = new CommunityService().getBoardCount();
 		String pageNum = request.getParameter("pageNum");
