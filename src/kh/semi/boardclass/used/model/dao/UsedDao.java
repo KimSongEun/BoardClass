@@ -140,6 +140,33 @@ public class UsedDao {
 		}
 		return volist;
 	}
+	
+	public ArrayList<Used> selectNewUsedList(Connection conn){
+		ArrayList<Used> volist = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = "select ROWNUM, USED_TITLE, USED_PRICE, USED_IMG from (select USED_TITLE, USED_PRICE, USED_IMG from USED order by USED_DAY desc) where ROWNUM <= 5";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Used>();
+			if (rset.next()) {
+				do {
+					Used vo = new Used();
+					vo.setUsedTitle(rset.getString("USED_TITLE"));
+					vo.setUsedPrice(rset.getInt("USED_PRICE"));
+					vo.setUsedImg(rset.getString("USED_IMG"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
 
 	public int getUsedCount(Connection conn) {
 		int result = -1;
@@ -185,7 +212,7 @@ public class UsedDao {
 
 	public Used getUsedDetail(Connection conn, int usedNo) {
 		Used vo = null;
-		String sql = "select USED_NO, USER_ID, USED_TITLE, USED_PRICE, USED_STATE, USED_CHANGE, USED_EXTYPE, USED_INFO, TO_CHAR(USED_DAY, 'mm/dd hh24:mi') USED_DAY, USED_IMG, USED_CATEGORY, USED_KEYWORD from used where USED_NO = ?";
+		String sql = "select USED_NO, USER_ID, USED_TITLE, USED_PRICE, USED_STATE, USED_CHANGE, USED_EXTYPE, USED_INFO, TO_CHAR(USED_DAY, 'mm/dd hh24:mi') USED_DAY, USED_IMG, USED_CATEGORY, USED_KEYWORD, NVL(GAME_NO, 0) GAME_NO, GAME_KONAME, GAME_IMAGE from (select u.*, g.GAME_NO, g.GAME_KONAME, g.GAME_IMAGE from used u, boardgame g where u.USED_KEYWORD = g.GAME_KONAME(+)) where USED_NO = ?";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		try {
@@ -206,6 +233,9 @@ public class UsedDao {
 				vo.setUsedImg(rset.getString(10));
 				vo.setUsedCategory(rset.getString(11));
 				vo.setUsedKeyword(rset.getString(12));
+				vo.setGameNo(rset.getInt(13));
+				vo.setGameKoName(rset.getString(14));
+				vo.setGameImage(rset.getString(15));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

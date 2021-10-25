@@ -98,6 +98,23 @@
 					<p class="p_info_title">상품 상세설명</p>
 					<p class="p_info">${used.usedInfo}</p>
 				</div>
+				<div class="div_info">
+					<p class="p_info_title">연관상품</p>
+						<c:choose>
+							<c:when test="${used.gameNo == 0}">
+								<p class="p_info">"연관상품이 없습니다."</p>
+							</c:when>
+							<c:when test="${used.gameNo != 0}">
+								<div class="div_re_product">
+									<div class="div_re_img">
+										<a href="GameInfo?GAME_NO=${used.gameNo}">
+											<img src="${pageContext.request.contextPath}/${used.gameImage}">
+										</a>
+									</div>
+								</div>
+							</c:when>
+						</c:choose>
+				</div>
 		</div>
 		</div>
 	</section>

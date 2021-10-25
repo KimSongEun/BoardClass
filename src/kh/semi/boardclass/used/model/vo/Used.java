@@ -14,6 +14,9 @@ public class Used {
 	private String usedImg;
 	private String usedCategory;
 	private String usedKeyword;
+	private int gameNo;
+	private String gameKoName;
+	private String gameImage;
 
 	public Used() {
 	}
@@ -72,7 +75,8 @@ public class Used {
 		return "Used [usedNo=" + usedNo + ", userId=" + userId + ", usedTitle=" + usedTitle + ", usedPrice=" + usedPrice
 				+ ", usedState=" + usedState + ", usedChange=" + usedChange + ", usedExtype=" + usedExtype
 				+ ", usedInfo=" + usedInfo + ", usedDay=" + usedDay + ", usedImg=" + usedImg + ", usedCategory="
-				+ usedCategory + ", usedKeyword=" + usedKeyword + "]";
+				+ usedCategory + ", usedKeyword=" + usedKeyword + ", gameNo=" + gameNo + ", gameKoName=" + gameKoName
+				+ ", gameImage=" + gameImage + "]";
 	}
 
 	public int getUsedNo() {
@@ -169,6 +173,30 @@ public class Used {
 
 	public void setUsedKeyword(String usedKeyword) {
 		this.usedKeyword = usedKeyword;
+	}
+	
+	public int getGameNo() {
+		return gameNo;
+	}
+
+	public void setGameNo(int gameNo) {
+		this.gameNo = gameNo;
+	}
+
+	public String getGameKoName() {
+		return gameKoName;
+	}
+
+	public void setGameKoName(String gameKoName) {
+		this.gameKoName = gameKoName;
+	}
+
+	public String getGameImage() {
+		return gameImage;
+	}
+
+	public void setGameImage(String gameImage) {
+		this.gameImage = gameImage;
 	}
 
 }

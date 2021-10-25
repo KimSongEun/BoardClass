@@ -249,8 +249,8 @@
 
 		
 		$("#title").on("keyup", function() {
-			if ($(this).val().length > 200) {
-				$(this).val($(this).val().substring(0, 200));
+			if ($(this).val().length > 150) {
+				$(this).val($(this).val().substring(0, 150));
 			}
 		});
 		

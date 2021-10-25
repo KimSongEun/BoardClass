@@ -13,6 +13,8 @@ import kh.semi.boardclass.admin.model.vo.Banner;
 import kh.semi.boardclass.admin.model.vo.Notice;
 import kh.semi.boardclass.community.model.vo.Board;
 import kh.semi.boardclass.main.model.service.MainService;
+import kh.semi.boardclass.used.model.service.UsedService;
+import kh.semi.boardclass.used.model.vo.Used;
 
 /**
  * Servlet implementation class GoGoMain
@@ -51,6 +53,8 @@ public class MainServlet extends HttpServlet {
 		ArrayList<Board> boardlist = new MainService().getBestBoard();
 		request.setAttribute("boardlist", boardlist);
 		
+		ArrayList<Used> usedNewList = new UsedService().selectNewUsedList();
+		request.setAttribute("usedNewList", usedNewList);
 		
 		String viewPage = "/WEB-INF/index/main.jsp";
 		request.getRequestDispatcher(viewPage).forward(request, response);

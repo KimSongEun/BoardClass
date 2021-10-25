@@ -27,6 +27,14 @@ public class UsedService {
 		JDBCTemplate.close(conn);
 		return volist;
 	}
+	
+	public ArrayList<Used> selectNewUsedList(){
+		ArrayList<Used> volist = null;
+		Connection conn = JDBCTemplate.getConnection();
+		volist = new UsedDao().selectNewUsedList(conn);
+		JDBCTemplate.close(conn);
+		return volist;
+	}
 
 	public int getUsedCount() {
 		int result = -1;

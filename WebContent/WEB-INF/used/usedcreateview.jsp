@@ -227,6 +227,12 @@
 
 					}
 				});
+		
+		$("#title").on("keyup", function() {
+			if ($(this).val().length > 150) {
+				$(this).val($(this).val().substring(0, 150));
+			}
+		});
 
 		$("#info").on("keyup", function() {
 			$("#info_count").html("(" + $(this).val().length + " / 1,000)");
