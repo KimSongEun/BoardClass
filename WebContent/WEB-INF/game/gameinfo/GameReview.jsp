@@ -191,10 +191,11 @@ border-left:none;
 					     		 
 					     		 <button type="button" class ="btn_report">신고하기</button>
 								</c:if>
-					     		 <c:if test="${game.userId != userSession.userId}">
+					     		<c:if test="${game.userId != userSession.userId}">
     							 <button type="button" class ="btn_report2">삭제</button>
+								</c:if>
     							</div>
-								</c:if></td>
+							</td>
 								
 								<td class = "td2" align=right><%=go.getReviewDate()%> &nbsp;</td>
 							</tr>
