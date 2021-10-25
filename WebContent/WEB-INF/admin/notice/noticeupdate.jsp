@@ -27,7 +27,7 @@
         <form method="post" action="noticeupdate">
             <table style="text-align: center; font-size: 15px; margin: 0 auto; margin-top: 50px; width : 900px">
                 <tr>
-                    <td style="text-align: left; font-size: 34px; font-weight: bold;">공지수정</td>
+                    <td style="text-align: left; font-size: 34px; font-weight: bold;">📋 공지수정 📋</td>
                 </tr>
                 <tr style="text-align: left; font-size: 16px;">
                 <%if(n !=null){%>

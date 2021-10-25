@@ -31,7 +31,7 @@
      <section>
         <div class="admin-notice-section">
             <div class="admin-notice-div">
-                <div class="admin-notice-title">공지사항 조회</div>
+                <div class="admin-notice-title"> 📋 공지사항 조회 📋</div>
                 <table class="admin-notice-search">
                 	<tr>
                 	<td>
@@ -70,13 +70,13 @@
                             <td style = "vertical-align : middle;white-space : nowrap; text-overflow : ellipsis; overflow : hidden"><a href = "cnoticedetail?announceNo=<%=n.getAnnounceNo() %>" target="_blank" style = "color : #754100" title = "<%=n.getAdminTitle() %>" target = '_blank' style = "color : #754100" title = "<%=n.getAdminTitle() %>"> <%=n.getAdminTitle() %></a></td>
                             <td style = "vertical-align : middle"><%=n.getAdminWrDate() %></td>
                             <td style = "vertical-align : middle"><%=n.getAdminRwrDate() %></td>
-                            <td style = "vertical-align : middle"><button class="update btn btn-danger" value="updatego" no="<%=n.getAnnounceNo()%>">글수정</button> </td>
+                            <td style = "vertical-align : middle"><button class="update btn btn-danger" value="updatego" no="<%=n.getAnnounceNo()%>">글수정 </button> </td>
                             <td style = "vertical-align : middle"><button class="delete btn btn-primary" value="deletego" id="<%=n.getAnnounceNo() %>">글삭제</button> </td>
                         </tr>
                          <%} }%> 
                          <tr>
                          	<td colspan = "6"> <button type="button" class="insert btn btn-primary"
-                    style="float: right; background-color: #285226; color: #EAEAEA; border-radius: 5px;">공지사항작성</button></td>
+                    style="float: right; background-color: #285226; color: #EAEAEA; border-radius: 5px;">📋 공지사항작성 📋</button></td>
                          </tr>
                     </table>
                 </div>

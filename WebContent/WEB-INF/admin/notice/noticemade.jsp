@@ -28,7 +28,7 @@
         <form method="post" action="noticemade">
             <table style="text-align: center; font-size: 15px; margin: 0 auto; margin-top: 50px; width : 900px">
                 <tr>
-                    <td style="text-align: left; font-size: 34px; font-weight: bold;">공지등록</td>
+                    <td style="text-align: left; font-size: 34px; font-weight: bold;">📋 공지등록 📋</td>
                 </tr>
                 <tr style="text-align: left; font-size: 16px;">
                     <td style="font-weight: bold;"><input name=title type="text" style="width: 100%;" placeholder="제목을 입력해주세요." required><br></td>

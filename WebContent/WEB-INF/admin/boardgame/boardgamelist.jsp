@@ -30,7 +30,7 @@
      <section>
         <div class="admin-boardgame-section">
             <div class="admin-boardgame-div">
-                <div class="admin-boardgame-title">보드게임 조회</div>
+                <div class="admin-boardgame-title"> ♟ 보드게임 조회 ♟</div>
                 <table class="admin-boardgame-search">
                 <tr>
                 	<td>
@@ -76,7 +76,7 @@
                          <%} }%> 
                          <tr>
                           <td colspan = "6"><button type="button" class="insert btn btn-primary"
-                    style="float : right; background-color: #285226; color: #EAEAEA; border-radius: 5px;">게임작성</button></td>
+                    style="float : right; background-color: #285226; color: #EAEAEA; border-radius: 5px;">♟ 게임작성 ♟</button></td>
                     </tr>
                     </table>
                 </div>

@@ -28,9 +28,9 @@
                 <div class="boardgame-main_body">
                     <div class="boardgame-main_body_img">
                         <div class="boardgame-main_body_imgcontent">
-                            <h2>보드게임 수정</h2>
+                            <h2>♟ 보드게임 수정 ♟</h2>
                             <br>
-                            	보드게임 썸네일 이미지
+                            	🎲 보드게임 썸네일 이미지
                             <div class="boardgame-enroll_img_btn">
                                 <span>이미지 변경</span> <input type="file" multiple name="uploadFileImage" class="boardgame-enroll_box"
                                     id="photo_upload" onchange="loadImg(this)" id="boardgame-image">
@@ -44,7 +44,7 @@
                                 <fieldset class="boardgame-item_main">
 
                                     <div class="boardgame-item_menu">
-                                        <label class="boardgame-item_menu_label">한글 상품명 :</label>
+                                        <label class="boardgame-item_menu_label">🎲 한글 상품명 :</label>
                                         <div class="boardgame-item_menu_title">
                                             <input type="text" class="boardgame-form_control_title"
                                                 placeholder="한글상품명을 입력해주세요" name="kotitle" required value = "${gamevo.gameKoName}">
@@ -52,7 +52,7 @@
                                     </div>
 
                                     <div class="boardgame-item_menu">
-                                        <br><br><label class="boardgame-item_menu_label">영어 상품명 :</label>
+                                        <br><br><label class="boardgame-item_menu_label">🎲 영어 상품명 :</label>
                                         <div class="boardgame-item_menu_title">
                                             <input type="text" class="boardgame-form_control_title"
                                                 placeholder="영어상품명을 입력해주세요" name="entitle" value = "${gamevo.gameEnName}">
@@ -60,7 +60,7 @@
                                     </div>
 
                                     <div class="boardgame-item_menu">
-                                        <br><br><label class="boardgame-item_menu_label"> 카테고리 : &nbsp; &nbsp; </label>
+                                        <br><br><label class="boardgame-item_menu_label"> 🎲 카테고리 : &nbsp; &nbsp; </label>
                                         <div class="boardgame-item_menu_maincate">
                                             <select class="boardgame-mainCategory_select" name="category"
                                                 id="boardgame-selectMain"  required>
@@ -82,7 +82,7 @@
                                     <br>
 
                                     <div class="boardgame-item_menu">
-                                        <br> <label class="boardgame-item_menu_label"> 대상연령
+                                        <br> <label class="boardgame-item_menu_label"> 🎲 대상연령
                                             : &nbsp;&nbsp;&nbsp; </label>
                                         <div class="boardgame-item_menu_title">
                                             <input type="text" class="boardgame-form_control_title"
@@ -91,7 +91,7 @@
                                     </div>
 
                                     <div class="boardgame-item_menu">
-                                        <br><br> <label class="boardgame-item_menu_label"> 게임인원
+                                        <br><br> <label class="boardgame-item_menu_label"> 🎲 게임인원
                                             : &nbsp;&nbsp;&nbsp; </label>
                                         <div class="boardgame-item_menu_title">
                                             <input type="text" class="boardgame-form_control_title"
@@ -100,7 +100,7 @@
                                     </div>
 
                                     <div class="boardgame-item_menu">
-                                        <br><br> <label class="boardgame-item_menu_label"> 게임시간
+                                        <br><br> <label class="boardgame-item_menu_label"> 🎲 게임시간
                                             : &nbsp;&nbsp;&nbsp; </label>
                                         <div class="boardgame-item_menu_title">
                                             <input type="text" class="boardgame-form_control_title"
@@ -109,16 +109,16 @@
                                     </div>
 
                                     <div class="boardgame-item_menu">
-                                        <br> <br> <label class="boardgame-item_menu_label"> 게임가격
+                                        <br> <br> <label class="boardgame-item_menu_label"> 🎲 게임가격
                                             : &nbsp;&nbsp;&nbsp; </label>
-                                        <div class="boardgame-item_menu_number">
-                                            <input type="number" class="boardgame-form_control_number"
+                                        <div class="boardgame-item_menu_number" style="width:754px">
+                                            <input type="number" class="boardgame-form_control_number" style="width:754px"
                                                 placeholder="10000(가격은 숫자로만 입력)" name="price" value = "${gamevo.gamePrice}">
                                         </div>
                                     </div>
 
                                     <div class="boardgame-item_menu">
-                                        <br> <br> <label class="boardgame-item_menu_label"> 게임평점
+                                        <br> <br> <label class="boardgame-item_menu_label"> 🎲 게임평점
                                             : &nbsp;&nbsp;&nbsp; </label>
                                         <div class="boardgame-item_menu_title">
                                             <input type="text" class="boardgame-form_control_title"
@@ -127,7 +127,7 @@
                                     </div>
 
                                     <div class="boardgame-item_menu">
-                                        <br> <br> <label class="boardgame-item_menu_label"> 게임 난이도
+                                        <br> <br> <label class="boardgame-item_menu_label"> 🎲 게임 난이도
                                             : </label>
                                         <div class="boardgame-item_menu_title">
                                             <input type="text" class="boardgame-form_control_title"
@@ -136,7 +136,7 @@
                                     </div>
 
                                     <div class="boardgame-item_menu">
-                                        <br> <br> <label class="boardgame-item_menu_label"> 디자이너
+                                        <br> <br> <label class="boardgame-item_menu_label"> 🎲 디자이너
                                             : &nbsp;&nbsp;&nbsp; </label>
                                         <div class="boardgame-item_menu_title">
                                             <input type="text" class="boardgame-form_control_title"
@@ -145,7 +145,7 @@
                                     </div>
 
                                     <div class="boardgame-item_menu">
-                                        <br> <br> <label class="boardgame-item_menu_label"> 게임작가
+                                        <br> <br> <label class="boardgame-item_menu_label"> 🎲 게임작가
                                             : &nbsp;&nbsp;&nbsp; </label>
                                         <div class="boardgame-item_menu_title">
                                             <input type="text" class="boardgame-form_control_title"
@@ -154,7 +154,7 @@
                                     </div>
 
                                     <div class="boardgame-item_menu">
-                                        <br> <br> <label class="boardgame-item_menu_label"> 게임 제조사
+                                        <br> <br> <label class="boardgame-item_menu_label"> 🎲 게임 제조사
                                             : </label>
                                         <div class="boardgame-item_menu_title">
                                             <input type="text" class="boardgame-form_control_title"
@@ -163,7 +163,7 @@
                                     </div>
 
                                     <div class="boardgame-item_menu">
-                                        <br> <br> <label class="boardgame-item_menu_label"> 출시년도
+                                        <br> <br> <label class="boardgame-item_menu_label"> 🎲 출시년도
                                             : &nbsp;&nbsp;&nbsp; </label>
                                         <div class="boardgame-item_menu_title">
                                             <input type="text" class="boardgame-form_control_title"
@@ -172,7 +172,7 @@
                                     </div>
 
                                     <div class="boardgame-item_menu">
-                                        <br> <br> <label class="boardgame-item_menu_label"> 언어 의존도
+                                        <br> <br> <label class="boardgame-item_menu_label"> 🎲 언어 의존도
                                             : </label>
                                         <div class="boardgame-item_menu_title">
                                             <input type="text" class="boardgame-form_control_title"
@@ -181,13 +181,13 @@
                                     </div>
 
                                     <div class="boardgame-item_menu">
-                                        <br> <br> <label class="boardgame-item_menu_label"> 규칙 이미지
+                                        <br> <br> <label class="boardgame-item_menu_label"> 🎲 규칙 이미지
                                             : </label>
                                             &nbsp; &nbsp;
                                             <img id="boardgame-img_view2" height="420" src = "<%=request.getContextPath()%>${gamevo.gameRuleImage}" style="max-width: 850px; max-height: 500px;">
                                             <br><br>
                                         <div class="input-group mb-3" style="width : 875px;">
-                                            &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                                            &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
                                             <input type="file" class="form-control" id="inputGroupFile02"
                                                 name="uploadFileRuleImage" onchange="loadRuleImg(this)">
                                             <label class="input-group-text" for="inputGroupFile02">변경</label>
@@ -196,7 +196,7 @@
 
                                     <br>
                                     <div class="boardgame-item_menu">
-                                        <label class="boardgame-item_menu_label">게임 규칙 영상 및 게임 설명 :</label>
+                                        <label class="boardgame-item_menu_label">🎲 게임 규칙 영상 및 게임 설명 :</label>
                                         <br>
                                         <div class = "boardgame-item_description">
                                         <div>
@@ -214,7 +214,7 @@
                                     </div>
                                     
                                     <div class="boardgame-item_menu">
-                                        <br> <label class="boardgame-item_menu_label"> 게임 확장판
+                                        <br> <label class="boardgame-item_menu_label"> 🎲 게임 확장판
                                             : </label>
                                         <div class="boardgame-item_menu_title">
                                             <input type="text" class="boardgame-form_control_title"
@@ -223,13 +223,13 @@
                                     </div>
                                     
                                     <div class="boardgame-item_menu">
-                                        <br> <br> <label class="boardgame-item_menu_label"> 확장판 이미지
+                                        <br> <br> <label class="boardgame-item_menu_label"> 🎲 확장판 이미지
                                             : </label>
                                             &nbsp; &nbsp;
                                             <img id="boardgame-img_view3" height="420" src = "<%=request.getContextPath()%>${gamevo.gamePlusImage}" style="max-width: 850px; max-height: 500px;">
                                             <br><br>
                                         <div class="input-group mb-3" style="width : 875px;">
-                                            &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
                                             <input type="file" class="form-control" id="inputGroupFile03"
                                                 name="uploadFilePlusImage" onchange="loadPlusImg(this)">
                                             <label class="input-group-text" for="inputGroupFile03">변경</label>
