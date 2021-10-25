@@ -71,7 +71,7 @@ $(function(){
 				html += "<td>"+data.allboarduservolist[i].boardRewriteDate+"</td>";
 				html += "</tr>";
 		}
-		$("#input_data").html(html);
+		$("#input_data_board").html(html);
 		},
 		error : function(){
 			console.log("ajax 실패");
@@ -130,7 +130,7 @@ $(function(){
 			}
 
 				console.log(usedState);
-		$("#input_data").html(html);
+		$("#input_data_used").html(html);
 		},
 		error : function(){
 			console.log("ajax 실패");
@@ -158,7 +158,7 @@ $(function(){
 				html += "<td>"+data.commentvolist[i].commentRewriteDate+"</td>";
 				html += "</tr>";
 		}
-		$("#input_data").html(html);
+		$("#input_data_comt").html(html);
 		},
 		error : function(){
 			console.log("ajax 실패");
@@ -187,7 +187,7 @@ $(function(){
 				html += "<td>"+data.reviewvolist[i].reviewDate+"</td>";
 				html += "</tr>";
 		}
-		$("#input_data").html(html);
+		$("#input_data_review").html(html);
 		},
 		error : function(){
 			console.log("ajax 실패");
@@ -219,7 +219,7 @@ $(function(){
 				html += "<td style = 'vertical-align : middle'><button class='delete btn warning' value='deletego' id = '"+data.reportboardvolist[i].boardNo+"'>삭제</button></td>";
 				html += "</tr>";
 		}
-		$("#input_data").html(html);
+		$("#input_data_reportboard").html(html);
 		$(".delete").click(function () {
 				console.log("눌림");
 		var deleteid = $(this).attr("id");
@@ -276,6 +276,8 @@ $(function(){
 					usedExtype = '택배'
 				}
 				console.log(usedState);
+				console.log("count"+data.reportusedvolist[i].reportCount);
+				console.log("count"+data.reportusedvolist[i].usedNo);
 				html += "<tr>"
 				html += "<td style = 'color : #f55354'>"+data.reportusedvolist[i].reportCount+"</td>";
 				html += "<td>"+data.reportusedvolist[i].usedNo+"</td>";
@@ -290,7 +292,7 @@ $(function(){
 			}
 
 				console.log(usedState);
-		$("#input_data").html(html);
+		$("#input_data_reportused").html(html);
 		$(".delete").click(function () {
 				console.log("눌림");
 		var deleteid = $(this).attr("id");
@@ -328,7 +330,7 @@ $(function(){
 				html += "<td style = 'vertical-align : middle'><button class='delete btn warning' value='deletego' id = '"+data.reportcommentvolist[i].commentNo+"'>삭제</button></td>";
 				html += "</tr>";
 		}
-		$("#input_data").html(html);
+		$("#input_data_reportcomt").html(html);
 		$(".delete").click(function () {
 				console.log("눌림");
 		var deleteid = $(this).attr("id");
@@ -367,7 +369,7 @@ $(function(){
 				html += "<td style = 'vertical-align : middle'><button class='delete btn warning' value='deletego' id = '"+data.reportreviewvolist[i].reviewNo+"'>삭제</button></td>";
 				html += "</tr>";
 		}
-		$("#input_data").html(html);
+		$("#input_data_reportreview").html(html);
 		$(".delete").click(function () {
 				console.log("눌림");
 		var deleteid = $(this).attr("id");
