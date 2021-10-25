@@ -273,12 +273,14 @@ img {vertical-align: middle;}
             box-sizing: border-box;
             display: flex;
             justify-content: center;
+            margin-top : 10px;
         }
 
         /* The container must be positioned relative: */
         .custom-select {
             position: relative;
             font-size: 17px;
+            width : 130px;
         }
 
         .custom-select select {
@@ -294,27 +296,29 @@ img {vertical-align: middle;}
         .select-selected:after {
             position: absolute;
             content: "";
-            top: 14px;
+            top: 20px;
             right: 10px;
             width: 0;
             height: 0;
-            border: 6px solid transparent;
-            border-color: #fff transparent transparent transparent;
+            border: 6px solid #D27328;
+            border-color: #D27328 transparent transparent transparent;
         }
 
         /* Point the arrow upwards when the select box is open (active): */
         .select-selected.select-arrow-active:after {
-            border-color: transparent transparent #fff transparent;
-            top: 7px;
+            border-color: transparent transparent #D27328 transparent;
+            top: 12px;
         }
 
         /* style the items (options), including the selected item: */
         .select-items div,
         .select-selected {
-            color: #ffffff;
-            padding: 8px 16px;
-            border: 1px solid transparent;
-            border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+            color: #D27328;
+            font-weight : 400;
+            padding: 8px 20px;
+            border: 1px solid #D27328;
+            /* border-color: #D27328 #D27328 #D27328 #D27328; */
+            border-radius : 2px;
             cursor: pointer;
         }
 
@@ -342,7 +346,7 @@ img {vertical-align: middle;}
         .form_search input[type=text] {
             padding: 10px;
             font-size: 17px;
-            border: 1px solid #f1f1f1;
+            border: 1px solid #dddddd;
             background: #f1f1f1;
         }
 
@@ -350,10 +354,11 @@ img {vertical-align: middle;}
         .form_search button {
             padding: 10px;
             background: #FFE699;
-            color: white;
+            color: #D27328;
             font-size: 17px;
-            border: 1px solid #FFE699;
-            border-left: none;
+            border: 1px solid #D27328;
+            border-radius : 5px;
+            /* border-left: none; */
             /* Prevent double borders */
             cursor: pointer;
         }
