@@ -704,7 +704,7 @@ border-bottom-left-radius: 5px;
 						for (int i = 0; i < str2.length; i++) {
 				%>
 				<button class="rule"
-					onclick="location.href='./GameInfo?GAME_NO=${plusNo}'">
+					onclick="location.href='./GameInfo?GAME_NO=<%=i+2%>'">
 					<img src="<%=request.getContextPath()%>/<%=str2[i]%>" width="250"
 						height="250" />
 					<div id="plus">
