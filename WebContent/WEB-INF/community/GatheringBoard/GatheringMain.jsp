@@ -151,7 +151,7 @@ function f1() {
 		
 		
 	} else if ($(".search_select").val() == "내용") {
-		$(".searchselect").attr("action", "searchallboardcontent");
+		$(".searchselect").attr("action", "SearchGathringBoardContent");
 		
 		
 	}else if ($(".search_select").val() == "작성자") {

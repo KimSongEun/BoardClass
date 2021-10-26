@@ -191,7 +191,17 @@ img { border: 0;}
     font-size: 12px;
     line-height: 19px;
     color: #ffd642;
+    display: inline-block;
 }
+.board_rank_wrap .commt .material-icons {
+	 display: inline-block;
+	 width: 4px;
+	 padding-right: 15px;
+}
+.board_rank_wrap .commt .commt_container {
+	 display: inline-block;
+}
+
 .btn_wrap a:first-child {
 	margin: 0;
 }

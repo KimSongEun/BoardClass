@@ -8,7 +8,9 @@
 <title>BoardClass</title>
 <link rel="stylesheet" href="css/community/community.css" />
 <link rel="stylesheet" href="css/community/common.css" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+
 <style>
 .tab {
   overflow: hidden;
@@ -85,35 +87,35 @@
 					 			<li class="item">
 						 			 <div class="rank">1</div>
 						              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-						              <div class="commt">${freebest.boardViewCount }</div>
+						              <div class="commt">  ${freebest.boardViewCount }</div>
 					             </li>
 				             </c:forEach>
 				             <c:forEach var="freebest" items="${bestfreetwo }">
 					 			<li class="item">
 						 			<div class="rank">2</div>
 					              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-					           	  <div class="commt">${freebest.boardViewCount }</div>
+					           	  <div class="commt">  ${freebest.boardViewCount }</div>
 					             </li>
 				             </c:forEach>
 				            <c:forEach var="freebest" items="${bestfreethree }">
 					 			<li class="item">
 					 			 <div class="rank">3</div>
 					              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-					              <div class="commt">${freebest.boardViewCount }</div>
+					              <div class="commt">  ${freebest.boardViewCount }</div>
 					             </li>
 				             </c:forEach>
 				              <c:forEach var="freebest" items="${bestfreefour }">
 					 			<li class="item">
 					 			 <div class="rank">4</div>
 					              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-					              <div class="commt">${freebest.boardViewCount }</div>
+					              <div class="commt">  ${freebest.boardViewCount }</div>
 					            </li>
 				             </c:forEach>
 				             <c:forEach var="freebest" items="${bestfreefive }">
 					 			<li class="item">
 					 			 <div class="rank">5</div>
 					              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-					              <div class="commt">${freebest.boardViewCount }</div>
+					              <div class="commt">  ${freebest.boardViewCount }</div>
 					            </li>
 				             </c:forEach>
 			          	</ol>
@@ -170,35 +172,35 @@
 						 			<li class="item">
 							 			 <div class="rank">1</div>
 							              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-							              <div class="commt">${freebest.boardViewCount }</div>
+								     	 <div class="commt"> ${freebest.boardViewCount }</div>
 						             </li>
 					             </c:forEach>
 					             <c:forEach var="freebest" items="${bestuserviewtwo }">
 						 			<li class="item">
 							 			<div class="rank">2</div>
 						              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-						           	  <div class="commt">${freebest.boardViewCount }</div>
+						           	  <div class="commt"> ${freebest.boardViewCount }</div>
 						             </li>
 					             </c:forEach>
 					            <c:forEach var="freebest" items="${bestuserviewthree }">
 						 			<li class="item">
 						 			 <div class="rank">3</div>
 						              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-						              <div class="commt">${freebest.boardViewCount }</div>
+						              <div class="commt"> ${freebest.boardViewCount }</div>
 						             </li>
 					             </c:forEach>
 					              <c:forEach var="freebest" items="${bestuserviewfour }">
 						 			<li class="item">
 						 			 <div class="rank">4</div>
 						              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-						              <div class="commt">${freebest.boardViewCount }</div>
+						              <div class="commt"> ${freebest.boardViewCount }</div>
 						            </li>
 					             </c:forEach>
 					             <c:forEach var="freebest" items="${bestuserviewfive }">
 						 			<li class="item">
 						 			 <div class="rank">5</div>
 						              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-						              <div class="commt">${freebest.boardViewCount }</div>
+						              <div class="commt"> ${freebest.boardViewCount }</div>
 						            </li>
 					             </c:forEach>
 					       	 </ol>	
@@ -213,7 +215,7 @@
 						 			<li class="item">
 							 			 <div class="rank">1</div>
 							              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-							              <div class="commt">${freebest.comment_no }</div>
+							              <div class="commt"> ${freebest.comment_no }</div>
 						             </li>
 					             </c:forEach>
 					             <c:forEach var="freebest" items="${bestusercomttwo }">
