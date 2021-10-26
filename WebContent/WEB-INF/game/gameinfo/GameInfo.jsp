@@ -100,6 +100,9 @@
 #plus {
 	display: flex;
 	justify-content: space-around;
+	overflow:hidden;
+	width: 250px;
+	height: 18px;
 }
 
 #btnReview {
@@ -669,7 +672,7 @@ border-bottom-left-radius: 5px;
 					if (vo2 != null) {
 						for (Used vo22 : vo2) {
 				%>
-				<button class="rule" style = "width: 220px;" onclick="location.href='./usedinformation?no=<%=vo22.getUsedNo()%>'">
+				<button class="rule" onclick="location.href='./usedinformation?no=<%=vo22.getUsedNo()%>'">
 					<img src="<%=request.getContextPath()%>/<%=vo22.getUsedImg()%>"
 						width="250" height="250" />
 					<div id="plus">
