@@ -176,7 +176,7 @@ border-left:none;
 		<table border = "1" id = "tb">
 							<tr>
 								<td width="450px;"><%=go.getUserId()%>님</td>
-								<td class="reviewNo"><input type="hidden" value=<%=go.getReviewNo()%>></td>
+								<td class="reviewNo"><%=go.getReviewNo()%></td>
 								<td class = "td2" align=right >★   <%=go.getReviewScore()%> &nbsp; </td>								
 							</tr>
 							<tr>
