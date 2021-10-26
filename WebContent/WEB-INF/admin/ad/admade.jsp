@@ -21,7 +21,7 @@
         <form method="post" action="admade" enctype = "multipart/form-data">
             <table style="text-align: center; font-size: 15px; margin: 0 auto; margin-top: 50px; width : 900px">
                 <tr>
-                    <td style="text-align: left; font-size: 34px; font-weight: bold;" colspan = "2">광고등록</td>
+                    <td style="text-align: left; font-size: 34px; font-weight: bold;" colspan = "2">📺 광고등록 📺</td>
                 </tr>
                 <tr style="text-align: left; font-size: 16px;">
                     <td colspan = "2" style="font-weight: bold;"><input name=title type="text" style="width: 100%;" placeholder="제목을 입력해주세요." required><br></td>

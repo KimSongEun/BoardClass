@@ -26,7 +26,7 @@
         <form method="post" action="adupdate" enctype = "multipart/form-data">
             <table style="text-align: center; font-size: 15px; margin: 0 auto; margin-top: 50px; width : 900px">
                 <tr>
-                    <td colspan = "2" style="text-align: left; font-size: 34px; font-weight: bold;">광고수정</td>
+                    <td colspan = "2" style="text-align: left; font-size: 34px; font-weight: bold;">📺 광고수정 📺</td>
                 </tr>
                 <tr style="text-align: left; font-size: 16px;">
                 <%if(b !=null){%>

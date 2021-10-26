@@ -29,7 +29,7 @@
      <section>
         <div class="admin-ad-section">
             <div class="admin-ad-div">
-                <div class="admin-ad-title">광고 조회</div>
+                <div class="admin-ad-title">📺 광고 조회 📺</div>
                 <table class="admin-ad-search">
                 <tr>
                 	<td>
@@ -89,7 +89,7 @@
                          <%} }%> 
                          <tr>
                           <td colspan = "6"><button type="button" class="insert btn btn-primary"
-                    style="float : right; background-color: #285226; color: #EAEAEA; border-radius: 5px;">광고작성</button></td>
+                    style="float : right; background-color: #285226; color: #EAEAEA; border-radius: 5px;">📺 광고작성 📺</button></td>
                     </tr>
                     </table>
                 </div>
