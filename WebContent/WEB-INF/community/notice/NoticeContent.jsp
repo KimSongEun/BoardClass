@@ -54,8 +54,8 @@
 	<div class="btn_wrap">
 	<!-- 아이디 확인한 후 버튼 생성 가능-->
 	
-		<a href="nmain" class="btn btn3">
-			<button >목록</button>
+		<a href="nmain">
+			<button class="movelist list">목록</button>
 		</a>
 		
 	</div>

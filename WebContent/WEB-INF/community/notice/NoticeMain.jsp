@@ -112,18 +112,18 @@ display: felx;
             
 	<div style="text-align: centerl; margin-top:20px;" class="pagination">
 		<c:if test="${startPage > blockSize }">
-			<a href="nmain?pageNum=${startPage-blockSize}">[이전]</a>
+			<a href="nmain?pageNum=${startPage-blockSize}" style="color:#555;">[이전]</a>
 		</c:if>
 		<c:forEach var="i" begin="${startPage }" end="${endPage }">
 			<c:if test="${pageNum == i }">
-				<a href="nmain?pageNum=${i }" style="color: blue;">[${i }]</a>
+				<a href="nmain?pageNum=${i }" style="color:#555;">[${i }]</a>
 			</c:if>
 		<c:if test="${pageNum != i }">
-			<a href="nmain?pageNum=${i }">[${i }]</a>
+			<a href="nmain?pageNum=${i }" style="color:#555;">[${i }]</a>
 		</c:if>
 		</c:forEach>
 		<c:if test="${endPage < pageCnt }">
-			<a href="nmain?pageNum=${startPage + blockSize }">[다음]</a>
+			<a href="nmain?pageNum=${startPage + blockSize }" style="color:#555;">[다음]</a>
 		</c:if>
  	</div>
             
