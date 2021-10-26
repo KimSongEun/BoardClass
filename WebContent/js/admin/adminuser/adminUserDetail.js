@@ -230,7 +230,7 @@ $(function(){
 				html += "<td>"+data.reportboardvolist[i].boardCategory+"</td>";
 				html += "<td>"+data.reportboardvolist[i].boardType+"</td>";
 				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden' id = 'tda'><a href = 'bdetail?boardNo="+data.reportboardvolist[i].boardNo+"' target='blank'>"+data.reportboardvolist[i].boardTitle+"</a></td>";
-				html += "<td>"+data.reportboardvolist[i].boardRewriteDate+"</td>";
+				html += "<td>"+data.reportboardvolist[i].boardWriteDate+"</td>";
 				html += "<td style = 'vertical-align : middle'><button class='delete btn warning' value='deletego' id = '"+data.reportboardvolist[i].boardNo+"'>삭제</button></td>";
 				html += "</tr>";
 		}
