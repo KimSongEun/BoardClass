@@ -189,7 +189,7 @@
 							<input type="hidden" name="commentReStep" value="${comment.commentReStep }">
 							
 							<div class="comment_inbox">
-							<div><span class="left"><label for="name">${comment.userId }</label></span></div>
+						
 							<textarea name="commentContent" id="commentContent" maxlength="800" required="required" class="comment_inbox_text"  placeholder="답글을 입력해주세요"></textarea>
 							</div>
 							<div class="comment_attach">

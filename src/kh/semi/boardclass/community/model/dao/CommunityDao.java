@@ -24,7 +24,7 @@ public Board getBoard(Connection conn, int boardNo) {
 	Board vo = null;
 //	String sql = "select * from board where board_no =?";
 	String sql = "SELECT BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE,BOARD_CONTENT," 
-			+ " TO_CHAR(BOARD_WRITE_DATE, 'YY/MM/DD') as BOARD_WRITE_DATE, TO_CHAR(BOARD_REWRITE_DATE, 'YY/MM/DD') as BOARD_REWRITE_DATE, " 
+			+ " TO_CHAR(BOARD_WRITE_DATE, 'YY/MM/DD hh24:mi') as BOARD_WRITE_DATE, TO_CHAR(BOARD_REWRITE_DATE, 'YY/MM/DD hh24:mi') as BOARD_REWRITE_DATE, " 
 			+ " BOARD_VIEW_COUNT, BOARD_REPLY_REF, BOARD_REPLY_LEV, BOARD_REPLY_SEQ, BOARD_IMG  FROM BOARD"
 			+ " WHERE BOARD_NO = ?";
 	PreparedStatement pstmt = null;
@@ -999,14 +999,17 @@ public Board getBoard(Connection conn, int boardNo) {
 	public int insertBoard(Connection conn, Board vo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = "INSERT INTO BOARD (BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE, BOARD_CONTENT," 
-				+ 	" BOARD_WRITE_DATE, BOARD_VIEW_COUNT, BOARD_IMG)"  
-				+ 	" VALUES (BOARD_NUM.NEXTVAL, ?, ?, ?, ?, ?, TO_DATE(SYSDATE, 'YYYY/MM/DD SS'), ?, ?)";
+//		String sql = "INSERT INTO BOARD (BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE, BOARD_CONTENT," 
+//				+ 	" BOARD_WRITE_DATE, BOARD_VIEW_COUNT, BOARD_IMG)"  
+//				+ 	" VALUES (BOARD_NUM.NEXTVAL, ?, ?, ?, ?, ?, TO_DATE(SYSDATE, 'YY/MM/DD hh24:mi'), ?, ?)";
+		String sql = "INSERT INTO BOARD (BOARD_NO, USER_ID, BOARD_TYPE, BOARD_CATEGORY, BOARD_TITLE, BOARD_CONTENT," + 
+				" BOARD_WRITE_DATE,board_rewrite_date, BOARD_VIEW_COUNT, BOARD_IMG)" + 
+				" VALUES (BOARD_NUM.NEXTVAL, ?, ?, ?, ?, ?, SYSDATE,sysdate, ?, ?)";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getUserId());
-			pstmt.setString(2, vo.getBoardType()); // 사담/건의/질문
-			pstmt.setString(3, vo.getBoardCategory()); // 자유게시판
+			pstmt.setString(2, vo.getBoardType()); 
+			pstmt.setString(3, vo.getBoardCategory()); 
 			pstmt.setString(4, vo.getBoardTitle());
 			pstmt.setString(5, vo.getBoardContent()); 
 			pstmt.setInt(6, vo.getBoardViewCount());
@@ -1023,7 +1026,7 @@ public Board getBoard(Connection conn, int boardNo) {
 	public int updateBoard(Connection conn, Board vo, int boardNo) {
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = "update board set board_title = ?, board_content = ?, board_type=?, board_category = ?, board_img = ? where board_no = ?";
+		String sql = "update board set board_title = ?, board_content = ?, board_type=?, board_category = ?, board_img = ?,board_rewrite_date = sysdate  where board_no = ?";
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, vo.getBoardTitle());
