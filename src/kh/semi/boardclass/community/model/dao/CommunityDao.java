@@ -1233,23 +1233,13 @@ public Board getBoard(Connection conn, int boardNo) {
 		
 		return result;
 	}
+	
+	// 자유게시판 작성자
 
 	public ArrayList<Board> searchAllBoardUserId(Connection conn, String keyword, int start, int end) {
 		ArrayList<Board> volist = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-//		String sql = "select * from "
-//				+ "(select Rownum r, t1.* from "
-//				+ "(SELECT B.USER_ID, B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY,"
-//				+ " B.BOARD_TITLE, B.BOARD_CONTENT, B.BOARD_WRITE_DATE, "
-//				+ " B.BOARD_REWRITE_DATE, B.BOARD_IMG M.USER_NO FROM BOARD B "
-//				+ " JOIN MEMBER M ON B.USER_ID = M.USER_ID "
-//				+ " WHERE M.USER_ID like (?) ORDER BY BOARD_REWRITE_DATE DESC) t1) t2 where r between ? and ?";
-//		String sql = "select * from (   select Rownum r, t1.* from "
-//				 + " (SELECT B.USER_ID, B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.BOARD_CONTENT," 
-//				 + " B.BOARD_WRITE_DATE, B.BOARD_REWRITE_DATE,BOARD_IMG FROM BOARD B " 
-//				 + " JOIN MEMBER M ON B.USER_ID = M.USER_ID WHERE M.USER_ID like (?) "
-//				 + " ORDER BY BOARD_REWRITE_DATE DESC) t1) t2 where r between ? and ?";
 		String sql = "select * from (select * from (  select Rownum r, t1.* from" 
 				+ "	 (SELECT B.USER_ID, B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.BOARD_CONTENT,\r\n" 
 				+ "	 B.BOARD_WRITE_DATE, B.BOARD_REWRITE_DATE,BOARD_IMG FROM BOARD B " 
@@ -1353,7 +1343,7 @@ public Board getBoard(Connection conn, int boardNo) {
 	
 	public int getAllBoardTitleCount(Connection conn, String keyword) {
 		int result = 0;
-		String sql = "select count(*) as total FROM BOARD B JOIN MEMBER M ON B.USER_ID = M.USER_ID where BOARD_TITLE like (?)";
+		String sql = "select count(*) as total FROM BOARD B JOIN MEMBER M ON B.USER_ID = M.USER_ID where BOARD_TITLE like (?) and board_category = '자유정보게시판'";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -1375,11 +1365,11 @@ public Board getBoard(Connection conn, int boardNo) {
 	
 	public ArrayList<Board> searchAllBoardContent(Connection conn, String keyword, int start, int end){
 		ArrayList<Board> volist = null;
-		String sql = "select * from (   select Rownum r, t1.* from "
+		String sql = "select * from(select * from (   select Rownum r, t1.* from "
 				+ "(SELECT B.USER_ID, B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.BOARD_CONTENT,"
 				+ " B.BOARD_WRITE_DATE, B.BOARD_REWRITE_DATE,BOARD_IMG FROM BOARD B "
 				+ " JOIN MEMBER M ON B.USER_ID = M.USER_ID "
-				+ " WHERE  BOARD_CONTENT like (?) ORDER BY BOARD_REWRITE_DATE DESC) t1) t2 where r between ? and ?";
+				+ " WHERE  BOARD_CONTENT like (?) ORDER BY BOARD_REWRITE_DATE DESC) t1) t2 where r between ? and ?) where board_category ='자유게시판'";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -1416,7 +1406,377 @@ public Board getBoard(Connection conn, int boardNo) {
 	
 	public int getAllBoardContentCount(Connection conn, String keyword) {
 		int result = 0;
-		String sql = "select count(*) as total FROM BOARD B JOIN MEMBER M ON B.USER_ID = M.USER_ID where BOARD_CONTENT like (?)";
+		String sql = "select count(*) as total FROM BOARD B JOIN MEMBER M ON B.USER_ID = M.USER_ID where BOARD_CONTENT like (?) and board_category = '자유정보게시판'";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+		
+	}
+	//유저정보 검색
+	public ArrayList<Board> UserBoardSearchUserId(Connection conn, String keyword, int start, int end) {
+		ArrayList<Board> volist = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = "select * from (   select Rownum r, t1.* from " + 
+				" (SELECT * FROM BOARD B " + 
+				" JOIN MEMBER M ON B.USER_ID = M.USER_ID " + 
+				" WHERE  M.USER_ID like (?) ORDER BY BOARD_REWRITE_DATE DESC) t1) t2 "
+				+ " where r between ? and ? and board_category = '유저정보게시판'";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Board>();
+			if (rset.next()) {
+				do {
+					Board vo = new Board();
+					vo.setBoardNo(rset.getInt("BOARD_NO"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setBoardType(rset.getString("BOARD_TYPE"));
+					vo.setBoardCategory(rset.getString("BOARD_CATEGORY"));
+					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+					vo.setBoardContent(rset.getString("BOARD_CONTENT"));
+					vo.setBoardWriteDate(rset.getString("BOARD_WRITE_DATE"));
+					vo.setBoardRewriteDate(rset.getString("BOARD_REWRITE_DATE"));
+					vo.setBoardImg(rset.getString("BOARD_IMG"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	public int UserBoardUserIdCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "select count(*) as total FROM BOARD B  JOIN MEMBER M ON B.USER_ID = M.USER_ID where M.USER_ID like (?) and b.board_category='유저정보게시판'";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<Board> UserBoardSearchTitle(Connection conn, String keyword, int start, int end){
+		ArrayList<Board> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from " + 
+				" (SELECT * FROM BOARD B " + 
+				" JOIN MEMBER M ON B.USER_ID = M.USER_ID " + 
+				" WHERE  BOARD_Title like (?) ORDER BY BOARD_REWRITE_DATE DESC) t1) t2 where r between ? and ? and board_category = '유저정보게시판' ";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Board>();
+			if (rset.next()) {
+				do {
+					Board vo = new Board();
+					vo.setBoardNo(rset.getInt("BOARD_NO"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setBoardType(rset.getString("BOARD_TYPE"));
+					vo.setBoardCategory(rset.getString("BOARD_CATEGORY"));
+					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+					vo.setBoardContent(rset.getString("BOARD_CONTENT"));
+					vo.setBoardWriteDate(rset.getString("BOARD_WRITE_DATE"));
+					vo.setBoardRewriteDate(rset.getString("BOARD_REWRITE_DATE"));
+					vo.setBoardImg(rset.getString("BOARD_IMG"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	public int UserBoardTitleCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "select count(*) as total FROM BOARD B JOIN MEMBER M ON B.USER_ID = M.USER_ID where BOARD_TITLE like (?) and board_category = '유저정보게시판'";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	public ArrayList<Board> UserBoardContent(Connection conn, String keyword, int start, int end){
+		ArrayList<Board> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from " + 
+				" (SELECT * FROM BOARD B " + 
+				" JOIN MEMBER M ON B.USER_ID = M.USER_ID " + 
+				" WHERE  BOARD_CONTENT like (?) ORDER BY BOARD_REWRITE_DATE DESC) t1) t2 where r between ? and ? and board_category = '유저정보게시판' ";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Board>();
+			if (rset.next()) {
+				do {
+					Board vo = new Board();
+					vo.setBoardNo(rset.getInt("BOARD_NO"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setBoardType(rset.getString("BOARD_TYPE"));
+					vo.setBoardCategory(rset.getString("BOARD_CATEGORY"));
+					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+					vo.setBoardContent(rset.getString("BOARD_CONTENT"));
+					vo.setBoardWriteDate(rset.getString("BOARD_WRITE_DATE"));
+					vo.setBoardRewriteDate(rset.getString("BOARD_REWRITE_DATE"));
+					vo.setBoardImg(rset.getString("BOARD_IMG"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	
+	public int UserBoardContentCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "select count(*) as total FROM BOARD B JOIN MEMBER M ON B.USER_ID = M.USER_ID where BOARD_CONTENT like (?) and board_category = '유저정보게시판'";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+		
+		
+	}
+	//모임게시판 검색
+	public ArrayList<Board> gatheringBoardSearchUserId(Connection conn, String keyword, int start, int end) {
+		ArrayList<Board> volist = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = "select * from (   select Rownum r, t1.* from " + 
+				" (SELECT * FROM BOARD B " + 
+				" JOIN MEMBER M ON B.USER_ID = M.USER_ID " + 
+				" WHERE  M.USER_ID like (?) ORDER BY BOARD_REWRITE_DATE DESC) t1) t2 "
+				+ " where r between ? and ? and board_category = '모임게시판'";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Board>();
+			if (rset.next()) {
+				do {
+					Board vo = new Board();
+					vo.setBoardNo(rset.getInt("BOARD_NO"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setBoardType(rset.getString("BOARD_TYPE"));
+					vo.setBoardCategory(rset.getString("BOARD_CATEGORY"));
+					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+					vo.setBoardContent(rset.getString("BOARD_CONTENT"));
+					vo.setBoardWriteDate(rset.getString("BOARD_WRITE_DATE"));
+					vo.setBoardRewriteDate(rset.getString("BOARD_REWRITE_DATE"));
+					vo.setBoardImg(rset.getString("BOARD_IMG"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	public int gatheringBoardUserIdCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "select count(*) as total FROM BOARD B  JOIN MEMBER M ON B.USER_ID = M.USER_ID where M.USER_ID like (?) and b.board_category='모임게시판'";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	
+	public ArrayList<Board> gatheringBoardSearchTitle(Connection conn, String keyword, int start, int end){
+		ArrayList<Board> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from " + 
+				" (SELECT * FROM BOARD B " + 
+				" JOIN MEMBER M ON B.USER_ID = M.USER_ID " + 
+				" WHERE  BOARD_Title like (?) ORDER BY BOARD_REWRITE_DATE DESC) t1) t2 where r between ? and ? and board_category = '모임게시판' ";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Board>();
+			if (rset.next()) {
+				do {
+					Board vo = new Board();
+					vo.setBoardNo(rset.getInt("BOARD_NO"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setBoardType(rset.getString("BOARD_TYPE"));
+					vo.setBoardCategory(rset.getString("BOARD_CATEGORY"));
+					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+					vo.setBoardContent(rset.getString("BOARD_CONTENT"));
+					vo.setBoardWriteDate(rset.getString("BOARD_WRITE_DATE"));
+					vo.setBoardRewriteDate(rset.getString("BOARD_REWRITE_DATE"));
+					vo.setBoardImg(rset.getString("BOARD_IMG"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	public int gatheringBoardTitleCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "select count(*) as total FROM BOARD B JOIN MEMBER M ON B.USER_ID = M.USER_ID where BOARD_TITLE like (?) and board_category = '모임게시판'";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			rset = pstmt.executeQuery();
+			if (rset.next()) {
+				result = rset.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return result;
+	}
+	public ArrayList<Board> gatheringBoardContent(Connection conn, String keyword, int start, int end){
+		ArrayList<Board> volist = null;
+		String sql = "select * from (   select Rownum r, t1.* from " + 
+				" (SELECT * FROM BOARD B " + 
+				" JOIN MEMBER M ON B.USER_ID = M.USER_ID " + 
+				" WHERE  BOARD_CONTENT like (?) ORDER BY BOARD_REWRITE_DATE DESC) t1) t2 where r between ? and ? and board_category = '모임게시판' ";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, "%"+keyword+"%");
+			pstmt.setInt(2, start);
+			pstmt.setInt(3, end);
+			rset = pstmt.executeQuery();
+			volist = new ArrayList<Board>();
+			if (rset.next()) {
+				do {
+					Board vo = new Board();
+					vo.setBoardNo(rset.getInt("BOARD_NO"));
+					vo.setUserId(rset.getString("USER_ID"));
+					vo.setBoardType(rset.getString("BOARD_TYPE"));
+					vo.setBoardCategory(rset.getString("BOARD_CATEGORY"));
+					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
+					vo.setBoardContent(rset.getString("BOARD_CONTENT"));
+					vo.setBoardWriteDate(rset.getString("BOARD_WRITE_DATE"));
+					vo.setBoardRewriteDate(rset.getString("BOARD_REWRITE_DATE"));
+					vo.setBoardImg(rset.getString("BOARD_IMG"));
+					volist.add(vo);
+				} while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return volist;
+	}
+	
+	public int gatheringBoardContentCount(Connection conn, String keyword) {
+		int result = 0;
+		String sql = "select count(*) as total FROM BOARD B JOIN MEMBER M ON B.USER_ID = M.USER_ID where BOARD_CONTENT like (?) and board_category = '모임게시판'";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 

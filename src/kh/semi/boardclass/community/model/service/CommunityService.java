@@ -1,6 +1,8 @@
 package kh.semi.boardclass.community.model.service;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 
 import kh.semi.boardclass.admin.model.dao.AdminDao;
@@ -446,6 +448,83 @@ public class CommunityService {
 		result = new CommunityDao().getAllBoardContentCount(conn, keyword);
 		return result;
 	}
+	//유저정보게시판 검색
+	public ArrayList<Board> UserBoardSearchUserId( String keyword, int start, int end)  {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().UserBoardSearchUserId(conn, keyword, start, end);
+		return list;
+	}
+	public int UserBoardUserIdCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new CommunityDao().UserBoardUserIdCount(conn, keyword);
+		return result;
+	}
+	public ArrayList<Board> UserBoardSearchTitle(String keyword, int start, int end){
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().UserBoardSearchTitle(conn, keyword, start, end);
+		return list;
+	}
+	public int UserBoardTitleCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new CommunityDao().UserBoardTitleCount(conn, keyword);
+		return result;
+	}
+	public ArrayList<Board> UserBoardContent(String keyword, int start, int end){
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().UserBoardContent(conn, keyword, start, end);
+		return list;
+	}
+	public int UserBoardContentCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new CommunityDao().UserBoardContentCount(conn, keyword);
+		return result;
+	}
+	//모임게시판
+	public ArrayList<Board> gatheringBoardSearchUserId( String keyword, int start, int end)  {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().gatheringBoardSearchUserId(conn, keyword, start, end);
+		return list;
+	}
+	public int gatheringBoardUserIdCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new CommunityDao().gatheringBoardUserIdCount(conn, keyword);
+		return result;
+	}
+	public ArrayList<Board> gatheringBoardSearchTitle(String keyword, int start, int end){
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().gatheringBoardSearchTitle(conn, keyword, start, end);
+		return list;
+	}
+	public int gatheringBoardTitleCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new CommunityDao().gatheringBoardTitleCount(conn, keyword);
+		return result;
+	}
+	public ArrayList<Board> gatheringBoardContent(String keyword, int start, int end){
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().gatheringBoardContent(conn, keyword, start, end);
+		return list;
+	}
+	public int gatheringBoardContentCount(String keyword) {
+		int result = 0;
+		Connection conn = JDBCTemplate.getConnection();
+		result = new CommunityDao().gatheringBoardContentCount(conn, keyword);
+		return result;
+	}
+	
+	
+	
 	//공지검색
 	public ArrayList<Notice> searchNoticeContent(String keyword, int start, int end) {
 		ArrayList<Notice> volist = null;

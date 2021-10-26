@@ -10,6 +10,9 @@
 <link rel="stylesheet" href="css/community/freeBoardMain.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<style>
+.hidden{display:none;}
+</style>
 </head>
 <body>
 <%@include file="/WEB-INF/index/header.jsp" %>
@@ -77,7 +80,7 @@
 				
 				<td class="obj">
 					<div class="tbox">
-					<div class="tit">
+					<div class="tit">${board.boardType }
 						<a href="bdetail?boardNo=${board.boardNo }">${board.boardTitle }</a>
 					</div>
 					</div>

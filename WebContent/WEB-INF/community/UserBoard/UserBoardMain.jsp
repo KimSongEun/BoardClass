@@ -13,6 +13,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" ></script>
+<style>
+.hidden{display:none;}
+</style>
 </head>
 <body>
 <%@include file="/WEB-INF/index/header.jsp" %>
@@ -52,7 +55,7 @@
 	
 	<!-- 검색 영역 -->
 	<div class="data_srch_wrap bdt_n ">
-		<form action = "searchuserboardcontent" method = "post" class = "searchselect">
+		<form action = "searchuserboardtitle" method = "post" class = "searchselect">
 				<select class="search_select" name="type" style="width: 189px;">
 					<option value="제목" <c:if test = "${type == '제목'}"> selected </c:if>>제목</option>
 					<option value="내용" <c:if test = "${type == '내용'}"> selected </c:if>>내용</option>
