@@ -92,7 +92,7 @@
 						</div>
 						<div class="util">
 							<div class="hit">조회수 : <span class="val">${board.boardViewCount }</span></div>
-							<div class="comt">댓글수: <span class="val">${board.comment_no }</span>
+							<div class="comt">댓글수: <span class="val">${board.commentCount }</span>
 							</div>
 						</div>
 					
