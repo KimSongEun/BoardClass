@@ -8,6 +8,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <link rel="stylesheet" href="./css/index/maincss.css"/>
+<link rel="icon" href="./img/dicedice.ico" type="image/x-icon" sizes="16x16">
 <title>메인검색결과페이지</title>
 <style>
 .div_product{

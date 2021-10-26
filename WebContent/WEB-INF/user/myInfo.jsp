@@ -12,6 +12,7 @@
 <title>회원정보 관리</title>
 <link rel="stylesheet" href="css/user/myinfo.css">
 <link rel="stylesheet" href="css/index/maincss.css">
+<link rel="icon" href="./img/dicedice.ico" type="image/x-icon" sizes="16x16">
 </head>
 <body>
   <%@include file="/WEB-INF/index/header.jsp" %>

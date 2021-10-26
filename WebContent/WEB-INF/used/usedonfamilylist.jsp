@@ -9,6 +9,7 @@
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <link rel="stylesheet" href="./css/index/maincss.css"/>
 <link rel="stylesheet" href="./css/used/usedmain.css"/>
+<link rel="icon" href="./img/dicedice.ico" type="image/x-icon" sizes="16x16">
 <title>중고거래 메인</title>
 </head>
 <body>

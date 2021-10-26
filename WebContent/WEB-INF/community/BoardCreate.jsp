@@ -20,6 +20,7 @@
 <script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<link rel="icon" href="./img/dicedice.ico" type="image/x-icon" sizes="16x16">
 </head>
 <body>
 <%@include file="/WEB-INF/index/header.jsp" %>

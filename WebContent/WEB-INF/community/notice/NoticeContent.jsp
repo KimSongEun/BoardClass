@@ -7,6 +7,7 @@
 <title>BoardClass</title>
 <link rel="stylesheet" href="css/community/BoardContent.css" />
 <link rel="stylesheet" href="css/index/maincss.css" />
+<link rel="icon" href="./img/dicedice.ico" type="image/x-icon" sizes="16x16">
 </head>
 <body>
 <%@include file="/WEB-INF/index/header.jsp" %>

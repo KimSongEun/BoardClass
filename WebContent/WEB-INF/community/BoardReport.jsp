@@ -8,6 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="./img/dicedice.ico" type="image/x-icon" sizes="16x16">
 <title>신고하기</title>
 </head>
 <body>

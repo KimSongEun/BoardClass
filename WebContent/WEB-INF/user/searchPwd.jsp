@@ -14,7 +14,7 @@ User user = (User)request.getAttribute("users");
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/index/maincss.css">
   <link rel="stylesheet" href="css/user/searchIdPwd.css">
-
+<link rel="icon" href="./img/dicedice.ico" type="image/x-icon" sizes="16x16">
 
 </head>
 <body>

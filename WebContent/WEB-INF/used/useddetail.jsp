@@ -9,7 +9,8 @@
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <link rel="stylesheet" href="./css/index/maincss.css"/>
 <link rel="stylesheet" href="./css/used/useddetail.css"/>
-<title>Insert title here</title>
+<link rel="icon" href="./img/dicedice.ico" type="image/x-icon" sizes="16x16">
+<title>중고거래글 상세보기</title>
 </head>
 <body>
 <%@include file="/WEB-INF/index/header.jsp" %>

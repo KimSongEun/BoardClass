@@ -14,6 +14,7 @@
 <script type="text/javascript"
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript" src="./js/user/updateUser.js"></script>
+<link rel="icon" href="./img/dicedice.ico" type="image/x-icon" sizes="16x16">
 </head>
 <body>
 	<%@include file="/WEB-INF/index/header.jsp"%>

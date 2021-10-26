@@ -25,6 +25,7 @@ int pageCount2 = (int)request.getAttribute("pageCount2");
 <link rel="stylesheet" href="css/index/maincss.css">
 <link rel="stylesheet" href="css/mypage/myUsedList.css">
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<link rel="icon" href="./img/dicedice.ico" type="image/x-icon" sizes="16x16">
 <title>마이페이지 중고거래 조회</title>
 </head>
 

@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="css/community/freeBoardMain.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+<link rel="icon" href="./img/dicedice.ico" type="image/x-icon" sizes="16x16">
 <style>
 .hidden{display:none;}
 </style>

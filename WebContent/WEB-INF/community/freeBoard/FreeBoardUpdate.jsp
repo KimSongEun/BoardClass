@@ -12,6 +12,7 @@
 <meta charset="UTF-8">
 <title>BoardClass</title>
 <script type="text/javascript" src="./ckeditor/ckeditor.js"></script>
+<link rel="icon" href="./img/dicedice.ico" type="image/x-icon" sizes="16x16">
 </head>
 <body>
 	<c:import url="../header.jsp" />

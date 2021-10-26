@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="css/user/loginHeaderFooter.css"> 
 <!--<link rel="stylesheet" href="css/index/maincss.css"> -->
-
+<link rel="icon" href="./img/dicedice.ico" type="image/x-icon" sizes="16x16">
 
 </head>
 <body>

@@ -11,6 +11,7 @@
 <script src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
 <link rel="stylesheet" href="css/index/maincss.css" />
 <link rel="stylesheet" href="css/community/write.css" />
+<link rel="icon" href="./img/dicedice.ico" type="image/x-icon" sizes="16x16">
 </head>
 <body>
 <%@include file="/WEB-INF/index/header.jsp" %>
