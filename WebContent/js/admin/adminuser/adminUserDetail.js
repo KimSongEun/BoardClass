@@ -31,8 +31,7 @@ $(function(){
 				html += "<td>"+data.allboarduservolist[i].boardCategory+"</td>";
 				html += "<td>"+data.allboarduservolist[i].boardType+"</td>";
 				html += "<td id = 'tda' style='white-space : nowrap; text-overflow : ellipsis; overflow : hidden'><a href = 'bdetail?boardNo="+data.allboarduservolist[i].boardNo+"' target='blank'>"+data.allboarduservolist[i].boardTitle+"</a></td>";
-				html += "<td style = 'white-space : nowrap; text-overflow : ellipsis; overflow : hidden'>"+data.allboarduservolist[i].boardContent+"</td>";
-				html += "<td>"+data.allboarduservolist[i].boardRewriteDate+"</td>";
+				html += "<td>"+data.allboarduservolist[i].boardWriteDate+"</td>";
 				html += "</tr>";
 		}
 		$("#input_data_board").html(html);

@@ -1787,11 +1787,11 @@ public class AdminDao {
 	
 	public ArrayList<AllBoardUser> selectUserDetailBoardList(Connection conn, String userId){
 		ArrayList<AllBoardUser> volist = null;
-		String sql = "SELECT B.USER_ID, B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.BOARD_CONTENT, B.BOARD_WRITE_DATE, B.BOARD_REWRITE_DATE, M.USER_NO\r\n" + 
+		String sql = "SELECT B.USER_ID, B.BOARD_NO, B.BOARD_TYPE, B.BOARD_CATEGORY, B.BOARD_TITLE, B.BOARD_CONTENT, B.BOARD_WRITE_DATE, M.USER_NO\r\n" + 
 				"FROM BOARD B JOIN MEMBER M \r\n" + 
 				"ON B.USER_ID = M.USER_ID \r\n" + 
 				"WHERE B.USER_ID = ? \r\n" + 
-				"ORDER BY BOARD_REWRITE_DATE DESC";
+				"ORDER BY B.BOARD_WRITE_DATE DESC";
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 
@@ -1810,7 +1810,6 @@ public class AdminDao {
 					vo.setBoardTitle(rset.getString("BOARD_TITLE"));
 					vo.setBoardContent(rset.getString("BOARD_CONTENT"));
 					vo.setBoardWriteDate(rset.getDate("BOARD_WRITE_DATE"));
-					vo.setBoardRewriteDate(rset.getDate("BOARD_REWRITE_DATE"));
 					vo.setUserNo(rset.getInt("USER_NO"));
 					volist.add(vo);
 				} while (rset.next());

@@ -59,7 +59,7 @@ public class UserDetailBoardListAjaxServlet extends HttpServlet {
 		ArrayList<AllBoardUser> volist  = new AdminService().selectUserDetailBoardList(userId);
 		
 		map1.put("allboarduservolist", volist);
-		
+		System.out.println(volist);
 		Gson gson = new GsonBuilder().setPrettyPrinting().create();
 		String gsonStr = gson.toJson(map1);
 		out.append(gsonStr);
