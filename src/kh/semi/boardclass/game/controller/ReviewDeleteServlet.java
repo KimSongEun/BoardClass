@@ -46,7 +46,7 @@ public class ReviewDeleteServlet extends HttpServlet {
 		int result = new GameService().deleteReview(reviewNo);
 		if (result < 1) {
 			System.out.println("리뷰 삭제 안됨-deleteError이동");
-			request.getRequestDispatcher("/WEB-INF/error/deleteError.jsp").forward(request, response);
+			//request.getRequestDispatcher("/WEB-INF/error/deleteError.jsp").forward(request, response);
 		} else {
 			System.out.println("리뷰 삭제 성공 - 그리고 main 이동");
 			response.sendRedirect("GameReview");

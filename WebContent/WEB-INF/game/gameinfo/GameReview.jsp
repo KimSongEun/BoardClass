@@ -249,6 +249,7 @@ border-left:none;
 $(".btn_report2").click(conDelete);
 
 function conDelete(){
+	var gameNo = ${gameno};
 	console.log($(this));
 	var $eleClickThis = $(this);
 	var $eleTable = $(this).parents("table");
@@ -256,6 +257,7 @@ function conDelete(){
 	var reviewNo = $eleReviewNo.text();
 	if(window.confirm("삭제하겠습니까?")){
 		location.href='reviewdeletee?reviewNo='+reviewNo;
+		location.href='GameReview?GAME_NO='+gameNo;
 	} else {
 		return;
 	}
