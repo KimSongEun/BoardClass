@@ -98,8 +98,9 @@
 
 .info{
 	margin: 20px 40px 70px 40px;
+	padding:5px;
 	display:inline-block;
-	border: 1px solid blue;
+	border: 1px solid #c0c0c0;
 	border-radius: 25px;
 	font-weight: bold;
 	letter-spacing: 2px;
@@ -116,7 +117,7 @@ table .info_text {
 	
 	text-align:left;
 	margin-left: 10px;
-	width: 410px;
+	width: 390px;
 	line-height:55px;
 	white-space: nowrap;
 	overflow: hidden;
@@ -125,12 +126,13 @@ table .info_text {
 
 #page{
 	text-align: center;
-	
+	margin-bottom: 50px;
 }
 #page a{
 	padding:3px 11px; margin:2px; text-align: center;
 	border: #ccc 3px solid; color: #999;
 	font-weight: bold;
+	
 }
 #page a:hover,#page a:active,#page a:focus {BORDER: 3px solid #2196F3; COLOR: #2196F3;}
 .clear{

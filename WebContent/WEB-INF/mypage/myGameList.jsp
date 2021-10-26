@@ -70,14 +70,14 @@ int pageCount2 = (int) request.getAttribute("pageCount2");
 				<tr>
 					<td class="a"><img
 						src="<%=request.getContextPath()%>/<%=vo.getGameImage()%>"
-						width="300" height="300" style="border-radius: 25px"/></td>
+						width="250" height="250" style="border-radius: 25px"/></td>
 				</tr>
 				<tr>
 					<td class="b">
 						<div class="info_text">
 							<%=vo.getGameKoName()%><br>
-							<%=vo.getGameCategory()%><br>
-							<%=vo.getGameGrade()%></div>
+							카테고리 : <%=vo.getGameCategory()%><br>
+							게임평점 : <%=vo.getGameGrade()%></div>
 					</td>
 
 				</tr>
@@ -131,14 +131,14 @@ int pageCount2 = (int) request.getAttribute("pageCount2");
 				<tr>
 					<td class="a"><img
 						src="<%=request.getContextPath()%>/<%=R.getGameImage()%>"
-						width="300" height="300" style="border-radius: 25px"/></td>
+						width="250" height="250" style="border-radius: 25px"/></td>
 				</tr>
 				<tr>
 					<td class="b">
 						<div class="info_text">
 							<%=R.getGameKoName()%><br>
-							<%=R.getGameCategory()%><br>
-							<%=R.getReviewScore()%></div>
+							카테고리 : <%=R.getGameCategory()%><br>
+							리뷰평점 : <%=R.getReviewScore()%></div>
 					</td>
 
 				</tr>

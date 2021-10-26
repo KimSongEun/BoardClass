@@ -81,13 +81,13 @@
 /*Content */
 .main h1 {
 	text-align: center;
-	margin: 80px 0 100px;
+	margin: 80px 0 90px;
 }
 
 .info{
 	margin: 20px 20px 70px 20px;
 	display:inline-block;
-	border: 1px solid blue;
+	border: 1px solid #999;
 	text-align: center;
 	border-radius: 25px;
 	font-weight: bold;
@@ -96,12 +96,12 @@
 	
 }
 table .a {
-	border-bottom: 1px solid red;
+	border-bottom: 1px solid #999;
 	padding: auto;
 }
 
 table .info_text {
-	width: 300px;
+	width:250px;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -109,7 +109,7 @@ table .info_text {
 
 #page{
 	text-align: center;
-	
+	margin-bottom: 50px;
 }
 #page a{
 	padding:3px 11px; margin:2px; text-align: center;

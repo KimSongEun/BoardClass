@@ -42,7 +42,7 @@ public class MyTradeServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 
-		final int PAGE_SIZE = 20; // 한 페이지 당 글 개수
+		final int PAGE_SIZE = 6; // 한 페이지 당 글 개수
 		final int PAGE_BLOCK = 3; // 한 화면에 나타날 페이지 링크수
 		int bCount = 0; // 총 글수
 		int pageCount = 0; // 총 페이지수
@@ -52,7 +52,7 @@ public class MyTradeServlet extends HttpServlet {
 		int startRnum = 1; // 화면에 나타날 글 번호
 		int endRnum = 1; // 화면에 나타날 글 번호
 
-		final int PAGE_SIZE2 = 20; // 한 페이지 당 글 개수
+		final int PAGE_SIZE2 = 6; // 한 페이지 당 글 개수
 		final int PAGE_BLOCK2 = 3; // 한 화면에 나타날 페이지 링크수
 		int bCount2 = 0; // 총 글수
 		int pageCount2 = 0; // 총 페이지수
