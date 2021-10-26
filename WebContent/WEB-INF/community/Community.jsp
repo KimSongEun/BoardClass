@@ -207,46 +207,18 @@
 				        </div>
 				       </dd>
 			         </dl>
-			         	<dl>
+			         <dl>
 		          	<dd>
 			    		<div class="usercontent" id="rightcomt">
-				          	 	<ol>
-				           		<c:forEach var="freebest" items="${bestusercomtone }">
+			    			<ul>
+				           		<c:forEach var="freebest" items="${bestusercomt }">
 						 			<li class="item">
-							 			 <div class="rank">1</div>
+							 			 <div class="rank">${freebest.boardRank }</div>
 							              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-							              <div class="commt"> ${freebest.comment_no }</div>
+							              <div class="commt">${freebest.commentCount}</div>
 						             </li>
 					             </c:forEach>
-					             <c:forEach var="freebest" items="${bestusercomttwo }">
-						 			<li class="item">
-							 			<div class="rank">2</div>
-						              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-						           	  <div class="commt">${freebest.comment_no }</div>
-						             </li>
-					             </c:forEach>
-					            <c:forEach var="freebest" items="${bestusercomtthree }">
-						 			<li class="item">
-						 			 <div class="rank">3</div>
-						              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-						              <div class="commt">${freebest.comment_no }</div>
-						             </li>
-					             </c:forEach>
-					              <c:forEach var="freebest" items="${bestusercomtfour }">
-						 			<li class="item">
-						 			 <div class="rank">4</div>
-						              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-						              <div class="commt">${freebest.comment_no }</div>
-						            </li>
-					             </c:forEach>
-					             <c:forEach var="freebest" items="${bestusercomtfive }">
-						 			<li class="item">
-						 			 <div class="rank">5</div>
-						              <a href="bdetail?boardNo=${freebest.boardNo }" class="tit">${freebest.boardTitle }</a>
-						              <div class="commt">${freebest.comment_no }</div>
-						            </li>
-					             </c:forEach>
-					       	 </ol>	
+					       	 </ul>	
 				        </div>
 				       </dd>
 			         </dl>

@@ -72,6 +72,9 @@ public class CommunityMainServlet extends HttpServlet {
 		request.setAttribute("bestuserviewfive", bestuserviewfive);
 		
 		//유저정보 댓글순
+		ArrayList<Board> bestusercomt = new CommunityService().bestUserComt();
+		request.setAttribute("bestusercomt", bestusercomt);
+		
 		ArrayList<Board> bestusercomtone = new CommunityService().bestUserComtOne();
 		request.setAttribute("bestusercomtone", bestusercomtone);
 		ArrayList<Board> bestusercomttwo = new CommunityService().bestUserComtTwo();

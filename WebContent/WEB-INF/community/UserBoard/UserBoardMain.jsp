@@ -55,7 +55,7 @@
 	
 	<!-- 검색 영역 -->
 	<div class="data_srch_wrap bdt_n ">
-		<form action = "searchuserboardtitle" method = "post" class = "searchselect">
+		<form action = "searchuserboardcontent" method = "post" class = "searchselect">
 				<select class="search_select" name="type" style="width: 189px;">
 					<option value="제목" <c:if test = "${type == '제목'}"> selected </c:if>>제목</option>
 					<option value="내용" <c:if test = "${type == '내용'}"> selected </c:if>>내용</option>

@@ -217,6 +217,14 @@ public class CommunityService {
 		return list;
 	}
 	//유저정보게시판 댓글순
+	public ArrayList<Board> bestUserComt () {
+		ArrayList<Board> list = null;
+		Connection conn = JDBCTemplate.getConnection();
+		list = new CommunityDao().bestUserComt(conn);
+		JDBCTemplate.close(conn);
+		return list;
+	}
+	
 	public ArrayList<Board> bestUserComtOne () {
 		ArrayList<Board> list = null;
 		Connection conn = JDBCTemplate.getConnection();

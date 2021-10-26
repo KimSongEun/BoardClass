@@ -800,6 +800,44 @@ public Board getBoard(Connection conn, int boardNo) {
 		return list;
 	}
 	//유저정보게시판 댓글순
+	public ArrayList<Board> bestUserComt(Connection conn) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		ArrayList<Board> list = new ArrayList<Board>();
+		String sql = "select * from (select rownum r, NVL(comment_no1,0) comment_count, a.*  from" + 
+				" ( select * from (select * from board where board_category = '유저정보게시판' ) t1" + 
+				" left outer join (SELECT COUNT(comment_no) comment_no1, board_no FROM comt group by board_no  order by comment_no1 desc ) t2 using ( board_no ))a" + 
+				"  ) where r between 1 and 5";
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				do {
+					Board vo = new Board();
+					vo.setBoardNo(rset.getInt("board_no"));
+					vo.setUserId(rset.getString("user_id"));
+					vo.setBoardType(rset.getString("board_type"));
+					vo.setBoardCategory(rset.getString("board_category"));
+					vo.setBoardTitle(rset.getString("board_title"));
+					vo.setBoardContent(rset.getString("board_content"));
+					vo.setBoardWriteDate(rset.getString("board_write_date"));
+					vo.setBoardRewriteDate(rset.getString("board_rewrite_date"));
+					vo.setBoardViewCount(rset.getInt("board_view_count"));
+					vo.setBoardImg(rset.getString("board_img"));
+					vo.setComment_no(rset.getInt("comment_no"));
+					vo.setCommentCount(rset.getInt("comment_count"));
+					vo.setBoardRank(rset.getInt("r"));
+					list.add(vo);
+				}while (rset.next());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCTemplate.close(rset);
+			JDBCTemplate.close(pstmt);
+		}
+		return list;
+	}
 	public ArrayList<Board> bestUserComtOne (Connection conn) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
