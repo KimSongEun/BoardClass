@@ -35,8 +35,8 @@ public class ReportUsedDeleteServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 
 		int usedNo = Integer.parseInt(request.getParameter("usedNo"));
+		System.out.println(usedNo);
 		int result = new AdminService().deleteUsed(usedNo);
-
 
 		if (result > 0) {
 			request.setAttribute("msg", usedNo + "번 중고글 삭제완료");

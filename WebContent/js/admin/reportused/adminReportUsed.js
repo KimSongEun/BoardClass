@@ -18,7 +18,7 @@ $(function(){
 	$(".delete").click(function () {
     var deleteid = $(this).attr("id");
 	if(confirm(deleteid+"번 중고글 삭제하시겠습니까?")){
-    	location.href = "reportuseddelete?boardNo=" + deleteid;
+    	location.href = "reportuseddelete?usedNo=" + deleteid;
 	} else {
 	}
 });
